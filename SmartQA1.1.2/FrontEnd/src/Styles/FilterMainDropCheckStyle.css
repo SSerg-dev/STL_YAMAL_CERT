@@ -1,0 +1,113 @@
+.fsdc_container{
+    display:inline-block;
+    position:relative;
+}
+.fsdc_nodesBlock{
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0.2;
+    background-color:grey;
+    top:0;
+    left:0;
+}
+.fsdc_button{
+    display:inline-block;
+    position:relative;
+    top:1.5px;
+    margin-bottom:4px;
+    outline:none;
+    border:none;
+    background-color:rgb(235, 6, 6);
+    height:24px;
+    width:24px;
+}
+.fsdc_button:hover{
+    background-color:rgb(165, 2, 2);
+    cursor: pointer;
+}
+.fsdc_buttonImg{
+    border:none;
+    height:70%;
+    right:1.5px;
+    position:relative;
+    filter:invert(100%);
+}
+.flistButtonStyle:hover{
+    background-color:rgb(30, 156, 30);
+}
+.filterAlterButton{
+    background-color:rgb(36, 143, 36);
+    height:24px;
+    width:24px;
+    display:inline-block;
+    margin-left:4px;
+    vertical-align: top;
+    position: relative;
+    top:2px;
+    cursor:pointer;
+    box-sizing: border-box;
+    border:none;
+}
+.filterAlterButton:disabled{
+    background-color:rgb(185, 185, 185);
+    cursor: auto;
+}
+.filterAlterButtonImg{
+    height:77%;
+    position:relative;
+    right:2px;
+    top:-1px;
+    filter:invert(100%)
+    brightness(300%);
+}
+.flistButtonStyle{
+    outline:none;
+    padding:6px;
+    margin:4px;
+    margin-bottom:8px;
+    border:none;
+    margin-top:0px;
+    background-color:grey;
+    padding-left:9px;
+    padding-right:9px;
+}
+
+
+.fsdc_droplist{
+    background-color:orange;
+    position:absolute;
+    color:green;
+    z-index:3;
+
+    color:black;
+    padding:14px;
+    padding-top:13px;
+    background-color:white;
+}
+/*
+.fsdc_checkBox{
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0px;
+    border:0px solid black;
+    height:15px;
+    width:15px;
+    background-color:grey;
+    outline:none;
+    margin-right:6px;
+    position:relative;
+}
+
+.fsdc_checkBox:checked{
+    background-color:rgb(31, 172, 31);
+}
+.fsdc_checkBox:checked:after{
+    content:'\2612';
+    content:'\2716';
+    font-size:12px;
+    position:absolute;
+    top:-2px;
+    left:2px;
+}
+*/

@@ -1,0 +1,35 @@
+﻿@using SmartQA1._1._2.DB.WebDb
+@model SmartQA1._1._2.Models.Document.Document
+
+@{
+    var documentFiles = Model.DocumentFiles?? new List<UI_FileStream>();
+    Html.RenderPartial("DocExistingFiles", documentFiles);
+    @:</br>
+    Html.RenderPartial("DocNewFiles", new List<UI_FileStream>());
+    @:</br>
+    using (Html.BeginForm("FileControlUpload", "Document", FormMethod.Post))
+    {
+        Html.DevExpress().UploadControl(settings =>
+        {
+            settings.Name = "UploadControl";
+            settings.CallbackRouteValues = new { Controller = "Document", Action = "FileControlUpload" };
+
+            settings.AdvancedModeSettings.EnableMultiSelect = true;
+            settings.AdvancedModeSettings.EnableFileList = true;
+            settings.AdvancedModeSettings.EnableDragAndDrop = true;
+
+            settings.ClientSideEvents.FilesUploadComplete = "function(s,e){DocNewFiles.Refresh()}";
+
+            settings.UploadMode = UploadControlUploadMode.Auto;
+            settings.AutoStartUpload = true;
+
+            settings.ShowUploadButton = true;
+            settings.ShowProgressPanel = true;
+            settings.UploadButton.Text = "Загрузить";
+            settings.ValidationSettings.Assign(
+                SmartQA1._1._2.Models.Document.DocFileUploadSettings.UploadValidationSettings
+            );
+        }
+        ).GetHtml();
+    }
+}

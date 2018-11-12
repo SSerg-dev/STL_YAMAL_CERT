@@ -1,0 +1,44 @@
+﻿@model SmartQA1._1._2.Models.Register.Revision
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "RevisionGridView"+Model.Current_Iteration;
+        settings.CallbackRouteValues = new { Controller = "Register", Action = "DocumentsInRevision", Iteration = Model.Current_Iteration};
+
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Register", Action = "DocumentsInRevisionDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = Model.IsLatest;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = Model.IsLatest;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.SettingsCommandButton.DeleteButton.Text = "Удалить";
+        
+        settings.KeyFieldName = "Document_ID";
+
+        settings.SettingsPager.Visible = false;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add("Document_Code", "№ карточки");
+        settings.Columns.Add("Document_Issue_Date", "Дата карточки");
+        settings.Columns.Add("Document_Date", "Дата док-та");
+        settings.Columns.Add("Document_Number", "№ документа");
+        settings.Columns.Add("Document_Name", "Имя док-та");
+        settings.Columns.Add("Document_Comment", "Примечания");
+
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model.Documents).GetHtml()

@@ -1,0 +1,1899 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DEV_WEB_MainDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.abd.AttributeType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AttributeType">
+          <Key>
+            <PropertyRef Name="AttributeType_ID" />
+            
+            
+            
+            
+          </Key>
+          <Property Name="AttributeType_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AttributeType_Code" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="AttributeType_Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="AttributeType_Group" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Attribute_DataType" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Attribute_Table" Type="nvarchar" MaxLength="250" />
+          <Property Name="Attribute_Format" Type="nvarchar" MaxLength="250" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="250" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.abd.Document' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="Document_Name" />
+            <PropertyRef Name="Document_Title" />
+            <PropertyRef Name="DocumentType_ID" />
+            <PropertyRef Name="Document_Revision" />
+          </Key>
+          <Property Name="Document_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Document_Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Document_Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="DocumentType_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Document_Revision" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Document_Parent_ID" Type="uniqueidentifier" />
+          <Property Name="Reponsible_Employee_ID" Type="uniqueidentifier" />
+          <Property Name="Document_Number" Type="nvarchar" MaxLength="255" />
+          <Property Name="Document_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.abd.DocumentAttribute' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DocumentAttribute">
+          <Key>
+            <PropertyRef Name="DocumentAttribute_ID" />
+            
+            
+            
+            
+          </Key>
+          <Property Name="DocumentAttribute_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DocumentAttribute_Value" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="AttributeType_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Document_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DocumentAttribute_Order" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.abd.DocumentRelation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DocumentRelation">
+          <Key>
+            <PropertyRef Name="DocumentRelation_ID" />
+            
+            
+            
+            
+          </Key>
+          <Property Name="DocumentRelation_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DocumentFrom_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DocumentTo_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RelationType_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DocumentRelation_Order" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.abd.DocumentType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DocumentType">
+          <Key>
+            <PropertyRef Name="DocumentType_ID" />
+            
+            
+            
+          </Key>
+          <Property Name="DocumentType_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DocumentType_Code" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="DocumentType_Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="DocumentType_Group" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="250" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.abd.UI_Document_Header' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_Document_Header">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            
+            
+            
+            
+            
+          </Key>
+          <Property Name="Document_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Document_Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Document_Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="DocumentType_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DocumentType_Code" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Document_Revision" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Document_Parent_ID" Type="uniqueidentifier" />
+          <Property Name="Reponsible_Employee_ID" Type="uniqueidentifier" />
+          <Property Name="Document_Number" Type="nvarchar" MaxLength="255" />
+          <Property Name="Document_Date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.Contragent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Contragent">
+          <Key>
+            <PropertyRef Name="Contragent_ID" />
+          </Key>
+          <Property Name="Contragent_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Contragent_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.DetailsType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DetailsType">
+          <Key>
+            <PropertyRef Name="DetailsType_ID" />
+            
+          </Key>
+          <Property Name="DetailsType_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DetailsType_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.Employee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+          </Key>
+          <Property Name="Employee_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Employee_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Person_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Position_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AppUser_Id" Type="uniqueidentifier" />
+          <Property Name="Contragent_ID" Type="uniqueidentifier" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.HIFGroup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="HIFGroup">
+          <Key>
+            <PropertyRef Name="HIFGroup_ID" />
+            
+          </Key>
+          <Property Name="HIFGroup_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="HIFGroup_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.JointKind' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="JointKind">
+          <Key>
+            <PropertyRef Name="JointKind_ID" />
+            
+          </Key>
+          <Property Name="JointKind_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="JointKind_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.JointType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="JointType">
+          <Key>
+            <PropertyRef Name="JointType_ID" />
+            
+          </Key>
+          <Property Name="JointType_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="JointType_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.Marka' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Marka">
+          <Key>
+            <PropertyRef Name="Marka_ID" />
+            <PropertyRef Name="Marka_Code" />
+          </Key>
+          <Property Name="Marka_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Marka_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Marka_Code_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="Engineering_Drawing_Type_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="Engineering_Drawing_Type_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="IsUsedInMatrix" Type="bit" />
+          <Property Name="IsPriority" Type="bit" />
+          <Property Name="ReportColor" Type="nvarchar" MaxLength="255" />
+          <Property Name="ReportOrder" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.Person' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Person_ID" />
+          </Key>
+          <Property Name="Person_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Person_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="SecondName" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="255" />
+          <Property Name="BirthDate" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.Position' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="Position_ID" />
+          </Key>
+          <Property Name="Position_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Position_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Position_Description" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.SeamsType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SeamsType">
+          <Key>
+            <PropertyRef Name="SeamsType_ID" />
+            
+          </Key>
+          <Property Name="SeamsType_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SeamsType_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.TitleObject' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TitleObject">
+          <Key>
+            <PropertyRef Name="TitleObject_ID" />
+            <PropertyRef Name="TitleObject_Code" />
+            <PropertyRef Name="Structure" />
+          </Key>
+          <Property Name="TitleObject_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TitleObject_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Parent_Id" Type="uniqueidentifier" />
+          <Property Name="Structure" Type="int" Nullable="false" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="300" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="400" />
+          <Property Name="Phase_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="ReportColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReportOrder" Type="int" />
+          <Property Name="GLB_Weight" Type="float" />
+          <Property Name="Row_Status" Type="int" />
+          <Property Name="Book1_Pct" Type="float" />
+          <Property Name="Book1_Weight" Type="float" />
+          <Property Name="Book2_Pct" Type="float" />
+          <Property Name="Book2_Weight" Type="float" />
+          <Property Name="Book3_Pct" Type="float" />
+          <Property Name="Book3_Weight" Type="float" />
+          <Property Name="Book4_Weight" Type="float" />
+          <Property Name="TitleObject_for_ABDFinalSet" Type="nvarchar" MaxLength="100" />
+          <Property Name="Book1_Documents_Total" Type="float" />
+          <Property Name="Book1_Documents_received" Type="float" />
+          <Property Name="Book1_Progress" Type="float" />
+          <Property Name="Book1_Documents_transmitted_to_CPY" Type="float" />
+          <Property Name="StageOfConstr" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.UI_Contragent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_Contragent">
+          <Key>
+            <PropertyRef Name="Contragent_ID" />
+            <PropertyRef Name="Contragent_Code" />
+          </Key>
+          <Property Name="Contragent_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Contragent_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.UI_Personal' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_Personal">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+            <PropertyRef Name="Employee_Code" />
+          </Key>
+          <Property Name="Employee_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Employee_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Person_ID" Type="uniqueidentifier" />
+          <Property Name="Person_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="SecondName" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="255" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="767" />
+          <Property Name="Position_ID" Type="uniqueidentifier" />
+          <Property Name="Position_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Position_Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="AppUser_ID" Type="uniqueidentifier" />
+          <Property Name="AppUser_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Division_ID" Type="uniqueidentifier" />
+          <Property Name="Division_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Contragent_ID" Type="uniqueidentifier" />
+          <Property Name="Contragent_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="BirthDate" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.UI_Position' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_Position">
+          <Key>
+            <PropertyRef Name="Position_ID" />
+            <PropertyRef Name="Position_Code" />
+          </Key>
+          <Property Name="Position_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Position_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Position_Description" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.WeldGOST14098' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WeldGOST14098">
+          <Key>
+            <PropertyRef Name="WeldGOST14098_ID" />
+          </Key>
+          <Property Name="WeldGOST14098_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WeldGOST14098_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.WeldingEquipmentAutomationLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WeldingEquipmentAutomationLevel">
+          <Key>
+            <PropertyRef Name="WeldingEquipmentAutomationLevel_ID" />
+            
+          </Key>
+          <Property Name="WeldingEquipmentAutomationLevel_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WeldingEquipmentAutomationLevel_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.WeldMaterial' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WeldMaterial">
+          <Key>
+            <PropertyRef Name="WeldMaterial_ID" />
+            
+          </Key>
+          <Property Name="WeldMaterial_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WeldMaterial_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.WeldMaterialGroup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WeldMaterialGroup">
+          <Key>
+            <PropertyRef Name="WeldMaterialGroup_ID" />
+            
+          </Key>
+          <Property Name="WeldMaterialGroup_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WeldMaterialGroup_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.WeldPosition' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WeldPosition">
+          <Key>
+            <PropertyRef Name="WeldPosition_ID" />
+            
+          </Key>
+          <Property Name="WeldPosition_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WeldPosition_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.WeldType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WeldType">
+          <Key>
+            <PropertyRef Name="WeldType_ID" />
+            
+          </Key>
+          <Property Name="WeldType_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WeldType_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Function Name="Document_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="abd">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_DocumentType_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Title" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Revision" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Reponsible_Employee_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Date" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Parent_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Document_SequenceNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="abd" />
+        <Function Name="Document_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="abd">
+          <Parameter Name="i_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_DocumentType_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Title" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Revision" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Reponsible_Employee_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Date" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Parent_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="DocumentAttribute_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="abd">
+          <Parameter Name="i_DocumentAttribute_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="DocumentAttribute_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="abd">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_DocumentAttribute_Value" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AttributeType_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_DocumentAttribute_Order" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="f_GetTemplate_Attr" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="abd">
+          <Parameter Name="DocumentType_Code" Type="nvarchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="DocEntityType_Code" Type="nvarchar" MaxLength="255" />
+                <Property Name="AttributeType_ID" Type="uniqueidentifier" />
+                <Property Name="AttributeType_Code" Type="nvarchar" MaxLength="250" />
+                <Property Name="AttributeType_Name" Type="nvarchar" MaxLength="250" />
+                <Property Name="Attribute_DataType" Type="nvarchar" MaxLength="250" />
+                <Property Name="Attribute_Table" Type="nvarchar" MaxLength="250" />
+                <Property Name="Attribute_Format" Type="nvarchar" MaxLength="250" />
+                <Property Name="Description_Rus" Type="nvarchar" MaxLength="250" />
+                <Property Name="Description_Eng" Type="nvarchar" MaxLength="250" />
+                <Property Name="DocumentAttribute_ID" Type="uniqueidentifier" />
+                <Property Name="DocumentAttribute_Order" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="UI_DocumentTree_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="abd">
+          <Parameter Name="i_Employee_ID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Employee_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Employee_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Employee_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Employee_Code" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Person_Id" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Position_Id" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUserRef_Id" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Contragent_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Employee_SequenceNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Employee_to_Document_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Employee_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Employee_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Employee_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Employee_Code" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Person_Id" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Position_Id" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUserRef_Id" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Contragent_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Person_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Person_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Person_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Person_Code" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_SecondName" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ShortName" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_BirthDate" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Person_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Person_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Person_Code" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_SecondName" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ShortName" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_BirthDate" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="DEV_WEB_MainDataModelStoreContainer">
+          <EntitySet Name="AttributeType" EntityType="Self.AttributeType" store:Type="Views" store:Schema="abd">
+            <DefiningQuery>SELECT 
+    [AttributeType].[AttributeType_ID] AS [AttributeType_ID], 
+    [AttributeType].[AttributeType_Code] AS [AttributeType_Code], 
+    [AttributeType].[AttributeType_Name] AS [AttributeType_Name], 
+    [AttributeType].[AttributeType_Group] AS [AttributeType_Group], 
+    [AttributeType].[Attribute_DataType] AS [Attribute_DataType], 
+    [AttributeType].[Attribute_Table] AS [Attribute_Table], 
+    [AttributeType].[Attribute_Format] AS [Attribute_Format], 
+    [AttributeType].[Description_Rus] AS [Description_Rus], 
+    [AttributeType].[Description_Eng] AS [Description_Eng]
+    FROM [abd].[AttributeType] AS [AttributeType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Document" EntityType="Self.Document" store:Type="Views" store:Schema="abd">
+            <DefiningQuery>SELECT 
+    [Document].[Document_ID] AS [Document_ID], 
+    [Document].[Document_Name] AS [Document_Name], 
+    [Document].[Document_Title] AS [Document_Title], 
+    [Document].[DocumentType_ID] AS [DocumentType_ID], 
+    [Document].[Document_Revision] AS [Document_Revision], 
+    [Document].[Document_Parent_ID] AS [Document_Parent_ID], 
+    [Document].[Reponsible_Employee_ID] AS [Reponsible_Employee_ID], 
+    [Document].[Document_Number] AS [Document_Number], 
+    [Document].[Document_Date] AS [Document_Date]
+    FROM [abd].[Document] AS [Document]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DocumentAttribute" EntityType="Self.DocumentAttribute" store:Type="Views" store:Schema="abd">
+            <DefiningQuery>SELECT 
+    [DocumentAttribute].[DocumentAttribute_ID] AS [DocumentAttribute_ID], 
+    [DocumentAttribute].[DocumentAttribute_Value] AS [DocumentAttribute_Value], 
+    [DocumentAttribute].[AttributeType_ID] AS [AttributeType_ID], 
+    [DocumentAttribute].[Document_ID] AS [Document_ID], 
+    [DocumentAttribute].[DocumentAttribute_Order] AS [DocumentAttribute_Order]
+    FROM [abd].[DocumentAttribute] AS [DocumentAttribute]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DocumentRelation" EntityType="Self.DocumentRelation" store:Type="Views" store:Schema="abd">
+            <DefiningQuery>SELECT 
+    [DocumentRelation].[DocumentRelation_ID] AS [DocumentRelation_ID], 
+    [DocumentRelation].[DocumentFrom_ID] AS [DocumentFrom_ID], 
+    [DocumentRelation].[DocumentTo_ID] AS [DocumentTo_ID], 
+    [DocumentRelation].[RelationType_ID] AS [RelationType_ID], 
+    [DocumentRelation].[DocumentRelation_Order] AS [DocumentRelation_Order]
+    FROM [abd].[DocumentRelation] AS [DocumentRelation]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DocumentType" EntityType="Self.DocumentType" store:Type="Views" store:Schema="abd">
+            <DefiningQuery>SELECT 
+    [DocumentType].[DocumentType_ID] AS [DocumentType_ID], 
+    [DocumentType].[DocumentType_Code] AS [DocumentType_Code], 
+    [DocumentType].[DocumentType_Name] AS [DocumentType_Name], 
+    [DocumentType].[DocumentType_Group] AS [DocumentType_Group], 
+    [DocumentType].[Description_Rus] AS [Description_Rus], 
+    [DocumentType].[Description_Eng] AS [Description_Eng]
+    FROM [abd].[DocumentType] AS [DocumentType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_Document_Header" EntityType="Self.UI_Document_Header" store:Type="Views" store:Schema="abd">
+            <DefiningQuery>SELECT 
+    [UI_Document_Header].[Document_ID] AS [Document_ID], 
+    [UI_Document_Header].[Document_Name] AS [Document_Name], 
+    [UI_Document_Header].[Document_Title] AS [Document_Title], 
+    [UI_Document_Header].[DocumentType_ID] AS [DocumentType_ID], 
+    [UI_Document_Header].[DocumentType_Code] AS [DocumentType_Code], 
+    [UI_Document_Header].[Document_Revision] AS [Document_Revision], 
+    [UI_Document_Header].[Document_Parent_ID] AS [Document_Parent_ID], 
+    [UI_Document_Header].[Reponsible_Employee_ID] AS [Reponsible_Employee_ID], 
+    [UI_Document_Header].[Document_Number] AS [Document_Number], 
+    [UI_Document_Header].[Document_Date] AS [Document_Date]
+    FROM [abd].[UI_Document_Header] AS [UI_Document_Header]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Contragent" EntityType="Self.Contragent" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Contragent].[Contragent_ID] AS [Contragent_ID], 
+    [Contragent].[Contragent_Code] AS [Contragent_Code], 
+    [Contragent].[Description_Eng] AS [Description_Eng], 
+    [Contragent].[Description_Rus] AS [Description_Rus]
+    FROM [dbo].[Contragent] AS [Contragent]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DetailsType" EntityType="Self.DetailsType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DetailsType].[DetailsType_ID] AS [DetailsType_ID], 
+    [DetailsType].[DetailsType_Code] AS [DetailsType_Code], 
+    [DetailsType].[Description_Rus] AS [Description_Rus]
+    FROM [dbo].[DetailsType] AS [DetailsType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Employee" EntityType="Self.Employee" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Employee].[Employee_ID] AS [Employee_ID], 
+    [Employee].[Employee_Code] AS [Employee_Code], 
+    [Employee].[Person_Id] AS [Person_Id], 
+    [Employee].[Position_Id] AS [Position_Id], 
+    [Employee].[AppUser_Id] AS [AppUser_Id], 
+    [Employee].[Contragent_ID] AS [Contragent_ID]
+    FROM [dbo].[Employee] AS [Employee]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="HIFGroup" EntityType="Self.HIFGroup" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [HIFGroup].[HIFGroup_ID] AS [HIFGroup_ID], 
+    [HIFGroup].[HIFGroup_Code] AS [HIFGroup_Code], 
+    [HIFGroup].[Description_Rus] AS [Description_Rus]
+    FROM [dbo].[HIFGroup] AS [HIFGroup]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="JointKind" EntityType="Self.JointKind" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [JointKind].[JointKind_ID] AS [JointKind_ID], 
+    [JointKind].[JointKind_Code] AS [JointKind_Code], 
+    [JointKind].[Description_Rus] AS [Description_Rus]
+    FROM [dbo].[JointKind] AS [JointKind]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="JointType" EntityType="Self.JointType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [JointType].[JointType_ID] AS [JointType_ID], 
+    [JointType].[JointType_Code] AS [JointType_Code], 
+    [JointType].[Description_Rus] AS [Description_Rus]
+    FROM [dbo].[JointType] AS [JointType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Marka" EntityType="Self.Marka" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Marka].[Marka_ID] AS [Marka_ID], 
+    [Marka].[Marka_Code] AS [Marka_Code], 
+    [Marka].[Marka_Code_Eng] AS [Marka_Code_Eng], 
+    [Marka].[Description_Eng] AS [Description_Eng], 
+    [Marka].[Description_Rus] AS [Description_Rus], 
+    [Marka].[Engineering_Drawing_Type_Eng] AS [Engineering_Drawing_Type_Eng], 
+    [Marka].[Engineering_Drawing_Type_Rus] AS [Engineering_Drawing_Type_Rus], 
+    [Marka].[IsUsedInMatrix] AS [IsUsedInMatrix], 
+    [Marka].[IsPriority] AS [IsPriority], 
+    [Marka].[ReportColor] AS [ReportColor], 
+    [Marka].[ReportOrder] AS [ReportOrder]
+    FROM [dbo].[Marka] AS [Marka]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Person" EntityType="Self.Person" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Person].[Person_ID] AS [Person_ID], 
+    [Person].[Person_Code] AS [Person_Code], 
+    [Person].[FirstName] AS [FirstName], 
+    [Person].[SecondName] AS [SecondName], 
+    [Person].[LastName] AS [LastName], 
+    [Person].[ShortName] AS [ShortName], 
+    [Person].[BirthDate] AS [BirthDate]
+    FROM [dbo].[Person] AS [Person]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Position" EntityType="Self.Position" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Position].[Position_ID] AS [Position_ID], 
+    [Position].[Position_Code] AS [Position_Code], 
+    [Position].[Position_Description] AS [Position_Description]
+    FROM [dbo].[Position] AS [Position]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SeamsType" EntityType="Self.SeamsType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SeamsType].[SeamsType_ID] AS [SeamsType_ID], 
+    [SeamsType].[SeamsType_Code] AS [SeamsType_Code], 
+    [SeamsType].[Description_Rus] AS [Description_Rus]
+    FROM [dbo].[SeamsType] AS [SeamsType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TitleObject" EntityType="Self.TitleObject" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TitleObject].[TitleObject_ID] AS [TitleObject_ID], 
+    [TitleObject].[TitleObject_Code] AS [TitleObject_Code], 
+    [TitleObject].[Parent_Id] AS [Parent_Id], 
+    [TitleObject].[Structure] AS [Structure], 
+    [TitleObject].[Description_Eng] AS [Description_Eng], 
+    [TitleObject].[Description_Rus] AS [Description_Rus], 
+    [TitleObject].[Phase_Name] AS [Phase_Name], 
+    [TitleObject].[ReportColor] AS [ReportColor], 
+    [TitleObject].[ReportOrder] AS [ReportOrder], 
+    [TitleObject].[GLB_Weight] AS [GLB_Weight], 
+    [TitleObject].[Row_Status] AS [Row_Status], 
+    [TitleObject].[Book1_Pct] AS [Book1_Pct], 
+    [TitleObject].[Book1_Weight] AS [Book1_Weight], 
+    [TitleObject].[Book2_Pct] AS [Book2_Pct], 
+    [TitleObject].[Book2_Weight] AS [Book2_Weight], 
+    [TitleObject].[Book3_Pct] AS [Book3_Pct], 
+    [TitleObject].[Book3_Weight] AS [Book3_Weight], 
+    [TitleObject].[Book4_Weight] AS [Book4_Weight], 
+    [TitleObject].[TitleObject_for_ABDFinalSet] AS [TitleObject_for_ABDFinalSet], 
+    [TitleObject].[Book1_Documents_Total] AS [Book1_Documents_Total], 
+    [TitleObject].[Book1_Documents_received] AS [Book1_Documents_received], 
+    [TitleObject].[Book1_Progress] AS [Book1_Progress], 
+    [TitleObject].[Book1_Documents_transmitted_to_CPY] AS [Book1_Documents_transmitted_to_CPY], 
+    [TitleObject].[StageOfConstr] AS [StageOfConstr]
+    FROM [dbo].[TitleObject] AS [TitleObject]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_Contragent" EntityType="Self.UI_Contragent" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_Contragent].[Contragent_ID] AS [Contragent_ID], 
+    [UI_Contragent].[Contragent_Code] AS [Contragent_Code], 
+    [UI_Contragent].[Description_Eng] AS [Description_Eng], 
+    [UI_Contragent].[Description_Rus] AS [Description_Rus]
+    FROM [dbo].[UI_Contragent] AS [UI_Contragent]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_Personal" EntityType="Self.UI_Personal" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_Personal].[Employee_ID] AS [Employee_ID], 
+    [UI_Personal].[Employee_Code] AS [Employee_Code], 
+    [UI_Personal].[Person_ID] AS [Person_ID], 
+    [UI_Personal].[Person_Code] AS [Person_Code], 
+    [UI_Personal].[FirstName] AS [FirstName], 
+    [UI_Personal].[SecondName] AS [SecondName], 
+    [UI_Personal].[LastName] AS [LastName], 
+    [UI_Personal].[ShortName] AS [ShortName], 
+    [UI_Personal].[FullName] AS [FullName], 
+    [UI_Personal].[Position_ID] AS [Position_ID], 
+    [UI_Personal].[Position_Code] AS [Position_Code], 
+    [UI_Personal].[Position_Description] AS [Position_Description], 
+    [UI_Personal].[AppUser_ID] AS [AppUser_ID], 
+    [UI_Personal].[AppUser_Code] AS [AppUser_Code], 
+    [UI_Personal].[Division_ID] AS [Division_ID], 
+    [UI_Personal].[Division_Code] AS [Division_Code], 
+    [UI_Personal].[Contragent_ID] AS [Contragent_ID], 
+    [UI_Personal].[Contragent_Code] AS [Contragent_Code], 
+    [UI_Personal].[Description_Rus] AS [Description_Rus], 
+    [UI_Personal].[BirthDate] AS [BirthDate]
+    FROM [dbo].[UI_Personal] AS [UI_Personal]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_Position" EntityType="Self.UI_Position" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_Position].[Position_ID] AS [Position_ID], 
+    [UI_Position].[Position_Code] AS [Position_Code], 
+    [UI_Position].[Position_Description] AS [Position_Description]
+    FROM [dbo].[UI_Position] AS [UI_Position]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WeldGOST14098" EntityType="Self.WeldGOST14098" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WeldGOST14098].[WeldGOST14098_ID] AS [WeldGOST14098_ID], 
+    [WeldGOST14098].[WeldGOST14098_Code] AS [WeldGOST14098_Code], 
+    [WeldGOST14098].[Description_Rus] AS [Description_Rus]
+    FROM [dbo].[WeldGOST14098] AS [WeldGOST14098]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WeldingEquipmentAutomationLevel" EntityType="Self.WeldingEquipmentAutomationLevel" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WeldingEquipmentAutomationLevel].[WeldingEquipmentAutomationLevel_ID] AS [WeldingEquipmentAutomationLevel_ID], 
+    [WeldingEquipmentAutomationLevel].[WeldingEquipmentAutomationLevel_Code] AS [WeldingEquipmentAutomationLevel_Code], 
+    [WeldingEquipmentAutomationLevel].[Description_Rus] AS [Description_Rus]
+    FROM [dbo].[WeldingEquipmentAutomationLevel] AS [WeldingEquipmentAutomationLevel]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WeldMaterial" EntityType="Self.WeldMaterial" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WeldMaterial].[WeldMaterial_ID] AS [WeldMaterial_ID], 
+    [WeldMaterial].[WeldMaterial_Code] AS [WeldMaterial_Code], 
+    [WeldMaterial].[Description_Rus] AS [Description_Rus]
+    FROM [dbo].[WeldMaterial] AS [WeldMaterial]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WeldMaterialGroup" EntityType="Self.WeldMaterialGroup" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WeldMaterialGroup].[WeldMaterialGroup_ID] AS [WeldMaterialGroup_ID], 
+    [WeldMaterialGroup].[WeldMaterialGroup_Code] AS [WeldMaterialGroup_Code], 
+    [WeldMaterialGroup].[Description_Rus] AS [Description_Rus]
+    FROM [dbo].[WeldMaterialGroup] AS [WeldMaterialGroup]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WeldPosition" EntityType="Self.WeldPosition" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WeldPosition].[WeldPosition_ID] AS [WeldPosition_ID], 
+    [WeldPosition].[WeldPosition_Code] AS [WeldPosition_Code], 
+    [WeldPosition].[Description_Rus] AS [Description_Rus]
+    FROM [dbo].[WeldPosition] AS [WeldPosition]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WeldType" EntityType="Self.WeldType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WeldType].[WeldType_ID] AS [WeldType_ID], 
+    [WeldType].[WeldType_Code] AS [WeldType_Code], 
+    [WeldType].[Description_Rus] AS [Description_Rus]
+    FROM [dbo].[WeldType] AS [WeldType]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DEV_WEB_MainDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DEV_WEB_MainDataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Marka" EntityType="DEV_WEB_MainDataModel.permDbMarka" />
+          <EntitySet Name="TitleObject" EntityType="DEV_WEB_MainDataModel.permDbTitleObject" />
+          <EntitySet Name="UI_Contragent" EntityType="DEV_WEB_MainDataModel.UI_Contragent" />
+          <EntitySet Name="UI_Personal" EntityType="DEV_WEB_MainDataModel.UI_Personal" />
+          <EntitySet Name="UI_Position" EntityType="DEV_WEB_MainDataModel.UI_Position" />
+          <FunctionImport Name="Employee_Delete" ReturnType="Collection(DEV_WEB_MainDataModel.Employee_Delete_Result)">
+            <Parameter Name="i_Employee_ID" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Employee_Insert" ReturnType="Collection(DEV_WEB_MainDataModel.Employee_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Employee_Code" Mode="In" Type="String" />
+            <Parameter Name="i_Person_Id" Mode="In" Type="String" />
+            <Parameter Name="i_Position_Id" Mode="In" Type="String" />
+            <Parameter Name="i_AppUserRef_Id" Mode="In" Type="String" />
+            <Parameter Name="i_Contragent_ID" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Employee_SequenceNumber" ReturnType="Collection(Int64)" />
+          <FunctionImport Name="Employee_Update" ReturnType="Collection(DEV_WEB_MainDataModel.Employee_Update_Result)">
+            <Parameter Name="i_Employee_ID" Mode="In" Type="String" />
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Employee_Code" Mode="In" Type="String" />
+            <Parameter Name="i_Person_Id" Mode="In" Type="String" />
+            <Parameter Name="i_Position_Id" Mode="In" Type="String" />
+            <Parameter Name="i_AppUserRef_Id" Mode="In" Type="String" />
+            <Parameter Name="i_Contragent_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Person_Delete" ReturnType="Collection(DEV_WEB_MainDataModel.Person_Delete_Result)">
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Person_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Person_Insert" ReturnType="Collection(DEV_WEB_MainDataModel.Person_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Person_Code" Mode="In" Type="String" />
+            <Parameter Name="i_FirstName" Mode="In" Type="String" />
+            <Parameter Name="i_SecondName" Mode="In" Type="String" />
+            <Parameter Name="i_LastName" Mode="In" Type="String" />
+            <Parameter Name="i_ShortName" Mode="In" Type="String" />
+            <Parameter Name="i_BirthDate" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Person_Update" ReturnType="Collection(DEV_WEB_MainDataModel.Person_Update_Result)">
+            <Parameter Name="i_Person_ID" Mode="In" Type="String" />
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Person_Code" Mode="In" Type="String" />
+            <Parameter Name="i_FirstName" Mode="In" Type="String" />
+            <Parameter Name="i_SecondName" Mode="In" Type="String" />
+            <Parameter Name="i_LastName" Mode="In" Type="String" />
+            <Parameter Name="i_ShortName" Mode="In" Type="String" />
+            <Parameter Name="i_BirthDate" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="DocumentAttribute_Insert" ReturnType="Collection(DEV_WEB_MainDataModel.DocumentAttribute_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_DocumentAttribute_Value" Mode="In" Type="String" />
+            <Parameter Name="i_AttributeType_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="i_DocumentAttribute_Order" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Employee_to_Document_Insert" ReturnType="Collection(DEV_WEB_MainDataModel.Employee_to_Document_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Employee_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Document_Insert" ReturnType="Collection(DEV_WEB_MainDataModel.permDbDocument_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_DocumentType_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Name" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Title" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Revision" Mode="In" Type="String" />
+            <Parameter Name="i_Reponsible_Employee_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Number" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Date" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Parent_ID" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Document_SequenceNumber" ReturnType="Collection(Int64)" />
+          <FunctionImport Name="UI_DocumentTree_Select" ReturnType="Collection(DEV_WEB_MainDataModel.UI_DocumentTree_Select_Result)">
+          <Parameter Name="i_Employee_ID" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="EAVDocumentTypes" EntityType="DEV_WEB_MainDataModel.EAVDocumentType" />
+          <FunctionImport Name="f_GetTemplate_Attr" IsComposable="true" ReturnType="Collection(DEV_WEB_MainDataModel.f_GetTemplate_Attr_Result)">
+          <Parameter Name="DocumentType_Code" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="EAVDocuments" EntityType="DEV_WEB_MainDataModel.EAVDocument" />
+          <EntitySet Name="DocumentAttributes" EntityType="DEV_WEB_MainDataModel.DocumentAttribute" />
+          <EntitySet Name="AttributeTypes" EntityType="DEV_WEB_MainDataModel.AttributeType" />
+          <AssociationSet Name="DocumentDocumentType" Association="DEV_WEB_MainDataModel.DocumentDocumentType">
+            <End Role="Document" EntitySet="EAVDocuments" />
+            <End Role="DocumentType" EntitySet="EAVDocumentTypes" />
+          </AssociationSet>
+          <AssociationSet Name="DocumentDocumentAttribute" Association="DEV_WEB_MainDataModel.DocumentDocumentAttribute">
+            <End Role="Document" EntitySet="EAVDocuments" />
+            <End Role="DocumentAttribute" EntitySet="DocumentAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="DocumentAttributeAttributeType" Association="DEV_WEB_MainDataModel.DocumentAttributeAttributeType">
+            <End Role="DocumentAttribute" EntitySet="DocumentAttributes" />
+            <End Role="AttributeType" EntitySet="AttributeTypes" />
+          </AssociationSet>
+          <EntitySet Name="WeldTypes" EntityType="DEV_WEB_MainDataModel.WeldType" />
+          <EntitySet Name="HIFGroups" EntityType="DEV_WEB_MainDataModel.HIFGroup" />
+          <FunctionImport Name="DocumentAttribute_Delete" ReturnType="Collection(DEV_WEB_MainDataModel.DocumentAttribute_Delete_Result)">
+            <Parameter Name="i_DocumentAttribute_ID" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Document_Update" ReturnType="Collection(DEV_WEB_MainDataModel.permDbDocument_Update_Result)">
+            <Parameter Name="i_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_DocumentType_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Name" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Title" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Revision" Mode="In" Type="String" />
+            <Parameter Name="i_Reponsible_Employee_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Number" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Date" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Parent_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="DocumentRelations" EntityType="DEV_WEB_MainDataModel.DocumentRelation" />
+          <AssociationSet Name="DocumentRelationDocumentTo" Association="DEV_WEB_MainDataModel.DocumentRelationDocumentTo">
+            <End Role="DocumentRelation" EntitySet="DocumentRelations" />
+            <End Role="Document" EntitySet="EAVDocuments" />           
+          </AssociationSet>          
+          <AssociationSet Name="DocumentRelationDocumentFrom" Association="DEV_WEB_MainDataModel.DocumentRelationDocumentFrom">
+            <End Role="DocumentRelation" EntitySet="DocumentRelations" />
+            <End Role="Document" EntitySet="EAVDocuments" />           
+          </AssociationSet>
+          <EntitySet Name="DetailsTypes" EntityType="DEV_WEB_MainDataModel.DetailsType" />
+          <EntitySet Name="JointKinds" EntityType="DEV_WEB_MainDataModel.JointKind" />
+          <EntitySet Name="JointTypes" EntityType="DEV_WEB_MainDataModel.JointType" />
+          <EntitySet Name="SeamsTypes" EntityType="DEV_WEB_MainDataModel.SeamsType" />
+          <EntitySet Name="WeldGOST14098" EntityType="DEV_WEB_MainDataModel.WeldGOST14098" />
+          <EntitySet Name="WeldingEquipmentAutomationLevels" EntityType="DEV_WEB_MainDataModel.WeldingEquipmentAutomationLevel" />
+          <EntitySet Name="WeldMaterials" EntityType="DEV_WEB_MainDataModel.WeldMaterial" />
+          <EntitySet Name="WeldMaterialGroups" EntityType="DEV_WEB_MainDataModel.WeldMaterialGroup" />
+          <EntitySet Name="WeldPositions" EntityType="DEV_WEB_MainDataModel.WeldPosition" />
+          <EntitySet Name="Contragents" EntityType="DEV_WEB_MainDataModel.Contragent" />
+          <EntitySet Name="Employees" EntityType="DEV_WEB_MainDataModel.Employee" />
+          <EntitySet Name="People" EntityType="DEV_WEB_MainDataModel.Person" />
+          <EntitySet Name="Positions" EntityType="DEV_WEB_MainDataModel.Position" />
+          <AssociationSet Name="PersonEmployee" Association="DEV_WEB_MainDataModel.PersonEmployee">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="ContragentEmployee" Association="DEV_WEB_MainDataModel.ContragentEmployee">
+            <End Role="Contragent" EntitySet="Contragents" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="PositionEmployee" Association="DEV_WEB_MainDataModel.PositionEmployee">
+            <End Role="Position" EntitySet="Positions" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="permDbMarka">
+          <Key>
+            <PropertyRef Name="Marka_ID" />
+            <PropertyRef Name="Marka_Code" />
+          </Key>
+          <Property Name="Marka_ID" Type="Guid" Nullable="false" />
+          <Property Name="Marka_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Marka_Code_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Engineering_Drawing_Type_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Engineering_Drawing_Type_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsUsedInMatrix" Type="Boolean" />
+          <Property Name="IsPriority" Type="Boolean" />
+          <Property Name="ReportColor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ReportOrder" Type="Int32" />
+        </EntityType>
+        <EntityType Name="permDbTitleObject">
+          <Key>
+            <PropertyRef Name="TitleObject_ID" />
+            <PropertyRef Name="TitleObject_Code" />
+            <PropertyRef Name="Structure" />
+          </Key>
+          <Property Name="TitleObject_ID" Type="Guid" Nullable="false" />
+          <Property Name="TitleObject_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Parent_Id" Type="Guid" />
+          <Property Name="Structure" Type="Int32" Nullable="false" />
+          <Property Name="Description_Eng" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Phase_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReportColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReportOrder" Type="Int32" />
+          <Property Name="GLB_Weight" Type="Double" />
+          <Property Name="Row_Status" Type="Int32" />
+          <Property Name="Book1_Pct" Type="Double" />
+          <Property Name="Book1_Weight" Type="Double" />
+          <Property Name="Book2_Pct" Type="Double" />
+          <Property Name="Book2_Weight" Type="Double" />
+          <Property Name="Book3_Pct" Type="Double" />
+          <Property Name="Book3_Weight" Type="Double" />
+          <Property Name="Book4_Weight" Type="Double" />
+          <Property Name="TitleObject_for_ABDFinalSet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Book1_Documents_Total" Type="Double" />
+          <Property Name="Book1_Documents_received" Type="Double" />
+          <Property Name="Book1_Progress" Type="Double" />
+          <Property Name="Book1_Documents_transmitted_to_CPY" Type="Double" />
+          <Property Name="StageOfConstr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UI_Contragent">
+          <Key>
+            <PropertyRef Name="Contragent_ID" />
+            <PropertyRef Name="Contragent_Code" />
+          </Key>
+          <Property Name="Contragent_ID" Type="Guid" Nullable="false" />
+          <Property Name="Contragent_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UI_Personal">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+            <PropertyRef Name="Employee_Code" />
+          </Key>
+          <Property Name="Employee_ID" Type="Guid" Nullable="false" />
+          <Property Name="Employee_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Person_ID" Type="Guid" />
+          <Property Name="Person_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SecondName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="767" FixedLength="false" Unicode="true" />
+          <Property Name="Position_ID" Type="Guid" />
+          <Property Name="Position_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Position_Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AppUser_ID" Type="Guid" />
+          <Property Name="AppUser_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Division_ID" Type="Guid" />
+          <Property Name="Division_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Contragent_ID" Type="Guid" />
+          <Property Name="Contragent_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="UI_Position">
+          <Key>
+            <PropertyRef Name="Position_ID" />
+            <PropertyRef Name="Position_Code" />
+          </Key>
+          <Property Name="Position_ID" Type="Guid" Nullable="false" />
+          <Property Name="Position_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Position_Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="Employee_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Employee_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Employee_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Person_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Person_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Person_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="DocumentAttribute_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Employee_to_Document_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="permDbDocument_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="UI_DocumentTree_Select_Result">
+          <Property Type="Int32" Name="P_ID" Nullable="true" />
+          <Property Type="Int32" Name="ID" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="527" />
+          <Property Type="Guid" Name="Document_ID" Nullable="true" />
+          <Property Type="Guid" Name="DocumentType_ID" Nullable="true" />
+          <Property Type="Int32" Name="EntityType" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="EAVDocumentType">
+          <Key>
+            <PropertyRef Name="DocumentType_ID" />
+          </Key>
+          <Property Name="DocumentType_ID" Type="Guid" Nullable="false" />
+          <Property Name="DocumentType_Code" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentType_Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentType_Group" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Eng" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Documents" Relationship="DEV_WEB_MainDataModel.DocumentDocumentType" FromRole="DocumentType" ToRole="Document" />
+        </EntityType>
+        <ComplexType Name="f_GetTemplate_Attr_Result">
+          <Property Type="String" Name="DocEntityType_Code" Nullable="true" MaxLength="255" />
+          <Property Type="Guid" Name="AttributeType_ID" Nullable="true" />
+          <Property Type="String" Name="AttributeType_Code" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="AttributeType_Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Attribute_DataType" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Attribute_Table" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Attribute_Format" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Description_Rus" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Description_Eng" Nullable="true" MaxLength="250" />
+          <Property Type="Guid" Name="DocumentAttribute_ID" Nullable="true" />
+          <Property Type="Int32" Name="DocumentAttribute_Order" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="EAVDocument">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+          </Key>
+          <Property Name="Document_ID" Type="Guid" Nullable="false" />
+          <Property Name="Document_Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Document_Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentType_ID" Type="Guid" Nullable="false" />
+          <Property Name="Document_Revision" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Document_Parent_ID" Type="Guid" />
+          <Property Name="Reponsible_Employee_ID" Type="Guid" />
+          <Property Name="Document_Number" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Document_Date" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="DocumentType" Relationship="DEV_WEB_MainDataModel.DocumentDocumentType" FromRole="Document" ToRole="DocumentType" />
+          <NavigationProperty Name="DocumentAttributes" Relationship="DEV_WEB_MainDataModel.DocumentDocumentAttribute" FromRole="Document" ToRole="DocumentAttribute" />
+          <NavigationProperty Name="DocumentRelationsFrom" Relationship="DEV_WEB_MainDataModel.DocumentRelationDocumentTo" FromRole="Document" ToRole="DocumentRelation" />
+          <NavigationProperty Name="DocumentRelationsTo" Relationship="DEV_WEB_MainDataModel.DocumentRelationDocumentFrom" FromRole="Document" ToRole="DocumentRelation" />
+        </EntityType>
+        <EntityType Name="DocumentAttribute">
+          <Key>
+            <PropertyRef Name="DocumentAttribute_ID" />
+          </Key>
+          <Property Name="DocumentAttribute_ID" Type="Guid" Nullable="false" />
+          <Property Name="DocumentAttribute_Value" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AttributeType_ID" Type="Guid" Nullable="false" />
+          <Property Name="Document_ID" Type="Guid" Nullable="false" />
+          <Property Name="DocumentAttribute_Order" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Document" Relationship="DEV_WEB_MainDataModel.DocumentDocumentAttribute" FromRole="DocumentAttribute" ToRole="Document" />
+          <NavigationProperty Name="AttributeType" Relationship="DEV_WEB_MainDataModel.DocumentAttributeAttributeType" FromRole="DocumentAttribute" ToRole="AttributeType" />
+        </EntityType>
+        <EntityType Name="AttributeType">
+          <Key>
+            <PropertyRef Name="AttributeType_ID" />
+          </Key>
+          <Property Name="AttributeType_ID" Type="Guid" Nullable="false" />
+          <Property Name="AttributeType_Code" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AttributeType_Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AttributeType_Group" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Attribute_DataType" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Attribute_Table" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Attribute_Format" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Eng" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DocumentAttributes" Relationship="DEV_WEB_MainDataModel.DocumentAttributeAttributeType" FromRole="AttributeType" ToRole="DocumentAttribute" />
+        </EntityType>
+        <Association Name="DocumentDocumentType">
+          <End Type="DEV_WEB_MainDataModel.EAVDocument" Role="Document" Multiplicity="*" />
+          <End Type="DEV_WEB_MainDataModel.EAVDocumentType" Role="DocumentType" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentType">
+              <PropertyRef Name="DocumentType_ID" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="DocumentType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DocumentDocumentAttribute">
+          <End Type="DEV_WEB_MainDataModel.EAVDocument" Role="Document" Multiplicity="1" />
+          <End Type="DEV_WEB_MainDataModel.DocumentAttribute" Role="DocumentAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="Document_ID" />
+            </Principal>
+            <Dependent Role="DocumentAttribute">
+              <PropertyRef Name="Document_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DocumentAttributeAttributeType">
+          <End Type="DEV_WEB_MainDataModel.DocumentAttribute" Role="DocumentAttribute" Multiplicity="*" />
+          <End Type="DEV_WEB_MainDataModel.AttributeType" Role="AttributeType" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeType">
+              <PropertyRef Name="AttributeType_ID" />
+            </Principal>
+            <Dependent Role="DocumentAttribute">
+              <PropertyRef Name="AttributeType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WeldType">
+          <Key>
+            <PropertyRef Name="WeldType_ID" />
+          </Key>
+          <Property Name="WeldType_ID" Type="Guid" Nullable="false" />
+          <Property Name="WeldType_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HIFGroup">
+          <Key>
+            <PropertyRef Name="HIFGroup_ID" />
+          </Key>
+          <Property Name="HIFGroup_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="HIFGroup_ID" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Document_Naks" BaseType="DEV_WEB_MainDataModel.EAVDocument" />
+        <ComplexType Name="DocumentAttribute_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="permDbDocument_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <EntityType Name="Document_NaksAttest" BaseType="DEV_WEB_MainDataModel.EAVDocument" />
+        <EntityType Name="DocumentRelation">
+          <Key>
+            <PropertyRef Name="DocumentRelation_ID" />
+          </Key>
+          <Property Name="DocumentRelation_ID" Type="Guid" Nullable="false" />
+          <Property Name="DocumentFrom_ID" Type="Guid" Nullable="false" />
+          <Property Name="DocumentTo_ID" Type="Guid" Nullable="false" />
+          <Property Name="RelationType_ID" Type="Guid" Nullable="false" />
+          <Property Name="DocumentRelation_Order" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DocumentTo" Relationship="DEV_WEB_MainDataModel.DocumentRelationDocumentTo" FromRole="DocumentRelation" ToRole="Document" />
+          <NavigationProperty Name="DocumentFrom" Relationship="DEV_WEB_MainDataModel.DocumentRelationDocumentFrom" FromRole="DocumentRelation" ToRole="Document" />
+        </EntityType>
+        <Association Name="DocumentRelationDocumentTo">
+          <End Type="DEV_WEB_MainDataModel.DocumentRelation" Role="DocumentRelation" Multiplicity="*" />
+          <End Type="DEV_WEB_MainDataModel.EAVDocument" Role="Document" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="Document_ID" />
+            </Principal>
+            <Dependent Role="DocumentRelation">
+              <PropertyRef Name="DocumentTo_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>       
+        <Association Name="DocumentRelationDocumentFrom">
+          <End Type="DEV_WEB_MainDataModel.DocumentRelation" Role="DocumentRelation" Multiplicity="*" />
+          <End Type="DEV_WEB_MainDataModel.EAVDocument" Role="Document" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="Document_ID" />
+            </Principal>
+            <Dependent Role="DocumentRelation">
+              <PropertyRef Name="DocumentFrom_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DetailsType">
+          <Key>
+            <PropertyRef Name="DetailsType_ID" />
+          </Key>
+          <Property Name="DetailsType_ID" Type="Guid" Nullable="false" />
+          <Property Name="DetailsType_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="JointKind">
+          <Key>
+            <PropertyRef Name="JointKind_ID" />
+          </Key>
+          <Property Name="JointKind_ID" Type="Guid" Nullable="false" />
+          <Property Name="JointKind_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="JointType">
+          <Key>
+            <PropertyRef Name="JointType_ID" />
+          </Key>
+          <Property Name="JointType_ID" Type="Guid" Nullable="false" />
+          <Property Name="JointType_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SeamsType">
+          <Key>
+            <PropertyRef Name="SeamsType_ID" />
+          </Key>
+          <Property Name="SeamsType_ID" Type="Guid" Nullable="false" />
+          <Property Name="SeamsType_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WeldGOST14098">
+          <Key>
+            <PropertyRef Name="WeldGOST14098_ID" />
+          </Key>
+          <Property Name="WeldGOST14098_ID" Type="Guid" Nullable="false" />
+          <Property Name="WeldGOST14098_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WeldingEquipmentAutomationLevel">
+          <Key>
+            <PropertyRef Name="WeldingEquipmentAutomationLevel_ID" />
+          </Key>
+          <Property Name="WeldingEquipmentAutomationLevel_ID" Type="Guid" Nullable="false" />
+          <Property Name="WeldingEquipmentAutomationLevel_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WeldMaterial">
+          <Key>
+            <PropertyRef Name="WeldMaterial_ID" />
+          </Key>
+          <Property Name="WeldMaterial_ID" Type="Guid" Nullable="false" />
+          <Property Name="WeldMaterial_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WeldMaterialGroup">
+          <Key>
+            <PropertyRef Name="WeldMaterialGroup_ID" />
+          </Key>
+          <Property Name="WeldMaterialGroup_ID" Type="Guid" Nullable="false" />
+          <Property Name="WeldMaterialGroup_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WeldPosition">
+          <Key>
+            <PropertyRef Name="WeldPosition_ID" />
+          </Key>
+          <Property Name="WeldPosition_ID" Type="Guid" Nullable="false" />
+          <Property Name="WeldPosition_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Contragent">
+          <Key>
+            <PropertyRef Name="Contragent_ID" />
+          </Key>
+          <Property Name="Contragent_ID" Type="Guid" Nullable="false" />
+          <Property Name="Contragent_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="DEV_WEB_MainDataModel.ContragentEmployee" FromRole="Contragent" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Employee_ID" />
+          </Key>
+          <Property Name="Employee_ID" Type="Guid" Nullable="false" />
+          <Property Name="Employee_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Person_Id" Type="Guid" Nullable="false" />
+          <Property Name="Position_Id" Type="Guid" Nullable="false" />
+          <Property Name="AppUser_Id" Type="Guid" />
+          <Property Name="Contragent_ID" Type="Guid" />
+          <NavigationProperty Name="Person" Relationship="DEV_WEB_MainDataModel.PersonEmployee" FromRole="Employee" ToRole="Person" />
+          <NavigationProperty Name="Contragent" Relationship="DEV_WEB_MainDataModel.ContragentEmployee" FromRole="Employee" ToRole="Contragent" />
+          <NavigationProperty Name="Position" Relationship="DEV_WEB_MainDataModel.PositionEmployee" FromRole="Employee" ToRole="Position" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Person_ID" />
+          </Key>
+          <Property Name="Person_ID" Type="Guid" Nullable="false" />
+          <Property Name="Person_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SecondName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Employees" Relationship="DEV_WEB_MainDataModel.PersonEmployee" FromRole="Person" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="Position_ID" />
+          </Key>
+          <Property Name="Position_ID" Type="Guid" Nullable="false" />
+          <Property Name="Position_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Position_Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="DEV_WEB_MainDataModel.PositionEmployee" FromRole="Position" ToRole="Employee" />
+        </EntityType>
+        <Association Name="PersonEmployee">
+          <End Type="DEV_WEB_MainDataModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="DEV_WEB_MainDataModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Person_ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Person_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ContragentEmployee">
+          <End Type="DEV_WEB_MainDataModel.Contragent" Role="Contragent" Multiplicity="0..1" />
+          <End Type="DEV_WEB_MainDataModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contragent">
+              <PropertyRef Name="Contragent_ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Contragent_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PositionEmployee">
+          <End Type="DEV_WEB_MainDataModel.Position" Role="Position" Multiplicity="1" />
+          <End Type="DEV_WEB_MainDataModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="Position_ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Position_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DEV_WEB_MainDataModelStoreContainer" CdmEntityContainer="DEV_WEB_MainDataEntities">
+          <EntitySetMapping Name="Marka">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.permDbMarka">
+              <MappingFragment StoreEntitySet="Marka">
+                <ScalarProperty Name="ReportOrder" ColumnName="ReportOrder" />
+                <ScalarProperty Name="ReportColor" ColumnName="ReportColor" />
+                <ScalarProperty Name="IsPriority" ColumnName="IsPriority" />
+                <ScalarProperty Name="IsUsedInMatrix" ColumnName="IsUsedInMatrix" />
+                <ScalarProperty Name="Engineering_Drawing_Type_Rus" ColumnName="Engineering_Drawing_Type_Rus" />
+                <ScalarProperty Name="Engineering_Drawing_Type_Eng" ColumnName="Engineering_Drawing_Type_Eng" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="Marka_Code_Eng" ColumnName="Marka_Code_Eng" />
+                <ScalarProperty Name="Marka_Code" ColumnName="Marka_Code" />
+                <ScalarProperty Name="Marka_ID" ColumnName="Marka_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TitleObject">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.permDbTitleObject">
+              <MappingFragment StoreEntitySet="TitleObject">
+                <ScalarProperty Name="StageOfConstr" ColumnName="StageOfConstr" />
+                <ScalarProperty Name="Book1_Documents_transmitted_to_CPY" ColumnName="Book1_Documents_transmitted_to_CPY" />
+                <ScalarProperty Name="Book1_Progress" ColumnName="Book1_Progress" />
+                <ScalarProperty Name="Book1_Documents_received" ColumnName="Book1_Documents_received" />
+                <ScalarProperty Name="Book1_Documents_Total" ColumnName="Book1_Documents_Total" />
+                <ScalarProperty Name="TitleObject_for_ABDFinalSet" ColumnName="TitleObject_for_ABDFinalSet" />
+                <ScalarProperty Name="Book4_Weight" ColumnName="Book4_Weight" />
+                <ScalarProperty Name="Book3_Weight" ColumnName="Book3_Weight" />
+                <ScalarProperty Name="Book3_Pct" ColumnName="Book3_Pct" />
+                <ScalarProperty Name="Book2_Weight" ColumnName="Book2_Weight" />
+                <ScalarProperty Name="Book2_Pct" ColumnName="Book2_Pct" />
+                <ScalarProperty Name="Book1_Weight" ColumnName="Book1_Weight" />
+                <ScalarProperty Name="Book1_Pct" ColumnName="Book1_Pct" />
+                <ScalarProperty Name="Row_Status" ColumnName="Row_Status" />
+                <ScalarProperty Name="GLB_Weight" ColumnName="GLB_Weight" />
+                <ScalarProperty Name="ReportOrder" ColumnName="ReportOrder" />
+                <ScalarProperty Name="ReportColor" ColumnName="ReportColor" />
+                <ScalarProperty Name="Phase_Name" ColumnName="Phase_Name" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="Structure" ColumnName="Structure" />
+                <ScalarProperty Name="Parent_Id" ColumnName="Parent_Id" />
+                <ScalarProperty Name="TitleObject_Code" ColumnName="TitleObject_Code" />
+                <ScalarProperty Name="TitleObject_ID" ColumnName="TitleObject_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_Contragent">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.UI_Contragent">
+              <MappingFragment StoreEntitySet="UI_Contragent">
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="Contragent_Code" ColumnName="Contragent_Code" />
+                <ScalarProperty Name="Contragent_ID" ColumnName="Contragent_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_Personal">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.UI_Personal">
+              <MappingFragment StoreEntitySet="UI_Personal">
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Contragent_Code" ColumnName="Contragent_Code" />
+                <ScalarProperty Name="Contragent_ID" ColumnName="Contragent_ID" />
+                <ScalarProperty Name="Division_Code" ColumnName="Division_Code" />
+                <ScalarProperty Name="Division_ID" ColumnName="Division_ID" />
+                <ScalarProperty Name="AppUser_Code" ColumnName="AppUser_Code" />
+                <ScalarProperty Name="AppUser_ID" ColumnName="AppUser_ID" />
+                <ScalarProperty Name="Position_Description" ColumnName="Position_Description" />
+                <ScalarProperty Name="Position_Code" ColumnName="Position_Code" />
+                <ScalarProperty Name="Position_ID" ColumnName="Position_ID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Person_Code" ColumnName="Person_Code" />
+                <ScalarProperty Name="Person_ID" ColumnName="Person_ID" />
+                <ScalarProperty Name="Employee_Code" ColumnName="Employee_Code" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_Position">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.UI_Position">
+              <MappingFragment StoreEntitySet="UI_Position">
+                <ScalarProperty Name="Position_Description" ColumnName="Position_Description" />
+                <ScalarProperty Name="Position_Code" ColumnName="Position_Code" />
+                <ScalarProperty Name="Position_ID" ColumnName="Position_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Employee_Delete" FunctionName="DEV_WEB_MainDataModel.Store.Employee_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_WEB_MainDataModel.Employee_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Employee_Insert" FunctionName="DEV_WEB_MainDataModel.Store.Employee_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_WEB_MainDataModel.Employee_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Employee_SequenceNumber" FunctionName="DEV_WEB_MainDataModel.Store.Employee_SequenceNumber" />
+          <FunctionImportMapping FunctionImportName="Employee_Update" FunctionName="DEV_WEB_MainDataModel.Store.Employee_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_WEB_MainDataModel.Employee_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Person_Delete" FunctionName="DEV_WEB_MainDataModel.Store.Person_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_WEB_MainDataModel.Person_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Person_Insert" FunctionName="DEV_WEB_MainDataModel.Store.Person_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_WEB_MainDataModel.Person_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Person_Update" FunctionName="DEV_WEB_MainDataModel.Store.Person_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_WEB_MainDataModel.Person_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DocumentAttribute_Insert" FunctionName="DEV_WEB_MainDataModel.Store.DocumentAttribute_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_WEB_MainDataModel.DocumentAttribute_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Employee_to_Document_Insert" FunctionName="DEV_WEB_MainDataModel.Store.Employee_to_Document_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_WEB_MainDataModel.Employee_to_Document_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Document_Insert" FunctionName="DEV_WEB_MainDataModel.Store.Document_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_WEB_MainDataModel.permDbDocument_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Document_SequenceNumber" FunctionName="DEV_WEB_MainDataModel.Store.Document_SequenceNumber" />
+          <FunctionImportMapping FunctionImportName="UI_DocumentTree_Select" FunctionName="DEV_WEB_MainDataModel.Store.UI_DocumentTree_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_WEB_MainDataModel.UI_DocumentTree_Select_Result">
+                <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+                <ScalarProperty Name="DocumentType_ID" ColumnName="DocumentType_ID" />
+                <ScalarProperty Name="EntityType" ColumnName="EntityType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="EAVDocumentTypes">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.EAVDocumentType">
+              <MappingFragment StoreEntitySet="DocumentType">
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="DocumentType_Group" ColumnName="DocumentType_Group" />
+                <ScalarProperty Name="DocumentType_Name" ColumnName="DocumentType_Name" />
+                <ScalarProperty Name="DocumentType_Code" ColumnName="DocumentType_Code" />
+                <ScalarProperty Name="DocumentType_ID" ColumnName="DocumentType_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="f_GetTemplate_Attr" FunctionName="DEV_WEB_MainDataModel.Store.f_GetTemplate_Attr">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_WEB_MainDataModel.f_GetTemplate_Attr_Result">
+                <ScalarProperty Name="DocEntityType_Code" ColumnName="DocEntityType_Code" />
+                <ScalarProperty Name="AttributeType_ID" ColumnName="AttributeType_ID" />
+                <ScalarProperty Name="AttributeType_Code" ColumnName="AttributeType_Code" />
+                <ScalarProperty Name="AttributeType_Name" ColumnName="AttributeType_Name" />
+                <ScalarProperty Name="Attribute_DataType" ColumnName="Attribute_DataType" />
+                <ScalarProperty Name="Attribute_Table" ColumnName="Attribute_Table" />
+                <ScalarProperty Name="Attribute_Format" ColumnName="Attribute_Format" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="DocumentAttribute_ID" ColumnName="DocumentAttribute_ID" />
+                <ScalarProperty Name="DocumentAttribute_Order" ColumnName="DocumentAttribute_Order" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="EAVDocuments">
+            <EntityTypeMapping TypeName="IsTypeOf(DEV_WEB_MainDataModel.Document_Naks)">
+              <MappingFragment StoreEntitySet="UI_Document_Header">
+                <ScalarProperty Name="Document_Date" ColumnName="Document_Date" />
+                <ScalarProperty Name="Document_Number" ColumnName="Document_Number" />
+                <ScalarProperty Name="Reponsible_Employee_ID" ColumnName="Reponsible_Employee_ID" />
+                <ScalarProperty Name="Document_Parent_ID" ColumnName="Document_Parent_ID" />
+                <ScalarProperty Name="Document_Revision" ColumnName="Document_Revision" />
+                <ScalarProperty Name="DocumentType_ID" ColumnName="DocumentType_ID" />
+                <ScalarProperty Name="Document_Title" ColumnName="Document_Title" />
+                <ScalarProperty Name="Document_Name" ColumnName="Document_Name" />
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+                <Condition ColumnName="DocumentType_Code" Value="НАКС" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.EAVDocument">
+              <MappingFragment StoreEntitySet="UI_Document_Header">
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+                <ScalarProperty Name="Document_Date" ColumnName="Document_Date" />
+                <ScalarProperty Name="Document_Number" ColumnName="Document_Number" />
+                <ScalarProperty Name="Reponsible_Employee_ID" ColumnName="Reponsible_Employee_ID" />
+                <ScalarProperty Name="Document_Parent_ID" ColumnName="Document_Parent_ID" />
+                <ScalarProperty Name="Document_Revision" ColumnName="Document_Revision" />
+                <ScalarProperty Name="DocumentType_ID" ColumnName="DocumentType_ID" />
+                <ScalarProperty Name="Document_Title" ColumnName="Document_Title" />
+                <ScalarProperty Name="Document_Name" ColumnName="Document_Name" />
+                <Condition ColumnName="DocumentType_Code" Value="" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(DEV_WEB_MainDataModel.Document_NaksAttest)">
+              <MappingFragment StoreEntitySet="UI_Document_Header">
+                <ScalarProperty Name="Document_Name" ColumnName="Document_Name" />
+                <ScalarProperty Name="Document_Title" ColumnName="Document_Title" />
+                <ScalarProperty Name="DocumentType_ID" ColumnName="DocumentType_ID" />
+                <ScalarProperty Name="Document_Revision" ColumnName="Document_Revision" />
+                <ScalarProperty Name="Document_Parent_ID" ColumnName="Document_Parent_ID" />
+                <ScalarProperty Name="Reponsible_Employee_ID" ColumnName="Reponsible_Employee_ID" />
+                <ScalarProperty Name="Document_Number" ColumnName="Document_Number" />
+                <ScalarProperty Name="Document_Date" ColumnName="Document_Date" />
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+                <Condition ColumnName="DocumentType_Code" Value="Аттестация" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentAttributes">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.DocumentAttribute">
+              <MappingFragment StoreEntitySet="DocumentAttribute">
+                <ScalarProperty Name="DocumentAttribute_Order" ColumnName="DocumentAttribute_Order" />
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+                <ScalarProperty Name="AttributeType_ID" ColumnName="AttributeType_ID" />
+                <ScalarProperty Name="DocumentAttribute_Value" ColumnName="DocumentAttribute_Value" />
+                <ScalarProperty Name="DocumentAttribute_ID" ColumnName="DocumentAttribute_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttributeTypes">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.AttributeType">
+              <MappingFragment StoreEntitySet="AttributeType">
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Attribute_Format" ColumnName="Attribute_Format" />
+                <ScalarProperty Name="Attribute_Table" ColumnName="Attribute_Table" />
+                <ScalarProperty Name="Attribute_DataType" ColumnName="Attribute_DataType" />
+                <ScalarProperty Name="AttributeType_Group" ColumnName="AttributeType_Group" />
+                <ScalarProperty Name="AttributeType_Name" ColumnName="AttributeType_Name" />
+                <ScalarProperty Name="AttributeType_Code" ColumnName="AttributeType_Code" />
+                <ScalarProperty Name="AttributeType_ID" ColumnName="AttributeType_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeldTypes">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.WeldType">
+              <MappingFragment StoreEntitySet="WeldType">
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="WeldType_Code" ColumnName="WeldType_Code" />
+                <ScalarProperty Name="WeldType_ID" ColumnName="WeldType_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HIFGroups">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.HIFGroup">
+              <MappingFragment StoreEntitySet="HIFGroup">
+                <ScalarProperty Name="HIFGroup_ID" ColumnName="HIFGroup_ID" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="HIFGroup_Code" ColumnName="HIFGroup_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DocumentAttribute_Delete" FunctionName="DEV_WEB_MainDataModel.Store.DocumentAttribute_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_WEB_MainDataModel.DocumentAttribute_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Document_Update" FunctionName="DEV_WEB_MainDataModel.Store.Document_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_WEB_MainDataModel.permDbDocument_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="DocumentRelations">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.DocumentRelation">
+              <MappingFragment StoreEntitySet="DocumentRelation">
+                <ScalarProperty Name="DocumentRelation_Order" ColumnName="DocumentRelation_Order" />
+                <ScalarProperty Name="RelationType_ID" ColumnName="RelationType_ID" />
+                <ScalarProperty Name="DocumentTo_ID" ColumnName="DocumentTo_ID" />
+                <ScalarProperty Name="DocumentFrom_ID" ColumnName="DocumentFrom_ID" />
+                <ScalarProperty Name="DocumentRelation_ID" ColumnName="DocumentRelation_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetailsTypes">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.DetailsType">
+              <MappingFragment StoreEntitySet="DetailsType">
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="DetailsType_Code" ColumnName="DetailsType_Code" />
+                <ScalarProperty Name="DetailsType_ID" ColumnName="DetailsType_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JointKinds">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.JointKind">
+              <MappingFragment StoreEntitySet="JointKind">
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="JointKind_Code" ColumnName="JointKind_Code" />
+                <ScalarProperty Name="JointKind_ID" ColumnName="JointKind_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JointTypes">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.JointType">
+              <MappingFragment StoreEntitySet="JointType">
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="JointType_Code" ColumnName="JointType_Code" />
+                <ScalarProperty Name="JointType_ID" ColumnName="JointType_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SeamsTypes">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.SeamsType">
+              <MappingFragment StoreEntitySet="SeamsType">
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="SeamsType_Code" ColumnName="SeamsType_Code" />
+                <ScalarProperty Name="SeamsType_ID" ColumnName="SeamsType_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeldGOST14098">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.WeldGOST14098">
+              <MappingFragment StoreEntitySet="WeldGOST14098">
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="WeldGOST14098_Code" ColumnName="WeldGOST14098_Code" />
+                <ScalarProperty Name="WeldGOST14098_ID" ColumnName="WeldGOST14098_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeldingEquipmentAutomationLevels">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.WeldingEquipmentAutomationLevel">
+              <MappingFragment StoreEntitySet="WeldingEquipmentAutomationLevel">
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="WeldingEquipmentAutomationLevel_Code" ColumnName="WeldingEquipmentAutomationLevel_Code" />
+                <ScalarProperty Name="WeldingEquipmentAutomationLevel_ID" ColumnName="WeldingEquipmentAutomationLevel_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeldMaterials">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.WeldMaterial">
+              <MappingFragment StoreEntitySet="WeldMaterial">
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="WeldMaterial_Code" ColumnName="WeldMaterial_Code" />
+                <ScalarProperty Name="WeldMaterial_ID" ColumnName="WeldMaterial_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeldMaterialGroups">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.WeldMaterialGroup">
+              <MappingFragment StoreEntitySet="WeldMaterialGroup">
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="WeldMaterialGroup_Code" ColumnName="WeldMaterialGroup_Code" />
+                <ScalarProperty Name="WeldMaterialGroup_ID" ColumnName="WeldMaterialGroup_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeldPositions">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.WeldPosition">
+              <MappingFragment StoreEntitySet="WeldPosition">
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="WeldPosition_Code" ColumnName="WeldPosition_Code" />
+                <ScalarProperty Name="WeldPosition_ID" ColumnName="WeldPosition_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contragents">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.Contragent">
+              <MappingFragment StoreEntitySet="Contragent">
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="Contragent_Code" ColumnName="Contragent_Code" />
+                <ScalarProperty Name="Contragent_ID" ColumnName="Contragent_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Contragent_ID" ColumnName="Contragent_ID" />
+                <ScalarProperty Name="AppUser_Id" ColumnName="AppUser_Id" />
+                <ScalarProperty Name="Position_Id" ColumnName="Position_Id" />
+                <ScalarProperty Name="Person_Id" ColumnName="Person_Id" />
+                <ScalarProperty Name="Employee_Code" ColumnName="Employee_Code" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Person_Code" ColumnName="Person_Code" />
+                <ScalarProperty Name="Person_ID" ColumnName="Person_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="DEV_WEB_MainDataModel.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="Position_Description" ColumnName="Position_Description" />
+                <ScalarProperty Name="Position_Code" ColumnName="Position_Code" />
+                <ScalarProperty Name="Position_ID" ColumnName="Position_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

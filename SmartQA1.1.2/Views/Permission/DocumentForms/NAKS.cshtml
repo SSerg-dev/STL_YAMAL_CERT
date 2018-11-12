@@ -1,0 +1,133 @@
+﻿@using System.Web.UI.WebControls
+
+@model SmartQA1._1._2.Models.Permission.ViewModels.DocumentForm_NAKS
+
+@Html.DevExpress().FormLayout(settings =>
+{
+    settings.Name = "DocumentEditFL";
+
+    settings.Items.AddGroupItem(groupItemSettings =>
+    {
+        groupItemSettings.Caption = "Удостоверение";
+
+        foreach (var hiddenField in new[]
+        {
+            "Document_ID", "DocumentType_ID", "DocumentTemplate_ID", "Employee_ID", "Document_Parent_ID"
+        })
+        {
+            groupItemSettings.Items.Add(itemSettings =>
+            {
+                itemSettings.ClientVisible = false;
+                itemSettings.SetNestedContent(() => {
+                                                        ViewContext.Writer.Write(Html.Hidden(hiddenField).ToHtmlString());
+                });
+            });
+        }
+
+        groupItemSettings.Items.Add(m => m.Document_Number, itemSettings =>
+        {
+            itemSettings.NestedExtension().TextBox(s =>
+            {
+                s.ShowModelErrors = true;
+            });
+        });
+
+        groupItemSettings.Items.Add(m => m.Document_Date, itemSettings =>
+        {
+            itemSettings.NestedExtension().DateEdit(s =>
+            {
+                s.ShowModelErrors = true;
+            });
+        });
+
+        groupItemSettings.Items.Add(m => m.EndDate, itemSettings =>
+        {
+            itemSettings.NestedExtension().DateEdit(s =>
+            {
+                s.ShowModelErrors = true;
+            });
+        });
+
+        groupItemSettings.Items.Add(m => m.Schifr, itemSettings =>
+        {
+            itemSettings.NestedExtension().TextBox(s =>
+            {
+                s.ShowModelErrors = true;
+            });
+        });
+
+        groupItemSettings.Items.Add(m => m.WeldType, itemSettings =>
+        {
+            itemSettings.SetNestedContent(() =>
+            {
+                Html.DevExpress().ComboBoxFor(m => m.WeldType, comboBoxSettings =>
+                {
+                    comboBoxSettings.Name = "WeldType";
+                    comboBoxSettings.Width = Unit.Pixel(400);
+                    comboBoxSettings.ShowModelErrors = true;
+
+                    comboBoxSettings.Properties.ValueField = "WeldType_ID";
+                    comboBoxSettings.Properties.TextField = "WeldType_Code";
+
+                }).BindList(((dynamic) ViewData["FieldChoices"])["WeldType"]).Render();
+            });
+
+        });
+
+        groupItemSettings.Items.Add(m => m.HIFGroup, itemSettings =>
+        {
+            itemSettings.SetNestedContent(() =>
+            {
+                Html.DevExpress().TokenBoxFor(m => m.HIFGroup, tokenBoxSettings =>
+                {
+                    tokenBoxSettings.Name = "HIFGroup";
+                    tokenBoxSettings.Width = Unit.Pixel(400);
+                    tokenBoxSettings.ShowModelErrors = true;
+
+                    tokenBoxSettings.Properties.AllowCustomTokens = true;
+                    tokenBoxSettings.Properties.ShowDropDownOnFocus = ShowDropDownOnFocusMode.Always;
+                    tokenBoxSettings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                    tokenBoxSettings.Properties.TextField = "HIFGroup_Code";
+                    tokenBoxSettings.Properties.ValueField = "HIFGroup_ID";
+
+                }).BindList(((dynamic) ViewData["FieldChoices"])["HIFGroup"]).Render();
+            });
+
+        });
+
+        settings.Items.Add(itemSettings =>
+        {
+            itemSettings.ShowCaption = DefaultBoolean.False;
+            itemSettings.SetNestedContent(() =>
+                Html.DevExpress().ValidationSummary().Render()
+                );
+        });
+        /*
+        settings.Items.Add(itemSettings =>
+        {
+            itemSettings.ShowCaption = DefaultBoolean.False;
+            itemSettings.SetNestedContent(() =>
+            {
+                Html.RenderAction("DocumentList_NaksAttest", new
+                {
+                    Document_ID = Model.Document_ID,
+                });
+            });
+        });
+
+        settings.Items.Add(itemSettings =>
+        {
+            itemSettings.ShowCaption = DefaultBoolean.False;
+            itemSettings.SetNestedContent(() =>
+            {               
+                if (Model.Document_ID == Guid.Empty) return;
+                Html.RenderAction("DocumentEdit_NaksAttest", routeValues: new
+                {
+                    NaksDocument_ID = Model.Document_ID,
+                    initialOpen = true,
+                });
+            });
+        });
+        */
+    });
+}).GetHtml()

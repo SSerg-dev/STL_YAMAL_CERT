@@ -1,0 +1,283 @@
+.filterLine{
+    border-top:1px solid rgb(167, 167, 167);
+    max-width:1024px;
+    margin-right:auto;
+    margin-left:auto;
+    font-family:'Segoe UI';
+    outline:none;
+    box-sizing:border-box;
+    padding-top:6px;
+    padding-left:10px;
+    box-sizing:border-box;
+    overflow:visible;
+}
+.filterSearch{
+    float:right;
+    vertical-align: top;
+    position:relative;
+    top:5px;
+}
+.filterSearchButtonContainer{
+    position:absolute;
+    right:0px;
+    height:24px;
+    width:24px;
+    top:0;
+    cursor: pointer;
+}
+.filterSearch>input{
+    height:25px;
+    width:300px;
+    padding-left:2px;
+}
+.filterSearchCrossIcon{
+    position:relative;
+    right:0px;
+    height:12px;
+    top:5px;
+    left:3px;
+    cursor: pointer;
+    opacity:0.6;
+    outline:none;
+}
+.filterSearchSearchIcon{
+    position:relative;
+    right:0px;
+    height:20px;
+    top:5px;
+    left:0px;
+    cursor: pointer;
+    opacity:0.6;
+    outline:none;
+}
+
+.filterSearch
+.searchLine {
+    width: 1024px;
+    margin-right: auto;
+    margin-left: auto;
+    font-family: 'Segoe UI';
+    outline: none;
+    box-sizing: border-box;
+    padding-top: 6px;
+}
+.filterField{
+    width:100%;
+    padding:0px; 
+    padding-left:0px; /*used to be 10px*/
+    box-sizing:border-box;
+    padding-bottom:6px;
+}
+.searchField {
+    position: relative;
+    border: 1px solid black;
+    display: inline-block;
+    height: 26px;
+    top: 7px;
+    margin: 5px;
+    margin-right: 0px;
+    float: right;
+    padding-left: 4px;
+}
+.searchButton {
+    background-color: rgb(200, 73, 0);
+    color: white;
+    padding-top: 3px;
+    padding-left: 14px;
+    padding-right: 16px;
+    padding-bottom: 6px;
+    font-size: 13px;
+    border: none;
+    outline: none;
+    font-family: 'Segoe UI';
+    text-align: left;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    top: 12px;
+    margin-left: 2px;
+    float: right;
+}
+
+.filterContainer{
+    padding: 0px;
+    padding-left: 2px;
+    color:black;
+    display:inline-block;
+    margin:4px;
+    margin-left:0px;
+    border:1px solid black;
+    font-size:14px;
+    vertical-align: top;
+    white-space: nowrap;
+}
+.filterEmpty{
+    margin-left:7px;
+}
+.filterName{
+    display:inline-block;
+    margin-right:10px;
+    font-size:14px;
+    user-select: none;
+}
+.filterNameCheckDrop{
+    display:inline-block;
+    padding-right:10px;
+    font-size:14px;
+    user-select: none;
+    position:relative;
+    height:26px;
+    border-right:1px solid black !important;
+    vertical-align: center;
+}
+.filterNameCheckDrop>p{
+    margin:0px;
+    position:relative;
+    top:2px;
+}
+.filterClose{
+    border:none;
+    background-color:inherit;
+    margin-right:2px;
+    cursor: pointer;
+    outline:none;
+}
+.filterCloseCheckDrop{
+    border:none;
+    background-color:inherit;
+    margin-right:2px;
+    cursor: pointer;
+    outline:none;
+    position:relative;
+    top:2px;
+}
+.filterList{
+    height:26px;
+    border:none;
+    border-left: 1px solid black;
+    outline:none;
+    vertical-align: center;
+    padding-left:4px;
+}
+.filterList:active{
+}
+.filterInput{
+    vertical-align: center;
+    border:none;
+    border-left:1px solid black;
+    height:26px;
+    outline:none;
+    padding-left:4px;
+}
+.filterSuperDropCheckText{
+    display:inline-block;
+    padding-left: 5px;
+    padding-right:10px;
+}
+.filterDropCheckButton{
+    height:15px;
+    width:15px;
+    position:relative;
+    top:1.5px;
+    background-color:rgb(66, 66, 66);
+    background-size: cover;
+    border:none;
+    cursor: pointer;
+}
+.filterDropCheckButton:hover{
+background-color:rgb(100, 100, 100);
+}
+.filterDropCheckMultiSelect{
+    display: inline-block;
+    width:300px;
+    margin:0px;
+    vertical-align: top;
+}
+.Select-control{
+    border-radius:0px !important;
+    height:26px !important;
+    border:none !important;
+    
+    outline:none !important;
+    box-shadow: none !important;
+}
+.Select-placeHolder{
+    top:-4px !important;
+    font-size:14px;
+}
+.Select-clear-zone{
+    top:-1px;
+    width:26px !important;
+    height:25px !important;
+    outline:none !important;
+}
+.Select-arrow-zone{
+    position:relative !important;
+    top:2px !important;
+}
+.Select-input{
+    height:25px !important;
+}
+.Select-input>input{
+    height:25px !important;
+    font-size:14px !important;
+    position:relative !important;
+    top:-1px !important;
+    padding:0px !important;
+}
+.Select-value{
+    margin:0px !important;
+    border-radius:0px !important;
+    color:black !important;
+    margin:0px !important;
+    position:relative;
+    top:0px;
+    height:26px !important;
+    overflow:hidden !important;
+}
+.Select-value-icon{
+    position:relative !important;
+    top:2px !important;
+}
+.Select-value-label{
+    position:relative !important;
+    top:1px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow:ellipsis !important;
+    word-wrap: none !important;
+    max-width:220px;
+    vertical-align: top !important;
+}
+.filterDropNodesBlock{
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0.3;
+    background-color: grey;
+    top:0;
+    left:0;
+}
+.filterDropCheckList{
+    position:absolute;
+    color:black;
+    padding:10px;
+    padding-top:14px;
+    background-color:white;
+    /*border:1px solid black;*/
+    z-index:3;
+}
+.filtersListButtonStyle{
+    outline:none;
+    padding:6px;
+    margin:4px;
+    margin-bottom:8px;
+    border:none;
+    margin-top:0px;
+    background-color:grey;
+    padding-left:9px;
+    padding-right:9px;
+}
+.filtersListButtonStyle:hover{
+    background-color:rgb(24, 139, 24);
+}

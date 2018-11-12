@@ -1,0 +1,65 @@
+.gds_container{
+    position:absolute;
+    border:1px solid black;
+    padding:10px;
+    padding-bottom:0px;
+    background-color:white;
+    font-size:16px;
+}
+.gds_block{
+    position:absolute;
+    opacity:0.1;
+    width:100%;
+    top:0;
+    left:0;
+    height:100%;
+    background-color:grey;
+}
+.gds_pidText{
+    display:inline-block;
+
+    margin-right:5px;
+    width:260px;
+}
+.gds_listLine{
+    height:30px;
+
+}
+.gds_gostText{
+    margin-left:6px;
+    display:inline-block;
+
+    width:260px;
+}
+.gds_deleteLineButton{
+    display:inline-block;
+    float:right;
+    margin-left:auto;
+    margin-right:0;
+}
+.gds_input{
+    margin-top:10px;
+    display:inline-block;
+    vertical-align:top;
+}
+.gds_input>input{
+    display:inline-block;
+    width:257px;
+    margin-right:12px;
+    font-size:15px;
+    padding-left:4px;
+    box-sizing:border-box;
+}
+.gds_input>p{
+    margin-top:2px;
+    position:relative;
+    left:10px;
+    display:block;
+    font-size:12px;
+    color:red;
+}
+.gds_addLine{
+    display:inline-block;
+    vertical-align:top;
+    margin-top:10px;
+}

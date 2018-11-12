@@ -1,0 +1,48 @@
+.titleObjectColorSelector{
+    border:1px solid rgb(170, 170, 170);
+    position:relative;
+    top:2px;
+    width:99px;
+    height:20px;
+    outline:none;
+}
+.titleEditContainer{
+    margin:15px;
+    margin-top:4px;
+    margin-bottom:15px;
+}
+.titleEditTextArea{
+    resize:none;
+    display:block;
+    width:100%;
+    height:56px;
+    margin-bottom:2px;
+    font-family: 'Segoe UI';
+}
+.titleEditContainer>div>p{
+    margin:0px;
+    display:inline-block;
+    width:160px;
+    margin-top:10px;
+    font-weight: 600;
+}
+.titleEditSave{
+    border:none;
+    color:white;
+    background-color:rgb(75, 75, 75);
+    display:inline-block;
+    padding:5px;
+    padding-right:14px;
+    padding-left:14px;
+    margin-top:16px;
+    outline:none;
+    min-width:80px;
+}
+.titleEditSave:hover{
+    background-color:green;
+    color:white;
+}
+.titleEditSave:disabled{
+    background-color:rgb(180, 180, 180);
+    color:white;
+}

@@ -1,0 +1,30 @@
+﻿@model Tuple<string,string, bool>
+
+@*First string is GridView name, 
+    second string is Title for the GridView
+    boolead responds to "is button Add new enabled"
+    *@
+
+@{ 
+    var label = Model.Item2 != null ?
+        Html.DevExpress().Label(sl =>
+        {
+            sl.ControlStyle.CssClass = "GridTitle";
+            sl.Name = "TitleGridViewLabel" + Model.Item1;
+            sl.Text = Model.Item2;
+        }).GetHtml() : null;
+}
+@{
+    var button = Html.DevExpress().Button(sb => {
+        sb.Name = "ButtonAddNew"+Model.Item1;
+        sb.Text = "Add new";
+        sb.Images.Image.IconID = IconID.ActionsAddfile16x16;
+        sb.ControlStyle.CssClass = "addNewButton";
+        sb.UseSubmitBehavior = true;
+        sb.Enabled = Model.Item3;
+        sb.ClientSideEvents.Click = "function (s,e) {" + Model.Item1 + ".AddNewRow();}";
+    }).GetHtml();
+}
+
+@label
+@button

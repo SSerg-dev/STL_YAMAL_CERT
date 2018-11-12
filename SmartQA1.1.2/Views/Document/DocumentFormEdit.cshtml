@@ -1,0 +1,248 @@
+﻿@model SmartQA1._1._2.Models.Document.Document
+
+@Html.DevExpress().FormLayout(settings =>
+{
+    settings.Name = "docEditLayout";
+    settings.ColCount = 2;
+
+    settings.Items.AddGroupItem(groupSettings =>
+    {
+
+        groupSettings.Caption = "Карточка";
+        groupSettings.Paddings.PaddingLeft = 10;
+        groupSettings.ColumnCount = 3;
+
+        groupSettings.Items.Add(m => m.Status_Name, i =>
+        {
+            i.Caption = "Статус";
+            i.ColumnSpan = 1;
+            i.VerticalAlign = FormLayoutVerticalAlign.Top;
+            i.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+            i.NestedExtensionType = FormLayoutNestedExtensionItemType.DropDownEdit;
+            var dds = (DropDownEditSettings)i.NestedExtensionSettings;
+            dds.Name = "Status_Name";
+            dds.SetDropDownWindowTemplateContent(c =>
+            {
+                Html.DevExpress().ListBoxFor(m => m.Status_ID,
+                    listBoxSettings =>
+                    {
+                        listBoxSettings.ReadOnly = !Model.IsStatusChangeEnabled;
+                        listBoxSettings.ControlStyle.Border.BorderWidth = 0;
+                        listBoxSettings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        listBoxSettings.Name = "Status_ID";
+                        listBoxSettings.Properties.SelectionMode = ListEditSelectionMode.Single;
+
+                        if (Model.DocumentStatuses != null)
+                        foreach (var docType in Model.DocumentStatuses)
+                            listBoxSettings.Properties.Items.Add(docType.Description_Rus.ToString(), docType.Status_ID.ToString());
+
+                        listBoxSettings.Properties.EnableClientSideAPI = true;
+                        listBoxSettings.Properties.ClientSideEvents.SelectedIndexChanged = "updateDocumentStatus";
+                    }
+                ).GetHtml();
+            });
+        });
+        groupSettings.Items.Add(m => m.Document_Code, s =>
+        {
+            s.Caption = "№ карточки";
+            s.NestedExtension().TextBox(tb =>
+            {
+                tb.ReadOnly = true;
+                tb.Width = 300;
+            });
+            s.VerticalAlign = FormLayoutVerticalAlign.Top;
+        });
+
+        groupSettings.Items.Add(m => m.Issue_Date, s =>
+        {
+            s.Caption = "от";
+            s.VerticalAlign = FormLayoutVerticalAlign.Top;
+            s.HelpText = "Дата регистрации в системе";
+            var d = (DateEditSettings)s.NestedExtensionSettings;
+            d.ReadOnly = true;
+
+            //s.HelpText = "Дата регистрации в системе";
+            //s.Caption = "от";
+            //s.VerticalAlign = FormLayoutVerticalAlign.Top;
+            //s.NestedExtension().TextBox(tb =>
+            //{
+            //    //tb.ReadOnly = true;
+            //});
+        });
+        groupSettings.Items.Add(m => m.Responsible, s =>
+        {
+            s.HelpText = "Ответственный за создание карточки";
+            s.Caption = "Ответственный";
+            s.ColumnSpan = 3;
+            s.NestedExtension().TextBox(tb =>
+                tb.Width = 300
+            );
+        });
+    });
+
+    settings.Items.AddGroupItem(groupSettings =>
+    {
+        groupSettings.RowSpan = 3;
+        groupSettings.ShowCaption = DefaultBoolean.False;
+        //groupSettings.ColumnCount = 2;
+        groupSettings.GroupBoxDecoration = GroupBoxDecoration.None;
+        groupSettings.Items.Add(i =>
+        {
+            i.ShowCaption = DefaultBoolean.False;
+            i.NestedExtensionType = FormLayoutNestedExtensionItemType.Button;
+            var buttonSettings = (ButtonSettings)i.NestedExtensionSettings;
+            buttonSettings.Name = "update";
+            buttonSettings.Text = "Сохранить";
+            buttonSettings.ClientSideEvents.Click = "function(){documentEditGridView.UpdateEdit();}";
+            buttonSettings.Width = 116;
+            buttonSettings.Enabled = Model.IsEditEnabled;
+        }
+        );
+        groupSettings.Items.Add(i =>
+        {
+            i.ShowCaption = DefaultBoolean.False;
+            i.NestedExtensionType = FormLayoutNestedExtensionItemType.Button;
+            var buttonSettings = (ButtonSettings)i.NestedExtensionSettings;
+            buttonSettings.Name = "showHistory";
+            buttonSettings.Text = "История";
+            buttonSettings.ClientSideEvents.Click = "function(){}";
+            buttonSettings.Width = 116;
+            buttonSettings.Enabled = false;
+        }
+        );
+        groupSettings.Items.Add(i =>
+        {
+            i.ShowCaption = DefaultBoolean.False;
+            i.NestedExtensionType = FormLayoutNestedExtensionItemType.Button;
+            var buttonSettings = (ButtonSettings)i.NestedExtensionSettings;
+            buttonSettings.Name = "cancel";
+            buttonSettings.Text = "Закрыть";
+            buttonSettings.ClientSideEvents.Click = "function(){documentEditGridView.CancelEdit();}";
+            buttonSettings.Width = 116;
+        }
+        );
+    });
+
+    settings.Items.AddGroupItem(groupSettings=>
+    {
+        groupSettings.ColumnCount = 3;
+        groupSettings.Caption = "Документ";
+        groupSettings.Paddings.PaddingLeft = 10;
+
+        groupSettings.Items.Add(m=>m.Document_Number, i =>
+        {
+            i.Caption = "№ документа";
+            i.VerticalAlign = FormLayoutVerticalAlign.Top;
+            i.NestedExtension().TextBox(tb =>
+                tb.Width = 300
+            );
+        });
+
+        groupSettings.Items.Add(m => m.Document_Date, i =>
+        {
+            i.Caption = "от";
+            i.VerticalAlign = FormLayoutVerticalAlign.Top;
+            i.HelpText = "Дата выпуска документа";
+            i.HorizontalAlign = FormLayoutHorizontalAlign.Left;
+        });
+
+        groupSettings.Items.Add(m => m.DocumentType_Code, i =>
+        {
+            i.Caption = "Тип документа";
+            i.ColumnSpan = 1;
+            i.VerticalAlign = FormLayoutVerticalAlign.Top;
+            i.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+            i.NestedExtensionType = FormLayoutNestedExtensionItemType.DropDownEdit;
+            var dds = (DropDownEditSettings)i.NestedExtensionSettings;
+            dds.Name = "DocumentType_Code";
+            dds.SetDropDownWindowTemplateContent(c =>
+            {
+                Html.DevExpress().ListBoxFor(m => m.DocumentType_ID,
+                    listBoxSettings =>
+                    {
+                        listBoxSettings.ControlStyle.Border.BorderWidth = 0;
+                        listBoxSettings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        listBoxSettings.Name = "DocumentType_ID";
+                        listBoxSettings.Properties.SelectionMode = ListEditSelectionMode.Single;
+
+                        if(Model.DocumentTypes != null)
+                        foreach (var docType in Model.DocumentTypes)
+                            listBoxSettings.Properties.Items.Add(docType.DocumentType_Code.ToString(), docType.DocumentType_ID.ToString());
+
+                        listBoxSettings.Properties.EnableClientSideAPI = true;
+                        listBoxSettings.Properties.ClientSideEvents.SelectedIndexChanged = "updateDocumentType";
+                    }
+                ).GetHtml();
+            });
+        });
+
+        groupSettings.Items.Add(m => m.Document_Name, i =>
+        {
+            i.Caption = "Наименование";
+            i.ColumnSpan = 2;
+            i.NestedExtensionType = FormLayoutNestedExtensionItemType.Memo;
+            i.NestedExtensionSettings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        });
+        groupSettings.Items.Add(m => m.TotalSheets, i =>
+        {
+            i.Caption = "Страниц в документе";
+            i.NestedExtensionSettings.Width = 100;
+            i.VerticalAlign = FormLayoutVerticalAlign.Top;
+            var spinEditSettings = (SpinEditSettings) i.NestedExtensionSettings;
+            spinEditSettings.Properties.MinValue = 0;
+            spinEditSettings.Properties.MaxValue = decimal.MaxValue;
+        }
+        );
+
+        groupSettings.Items.Add(m => m.Gost_Code, i =>
+        {
+            i.Caption = "ГОСТ";
+            i.ColumnSpan = 3;
+            i.SetNestedContent(() =>
+                Html.RenderPartial("~/Views/Document/GostCombo.cshtml")
+            );
+            var g = (TextBoxSettings)i.NestedExtensionSettings;
+            g.ShowModelErrors = true;
+        });
+
+        groupSettings.Items.Add(m => m.PID_Code, i =>
+        {
+            i.Caption = "PID";
+            i.ColumnSpan = 3;
+            i.SetNestedContent(() =>
+                Html.RenderPartial("~/Views/Document/PidCombo.cshtml")
+                );
+        });
+
+    });
+    var pagerContainer = settings.Items.Add(m => m.DocumentFiles);
+    pagerContainer.ShowCaption = DefaultBoolean.False;
+    pagerContainer.ColumnSpan = 1;
+
+    pagerContainer.SetNestedContent(() =>
+    Html.DevExpress().PageControl(pageSettings =>
+    {
+        pageSettings.Name = "PageControl";
+        pageSettings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        pageSettings.TabPages.Add("Файлы").SetContent(() =>
+        {
+            Html.RenderPartial("~/Views/Document/DocFiles.cshtml", Model);
+        });
+        pageSettings.TabPages.Add("Физические объемы").SetContent(() => ViewContext.Writer.Write("Здесь физические объемы"));
+    }).Render());
+
+    //documentEditGridView
+
+    ////example for grouping:
+    //var groupItem = settings.Items.AddGroupItem(groupSettings =>
+    //{
+    //    groupSettings.Caption = "Group Caption";
+    //    groupSettings.ShowCaption = DefaultBoolean.True;
+    //    groupSettings.GroupBoxDecoration = GroupBoxDecoration.Default;
+    //});
+    //groupItem.SettingsItems.ShowCaption = DefaultBoolean.True;
+    //groupItem.SettingsItemCaptions.Location = LayoutItemCaptionLocation.Left;
+    //groupItem.SettingsItemHelpTexts.Position = HelpTextPosition.Auto;
+
+}).GetHtml()

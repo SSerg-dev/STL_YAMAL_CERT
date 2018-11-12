@@ -1,0 +1,2844 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WEB_MainDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="p_Register_to_Document">
+          <Key>
+            <PropertyRef Name="Register_to_Document_ID" />
+          </Key>
+          <Property Name="Register_to_Document_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RowStatus" Type="int" Nullable="false" />
+          <Property Name="Insert_DTS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Update_DTS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Created_User_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Modified_User_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Register_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Document_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Iteration" Type="int" Nullable="false" />
+          <Property Name="NumberInRegister" Type="int" />
+          <Property Name="SheetFolderNumber" Type="int" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="p_Register_to_Marka">
+          <Key>
+            <PropertyRef Name="Register_to_Marka_ID" />
+          </Key>
+          <Property Name="Register_to_Marka_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RowStatus" Type="int" Nullable="false" />
+          <Property Name="Insert_DTS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Update_DTS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Created_User_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Modified_User_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Register_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Marka_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Iteration" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="p_Register_to_TitleObject">
+          <Key>
+            <PropertyRef Name="Register_to_TitleObject_ID" />
+          </Key>
+          <Property Name="Register_to_TitleObject_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RowStatus" Type="int" Nullable="false" />
+          <Property Name="Insert_DTS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Update_DTS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Created_User_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Modified_User_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Register_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TitleObject_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Iteration" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.Contragent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.DocumentProjectNumber' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DocumentProjectNumber">
+          <Key>
+            <PropertyRef Name="DocumentProjectNumber_ID" />
+            <PropertyRef Name="DocumentProjectNumber_Code" />
+          </Key>
+          <Property Name="DocumentProjectNumber_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DocumentProjectNumber_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.DocumentType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DocumentType">
+          <Key>
+            <PropertyRef Name="DocumentType_ID" />
+            <PropertyRef Name="DocumentType_Code" />
+          </Key>
+          <Property Name="DocumentType_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DocumentType_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.GOST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GOST">
+          <Key>
+            <PropertyRef Name="GOST_ID" />
+            <PropertyRef Name="GOST_Code" />
+          </Key>
+          <Property Name="GOST_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GOST_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="Marka_ID" Type="uniqueidentifier" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.Marka' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Marka">
+          <Key>
+            <PropertyRef Name="Marka_ID" />
+            <PropertyRef Name="Marka_Code" />
+          </Key>
+          <Property Name="Marka_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Marka_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Marka_Code_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="Engineering_Drawing_Type_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="Engineering_Drawing_Type_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="IsUsedInMatrix" Type="bit" />
+          <Property Name="IsPriority" Type="bit" />
+          <Property Name="ReportColor" Type="nvarchar" MaxLength="255" />
+          <Property Name="ReportOrder" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.PID' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PID">
+          <Key>
+            <PropertyRef Name="PID_ID" />
+            <PropertyRef Name="PID_Code" />
+          </Key>
+          <Property Name="PID_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PID_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.Register_to_Marka' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Register_to_Marka">
+          <Key>
+            <PropertyRef Name="Register_to_Marka_ID" />
+            <PropertyRef Name="Register_ID" />
+            <PropertyRef Name="Marka_ID" />
+            <PropertyRef Name="Iteration" />
+          </Key>
+          <Property Name="Register_to_Marka_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Register_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Marka_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Iteration" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.Register_to_TitleObject' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Register_to_TitleObject">
+          <Key>
+            <PropertyRef Name="Register_to_TitleObject_ID" />
+            <PropertyRef Name="Register_ID" />
+            <PropertyRef Name="TitleObject_ID" />
+            <PropertyRef Name="Iteration" />
+          </Key>
+          <Property Name="Register_to_TitleObject_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Register_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TitleObject_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Iteration" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.Status' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Status_ID" />
+            <PropertyRef Name="Status_Code" />
+          </Key>
+          <Property Name="Status_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Status_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="StatusEntity" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="EntityLocked" Type="bit" />
+          <Property Name="ReportColor" Type="nvarchar" MaxLength="255" />
+          <Property Name="ReportOrder" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.T_CheckItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="T_CheckItem">
+          <Key>
+            <PropertyRef Name="CheckItem_ID" />
+            <PropertyRef Name="Position" />
+            <PropertyRef Name="Status_ID" />
+            <PropertyRef Name="Status_Code" />
+          </Key>
+          <Property Name="CheckItem_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Position" Type="int" Nullable="false" />
+          <Property Name="Status_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.T_CheckList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="T_CheckList">
+          <Key>
+            <PropertyRef Name="CheckList_ID" />
+            <PropertyRef Name="Status_ID" />
+            <PropertyRef Name="Status_Code" />
+          </Key>
+          <Property Name="CheckList_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Status_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Status_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.T_Document' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="T_Document">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="Document_Code" />
+            <PropertyRef Name="DocumentType_ID" />
+            <PropertyRef Name="Issue_Date" />
+          </Key>
+          <Property Name="Document_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Document_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Document_Number" Type="nvarchar" MaxLength="255" />
+          <Property Name="DocumentType_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Document_Date" Type="datetime2" Precision="7" />
+          <Property Name="Issue_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="TotalSheets" Type="int" />
+          <Property Name="Document_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Parent_ID" Type="uniqueidentifier" />
+          <Property Name="VersionNumber" Type="int" />
+          <Property Name="IsActual" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.T_Document_List' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="T_Document_List">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="Document_Code" />
+            <PropertyRef Name="DocumentType_ID" />
+            <PropertyRef Name="Issue_Date" />
+            <PropertyRef Name="DocumentType_Code" />
+            <PropertyRef Name="Status_ID" />
+            <PropertyRef Name="FilesQTY" />
+          </Key>
+          <Property Name="Document_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Document_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Document_Number" Type="nvarchar" MaxLength="255" />
+          <Property Name="DocumentType_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Document_Date" Type="datetime2" Precision="7" />
+          <Property Name="Issue_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="TotalSheets" Type="int" />
+          <Property Name="Document_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Parent_ID" Type="uniqueidentifier" />
+          <Property Name="VersionNumber" Type="int" />
+          <Property Name="IsActual" Type="bit" />
+          <Property Name="DocumentType_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Status_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Status_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Document_to_Status_ID" Type="uniqueidentifier" />
+          <Property Name="FilesQTY" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.T_Register_List' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="T_Register_List">
+          <Key>
+            <PropertyRef Name="Register_ID" />
+            <PropertyRef Name="Register_Code" />
+            <PropertyRef Name="Register_Date" />
+            <PropertyRef Name="Current_Iteration" />
+            <PropertyRef Name="UI_PageNumber" />
+          </Key>
+          <Property Name="Register_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Register_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Register_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Current_Iteration" Type="int" Nullable="false" />
+          <Property Name="Status_ID" Type="uniqueidentifier" />
+          <Property Name="Status_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status_Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="Contractor_ID" Type="uniqueidentifier" />
+          <Property Name="Contractor_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="SubContractor_ID" Type="nvarchar" MaxLength="255" />
+          <Property Name="SubContractor_Code" Type="uniqueidentifier" />
+          <Property Name="Customer_ID" Type="uniqueidentifier" />
+          <Property Name="Customer_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="TitleObject_ID" Type="uniqueidentifier" />
+          <Property Name="TitleObject_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Marka_ID" Type="uniqueidentifier" />
+          <Property Name="Marka_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Complex" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Project" Type="nvarchar" MaxLength="1000" />
+          <Property Name="UI_PageNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.TitleObject' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TitleObject">
+          <Key>
+            <PropertyRef Name="TitleObject_ID" />
+            <PropertyRef Name="TitleObject_Code" />
+            <PropertyRef Name="Structure" />
+          </Key>
+          <Property Name="TitleObject_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TitleObject_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Parent_Id" Type="uniqueidentifier" />
+          <Property Name="Structure" Type="int" Nullable="false" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="300" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="400" />
+          <Property Name="Phase_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="ReportColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReportOrder" Type="int" />
+          <Property Name="GLB_Weight" Type="float" />
+          <Property Name="Row_Status" Type="int" />
+          <Property Name="Book1_Pct" Type="float" />
+          <Property Name="Book1_Weight" Type="float" />
+          <Property Name="Book2_Pct" Type="float" />
+          <Property Name="Book2_Weight" Type="float" />
+          <Property Name="Book3_Pct" Type="float" />
+          <Property Name="Book3_Weight" Type="float" />
+          <Property Name="Book4_Weight" Type="float" />
+          <Property Name="TitleObject_for_ABDFinalSet" Type="nvarchar" MaxLength="100" />
+          <Property Name="Book1_Documents_Total" Type="float" />
+          <Property Name="Book1_Documents_received" Type="float" />
+          <Property Name="Book1_Progress" Type="float" />
+          <Property Name="Book1_Documents_transmitted_to_CPY" Type="float" />
+          <Property Name="StageOfConstr" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.UI_CheckItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_CheckItem">
+          <Key>
+            <PropertyRef Name="CheckList_Code" />
+            <PropertyRef Name="Update_DTS" />
+            <PropertyRef Name="Position" />
+            <PropertyRef Name="CheckList_ID" />
+            <PropertyRef Name="CheckItem_ID" />
+            <PropertyRef Name="Register_ID" />
+          </Key>
+          <Property Name="CheckList_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CheckItem_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Position_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status_ID" Type="uniqueidentifier" />
+          <Property Name="CheckItem_Status" Type="nvarchar" MaxLength="255" />
+          <Property Name="Update_DTS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Position" Type="int" Nullable="false" />
+          <Property Name="CheckList_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CheckItem_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Division_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Document_ID" Type="uniqueidentifier" />
+          <Property Name="Document_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Register_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Document_Number" Type="nvarchar" MaxLength="255" />
+          <Property Name="Issued_Date" Type="datetime2" Precision="7" />
+          <Property Name="Status_Code" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.UI_CheckList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_CheckList">
+          <Key>
+            <PropertyRef Name="CheckList_Code" />
+            <PropertyRef Name="CheckList_Date" />
+            <PropertyRef Name="CheckParty_Code" />
+            <PropertyRef Name="Register_ID" />
+            <PropertyRef Name="CheckList_ID" />
+            <PropertyRef Name="Status_Code" />
+            <PropertyRef Name="Status_ID" />
+            <PropertyRef Name="CheckType_Code" />
+          </Key>
+          <Property Name="CheckList_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CheckList_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CheckParty_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Position_Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="255" />
+          <Property Name="CheckList_Status" Type="nvarchar" MaxLength="255" />
+          <Property Name="Register_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CheckList_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Status_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Status_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Position_ID" Type="uniqueidentifier" />
+          <Property Name="Person_ID" Type="uniqueidentifier" />
+          <Property Name="CheckType_ID" Type="uniqueidentifier" />
+          <Property Name="CheckType_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.UI_Document_List' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_Document_List">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="Document_Code" />
+            <PropertyRef Name="DocumentType_ID" />
+            <PropertyRef Name="Issue_Date" />
+            <PropertyRef Name="Status_ID" />
+            <PropertyRef Name="Document_to_Status_ID" />
+          </Key>
+          <Property Name="Document_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Document_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Document_Number" Type="nvarchar" MaxLength="255" />
+          <Property Name="DocumentType_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Document_Date" Type="datetime2" Precision="7" />
+          <Property Name="Issue_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="TotalSheets" Type="int" />
+          <Property Name="Document_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Parent_ID" Type="uniqueidentifier" />
+          <Property Name="VersionNumber" Type="int" />
+          <Property Name="IsActual" Type="bit" />
+          <Property Name="DocumentType_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Status_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Document_to_Status_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FilesQTY" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.UI_Document_to_GOST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_Document_to_GOST">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="Document_Code" />
+            <PropertyRef Name="GOST_ID" />
+            <PropertyRef Name="GOST_Code" />
+            <PropertyRef Name="Document_to_GOST_ID" />
+          </Key>
+          <Property Name="Document_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Document_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="GOST_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GOST_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Document_to_GOST_ID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.UI_Document_to_Marka' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_Document_to_Marka">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="Marka_ID" />
+            <PropertyRef Name="Marka_Code" />
+          </Key>
+          <Property Name="Document_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Marka_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Marka_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.UI_Document_to_PID' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_Document_to_PID">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="Document_Code" />
+            <PropertyRef Name="PID_ID" />
+            <PropertyRef Name="PID_Code" />
+            <PropertyRef Name="Document_to_PID_ID" />
+          </Key>
+          <Property Name="Document_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Document_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PID_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PID_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Document_to_PID_ID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.UI_Document_to_TitleObject' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_Document_to_TitleObject">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="TitleObject_ID" />
+            <PropertyRef Name="TitleObject_Code" />
+          </Key>
+          <Property Name="Document_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TitleObject_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TitleObject_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.UI_FileStream' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_FileStream">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="FileTable_ID" />
+            <PropertyRef Name="Document_to_FileTable_ID" />
+          </Key>
+          <Property Name="Document_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FileTable_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="file_type" Type="nvarchar" MaxLength="255" />
+          <Property Name="last_write_time" Type="datetimeoffset" Precision="7" />
+          <Property Name="Document_to_FileTable_ID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.UI_Register_List' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_Register_List">
+          <Key>
+            <PropertyRef Name="Register_ID" />
+            <PropertyRef Name="Register_Code" />
+            <PropertyRef Name="Register_Date" />
+            <PropertyRef Name="Current_Iteration" />
+            <PropertyRef Name="UI_PageNumber" />
+          </Key>
+          <Property Name="Register_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Register_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Register_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Current_Iteration" Type="int" Nullable="false" />
+          <Property Name="Status_ID" Type="uniqueidentifier" />
+          <Property Name="Status_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status_Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="Contractor_ID" Type="uniqueidentifier" />
+          <Property Name="Contractor_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="SubContractor_ID" Type="uniqueidentifier" />
+          <Property Name="SubContractor_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Customer_ID" Type="uniqueidentifier" />
+          <Property Name="Customer_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="TitleObject_ID" Type="uniqueidentifier" />
+          <Property Name="TitleObject_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Marka_ID" Type="uniqueidentifier" />
+          <Property Name="Marka_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Complex" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Project" Type="nvarchar" MaxLength="1000" />
+          <Property Name="UI_PageNumber" Type="int" Nullable="false" />
+          <Property Name="WorkPackage_ID" Type="uniqueidentifier" />
+          <Property Name="WorkPackage_Code" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.UI_Register_ListItem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_Register_ListItem">
+          <Key>
+            <PropertyRef Name="Register_ID" />
+            <PropertyRef Name="Register_Code" />
+            <PropertyRef Name="Register_Date" />
+            <PropertyRef Name="Register_Iteration" />
+            
+            <PropertyRef Name="Register_to_Document_ID" />
+            <PropertyRef Name="Document_ID" />
+          </Key>
+          <Property Name="Register_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Register_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Register_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Register_Iteration" Type="int" Nullable="false" />
+          <Property Name="Document_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Document_Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="Document_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Document_Date" Type="datetime2" Precision="7" />
+          <Property Name="Document_Number" Type="nvarchar" MaxLength="255" />
+          <Property Name="Document_Issue_Date" Type="datetime2" Precision="7" />
+          <Property Name="Document_Iteration" Type="int" Nullable="false" />
+          <Property Name="Document_Position" Type="int" />
+          <Property Name="Document_SheetNumber" Type="int" />
+          <Property Name="Document_Comment" Type="nvarchar" MaxLength="255" />
+          <Property Name="Register_to_Document_ID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.UI_StatusRelation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_StatusRelation">
+          <Key>
+            <PropertyRef Name="FromStatus_ID" />
+            <PropertyRef Name="ToStatus_ID" />
+          </Key>
+          <Property Name="FromStatus_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FromStatus" Type="nvarchar" MaxLength="255" />
+          <Property Name="ToStatus_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ToStatus" Type="nvarchar" MaxLength="255" />
+          <Property Name="IterationIncrement" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.WorkPackage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WorkPackage">
+          <Key>
+            <PropertyRef Name="WorkPackage_ID" />
+            <PropertyRef Name="WorkPackage_Code" />
+          </Key>
+          <Property Name="WorkPackage_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WorkPackage_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="SiteRussiaYard" Type="nvarchar" MaxLength="100" />
+          <Property Name="LocationOfWork" Type="nvarchar" MaxLength="100" />
+          <Property Name="ScopeOfWork" Type="nvarchar" MaxLength="1000" />
+          <Property Name="AreaOfWork" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <Function Name="Document_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Document_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Code" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_DocumentType_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Date" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Issue_Date" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_TotalSheets" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Parent_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Document_SequenceNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Document_To_FileTable_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_to_FileTable_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Document_to_FileTable_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_FileTable_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Document_to_FileTable_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Document_to_FileTable_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_FileTable_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Document_to_GOST_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_to_GOST_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Document_to_GOST_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_GOST_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Document_to_GOST_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Document_to_GOST_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_GOST_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Document_to_PID_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_to_PID_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Document_to_PID_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_PID_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Document_to_PID_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Document_to_PID_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_PID_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Document_to_Status_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_to_Status_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Document_to_Status_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Status_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Parent_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Document_to_Status_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Document_to_Status_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Status_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Document_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Code" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_DocumentType_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Date" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Issue_Date" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_TotalSheets" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Parent_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="DocumentType_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_DocumentType_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="DocumentType_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_DocumentType_Code" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="DocumentType_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_DocumentType_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_DocumentType_Code" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Register_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Register_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_Code" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_Date" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Current_Iteration" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Customer_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Contractor_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_SubContractor_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Resp_Employee_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_WorkPackage_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Comment" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Register_SequenceNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Register_To_Document_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_to_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Register_to_Document_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Iteration" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_NumberInRegister" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_SheetFolderNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Comment" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Register_to_Document_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Register_to_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Document_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Iteration" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_NumberInRegister" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_SheetFolderNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Comment" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Register_to_Marka_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_to_Marka_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Register_to_Marka_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Marka_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Iteration" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Register_to_Marka_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Register_to_Marka_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Marka_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Iteration" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Register_To_Status_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_to_Status_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Register_to_Status_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Status_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Iteration" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_DTS_Start" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_DTS_End" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Parent_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Register_to_Status_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Register_to_Status_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Status_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Parent_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Iteration" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_DTS_Start" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_DTS_End" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Register_to_TitleObject_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_to_TitleObject_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Register_to_TitleObject_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_TitleObject_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Iteration" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Register_to_TitleObject_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Register_to_TitleObject_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_TitleObject_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Iteration" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Register_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Register_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_Code" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Register_Date" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Current_Iteration" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Customer_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Contractor_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_SubContractor_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Resp_Employee_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_WorkPackage_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Comment" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="WEB_MainDataModelStoreContainer">
+          <EntitySet Name="p_Register_to_Document" EntityType="Self.p_Register_to_Document" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="p_Register_to_Marka" EntityType="Self.p_Register_to_Marka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="p_Register_to_TitleObject" EntityType="Self.p_Register_to_TitleObject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentProjectNumber" EntityType="Self.DocumentProjectNumber" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DocumentProjectNumber].[DocumentProjectNumber_ID] AS [DocumentProjectNumber_ID], 
+    [DocumentProjectNumber].[DocumentProjectNumber_Code] AS [DocumentProjectNumber_Code], 
+    [DocumentProjectNumber].[Description_Eng] AS [Description_Eng], 
+    [DocumentProjectNumber].[Description_Rus] AS [Description_Rus]
+    FROM [dbo].[DocumentProjectNumber] AS [DocumentProjectNumber]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DocumentType" EntityType="Self.DocumentType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DocumentType].[DocumentType_ID] AS [DocumentType_ID], 
+    [DocumentType].[DocumentType_Code] AS [DocumentType_Code]
+    FROM [dbo].[DocumentType] AS [DocumentType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="GOST" EntityType="Self.GOST" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GOST].[GOST_ID] AS [GOST_ID], 
+    [GOST].[GOST_Code] AS [GOST_Code], 
+    [GOST].[Description_Rus] AS [Description_Rus], 
+    [GOST].[Marka_ID] AS [Marka_ID]
+    FROM [dbo].[GOST] AS [GOST]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Marka" EntityType="Self.Marka" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Marka].[Marka_ID] AS [Marka_ID], 
+    [Marka].[Marka_Code] AS [Marka_Code], 
+    [Marka].[Marka_Code_Eng] AS [Marka_Code_Eng], 
+    [Marka].[Description_Eng] AS [Description_Eng], 
+    [Marka].[Description_Rus] AS [Description_Rus], 
+    [Marka].[Engineering_Drawing_Type_Eng] AS [Engineering_Drawing_Type_Eng], 
+    [Marka].[Engineering_Drawing_Type_Rus] AS [Engineering_Drawing_Type_Rus], 
+    [Marka].[IsUsedInMatrix] AS [IsUsedInMatrix], 
+    [Marka].[IsPriority] AS [IsPriority], 
+    [Marka].[ReportColor] AS [ReportColor], 
+    [Marka].[ReportOrder] AS [ReportOrder]
+    FROM [dbo].[Marka] AS [Marka]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PID" EntityType="Self.PID" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PID].[PID_ID] AS [PID_ID], 
+    [PID].[PID_Code] AS [PID_Code], 
+    [PID].[Description_Eng] AS [Description_Eng]
+    FROM [dbo].[PID] AS [PID]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Register_to_Marka" EntityType="Self.Register_to_Marka" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Register_to_Marka].[Register_to_Marka_ID] AS [Register_to_Marka_ID], 
+    [Register_to_Marka].[Register_ID] AS [Register_ID], 
+    [Register_to_Marka].[Marka_ID] AS [Marka_ID], 
+    [Register_to_Marka].[Iteration] AS [Iteration]
+    FROM [dbo].[Register_to_Marka] AS [Register_to_Marka]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Register_to_TitleObject" EntityType="Self.Register_to_TitleObject" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Register_to_TitleObject].[Register_to_TitleObject_ID] AS [Register_to_TitleObject_ID], 
+    [Register_to_TitleObject].[Register_ID] AS [Register_ID], 
+    [Register_to_TitleObject].[TitleObject_ID] AS [TitleObject_ID], 
+    [Register_to_TitleObject].[Iteration] AS [Iteration]
+    FROM [dbo].[Register_to_TitleObject] AS [Register_to_TitleObject]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Status" EntityType="Self.Status" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Status].[Status_ID] AS [Status_ID], 
+    [Status].[Status_Code] AS [Status_Code], 
+    [Status].[StatusEntity] AS [StatusEntity], 
+    [Status].[Description_Eng] AS [Description_Eng], 
+    [Status].[Description_Rus] AS [Description_Rus], 
+    [Status].[EntityLocked] AS [EntityLocked], 
+    [Status].[ReportColor] AS [ReportColor], 
+    [Status].[ReportOrder] AS [ReportOrder]
+    FROM [dbo].[Status] AS [Status]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="T_CheckItem" EntityType="Self.T_CheckItem" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [T_CheckItem].[CheckItem_ID] AS [CheckItem_ID], 
+    [T_CheckItem].[Position] AS [Position], 
+    [T_CheckItem].[Status_ID] AS [Status_ID], 
+    [T_CheckItem].[Description_Rus] AS [Description_Rus], 
+    [T_CheckItem].[Status_Code] AS [Status_Code]
+    FROM [dbo].[T_CheckItem] AS [T_CheckItem]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="T_CheckList" EntityType="Self.T_CheckList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [T_CheckList].[CheckList_ID] AS [CheckList_ID], 
+    [T_CheckList].[Status_ID] AS [Status_ID], 
+    [T_CheckList].[Status_Code] AS [Status_Code], 
+    [T_CheckList].[Description_Rus] AS [Description_Rus]
+    FROM [dbo].[T_CheckList] AS [T_CheckList]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="T_Document" EntityType="Self.T_Document" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [T_Document].[Document_ID] AS [Document_ID], 
+    [T_Document].[Document_Code] AS [Document_Code], 
+    [T_Document].[Document_Number] AS [Document_Number], 
+    [T_Document].[DocumentType_ID] AS [DocumentType_ID], 
+    [T_Document].[Document_Date] AS [Document_Date], 
+    [T_Document].[Issue_Date] AS [Issue_Date], 
+    [T_Document].[TotalSheets] AS [TotalSheets], 
+    [T_Document].[Document_Name] AS [Document_Name], 
+    [T_Document].[Parent_ID] AS [Parent_ID], 
+    [T_Document].[VersionNumber] AS [VersionNumber], 
+    [T_Document].[IsActual] AS [IsActual]
+    FROM [dbo].[T_Document] AS [T_Document]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="T_Document_List" EntityType="Self.T_Document_List" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [T_Document_List].[Document_ID] AS [Document_ID], 
+    [T_Document_List].[Document_Code] AS [Document_Code], 
+    [T_Document_List].[Document_Number] AS [Document_Number], 
+    [T_Document_List].[DocumentType_ID] AS [DocumentType_ID], 
+    [T_Document_List].[Document_Date] AS [Document_Date], 
+    [T_Document_List].[Issue_Date] AS [Issue_Date], 
+    [T_Document_List].[TotalSheets] AS [TotalSheets], 
+    [T_Document_List].[Document_Name] AS [Document_Name], 
+    [T_Document_List].[Parent_ID] AS [Parent_ID], 
+    [T_Document_List].[VersionNumber] AS [VersionNumber], 
+    [T_Document_List].[IsActual] AS [IsActual], 
+    [T_Document_List].[DocumentType_Code] AS [DocumentType_Code], 
+    [T_Document_List].[Status_ID] AS [Status_ID], 
+    [T_Document_List].[Status_Name] AS [Status_Name], 
+    [T_Document_List].[Document_to_Status_ID] AS [Document_to_Status_ID], 
+    [T_Document_List].[FilesQTY] AS [FilesQTY]
+    FROM [dbo].[T_Document_List] AS [T_Document_List]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="T_Register_List" EntityType="Self.T_Register_List" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [T_Register_List].[Register_ID] AS [Register_ID], 
+    [T_Register_List].[Register_Code] AS [Register_Code], 
+    [T_Register_List].[Register_Date] AS [Register_Date], 
+    [T_Register_List].[Current_Iteration] AS [Current_Iteration], 
+    [T_Register_List].[Status_ID] AS [Status_ID], 
+    [T_Register_List].[Status_Code] AS [Status_Code], 
+    [T_Register_List].[Status_Description_Rus] AS [Status_Description_Rus], 
+    [T_Register_List].[Contractor_ID] AS [Contractor_ID], 
+    [T_Register_List].[Contractor_Code] AS [Contractor_Code], 
+    [T_Register_List].[SubContractor_ID] AS [SubContractor_ID], 
+    [T_Register_List].[SubContractor_Code] AS [SubContractor_Code], 
+    [T_Register_List].[Customer_ID] AS [Customer_ID], 
+    [T_Register_List].[Customer_Code] AS [Customer_Code], 
+    [T_Register_List].[TitleObject_ID] AS [TitleObject_ID], 
+    [T_Register_List].[TitleObject_Code] AS [TitleObject_Code], 
+    [T_Register_List].[Marka_ID] AS [Marka_ID], 
+    [T_Register_List].[Marka_Code] AS [Marka_Code], 
+    [T_Register_List].[Complex] AS [Complex], 
+    [T_Register_List].[Project] AS [Project], 
+    [T_Register_List].[UI_PageNumber] AS [UI_PageNumber]
+    FROM [dbo].[T_Register_List] AS [T_Register_List]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TitleObject" EntityType="Self.TitleObject" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TitleObject].[TitleObject_ID] AS [TitleObject_ID], 
+    [TitleObject].[TitleObject_Code] AS [TitleObject_Code], 
+    [TitleObject].[Parent_Id] AS [Parent_Id], 
+    [TitleObject].[Structure] AS [Structure], 
+    [TitleObject].[Description_Eng] AS [Description_Eng], 
+    [TitleObject].[Description_Rus] AS [Description_Rus], 
+    [TitleObject].[Phase_Name] AS [Phase_Name], 
+    [TitleObject].[ReportColor] AS [ReportColor], 
+    [TitleObject].[ReportOrder] AS [ReportOrder], 
+    [TitleObject].[GLB_Weight] AS [GLB_Weight], 
+    [TitleObject].[Row_Status] AS [Row_Status], 
+    [TitleObject].[Book1_Pct] AS [Book1_Pct], 
+    [TitleObject].[Book1_Weight] AS [Book1_Weight], 
+    [TitleObject].[Book2_Pct] AS [Book2_Pct], 
+    [TitleObject].[Book2_Weight] AS [Book2_Weight], 
+    [TitleObject].[Book3_Pct] AS [Book3_Pct], 
+    [TitleObject].[Book3_Weight] AS [Book3_Weight], 
+    [TitleObject].[Book4_Weight] AS [Book4_Weight], 
+    [TitleObject].[TitleObject_for_ABDFinalSet] AS [TitleObject_for_ABDFinalSet], 
+    [TitleObject].[Book1_Documents_Total] AS [Book1_Documents_Total], 
+    [TitleObject].[Book1_Documents_received] AS [Book1_Documents_received], 
+    [TitleObject].[Book1_Progress] AS [Book1_Progress], 
+    [TitleObject].[Book1_Documents_transmitted_to_CPY] AS [Book1_Documents_transmitted_to_CPY], 
+    [TitleObject].[StageOfConstr] AS [StageOfConstr]
+    FROM [dbo].[TitleObject] AS [TitleObject]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_CheckItem" EntityType="Self.UI_CheckItem" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_CheckItem].[CheckList_Code] AS [CheckList_Code], 
+    [UI_CheckItem].[CheckItem_Name] AS [CheckItem_Name], 
+    [UI_CheckItem].[Comment] AS [Comment], 
+    [UI_CheckItem].[ShortName] AS [ShortName], 
+    [UI_CheckItem].[Position_Code] AS [Position_Code], 
+    [UI_CheckItem].[Status_ID] AS [Status_ID], 
+    [UI_CheckItem].[CheckItem_Status] AS [CheckItem_Status], 
+    [UI_CheckItem].[Update_DTS] AS [Update_DTS], 
+    [UI_CheckItem].[Position] AS [Position], 
+    [UI_CheckItem].[CheckList_ID] AS [CheckList_ID], 
+    [UI_CheckItem].[CheckItem_ID] AS [CheckItem_ID], 
+    [UI_CheckItem].[Division_Name] AS [Division_Name], 
+    [UI_CheckItem].[Document_ID] AS [Document_ID], 
+    [UI_CheckItem].[Document_Name] AS [Document_Name], 
+    [UI_CheckItem].[Register_ID] AS [Register_ID], 
+    [UI_CheckItem].[Document_Number] AS [Document_Number], 
+    [UI_CheckItem].[Issued_Date] AS [Issued_Date], 
+    [UI_CheckItem].[Status_Code] AS [Status_Code]
+    FROM [dbo].[UI_CheckItem] AS [UI_CheckItem]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_CheckList" EntityType="Self.UI_CheckList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_CheckList].[CheckList_Code] AS [CheckList_Code], 
+    [UI_CheckList].[CheckList_Date] AS [CheckList_Date], 
+    [UI_CheckList].[CheckParty_Code] AS [CheckParty_Code], 
+    [UI_CheckList].[Position_Description] AS [Position_Description], 
+    [UI_CheckList].[ShortName] AS [ShortName], 
+    [UI_CheckList].[CheckList_Status] AS [CheckList_Status], 
+    [UI_CheckList].[Register_ID] AS [Register_ID], 
+    [UI_CheckList].[CheckList_ID] AS [CheckList_ID], 
+    [UI_CheckList].[Status_Code] AS [Status_Code], 
+    [UI_CheckList].[Status_ID] AS [Status_ID], 
+    [UI_CheckList].[Position_ID] AS [Position_ID], 
+    [UI_CheckList].[Person_ID] AS [Person_ID], 
+    [UI_CheckList].[CheckType_ID] AS [CheckType_ID], 
+    [UI_CheckList].[CheckType_Code] AS [CheckType_Code]
+    FROM [dbo].[UI_CheckList] AS [UI_CheckList]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_Document_List" EntityType="Self.UI_Document_List" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_Document_List].[Document_ID] AS [Document_ID], 
+    [UI_Document_List].[Document_Code] AS [Document_Code], 
+    [UI_Document_List].[Document_Number] AS [Document_Number], 
+    [UI_Document_List].[DocumentType_ID] AS [DocumentType_ID], 
+    [UI_Document_List].[Document_Date] AS [Document_Date], 
+    [UI_Document_List].[Issue_Date] AS [Issue_Date], 
+    [UI_Document_List].[TotalSheets] AS [TotalSheets], 
+    [UI_Document_List].[Document_Name] AS [Document_Name], 
+    [UI_Document_List].[Parent_ID] AS [Parent_ID], 
+    [UI_Document_List].[VersionNumber] AS [VersionNumber], 
+    [UI_Document_List].[IsActual] AS [IsActual], 
+    [UI_Document_List].[DocumentType_Code] AS [DocumentType_Code], 
+    [UI_Document_List].[Status_ID] AS [Status_ID], 
+    [UI_Document_List].[Status_Name] AS [Status_Name], 
+    [UI_Document_List].[Document_to_Status_ID] AS [Document_to_Status_ID], 
+    [UI_Document_List].[FilesQTY] AS [FilesQTY]
+    FROM [dbo].[UI_Document_List] AS [UI_Document_List]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_Document_to_GOST" EntityType="Self.UI_Document_to_GOST" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_Document_to_GOST].[Document_ID] AS [Document_ID], 
+    [UI_Document_to_GOST].[Document_Code] AS [Document_Code], 
+    [UI_Document_to_GOST].[GOST_ID] AS [GOST_ID], 
+    [UI_Document_to_GOST].[GOST_Code] AS [GOST_Code], 
+    [UI_Document_to_GOST].[Document_to_GOST_ID] AS [Document_to_GOST_ID]
+    FROM [dbo].[UI_Document_to_GOST] AS [UI_Document_to_GOST]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_Document_to_Marka" EntityType="Self.UI_Document_to_Marka" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_Document_to_Marka].[Document_ID] AS [Document_ID], 
+    [UI_Document_to_Marka].[Marka_ID] AS [Marka_ID], 
+    [UI_Document_to_Marka].[Marka_Code] AS [Marka_Code]
+    FROM [dbo].[UI_Document_to_Marka] AS [UI_Document_to_Marka]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_Document_to_PID" EntityType="Self.UI_Document_to_PID" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_Document_to_PID].[Document_ID] AS [Document_ID], 
+    [UI_Document_to_PID].[Document_Code] AS [Document_Code], 
+    [UI_Document_to_PID].[PID_ID] AS [PID_ID], 
+    [UI_Document_to_PID].[PID_Code] AS [PID_Code], 
+    [UI_Document_to_PID].[Document_to_PID_ID] AS [Document_to_PID_ID]
+    FROM [dbo].[UI_Document_to_PID] AS [UI_Document_to_PID]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_Document_to_TitleObject" EntityType="Self.UI_Document_to_TitleObject" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_Document_to_TitleObject].[Document_ID] AS [Document_ID], 
+    [UI_Document_to_TitleObject].[TitleObject_ID] AS [TitleObject_ID], 
+    [UI_Document_to_TitleObject].[TitleObject_Code] AS [TitleObject_Code]
+    FROM [dbo].[UI_Document_to_TitleObject] AS [UI_Document_to_TitleObject]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_FileStream" EntityType="Self.UI_FileStream" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_FileStream].[Document_ID] AS [Document_ID], 
+    [UI_FileStream].[FileTable_ID] AS [FileTable_ID], 
+    [UI_FileStream].[name] AS [name], 
+    [UI_FileStream].[file_type] AS [file_type], 
+    [UI_FileStream].[last_write_time] AS [last_write_time], 
+    [UI_FileStream].[Document_to_FileTable_ID] AS [Document_to_FileTable_ID]
+    FROM [dbo].[UI_FileStream] AS [UI_FileStream]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_Register_List" EntityType="Self.UI_Register_List" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_Register_List].[Register_ID] AS [Register_ID], 
+    [UI_Register_List].[Register_Code] AS [Register_Code], 
+    [UI_Register_List].[Register_Date] AS [Register_Date], 
+    [UI_Register_List].[Current_Iteration] AS [Current_Iteration], 
+    [UI_Register_List].[Status_ID] AS [Status_ID], 
+    [UI_Register_List].[Status_Code] AS [Status_Code], 
+    [UI_Register_List].[Status_Description_Rus] AS [Status_Description_Rus], 
+    [UI_Register_List].[Contractor_ID] AS [Contractor_ID], 
+    [UI_Register_List].[Contractor_Code] AS [Contractor_Code], 
+    [UI_Register_List].[SubContractor_ID] AS [SubContractor_ID], 
+    [UI_Register_List].[SubContractor_Code] AS [SubContractor_Code], 
+    [UI_Register_List].[Customer_ID] AS [Customer_ID], 
+    [UI_Register_List].[Customer_Code] AS [Customer_Code], 
+    [UI_Register_List].[TitleObject_ID] AS [TitleObject_ID], 
+    [UI_Register_List].[TitleObject_Code] AS [TitleObject_Code], 
+    [UI_Register_List].[Marka_ID] AS [Marka_ID], 
+    [UI_Register_List].[Marka_Code] AS [Marka_Code], 
+    [UI_Register_List].[Complex] AS [Complex], 
+    [UI_Register_List].[Project] AS [Project], 
+    [UI_Register_List].[UI_PageNumber] AS [UI_PageNumber], 
+    [UI_Register_List].[WorkPackage_ID] AS [WorkPackage_ID], 
+    [UI_Register_List].[WorkPackage_Code] AS [WorkPackage_Code]
+    FROM [dbo].[UI_Register_List] AS [UI_Register_List]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_Register_ListItem" EntityType="Self.UI_Register_ListItem" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_Register_ListItem].[Register_ID] AS [Register_ID], 
+    [UI_Register_ListItem].[Register_Code] AS [Register_Code], 
+    [UI_Register_ListItem].[Register_Date] AS [Register_Date], 
+    [UI_Register_ListItem].[Register_Iteration] AS [Register_Iteration], 
+    [UI_Register_ListItem].[Document_ID] AS [Document_ID], 
+    [UI_Register_ListItem].[Document_Code] AS [Document_Code], 
+    [UI_Register_ListItem].[Document_Name] AS [Document_Name], 
+    [UI_Register_ListItem].[Document_Date] AS [Document_Date], 
+    [UI_Register_ListItem].[Document_Number] AS [Document_Number], 
+    [UI_Register_ListItem].[Document_Issue_Date] AS [Document_Issue_Date], 
+    [UI_Register_ListItem].[Document_Iteration] AS [Document_Iteration], 
+    [UI_Register_ListItem].[Document_Position] AS [Document_Position], 
+    [UI_Register_ListItem].[Document_SheetNumber] AS [Document_SheetNumber], 
+    [UI_Register_ListItem].[Document_Comment] AS [Document_Comment], 
+    [UI_Register_ListItem].[Register_to_Document_ID] AS [Register_to_Document_ID]
+    FROM [dbo].[UI_Register_ListItem] AS [UI_Register_ListItem]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_StatusRelation" EntityType="Self.UI_StatusRelation" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_StatusRelation].[FromStatus_ID] AS [FromStatus_ID], 
+    [UI_StatusRelation].[FromStatus] AS [FromStatus], 
+    [UI_StatusRelation].[ToStatus_ID] AS [ToStatus_ID], 
+    [UI_StatusRelation].[ToStatus] AS [ToStatus], 
+    [UI_StatusRelation].[IterationIncrement] AS [IterationIncrement]
+    FROM [dbo].[UI_StatusRelation] AS [UI_StatusRelation]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WorkPackage" EntityType="Self.WorkPackage" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WorkPackage].[WorkPackage_ID] AS [WorkPackage_ID], 
+    [WorkPackage].[WorkPackage_Code] AS [WorkPackage_Code], 
+    [WorkPackage].[SiteRussiaYard] AS [SiteRussiaYard], 
+    [WorkPackage].[LocationOfWork] AS [LocationOfWork], 
+    [WorkPackage].[ScopeOfWork] AS [ScopeOfWork], 
+    [WorkPackage].[AreaOfWork] AS [AreaOfWork]
+    FROM [dbo].[WorkPackage] AS [WorkPackage]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WEB_MainDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="UI_Register_ListItem">
+          <Key>
+            <PropertyRef Name="Register_ID" />
+            <PropertyRef Name="Register_Code" />
+            <PropertyRef Name="Register_Date" />
+            <PropertyRef Name="Register_Iteration" />
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="Register_to_Document_ID" />
+          </Key>
+          <Property Name="Register_ID" Type="Guid" Nullable="false" />
+          <Property Name="Register_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Register_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Register_Iteration" Type="Int32" Nullable="false" />
+          <Property Name="Document_ID" Type="Guid" Nullable="false" />
+          <Property Name="Document_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Document_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Document_Date" Type="DateTime" Precision="7" />
+          <Property Name="Document_Number" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Document_Issue_Date" Type="DateTime" Precision="7" />
+          <Property Name="Document_Iteration" Type="Int32" Nullable="false" />
+          <Property Name="Document_Position" Type="Int32" />
+          <Property Name="Document_SheetNumber" Type="Int32" />
+          <Property Name="Document_Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Register_to_Document_ID" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="WEB_MainDataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UI_Register_ListItem" EntityType="Self.UI_Register_ListItem" />
+          <FunctionImport Name="Register_SequenceNumber" ReturnType="Collection(Int64)" />
+          <FunctionImport Name="Document_Delete" ReturnType="Collection(WEB_MainDataModel.Document_Delete_Result)">
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Document_Insert" ReturnType="Collection(WEB_MainDataModel.Document_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Code" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Number" Mode="In" Type="String" />
+            <Parameter Name="i_DocumentType_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Date" Mode="In" Type="String" />
+            <Parameter Name="i_Issue_Date" Mode="In" Type="String" />
+            <Parameter Name="i_TotalSheets" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Name" Mode="In" Type="String" />
+            <Parameter Name="i_Parent_ID" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Document_To_FileTable_Delete" ReturnType="Collection(WEB_MainDataModel.Document_To_FileTable_Delete_Result)">
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_to_FileTable_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Document_to_FileTable_Insert" ReturnType="Collection(WEB_MainDataModel.Document_to_FileTable_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="i_FileTable_ID" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Document_to_FileTable_Update" ReturnType="Collection(WEB_MainDataModel.Document_to_FileTable_Update_Result)">
+            <Parameter Name="i_Document_to_FileTable_ID" Mode="In" Type="String" />
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="i_FileTable_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Document_Update" ReturnType="Collection(WEB_MainDataModel.Document_Update_Result)">
+            <Parameter Name="i_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Code" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Number" Mode="In" Type="String" />
+            <Parameter Name="i_DocumentType_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Date" Mode="In" Type="String" />
+            <Parameter Name="i_Issue_Date" Mode="In" Type="String" />
+            <Parameter Name="i_TotalSheets" Mode="In" Type="String" />
+            <Parameter Name="i_Document_Name" Mode="In" Type="String" />
+            <Parameter Name="i_Parent_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="DocumentType_Delete" ReturnType="Collection(WEB_MainDataModel.DocumentType_Delete_Result)">
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_DocumentType_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="DocumentType_Insert" ReturnType="Collection(WEB_MainDataModel.DocumentType_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_DocumentType_Code" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="DocumentType_Update" ReturnType="Collection(WEB_MainDataModel.DocumentType_Update_Result)">
+            <Parameter Name="i_DocumentType_ID" Mode="In" Type="String" />
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_DocumentType_Code" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Register_Delete" ReturnType="Collection(WEB_MainDataModel.Register_Delete_Result)">
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Register_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Register_Insert" ReturnType="Collection(WEB_MainDataModel.Register_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Register_Code" Mode="In" Type="String" />
+            <Parameter Name="i_Register_Date" Mode="In" Type="String" />
+            <Parameter Name="i_Current_Iteration" Mode="In" Type="String" />
+            <Parameter Name="i_Customer_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Contractor_ID" Mode="In" Type="String" />
+            <Parameter Name="i_SubContractor_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Resp_Employee_ID" Mode="In" Type="String" />
+            <Parameter Name="i_WorkPackage_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Comment" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Register_To_Document_Delete" ReturnType="Collection(WEB_MainDataModel.Register_To_Document_Delete_Result)">
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Register_to_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Register_to_Document_Insert" ReturnType="Collection(WEB_MainDataModel.Register_to_Document_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Register_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Iteration" Mode="In" Type="String" />
+            <Parameter Name="i_NumberInRegister" Mode="In" Type="String" />
+            <Parameter Name="i_SheetFolderNumber" Mode="In" Type="String" />
+            <Parameter Name="i_Comment" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Register_to_Document_Update" ReturnType="Collection(WEB_MainDataModel.Register_to_Document_Update_Result)">
+            <Parameter Name="i_Register_to_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Register_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Iteration" Mode="In" Type="String" />
+            <Parameter Name="i_NumberInRegister" Mode="In" Type="String" />
+            <Parameter Name="i_SheetFolderNumber" Mode="In" Type="String" />
+            <Parameter Name="i_Comment" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Register_To_Status_Delete" ReturnType="Collection(WEB_MainDataModel.Register_To_Status_Delete_Result)">
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Register_to_Status_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Register_to_Status_Insert" ReturnType="Collection(WEB_MainDataModel.Register_to_Status_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Register_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Status_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Iteration" Mode="In" Type="String" />
+            <Parameter Name="i_DTS_Start" Mode="In" Type="String" />
+            <Parameter Name="i_DTS_End" Mode="In" Type="String" />
+            <Parameter Name="i_Parent_ID" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Register_to_Status_Update" ReturnType="Collection(WEB_MainDataModel.Register_to_Status_Update_Result)">
+            <Parameter Name="i_Register_to_Status_ID" Mode="In" Type="String" />
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Register_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Status_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Parent_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Iteration" Mode="In" Type="String" />
+            <Parameter Name="i_DTS_Start" Mode="In" Type="String" />
+            <Parameter Name="i_DTS_End" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Register_Update" ReturnType="Collection(WEB_MainDataModel.Register_Update_Result)">
+            <Parameter Name="i_Register_ID" Mode="In" Type="String" />
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Register_Code" Mode="In" Type="String" />
+            <Parameter Name="i_Register_Date" Mode="In" Type="String" />
+            <Parameter Name="i_Current_Iteration" Mode="In" Type="String" />
+            <Parameter Name="i_Customer_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Contractor_ID" Mode="In" Type="String" />
+            <Parameter Name="i_SubContractor_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Resp_Employee_ID" Mode="In" Type="String" />
+            <Parameter Name="i_WorkPackage_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Comment" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="DocumentTypes" EntityType="WEB_MainDataModel.DocumentType" />
+          <FunctionImport Name="Document_SequenceNumber" ReturnType="Collection(Int64)" />
+          <EntitySet Name="Status" EntityType="WEB_MainDataModel.Status" />
+          <EntitySet Name="UI_Document_to_GOST" EntityType="WEB_MainDataModel.UI_Document_to_GOST" />
+          <EntitySet Name="UI_Document_to_PID" EntityType="WEB_MainDataModel.UI_Document_to_PID" />
+          <FunctionImport Name="Document_to_GOST_Delete" ReturnType="Collection(WEB_MainDataModel.Document_to_GOST_Delete_Result)">
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_to_GOST_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Document_to_GOST_Insert" ReturnType="Collection(WEB_MainDataModel.Document_to_GOST_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="i_GOST_ID" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Document_to_GOST_Update" ReturnType="Collection(WEB_MainDataModel.Document_to_GOST_Update_Result)">
+            <Parameter Name="i_Document_to_GOST_ID" Mode="In" Type="String" />
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="i_GOST_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Document_to_PID_Delete" ReturnType="Collection(WEB_MainDataModel.Document_to_PID_Delete_Result)">
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_to_PID_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Document_to_PID_Insert" ReturnType="Collection(WEB_MainDataModel.Document_to_PID_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="i_PID_ID" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Document_to_PID_Update" ReturnType="Collection(WEB_MainDataModel.Document_to_PID_Update_Result)">
+            <Parameter Name="i_Document_to_PID_ID" Mode="In" Type="String" />
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="i_PID_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Document_to_Status_Delete" ReturnType="Collection(WEB_MainDataModel.Document_to_Status_Delete_Result)">
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_to_Status_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Document_to_Status_Insert" ReturnType="Collection(WEB_MainDataModel.Document_to_Status_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Status_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Parent_ID" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Document_to_Status_Update" ReturnType="Collection(WEB_MainDataModel.Document_to_Status_Update_Result)">
+            <Parameter Name="i_Document_to_Status_ID" Mode="In" Type="String" />
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Document_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Status_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="GOSTs" EntityType="WEB_MainDataModel.GOST" />
+          <EntitySet Name="PIDs" EntityType="WEB_MainDataModel.PID" />
+          <EntitySet Name="UI_Document_List" EntityType="WEB_MainDataModel.UI_Document_List" />
+          <EntitySet Name="T_Document" EntityType="WEB_MainDataModel.T_Document" />
+          <EntitySet Name="T_Document_List" EntityType="WEB_MainDataModel.T_Document_List" />
+          <EntitySet Name="DocumentProjectNumbers" EntityType="WEB_MainDataModel.DocumentProjectNumber" />
+          <EntitySet Name="TitleObjects" EntityType="WEB_MainDataModel.TitleObject" />
+          <EntitySet Name="UI_StatusRelation" EntityType="WEB_MainDataModel.UI_StatusRelation" />
+          <EntitySet Name="Markas" EntityType="WEB_MainDataModel.Marka" />
+          <EntitySet Name="WorkPackages" EntityType="WEB_MainDataModel.WorkPackage" />
+          <EntitySet Name="UI_Document_to_Marka" EntityType="WEB_MainDataModel.UI_Document_to_Marka" />
+          <EntitySet Name="UI_Document_to_TitleObject" EntityType="WEB_MainDataModel.UI_Document_to_TitleObject" />
+          <EntitySet Name="p_Register_to_Marka" EntityType="WEB_MainDataModel.p_Register_to_Marka" />
+          <EntitySet Name="p_Register_to_TitleObject" EntityType="WEB_MainDataModel.p_Register_to_TitleObject" />
+          <EntitySet Name="Register_to_Marka" EntityType="WEB_MainDataModel.Register_to_Marka" />
+          <EntitySet Name="Register_to_TitleObject" EntityType="WEB_MainDataModel.Register_to_TitleObject" />
+          <FunctionImport Name="Register_to_Marka_Delete" ReturnType="Collection(WEB_MainDataModel.Register_to_Marka_Delete_Result)">
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Register_to_Marka_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Register_to_Marka_Insert" ReturnType="Collection(WEB_MainDataModel.Register_to_Marka_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Register_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Marka_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Iteration" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Register_to_Marka_Update" ReturnType="Collection(WEB_MainDataModel.Register_to_Marka_Update_Result)">
+            <Parameter Name="i_Register_to_Marka_ID" Mode="In" Type="String" />
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Register_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Marka_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Iteration" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Register_to_TitleObject_Delete" ReturnType="Collection(WEB_MainDataModel.Register_to_TitleObject_Delete_Result)">
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Register_to_TitleObject_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Register_to_TitleObject_Insert" ReturnType="Collection(WEB_MainDataModel.Register_to_TitleObject_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Register_ID" Mode="In" Type="String" />
+            <Parameter Name="i_TitleObject_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Iteration" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Register_to_TitleObject_Update" ReturnType="Collection(WEB_MainDataModel.Register_to_TitleObject_Update_Result)">
+            <Parameter Name="i_Register_to_TitleObject_ID" Mode="In" Type="String" />
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Register_ID" Mode="In" Type="String" />
+            <Parameter Name="i_TitleObject_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Iteration" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="p_Register_to_Document" EntityType="WEB_MainDataModel.p_Register_to_Document" />
+          <EntitySet Name="T_CheckList" EntityType="WEB_MainDataModel.T_CheckList" />
+          <EntitySet Name="T_Register_List" EntityType="WEB_MainDataModel.T_Register_List" />
+          <EntitySet Name="T_CheckItem" EntityType="WEB_MainDataModel.T_CheckItem" />
+          <EntitySet Name="UI_Register_List" EntityType="WEB_MainDataModel.UI_Register_List" />
+          <EntitySet Name="UI_FileStream" EntityType="WEB_MainDataModel.UI_FileStream" />
+          <EntitySet Name="UI_CheckItem" EntityType="WEB_MainDataModel.UI_CheckItem" />
+          <EntitySet Name="UI_CheckList" EntityType="WEB_MainDataModel.UI_CheckList" />
+        </EntityContainer>
+        <ComplexType Name="Document_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Document_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Document_To_FileTable_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Document_to_FileTable_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Document_to_FileTable_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Document_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="DocumentType_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="DocumentType_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="DocumentType_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Register_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Register_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Register_To_Document_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Register_to_Document_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Register_to_Document_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Register_To_Status_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Register_to_Status_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Register_to_Status_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Register_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <EntityType Name="DocumentType">
+          <Key>
+            <PropertyRef Name="DocumentType_ID" />
+            <PropertyRef Name="DocumentType_Code" />
+          </Key>
+          <Property Name="DocumentType_ID" Type="Guid" Nullable="false" />
+          <Property Name="DocumentType_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Status_ID" />
+            <PropertyRef Name="Status_Code" />
+          </Key>
+          <Property Name="Status_ID" Type="Guid" Nullable="false" />
+          <Property Name="Status_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="StatusEntity" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EntityLocked" Type="Boolean" />
+          <Property Name="ReportColor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ReportOrder" Type="Int32" />
+        </EntityType>
+        <EntityType Name="UI_Document_to_GOST">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="Document_Code" />
+            <PropertyRef Name="GOST_ID" />
+            <PropertyRef Name="GOST_Code" />
+            <PropertyRef Name="Document_to_GOST_ID" />
+          </Key>
+          <Property Name="Document_ID" Type="Guid" Nullable="false" />
+          <Property Name="Document_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="GOST_ID" Type="Guid" Nullable="false" />
+          <Property Name="GOST_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Document_to_GOST_ID" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UI_Document_to_PID">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="Document_Code" />
+            <PropertyRef Name="PID_ID" />
+            <PropertyRef Name="PID_Code" />
+            <PropertyRef Name="Document_to_PID_ID" />
+          </Key>
+          <Property Name="Document_ID" Type="Guid" Nullable="false" />
+          <Property Name="Document_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PID_ID" Type="Guid" Nullable="false" />
+          <Property Name="PID_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Document_to_PID_ID" Type="Guid" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="Document_to_GOST_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Document_to_GOST_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Document_to_GOST_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Document_to_PID_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Document_to_PID_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Document_to_PID_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Document_to_Status_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Document_to_Status_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Document_to_Status_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <EntityType Name="GOST">
+          <Key>
+            <PropertyRef Name="GOST_ID" />
+            <PropertyRef Name="GOST_Code" />
+          </Key>
+          <Property Name="GOST_ID" Type="Guid" Nullable="false" />
+          <Property Name="GOST_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Marka_ID" Type="Guid" />
+        </EntityType>
+        <EntityType Name="PID">
+          <Key>
+            <PropertyRef Name="PID_ID" />
+            <PropertyRef Name="PID_Code" />
+          </Key>
+          <Property Name="PID_ID" Type="Guid" Nullable="false" />
+          <Property Name="PID_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UI_Document_List">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="Document_Code" />
+            <PropertyRef Name="DocumentType_ID" />
+            <PropertyRef Name="Issue_Date" />
+            <PropertyRef Name="Status_ID" />
+            <PropertyRef Name="Document_to_Status_ID" />
+          </Key>
+          <Property Name="Document_ID" Type="Guid" Nullable="false" />
+          <Property Name="Document_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Document_Number" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentType_ID" Type="Guid" Nullable="false" />
+          <Property Name="Document_Date" Type="DateTime" Precision="7" />
+          <Property Name="Issue_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="TotalSheets" Type="Int32" />
+          <Property Name="Document_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Parent_ID" Type="Guid" />
+          <Property Name="DocumentType_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status_ID" Type="Guid" Nullable="false" />
+          <Property Name="Status_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Document_to_Status_ID" Type="Guid" Nullable="false" />
+          <Property Name="FilesQTY" Type="Int32" />
+          <Property Name="VersionNumber" Type="Int32" />
+          <Property Name="IsActual" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="T_Document">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="Document_Code" />
+            <PropertyRef Name="DocumentType_ID" />
+            <PropertyRef Name="Issue_Date" />
+          </Key>
+          <Property Name="Document_ID" Type="Guid" Nullable="false" />
+          <Property Name="Document_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Document_Number" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentType_ID" Type="Guid" Nullable="false" />
+          <Property Name="Document_Date" Type="DateTime" Precision="7" />
+          <Property Name="Issue_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="TotalSheets" Type="Int32" />
+          <Property Name="Document_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Parent_ID" Type="Guid" />
+          <Property Name="VersionNumber" Type="Int32" />
+          <Property Name="IsActual" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="T_Document_List">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="Document_Code" />
+            <PropertyRef Name="DocumentType_ID" />
+            <PropertyRef Name="Issue_Date" />
+            <PropertyRef Name="DocumentType_Code" />
+            <PropertyRef Name="Status_ID" />
+            <PropertyRef Name="FilesQTY" />
+          </Key>
+          <Property Name="Document_ID" Type="Guid" Nullable="false" />
+          <Property Name="Document_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Document_Number" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentType_ID" Type="Guid" Nullable="false" />
+          <Property Name="Document_Date" Type="DateTime" Precision="7" />
+          <Property Name="Issue_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="TotalSheets" Type="Int32" />
+          <Property Name="Document_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Parent_ID" Type="Guid" />
+          <Property Name="VersionNumber" Type="Int32" />
+          <Property Name="IsActual" Type="Boolean" />
+          <Property Name="DocumentType_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status_ID" Type="Guid" Nullable="false" />
+          <Property Name="Status_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Document_to_Status_ID" Type="Guid" />
+          <Property Name="FilesQTY" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocumentProjectNumber">
+          <Key>
+            <PropertyRef Name="DocumentProjectNumber_ID" />
+            <PropertyRef Name="DocumentProjectNumber_Code" />
+          </Key>
+          <Property Name="DocumentProjectNumber_ID" Type="Guid" Nullable="false" />
+          <Property Name="DocumentProjectNumber_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TitleObject">
+          <Key>
+            <PropertyRef Name="TitleObject_ID" />
+            <PropertyRef Name="TitleObject_Code" />
+            <PropertyRef Name="Structure" />
+          </Key>
+          <Property Name="TitleObject_ID" Type="Guid" Nullable="false" />
+          <Property Name="TitleObject_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Parent_Id" Type="Guid" />
+          <Property Name="Structure" Type="Int32" Nullable="false" />
+          <Property Name="Description_Eng" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Phase_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReportColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReportOrder" Type="Int32" />
+          <Property Name="GLB_Weight" Type="Double" />
+          <Property Name="Row_Status" Type="Int32" />
+          <Property Name="Book1_Pct" Type="Double" />
+          <Property Name="Book1_Weight" Type="Double" />
+          <Property Name="Book2_Pct" Type="Double" />
+          <Property Name="Book2_Weight" Type="Double" />
+          <Property Name="Book3_Pct" Type="Double" />
+          <Property Name="Book3_Weight" Type="Double" />
+          <Property Name="Book4_Weight" Type="Double" />
+          <Property Name="TitleObject_for_ABDFinalSet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Book1_Documents_Total" Type="Double" />
+          <Property Name="Book1_Documents_received" Type="Double" />
+          <Property Name="Book1_Progress" Type="Double" />
+          <Property Name="Book1_Documents_transmitted_to_CPY" Type="Double" />
+          <Property Name="StageOfConstr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UI_StatusRelation">
+          <Key>
+            <PropertyRef Name="FromStatus_ID" />
+            <PropertyRef Name="ToStatus_ID" />
+          </Key>
+          <Property Name="FromStatus_ID" Type="Guid" Nullable="false" />
+          <Property Name="FromStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ToStatus_ID" Type="Guid" Nullable="false" />
+          <Property Name="ToStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IterationIncrement" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Marka">
+          <Key>
+            <PropertyRef Name="Marka_ID" />
+            <PropertyRef Name="Marka_Code" />
+          </Key>
+          <Property Name="Marka_ID" Type="Guid" Nullable="false" />
+          <Property Name="Marka_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Marka_Code_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Engineering_Drawing_Type_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Engineering_Drawing_Type_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsUsedInMatrix" Type="Boolean" />
+          <Property Name="IsPriority" Type="Boolean" />
+          <Property Name="ReportColor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ReportOrder" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WorkPackage">
+          <Key>
+            <PropertyRef Name="WorkPackage_ID" />
+            <PropertyRef Name="WorkPackage_Code" />
+          </Key>
+          <Property Name="WorkPackage_ID" Type="Guid" Nullable="false" />
+          <Property Name="WorkPackage_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SiteRussiaYard" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LocationOfWork" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ScopeOfWork" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="AreaOfWork" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UI_Document_to_Marka">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="Marka_ID" />
+            <PropertyRef Name="Marka_Code" />
+          </Key>
+          <Property Name="Document_ID" Type="Guid" Nullable="false" />
+          <Property Name="Marka_ID" Type="Guid" Nullable="false" />
+          <Property Name="Marka_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UI_Document_to_TitleObject">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="TitleObject_ID" />
+            <PropertyRef Name="TitleObject_Code" />
+          </Key>
+          <Property Name="Document_ID" Type="Guid" Nullable="false" />
+          <Property Name="TitleObject_ID" Type="Guid" Nullable="false" />
+          <Property Name="TitleObject_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="p_Register_to_Marka">
+          <Key>
+            <PropertyRef Name="Register_to_Marka_ID" />
+          </Key>
+          <Property Name="Register_to_Marka_ID" Type="Guid" Nullable="false" />
+          <Property Name="RowStatus" Type="Int32" Nullable="false" />
+          <Property Name="Insert_DTS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Update_DTS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Created_User_ID" Type="Guid" Nullable="false" />
+          <Property Name="Modified_User_ID" Type="Guid" Nullable="false" />
+          <Property Name="Register_ID" Type="Guid" Nullable="false" />
+          <Property Name="Marka_ID" Type="Guid" Nullable="false" />
+          <Property Name="Iteration" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="p_Register_to_TitleObject">
+          <Key>
+            <PropertyRef Name="Register_to_TitleObject_ID" />
+          </Key>
+          <Property Name="Register_to_TitleObject_ID" Type="Guid" Nullable="false" />
+          <Property Name="RowStatus" Type="Int32" Nullable="false" />
+          <Property Name="Insert_DTS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Update_DTS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Created_User_ID" Type="Guid" Nullable="false" />
+          <Property Name="Modified_User_ID" Type="Guid" Nullable="false" />
+          <Property Name="Register_ID" Type="Guid" Nullable="false" />
+          <Property Name="TitleObject_ID" Type="Guid" Nullable="false" />
+          <Property Name="Iteration" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Register_to_Marka">
+          <Key>
+            <PropertyRef Name="Register_to_Marka_ID" />
+            <PropertyRef Name="Register_ID" />
+            <PropertyRef Name="Marka_ID" />
+            <PropertyRef Name="Iteration" />
+          </Key>
+          <Property Name="Register_to_Marka_ID" Type="Guid" Nullable="false" />
+          <Property Name="Register_ID" Type="Guid" Nullable="false" />
+          <Property Name="Marka_ID" Type="Guid" Nullable="false" />
+          <Property Name="Iteration" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Register_to_TitleObject">
+          <Key>
+            <PropertyRef Name="Register_to_TitleObject_ID" />
+            <PropertyRef Name="Register_ID" />
+            <PropertyRef Name="TitleObject_ID" />
+            <PropertyRef Name="Iteration" />
+          </Key>
+          <Property Name="Register_to_TitleObject_ID" Type="Guid" Nullable="false" />
+          <Property Name="Register_ID" Type="Guid" Nullable="false" />
+          <Property Name="TitleObject_ID" Type="Guid" Nullable="false" />
+          <Property Name="Iteration" Type="Int32" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="Register_to_Marka_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Register_to_Marka_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Register_to_Marka_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Register_to_TitleObject_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Register_to_TitleObject_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Register_to_TitleObject_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <EntityType Name="p_Register_to_Document">
+          <Key>
+            <PropertyRef Name="Register_to_Document_ID" />
+          </Key>
+          <Property Name="Register_to_Document_ID" Type="Guid" Nullable="false" />
+          <Property Name="RowStatus" Type="Int32" Nullable="false" />
+          <Property Name="Insert_DTS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Update_DTS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Created_User_ID" Type="Guid" Nullable="false" />
+          <Property Name="Modified_User_ID" Type="Guid" Nullable="false" />
+          <Property Name="Register_ID" Type="Guid" Nullable="false" />
+          <Property Name="Document_ID" Type="Guid" Nullable="false" />
+          <Property Name="Iteration" Type="Int32" Nullable="false" />
+          <Property Name="NumberInRegister" Type="Int32" />
+          <Property Name="SheetFolderNumber" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_CheckList">
+          <Key>
+            <PropertyRef Name="CheckList_ID" />
+            <PropertyRef Name="Status_ID" />
+            <PropertyRef Name="Status_Code" />
+          </Key>
+          <Property Name="CheckList_ID" Type="Guid" Nullable="false" />
+          <Property Name="Status_ID" Type="Guid" Nullable="false" />
+          <Property Name="Status_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_Register_List">
+          <Key>
+            <PropertyRef Name="Register_ID" />
+            <PropertyRef Name="Register_Code" />
+            <PropertyRef Name="Register_Date" />
+            <PropertyRef Name="Current_Iteration" />
+            <PropertyRef Name="UI_PageNumber" />
+          </Key>
+          <Property Name="Register_ID" Type="Guid" Nullable="false" />
+          <Property Name="Register_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Register_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Current_Iteration" Type="Int32" Nullable="false" />
+          <Property Name="Status_ID" Type="Guid" />
+          <Property Name="Status_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status_Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Contractor_ID" Type="Guid" />
+          <Property Name="Contractor_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SubContractor_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SubContractor_Code" Type="Guid" />
+          <Property Name="Customer_ID" Type="Guid" />
+          <Property Name="Customer_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TitleObject_ID" Type="Guid" />
+          <Property Name="TitleObject_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Marka_ID" Type="Guid" />
+          <Property Name="Marka_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Complex" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Project" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="UI_PageNumber" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_CheckItem">
+          <Key>
+            <PropertyRef Name="CheckItem_ID" />
+            <PropertyRef Name="Position" />
+            <PropertyRef Name="Status_ID" />
+            <PropertyRef Name="Status_Code" />
+          </Key>
+          <Property Name="CheckItem_ID" Type="Guid" Nullable="false" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="Status_ID" Type="Guid" Nullable="false" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UI_Register_List">
+          <Key>
+            <PropertyRef Name="Register_ID" />
+            <PropertyRef Name="Register_Code" />
+            <PropertyRef Name="Register_Date" />
+            <PropertyRef Name="Current_Iteration" />
+            <PropertyRef Name="UI_PageNumber" />
+          </Key>
+          <Property Name="Register_ID" Type="Guid" Nullable="false" />
+          <Property Name="Register_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Register_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Current_Iteration" Type="Int32" Nullable="false" />
+          <Property Name="Status_ID" Type="Guid" />
+          <Property Name="Status_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status_Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Contractor_ID" Type="Guid" />
+          <Property Name="Contractor_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SubContractor_ID" Type="Guid" />
+          <Property Name="SubContractor_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Customer_ID" Type="Guid" />
+          <Property Name="Customer_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TitleObject_ID" Type="Guid" />
+          <Property Name="TitleObject_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Marka_ID" Type="Guid" />
+          <Property Name="Marka_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Complex" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Project" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="UI_PageNumber" Type="Int32" Nullable="false" />
+          <Property Name="WorkPackage_ID" Type="Guid" />
+          <Property Name="WorkPackage_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UI_FileStream">
+          <Key>
+            <PropertyRef Name="Document_ID" />
+            <PropertyRef Name="FileTable_ID" />
+            <PropertyRef Name="Document_to_FileTable_ID" />
+          </Key>
+          <Property Name="Document_ID" Type="Guid" Nullable="false" />
+          <Property Name="FileTable_ID" Type="Guid" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="file_type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="last_write_time" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Document_to_FileTable_ID" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UI_CheckItem">
+          <Key>
+            <PropertyRef Name="CheckList_Code" />
+            <PropertyRef Name="Update_DTS" />
+            <PropertyRef Name="Position" />
+            <PropertyRef Name="CheckList_ID" />
+            <PropertyRef Name="CheckItem_ID" />
+            <PropertyRef Name="Register_ID" />
+          </Key>
+          <Property Name="CheckList_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CheckItem_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Position_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status_ID" Type="Guid" />
+          <Property Name="CheckItem_Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Update_DTS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="CheckList_ID" Type="Guid" Nullable="false" />
+          <Property Name="CheckItem_ID" Type="Guid" Nullable="false" />
+          <Property Name="Division_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Document_ID" Type="Guid" />
+          <Property Name="Document_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Register_ID" Type="Guid" Nullable="false" />
+          <Property Name="Document_Number" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Issued_Date" Type="DateTime" Precision="7" />
+          <Property Name="Status_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UI_CheckList">
+          <Key>
+            <PropertyRef Name="CheckList_Code" />
+            <PropertyRef Name="CheckList_Date" />
+            <PropertyRef Name="CheckParty_Code" />
+            <PropertyRef Name="Register_ID" />
+            <PropertyRef Name="CheckList_ID" />
+            <PropertyRef Name="Status_Code" />
+            <PropertyRef Name="Status_ID" />
+            <PropertyRef Name="CheckType_Code" />
+          </Key>
+          <Property Name="CheckList_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CheckList_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CheckParty_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Position_Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CheckList_Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Register_ID" Type="Guid" Nullable="false" />
+          <Property Name="CheckList_ID" Type="Guid" Nullable="false" />
+          <Property Name="Status_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status_ID" Type="Guid" Nullable="false" />
+          <Property Name="Position_ID" Type="Guid" />
+          <Property Name="Person_ID" Type="Guid" />
+          <Property Name="CheckType_ID" Type="Guid" />
+          <Property Name="CheckType_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WEB_MainDataModelStoreContainer" CdmEntityContainer="WEB_MainDataEntities">
+          <EntitySetMapping Name="UI_Register_ListItem">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.UI_Register_ListItem">
+              <MappingFragment StoreEntitySet="UI_Register_ListItem">
+                <ScalarProperty Name="Register_to_Document_ID" ColumnName="Register_to_Document_ID" />
+                <ScalarProperty Name="Register_ID" ColumnName="Register_ID" />
+                <ScalarProperty Name="Register_Code" ColumnName="Register_Code" />
+                <ScalarProperty Name="Register_Date" ColumnName="Register_Date" />
+                <ScalarProperty Name="Register_Iteration" ColumnName="Register_Iteration" />
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+                <ScalarProperty Name="Document_Code" ColumnName="Document_Code" />
+                <ScalarProperty Name="Document_Name" ColumnName="Document_Name" />
+                <ScalarProperty Name="Document_Date" ColumnName="Document_Date" />
+                <ScalarProperty Name="Document_Number" ColumnName="Document_Number" />
+                <ScalarProperty Name="Document_Issue_Date" ColumnName="Document_Issue_Date" />
+                <ScalarProperty Name="Document_Iteration" ColumnName="Document_Iteration" />
+                <ScalarProperty Name="Document_Position" ColumnName="Document_Position" />
+                <ScalarProperty Name="Document_SheetNumber" ColumnName="Document_SheetNumber" />
+                <ScalarProperty Name="Document_Comment" ColumnName="Document_Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Register_SequenceNumber" FunctionName="WEB_MainDataModel.Store.Register_SequenceNumber" />
+          <FunctionImportMapping FunctionImportName="Document_Delete" FunctionName="WEB_MainDataModel.Store.Document_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Document_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Document_Insert" FunctionName="WEB_MainDataModel.Store.Document_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Document_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Document_To_FileTable_Delete" FunctionName="WEB_MainDataModel.Store.Document_To_FileTable_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Document_To_FileTable_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Document_to_FileTable_Insert" FunctionName="WEB_MainDataModel.Store.Document_to_FileTable_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Document_to_FileTable_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Document_to_FileTable_Update" FunctionName="WEB_MainDataModel.Store.Document_to_FileTable_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Document_to_FileTable_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Document_Update" FunctionName="WEB_MainDataModel.Store.Document_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Document_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DocumentType_Delete" FunctionName="WEB_MainDataModel.Store.DocumentType_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.DocumentType_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DocumentType_Insert" FunctionName="WEB_MainDataModel.Store.DocumentType_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.DocumentType_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DocumentType_Update" FunctionName="WEB_MainDataModel.Store.DocumentType_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.DocumentType_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Register_Delete" FunctionName="WEB_MainDataModel.Store.Register_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Register_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Register_Insert" FunctionName="WEB_MainDataModel.Store.Register_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Register_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Register_To_Document_Delete" FunctionName="WEB_MainDataModel.Store.Register_To_Document_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Register_To_Document_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Register_to_Document_Insert" FunctionName="WEB_MainDataModel.Store.Register_to_Document_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Register_to_Document_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Register_to_Document_Update" FunctionName="WEB_MainDataModel.Store.Register_to_Document_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Register_to_Document_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Register_To_Status_Delete" FunctionName="WEB_MainDataModel.Store.Register_To_Status_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Register_To_Status_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Register_to_Status_Insert" FunctionName="WEB_MainDataModel.Store.Register_to_Status_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Register_to_Status_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Register_to_Status_Update" FunctionName="WEB_MainDataModel.Store.Register_to_Status_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Register_to_Status_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Register_Update" FunctionName="WEB_MainDataModel.Store.Register_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Register_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="DocumentTypes">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.DocumentType">
+              <MappingFragment StoreEntitySet="DocumentType">
+                <ScalarProperty Name="DocumentType_Code" ColumnName="DocumentType_Code" />
+                <ScalarProperty Name="DocumentType_ID" ColumnName="DocumentType_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Document_SequenceNumber" FunctionName="WEB_MainDataModel.Store.Document_SequenceNumber" />
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="ReportOrder" ColumnName="ReportOrder" />
+                <ScalarProperty Name="ReportColor" ColumnName="ReportColor" />
+                <ScalarProperty Name="EntityLocked" ColumnName="EntityLocked" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="StatusEntity" ColumnName="StatusEntity" />
+                <ScalarProperty Name="Status_Code" ColumnName="Status_Code" />
+                <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_Document_to_GOST">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.UI_Document_to_GOST">
+              <MappingFragment StoreEntitySet="UI_Document_to_GOST">
+                <ScalarProperty Name="Document_to_GOST_ID" ColumnName="Document_to_GOST_ID" />
+                <ScalarProperty Name="GOST_Code" ColumnName="GOST_Code" />
+                <ScalarProperty Name="GOST_ID" ColumnName="GOST_ID" />
+                <ScalarProperty Name="Document_Code" ColumnName="Document_Code" />
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_Document_to_PID">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.UI_Document_to_PID">
+              <MappingFragment StoreEntitySet="UI_Document_to_PID">
+                <ScalarProperty Name="Document_to_PID_ID" ColumnName="Document_to_PID_ID" />
+                <ScalarProperty Name="PID_Code" ColumnName="PID_Code" />
+                <ScalarProperty Name="PID_ID" ColumnName="PID_ID" />
+                <ScalarProperty Name="Document_Code" ColumnName="Document_Code" />
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Document_to_GOST_Delete" FunctionName="WEB_MainDataModel.Store.Document_to_GOST_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Document_to_GOST_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Document_to_GOST_Insert" FunctionName="WEB_MainDataModel.Store.Document_to_GOST_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Document_to_GOST_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Document_to_GOST_Update" FunctionName="WEB_MainDataModel.Store.Document_to_GOST_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Document_to_GOST_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Document_to_PID_Delete" FunctionName="WEB_MainDataModel.Store.Document_to_PID_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Document_to_PID_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Document_to_PID_Insert" FunctionName="WEB_MainDataModel.Store.Document_to_PID_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Document_to_PID_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Document_to_PID_Update" FunctionName="WEB_MainDataModel.Store.Document_to_PID_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Document_to_PID_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Document_to_Status_Delete" FunctionName="WEB_MainDataModel.Store.Document_to_Status_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Document_to_Status_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Document_to_Status_Insert" FunctionName="WEB_MainDataModel.Store.Document_to_Status_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Document_to_Status_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Document_to_Status_Update" FunctionName="WEB_MainDataModel.Store.Document_to_Status_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Document_to_Status_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="GOSTs">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.GOST">
+              <MappingFragment StoreEntitySet="GOST">
+                <ScalarProperty Name="Marka_ID" ColumnName="Marka_ID" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="GOST_Code" ColumnName="GOST_Code" />
+                <ScalarProperty Name="GOST_ID" ColumnName="GOST_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PIDs">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.PID">
+              <MappingFragment StoreEntitySet="PID">
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="PID_Code" ColumnName="PID_Code" />
+                <ScalarProperty Name="PID_ID" ColumnName="PID_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_Document_List">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.UI_Document_List">
+              <MappingFragment StoreEntitySet="UI_Document_List">
+                <ScalarProperty Name="IsActual" ColumnName="IsActual" />
+                <ScalarProperty Name="VersionNumber" ColumnName="VersionNumber" />
+                <ScalarProperty Name="FilesQTY" ColumnName="FilesQTY" />
+                <ScalarProperty Name="Document_to_Status_ID" ColumnName="Document_to_Status_ID" />
+                <ScalarProperty Name="Status_Name" ColumnName="Status_Name" />
+                <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+                <ScalarProperty Name="DocumentType_Code" ColumnName="DocumentType_Code" />
+                <ScalarProperty Name="Parent_ID" ColumnName="Parent_ID" />
+                <ScalarProperty Name="Document_Name" ColumnName="Document_Name" />
+                <ScalarProperty Name="TotalSheets" ColumnName="TotalSheets" />
+                <ScalarProperty Name="Issue_Date" ColumnName="Issue_Date" />
+                <ScalarProperty Name="Document_Date" ColumnName="Document_Date" />
+                <ScalarProperty Name="DocumentType_ID" ColumnName="DocumentType_ID" />
+                <ScalarProperty Name="Document_Number" ColumnName="Document_Number" />
+                <ScalarProperty Name="Document_Code" ColumnName="Document_Code" />
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Document">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.T_Document">
+              <MappingFragment StoreEntitySet="T_Document">
+                <ScalarProperty Name="IsActual" ColumnName="IsActual" />
+                <ScalarProperty Name="VersionNumber" ColumnName="VersionNumber" />
+                <ScalarProperty Name="Parent_ID" ColumnName="Parent_ID" />
+                <ScalarProperty Name="Document_Name" ColumnName="Document_Name" />
+                <ScalarProperty Name="TotalSheets" ColumnName="TotalSheets" />
+                <ScalarProperty Name="Issue_Date" ColumnName="Issue_Date" />
+                <ScalarProperty Name="Document_Date" ColumnName="Document_Date" />
+                <ScalarProperty Name="DocumentType_ID" ColumnName="DocumentType_ID" />
+                <ScalarProperty Name="Document_Number" ColumnName="Document_Number" />
+                <ScalarProperty Name="Document_Code" ColumnName="Document_Code" />
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Document_List">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.T_Document_List">
+              <MappingFragment StoreEntitySet="T_Document_List">
+                <ScalarProperty Name="FilesQTY" ColumnName="FilesQTY" />
+                <ScalarProperty Name="Document_to_Status_ID" ColumnName="Document_to_Status_ID" />
+                <ScalarProperty Name="Status_Name" ColumnName="Status_Name" />
+                <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+                <ScalarProperty Name="DocumentType_Code" ColumnName="DocumentType_Code" />
+                <ScalarProperty Name="IsActual" ColumnName="IsActual" />
+                <ScalarProperty Name="VersionNumber" ColumnName="VersionNumber" />
+                <ScalarProperty Name="Parent_ID" ColumnName="Parent_ID" />
+                <ScalarProperty Name="Document_Name" ColumnName="Document_Name" />
+                <ScalarProperty Name="TotalSheets" ColumnName="TotalSheets" />
+                <ScalarProperty Name="Issue_Date" ColumnName="Issue_Date" />
+                <ScalarProperty Name="Document_Date" ColumnName="Document_Date" />
+                <ScalarProperty Name="DocumentType_ID" ColumnName="DocumentType_ID" />
+                <ScalarProperty Name="Document_Number" ColumnName="Document_Number" />
+                <ScalarProperty Name="Document_Code" ColumnName="Document_Code" />
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentProjectNumbers">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.DocumentProjectNumber">
+              <MappingFragment StoreEntitySet="DocumentProjectNumber">
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="DocumentProjectNumber_Code" ColumnName="DocumentProjectNumber_Code" />
+                <ScalarProperty Name="DocumentProjectNumber_ID" ColumnName="DocumentProjectNumber_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TitleObjects">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.TitleObject">
+              <MappingFragment StoreEntitySet="TitleObject">
+                <ScalarProperty Name="StageOfConstr" ColumnName="StageOfConstr" />
+                <ScalarProperty Name="Book1_Documents_transmitted_to_CPY" ColumnName="Book1_Documents_transmitted_to_CPY" />
+                <ScalarProperty Name="Book1_Progress" ColumnName="Book1_Progress" />
+                <ScalarProperty Name="Book1_Documents_received" ColumnName="Book1_Documents_received" />
+                <ScalarProperty Name="Book1_Documents_Total" ColumnName="Book1_Documents_Total" />
+                <ScalarProperty Name="TitleObject_for_ABDFinalSet" ColumnName="TitleObject_for_ABDFinalSet" />
+                <ScalarProperty Name="Book4_Weight" ColumnName="Book4_Weight" />
+                <ScalarProperty Name="Book3_Weight" ColumnName="Book3_Weight" />
+                <ScalarProperty Name="Book3_Pct" ColumnName="Book3_Pct" />
+                <ScalarProperty Name="Book2_Weight" ColumnName="Book2_Weight" />
+                <ScalarProperty Name="Book2_Pct" ColumnName="Book2_Pct" />
+                <ScalarProperty Name="Book1_Weight" ColumnName="Book1_Weight" />
+                <ScalarProperty Name="Book1_Pct" ColumnName="Book1_Pct" />
+                <ScalarProperty Name="Row_Status" ColumnName="Row_Status" />
+                <ScalarProperty Name="GLB_Weight" ColumnName="GLB_Weight" />
+                <ScalarProperty Name="ReportOrder" ColumnName="ReportOrder" />
+                <ScalarProperty Name="ReportColor" ColumnName="ReportColor" />
+                <ScalarProperty Name="Phase_Name" ColumnName="Phase_Name" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="Structure" ColumnName="Structure" />
+                <ScalarProperty Name="Parent_Id" ColumnName="Parent_Id" />
+                <ScalarProperty Name="TitleObject_Code" ColumnName="TitleObject_Code" />
+                <ScalarProperty Name="TitleObject_ID" ColumnName="TitleObject_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_StatusRelation">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.UI_StatusRelation">
+              <MappingFragment StoreEntitySet="UI_StatusRelation">
+                <ScalarProperty Name="IterationIncrement" ColumnName="IterationIncrement" />
+                <ScalarProperty Name="ToStatus" ColumnName="ToStatus" />
+                <ScalarProperty Name="ToStatus_ID" ColumnName="ToStatus_ID" />
+                <ScalarProperty Name="FromStatus" ColumnName="FromStatus" />
+                <ScalarProperty Name="FromStatus_ID" ColumnName="FromStatus_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Markas">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.Marka">
+              <MappingFragment StoreEntitySet="Marka">
+                <ScalarProperty Name="ReportOrder" ColumnName="ReportOrder" />
+                <ScalarProperty Name="ReportColor" ColumnName="ReportColor" />
+                <ScalarProperty Name="IsPriority" ColumnName="IsPriority" />
+                <ScalarProperty Name="IsUsedInMatrix" ColumnName="IsUsedInMatrix" />
+                <ScalarProperty Name="Engineering_Drawing_Type_Rus" ColumnName="Engineering_Drawing_Type_Rus" />
+                <ScalarProperty Name="Engineering_Drawing_Type_Eng" ColumnName="Engineering_Drawing_Type_Eng" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="Marka_Code_Eng" ColumnName="Marka_Code_Eng" />
+                <ScalarProperty Name="Marka_Code" ColumnName="Marka_Code" />
+                <ScalarProperty Name="Marka_ID" ColumnName="Marka_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkPackages">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.WorkPackage">
+              <MappingFragment StoreEntitySet="WorkPackage">
+                <ScalarProperty Name="AreaOfWork" ColumnName="AreaOfWork" />
+                <ScalarProperty Name="ScopeOfWork" ColumnName="ScopeOfWork" />
+                <ScalarProperty Name="LocationOfWork" ColumnName="LocationOfWork" />
+                <ScalarProperty Name="SiteRussiaYard" ColumnName="SiteRussiaYard" />
+                <ScalarProperty Name="WorkPackage_Code" ColumnName="WorkPackage_Code" />
+                <ScalarProperty Name="WorkPackage_ID" ColumnName="WorkPackage_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_Document_to_Marka">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.UI_Document_to_Marka">
+              <MappingFragment StoreEntitySet="UI_Document_to_Marka">
+                <ScalarProperty Name="Marka_Code" ColumnName="Marka_Code" />
+                <ScalarProperty Name="Marka_ID" ColumnName="Marka_ID" />
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_Document_to_TitleObject">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.UI_Document_to_TitleObject">
+              <MappingFragment StoreEntitySet="UI_Document_to_TitleObject">
+                <ScalarProperty Name="TitleObject_Code" ColumnName="TitleObject_Code" />
+                <ScalarProperty Name="TitleObject_ID" ColumnName="TitleObject_ID" />
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="p_Register_to_Marka">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.p_Register_to_Marka">
+              <MappingFragment StoreEntitySet="p_Register_to_Marka">
+                <ScalarProperty Name="Iteration" ColumnName="Iteration" />
+                <ScalarProperty Name="Marka_ID" ColumnName="Marka_ID" />
+                <ScalarProperty Name="Register_ID" ColumnName="Register_ID" />
+                <ScalarProperty Name="Modified_User_ID" ColumnName="Modified_User_ID" />
+                <ScalarProperty Name="Created_User_ID" ColumnName="Created_User_ID" />
+                <ScalarProperty Name="Update_DTS" ColumnName="Update_DTS" />
+                <ScalarProperty Name="Insert_DTS" ColumnName="Insert_DTS" />
+                <ScalarProperty Name="RowStatus" ColumnName="RowStatus" />
+                <ScalarProperty Name="Register_to_Marka_ID" ColumnName="Register_to_Marka_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="p_Register_to_TitleObject">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.p_Register_to_TitleObject">
+              <MappingFragment StoreEntitySet="p_Register_to_TitleObject">
+                <ScalarProperty Name="Iteration" ColumnName="Iteration" />
+                <ScalarProperty Name="TitleObject_ID" ColumnName="TitleObject_ID" />
+                <ScalarProperty Name="Register_ID" ColumnName="Register_ID" />
+                <ScalarProperty Name="Modified_User_ID" ColumnName="Modified_User_ID" />
+                <ScalarProperty Name="Created_User_ID" ColumnName="Created_User_ID" />
+                <ScalarProperty Name="Update_DTS" ColumnName="Update_DTS" />
+                <ScalarProperty Name="Insert_DTS" ColumnName="Insert_DTS" />
+                <ScalarProperty Name="RowStatus" ColumnName="RowStatus" />
+                <ScalarProperty Name="Register_to_TitleObject_ID" ColumnName="Register_to_TitleObject_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Register_to_Marka">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.Register_to_Marka">
+              <MappingFragment StoreEntitySet="Register_to_Marka">
+                <ScalarProperty Name="Iteration" ColumnName="Iteration" />
+                <ScalarProperty Name="Marka_ID" ColumnName="Marka_ID" />
+                <ScalarProperty Name="Register_ID" ColumnName="Register_ID" />
+                <ScalarProperty Name="Register_to_Marka_ID" ColumnName="Register_to_Marka_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Register_to_TitleObject">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.Register_to_TitleObject">
+              <MappingFragment StoreEntitySet="Register_to_TitleObject">
+                <ScalarProperty Name="Iteration" ColumnName="Iteration" />
+                <ScalarProperty Name="TitleObject_ID" ColumnName="TitleObject_ID" />
+                <ScalarProperty Name="Register_ID" ColumnName="Register_ID" />
+                <ScalarProperty Name="Register_to_TitleObject_ID" ColumnName="Register_to_TitleObject_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Register_to_Marka_Delete" FunctionName="WEB_MainDataModel.Store.Register_to_Marka_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Register_to_Marka_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Register_to_Marka_Insert" FunctionName="WEB_MainDataModel.Store.Register_to_Marka_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Register_to_Marka_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Register_to_Marka_Update" FunctionName="WEB_MainDataModel.Store.Register_to_Marka_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Register_to_Marka_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Register_to_TitleObject_Delete" FunctionName="WEB_MainDataModel.Store.Register_to_TitleObject_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Register_to_TitleObject_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Register_to_TitleObject_Insert" FunctionName="WEB_MainDataModel.Store.Register_to_TitleObject_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Register_to_TitleObject_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Register_to_TitleObject_Update" FunctionName="WEB_MainDataModel.Store.Register_to_TitleObject_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel.Register_to_TitleObject_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="p_Register_to_Document">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.p_Register_to_Document">
+              <MappingFragment StoreEntitySet="p_Register_to_Document">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="SheetFolderNumber" ColumnName="SheetFolderNumber" />
+                <ScalarProperty Name="NumberInRegister" ColumnName="NumberInRegister" />
+                <ScalarProperty Name="Iteration" ColumnName="Iteration" />
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+                <ScalarProperty Name="Register_ID" ColumnName="Register_ID" />
+                <ScalarProperty Name="Modified_User_ID" ColumnName="Modified_User_ID" />
+                <ScalarProperty Name="Created_User_ID" ColumnName="Created_User_ID" />
+                <ScalarProperty Name="Update_DTS" ColumnName="Update_DTS" />
+                <ScalarProperty Name="Insert_DTS" ColumnName="Insert_DTS" />
+                <ScalarProperty Name="RowStatus" ColumnName="RowStatus" />
+                <ScalarProperty Name="Register_to_Document_ID" ColumnName="Register_to_Document_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_CheckList">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.T_CheckList">
+              <MappingFragment StoreEntitySet="T_CheckList">
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Status_Code" ColumnName="Status_Code" />
+                <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+                <ScalarProperty Name="CheckList_ID" ColumnName="CheckList_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Register_List">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.T_Register_List">
+              <MappingFragment StoreEntitySet="T_Register_List">
+                <ScalarProperty Name="UI_PageNumber" ColumnName="UI_PageNumber" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="Complex" ColumnName="Complex" />
+                <ScalarProperty Name="Marka_Code" ColumnName="Marka_Code" />
+                <ScalarProperty Name="Marka_ID" ColumnName="Marka_ID" />
+                <ScalarProperty Name="TitleObject_Code" ColumnName="TitleObject_Code" />
+                <ScalarProperty Name="TitleObject_ID" ColumnName="TitleObject_ID" />
+                <ScalarProperty Name="Customer_Code" ColumnName="Customer_Code" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="SubContractor_Code" ColumnName="SubContractor_Code" />
+                <ScalarProperty Name="SubContractor_ID" ColumnName="SubContractor_ID" />
+                <ScalarProperty Name="Contractor_Code" ColumnName="Contractor_Code" />
+                <ScalarProperty Name="Contractor_ID" ColumnName="Contractor_ID" />
+                <ScalarProperty Name="Status_Description_Rus" ColumnName="Status_Description_Rus" />
+                <ScalarProperty Name="Status_Code" ColumnName="Status_Code" />
+                <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+                <ScalarProperty Name="Current_Iteration" ColumnName="Current_Iteration" />
+                <ScalarProperty Name="Register_Date" ColumnName="Register_Date" />
+                <ScalarProperty Name="Register_Code" ColumnName="Register_Code" />
+                <ScalarProperty Name="Register_ID" ColumnName="Register_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_CheckItem">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.T_CheckItem">
+              <MappingFragment StoreEntitySet="T_CheckItem">
+                <ScalarProperty Name="Status_Code" ColumnName="Status_Code" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="CheckItem_ID" ColumnName="CheckItem_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_Register_List">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.UI_Register_List">
+              <MappingFragment StoreEntitySet="UI_Register_List">
+                <ScalarProperty Name="WorkPackage_Code" ColumnName="WorkPackage_Code" />
+                <ScalarProperty Name="WorkPackage_ID" ColumnName="WorkPackage_ID" />
+                <ScalarProperty Name="UI_PageNumber" ColumnName="UI_PageNumber" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="Complex" ColumnName="Complex" />
+                <ScalarProperty Name="Marka_Code" ColumnName="Marka_Code" />
+                <ScalarProperty Name="Marka_ID" ColumnName="Marka_ID" />
+                <ScalarProperty Name="TitleObject_Code" ColumnName="TitleObject_Code" />
+                <ScalarProperty Name="TitleObject_ID" ColumnName="TitleObject_ID" />
+                <ScalarProperty Name="Customer_Code" ColumnName="Customer_Code" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="SubContractor_Code" ColumnName="SubContractor_Code" />
+                <ScalarProperty Name="SubContractor_ID" ColumnName="SubContractor_ID" />
+                <ScalarProperty Name="Contractor_Code" ColumnName="Contractor_Code" />
+                <ScalarProperty Name="Contractor_ID" ColumnName="Contractor_ID" />
+                <ScalarProperty Name="Status_Description_Rus" ColumnName="Status_Description_Rus" />
+                <ScalarProperty Name="Status_Code" ColumnName="Status_Code" />
+                <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+                <ScalarProperty Name="Current_Iteration" ColumnName="Current_Iteration" />
+                <ScalarProperty Name="Register_Date" ColumnName="Register_Date" />
+                <ScalarProperty Name="Register_Code" ColumnName="Register_Code" />
+                <ScalarProperty Name="Register_ID" ColumnName="Register_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_FileStream">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.UI_FileStream">
+              <MappingFragment StoreEntitySet="UI_FileStream">
+                <ScalarProperty Name="Document_to_FileTable_ID" ColumnName="Document_to_FileTable_ID" />
+                <ScalarProperty Name="last_write_time" ColumnName="last_write_time" />
+                <ScalarProperty Name="file_type" ColumnName="file_type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="FileTable_ID" ColumnName="FileTable_ID" />
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_CheckItem">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.UI_CheckItem">
+              <MappingFragment StoreEntitySet="UI_CheckItem">
+                <ScalarProperty Name="Status_Code" ColumnName="Status_Code" />
+                <ScalarProperty Name="Issued_Date" ColumnName="Issued_Date" />
+                <ScalarProperty Name="Document_Number" ColumnName="Document_Number" />
+                <ScalarProperty Name="Register_ID" ColumnName="Register_ID" />
+                <ScalarProperty Name="Document_Name" ColumnName="Document_Name" />
+                <ScalarProperty Name="Document_ID" ColumnName="Document_ID" />
+                <ScalarProperty Name="Division_Name" ColumnName="Division_Name" />
+                <ScalarProperty Name="CheckItem_ID" ColumnName="CheckItem_ID" />
+                <ScalarProperty Name="CheckList_ID" ColumnName="CheckList_ID" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Update_DTS" ColumnName="Update_DTS" />
+                <ScalarProperty Name="CheckItem_Status" ColumnName="CheckItem_Status" />
+                <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+                <ScalarProperty Name="Position_Code" ColumnName="Position_Code" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CheckItem_Name" ColumnName="CheckItem_Name" />
+                <ScalarProperty Name="CheckList_Code" ColumnName="CheckList_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_CheckList">
+            <EntityTypeMapping TypeName="WEB_MainDataModel.UI_CheckList">
+              <MappingFragment StoreEntitySet="UI_CheckList">
+                <ScalarProperty Name="CheckType_Code" ColumnName="CheckType_Code" />
+                <ScalarProperty Name="CheckType_ID" ColumnName="CheckType_ID" />
+                <ScalarProperty Name="Person_ID" ColumnName="Person_ID" />
+                <ScalarProperty Name="Position_ID" ColumnName="Position_ID" />
+                <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+                <ScalarProperty Name="Status_Code" ColumnName="Status_Code" />
+                <ScalarProperty Name="CheckList_ID" ColumnName="CheckList_ID" />
+                <ScalarProperty Name="Register_ID" ColumnName="Register_ID" />
+                <ScalarProperty Name="CheckList_Status" ColumnName="CheckList_Status" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Position_Description" ColumnName="Position_Description" />
+                <ScalarProperty Name="CheckParty_Code" ColumnName="CheckParty_Code" />
+                <ScalarProperty Name="CheckList_Date" ColumnName="CheckList_Date" />
+                <ScalarProperty Name="CheckList_Code" ColumnName="CheckList_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

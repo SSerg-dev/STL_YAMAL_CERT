@@ -1,0 +1,74 @@
+.settingsContainer{
+    height: 77px;
+    float:right;
+    margin-right:12px;
+    margin-top:8px;
+}
+.settings_button{
+    display:block;
+    border:none;
+    margin-top:3px;
+    padding:4px;
+    padding-right:10px;
+    padding-left:10px;
+    width:80px;
+    outline:none;
+}
+.settings_button:hover:enabled{
+    background-color:rgb(4, 109, 4);
+    color:white;
+}
+.settings_button:disabled{
+    background-color:rgb(194, 194, 194);
+    opacity:0.5;
+    color:white;
+}
+.console_container{
+    position:fixed;
+    padding:none;
+    width:1024px;
+    bottom:-4px;
+    left:calc(50% - 512px);
+    z-index: 99;
+    border:1px solid grey;
+    background-color:white;
+}
+.console_title{
+    width:100%;
+    margin:0px;
+    background-color:rgb(182, 186, 255);
+    height:24px;
+    padding:none;
+}
+.console_title_text{
+    display:inline-block;
+    margin-top:none;
+    padding:4px;
+    padding-left:8px;
+}
+.console_close{
+    float:right;
+    padding:none;
+}
+.console_output{
+    width:100%;
+    outline:none;
+    resize: none;
+    border:none;
+    padding:10px;
+    padding-top:4px;
+    font-family:'Segoe UI';
+}
+.settings_text{
+    display:inline-block;
+    width:200px;
+    font-size:14px;
+    vertical-align:top;
+    margin-left:1px;
+}
+.settings_selector{
+    display:inline-block;
+}
+.settingsMenu_container{
+    margin:10px;
+}

@@ -1,0 +1,102 @@
+.mmenu_background{
+    width:100%;
+    pointer-events: none;
+    margin:auto;
+    filter: blur(2px) 
+    /*
+    saturate(100%) 
+    brightness(1.45) 
+    grayscale(100%)
+    */
+    contrast(80%);
+}
+.mmenu_container{
+    user-select: none;
+    overflow: hidden;
+}
+.mmenu_button_line{
+    background-color:rgb(136, 53, 53); /*rgb(110, 26, 26);*/
+    padding-left:calc(50% - 512px);
+    box-sizing: border-box;
+    width:100%;
+    position:absolute;
+    top:96px; /*the height of the Head*/
+    font-family:'Segoe UI';
+    background:none;
+}
+.mmenu_dropbtn {
+    background-color:none;
+    background: none;
+    color: black;
+    padding: 8px;
+    padding-left:12px;
+    font-size: 14px;
+    white-space: normal;
+    border:none;
+    width:150px;
+    text-align:left;
+    color:black;
+    min-height:48px;
+    vertical-align: top;
+    text-align:top;
+    position:relative;
+    background-color:none; 
+    color:white;
+    background-color:rgba(92, 92, 92, 0.50);
+}
+.mmenu_dropbtn:disabled{
+    background-color:rgba(184, 184, 184, 0.50) !important;
+}
+.mmenu_dropbtn:hover:enabled{
+    background-color:rgb(53, 53, 53);
+}
+.mmenu_dropbtn_inactive{
+    background-color:none;
+    background: none;
+    color: black;
+    border: none;
+    padding: 8px;
+    font-size: 16px;
+    white-space: normal;
+    width:170px;
+    text-align:left;
+}
+.mmenu_dropdown {
+    position: relative;
+    display: inline-block;
+}
+.mmenu_dropdown-content {
+    display: none;
+    position: absolute;
+    top:48px;
+    width:195px;
+    background-color:rgb(216, 216, 216);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.mmenu_dropdown-content > a {
+    color: black;
+    text-decoration: none;
+    display: block;
+    padding: 4px;
+    padding-bottom:6px;
+    font-size:14px;
+    padding-left:10px;
+    margin:3px;
+}
+.mmenu_dropdown-content a:hover {
+    color:white;
+}
+.mmenu_dd_content_red:hover{
+    background-color:rgb(237, 28,37);
+}
+.mmenu_dd_content_blue:hover{
+    background-color:rgb(53, 53, 53);
+}
+
+.mmenu_dropdown:hover .mmenu_dropdown-content {
+    display: block;
+}
+.mmenu_dropdown:hover .mmenu_dropbtn {
+    background-color:rgb(53, 53, 53);
+}

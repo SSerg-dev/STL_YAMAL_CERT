@@ -1,0 +1,152 @@
+@using System.Web.UI.WebControls;
+@using DevExpress.Web.ASPxTreeList.Internal
+@using DevExpress.WebUtils
+
+@using SmartQA1._1._2.Models.Permission
+
+@using SmartQA1._1._2.Views.CommonSettings
+@{
+    var treeList = Html.DevExpress().TreeList(settings =>
+    {
+        settings.Name = "PersDocTreeList";
+        settings.CallbackRouteValues = new
+        {
+            Controller = "Permission",
+            Action = "EmployeeDetails_DocumentTree_Partial",
+            Employee_ID = ViewBag.Employee_ID
+        };
+
+        settings.SettingsEditing.AllowNodeDragDrop = false;
+        /*
+        settings.SettingsEditing.Mode = TreeListEditMode.EditFormAndDisplayNode;
+
+
+
+        settings.SettingsEditing.AddNewNodeRouteValues = new { Controller = "Permission", Action = "PersDocTreeListPartialAddNew" };
+        settings.SettingsEditing.UpdateNodeRouteValues = new { Controller = "Permission", Action = "PersDocTreeListPartialUpdate" };
+        settings.SettingsEditing.DeleteNodeRouteValues = new { Controller = "Permission", Action = "PersDocTreeListPartialDelete" };
+        settings.SettingsEditing.NodeDragDropRouteValues = new { Controller = "Permission", Action = "PersDocTreeListPartialMove" };
+*/
+        settings.AutoGenerateColumns = false;
+        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.NewButton.Visible = false;
+        settings.CommandColumn.DeleteButton.Visible = false;
+        settings.CommandColumn.EditButton.Visible = false;
+
+        settings.KeyFieldName = "ID";
+        settings.ParentFieldName = "P_ID";
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Name";
+            column.Caption = "Имя документа";
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.SetDataCellTemplateContent(c =>
+            {
+
+                var doc = ((TreeListTemplateDataItem)c.DataItem).Row.DataItem.Node.DataItem as PersonDocument;
+                Html.DevExpress().Button(s =>
+                {
+                    s.Name = $"DocumentEditBtn{c.NodeKey}";
+                    s.Text = (doc.EntityType == 0 ? "New" : "Edit");
+                    s.ClientSideEvents.Click = string.Format(@"function(s, e){{ 
+                        OpenDocumentEditor(""{0}"", ""{1}"", {2}); 
+                        }}",
+                        ViewBag.Employee_ID,
+                        (doc.Document_ID),
+                        (doc.EntityType == 0 ? "true" : "false")
+                        );
+
+                }).Render();
+
+            });
+
+            column.FieldName = "X";
+            column.Caption = "X";
+        });
+
+        settings.Settings.ShowColumnHeaders = false;
+        settings.SettingsPager.Visible = true;
+        settings.SettingsSelection.Enabled = false;
+
+        settings.Theme = "Moderno";
+
+        settings.SettingsCookies.StoreExpandedNodes = true;
+
+        //settings.ClientSideEvents.ContextMenu = "function(s, e) {" +
+        //"e.showBrowserMenu = false;" +
+        //"var t = s.GetNodeHtmlElement(e.objectKey);" +
+        //    "if (e.objectType != \"Node\") return; " +
+        //    "alert(s.GetNodeValues(e.objectKey, \"DocumentType_ID\", function GetValues(result) { alert(result); })); " +
+        //"$.ajax({url: '" + Url.Action("EditDocForm") + "', type: 'POST', data: 'Person_ID=" +
+        //((Model == null || Model.Count == 0) ? null : Model[0].Person_ID) + "'," +
+        //"'Employee_ID=" +
+        //((Model == null || Model.Count == 0) ? null : Model[0].Employee_ID) + "'});}" +
+        //"});}";
+
+        settings.ClientSideEvents.ContextMenu = "function(){ PopupOpenPersonDocEdit.Show(); }";
+
+        //    settings
+        //.ApplyContextMenuSettings()
+        //.ApplyEditPopupSettings(row =>
+        //{
+        //    Guid? c = null;
+        //    if (row.KeyValue != null) c = Guid.Parse(row.KeyValue.ToString());
+        //    if (ViewData["item"] == null) Html.RenderAction("EditForm", new { id = c });
+        //    else Html.RenderPartial("DocumentFormEdit", (Document)ViewData["item"]);
+        //});
+
+        settings.HtmlRowPrepared = (s, args) =>
+        {
+            TreeListNode node = ((MVCxTreeList)s).FindNodeByKeyValue(args.NodeKey);
+            if ((node.DataItem as SmartQA1._1._2.Models.Permission.PersonDocument).EntityType == 0)
+                args.Row.ForeColor = System.Drawing.Color.FromArgb(0, 114, 198);
+        };
+        settings.PreRender = (sender, e) =>
+        {
+            //if (Session["TreeListState"] == null)
+            //    ((MVCxTreeList)sender).ExpandToLevel(0);
+            TreeListNodeIterator iterator = new TreeListNodeIterator(((MVCxTreeList)sender).Nodes[0]);
+            TreeListNode node = null;
+
+            while (iterator.Current != null)
+            {
+                node = iterator.Current;
+
+                if (node.HasChildren && node.Level <= 2) node.Expanded = true;
+
+                iterator.GetNext();
+            }
+        };
+        //settings.BeforeGetCallbackResult = (s, args) =>
+        //{
+        //    TreeListNodeIterator iterator = new TreeListNodeIterator(((MVCxTreeList)s).Nodes[0]);
+
+        //    while (iterator.Current != null)
+        //    {
+        //        TreeListNode node = iterator.Current;
+        //        bool done = false;
+        //        if (node.HasChildren && !done)
+        //        {
+        //            ((MVCxTreeList)s).HtmlDataCellPrepared += (sender, e) =>
+        //            {
+        //                if (done) return;
+        //                if (e.Column.Name == "Name")
+        //                    e.Cell.ForeColor = System.Drawing.Color.FromArgb(0, 114, 198);
+        //                done = true;
+        //            };
+        //            //done = true;
+        //        }
+        //        iterator.GetNext();
+        //    }
+        //};
+    });
+    if (ViewData["EditError"] != null)
+    {
+        treeList.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@treeList.Bind(Model).GetHtml()

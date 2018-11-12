@@ -1,0 +1,16 @@
+﻿@model SmartQA1._1._2.Models.Register.Register
+
+@{
+    Html.DevExpress().PageControl(pageSettings =>
+    {
+        pageSettings.Name = "PageControlCheckLists";
+        pageSettings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        var reviewPage = pageSettings.TabPages.Add("Проверка");
+        var approvementPage = pageSettings.TabPages.Add("Утверждение");
+
+        reviewPage.SetContent(() => Html.RenderPartial("CheckListPageView", Model.ReviewWrapper));
+        approvementPage.SetContent(() => Html.RenderPartial("CheckListPageView", Model.ApprovementWrapper));
+
+    }).Render();
+}

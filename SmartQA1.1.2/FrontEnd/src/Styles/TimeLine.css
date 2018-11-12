@@ -1,0 +1,62 @@
+.tml_container{
+    font-family: 'Segoe UI';
+    padding:30px;
+    user-select: none;
+    background-color:rgb(30, 69, 151);
+    display:inline-block;
+    top:0;
+    vertical-align: top;
+    margin-left:20px;
+}
+.tml_selector{
+    height:16px;
+    width:16px;
+    border-radius: 100px;
+    display:inline-block;
+    cursor: pointer;
+    
+}
+.tml_status_date{
+    display:inline-block;
+    vertical-align: top;
+    position:relative;
+    margin-left:10px;
+    cursor: pointer;
+    font-weight: 600;
+    position:relative;
+    top:-2px;
+}
+.tml_status_name{
+    display:inline-block;
+    vertical-align:top;
+    position:relative;
+    margin-left:15px;
+    cursor: pointer;
+    font-weight: 600;
+    position:relative;
+    top:-2px;
+}
+.tml_substatus_container{
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-left:37px; /*17px*/
+    border:2px;
+    border-style:dashed;
+    border-top:none;
+    border-right:none;
+    border-bottom:none;
+    position:relative;
+    left:7px;
+    top:-2px;
+    color:white;
+}
+.tml_substatus_block{
+
+}
+.tml_substatus_date{
+    display:inline-block;
+}
+.tml_substatus_name{
+    display:inline-block;
+    margin-left:15px;
+}

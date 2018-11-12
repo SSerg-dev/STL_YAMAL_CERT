@@ -1,0 +1,36 @@
+﻿@using System.Web.UI.WebControls
+@using SmartQA1._1._2.DB.PermissionDb
+@using SmartQA1._1._2.Models.Permission
+
+@model Personal
+
+@Html.DevExpress().Splitter(settings => {
+    settings.Name = "Splitter";
+    //settings.Height = 400;
+    settings.Width = Unit.Percentage(100);
+    settings.AllowResize = true;
+    settings.Orientation = Orientation.Horizontal;
+    settings.Panes.Add(pane =>
+    {
+        pane.PaneStyle.Border.BorderStyle = BorderStyle.Solid;
+        //pane.Size = 150;
+        pane.AllowResize = DefaultBoolean.False;
+        pane.ScrollBars = ScrollBars.Auto;
+        pane.AutoWidth = true;
+        pane.AutoHeight = true;
+        pane.SetContent(() =>
+        {
+            Html.RenderAction("EmployeeList_Partial");
+        });
+    });
+    settings.Panes.Add(pane => {
+        pane.SetContent(() => {
+             Html.RenderPartial("EmployeeDetails_Partial");
+        });
+        pane.PaneStyle.Border.BorderStyle = BorderStyle.Solid;
+    });
+}).GetHtml()
+
+@Html.Partial("EmployeeEdit_Partial", new ViewDataDictionary((Employee)null))
+
+

@@ -1,0 +1,67 @@
+@using System.Web.UI.WebControls
+@using SmartQA1._1._2.Models.Permission
+@using SmartQA1._1._2.Views.CommonSettings
+
+@Html.DevExpress().GridView(settings =>
+{
+    settings.Name = "EmployeeList";
+    settings.CallbackRouteValues = new { Controller = "Permission", Action = "EmployeeList_Partial" };
+
+    settings.KeyFieldName = "Employee_ID";
+    settings.SettingsBehavior.AllowFocusedRow = true;
+    settings.PreRender = (sender, e) =>
+    {
+        MVCxGridView gridView = sender as MVCxGridView;
+        if (gridView != null)
+        {
+            //gridView.Selection.SelectRow(0);
+        }
+    };
+
+    settings.Settings.ShowGroupPanel = false;
+    settings.Settings.ShowFilterRow = false;
+    settings.Settings.ShowColumnHeaders = false;
+    settings.Settings.GridLines = GridLines.None;
+
+    settings.SettingsPager.Visible = true;
+    settings.SettingsPager.PageSize = 1000;
+
+    settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+    settings.SettingsSearchPanel.Visible = true;
+    
+    settings.SettingsContextMenu.Enabled = true;
+
+    settings.SettingsEditing.DeleteRowRouteValues = new { Action = "EmployeeDelete", Controller = "Permission" };
+
+    settings.FillContextMenuItems = (s, e) =>
+    {
+        if (e.MenuType == GridViewContextMenuType.Rows)
+        {
+            e.Items.Clear();
+            e.Items.Add(GridViewContextMenuCommand.EditRow, "Edit", "Edit");
+            e.Items.Add(GridViewContextMenuCommand.DeleteRow, "Delete", "Delete");
+        }
+    };
+
+    settings.Toolbars.Add(toolbar =>
+    {
+        toolbar.Enabled = true;
+        toolbar.Position = GridToolbarPosition.Top;
+        toolbar.ItemAlign = GridToolbarItemAlign.Left;
+        toolbar.Items.Add(GridViewToolbarCommand.New);
+    });
+
+    settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+    settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+    settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+    settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+    settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+    settings.Columns.Add("FullName");
+    settings.Columns["FullName"].CellStyle.Wrap = DefaultBoolean.False;
+    settings.SettingsBehavior.AllowFocusedRow = true;
+
+    settings.ClientSideEvents.ContextMenuItemClick = "EmployeeList_OnContextMenuItemClick";
+    settings.ClientSideEvents.ToolbarItemClick = "EmployeeList_OnToolbarItemClick";
+    settings.ClientSideEvents.RowClick = "EmployeeList_RowClick";
+}).Bind(Model).GetHtml()

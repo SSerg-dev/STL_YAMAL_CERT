@@ -1,0 +1,27 @@
+﻿@model int
+@using System.Web.UI.WebControls
+
+@Html.DevExpress().FormLayout(settings => {
+    settings.Name = "FormLayout";
+
+    
+  var text = settings.Items.Add(x => x, s =>
+  {
+      s.Name = "inte";
+  }); 
+
+    var approveButton = settings.Items.Add();
+    approveButton.ShowCaption = DefaultBoolean.False;
+    approveButton.SetNestedContent(() =>
+    {
+        Html.DevExpress().Button(bs =>
+        {
+            bs.Name = "IncrementButton";
+            bs.Text = "Increment";
+            bs.UseSubmitBehavior = false;
+            bs.ControlStyle.VerticalAlign = VerticalAlign.Top;
+            bs.RouteValues = new {Controller = "Test", Action = "Increment", i=Model };
+        }).GetHtml();
+    });
+
+}).GetHtml()

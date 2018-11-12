@@ -1,0 +1,150 @@
+.finalFolder{
+    font-family:'Segoe UI';
+    font-size:15px;
+}
+.finalFolderTitleLine{
+    width:1024px;
+    margin:auto;
+    margin-left:auto;
+    margin-right:auto;
+    background-color:rgb(241, 241, 241);
+}
+.finalFolderTitleLine>div{
+    box-sizing:border-box;
+    padding:15px;
+    padding-bottom:10px;
+    width:512px;
+    display:inline-block;
+    vertical-align:top;
+}
+.finalFolderTitleLine>div>p{
+    
+    width:160px;
+    margin-top:0px;
+    display:inline-block;
+    vertical-align:top;
+    clear:left;
+}
+.finalFolderFalseInput{
+    width:300px;
+    margin-top:0px;
+    margin-bottom:18px;
+    min-height:21px;
+    box-sizing:border-box;
+    padding-left:3px;
+    display:inline-block;
+    vertical-align:top;
+    clear:right;
+    background-color:white;
+    border:1px solid rgb(17, 17, 17);
+}
+.finalFolderInput{
+    height:42px;
+    display:inline-block;
+    clear:right;
+}
+.finalFolderInput>input{
+    width:250px;
+    border:1px solid rgb(17, 17, 17);
+    font-size:inherit;
+    outline:none;
+}
+.finalFolderInput>select{
+    width:250px;
+    border:1px solid rgb(17, 17, 17);
+    font-size:inherit;
+    outline:none;
+}
+.finalFolderButtonLine > button{
+        display:inline-block;
+        border:none;
+        vertical-align:top;
+        Color:white;
+        font-family:'Segoe UI';
+        padding:6px;
+        padding-left:20px;
+        padding-right:20px;
+        padding-bottom:9px;
+        font-size:16px;
+        outline:none;
+}
+.finalFolderDeleteButton{
+    background-color: rgb(200, 130, 0);
+    margin-left:13px;
+}
+.finalFolderSaveButton{
+    background-color: rgb(24, 139, 24);
+}
+
+/*TABLE*/
+.finalFolderTable{
+    background-color:rgb(221, 221, 221);
+    table-layout:auto;
+    border-collapse:collapse;
+    border:none;
+    margin:auto;
+    margin-bottom:50px;
+}
+.finalFolderTable>tbody>tr>th{
+    border-collapse:collapse;
+    word-wrap: normal;
+    background-color:rgb(66, 66, 66);
+    color:white;
+    font-weight:400;
+}
+.finalFolderTable>tbody>tr{
+    border-collapse:collapse;
+    height:20px;
+    margin-bottom:0;
+}
+
+.finalFolderTable>tbody>tr>td{
+    /*background-color:rgb(113, 113, 155);*/
+    margin:none;
+    border-collapse:collapse;
+    border:1px solid black;
+    height:100%;
+}
+.finalFolderTable>tbody>tr>td>input{
+    border-collapse:collapse;
+    border:none;
+    height:21px;
+    margin:none;
+    width:none;
+}
+.finalFolderTdRowNum{width:60px;}
+.finalFolderTdNumInFolder{width:60px;}
+.finalFolderTdStructure{width:120px;}
+.finalFolderTdDocumentNumber{width:300px;}
+.finalFolderTdDocumentName{width:300px;}
+.finalFolderTdIssueDate{width:100px;}
+.finalFolderTdNumberInFolder{width:100px;}
+.finalFolderTdTotalSheet{width:100px;}
+
+.finalFolderAddLineButton{
+    background-color:rgb(66, 66, 66);
+    color:white;
+    border:none;
+    height:25px;
+    width:28px;
+    font-size:16px;
+    font-weight:100;
+    margin-top:0;
+    outline:none;
+}
+.finalFolderGostPidSelect{
+    margin-left:5px;
+    outline:none;
+}
+.finalFolderGostPidSelect > button{
+    background-color:rgb(120, 120, 120);
+    color:white;
+    border: none;
+    height:23px;
+    margin:none;
+    float:right;
+    outline:none;
+}
+.finalFolderGostPidSelect > button:hover{
+    background-color:rgb(66, 66, 66);
+}

@@ -1,0 +1,44 @@
+@model List<SmartQA1._1._2.DB.WebDb.UI_FileStream>
+
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridView";
+        settings.CallbackRouteValues = new { Controller = "Document", Action = "DocExistingFiles"};
+
+        //settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Document", Action = "DocExistingFilesAddNew" };
+        //settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Document", Action = "DocExistingFilesUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Document", Action = "DocExistingFilesDelete"};
+        //settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.Caption = "Уже прикрепленные файлы";
+
+        settings.KeyFieldName = "FileTable_ID";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = false;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        //settings.Columns.Add("FileTable_ID");
+        settings.Columns.Add("name", "Имя файла");
+        settings.Columns.Add("last_write_time", "Последнее изменение");
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

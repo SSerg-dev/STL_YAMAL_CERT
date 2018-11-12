@@ -1,0 +1,40 @@
+﻿body {
+    /* padding-top: 50px; */
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+.dxgvFooter_Mulberry {
+    color: red;
+    font-size: 12px;
+}
+.addNewButton {
+    float: left;
+    vertical-align: top !important;
+}
+.GridTitle {
+    float: left;
+    position: relative;
+    vertical-align: top;
+    top: 5px;
+    margin-right: 10px;
+}
+.clearBorders {
+    border-collapse: collapse !important;
+    border: none !important;
+}
+.dxtlControl_Moderno .dxtlDataTable {
+    border-collapse: collapse !important;
+    border: none !important;
+}

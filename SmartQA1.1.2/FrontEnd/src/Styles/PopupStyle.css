@@ -1,0 +1,68 @@
+.SuperPopupWindow_Block{
+    opacity: 0.2;
+    background-color: rgb(63, 56, 56);
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:100%;
+    height: 100%;
+    z-index: 101;
+}
+.SuperPopupWindow_Container{
+    border:1px solid black;
+    background-color: rgb(250, 250, 250);
+    text-align: center;
+    right:0;
+    left:0;
+    margin-left:auto;
+    margin-right:auto;
+    position:fixed;
+    top:200px;
+    width:300px;
+    z-index: 102;
+    font-family:'Segoe UI';
+    padding-bottom:10px;
+}
+.SuperPopupWindow_Head{
+    text-align:left;
+    padding-left:8px;
+    padding-bottom:1px;
+    padding-top:1px;
+    height:24px;
+    background-color:rgb(54, 54, 54);
+    color:white;
+}
+.SuperPopupWindow_Text{
+    margin-top:8px;
+    padding:6px;
+    padding-top:3px;
+    padding-left: 14px;
+    text-align:left;
+    font-size:14px;
+}
+.SuperPopupWindow_ButtonLine{
+    width:100%;
+    text-align:center;
+}
+.SuperPopupWindow_Button{
+    border:none;
+    color:white;
+    background-color:rgb(75, 75, 75);
+    display:inline-block;
+    padding:5px;
+    min-width: 100px;
+    padding-right:14px;
+    padding-left:14px;
+    margin-top:10px;
+    outline:none;
+    margin-left:8px;
+    margin-right:8px;
+}
+.SuperPopupWindow_Button:hover{
+    background-color:green;
+    color:black;
+}
+.SuperPopupWindow_Button:active{
+    color: rgb(255, 255, 255);
+    background-color: rgb(56, 146, 33);
+    }

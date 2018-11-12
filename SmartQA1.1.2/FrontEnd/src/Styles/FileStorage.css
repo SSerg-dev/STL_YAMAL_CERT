@@ -1,0 +1,30 @@
+.fileStorage_previewContainer{
+    position:absolute;
+    z-index:99;
+    width:1024px;
+    height:700px;
+    margin:auto;
+    top:50px;
+    left:calc(50% - 512px);
+    background-color:white;
+    text-align:center;
+}
+.fileStorage_iframe{
+    border:1px solid black;
+    position:relative;
+    top:-4px;
+    left:-1px;
+    -ms-transform: scale(0.56);
+    -moz-transform: scale(0.56);
+    -o-transform: scale(0.56);
+    -webkit-transform: scale(0.56);
+    transform: scale(0.56);
+    
+    width:178.5%;
+    height:171.5%;
+    -ms-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}

@@ -1,0 +1,20 @@
+.bottomElementContainer{
+    position: fixed;
+    background-color:rgb(95, 95, 95);
+    bottom:30px;
+    right:30px;
+    padding-left:30px;
+    padding-right:1px;
+    padding-top:8px;
+    padding-bottom:9px;
+    font-family: 'Segoe UI';
+    color:white;
+}
+.bottomElementContainerButton{
+    margin-left:20px;
+    padding:14px;
+    padding-top:8px;
+    padding-bottom:8px;
+    border-left:1px solid rgb(153, 153, 153);
+    cursor: pointer;
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="338634ea42094596ba5f4c0a7c659eb0" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="WEB_MainDataModel.UI_Register_ListItem" Width="2" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.DocumentType" Width="2.375" PointX="10.5" PointY="6.375" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.Status" Width="1.5" PointX="3.5" PointY="10.625" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.UI_Document_to_GOST" Width="1.5" PointX="5.25" PointY="6.375" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.UI_Document_to_PID" Width="1.5" PointX="8.75" PointY="6.375" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.UI_Document_List" Width="1.5" PointX="3.5" PointY="6.375" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.T_Document" Width="1.5" PointX="13.125" PointY="6.375" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.T_Document_List" Width="1.5" PointX="14.875" PointY="6.375" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.DocumentProjectNumber" Width="2.625" PointX="7" PointY="10.625" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.TitleObject" Width="1.5" PointX="9.875" PointY="10.625" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.UI_StatusRelation" Width="1.5" PointX="9.875" PointY="0.75" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.Marka" Width="1.5" PointX="11.625" PointY="10.625" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.WorkPackage" Width="1.5" PointX="13.375" PointY="10.625" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.UI_Document_to_Marka" Width="1.5" PointX="18.375" PointY="6.375" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.UI_Document_to_TitleObject" Width="1.5" PointX="16.625" PointY="6.375" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.p_Register_to_Marka" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.p_Register_to_TitleObject" Width="1.5" PointX="14.5" PointY="0.75" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.Register_to_Marka" Width="1.5" PointX="16.25" PointY="0.75" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.Register_to_TitleObject" Width="1.5" PointX="18" PointY="0.75" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.p_Register_to_Document" Width="1.5" PointX="19.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.T_CheckList" Width="1.5" PointX="8.625" PointY="17" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.T_Register_List" Width="1.5" PointX="7.5" PointY="0.75" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.T_CheckItem" Width="1.5" PointX="6.875" PointY="17" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.UI_Register_List" Width="1.5" PointX="3.5" PointY="0.75" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.UI_FileStream" Width="1.5" PointX="7" PointY="6.375" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.UI_CheckItem" Width="1.5" PointX="5.125" PointY="17" />
+        <EntityTypeShape EntityType="WEB_MainDataModel.UI_CheckList" Width="1.5" PointX="3.375" PointY="17" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

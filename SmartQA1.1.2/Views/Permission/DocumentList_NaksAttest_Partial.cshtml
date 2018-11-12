@@ -1,0 +1,115 @@
+﻿@model IEnumerable<SmartQA1._1._2.DB.PermissionDb.Document_NaksAttest>
+
+@{
+    <table>
+        <tr>
+            @foreach (var attest in Model)
+            {
+            <td>
+                @attest.WeldingEquipmentAutomationLevel
+            </td>                             
+            }
+        </tr>
+
+        <tr>
+            @foreach (var attest in Model)
+            {
+                <td>
+                    @attest.DetailsType
+                </td>                             
+            }
+        </tr>
+        
+        <tr>
+            @foreach (var attest in Model)
+            {
+                <td>
+                    @attest.SeamsType
+                </td>                             
+            }
+        </tr>
+        
+        <tr>
+            @foreach (var attest in Model)
+            {
+                <td>
+                    @attest.JointType
+                </td>                             
+            }
+        </tr>
+        
+        <tr>
+            @foreach (var attest in Model)
+            {
+                <td>
+                    @attest.WeldMaterialGroup
+                </td>                             
+            }
+        </tr>
+        
+        <tr>
+            @foreach (var attest in Model)
+            {
+                <td>
+                    @attest.WeldMaterial
+                </td>                             
+            }
+        </tr>
+        
+        <tr>
+            @foreach (var attest in Model)
+            {
+                <td>
+                    @attest.DetailWidth
+                </td>                             
+            }
+        </tr>
+
+        <tr>
+            @foreach (var attest in Model)
+            {
+                <td>
+                    @attest.OuterDiameter
+                </td>                             
+            }
+        </tr>
+        
+        <tr>
+            @foreach (var attest in Model)
+            {
+                <td>
+                    @attest.SDR
+                </td>                             
+            }
+        </tr>
+        
+        <tr>
+            @foreach (var attest in Model)
+            {
+                <td>
+                    @attest.WeldPosition
+                </td>                             
+            }
+        </tr>
+
+        <tr>
+            @foreach (var attest in Model)
+            {
+                <td>
+                    @attest.JointKind
+                </td>                             
+            }
+        </tr>
+
+        <tr>
+            @foreach (var attest in Model)
+            {
+                <td>
+                    @attest.WeldGOST14098
+                </td>                             
+            }
+        </tr>
+
+    </table>
+    
+}

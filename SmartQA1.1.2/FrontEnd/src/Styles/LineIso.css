@@ -1,0 +1,95 @@
+.lineIso_LineContainer{
+    display:inline-block;
+    margin-left:10px;
+}
+.lineIso_IsoContainer{
+    display:inline-block;
+    position:relative;
+    left:-2px;
+    vertical-align: top;
+}
+.lineIso_filterBlocker{
+    
+}
+.lineIso_resizerContainer{
+    display:inline-block;
+    position:relative;
+    border-right:2px solid rgb(184, 127, 23);
+    vertical-align:top;
+    left:-1px;
+    z-index:1;
+}
+.lineIso_resizer{
+    position:absolute;
+    right:-6px;
+    width:10px;
+    z-index:2;
+    opacity:0.0;
+    background-color: blue;
+    cursor: e-resize;
+    height:100%;
+}
+.lineIso_resultsFound{
+    width:calc(100% - 10px);
+    font-family: 'Segoe UI';
+    color:white;
+    background-color: rgb(105, 105, 105);
+    padding:3px;
+    font-size:12px;
+    padding-left:8px;
+    padding-bottom:4px;
+}
+.isoEdit_container{
+    width:420px;
+    margin:10px;
+}
+.isoEdit_container > div > div{
+    display:inline-block;
+}
+.isoEdit_container>div>p{
+    display:inline-block;
+    margin:5px;
+    width:150px;
+    font-size:13px;
+}
+.isoEdit_container>div>input{
+    width:250px;
+}
+.isoEdit_container>div>select{
+    width:120px;
+}
+.isoEditSaveButton{
+    border:none;
+    color:white;
+    background-color:rgb(75, 75, 75);
+    display:inline-block;
+    padding:5px;
+    padding-right:14px;
+    padding-left:14px;
+    margin-top:16px;
+    outline:none;
+    position: relative;
+    top:-4px;
+    left:0px;
+    min-width:80px;
+}
+.isoEditSaveButton:hover{
+    background-color:green;
+}
+.isoEditSaveButton:disabled{
+    background-color:rgb(180, 180, 180);
+}
+.lineEdit_Container{
+    margin:15px;
+    margin-left:15px;
+}
+.lineEdit_Container>div>p{
+    font-size:13px;
+    display:inline-block;
+    margin:0;
+    width:260px;
+    margin-bottom:8px;
+}
+.lineEdit_Container>div>input{
+    width:500px;
+}

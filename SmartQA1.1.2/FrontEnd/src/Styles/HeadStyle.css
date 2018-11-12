@@ -1,0 +1,66 @@
+.head_line{
+    width:1024px;
+    margin:auto;
+    height:98px;
+    font-family: 'Segoe UI';
+    outline: none;
+}
+.head_logo{
+    height:71px;
+    margin-left:0px; /*was15 recently*/
+    margin-top:14px;
+    pointer-events: none;
+    outline: none;
+}
+.head_loginBar{
+    font-size:14px;
+    float:right;
+    margin-right:16px;
+    margin-right:40px;
+}
+
+.head_loginBar>button{
+    border:none;
+    color:white;
+    background-color:rgb(75, 75, 75);
+    display:inline-block;
+    padding: 4px;
+    padding-right: 18px;
+    padding-left: 18px;
+    padding-bottom:6px;
+    font-size:12px;
+    font-family: 'Segoe UI';
+    outline:none;
+    margin-top:7px;
+}
+.head_loginBar>button:hover{
+    background-color:rgb(2, 109, 2);
+    color:white;
+}
+.head_loginBar>button:disabled{
+    background-color:rgb(180, 180, 180);
+    color:white;
+}
+.head_loginBarUser{
+    font-weight: 600;
+    margin:0px;
+    margin-top:14px;
+}
+.head_loginBarUserAuth{
+    margin:0px;
+    margin-top:3px;
+}
+.window_block{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background-color:grey;
+    opacity:0.2;
+    z-index:98;
+    display:none;
+}
+.globalPopupContainer{
+    
+}

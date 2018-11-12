@@ -1,0 +1,372 @@
+﻿@using System.Drawing
+@using System.Web.UI.WebControls
+@using SmartQA1._1._2.DB.WebDb
+@using SmartQA1._1._2.Models.Register
+@using SmartQA1._1._2.Views.CommonSettings
+@model SmartQA1._1._2.Models.Register.Register
+    
+@Html.DevExpress().FormLayout(settings =>
+{
+    settings.Name = "RegisterEditLayout";
+    settings.ColCount = 2;
+
+    settings.Items.AddGroupItem(groupSettings =>
+    {
+        groupSettings.Caption = "Карточка реестра";
+        groupSettings.Paddings.PaddingLeft = 10;
+        groupSettings.ColumnCount = 3;
+
+        groupSettings.Items.Add(m => m.Status_Description_Rus, i =>
+        {
+            i.Caption = "Статус";
+            i.VerticalAlign = FormLayoutVerticalAlign.Top;
+            i.ColumnSpan = 1;
+            i.Width = 200;
+
+            i.NestedExtensionType = FormLayoutNestedExtensionItemType.DropDownEdit;
+            var dds = (DropDownEditSettings)i.NestedExtensionSettings;
+            dds.Name = "Status_Name";
+            dds.SetDropDownWindowTemplateContent(c =>
+            {
+                Html.DevExpress().ListBoxFor(m => m.Status_ID,
+                    listBoxSettings =>
+                    {
+                        listBoxSettings.ControlStyle.Border.BorderWidth = 0;
+                        listBoxSettings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        listBoxSettings.Name = "Status_ID";
+                        listBoxSettings.Properties.SelectionMode = ListEditSelectionMode.Single;
+
+                        if (Model.AvailableStatuses != null)
+                            foreach (var avai in Model.AvailableStatuses)
+                                listBoxSettings.Properties.Items.Add(avai.Value, avai.Key.ToString());
+
+                        listBoxSettings.Properties.EnableClientSideAPI = true;
+                        listBoxSettings.Properties.ClientSideEvents.SelectedIndexChanged = "updateRegisterStatus";
+                    }
+                    ).GetHtml();
+            });
+        });
+        groupSettings.Items.Add(m => m.Register_Code, i =>
+        {
+            i.Caption = "№";
+            i.VerticalAlign = FormLayoutVerticalAlign.Top;
+            var txbSettings = (TextBoxSettings)i.NestedExtensionSettings;
+            txbSettings.ReadOnly = true;
+        });
+        groupSettings.Items.Add(m => m.Register_Date, s =>
+        {
+            s.Caption = "от";
+            s.VerticalAlign = FormLayoutVerticalAlign.Top;
+            s.HelpText = "Дата регистрации в системе";
+            var d = (DateEditSettings)s.NestedExtensionSettings;
+            d.ReadOnly = true;
+        });
+    });
+    settings.Items.AddGroupItem(groupSettings =>
+    {
+        //groupSettings.RowSpan = 3;
+        groupSettings.ShowCaption = DefaultBoolean.False;
+        groupSettings.ColumnCount = 3;
+        groupSettings.GroupBoxDecoration = GroupBoxDecoration.None;
+        groupSettings.Items.Add(i =>
+        {
+            i.ShowCaption = DefaultBoolean.False;
+            i.NestedExtensionType = FormLayoutNestedExtensionItemType.Button;
+            var buttonSettings = (ButtonSettings)i.NestedExtensionSettings;
+            buttonSettings.Name = "update";
+            buttonSettings.Text = "Сохранить";
+            buttonSettings.ClientSideEvents.Click = "function(){RegisterGridView.UpdateEdit();}";
+            buttonSettings.Width = 116;
+        }
+            );
+        groupSettings.Items.Add(i =>
+        {
+            i.ShowCaption = DefaultBoolean.False;
+            i.NestedExtensionType = FormLayoutNestedExtensionItemType.Button;
+            var buttonSettings = (ButtonSettings)i.NestedExtensionSettings;
+            buttonSettings.Name = "showHistory";
+            buttonSettings.Text = "История";
+            buttonSettings.ClientSideEvents.Click = "function(){}";
+            buttonSettings.Width = 116;
+            buttonSettings.Enabled = false;
+        });
+        groupSettings.Items.Add(i =>
+        {
+            i.ShowCaption = DefaultBoolean.False;
+            i.NestedExtensionType = FormLayoutNestedExtensionItemType.Button;
+            var buttonSettings = (ButtonSettings)i.NestedExtensionSettings;
+            buttonSettings.Name = "cancel";
+            buttonSettings.Text = "Закрыть";
+            buttonSettings.ClientSideEvents.Click = "function(){RegisterGridView.CancelEdit();}";
+            buttonSettings.Width = 116;
+        }
+            );
+    });
+
+    settings.Items.AddGroupItem(groupSettings =>
+    {
+        groupSettings.Caption = "Основное";
+        groupSettings.Paddings.PaddingLeft = 10;
+        groupSettings.ColumnCount = 2;
+
+        groupSettings.Items.Add(m => m.Customer_Code,
+            i =>
+            {
+                i.Caption = "Заказчик";
+                var tbs = (TextBoxSettings)i.NestedExtensionSettings;
+                tbs.ReadOnly = true;
+            });
+        groupSettings.Items.Add(m => m.Complex,
+            i =>
+            {
+                i.Caption = "Комплекс";
+                i.Width = 400;
+                var tbs = (TextBoxSettings)i.NestedExtensionSettings;
+                tbs.Width = 430;
+                tbs.ReadOnly = true;
+            });
+        groupSettings.Items.Add(m => m.Contractor_Code,
+            i =>
+            {
+                i.Caption = "Подрядчик";
+                var txbSettings = (TextBoxSettings)i.NestedExtensionSettings;
+                txbSettings.ReadOnly = true;
+            });
+        groupSettings.Items.Add(m => m.Project,
+            i =>
+            {
+                i.Caption = "Проект";
+                var tbs = (TextBoxSettings)i.NestedExtensionSettings;
+                tbs.Width = 430;
+                tbs.ReadOnly = true;
+            });
+        groupSettings.Items.Add(m => m.SubContractor_Code,
+            i =>
+            {
+                i.Caption = "Субподрядчик";
+                var tbs = (TextBoxSettings)i.NestedExtensionSettings;
+                tbs.ReadOnly = true;
+            });
+
+        groupSettings.Items.Add(m => m.WorkPackage_Code,
+            i =>
+            {
+                i.Caption = "Пакет работ";
+                i.NestedExtensionType = FormLayoutNestedExtensionItemType.DropDownEdit;
+                var dds = (DropDownEditSettings)i.NestedExtensionSettings;
+                dds.Name = "WorkPackage_TextField";
+
+                dds.SetDropDownWindowTemplateContent(c =>
+                {
+                    Html.DevExpress().ListBoxFor(m => m.WorkPackage_ID,
+                        listBoxSettings =>
+                        {
+                            listBoxSettings.ControlStyle.Border.BorderWidth = 0;
+                            listBoxSettings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                            listBoxSettings.Name = "WorkPackage_ID";
+                            listBoxSettings.Properties.SelectionMode = ListEditSelectionMode.Single;
+                            listBoxSettings.Height = 400;
+
+                            if (Model.TitleObjects != null)
+                                foreach (var package in Model.WorkPackages)
+                                    listBoxSettings.Properties.Items.Add(package.WorkPackage_Code, package.WorkPackage_ID);
+
+                            listBoxSettings.Properties.EnableClientSideAPI = true;
+                            listBoxSettings.Properties.ClientSideEvents.SelectedIndexChanged = "updateWorkPackage";
+                        }
+                        ).GetHtml();
+                });
+            });
+
+        groupSettings.Items.Add(m=>m.LatestRevision.Markas, i=>
+        {
+            i.Caption = "Марка";
+            i.NestedExtensionType = FormLayoutNestedExtensionItemType.DropDownEdit;
+            var dds = (DropDownEditSettings)i.NestedExtensionSettings;
+            dds.Name = "Marka_TextField";
+
+            dds.SetDropDownWindowTemplateContent(c =>
+            {
+                Html.DevExpress().ListBox(listBoxSettings =>
+                {
+                    listBoxSettings.ReadOnly = true;
+                    listBoxSettings.Name = "Marka_ID";
+                    listBoxSettings.ControlStyle.Border.BorderWidth = 0;
+                    listBoxSettings.ControlStyle.BorderBottom.BorderWidth = 1;
+                    listBoxSettings.ControlStyle.BorderBottom.BorderColor = Color.FromArgb(0xDCDCDC);
+                    listBoxSettings.Height = Unit.Pixel(200);
+                    listBoxSettings.Width = Unit.Percentage(100);
+
+                    listBoxSettings.Properties.EnableSelectAll = true;
+                    listBoxSettings.Properties.FilteringSettings.ShowSearchUI = true;
+                    listBoxSettings.Properties.SelectionMode = ListEditSelectionMode.CheckColumn;
+
+                    List<Guid> markaList = null;
+                    if(Model.LatestRevision.Markas != null) markaList = Model.LatestRevision.Markas.ToList();
+
+                    foreach (var marka in Model.Markas)
+                    {
+                        var item = listBoxSettings.Properties.Items.Add(marka.Marka_Code, marka.Marka_ID);
+                        if (markaList != null && markaList.Contains(marka.Marka_ID)) item.Selected = true;
+                    }
+                    listBoxSettings.Properties.ClientSideEvents.SelectedIndexChanged = "updateMarka";
+                    listBoxSettings.Properties.ClientSideEvents.Init = "updateMarka";
+                }).Render();
+                ViewContext.Writer.Write("<div style=\"margin: 6px; overflow: hidden;\">");
+                Html.DevExpress().Button(buttonSettings => {
+                    buttonSettings.Name = "buttonCloseMarka";
+                    buttonSettings.Text = "Close";
+                    buttonSettings.Style.Add("float", "right");
+                    buttonSettings.ClientSideEvents.Click = "function(s, e){ Marka_TextField.HideDropDown(); }";
+                    buttonSettings.Height = 26;
+                }).Render();
+                ViewContext.Writer.Write("</div>");
+            });
+        });
+        groupSettings.Items.Add(m => m.LatestRevision.TitleObjects, i =>
+        {
+            i.Caption = "Титул";
+            i.NestedExtensionType = FormLayoutNestedExtensionItemType.DropDownEdit;
+            var dds = (DropDownEditSettings)i.NestedExtensionSettings;
+            dds.Name = "TitleObject_TextField";
+
+            dds.SetDropDownWindowTemplateContent(c =>
+            {
+                Html.DevExpress().ListBox(listBoxSettings =>
+                {
+                    listBoxSettings.ReadOnly = true;
+                    listBoxSettings.Name = "TitleObject_ID";
+                    listBoxSettings.ControlStyle.Border.BorderWidth = 0;
+                    listBoxSettings.ControlStyle.BorderBottom.BorderWidth = 1;
+                    listBoxSettings.ControlStyle.BorderBottom.BorderColor = Color.FromArgb(0xDCDCDC);
+                    listBoxSettings.Height = Unit.Pixel(200);
+                    listBoxSettings.Width = Unit.Percentage(100);
+
+                    listBoxSettings.Properties.EnableSelectAll = true;
+                    listBoxSettings.Properties.FilteringSettings.ShowSearchUI = true;
+                    listBoxSettings.Properties.SelectionMode = ListEditSelectionMode.CheckColumn;
+
+                    List<Guid> titleList = null;
+                    if (Model.LatestRevision.TitleObjects != null) titleList = Model.LatestRevision.TitleObjects.ToList();
+
+                    foreach (var title in Model.TitleObjects)
+                    {
+                        var item = listBoxSettings.Properties.Items.Add(title.TitleObject_Code, title.TitleObject_ID);
+                        if (titleList != null && titleList.Contains(title.TitleObject_ID)) item.Selected = true;
+                    }
+                    listBoxSettings.Properties.ClientSideEvents.SelectedIndexChanged = "updateTitleObject";
+                    listBoxSettings.Properties.ClientSideEvents.Init = "updateTitleObject";
+                }).Render();
+                ViewContext.Writer.Write("<div style=\"margin: 6px; overflow: hidden;\">");
+                Html.DevExpress().Button(buttonSettings =>
+                {
+                    buttonSettings.Name = "buttonCloseTitleObject";
+                    buttonSettings.Text = "Close";
+                    buttonSettings.Style.Add("float", "right");
+                    buttonSettings.ClientSideEvents.Click = "function(s, e){ TitleObject_TextField.HideDropDown(); }";
+                    buttonSettings.Height = 26;
+                }).Render();
+                ViewContext.Writer.Write("</div>");
+            });
+        });
+    });
+    settings.Items.AddGroupItem(groupSettings =>
+    {
+        groupSettings.GroupBoxDecoration = GroupBoxDecoration.None;
+        groupSettings.ColCount = 2;
+        groupSettings.ShowCaption = DefaultBoolean.False;
+        groupSettings.Items.Add(c =>
+        {
+            c.ShowCaption = DefaultBoolean.False;
+            c.VerticalAlign = FormLayoutVerticalAlign.Top;
+            c.SetNestedContent(() =>
+            {
+                Html.DevExpress().Button(s =>
+                {
+                    s.Name = "OpenCheckListButton";
+                    s.Text = "Замечания";
+                    s.UseSubmitBehavior = true;
+                    s.Enabled = Model.Register_ID != null;
+                    s.ClientSideEvents.Click = "function(){PopupOpenCheckList.Show();}";
+                }).GetHtml();
+            });
+        });
+
+        groupSettings.Items.Add(c =>
+        {
+            c.ShowCaption = DefaultBoolean.False;
+            c.VerticalAlign = FormLayoutVerticalAlign.Top;
+            c.SetNestedContent(() =>
+            {
+                Html.DevExpress().Button(s =>
+                {
+                    s.Name = "Send to check";
+                    s.Text = "Отправить на проверку";
+                    s.UseSubmitBehavior = true;
+                    s.Enabled = false;
+                    s.ClientSideEvents.Click = "function(){console.log('send to check');}";
+                }).GetHtml();
+            });
+        });
+    });
+    //CHECKLIST BLOCK
+    Html.DevExpress().PopupControl(s =>
+    {
+        s.ShowCloseButton = false;
+        s.Name = "PopupOpenCheckList";
+        s.HeaderText = "Список замечаний по реестру";
+        s.ShowCloseButton = true;
+        s.AddPopupSettings();
+        s.SetContent(() =>
+        {
+            Html.RenderAction("GetCheckLists", "CheckList", Model);
+        });
+    }).GetHtml();
+
+    //DOCUMENT TABLE BLOCK
+    var pagerContainer = settings.Items.Add(m => Model.Revisions);
+    pagerContainer.ShowCaption = DefaultBoolean.False;
+    pagerContainer.ColumnSpan = 2;
+
+    List<string> tabPages = new List<string>();
+
+    foreach (var revision in Model.Revisions)
+        tabPages.Add(Html.Partial("Revision", revision).ToHtmlString());
+
+    pagerContainer.SetNestedContent(() =>
+        Html.DevExpress().PageControl(pageSettings =>
+        {
+            pageSettings.Name = "PageControl";
+            pageSettings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+            for (var i = 0; i < tabPages.Count; i++)
+            {
+                pageSettings.TabPages.Add("Ревизия "+(i+1)).SetContent(tabPages[i]);
+            }
+        }).Render());
+
+    //PERSONS BLOCK
+    settings.Items.AddGroupItem(groupSettings =>
+    {
+        groupSettings.ColSpan = 2;
+        groupSettings.ColCount = 2;
+        groupSettings.GroupBoxDecoration = GroupBoxDecoration.None;
+
+        groupSettings.Items.Add(c =>
+        {
+            c.Caption = "Проверка";
+            c.CaptionSettings.Location = LayoutItemCaptionLocation.Top;
+            c.VerticalAlign = FormLayoutVerticalAlign.Top;
+            c.SetNestedContent(()=>Html.RenderPartial("CheckTable",Model.ReviewWrapper));
+        });
+        groupSettings.Items.Add(c =>
+        {
+            c.Caption = "Утверждение";
+            c.CaptionSettings.Location = LayoutItemCaptionLocation.Top;
+            c.VerticalAlign = FormLayoutVerticalAlign.Top;
+            c.SetNestedContent(() => Html.RenderPartial("CheckTable", Model.ApprovementWrapper));
+        });
+
+    });
+
+}).GetHtml()

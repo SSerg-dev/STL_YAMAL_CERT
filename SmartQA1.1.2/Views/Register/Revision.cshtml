@@ -1,0 +1,72 @@
+﻿@using SmartQA1._1._2.Views.CommonSettings
+@model SmartQA1._1._2.Models.Register.Revision
+
+@{
+    //buttons:
+
+    Html.DevExpress().Label(settings =>
+    {
+        settings.Name = "Label" + Model.Name;
+        settings.Text = "Документы текущей ревизии     ";
+    }).GetHtml();
+
+    Html.DevExpress().Button(settings =>
+    {
+        settings.Name = "ChooseFromLibrary" + Model.Name;
+        settings.Text = "Добавить из библиотеки";
+        settings.UseSubmitBehavior = false;
+        settings.Enabled = Model.IsEditEnabled;
+        string r = "PopupDocumentLibrary" + Model.Current_Iteration;
+        settings.ClientSideEvents.Click = "function(s, e) { "+r+".Show(); }";
+    }).GetHtml();
+
+    Html.DevExpress().Button(settings =>
+    {
+        settings.Name = "CreateNew" + Model.Name;
+        settings.Text = "Создать новый";
+        settings.UseSubmitBehavior = false;
+        settings.Enabled = false;
+        string url = Url.Action("EditForm", "Document");
+        string r = "PopupCreateNewDocument" + Model.Current_Iteration;
+        //settings.ClientSideEvents.Click = 
+        //    "function(s,e) { $.ajax({type: 'POST', url:" + url + "}}";
+        settings.ClientSideEvents.Click = "callAjax";
+
+    }).GetHtml();
+
+    Html.DevExpress().PopupControl(settings =>
+    {
+        settings.Name = "PopupDocumentLibrary" + Model.Current_Iteration;
+        settings.AllowResize = false;
+        settings.HeaderText = "Добавить новые документы из библиотеки";
+        settings.ShowHeader = true;
+        settings.ShowOnPageLoad = false;
+        settings.AllowDragging = true;
+        settings.CloseAction = CloseAction.CloseButton;
+        settings.CloseOnEscape = false;
+        settings.Modal = false;
+        settings.Enabled = Model.IsEditEnabled;
+        settings.PopupHorizontalAlign = PopupHorizontalAlign.WindowCenter;
+        settings.PopupVerticalAlign = PopupVerticalAlign.WindowCenter;
+
+        settings.SetContent(() =>
+        {
+            ViewContext.Writer.Write(Html.Action("DocumentLibrary", new {id = Model.Current_Iteration}));
+
+            //Html.RenderAction("DocumentLibrary", new {id = Model.id});
+        });
+    }).GetHtml();
+
+    if (Model.IsLatest)
+    {
+        Html.DevExpress().PopupControl(settings =>
+        {
+            settings.Name = "PopupCreateNewDocument";
+            settings.HeaderText = "Создать новый документ";
+            settings.AddPopupSettings();
+            settings.SetContent(() =>{});
+        }).GetHtml();
+    }
+}
+<br />&nbsp;
+@Html.Partial("RevisionGridView", Model)

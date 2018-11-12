@@ -1,0 +1,102 @@
+﻿@using System.Web.UI.WebControls
+@using SmartQA1._1._2.DB.PermissionDb
+@using SmartQA1._1._2.Views.CommonSettings
+
+@model SmartQA1._1._2.DB.PermissionDb.Employee
+
+@Html.DevExpress().CallbackPanel(
+    settings => {
+        settings.Name = "PersonDetailsCbp";
+        settings.CallbackRouteValues = new { Controller = "Permission", Action = "EmployeeDetails" };
+        settings.Width = Unit.Percentage(100);
+
+        settings.SetContent(() =>
+        {
+            if (Model == null) return;
+
+            Html.DevExpress().FormLayout(flSettings =>
+            {
+                flSettings.Name = "PersonDetailsForm";
+
+                var groupItem = flSettings.Items.AddGroupItem(groupSettings =>
+                {
+                    groupSettings.ColCount = 1;
+                    groupSettings.ColumnSpan = 1;
+                    groupSettings.ShowCaption = DefaultBoolean.False;
+                    groupSettings.GroupBoxDecoration = GroupBoxDecoration.None;
+                });
+
+                groupItem.Width = Unit.Percentage(50);
+
+                groupItem.Items.Add(c =>
+                {
+                    c.ColSpan = 1;
+                    c.ShowCaption = DefaultBoolean.False;
+                    c.SetNestedContent($"<h2>{Html.Encode(String.Join(" ", Model.Person.LastName, Model.Person.FirstName, Model.Person.SecondName))}</h2>");
+                    c.Name = "PersonDetailsForm_FullName";
+                });
+
+                groupItem.Items.Add(c =>
+                {
+                    c.SetNestedContent(Html.Encode(Model.Person.BirthDate?.ToString("d")));
+                    c.Name = "PersonDetailsForm_BirthDate";
+                    c.Caption = "Дата рождения";
+                });
+
+                groupItem.Items.Add(c =>
+                {
+                    c.SetNestedContent(Html.Encode(Model.Contragent.Contragent_Code));
+                    c.Name = "PersonDetailsForm_Contragent";
+                    c.Caption = "Компания";
+                });
+
+                groupItem.Items.Add(c =>
+                {
+                    c.SetNestedContent(Html.Encode(Model.Position.Position_Description));
+                    c.Name = "PersonDetailsForm_Position";
+                    c.Caption = "Должность";
+                });
+                
+                flSettings.Items.AddGroupItem(groupSettings =>
+                {
+                    groupSettings.ColumnSpan = 1;
+                    groupSettings.Width = Unit.Percentage(100);
+                    groupSettings.ShowCaption = DefaultBoolean.False;
+                    groupSettings.GroupBoxDecoration = GroupBoxDecoration.None;
+                    groupSettings.Items.Add(i =>
+                    {
+                        i.ShowCaption = DefaultBoolean.False;
+                        i.SetNestedContent(() =>
+                        {
+                            @Html.RenderAction("EmployeeDetails_DocumentTree_Partial", "Permission", new { Employee_ID = Model.Employee_ID });
+                        });
+                    });
+                });
+
+                //                
+                //                @Html.DevExpress().PopupControl(s =>
+                //                {
+                //                    s.AddPopupSettings();
+                //                    s.Name = "PopupOpenPersonEdit";
+                //                    s.HeaderText = string.Empty;
+                //                    s.Styles.Header.BorderTop.BorderWidth = 0;
+                //                    s.Styles.Header.Paddings.PaddingTop = 0;
+                //                    s.Styles.Header.BorderBottom.BorderWidth = 0;
+                //                    s.Styles.Header.Paddings.PaddingBottom = 0;
+                //                    s.ShowCloseButton = true;
+                //                    s.Modal = true;
+                //                    s.SetContent(() =>
+                //                    {
+                //                        Html.RenderAction("EmployeeEdit", "Permission", new { formName = settings.Name });
+                //                    });
+                //                }).Render();
+            }).Render();
+
+        });
+
+        settings.ClientSideEvents.BeginCallback = "PersonDetailsCbp_OnBeginCallback";
+        settings.ClientSideEvents.EndCallback = "PersonDetailsCbp_OnEndCallback";
+
+    }).GetHtml()
+
+@Html.Partial("DocumentEdit_Partial", new ViewDataDictionary((EAVDocument)null))

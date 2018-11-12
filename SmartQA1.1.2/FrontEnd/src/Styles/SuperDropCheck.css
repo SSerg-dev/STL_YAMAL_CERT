@@ -1,0 +1,127 @@
+.sdc_container{
+    position:relative;
+    border:1px solid black;
+    display:inline-block;
+    margin:5px;
+    margin-left:0px;
+}
+.sdc_nodesBlock{
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0.2;
+    background-color:grey;
+    top:0;
+    left:0;
+    z-index:98;
+}
+.sdc_title{
+    display:inline-block;
+    padding: 2px;
+    padding-left: 8px;
+    padding-right:30px;
+    font-size:14px;
+    padding-bottom:3px;
+    outline:none;
+    user-select: none;
+}
+
+.sdc_button{
+    position:absolute;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    border: solid rgb(86, 87, 93);
+    border-width: 0 2px 2px 0;
+    background-color:transparent;
+    padding: 3px;
+    outline: none;
+    display:inline-block;
+    vertical-align: top;
+    top:calc(50% - 5px);
+    right:10px;
+    cursor: pointer;
+}
+.sdc_droplist{
+    position:absolute;
+    color:green;
+    padding:2px;
+    background-color:white;
+    border:1px solid black;
+    z-index:1;
+}
+.sdc_nodes_container{
+    position:absolute;
+    border:1px solid rgba(0, 0, 0, 0.479);
+    background-color:white;
+    z-index:99;
+    display: block;
+    top:calc(100% + 0px);
+    left:-1px;
+    width:220px;
+    padding-bottom:8px;
+}
+.sdc_checkOption{
+    display:inline-block;
+    width:188px;
+    position:relative;
+    top:1px;
+    margin-bottom:10px;
+    font-size:14px;
+    vertical-align: top;
+    top:5px;
+}
+.sdc_list_buttonStyle{
+    background-color:rgb(240, 240, 240);
+    color:black;
+    padding:3px;
+    padding-left:14px;
+    padding-bottom:5px;
+    font-size:13px;
+    border:none;
+    outline:none;
+    font-family: 'Segoe UI';
+    display:block;
+    width:110px;
+    text-align:left;
+    position:relative;
+    display:inline-block;
+    border-bottom:1px solid rgba(0, 0, 0, 0.479);
+    margin-bottom:6px;
+}
+.sdc_list_buttonStyle:hover{
+    background-color:rgb(2, 132, 197);
+    color:white;
+    /*
+        rgb(5, 64, 190)
+        rgb(4, 109, 4)
+    */
+}
+
+
+.sdc_checkBox{
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0px;
+    border:1px solid rgb(85, 85, 85);
+    height:14px;
+    width:14px;
+    outline:none;
+    position:relative;
+    margin-left:12px;
+    margin-right:6px;
+    margin-top:8px;
+
+}
+
+.sdc_checkBox:checked{
+}
+.sdc_checkBox:checked:after{
+    content:'\2716';
+    content:'\2612';
+    content:'\2714';
+    font-weight: 600;
+    font-size:12px;
+    position:absolute;
+    top:-3px;
+    left:1px;
+}

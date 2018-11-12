@@ -1,0 +1,37 @@
+﻿@using SmartQA1._1._2.Views.CommonSettings
+@model SmartQA1._1._2.Models.Permission.Personal
+
+<script>
+    function addPerson() {
+        var fName = addFirstName.GetText();
+        var sName = addSecondName.GetText();
+        var lName = addLastName.GetText();
+        var bDate = addBirthDate.GetText();
+        var contr = Contragent_ID.GetValue();
+        var pos = Position_ID.GetValue();
+
+        $.ajax({
+            url: '@Url.Action("PersonSave")',
+            type: 'POST',
+            data: 'Person_ID=@Model.Person_ID&Person_Code=@Model.Person_Code&Employee_ID=@Model.Employee_ID&Employee_Code=@Model.Employee_Code'
+                + '&FirstName=' + fName + '&SecondName=' + sName + '&LastName=' + lName
+                + '&ShortName=@Model.ShortName&BirthDate=' + bDate
+                + '&AppUser_ID=@Model.AppUser_ID&Contragent_ID=' + contr + '&Position_ID=' + pos,
+            success: function(response) {
+            }
+        });
+    }
+</script>
+@Html.DevExpress().PopupControl(s =>
+{
+s.ShowCloseButton = false;
+s.Name = "PopupOpenPersonEdit";
+s.HeaderText = "Основное";
+s.ShowCloseButton = true;
+s.AddPopupSettings();
+s.Modal = true;
+s.SetContent(() =>
+{
+    Html.RenderPartial("~/Views/Shared/PersonFormEdit.cshtml", Model);
+});
+}).GetHtml();

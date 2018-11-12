@@ -1,0 +1,20 @@
+﻿@using SmartQA1._1._2.DB.WebDb
+@model SmartQA1._1._2.Models.Document.Document
+
+@{
+    var g1 = Html.DevExpress().ComboBox(comboboxSettings =>
+    {
+        comboboxSettings.Name = "GOST_ID";
+        comboboxSettings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        comboboxSettings.CallbackRouteValues = new {Controller = "Document", Action = "GostPartial"};
+        comboboxSettings.Properties.CallbackPageSize = 15;
+        comboboxSettings.Properties.ValueField = "GOST_ID";
+        comboboxSettings.Properties.TextField = "GOST_Code";
+        comboboxSettings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        comboboxSettings.Properties.Columns.Add("GOST_Code", "Gost");
+        comboboxSettings.Properties.ValueType = typeof(Guid?);
+    })
+        .BindList(GOST.GetGostRange, GOST.GetGostById);
+    var g2 = g1.Bind(Model?.GOST_ID);
+    g2.GetHtml();
+}

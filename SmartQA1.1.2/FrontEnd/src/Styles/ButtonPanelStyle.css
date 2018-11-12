@@ -1,0 +1,44 @@
+.buttonPanelLineStyling{
+    width:"100%";
+    background-color:rgb(235, 235, 235);
+    margin-bottom:12px;
+}
+.buttonPanelPanetStyling{
+    width:1024px;
+    margin:auto;
+}
+.buttonPanelHomeStyling{
+    border:none;
+    color:white;
+    background-color: rgb(80, 80, 80);
+    padding: 4px;
+    padding-right: 16px;
+    padding-left: 16px;
+    padding-bottom:7px;
+    margin: auto;
+    outline: none;
+    display:inline-block;
+    font-size: 13px;
+    font-family: 'Segoe UI';
+    margin-right:2px;
+}
+.buttonPanelHomeStyling:hover{
+    background-color:rgb(4, 109, 4);
+}
+.buttonPanelHomeSelector{
+    width: 0;
+	height: 0;
+	border-top: 12px solid rgb(36, 143, 36);
+	border-right: 12px solid transparent;
+    display:inline-block;
+    position:relative;
+    right:6px;
+    top:2px;
+}
+/*
+    border-top: 10px solid rgb(10, 143, 10);
+	border-right: 10px solid transparent;
+    display:inline-block;
+    position:relative;
+    right:6px;
+*/

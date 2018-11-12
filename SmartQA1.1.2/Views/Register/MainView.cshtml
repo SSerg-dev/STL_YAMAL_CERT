@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Библиотека реестров";
+    ViewBag.GridName = "RegisterGridView";
+}
+
+<script type="text/javascript">
+    var textSeparator = ",";
+    var commandName = null;
+
+    function updateRegisterTitle() {
+        var selectedTitle = TitleObject_ID.GetSelectedItems()[0];
+        TitleObject_TextField.SetText(selectedTitle.text);
+        TitleObject_TextField.HideDropDown();
+    }
+    function updateWorkPackage() {
+        var selectedPackage = WorkPackage_ID.GetSelectedItems()[0];
+        WorkPackage_TextField.SetText(selectedPackage.text);
+        WorkPackage_TextField.HideDropDown();
+    }
+    function updateRegisterStatus() {
+        var selectedStatus = Status_ID.GetSelectedItems()[0];
+        Status_Name.SetText(selectedStatus.text);
+        Status_Name.HideDropDown();
+    }
+    function updateMarka() {
+        var selected = Marka_ID.GetSelectedItems();
+        Marka_TextField.SetText(getSelectedItemsText(selected));
+    }
+    function updateTitleObject() {
+        var selected = TitleObject_ID.GetSelectedItems();
+        TitleObject_TextField.SetText(getSelectedItemsText(selected));
+    }
+    function getSelectedItemsText(items) {
+        var texts = [];
+        for (var i = 0; i < items.length; i++)
+            texts.push(items[i].text);
+        return texts.join(textSeparator);
+    }
+    function updateCheckItemStatus() {
+        var selected = CheckListStatus_ID.GetSelectedItems()[0];
+        CheckItem_Status.SetText(selected.text);
+        CheckItem_Status.HideDropDown();
+    }
+    function updateCheckItemDocument() {
+        var selected = CheckListDocument_ID.GetSelectedItems()[0];
+        CheckItem_Document.SetText(selected.text);
+        CheckItem_Document.HideDropDown();
+    }
+    function callAjax() {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("EditForm", "Document")',
+            success: function(response) {
+                PopupCreateNewDocument.SetContentHtml(response);
+                PopupCreateNewDocument.Show();
+            }
+        });
+    }
+    
+</script>
+
+@Html.Action("GridViewPartial")

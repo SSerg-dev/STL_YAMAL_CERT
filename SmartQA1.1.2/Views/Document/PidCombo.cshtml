@@ -1,0 +1,21 @@
+﻿@using SmartQA1._1._2.DB.WebDb
+@model SmartQA1._1._2.Models.Document.Document
+
+@{
+    Html.DevExpress().ComboBox(comboboxSettings =>
+    {
+        comboboxSettings.Name = "PID_ID";
+        comboboxSettings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        comboboxSettings.CallbackRouteValues = new {Controller = "Document", Action = "PidPartial"};
+        comboboxSettings.Properties.CallbackPageSize = 15;
+        comboboxSettings.Properties.ValueField = "PID_ID";
+        comboboxSettings.Properties.TextField = "PID_Code";
+        comboboxSettings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        comboboxSettings.Properties.Columns.Add("PID_Code", "PID");
+        comboboxSettings.Properties.ValueType = typeof(Guid?);
+
+    })
+        .BindList(PID.GetPidRange, PID.GetPidById)
+        .Bind(Model?.PID_ID)
+        .GetHtml();
+}

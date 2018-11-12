@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+		Listening to ajax call;
+    </div>
+	<button onclick="getAjax()">Click here to get ajax test strings</button>
+	<div id="input"></div>
+</body>
+	<script>
+		function getAjax() {
+			console.log("getting Ajax...");
+			input = document.getElementById("input");
+
+			var xmlHttp = new XMLHttpRequest();
+			xmlHttp.onreadystatechange = function () {
+				console.log("the response came from Json controller");
+				//input.innerHTML = JSON.parse(xmlHttp.responseText);
+				input.innerHTML = xmlHttp.responseText;
+			}
+
+			output = "testId=" + "323";
+			xmlHttp.open("POST", 'ajaxtestRequest' ,false);
+			xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xmlHttp.send(output);
+		}
+	</script>
+</html>

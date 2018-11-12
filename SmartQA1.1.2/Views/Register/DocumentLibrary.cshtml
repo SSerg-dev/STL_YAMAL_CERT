@@ -1,0 +1,53 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "DocumentLibraryGrid" + ViewData["id"];
+        settings.CallbackRouteValues = new { Controller = "Register", Action = "DocumentLibrary", id = ViewData["id"] };
+
+        //SettingsEditing.AddNewRowRouteValues = new { Controller = "Register", Action = "DocumentLibraryAddNew" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Register", Action = "DocumentLibraryAddDocument" , id = ViewData["id"] };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = false;
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.SettingsCommandButton.DeleteButton.Text = "Добавить";
+
+        settings.KeyFieldName = "Document_ID";
+
+        string r = "RevisionGridView" + ViewData["id"];
+        settings.ClientSideEvents.EndCallback = "function(s,e){ " + r + ".Refresh()}";
+
+        settings.SettingsPager.Visible = true;
+        settings.SettingsPager.PageSize = 5;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add("Status_Name", "Статус");
+        settings.Columns.Add("Document_Code", "№ карточки");
+        settings.Columns.Add("Document_Number", "Номер документа");
+        settings.Columns.Add("Document_Name", "Наименование документа");
+        settings.Columns.Add("Document_Date", "Дата документа");
+        settings.Columns.Add("FilesQTY", "Кол-во файлов");
+        settings.Columns.Add("TotalSheets", "Кол-во листов");
+
+        settings.Settings.ShowFooter = true;
+        settings.SetFooterRowTemplateContent(c =>
+        {
+            Html.ViewContext.Writer.Write(ViewData["EditError"]);
+        });
+    });
+    if (ViewData["EditError"] != null){
+        
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FileStorageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'STL_FileStorage.dbo.FileShareTable' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FileShareTable">
+          <Key>
+            <PropertyRef Name="Stream_Id" />
+            <PropertyRef Name="FileName" />
+            <PropertyRef Name="IsDirectory" />
+            <PropertyRef Name="IsOffline" />
+            <PropertyRef Name="IsHidden" />
+            <PropertyRef Name="IsReadonly" />
+            <PropertyRef Name="IsArchive" />
+            <PropertyRef Name="IsSystem" />
+            <PropertyRef Name="IsTemporary" />
+          </Key>
+          <Property Name="Stream_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Path_ID" Type="varbinary" MaxLength="16" />
+          <Property Name="PathDefault" Type="nvarchar(max)" />
+          <Property Name="PathNonDefault" Type="nvarchar(max)" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FileType" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreationTime" Type="datetime2" Precision="7" />
+          <Property Name="LastWriteTime" Type="datetime2" Precision="7" />
+          <Property Name="LastAccessTime" Type="datetime2" Precision="7" />
+          <Property Name="IsDirectory" Type="bit" Nullable="false" />
+          <Property Name="IsOffline" Type="bit" Nullable="false" />
+          <Property Name="IsHidden" Type="bit" Nullable="false" />
+          <Property Name="IsReadonly" Type="bit" Nullable="false" />
+          <Property Name="IsArchive" Type="bit" Nullable="false" />
+          <Property Name="IsSystem" Type="bit" Nullable="false" />
+          <Property Name="IsTemporary" Type="bit" Nullable="false" />
+        </EntityType>
+        <Function Name="Get_RootPath" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FileTable" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SearchInFiles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SearchList" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SearchString" Type="nvarchar" Mode="In" />
+          <Parameter Name="FoundList" Type="nvarchar(max)" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="FileStorageModelStoreContainer">
+          <EntitySet Name="FileShareTable" EntityType="Self.FileShareTable" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FileShareTable].[Stream_Id] AS [Stream_Id], 
+    [FileShareTable].[Path_ID] AS [Path_ID], 
+    [FileShareTable].[PathDefault] AS [PathDefault], 
+    [FileShareTable].[PathNonDefault] AS [PathNonDefault], 
+    [FileShareTable].[FileName] AS [FileName], 
+    [FileShareTable].[FileType] AS [FileType], 
+    [FileShareTable].[CreationTime] AS [CreationTime], 
+    [FileShareTable].[LastWriteTime] AS [LastWriteTime], 
+    [FileShareTable].[LastAccessTime] AS [LastAccessTime], 
+    [FileShareTable].[IsDirectory] AS [IsDirectory], 
+    [FileShareTable].[IsOffline] AS [IsOffline], 
+    [FileShareTable].[IsHidden] AS [IsHidden], 
+    [FileShareTable].[IsReadonly] AS [IsReadonly], 
+    [FileShareTable].[IsArchive] AS [IsArchive], 
+    [FileShareTable].[IsSystem] AS [IsSystem], 
+    [FileShareTable].[IsTemporary] AS [IsTemporary]
+    FROM [dbo].[FileShareTable] AS [FileShareTable]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FileStorageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FileStorageEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FileShareTables" EntityType="FileStorageModel.FileShareTable" />
+          <FunctionImport Name="Get_RootPath" ReturnType="Collection(String)" >
+            <Parameter Name="FileTable" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SearchInFiles" ReturnType="Collection(FileStorageModel.SearchInFiles_Result)">
+            <Parameter Name="SearchList" Mode="In" Type="String" />
+            <Parameter Name="SearchString" Mode="In" Type="String" />
+            <Parameter Name="FoundList" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="FileShareTable">
+          <Key>
+            <PropertyRef Name="Stream_Id" />
+            <PropertyRef Name="FileName" />
+            <PropertyRef Name="IsDirectory" />
+            <PropertyRef Name="IsOffline" />
+            <PropertyRef Name="IsHidden" />
+            <PropertyRef Name="IsReadonly" />
+            <PropertyRef Name="IsArchive" />
+            <PropertyRef Name="IsSystem" />
+            <PropertyRef Name="IsTemporary" />
+          </Key>
+          <Property Name="Stream_Id" Type="Guid" Nullable="false" />
+          <Property Name="Path_ID" Type="Binary" MaxLength="16" FixedLength="false" />
+          <Property Name="PathDefault" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PathNonDefault" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FileType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreationTime" Type="DateTime" Precision="7" />
+          <Property Name="LastWriteTime" Type="DateTime" Precision="7" />
+          <Property Name="LastAccessTime" Type="DateTime" Precision="7" />
+          <Property Name="IsDirectory" Type="Boolean" Nullable="false" />
+          <Property Name="IsOffline" Type="Boolean" Nullable="false" />
+          <Property Name="IsHidden" Type="Boolean" Nullable="false" />
+          <Property Name="IsReadonly" Type="Boolean" Nullable="false" />
+          <Property Name="IsArchive" Type="Boolean" Nullable="false" />
+          <Property Name="IsSystem" Type="Boolean" Nullable="false" />
+          <Property Name="IsTemporary" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="SearchInFiles_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FileStorageModelStoreContainer" CdmEntityContainer="FileStorageEntities">
+          <EntitySetMapping Name="FileShareTables">
+            <EntityTypeMapping TypeName="FileStorageModel.FileShareTable">
+              <MappingFragment StoreEntitySet="FileShareTable">
+                <ScalarProperty Name="IsTemporary" ColumnName="IsTemporary" />
+                <ScalarProperty Name="IsSystem" ColumnName="IsSystem" />
+                <ScalarProperty Name="IsArchive" ColumnName="IsArchive" />
+                <ScalarProperty Name="IsReadonly" ColumnName="IsReadonly" />
+                <ScalarProperty Name="IsHidden" ColumnName="IsHidden" />
+                <ScalarProperty Name="IsOffline" ColumnName="IsOffline" />
+                <ScalarProperty Name="IsDirectory" ColumnName="IsDirectory" />
+                <ScalarProperty Name="LastAccessTime" ColumnName="LastAccessTime" />
+                <ScalarProperty Name="LastWriteTime" ColumnName="LastWriteTime" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="PathNonDefault" ColumnName="PathNonDefault" />
+                <ScalarProperty Name="PathDefault" ColumnName="PathDefault" />
+                <ScalarProperty Name="Path_ID" ColumnName="Path_ID" />
+                <ScalarProperty Name="Stream_Id" ColumnName="Stream_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Get_RootPath" FunctionName="FileStorageModel.Store.Get_RootPath" />
+          <FunctionImportMapping FunctionImportName="SearchInFiles" FunctionName="FileStorageModel.Store.SearchInFiles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FileStorageModel.SearchInFiles_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

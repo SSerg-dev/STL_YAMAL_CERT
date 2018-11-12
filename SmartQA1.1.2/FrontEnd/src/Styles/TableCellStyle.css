@@ -1,0 +1,12 @@
+.tableCell{
+    margin:none;
+    cursor:cell;
+    width:100%;
+}
+.tableCell:focus{
+    -webkit-box-shadow:inset 0px 0px 0px 1px rgb(0, 0, 0);
+    -moz-box-shadow:inset 0px 0px 0px 1px rgb(0, 0, 0);
+    box-shadow:inset 0px 0px 0px 1px rgb(0, 0, 0)
+    /*outline: 0;*/
+    
+}

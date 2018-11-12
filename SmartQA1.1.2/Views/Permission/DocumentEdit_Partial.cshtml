@@ -1,0 +1,77 @@
+﻿@using System.Web.UI.WebControls
+@using SmartQA1._1._2.Controllers
+@using SmartQA1._1._2.DB.PermissionDb
+@using SmartQA1._1._2.DB.WebDb
+@using SmartQA1._1._2.Models.Permission.ViewModels
+
+@model SmartQA1._1._2.DB.PermissionDb.EAVDocument
+
+@Html.DevExpress().PopupControl(settings =>
+{
+
+    settings.Name = "DocumentEditPopup";
+    settings.Modal = true;
+    settings.ShowHeader = false;
+    settings.CallbackRouteValues = new { Controller = "Permission", Action = "DocumentEdit" };
+    settings.LoadContentViaCallback = LoadContentViaCallback.OnFirstShow;
+    settings.PopupVerticalAlign = PopupVerticalAlign.Middle;
+    settings.PopupHorizontalAlign = PopupHorizontalAlign.WindowCenter;
+    settings.PopupAnimationType = AnimationType.Fade;
+    settings.AutoUpdatePosition = true;
+    settings.SettingsAdaptivity.Mode = PopupControlAdaptivityMode.Always;
+    settings.SettingsAdaptivity.VerticalAlign = PopupAdaptiveVerticalAlign.WindowCenter;
+    settings.SettingsAdaptivity.MaxWidth = Unit.Percentage(95);
+    settings.SettingsAdaptivity.MaxHeight = Unit.Percentage(95);
+    settings.ScrollBars = ScrollBars.Auto;
+
+    settings.SetContent(() =>
+    {
+        if (Model == null) return;
+
+        var editorHelper = (EAVDocumentType.DocumentTypeEditorHelper)ViewData["DocumentTypeEditor"];
+        using (Ajax.BeginForm(editorHelper.EditorAction,
+            new {initialOpen = false},
+            new AjaxOptions
+            {
+                UpdateTargetId = "DocumentEditFormContent",
+                OnComplete = "DocumentEditForm_AjaxOnComplete",
+            }))
+        {
+            ViewContext.Writer.WriteLine("<div id=\"DocumentEditFormContent\">");
+
+            var formViewModel = (dynamic) ViewData["DocumentFormViewModel"];
+            formViewModel.Employee_ID = (Guid?) ViewData["Employee_ID"];
+            formViewModel.DocumentTemplate_ID = (Guid) ViewData["DocumentTemplate_ID"];
+
+            Html.RenderAction(editorHelper.EditorAction, routeValues: new
+            {
+                model = formViewModel,
+                initialOpen = true,
+            });
+
+            ViewContext.Writer.WriteLine("</div>");
+
+            ViewContext.Writer.Write("<div style=\"display: table; margin: 0px 12px 12px auto;\">");
+
+            Html.DevExpress().Button(s =>
+            {
+                s.Name = "Cancel";
+                s.Text = "Cancel";
+                s.Style.Add("margin-right", "1em");
+                s.ClientSideEvents.Click = "DocumentEditPopup_OnCancelClicked";
+            }).Render();
+
+            Html.DevExpress().Button(s =>
+            {
+                s.Name = "Submit";
+                s.Text = "Submit";
+                s.UseSubmitBehavior = true;
+            }).Render();
+
+            ViewContext.Writer.Write("</div>");
+        }
+    });
+
+    settings.ClientSideEvents.BeginCallback = "DocumentEditPopup_OnBeginCallback";
+    settings.ClientSideEvents.EndCallback= "DocumentEditPopup_OnEndCallback";
+}).GetHtml()

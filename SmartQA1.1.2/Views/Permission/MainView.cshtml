@@ -1,0 +1,31 @@
+﻿@using System.Web.Optimization
+@using System.Web.UI.WebControls
+
+@{
+    ViewBag.Title = "Разрешительная документация";
+}
+
+@section scripts {
+    @Scripts.Render("~/Scripts/Permission.js")
+    @Scripts.Render("~/Scripts/Permission_DocumentEdit_Naks.js")
+
+}
+
+@Html.DevExpress().PageControl(settings => {
+    settings.Name = "PermissionPages";
+    settings.Width = Unit.Percentage(100);
+        settings.TabPages.Add("Персонал").SetContent(() => Html.RenderPartial("Personel") );
+
+        settings.TabPages.Add("Организация").SetContent(() => {
+        ViewContext.Writer.Write("Содержимое  1");
+    });
+        settings.TabPages.Add("Оборудование").SetContent(() => {
+        ViewContext.Writer.Write("Содержимое  2");
+    });
+        settings.TabPages.Add("Лаборатория").SetContent(() => {
+        ViewContext.Writer.Write("Содержимое  3");
+    });
+        settings.TabPages.Add("Документ").SetContent(() => {
+        ViewContext.Writer.Write("Содержимое  4");
+    });
+    }).GetHtml()

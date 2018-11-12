@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="32ef9715b97e4196b1e34676321363cc" Name="Diagram1" ZoomLevel="84">
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.permDbMarka" Width="2.375" PointX="3.5" PointY="0.5" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.permDbTitleObject" Width="2.75" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.UI_Contragent" Width="1.5" PointX="8" PointY="2.25" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.UI_Personal" Width="1.625" PointX="6.125" PointY="0.5" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.UI_Position" Width="1.625" PointX="8" PointY="0.5" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.EAVDocumentType" Width="2.75" PointX="0.5" PointY="6.625" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.EAVDocument" Width="3.125" PointX="3.625" PointY="6.625" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.DocumentAttribute" Width="3.5" PointX="7.125" PointY="6.625" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.AttributeType" Width="2.75" PointX="11.125" PointY="6.625" />
+        <AssociationConnector Association="DEV_WEB_MainDataModel.DocumentDocumentType" />
+        <AssociationConnector Association="DEV_WEB_MainDataModel.DocumentDocumentAttribute" />
+        <AssociationConnector Association="DEV_WEB_MainDataModel.DocumentAttributeAttributeType" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.WeldType" Width="1.5" PointX="0.5" PointY="12.875" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.HIFGroup" Width="1.5" PointX="2.125" PointY="12.875" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.Document_Naks" Width="1.5" PointX="5.625" PointY="11.625" IsExpanded="false" />
+        <InheritanceConnector EntityType="DEV_WEB_MainDataModel.Document_Naks" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.Document_NaksAttest" Width="1.5" PointX="5.625" PointY="10.375" />
+        <InheritanceConnector EntityType="DEV_WEB_MainDataModel.Document_NaksAttest" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.DocumentRelation" Width="2.25" PointX="0.5" PointY="9.625" />
+        <AssociationConnector Association="DEV_WEB_MainDataModel.DocumentRelationDocumentTo" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.DetailsType" Width="1.5" PointX="0.5" PointY="14.875" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.JointKind" Width="1.5" PointX="8.625" PointY="14.875" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.JointType" Width="1.5" PointX="10.25" PointY="14.875" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.SeamsType" Width="1.5" PointX="5.375" PointY="14.875" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.WeldGOST14098" Width="1.5" PointX="0.5" PointY="16.625" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.WeldingEquipmentAutomationLevel" Width="1.5" PointX="2.125" PointY="16.625" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.WeldMaterial" Width="1.5" PointX="7" PointY="14.875" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.WeldMaterialGroup" Width="1.5" PointX="2.125" PointY="14.875" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.WeldPosition" Width="1.5" PointX="3.75" PointY="14.875" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.Contragent" Width="1.5" PointX="10.125" PointY="19.5" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.Employee" Width="1.5" PointX="7.625" PointY="19.5" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.Person" Width="1.5" PointX="7.625" PointY="22.75" />
+        <EntityTypeShape EntityType="DEV_WEB_MainDataModel.Position" Width="1.5" PointX="4.5" PointY="19.625" />
+        <AssociationConnector Association="DEV_WEB_MainDataModel.PersonEmployee" />
+        <AssociationConnector Association="DEV_WEB_MainDataModel.ContragentEmployee" />
+        <AssociationConnector Association="DEV_WEB_MainDataModel.PositionEmployee" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Библиотека документов";
+    ViewBag.GridName = "documentEditGridView";
+}
+
+<script type="text/javascript">
+    function updateDocumentType() {
+        var selectedType = DocumentType_ID.GetSelectedItems()[0];
+        DocumentType_Code.SetText(selectedType.text);
+        DocumentType_Code.HideDropDown();
+    }
+
+    function updateDocumentStatus() {
+        var selectedStatus = Status_ID.GetSelectedItems()[0];
+        Status_Name.SetText(selectedStatus.text);
+        Status_Name.HideDropDown();
+    }
+</script>
+
+
+@Html.Partial("DocumentGridView")
+

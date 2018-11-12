@@ -1,0 +1,1997 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DEV_STL_MainDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="p_ABDFinalFolder">
+          <Key>
+            <PropertyRef Name="ABDFinalFolder_ID" />
+          </Key>
+          <Property Name="ABDFinalFolder_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ABDFinalFolder_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Row_status" Type="int" />
+          <Property Name="Insert_DTS" Type="datetime2" Precision="7" />
+          <Property Name="Update_DTS" Type="datetime2" Precision="7" />
+          <Property Name="Final_Compilation_Target_Date" Type="datetime2" Precision="7" />
+          <Property Name="Final_Compilation_Start_Date" Type="datetime2" Precision="7" />
+          <Property Name="CTR_RESP" Type="nvarchar" MaxLength="255" />
+          <Property Name="ListCount" Type="int" />
+          <Property Name="Modified_By" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="p_ABDFinalFolder_to_Contragent">
+          <Key>
+            <PropertyRef Name="ABDFinalFolder_to_Contragent_ID" />
+          </Key>
+          <Property Name="ABDFinalFolder_to_Contragent_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Insert_DTS" Type="datetime2" Precision="7" />
+          <Property Name="Update_DTS" Type="datetime2" Precision="7" />
+          <Property Name="Row_Status" Type="int" />
+          <Property Name="ABDFinalFolder_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Contragent_ID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="p_ABDStatus">
+          <Key>
+            <PropertyRef Name="ABDStatus_ID" />
+          </Key>
+          <Property Name="ABDStatus_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Stage" Type="nvarchar" MaxLength="100" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status_Type" Type="int" />
+          <Property Name="Row_status" Type="int" />
+          <Property Name="Insert_DTS" Type="datetime2" Precision="7" />
+          <Property Name="Update_DTS" Type="datetime2" Precision="7" />
+          <Property Name="ReportColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReportOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="p_Contragent">
+          <Key>
+            <PropertyRef Name="Contragent_ID" />
+          </Key>
+          <Property Name="Contragent_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="Row_status" Type="int" />
+          <Property Name="Insert_DTS" Type="datetime2" Precision="7" />
+          <Property Name="Update_DTS" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_STL_MainData.dbo.ABDDocument_to_FileTable_StreamFull' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ABDDocument_to_FileTable_StreamFull">
+          <Key>
+            <PropertyRef Name="ABDDocument_ID" />
+            <PropertyRef Name="FileTable_Stream_ID" />
+            <PropertyRef Name="ABDDocument_to_FileTable_Stream_ID" />
+          </Key>
+          <Property Name="ABDDocument_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FileTable_Stream_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="file_type" Type="nvarchar" MaxLength="255" />
+          <Property Name="last_write_time" Type="datetimeoffset" Precision="7" />
+          <Property Name="Row_Status" Type="int" />
+          <Property Name="ABDDocument_to_FileTable_Stream_ID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_STL_MainData.dbo.ABDDocumentFull' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ABDDocumentFull">
+          
+          <Key>
+            <PropertyRef Name="ABDDocumentFull_ID" />
+          </Key>
+          <Property Name="ABDDocumentFull_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ABDDocument_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ABDDocument_Number" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ABDDocument_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="ABDFinalFolder_ID" Type="uniqueidentifier" />
+          <Property Name="ABDFinalFolder_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="DisciplineDocumentCode_ID" Type="uniqueidentifier" />
+          <Property Name="DisciplineDocumentCode_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="DDC_Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="DDC_Description_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="DocumentTypeCode_ID" Type="uniqueidentifier" />
+          <Property Name="DocumentTypeCode_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="DTC_Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="DTC_Description_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="GOST_ID" Type="uniqueidentifier" />
+          <Property Name="GOST_Code" Type="nvarchar" MaxLength="300" />
+          <Property Name="G_Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="Module_ID" Type="uniqueidentifier" />
+          <Property Name="Module_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="M_Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="M_Description_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="PID_ID" Type="uniqueidentifier" />
+          <Property Name="PID_Code" Type="nvarchar" MaxLength="300" />
+          <Property Name="PID_Description_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="SubContractor_ID" Type="uniqueidentifier" />
+          <Property Name="SubContractor_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="UnitNumberDocumentCode_ID" Type="uniqueidentifier" />
+          <Property Name="UnitNumberDocumentCode_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="U_Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="U_Description_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="Issue_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Sheet_Folder_Number" Type="int" Nullable="false" />
+          <Property Name="Total_Sheets" Type="int" Nullable="false" />
+          <Property Name="Number_in_Folder" Type="int" Nullable="false" />
+          <Property Name="Structure" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Structure_ID" Type="uniqueidentifier" />
+          <Property Name="Final_Compilation_Target_Date" Type="datetime2" Precision="7" />
+          <Property Name="Final_Compilation_Start_Date" Type="datetime2" Precision="7" />
+          <Property Name="CTR_RESP" Type="nvarchar" MaxLength="255" />
+          <Property Name="Modified_User" Type="nvarchar" MaxLength="120" />
+          <Property Name="Created_User" Type="nvarchar" MaxLength="120" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_STL_MainData.dbo.DesignAreaType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DesignAreaType">
+          <Key>
+            <PropertyRef Name="DesignAreaType_ID" />
+            <PropertyRef Name="DesignAreaType_Name" />
+          </Key>
+          <Property Name="DesignAreaType_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DesignAreaType_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_STL_MainData.dbo.FinalABDCompilation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FinalABDCompilation">
+          
+          <Key>
+            <PropertyRef Name="NewGUID" />
+          </Key>
+          <Property Name="ABDFinalFolder_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ABDFinalFolder_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CTR_RESP" Type="nvarchar" MaxLength="255" />
+          <Property Name="Final_Compilation_Start_Date" Type="datetime2" Precision="7" />
+          <Property Name="Final_Compilation_Target_Date" Type="datetime2" Precision="7" />
+          <Property Name="ListCount" Type="int" />
+          <Property Name="ABDFinalSet_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ABDFinalSet_Number" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ABDStatus_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Status_ENG" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="TitleObject_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TitleObject_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SubContractor_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SubContractor_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Marka_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Marka_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Transmittal_ID" Type="uniqueidentifier" />
+          <Property Name="Transmittal_Code" Type="nvarchar" MaxLength="300" />
+          <Property Name="ReportColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReportOrder" Type="int" />
+          <Property Name="FoldedStatus" Type="nvarchar" MaxLength="513" />
+          <Property Name="NewGUID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_STL_MainData.dbo.GOST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_STL_MainData.dbo.Phase' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Phase">
+          <Key>
+            <PropertyRef Name="Phase_ID" />
+            <PropertyRef Name="Phase_Name" />
+          </Key>
+          <Property Name="Phase_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Phase_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_STL_MainData.dbo.PID' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_STL_MainData.dbo.ProcessPhase' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProcessPhase">
+          <Key>
+            <PropertyRef Name="ProcessPhase_ID" />
+            <PropertyRef Name="ProcessPhase_Name" />
+          </Key>
+          <Property Name="ProcessPhase_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProcessPhase_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_STL_MainData.dbo.R_Structure' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="R_Structure">
+          <Key>
+            <PropertyRef Name="Structure_ID" />
+            <PropertyRef Name="Structure_Name" />
+          </Key>
+          <Property Name="Structure_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Structure_Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_STL_MainData.dbo.UI_ISO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_ISO">
+          <Key>
+            <PropertyRef Name="ISO_ID" />
+            <PropertyRef Name="ISO_Number" />
+          </Key>
+          <Property Name="ISO_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ISO_Number" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Row_status" Type="int" />
+          <Property Name="Line_ID" Type="uniqueidentifier" />
+          <Property Name="Phase_ID" Type="uniqueidentifier" />
+          <Property Name="Marka_ID" Type="uniqueidentifier" />
+          <Property Name="TitleObject_ID" Type="uniqueidentifier" />
+          <Property Name="DesignAreaType_ID" Type="uniqueidentifier" />
+          <Property Name="ProcessPhase_ID" Type="uniqueidentifier" />
+          <Property Name="Line_Number" Type="nvarchar" MaxLength="100" />
+          <Property Name="Phase_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="TitleObject_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Marka_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="DesignAreaType_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProcessPhase_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Line_Row_status" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_STL_MainData.dbo.UI_Line' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_Line">
+          <Key>
+            <PropertyRef Name="Line_ID" />
+            <PropertyRef Name="Line_Number" />
+          </Key>
+          <Property Name="Line_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Line_Number" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Row_Status" Type="int" />
+          <Property Name="Location_From" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Location_To" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Fluid_Name_Eng" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Fluid_Name_Rus" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Fluid_Danger_Code_By_Gost" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Fluid_Fire_Aand_Explosive_Hazard" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Fluid_Group_By_TP_TC_032_2013" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Fluid_Group_By_GOST" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Pipeline_Category_By_GOST" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Piprline_Category_By_TP_TC_032_2013" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_STL_MainData.dbo.UI_Marka' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_Marka">
+          <Key>
+            <PropertyRef Name="Marka_ID" />
+            <PropertyRef Name="Marka_Name" />
+          </Key>
+          <Property Name="Marka_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Marka_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code_of_mark" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="Engineering_Drawing_Type_Eng" Type="nvarchar" MaxLength="300" />
+          <Property Name="Engineering_Drawing_Type_Rus" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsUsedInMatrix" Type="bit" />
+          <Property Name="IsPriority" Type="bit" />
+          <Property Name="ReportColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReportOrder" Type="int" />
+          <Property Name="Row_Status" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_STL_MainData.dbo.UI_RegisterList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_RegisterList">
+          <Key>
+            
+            
+            
+            
+            
+            <PropertyRef Name="User_Id" />
+            <PropertyRef Name="newGuid" />
+          </Key>
+          <Property Name="Register_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LOG_ID" Type="nvarchar" MaxLength="255" />
+          <Property Name="Register_Number" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phase" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="TitleObject_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Target (Unit/ISO)" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Marka_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Work_Desc" Type="nvarchar" MaxLength="4000" />
+          <Property Name="CNT_Date" Type="datetime2" Precision="7" />
+          <Property Name="SCTR_RESP" Type="nvarchar" MaxLength="255" />
+          <Property Name="CTR_RESP" Type="nvarchar" MaxLength="255" />
+          <Property Name="ABDStatusDate" Type="datetime2" Precision="7" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="255" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="4000" />
+          <Property Name="TitleColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="TitleOrder" Type="int" />
+          <Property Name="MarkaColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="MarkaOrder" Type="int" />
+          <Property Name="StatusColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusOrder" Type="int" />
+          <Property Name="TitleObject_ID" Type="uniqueidentifier" />
+          <Property Name="Marka_ID" Type="uniqueidentifier" />
+          <Property Name="ABDStatus_ID" Type="uniqueidentifier" />
+          <Property Name="WorkPackage_ID" Type="uniqueidentifier" />
+          <Property Name="WorkPackage_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProcessPhase_ID" Type="uniqueidentifier" />
+          <Property Name="ProcessPhase_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Register_Row_status" Type="int" />
+          <Property Name="Register_to_TitleObject_Row_status" Type="int" />
+          <Property Name="Register_to_Marka_Row_status" Type="int" />
+          <Property Name="Register_to_TitleObject_ID" Type="uniqueidentifier" />
+          <Property Name="Register_to_Marka_ID" Type="uniqueidentifier" />
+          <Property Name="FileLOG" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="newGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="User_Id" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_STL_MainData.dbo.UI_TitleObject' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_TitleObject">
+          <Key>
+            <PropertyRef Name="TitleObject_ID" />
+            <PropertyRef Name="TitleObject_Name" />
+          </Key>
+          <Property Name="TitleObject_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TitleObject_PARENTID" Type="uniqueidentifier" />
+          <Property Name="Structure" Type="nvarchar" MaxLength="50" />
+          <Property Name="TitleObject_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="300" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="400" />
+          <Property Name="Phase_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="ReportColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReportOrder" Type="int" />
+          <Property Name="GLB_Weight" Type="float" />
+          <Property Name="Book1_Pct" Type="float" />
+          <Property Name="Book1_Weight" Type="float" />
+          <Property Name="Book2_Pct" Type="float" />
+          <Property Name="Book2_Weight" Type="float" />
+          <Property Name="Book3_Pct" Type="float" />
+          <Property Name="Book3_Weight" Type="float" />
+          <Property Name="Book4_Weight" Type="float" />
+          <Property Name="TitleObject_for_ABDFinalSet" Type="nvarchar" MaxLength="100" />
+          <Property Name="StageOfConstr" Type="nvarchar" MaxLength="10" />
+          <Property Name="Row_Status" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_STL_MainData.dbo.UI_TitleObject_to_Phase' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UI_TitleObject_to_Phase">
+          <Key>
+            <PropertyRef Name="TitleObject_ID" />
+            
+          </Key>
+          <Property Name="Phase_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Phase_ID" Type="uniqueidentifier" />
+          <Property Name="TitleObject_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TitleObject_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_p_ABDFinalFolder_to_Contragent_p_ABDFinalFolder">
+          <End Role="p_ABDFinalFolder" Type="Self.p_ABDFinalFolder" Multiplicity="1" />
+          <End Role="p_ABDFinalFolder_to_Contragent" Type="Self.p_ABDFinalFolder_to_Contragent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="p_ABDFinalFolder">
+              <PropertyRef Name="ABDFinalFolder_ID" />
+            </Principal>
+            <Dependent Role="p_ABDFinalFolder_to_Contragent">
+              <PropertyRef Name="ABDFinalFolder_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_p_ABDFinalFolder_to_Contragent_p_Contragent">
+          <End Role="p_Contragent" Type="Self.p_Contragent" Multiplicity="1" />
+          <End Role="p_ABDFinalFolder_to_Contragent" Type="Self.p_ABDFinalFolder_to_Contragent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="p_Contragent">
+              <PropertyRef Name="Contragent_ID" />
+            </Principal>
+            <Dependent Role="p_ABDFinalFolder_to_Contragent">
+              <PropertyRef Name="Contragent_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ABDDocument_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ABDDocument_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="ABDDocument_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Row_Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ABDDocument_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ABDDocument_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Issue_Date" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Sheet_Folder_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Total_Sheets" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Number_in_Folder" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ABDFinalFolder_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="ABDDocument_To_FileTable_Stream_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ABDDocument_to_FileTable_Stream_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="ABDDocument_to_FileTable_Stream_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Row_Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ABDDocument_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_FileTable_Stream_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="ABDDocument_to_FileTable_Stream_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_ABDDocument_to_FileTable_Stream_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Row_Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ABDDocument_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_FileTable_Stream_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="ABDDocument_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_ABDDocument_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Row_Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ABDDocument_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ABDDocument_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Issue_Date" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Sheet_Folder_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Total_Sheets" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Number_in_Folder" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ABDFinalFolder_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="ISO_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_ISO_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="ISO_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Row_Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ISO_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Line_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Phase_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Marka_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_TitleObject_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_DesignAreaType_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ProcessPhase_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="ISO_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_ISO_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Row_Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ISO_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Line_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Phase_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Marka_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_TitleObject_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_DesignAreaType_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ProcessPhase_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Line_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Line_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Line_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Row_Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Line_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Location_From" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Location_To" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Fluid_Name_Eng" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Fluid_Name_Rus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Fluid_Danger_Code_By_Gost" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Fluid_Fire_Aand_Explosive_Hazard" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Fluid_Group_By_TP_TC_032_2013" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Fluid_Group_By_GOST_32569_2013" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Pipeline_Category_By_GOST_32569_2013" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Piprline_Category_By_TP_TC_032_2013" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Line_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Line_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Row_Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Line_Number" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Location_From" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Location_To" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Fluid_Name_Eng" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Fluid_Name_Rus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Fluid_Danger_Code_By_Gost" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Fluid_Fire_Aand_Explosive_Hazard" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Fluid_Group_By_TP_TC_032_2013" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Fluid_Group_By_GOST_32569_2013" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Pipeline_Category_By_GOST_32569_2013" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Piprline_Category_By_TP_TC_032_2013" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Marka_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Marka_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Marka_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Row_Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Marka_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Code_of_mark" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Description_Eng" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Description_Rus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Engineering_Drawing_Type_Eng" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Engineering_Drawing_Type_Rus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_IsUsedInMatrix" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_IsPriority" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ReportColor" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ReportOrder" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Marka_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Marka_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Row_Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Marka_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Code_of_mark" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Description_Eng" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Description_Rus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Engineering_Drawing_Type_Eng" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Engineering_Drawing_Type_Rus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_IsUsedInMatrix" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_IsPriority" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ReportColor" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ReportOrder" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="Register_SequenceNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="TitleObject_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_TitleObject_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="TitleObject_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_Row_Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_TitleObject_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_TitleObject_PARENTID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Structure" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Description_Eng" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Description_Rus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Phase_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ReportColor" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ReportOrder" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_GLB_Weight" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book1_Pct" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book1_Weight" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book2_Pct" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book2_Weight" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book3_Pct" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book3_Weight" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book4_Weight" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_TitleObject_for_ABDFinalSet" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book1_Documents_Total" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book1_Documents_received" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book1_Progress" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book1_Documents_transmitted_to_CPY" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_StageOfConstr" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="TitleObject_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_TitleObject_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Row_Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_TitleObject_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_TitleObject_PARENTID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Structure" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Description_Eng" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Description_Rus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Phase_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ReportColor" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_ReportOrder" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_GLB_Weight" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book1_Pct" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book1_Weight" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book2_Pct" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book2_Weight" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book3_Pct" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book3_Weight" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book4_Weight" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_TitleObject_for_ABDFinalSet" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book1_Documents_Total" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book1_Documents_received" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book1_Progress" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_Book1_Documents_transmitted_to_CPY" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_StageOfConstr" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="DEV_STL_MainDataModelStoreContainer">
+          <EntitySet Name="p_ABDFinalFolder" EntityType="Self.p_ABDFinalFolder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="p_ABDFinalFolder_to_Contragent" EntityType="Self.p_ABDFinalFolder_to_Contragent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="p_ABDStatus" EntityType="Self.p_ABDStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="p_Contragent" EntityType="Self.p_Contragent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ABDDocument_to_FileTable_StreamFull" EntityType="Self.ABDDocument_to_FileTable_StreamFull" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ABDDocument_to_FileTable_StreamFull].[ABDDocument_ID] AS [ABDDocument_ID], 
+    [ABDDocument_to_FileTable_StreamFull].[FileTable_Stream_ID] AS [FileTable_Stream_ID], 
+    [ABDDocument_to_FileTable_StreamFull].[name] AS [name], 
+    [ABDDocument_to_FileTable_StreamFull].[file_type] AS [file_type], 
+    [ABDDocument_to_FileTable_StreamFull].[last_write_time] AS [last_write_time], 
+    [ABDDocument_to_FileTable_StreamFull].[Row_Status] AS [Row_Status], 
+    [ABDDocument_to_FileTable_StreamFull].[ABDDocument_to_FileTable_Stream_ID] AS [ABDDocument_to_FileTable_Stream_ID]
+    FROM [dbo].[ABDDocument_to_FileTable_StreamFull] AS [ABDDocument_to_FileTable_StreamFull]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ABDDocumentFull" EntityType="Self.ABDDocumentFull" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ABDDocumentFull].[ABDDocumentFull_ID] AS [ABDDocumentFull_ID], 
+    [ABDDocumentFull].[ABDDocument_ID] AS [ABDDocument_ID], 
+    [ABDDocumentFull].[ABDDocument_Number] AS [ABDDocument_Number], 
+    [ABDDocumentFull].[ABDDocument_Name] AS [ABDDocument_Name], 
+    [ABDDocumentFull].[ABDFinalFolder_ID] AS [ABDFinalFolder_ID], 
+    [ABDDocumentFull].[ABDFinalFolder_Name] AS [ABDFinalFolder_Name], 
+    [ABDDocumentFull].[DisciplineDocumentCode_ID] AS [DisciplineDocumentCode_ID], 
+    [ABDDocumentFull].[DisciplineDocumentCode_Name] AS [DisciplineDocumentCode_Name], 
+    [ABDDocumentFull].[DDC_Description_Rus] AS [DDC_Description_Rus], 
+    [ABDDocumentFull].[DDC_Description_Eng] AS [DDC_Description_Eng], 
+    [ABDDocumentFull].[DocumentTypeCode_ID] AS [DocumentTypeCode_ID], 
+    [ABDDocumentFull].[DocumentTypeCode_Name] AS [DocumentTypeCode_Name], 
+    [ABDDocumentFull].[DTC_Description_Rus] AS [DTC_Description_Rus], 
+    [ABDDocumentFull].[DTC_Description_Eng] AS [DTC_Description_Eng], 
+    [ABDDocumentFull].[GOST_ID] AS [GOST_ID], 
+    [ABDDocumentFull].[GOST_Code] AS [GOST_Code], 
+    [ABDDocumentFull].[G_Description_Rus] AS [G_Description_Rus], 
+    [ABDDocumentFull].[Module_ID] AS [Module_ID], 
+    [ABDDocumentFull].[Module_Name] AS [Module_Name], 
+    [ABDDocumentFull].[M_Description_Rus] AS [M_Description_Rus], 
+    [ABDDocumentFull].[M_Description_Eng] AS [M_Description_Eng], 
+    [ABDDocumentFull].[PID_ID] AS [PID_ID], 
+    [ABDDocumentFull].[PID_Code] AS [PID_Code], 
+    [ABDDocumentFull].[PID_Description_Eng] AS [PID_Description_Eng], 
+    [ABDDocumentFull].[SubContractor_ID] AS [SubContractor_ID], 
+    [ABDDocumentFull].[SubContractor_Name] AS [SubContractor_Name], 
+    [ABDDocumentFull].[UnitNumberDocumentCode_ID] AS [UnitNumberDocumentCode_ID], 
+    [ABDDocumentFull].[UnitNumberDocumentCode_Name] AS [UnitNumberDocumentCode_Name], 
+    [ABDDocumentFull].[U_Description_Rus] AS [U_Description_Rus], 
+    [ABDDocumentFull].[U_Description_Eng] AS [U_Description_Eng], 
+    [ABDDocumentFull].[Issue_Date] AS [Issue_Date], 
+    [ABDDocumentFull].[Sheet_Folder_Number] AS [Sheet_Folder_Number], 
+    [ABDDocumentFull].[Total_Sheets] AS [Total_Sheets], 
+    [ABDDocumentFull].[Number_in_Folder] AS [Number_in_Folder], 
+    [ABDDocumentFull].[Structure] AS [Structure], 
+    [ABDDocumentFull].[Structure_ID] AS [Structure_ID], 
+    [ABDDocumentFull].[Final_Compilation_Target_Date] AS [Final_Compilation_Target_Date], 
+    [ABDDocumentFull].[Final_Compilation_Start_Date] AS [Final_Compilation_Start_Date], 
+    [ABDDocumentFull].[CTR_RESP] AS [CTR_RESP], 
+    [ABDDocumentFull].[Modified_User] AS [Modified_User], 
+    [ABDDocumentFull].[Created_User] AS [Created_User]
+    FROM [dbo].[ABDDocumentFull] AS [ABDDocumentFull]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DesignAreaType" EntityType="Self.DesignAreaType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DesignAreaType].[DesignAreaType_ID] AS [DesignAreaType_ID], 
+    [DesignAreaType].[DesignAreaType_Name] AS [DesignAreaType_Name]
+    FROM [dbo].[DesignAreaType] AS [DesignAreaType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FinalABDCompilation" EntityType="Self.FinalABDCompilation" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FinalABDCompilation].[ABDFinalFolder_ID] AS [ABDFinalFolder_ID], 
+    [FinalABDCompilation].[ABDFinalFolder_Name] AS [ABDFinalFolder_Name], 
+    [FinalABDCompilation].[CTR_RESP] AS [CTR_RESP], 
+    [FinalABDCompilation].[Final_Compilation_Start_Date] AS [Final_Compilation_Start_Date], 
+    [FinalABDCompilation].[Final_Compilation_Target_Date] AS [Final_Compilation_Target_Date], 
+    [FinalABDCompilation].[ListCount] AS [ListCount], 
+    [FinalABDCompilation].[ABDFinalSet_ID] AS [ABDFinalSet_ID], 
+    [FinalABDCompilation].[ABDFinalSet_Number] AS [ABDFinalSet_Number], 
+    [FinalABDCompilation].[ABDStatus_ID] AS [ABDStatus_ID], 
+    [FinalABDCompilation].[Status_ENG] AS [Status_ENG], 
+    [FinalABDCompilation].[Status_Rus] AS [Status_Rus], 
+    [FinalABDCompilation].[TitleObject_ID] AS [TitleObject_ID], 
+    [FinalABDCompilation].[TitleObject_Name] AS [TitleObject_Name], 
+    [FinalABDCompilation].[SubContractor_Id] AS [SubContractor_Id], 
+    [FinalABDCompilation].[SubContractor_Name] AS [SubContractor_Name], 
+    [FinalABDCompilation].[Marka_ID] AS [Marka_ID], 
+    [FinalABDCompilation].[Marka_Name] AS [Marka_Name], 
+    [FinalABDCompilation].[Transmittal_ID] AS [Transmittal_ID], 
+    [FinalABDCompilation].[Transmittal_Code] AS [Transmittal_Code], 
+    [FinalABDCompilation].[ReportColor] AS [ReportColor], 
+    [FinalABDCompilation].[ReportOrder] AS [ReportOrder], 
+    [FinalABDCompilation].[FoldedStatus] AS [FoldedStatus], 
+    [FinalABDCompilation].[NewGUID] AS [NewGUID]
+    FROM [dbo].[FinalABDCompilation] AS [FinalABDCompilation]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Phase" EntityType="Self.Phase" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Phase].[Phase_ID] AS [Phase_ID], 
+    [Phase].[Phase_Name] AS [Phase_Name]
+    FROM [dbo].[Phase] AS [Phase]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ProcessPhase" EntityType="Self.ProcessPhase" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProcessPhase].[ProcessPhase_ID] AS [ProcessPhase_ID], 
+    [ProcessPhase].[ProcessPhase_Name] AS [ProcessPhase_Name]
+    FROM [dbo].[ProcessPhase] AS [ProcessPhase]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="R_Structure" EntityType="Self.R_Structure" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [R_Structure].[Structure_ID] AS [Structure_ID], 
+    [R_Structure].[Structure_Name] AS [Structure_Name]
+    FROM [dbo].[R_Structure] AS [R_Structure]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_ISO" EntityType="Self.UI_ISO" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_ISO].[ISO_ID] AS [ISO_ID], 
+    [UI_ISO].[ISO_Number] AS [ISO_Number], 
+    [UI_ISO].[Row_status] AS [Row_status], 
+    [UI_ISO].[Line_ID] AS [Line_ID], 
+    [UI_ISO].[Phase_ID] AS [Phase_ID], 
+    [UI_ISO].[Marka_ID] AS [Marka_ID], 
+    [UI_ISO].[TitleObject_ID] AS [TitleObject_ID], 
+    [UI_ISO].[DesignAreaType_ID] AS [DesignAreaType_ID], 
+    [UI_ISO].[ProcessPhase_ID] AS [ProcessPhase_ID], 
+    [UI_ISO].[Line_Number] AS [Line_Number], 
+    [UI_ISO].[Phase_Name] AS [Phase_Name], 
+    [UI_ISO].[TitleObject_Name] AS [TitleObject_Name], 
+    [UI_ISO].[Marka_Name] AS [Marka_Name], 
+    [UI_ISO].[DesignAreaType_Name] AS [DesignAreaType_Name], 
+    [UI_ISO].[ProcessPhase_Name] AS [ProcessPhase_Name], 
+    [UI_ISO].[Line_Row_status] AS [Line_Row_status]
+    FROM [dbo].[UI_ISO] AS [UI_ISO]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_Line" EntityType="Self.UI_Line" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_Line].[Line_ID] AS [Line_ID], 
+    [UI_Line].[Line_Number] AS [Line_Number], 
+    [UI_Line].[Row_Status] AS [Row_Status], 
+    [UI_Line].[Location_From] AS [Location_From], 
+    [UI_Line].[Location_To] AS [Location_To], 
+    [UI_Line].[Fluid_Name_Eng] AS [Fluid_Name_Eng], 
+    [UI_Line].[Fluid_Name_Rus] AS [Fluid_Name_Rus], 
+    [UI_Line].[Fluid_Danger_Code_By_Gost] AS [Fluid_Danger_Code_By_Gost], 
+    [UI_Line].[Fluid_Fire_Aand_Explosive_Hazard] AS [Fluid_Fire_Aand_Explosive_Hazard], 
+    [UI_Line].[Fluid_Group_By_TP_TC_032_2013] AS [Fluid_Group_By_TP_TC_032_2013], 
+    [UI_Line].[Fluid_Group_By_GOST] AS [Fluid_Group_By_GOST], 
+    [UI_Line].[Pipeline_Category_By_GOST] AS [Pipeline_Category_By_GOST], 
+    [UI_Line].[Piprline_Category_By_TP_TC_032_2013] AS [Piprline_Category_By_TP_TC_032_2013]
+    FROM [dbo].[UI_Line] AS [UI_Line]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_Marka" EntityType="Self.UI_Marka" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_Marka].[Marka_ID] AS [Marka_ID], 
+    [UI_Marka].[Marka_Name] AS [Marka_Name], 
+    [UI_Marka].[Code_of_mark] AS [Code_of_mark], 
+    [UI_Marka].[Description_Eng] AS [Description_Eng], 
+    [UI_Marka].[Description_Rus] AS [Description_Rus], 
+    [UI_Marka].[Engineering_Drawing_Type_Eng] AS [Engineering_Drawing_Type_Eng], 
+    [UI_Marka].[Engineering_Drawing_Type_Rus] AS [Engineering_Drawing_Type_Rus], 
+    [UI_Marka].[IsUsedInMatrix] AS [IsUsedInMatrix], 
+    [UI_Marka].[IsPriority] AS [IsPriority], 
+    [UI_Marka].[ReportColor] AS [ReportColor], 
+    [UI_Marka].[ReportOrder] AS [ReportOrder], 
+    [UI_Marka].[Row_Status] AS [Row_Status]
+    FROM [dbo].[UI_Marka] AS [UI_Marka]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_RegisterList" EntityType="Self.UI_RegisterList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_RegisterList].[Register_ID] AS [Register_ID], 
+    [UI_RegisterList].[LOG_ID] AS [LOG_ID], 
+    [UI_RegisterList].[Register_Number] AS [Register_Number], 
+    [UI_RegisterList].[Phase] AS [Phase], 
+    [UI_RegisterList].[TitleObject_Name] AS [TitleObject_Name], 
+    [UI_RegisterList].[Target (Unit/ISO)] AS [Target (Unit/ISO)], 
+    [UI_RegisterList].[Marka_Name] AS [Marka_Name], 
+    [UI_RegisterList].[Work_Desc] AS [Work_Desc], 
+    [UI_RegisterList].[CNT_Date] AS [CNT_Date], 
+    [UI_RegisterList].[SCTR_RESP] AS [SCTR_RESP], 
+    [UI_RegisterList].[CTR_RESP] AS [CTR_RESP], 
+    [UI_RegisterList].[ABDStatusDate] AS [ABDStatusDate], 
+    [UI_RegisterList].[Description_Rus] AS [Description_Rus], 
+    [UI_RegisterList].[Notes] AS [Notes], 
+    [UI_RegisterList].[TitleColor] AS [TitleColor], 
+    [UI_RegisterList].[TitleOrder] AS [TitleOrder], 
+    [UI_RegisterList].[MarkaColor] AS [MarkaColor], 
+    [UI_RegisterList].[MarkaOrder] AS [MarkaOrder], 
+    [UI_RegisterList].[StatusColor] AS [StatusColor], 
+    [UI_RegisterList].[StatusOrder] AS [StatusOrder], 
+    [UI_RegisterList].[TitleObject_ID] AS [TitleObject_ID], 
+    [UI_RegisterList].[Marka_ID] AS [Marka_ID], 
+    [UI_RegisterList].[ABDStatus_ID] AS [ABDStatus_ID], 
+    [UI_RegisterList].[WorkPackage_ID] AS [WorkPackage_ID], 
+    [UI_RegisterList].[WorkPackage_Name] AS [WorkPackage_Name], 
+    [UI_RegisterList].[ProcessPhase_ID] AS [ProcessPhase_ID], 
+    [UI_RegisterList].[ProcessPhase_Name] AS [ProcessPhase_Name], 
+    [UI_RegisterList].[Register_Row_status] AS [Register_Row_status], 
+    [UI_RegisterList].[Register_to_TitleObject_Row_status] AS [Register_to_TitleObject_Row_status], 
+    [UI_RegisterList].[Register_to_Marka_Row_status] AS [Register_to_Marka_Row_status], 
+    [UI_RegisterList].[Register_to_TitleObject_ID] AS [Register_to_TitleObject_ID], 
+    [UI_RegisterList].[Register_to_Marka_ID] AS [Register_to_Marka_ID], 
+    [UI_RegisterList].[FileLOG] AS [FileLOG], 
+    [UI_RegisterList].[newGuid] AS [newGuid], 
+    [UI_RegisterList].[User_Id] AS [User_Id]
+    FROM [dbo].[UI_RegisterList] AS [UI_RegisterList]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_TitleObject" EntityType="Self.UI_TitleObject" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_TitleObject].[TitleObject_ID] AS [TitleObject_ID], 
+    [UI_TitleObject].[TitleObject_PARENTID] AS [TitleObject_PARENTID], 
+    [UI_TitleObject].[Structure] AS [Structure], 
+    [UI_TitleObject].[TitleObject_Name] AS [TitleObject_Name], 
+    [UI_TitleObject].[Description_Eng] AS [Description_Eng], 
+    [UI_TitleObject].[Description_Rus] AS [Description_Rus], 
+    [UI_TitleObject].[Phase_Name] AS [Phase_Name], 
+    [UI_TitleObject].[ReportColor] AS [ReportColor], 
+    [UI_TitleObject].[ReportOrder] AS [ReportOrder], 
+    [UI_TitleObject].[GLB_Weight] AS [GLB_Weight], 
+    [UI_TitleObject].[Book1_Pct] AS [Book1_Pct], 
+    [UI_TitleObject].[Book1_Weight] AS [Book1_Weight], 
+    [UI_TitleObject].[Book2_Pct] AS [Book2_Pct], 
+    [UI_TitleObject].[Book2_Weight] AS [Book2_Weight], 
+    [UI_TitleObject].[Book3_Pct] AS [Book3_Pct], 
+    [UI_TitleObject].[Book3_Weight] AS [Book3_Weight], 
+    [UI_TitleObject].[Book4_Weight] AS [Book4_Weight], 
+    [UI_TitleObject].[TitleObject_for_ABDFinalSet] AS [TitleObject_for_ABDFinalSet], 
+    [UI_TitleObject].[StageOfConstr] AS [StageOfConstr], 
+    [UI_TitleObject].[Row_Status] AS [Row_Status]
+    FROM [dbo].[UI_TitleObject] AS [UI_TitleObject]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UI_TitleObject_to_Phase" EntityType="Self.UI_TitleObject_to_Phase" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UI_TitleObject_to_Phase].[Phase_Name] AS [Phase_Name], 
+    [UI_TitleObject_to_Phase].[Phase_ID] AS [Phase_ID], 
+    [UI_TitleObject_to_Phase].[TitleObject_ID] AS [TitleObject_ID], 
+    [UI_TitleObject_to_Phase].[TitleObject_Name] AS [TitleObject_Name]
+    FROM [dbo].[UI_TitleObject_to_Phase] AS [UI_TitleObject_to_Phase]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_p_ABDFinalFolder_to_Contragent_p_ABDFinalFolder" Association="Self.FK_p_ABDFinalFolder_to_Contragent_p_ABDFinalFolder">
+            <End Role="p_ABDFinalFolder" EntitySet="p_ABDFinalFolder" />
+            <End Role="p_ABDFinalFolder_to_Contragent" EntitySet="p_ABDFinalFolder_to_Contragent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_p_ABDFinalFolder_to_Contragent_p_Contragent" Association="Self.FK_p_ABDFinalFolder_to_Contragent_p_Contragent">
+            <End Role="p_Contragent" EntitySet="p_Contragent" />
+            <End Role="p_ABDFinalFolder_to_Contragent" EntitySet="p_ABDFinalFolder_to_Contragent" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DEV_STL_MainDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="p_ABDStatus">
+          <Key>
+            <PropertyRef Name="ABDStatus_ID" />
+          </Key>
+          <Property Name="ABDStatus_ID" Type="Guid" Nullable="false" />
+          <Property Name="Stage" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status_Type" Type="Int32" />
+          <Property Name="Row_status" Type="Int32" />
+          <Property Name="Insert_DTS" Type="DateTime" Precision="7" />
+          <Property Name="Update_DTS" Type="DateTime" Precision="7" />
+          <Property Name="ReportColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReportOrder" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="p_ABDStatus" EntityType="Self.p_ABDStatus" />
+          <EntitySet Name="Phases" EntityType="DEV_STL_MainDataModel.Phase" />
+          <EntitySet Name="ProcessPhases" EntityType="DEV_STL_MainDataModel.ProcessPhase" />
+          <EntitySet Name="UI_RegisterList" EntityType="DEV_STL_MainDataModel.UI_RegisterList" />
+          <EntitySet Name="UI_TitleObject_to_Phase" EntityType="DEV_STL_MainDataModel.UI_TitleObject_to_Phase" />
+          <EntitySet Name="UI_Marka" EntityType="DEV_STL_MainDataModel.UI_Marka" />
+          <EntitySet Name="UI_TitleObject" EntityType="DEV_STL_MainDataModel.UI_TitleObject" />
+          <EntitySet Name="p_ABDFinalFolder" EntityType="DEV_STL_MainDataModel.p_ABDFinalFolder" />
+          <EntitySet Name="p_ABDFinalFolder_to_Contragent" EntityType="DEV_STL_MainDataModel.p_ABDFinalFolder_to_Contragent" />
+          <EntitySet Name="p_Contragent" EntityType="DEV_STL_MainDataModel.p_Contragent" />
+          <EntitySet Name="R_Structure" EntityType="DEV_STL_MainDataModel.R_Structure" />
+          <AssociationSet Name="FK_p_ABDFinalFolder_to_Contragent_p_ABDFinalFolder" Association="DEV_STL_MainDataModel.FK_p_ABDFinalFolder_to_Contragent_p_ABDFinalFolder">
+            <End Role="p_ABDFinalFolder" EntitySet="p_ABDFinalFolder" />
+            <End Role="p_ABDFinalFolder_to_Contragent" EntitySet="p_ABDFinalFolder_to_Contragent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_p_ABDFinalFolder_to_Contragent_p_Contragent" Association="DEV_STL_MainDataModel.FK_p_ABDFinalFolder_to_Contragent_p_Contragent">
+            <End Role="p_Contragent" EntitySet="p_Contragent" />
+            <End Role="p_ABDFinalFolder_to_Contragent" EntitySet="p_ABDFinalFolder_to_Contragent" />
+          </AssociationSet>
+          <EntitySet Name="FinalABDCompilations" EntityType="DEV_STL_MainDataModel.FinalABDCompilation" />
+          <EntitySet Name="UI_ISO" EntityType="DEV_STL_MainDataModel.UI_ISO" />
+          <EntitySet Name="UI_Line" EntityType="DEV_STL_MainDataModel.UI_Line" />
+          <EntitySet Name="DesignAreaTypes" EntityType="DEV_STL_MainDataModel.DesignAreaType" />
+          <FunctionImport Name="Line_Delete" ReturnType="Collection(DEV_STL_MainDataModel.Line_Delete_Result)">
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Line_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Line_Insert" ReturnType="Collection(DEV_STL_MainDataModel.Line_Insert_Result)">
+            <Parameter Name="i_Row_Status" Mode="In" Type="String" />
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Line_Number" Mode="In" Type="String" />
+            <Parameter Name="i_Location_From" Mode="In" Type="String" />
+            <Parameter Name="i_Location_To" Mode="In" Type="String" />
+            <Parameter Name="i_Fluid_Name_Eng" Mode="In" Type="String" />
+            <Parameter Name="i_Fluid_Name_Rus" Mode="In" Type="String" />
+            <Parameter Name="i_Fluid_Danger_Code_By_Gost" Mode="In" Type="String" />
+            <Parameter Name="i_Fluid_Fire_Aand_Explosive_Hazard" Mode="In" Type="String" />
+            <Parameter Name="i_Fluid_Group_By_TP_TC_032_2013" Mode="In" Type="String" />
+            <Parameter Name="i_Fluid_Group_By_GOST_32569_2013" Mode="In" Type="String" />
+            <Parameter Name="i_Pipeline_Category_By_GOST_32569_2013" Mode="In" Type="String" />
+            <Parameter Name="i_Piprline_Category_By_TP_TC_032_2013" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Line_Update" ReturnType="Collection(DEV_STL_MainDataModel.Line_Update_Result)">
+            <Parameter Name="i_Line_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Row_Status" Mode="In" Type="String" />
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Line_Number" Mode="In" Type="String" />
+            <Parameter Name="i_Location_From" Mode="In" Type="String" />
+            <Parameter Name="i_Location_To" Mode="In" Type="String" />
+            <Parameter Name="i_Fluid_Name_Eng" Mode="In" Type="String" />
+            <Parameter Name="i_Fluid_Name_Rus" Mode="In" Type="String" />
+            <Parameter Name="i_Fluid_Danger_Code_By_Gost" Mode="In" Type="String" />
+            <Parameter Name="i_Fluid_Fire_Aand_Explosive_Hazard" Mode="In" Type="String" />
+            <Parameter Name="i_Fluid_Group_By_TP_TC_032_2013" Mode="In" Type="String" />
+            <Parameter Name="i_Fluid_Group_By_GOST_32569_2013" Mode="In" Type="String" />
+            <Parameter Name="i_Pipeline_Category_By_GOST_32569_2013" Mode="In" Type="String" />
+            <Parameter Name="i_Piprline_Category_By_TP_TC_032_2013" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ISO_Delete" ReturnType="Collection(DEV_STL_MainDataModel.ISO_Delete_Result)">
+            <Parameter Name="i_ISO_ID" Mode="In" Type="String" />
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ISO_Insert" ReturnType="Collection(DEV_STL_MainDataModel.ISO_Insert_Result)">
+            <Parameter Name="i_Row_Status" Mode="In" Type="String" />
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_ISO_Number" Mode="In" Type="String" />
+            <Parameter Name="i_Line_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Phase_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Marka_ID" Mode="In" Type="String" />
+            <Parameter Name="i_TitleObject_ID" Mode="In" Type="String" />
+            <Parameter Name="i_DesignAreaType_ID" Mode="In" Type="String" />
+            <Parameter Name="i_ProcessPhase_ID" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ISO_Update" ReturnType="Collection(DEV_STL_MainDataModel.ISO_Update_Result)">
+            <Parameter Name="i_ISO_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Row_Status" Mode="In" Type="String" />
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_ISO_Number" Mode="In" Type="String" />
+            <Parameter Name="i_Line_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Phase_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Marka_ID" Mode="In" Type="String" />
+            <Parameter Name="i_TitleObject_ID" Mode="In" Type="String" />
+            <Parameter Name="i_DesignAreaType_ID" Mode="In" Type="String" />
+            <Parameter Name="i_ProcessPhase_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Marka_Delete" ReturnType="Collection(DEV_STL_MainDataModel.Marka_Delete_Result)">
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Marka_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Marka_Insert" ReturnType="Collection(DEV_STL_MainDataModel.Marka_Insert_Result)">
+            <Parameter Name="i_Row_Status" Mode="In" Type="String" />
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Marka_Name" Mode="In" Type="String" />
+            <Parameter Name="i_Code_of_mark" Mode="In" Type="String" />
+            <Parameter Name="i_Description_Eng" Mode="In" Type="String" />
+            <Parameter Name="i_Description_Rus" Mode="In" Type="String" />
+            <Parameter Name="i_Engineering_Drawing_Type_Eng" Mode="In" Type="String" />
+            <Parameter Name="i_Engineering_Drawing_Type_Rus" Mode="In" Type="String" />
+            <Parameter Name="i_IsUsedInMatrix" Mode="In" Type="String" />
+            <Parameter Name="i_IsPriority" Mode="In" Type="String" />
+            <Parameter Name="i_ReportColor" Mode="In" Type="String" />
+            <Parameter Name="i_ReportOrder" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Marka_Update" ReturnType="Collection(DEV_STL_MainDataModel.Marka_Update_Result)">
+            <Parameter Name="i_Marka_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Row_Status" Mode="In" Type="String" />
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Marka_Name" Mode="In" Type="String" />
+            <Parameter Name="i_Code_of_mark" Mode="In" Type="String" />
+            <Parameter Name="i_Description_Eng" Mode="In" Type="String" />
+            <Parameter Name="i_Description_Rus" Mode="In" Type="String" />
+            <Parameter Name="i_Engineering_Drawing_Type_Eng" Mode="In" Type="String" />
+            <Parameter Name="i_Engineering_Drawing_Type_Rus" Mode="In" Type="String" />
+            <Parameter Name="i_IsUsedInMatrix" Mode="In" Type="String" />
+            <Parameter Name="i_IsPriority" Mode="In" Type="String" />
+            <Parameter Name="i_ReportColor" Mode="In" Type="String" />
+            <Parameter Name="i_ReportOrder" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="TitleObject_Delete" ReturnType="Collection(DEV_STL_MainDataModel.TitleObject_Delete_Result)">
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_TitleObject_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="TitleObject_Insert" ReturnType="Collection(DEV_STL_MainDataModel.TitleObject_Insert_Result)">
+            <Parameter Name="i_Row_Status" Mode="In" Type="String" />
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_TitleObject_Name" Mode="In" Type="String" />
+            <Parameter Name="i_TitleObject_PARENTID" Mode="In" Type="String" />
+            <Parameter Name="i_Structure" Mode="In" Type="String" />
+            <Parameter Name="i_Description_Eng" Mode="In" Type="String" />
+            <Parameter Name="i_Description_Rus" Mode="In" Type="String" />
+            <Parameter Name="i_Phase_Name" Mode="In" Type="String" />
+            <Parameter Name="i_ReportColor" Mode="In" Type="String" />
+            <Parameter Name="i_ReportOrder" Mode="In" Type="String" />
+            <Parameter Name="i_GLB_Weight" Mode="In" Type="String" />
+            <Parameter Name="i_Book1_Pct" Mode="In" Type="String" />
+            <Parameter Name="i_Book1_Weight" Mode="In" Type="String" />
+            <Parameter Name="i_Book2_Pct" Mode="In" Type="String" />
+            <Parameter Name="i_Book2_Weight" Mode="In" Type="String" />
+            <Parameter Name="i_Book3_Pct" Mode="In" Type="String" />
+            <Parameter Name="i_Book3_Weight" Mode="In" Type="String" />
+            <Parameter Name="i_Book4_Weight" Mode="In" Type="String" />
+            <Parameter Name="i_TitleObject_for_ABDFinalSet" Mode="In" Type="String" />
+            <Parameter Name="i_Book1_Documents_Total" Mode="In" Type="String" />
+            <Parameter Name="i_Book1_Documents_received" Mode="In" Type="String" />
+            <Parameter Name="i_Book1_Progress" Mode="In" Type="String" />
+            <Parameter Name="i_Book1_Documents_transmitted_to_CPY" Mode="In" Type="String" />
+            <Parameter Name="i_StageOfConstr" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="TitleObject_Update" ReturnType="Collection(DEV_STL_MainDataModel.TitleObject_Update_Result)">
+            <Parameter Name="i_TitleObject_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Row_Status" Mode="In" Type="String" />
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_TitleObject_Name" Mode="In" Type="String" />
+            <Parameter Name="i_TitleObject_PARENTID" Mode="In" Type="String" />
+            <Parameter Name="i_Structure" Mode="In" Type="String" />
+            <Parameter Name="i_Description_Eng" Mode="In" Type="String" />
+            <Parameter Name="i_Description_Rus" Mode="In" Type="String" />
+            <Parameter Name="i_Phase_Name" Mode="In" Type="String" />
+            <Parameter Name="i_ReportColor" Mode="In" Type="String" />
+            <Parameter Name="i_ReportOrder" Mode="In" Type="String" />
+            <Parameter Name="i_GLB_Weight" Mode="In" Type="String" />
+            <Parameter Name="i_Book1_Pct" Mode="In" Type="String" />
+            <Parameter Name="i_Book1_Weight" Mode="In" Type="String" />
+            <Parameter Name="i_Book2_Pct" Mode="In" Type="String" />
+            <Parameter Name="i_Book2_Weight" Mode="In" Type="String" />
+            <Parameter Name="i_Book3_Pct" Mode="In" Type="String" />
+            <Parameter Name="i_Book3_Weight" Mode="In" Type="String" />
+            <Parameter Name="i_Book4_Weight" Mode="In" Type="String" />
+            <Parameter Name="i_TitleObject_for_ABDFinalSet" Mode="In" Type="String" />
+            <Parameter Name="i_Book1_Documents_Total" Mode="In" Type="String" />
+            <Parameter Name="i_Book1_Documents_received" Mode="In" Type="String" />
+            <Parameter Name="i_Book1_Progress" Mode="In" Type="String" />
+            <Parameter Name="i_Book1_Documents_transmitted_to_CPY" Mode="In" Type="String" />
+            <Parameter Name="i_StageOfConstr" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="ABDDocument_to_FileTable_StreamFull" EntityType="DEV_STL_MainDataModel.ABDDocument_to_FileTable_StreamFull" />
+          <EntitySet Name="ABDDocumentFulls" EntityType="DEV_STL_MainDataModel.ABDDocumentFull" />
+          <FunctionImport Name="ABDDocument_Delete" ReturnType="Collection(DEV_STL_MainDataModel.ABDDocument_Delete_Result)">
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_ABDDocument_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ABDDocument_Insert" ReturnType="Collection(DEV_STL_MainDataModel.ABDDocument_Insert_Result)">
+            <Parameter Name="i_Row_Status" Mode="In" Type="String" />
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_ABDDocument_Name" Mode="In" Type="String" />
+            <Parameter Name="i_ABDDocument_Number" Mode="In" Type="String" />
+            <Parameter Name="i_Issue_Date" Mode="In" Type="String" />
+            <Parameter Name="i_Sheet_Folder_Number" Mode="In" Type="String" />
+            <Parameter Name="i_Total_Sheets" Mode="In" Type="String" />
+            <Parameter Name="i_Number_in_Folder" Mode="In" Type="String" />
+            <Parameter Name="i_ABDFinalFolder_Name" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ABDDocument_To_FileTable_Stream_Delete" ReturnType="Collection(DEV_STL_MainDataModel.ABDDocument_To_FileTable_Stream_Delete_Result)">
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_ABDDocument_to_FileTable_Stream_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ABDDocument_to_FileTable_Stream_Insert" ReturnType="Collection(DEV_STL_MainDataModel.ABDDocument_to_FileTable_Stream_Insert_Result)">
+            <Parameter Name="i_Row_Status" Mode="In" Type="String" />
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_ABDDocument_ID" Mode="In" Type="String" />
+            <Parameter Name="i_FileTable_Stream_ID" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ABDDocument_to_FileTable_Stream_Update" ReturnType="Collection(DEV_STL_MainDataModel.ABDDocument_to_FileTable_Stream_Update_Result)">
+            <Parameter Name="i_ABDDocument_to_FileTable_Stream_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Row_Status" Mode="In" Type="String" />
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_ABDDocument_ID" Mode="In" Type="String" />
+            <Parameter Name="i_FileTable_Stream_ID" Mode="In" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Register_SequenceNumber" ReturnType="Collection(Int64)" />
+          <FunctionImport Name="ABDDocument_Update" ReturnType="Collection(DEV_STL_MainDataModel.ABDDocument_Update_Result)">
+            <Parameter Name="i_ABDDocument_ID" Mode="In" Type="String" />
+            <Parameter Name="i_Row_Status" Mode="In" Type="String" />
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="i_ABDDocument_Name" Mode="In" Type="String" />
+            <Parameter Name="i_ABDDocument_Number" Mode="In" Type="String" />
+            <Parameter Name="i_Issue_Date" Mode="In" Type="String" />
+            <Parameter Name="i_Sheet_Folder_Number" Mode="In" Type="String" />
+            <Parameter Name="i_Total_Sheets" Mode="In" Type="String" />
+            <Parameter Name="i_Number_in_Folder" Mode="In" Type="String" />
+            <Parameter Name="i_ABDFinalFolder_Name" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Phase">
+          <Key>
+            <PropertyRef Name="Phase_ID" />
+            <PropertyRef Name="Phase_Name" />
+          </Key>
+          <Property Name="Phase_ID" Type="Guid" Nullable="false" />
+          <Property Name="Phase_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProcessPhase">
+          <Key>
+            <PropertyRef Name="ProcessPhase_ID" />
+            <PropertyRef Name="ProcessPhase_Name" />
+          </Key>
+          <Property Name="ProcessPhase_ID" Type="Guid" Nullable="false" />
+          <Property Name="ProcessPhase_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UI_RegisterList">
+          <Key>
+            <PropertyRef Name="newGuid" />
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="Register_ID" Type="Guid" Nullable="false" />
+          <Property Name="LOG_ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Register_Number" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phase" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="TitleObject_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Target__Unit_ISO_" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Marka_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Work_Desc" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="CNT_Date" Type="DateTime" Precision="7" />
+          <Property Name="SCTR_RESP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CTR_RESP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ABDStatusDate" Type="DateTime" Precision="7" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="TitleColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TitleOrder" Type="Int32" />
+          <Property Name="MarkaColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MarkaOrder" Type="Int32" />
+          <Property Name="StatusColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusOrder" Type="Int32" />
+          <Property Name="TitleObject_ID" Type="Guid" />
+          <Property Name="Marka_ID" Type="Guid" />
+          <Property Name="ABDStatus_ID" Type="Guid" />
+          <Property Name="WorkPackage_ID" Type="Guid" />
+          <Property Name="WorkPackage_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessPhase_ID" Type="Guid" />
+          <Property Name="ProcessPhase_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Register_Row_status" Type="Int32" />
+          <Property Name="Register_to_TitleObject_Row_status" Type="Int32" />
+          <Property Name="Register_to_Marka_Row_status" Type="Int32" />
+          <Property Name="Register_to_TitleObject_ID" Type="Guid" />
+          <Property Name="Register_to_Marka_ID" Type="Guid" />
+          <Property Name="newGuid" Type="Guid" Nullable="false" />
+          <Property Name="FileLOG" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="User_Id" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UI_TitleObject_to_Phase">
+          <Key>
+            <PropertyRef Name="TitleObject_ID" />
+          </Key>
+          <Property Name="Phase_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phase_ID" Type="Guid" />
+          <Property Name="TitleObject_ID" Type="Guid" Nullable="false" />
+          <Property Name="TitleObject_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UI_Marka">
+          <Key>
+            <PropertyRef Name="Marka_ID" />
+            <PropertyRef Name="Marka_Name" />
+          </Key>
+          <Property Name="Marka_ID" Type="Guid" Nullable="false" />
+          <Property Name="Marka_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code_of_mark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Engineering_Drawing_Type_Eng" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Engineering_Drawing_Type_Rus" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsUsedInMatrix" Type="Boolean" />
+          <Property Name="IsPriority" Type="Boolean" />
+          <Property Name="ReportColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReportOrder" Type="Int32" />
+          <Property Name="Row_Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="UI_TitleObject">
+          <Key>
+            <PropertyRef Name="TitleObject_ID" />
+            <PropertyRef Name="TitleObject_Name" />
+          </Key>
+          <Property Name="TitleObject_ID" Type="Guid" Nullable="false" />
+          <Property Name="TitleObject_PARENTID" Type="Guid" />
+          <Property Name="Structure" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TitleObject_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Eng" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Phase_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReportColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReportOrder" Type="Int32" />
+          <Property Name="GLB_Weight" Type="Double" />
+          <Property Name="Book1_Pct" Type="Double" />
+          <Property Name="Book1_Weight" Type="Double" />
+          <Property Name="Book2_Pct" Type="Double" />
+          <Property Name="Book2_Weight" Type="Double" />
+          <Property Name="Book3_Pct" Type="Double" />
+          <Property Name="Book3_Weight" Type="Double" />
+          <Property Name="Book4_Weight" Type="Double" />
+          <Property Name="TitleObject_for_ABDFinalSet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StageOfConstr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Row_Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="p_ABDFinalFolder">
+          <Key>
+            <PropertyRef Name="ABDFinalFolder_ID" />
+          </Key>
+          <Property Name="ABDFinalFolder_ID" Type="Guid" Nullable="false" />
+          <Property Name="ABDFinalFolder_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Row_status" Type="Int32" />
+          <Property Name="Insert_DTS" Type="DateTime" Precision="7" />
+          <Property Name="Update_DTS" Type="DateTime" Precision="7" />
+          <Property Name="Final_Compilation_Target_Date" Type="DateTime" Precision="7" />
+          <Property Name="Final_Compilation_Start_Date" Type="DateTime" Precision="7" />
+          <Property Name="CTR_RESP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ListCount" Type="Int32" />
+          <NavigationProperty Name="p_ABDFinalFolder_to_Contragent" Relationship="DEV_STL_MainDataModel.FK_p_ABDFinalFolder_to_Contragent_p_ABDFinalFolder" FromRole="p_ABDFinalFolder" ToRole="p_ABDFinalFolder_to_Contragent" />
+          <Property Name="Modified_By" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="p_ABDFinalFolder_to_Contragent">
+          <Key>
+            <PropertyRef Name="ABDFinalFolder_to_Contragent_ID" />
+          </Key>
+          <Property Name="ABDFinalFolder_to_Contragent_ID" Type="Guid" Nullable="false" />
+          <Property Name="Insert_DTS" Type="DateTime" Precision="7" />
+          <Property Name="Update_DTS" Type="DateTime" Precision="7" />
+          <Property Name="Row_Status" Type="Int32" />
+          <Property Name="ABDFinalFolder_ID" Type="Guid" Nullable="false" />
+          <Property Name="Contragent_ID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="p_ABDFinalFolder" Relationship="DEV_STL_MainDataModel.FK_p_ABDFinalFolder_to_Contragent_p_ABDFinalFolder" FromRole="p_ABDFinalFolder_to_Contragent" ToRole="p_ABDFinalFolder" />
+          <NavigationProperty Name="p_Contragent" Relationship="DEV_STL_MainDataModel.FK_p_ABDFinalFolder_to_Contragent_p_Contragent" FromRole="p_ABDFinalFolder_to_Contragent" ToRole="p_Contragent" />
+        </EntityType>
+        <EntityType Name="p_Contragent">
+          <Key>
+            <PropertyRef Name="Contragent_ID" />
+          </Key>
+          <Property Name="Contragent_ID" Type="Guid" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Row_status" Type="Int32" />
+          <Property Name="Insert_DTS" Type="DateTime" Precision="7" />
+          <Property Name="Update_DTS" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="p_ABDFinalFolder_to_Contragent" Relationship="DEV_STL_MainDataModel.FK_p_ABDFinalFolder_to_Contragent_p_Contragent" FromRole="p_Contragent" ToRole="p_ABDFinalFolder_to_Contragent" />
+        </EntityType>
+        <EntityType Name="R_Structure">
+          <Key>
+            <PropertyRef Name="Structure_ID" />
+            <PropertyRef Name="Structure_Name" />
+          </Key>
+          <Property Name="Structure_ID" Type="Guid" Nullable="false" />
+          <Property Name="Structure_Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_p_ABDFinalFolder_to_Contragent_p_ABDFinalFolder">
+          <End Type="DEV_STL_MainDataModel.p_ABDFinalFolder" Role="p_ABDFinalFolder" Multiplicity="1" />
+          <End Type="DEV_STL_MainDataModel.p_ABDFinalFolder_to_Contragent" Role="p_ABDFinalFolder_to_Contragent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="p_ABDFinalFolder">
+              <PropertyRef Name="ABDFinalFolder_ID" />
+            </Principal>
+            <Dependent Role="p_ABDFinalFolder_to_Contragent">
+              <PropertyRef Name="ABDFinalFolder_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_p_ABDFinalFolder_to_Contragent_p_Contragent">
+          <End Type="DEV_STL_MainDataModel.p_Contragent" Role="p_Contragent" Multiplicity="1" />
+          <End Type="DEV_STL_MainDataModel.p_ABDFinalFolder_to_Contragent" Role="p_ABDFinalFolder_to_Contragent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="p_Contragent">
+              <PropertyRef Name="Contragent_ID" />
+            </Principal>
+            <Dependent Role="p_ABDFinalFolder_to_Contragent">
+              <PropertyRef Name="Contragent_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FinalABDCompilation">
+          <Key>
+            <PropertyRef Name="NewGUID" />
+          </Key>
+          <Property Name="ABDFinalFolder_ID" Type="Guid" Nullable="false" />
+          <Property Name="ABDFinalFolder_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CTR_RESP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Final_Compilation_Start_Date" Type="DateTime" Precision="7" />
+          <Property Name="Final_Compilation_Target_Date" Type="DateTime" Precision="7" />
+          <Property Name="ListCount" Type="Int32" />
+          <Property Name="ABDFinalSet_ID" Type="Guid" Nullable="false" />
+          <Property Name="ABDFinalSet_Number" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ABDStatus_ID" Type="Guid" Nullable="false" />
+          <Property Name="Status_ENG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TitleObject_ID" Type="Guid" Nullable="false" />
+          <Property Name="TitleObject_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SubContractor_Id" Type="Guid" Nullable="false" />
+          <Property Name="SubContractor_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Marka_ID" Type="Guid" Nullable="false" />
+          <Property Name="Marka_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Transmittal_ID" Type="Guid" />
+          <Property Name="Transmittal_Code" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ReportColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReportOrder" Type="Int32" />
+          <Property Name="FoldedStatus" Type="String" MaxLength="513" FixedLength="false" Unicode="true" />
+          <Property Name="NewGUID" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UI_ISO">
+          <Key>
+            <PropertyRef Name="ISO_ID" />
+            <PropertyRef Name="ISO_Number" />
+          </Key>
+          <Property Name="ISO_ID" Type="Guid" Nullable="false" />
+          <Property Name="ISO_Number" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Marka_ID" Type="Guid" />
+          <Property Name="Marka_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TitleObject_ID" Type="Guid" />
+          <Property Name="TitleObject_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DesignAreaType_ID" Type="Guid" />
+          <Property Name="DesignAreaType_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProcessPhase_ID" Type="Guid" />
+          <Property Name="ProcessPhase_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Line_ID" Type="Guid" />
+          <Property Name="Row_status" Type="Int32" />
+          <Property Name="Line_Number" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phase_ID" Type="Guid" />
+          <Property Name="Phase_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Line_Row_status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="UI_Line">
+          <Key>
+            <PropertyRef Name="Line_ID" />
+            <PropertyRef Name="Line_Number" />
+          </Key>
+          <Property Name="Line_ID" Type="Guid" Nullable="false" />
+          <Property Name="Line_Number" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Row_Status" Type="Int32" />
+          <Property Name="Location_From" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Location_To" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Fluid_Name_Eng" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Fluid_Name_Rus" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Fluid_Danger_Code_By_Gost" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Fluid_Fire_Aand_Explosive_Hazard" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Fluid_Group_By_TP_TC_032_2013" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Fluid_Group_By_GOST" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Pipeline_Category_By_GOST" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Piprline_Category_By_TP_TC_032_2013" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DesignAreaType">
+          <Key>
+            <PropertyRef Name="DesignAreaType_ID" />
+            <PropertyRef Name="DesignAreaType_Name" />
+          </Key>
+          <Property Name="DesignAreaType_ID" Type="Guid" Nullable="false" />
+          <Property Name="DesignAreaType_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="Line_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Line_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Line_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="ISO_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="ISO_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="ISO_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Marka_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Marka_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="Marka_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="TitleObject_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="TitleObject_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="TitleObject_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <EntityType Name="ABDDocument_to_FileTable_StreamFull">
+          <Key>
+            <PropertyRef Name="ABDDocument_ID" />
+            <PropertyRef Name="FileTable_Stream_ID" />
+            <PropertyRef Name="ABDDocument_to_FileTable_Stream_ID" />
+          </Key>
+          <Property Name="ABDDocument_ID" Type="Guid" Nullable="false" />
+          <Property Name="FileTable_Stream_ID" Type="Guid" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="file_type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="last_write_time" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Row_Status" Type="Int32" />
+          <Property Name="ABDDocument_to_FileTable_Stream_ID" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ABDDocumentFull">
+          <Key>
+            <PropertyRef Name="ABDDocumentFull_ID" />
+          </Key>
+          <Property Name="ABDDocument_ID" Type="Guid" Nullable="false" />
+          <Property Name="ABDDocument_Number" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ABDDocument_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ABDFinalFolder_ID" Type="Guid" />
+          <Property Name="ABDFinalFolder_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DisciplineDocumentCode_ID" Type="Guid" />
+          <Property Name="DisciplineDocumentCode_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DDC_Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DDC_Description_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentTypeCode_ID" Type="Guid" />
+          <Property Name="DocumentTypeCode_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DTC_Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DTC_Description_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="GOST_ID" Type="Guid" />
+          <Property Name="GOST_Code" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="G_Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Module_ID" Type="Guid" />
+          <Property Name="Module_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="M_Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="M_Description_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PID_ID" Type="Guid" />
+          <Property Name="PID_Code" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PID_Description_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SubContractor_ID" Type="Guid" />
+          <Property Name="SubContractor_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UnitNumberDocumentCode_ID" Type="Guid" />
+          <Property Name="UnitNumberDocumentCode_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="U_Description_Rus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="U_Description_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Issue_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Sheet_Folder_Number" Type="Int32" Nullable="false" />
+          <Property Name="Total_Sheets" Type="Int32" Nullable="false" />
+          <Property Name="Number_in_Folder" Type="Int32" Nullable="false" />
+          <Property Name="Structure" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Structure_ID" Type="Guid" />
+          <Property Name="Final_Compilation_Target_Date" Type="DateTime" Precision="7" />
+          <Property Name="Final_Compilation_Start_Date" Type="DateTime" Precision="7" />
+          <Property Name="CTR_RESP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ABDDocumentFull_ID" Type="Guid" Nullable="false" />
+          <Property Name="Modified_User" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="Created_User" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="ABDDocument_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="ABDDocument_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="ABDDocument_To_FileTable_Stream_Delete_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="ABDDocument_to_FileTable_Stream_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="ABDDocument_to_FileTable_Stream_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="ABDDocument_Update_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DEV_STL_MainDataModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="p_ABDStatus">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.p_ABDStatus">
+              <MappingFragment StoreEntitySet="p_ABDStatus">
+                <ScalarProperty Name="ABDStatus_ID" ColumnName="ABDStatus_ID" />
+                <ScalarProperty Name="Stage" ColumnName="Stage" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Status_Type" ColumnName="Status_Type" />
+                <ScalarProperty Name="Row_status" ColumnName="Row_status" />
+                <ScalarProperty Name="Insert_DTS" ColumnName="Insert_DTS" />
+                <ScalarProperty Name="Update_DTS" ColumnName="Update_DTS" />
+                <ScalarProperty Name="ReportColor" ColumnName="ReportColor" />
+                <ScalarProperty Name="ReportOrder" ColumnName="ReportOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phases">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.Phase">
+              <MappingFragment StoreEntitySet="Phase">
+                <ScalarProperty Name="Phase_Name" ColumnName="Phase_Name" />
+                <ScalarProperty Name="Phase_ID" ColumnName="Phase_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProcessPhases">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.ProcessPhase">
+              <MappingFragment StoreEntitySet="ProcessPhase">
+                <ScalarProperty Name="ProcessPhase_Name" ColumnName="ProcessPhase_Name" />
+                <ScalarProperty Name="ProcessPhase_ID" ColumnName="ProcessPhase_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_RegisterList">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.UI_RegisterList">
+              <MappingFragment StoreEntitySet="UI_RegisterList">
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="FileLOG" ColumnName="FileLOG" />
+                <ScalarProperty Name="newGuid" ColumnName="newGuid" />
+                <ScalarProperty Name="Register_to_Marka_ID" ColumnName="Register_to_Marka_ID" />
+                <ScalarProperty Name="Register_to_TitleObject_ID" ColumnName="Register_to_TitleObject_ID" />
+                <ScalarProperty Name="Register_to_Marka_Row_status" ColumnName="Register_to_Marka_Row_status" />
+                <ScalarProperty Name="Register_to_TitleObject_Row_status" ColumnName="Register_to_TitleObject_Row_status" />
+                <ScalarProperty Name="Register_Row_status" ColumnName="Register_Row_status" />
+                <ScalarProperty Name="ProcessPhase_Name" ColumnName="ProcessPhase_Name" />
+                <ScalarProperty Name="ProcessPhase_ID" ColumnName="ProcessPhase_ID" />
+                <ScalarProperty Name="WorkPackage_Name" ColumnName="WorkPackage_Name" />
+                <ScalarProperty Name="WorkPackage_ID" ColumnName="WorkPackage_ID" />
+                <ScalarProperty Name="ABDStatus_ID" ColumnName="ABDStatus_ID" />
+                <ScalarProperty Name="Marka_ID" ColumnName="Marka_ID" />
+                <ScalarProperty Name="TitleObject_ID" ColumnName="TitleObject_ID" />
+                <ScalarProperty Name="StatusOrder" ColumnName="StatusOrder" />
+                <ScalarProperty Name="StatusColor" ColumnName="StatusColor" />
+                <ScalarProperty Name="MarkaOrder" ColumnName="MarkaOrder" />
+                <ScalarProperty Name="MarkaColor" ColumnName="MarkaColor" />
+                <ScalarProperty Name="TitleOrder" ColumnName="TitleOrder" />
+                <ScalarProperty Name="TitleColor" ColumnName="TitleColor" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="ABDStatusDate" ColumnName="ABDStatusDate" />
+                <ScalarProperty Name="CTR_RESP" ColumnName="CTR_RESP" />
+                <ScalarProperty Name="SCTR_RESP" ColumnName="SCTR_RESP" />
+                <ScalarProperty Name="CNT_Date" ColumnName="CNT_Date" />
+                <ScalarProperty Name="Work_Desc" ColumnName="Work_Desc" />
+                <ScalarProperty Name="Marka_Name" ColumnName="Marka_Name" />
+                <ScalarProperty Name="Target__Unit_ISO_" ColumnName="Target (Unit/ISO)" />
+                <ScalarProperty Name="TitleObject_Name" ColumnName="TitleObject_Name" />
+                <ScalarProperty Name="Phase" ColumnName="Phase" />
+                <ScalarProperty Name="Register_Number" ColumnName="Register_Number" />
+                <ScalarProperty Name="LOG_ID" ColumnName="LOG_ID" />
+                <ScalarProperty Name="Register_ID" ColumnName="Register_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_TitleObject_to_Phase">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.UI_TitleObject_to_Phase">
+              <MappingFragment StoreEntitySet="UI_TitleObject_to_Phase">
+                <ScalarProperty Name="TitleObject_Name" ColumnName="TitleObject_Name" />
+                <ScalarProperty Name="TitleObject_ID" ColumnName="TitleObject_ID" />
+                <ScalarProperty Name="Phase_ID" ColumnName="Phase_ID" />
+                <ScalarProperty Name="Phase_Name" ColumnName="Phase_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_Marka">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.UI_Marka">
+              <MappingFragment StoreEntitySet="UI_Marka">
+                <ScalarProperty Name="Row_Status" ColumnName="Row_Status" />
+                <ScalarProperty Name="ReportOrder" ColumnName="ReportOrder" />
+                <ScalarProperty Name="ReportColor" ColumnName="ReportColor" />
+                <ScalarProperty Name="IsPriority" ColumnName="IsPriority" />
+                <ScalarProperty Name="IsUsedInMatrix" ColumnName="IsUsedInMatrix" />
+                <ScalarProperty Name="Engineering_Drawing_Type_Rus" ColumnName="Engineering_Drawing_Type_Rus" />
+                <ScalarProperty Name="Engineering_Drawing_Type_Eng" ColumnName="Engineering_Drawing_Type_Eng" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="Code_of_mark" ColumnName="Code_of_mark" />
+                <ScalarProperty Name="Marka_Name" ColumnName="Marka_Name" />
+                <ScalarProperty Name="Marka_ID" ColumnName="Marka_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_TitleObject">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.UI_TitleObject">
+              <MappingFragment StoreEntitySet="UI_TitleObject">
+                <ScalarProperty Name="Row_Status" ColumnName="Row_Status" />
+                <ScalarProperty Name="StageOfConstr" ColumnName="StageOfConstr" />
+                <ScalarProperty Name="TitleObject_for_ABDFinalSet" ColumnName="TitleObject_for_ABDFinalSet" />
+                <ScalarProperty Name="Book4_Weight" ColumnName="Book4_Weight" />
+                <ScalarProperty Name="Book3_Weight" ColumnName="Book3_Weight" />
+                <ScalarProperty Name="Book3_Pct" ColumnName="Book3_Pct" />
+                <ScalarProperty Name="Book2_Weight" ColumnName="Book2_Weight" />
+                <ScalarProperty Name="Book2_Pct" ColumnName="Book2_Pct" />
+                <ScalarProperty Name="Book1_Weight" ColumnName="Book1_Weight" />
+                <ScalarProperty Name="Book1_Pct" ColumnName="Book1_Pct" />
+                <ScalarProperty Name="GLB_Weight" ColumnName="GLB_Weight" />
+                <ScalarProperty Name="ReportOrder" ColumnName="ReportOrder" />
+                <ScalarProperty Name="ReportColor" ColumnName="ReportColor" />
+                <ScalarProperty Name="Phase_Name" ColumnName="Phase_Name" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="TitleObject_Name" ColumnName="TitleObject_Name" />
+                <ScalarProperty Name="Structure" ColumnName="Structure" />
+                <ScalarProperty Name="TitleObject_PARENTID" ColumnName="TitleObject_PARENTID" />
+                <ScalarProperty Name="TitleObject_ID" ColumnName="TitleObject_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="p_ABDFinalFolder">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.p_ABDFinalFolder">
+              <MappingFragment StoreEntitySet="p_ABDFinalFolder">
+                <ScalarProperty Name="Modified_By" ColumnName="Modified_By" />
+                <ScalarProperty Name="ListCount" ColumnName="ListCount" />
+                <ScalarProperty Name="CTR_RESP" ColumnName="CTR_RESP" />
+                <ScalarProperty Name="Final_Compilation_Start_Date" ColumnName="Final_Compilation_Start_Date" />
+                <ScalarProperty Name="Final_Compilation_Target_Date" ColumnName="Final_Compilation_Target_Date" />
+                <ScalarProperty Name="Update_DTS" ColumnName="Update_DTS" />
+                <ScalarProperty Name="Insert_DTS" ColumnName="Insert_DTS" />
+                <ScalarProperty Name="Row_status" ColumnName="Row_status" />
+                <ScalarProperty Name="ABDFinalFolder_Name" ColumnName="ABDFinalFolder_Name" />
+                <ScalarProperty Name="ABDFinalFolder_ID" ColumnName="ABDFinalFolder_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="p_ABDFinalFolder_to_Contragent">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.p_ABDFinalFolder_to_Contragent">
+              <MappingFragment StoreEntitySet="p_ABDFinalFolder_to_Contragent">
+                <ScalarProperty Name="Contragent_ID" ColumnName="Contragent_ID" />
+                <ScalarProperty Name="ABDFinalFolder_ID" ColumnName="ABDFinalFolder_ID" />
+                <ScalarProperty Name="Row_Status" ColumnName="Row_Status" />
+                <ScalarProperty Name="Update_DTS" ColumnName="Update_DTS" />
+                <ScalarProperty Name="Insert_DTS" ColumnName="Insert_DTS" />
+                <ScalarProperty Name="ABDFinalFolder_to_Contragent_ID" ColumnName="ABDFinalFolder_to_Contragent_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="p_Contragent">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.p_Contragent">
+              <MappingFragment StoreEntitySet="p_Contragent">
+                <ScalarProperty Name="Update_DTS" ColumnName="Update_DTS" />
+                <ScalarProperty Name="Insert_DTS" ColumnName="Insert_DTS" />
+                <ScalarProperty Name="Row_status" ColumnName="Row_status" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Contragent_ID" ColumnName="Contragent_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="R_Structure">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.R_Structure">
+              <MappingFragment StoreEntitySet="R_Structure">
+                <ScalarProperty Name="Structure_Name" ColumnName="Structure_Name" />
+                <ScalarProperty Name="Structure_ID" ColumnName="Structure_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinalABDCompilations">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.FinalABDCompilation">
+              <MappingFragment StoreEntitySet="FinalABDCompilation">
+                <ScalarProperty Name="NewGUID" ColumnName="NewGUID" />
+                <ScalarProperty Name="FoldedStatus" ColumnName="FoldedStatus" />
+                <ScalarProperty Name="ReportOrder" ColumnName="ReportOrder" />
+                <ScalarProperty Name="ReportColor" ColumnName="ReportColor" />
+                <ScalarProperty Name="Transmittal_Code" ColumnName="Transmittal_Code" />
+                <ScalarProperty Name="Transmittal_ID" ColumnName="Transmittal_ID" />
+                <ScalarProperty Name="Marka_Name" ColumnName="Marka_Name" />
+                <ScalarProperty Name="Marka_ID" ColumnName="Marka_ID" />
+                <ScalarProperty Name="SubContractor_Name" ColumnName="SubContractor_Name" />
+                <ScalarProperty Name="SubContractor_Id" ColumnName="SubContractor_Id" />
+                <ScalarProperty Name="TitleObject_Name" ColumnName="TitleObject_Name" />
+                <ScalarProperty Name="TitleObject_ID" ColumnName="TitleObject_ID" />
+                <ScalarProperty Name="Status_Rus" ColumnName="Status_Rus" />
+                <ScalarProperty Name="Status_ENG" ColumnName="Status_ENG" />
+                <ScalarProperty Name="ABDStatus_ID" ColumnName="ABDStatus_ID" />
+                <ScalarProperty Name="ABDFinalSet_Number" ColumnName="ABDFinalSet_Number" />
+                <ScalarProperty Name="ABDFinalSet_ID" ColumnName="ABDFinalSet_ID" />
+                <ScalarProperty Name="ListCount" ColumnName="ListCount" />
+                <ScalarProperty Name="Final_Compilation_Target_Date" ColumnName="Final_Compilation_Target_Date" />
+                <ScalarProperty Name="Final_Compilation_Start_Date" ColumnName="Final_Compilation_Start_Date" />
+                <ScalarProperty Name="CTR_RESP" ColumnName="CTR_RESP" />
+                <ScalarProperty Name="ABDFinalFolder_Name" ColumnName="ABDFinalFolder_Name" />
+                <ScalarProperty Name="ABDFinalFolder_ID" ColumnName="ABDFinalFolder_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_ISO">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.UI_ISO">
+              <MappingFragment StoreEntitySet="UI_ISO">
+                <ScalarProperty Name="Line_Row_status" ColumnName="Line_Row_status" />
+                <ScalarProperty Name="Phase_Name" ColumnName="Phase_Name" />
+                <ScalarProperty Name="Phase_ID" ColumnName="Phase_ID" />
+                <ScalarProperty Name="Line_Number" ColumnName="Line_Number" />
+                <ScalarProperty Name="Row_status" ColumnName="Row_status" />
+                <ScalarProperty Name="Line_ID" ColumnName="Line_ID" />
+                <ScalarProperty Name="ProcessPhase_Name" ColumnName="ProcessPhase_Name" />
+                <ScalarProperty Name="ProcessPhase_ID" ColumnName="ProcessPhase_ID" />
+                <ScalarProperty Name="DesignAreaType_Name" ColumnName="DesignAreaType_Name" />
+                <ScalarProperty Name="DesignAreaType_ID" ColumnName="DesignAreaType_ID" />
+                <ScalarProperty Name="TitleObject_Name" ColumnName="TitleObject_Name" />
+                <ScalarProperty Name="TitleObject_ID" ColumnName="TitleObject_ID" />
+                <ScalarProperty Name="Marka_Name" ColumnName="Marka_Name" />
+                <ScalarProperty Name="Marka_ID" ColumnName="Marka_ID" />
+                <ScalarProperty Name="ISO_Number" ColumnName="ISO_Number" />
+                <ScalarProperty Name="ISO_ID" ColumnName="ISO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UI_Line">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.UI_Line">
+              <MappingFragment StoreEntitySet="UI_Line">
+                <ScalarProperty Name="Piprline_Category_By_TP_TC_032_2013" ColumnName="Piprline_Category_By_TP_TC_032_2013" />
+                <ScalarProperty Name="Pipeline_Category_By_GOST" ColumnName="Pipeline_Category_By_GOST" />
+                <ScalarProperty Name="Fluid_Group_By_GOST" ColumnName="Fluid_Group_By_GOST" />
+                <ScalarProperty Name="Fluid_Group_By_TP_TC_032_2013" ColumnName="Fluid_Group_By_TP_TC_032_2013" />
+                <ScalarProperty Name="Fluid_Fire_Aand_Explosive_Hazard" ColumnName="Fluid_Fire_Aand_Explosive_Hazard" />
+                <ScalarProperty Name="Fluid_Danger_Code_By_Gost" ColumnName="Fluid_Danger_Code_By_Gost" />
+                <ScalarProperty Name="Fluid_Name_Rus" ColumnName="Fluid_Name_Rus" />
+                <ScalarProperty Name="Fluid_Name_Eng" ColumnName="Fluid_Name_Eng" />
+                <ScalarProperty Name="Location_To" ColumnName="Location_To" />
+                <ScalarProperty Name="Location_From" ColumnName="Location_From" />
+                <ScalarProperty Name="Row_Status" ColumnName="Row_Status" />
+                <ScalarProperty Name="Line_Number" ColumnName="Line_Number" />
+                <ScalarProperty Name="Line_ID" ColumnName="Line_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DesignAreaTypes">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.DesignAreaType">
+              <MappingFragment StoreEntitySet="DesignAreaType">
+                <ScalarProperty Name="DesignAreaType_Name" ColumnName="DesignAreaType_Name" />
+                <ScalarProperty Name="DesignAreaType_ID" ColumnName="DesignAreaType_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Line_Delete" FunctionName="DEV_STL_MainDataModel.Store.Line_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.Line_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Line_Insert" FunctionName="DEV_STL_MainDataModel.Store.Line_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.Line_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Line_Update" FunctionName="DEV_STL_MainDataModel.Store.Line_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.Line_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ISO_Delete" FunctionName="DEV_STL_MainDataModel.Store.ISO_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.ISO_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ISO_Insert" FunctionName="DEV_STL_MainDataModel.Store.ISO_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.ISO_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ISO_Update" FunctionName="DEV_STL_MainDataModel.Store.ISO_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.ISO_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Marka_Delete" FunctionName="DEV_STL_MainDataModel.Store.Marka_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.Marka_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Marka_Insert" FunctionName="DEV_STL_MainDataModel.Store.Marka_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.Marka_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Marka_Update" FunctionName="DEV_STL_MainDataModel.Store.Marka_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.Marka_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TitleObject_Delete" FunctionName="DEV_STL_MainDataModel.Store.TitleObject_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.TitleObject_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TitleObject_Insert" FunctionName="DEV_STL_MainDataModel.Store.TitleObject_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.TitleObject_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TitleObject_Update" FunctionName="DEV_STL_MainDataModel.Store.TitleObject_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.TitleObject_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ABDDocument_to_FileTable_StreamFull">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.ABDDocument_to_FileTable_StreamFull">
+              <MappingFragment StoreEntitySet="ABDDocument_to_FileTable_StreamFull">
+                <ScalarProperty Name="ABDDocument_to_FileTable_Stream_ID" ColumnName="ABDDocument_to_FileTable_Stream_ID" />
+                <ScalarProperty Name="Row_Status" ColumnName="Row_Status" />
+                <ScalarProperty Name="last_write_time" ColumnName="last_write_time" />
+                <ScalarProperty Name="file_type" ColumnName="file_type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="FileTable_Stream_ID" ColumnName="FileTable_Stream_ID" />
+                <ScalarProperty Name="ABDDocument_ID" ColumnName="ABDDocument_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ABDDocumentFulls">
+            <EntityTypeMapping TypeName="DEV_STL_MainDataModel.ABDDocumentFull">
+              <MappingFragment StoreEntitySet="ABDDocumentFull">
+                <ScalarProperty Name="Created_User" ColumnName="Created_User" />
+                <ScalarProperty Name="Modified_User" ColumnName="Modified_User" />
+                <ScalarProperty Name="ABDDocumentFull_ID" ColumnName="ABDDocumentFull_ID" />
+                <ScalarProperty Name="CTR_RESP" ColumnName="CTR_RESP" />
+                <ScalarProperty Name="Final_Compilation_Start_Date" ColumnName="Final_Compilation_Start_Date" />
+                <ScalarProperty Name="Final_Compilation_Target_Date" ColumnName="Final_Compilation_Target_Date" />
+                <ScalarProperty Name="Structure_ID" ColumnName="Structure_ID" />
+                <ScalarProperty Name="Structure" ColumnName="Structure" />
+                <ScalarProperty Name="Number_in_Folder" ColumnName="Number_in_Folder" />
+                <ScalarProperty Name="Total_Sheets" ColumnName="Total_Sheets" />
+                <ScalarProperty Name="Sheet_Folder_Number" ColumnName="Sheet_Folder_Number" />
+                <ScalarProperty Name="Issue_Date" ColumnName="Issue_Date" />
+                <ScalarProperty Name="U_Description_Eng" ColumnName="U_Description_Eng" />
+                <ScalarProperty Name="U_Description_Rus" ColumnName="U_Description_Rus" />
+                <ScalarProperty Name="UnitNumberDocumentCode_Name" ColumnName="UnitNumberDocumentCode_Name" />
+                <ScalarProperty Name="UnitNumberDocumentCode_ID" ColumnName="UnitNumberDocumentCode_ID" />
+                <ScalarProperty Name="SubContractor_Name" ColumnName="SubContractor_Name" />
+                <ScalarProperty Name="SubContractor_ID" ColumnName="SubContractor_ID" />
+                <ScalarProperty Name="PID_Description_Eng" ColumnName="PID_Description_Eng" />
+                <ScalarProperty Name="PID_Code" ColumnName="PID_Code" />
+                <ScalarProperty Name="PID_ID" ColumnName="PID_ID" />
+                <ScalarProperty Name="M_Description_Eng" ColumnName="M_Description_Eng" />
+                <ScalarProperty Name="M_Description_Rus" ColumnName="M_Description_Rus" />
+                <ScalarProperty Name="Module_Name" ColumnName="Module_Name" />
+                <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
+                <ScalarProperty Name="G_Description_Rus" ColumnName="G_Description_Rus" />
+                <ScalarProperty Name="GOST_Code" ColumnName="GOST_Code" />
+                <ScalarProperty Name="GOST_ID" ColumnName="GOST_ID" />
+                <ScalarProperty Name="DTC_Description_Eng" ColumnName="DTC_Description_Eng" />
+                <ScalarProperty Name="DTC_Description_Rus" ColumnName="DTC_Description_Rus" />
+                <ScalarProperty Name="DocumentTypeCode_Name" ColumnName="DocumentTypeCode_Name" />
+                <ScalarProperty Name="DocumentTypeCode_ID" ColumnName="DocumentTypeCode_ID" />
+                <ScalarProperty Name="DDC_Description_Eng" ColumnName="DDC_Description_Eng" />
+                <ScalarProperty Name="DDC_Description_Rus" ColumnName="DDC_Description_Rus" />
+                <ScalarProperty Name="DisciplineDocumentCode_Name" ColumnName="DisciplineDocumentCode_Name" />
+                <ScalarProperty Name="DisciplineDocumentCode_ID" ColumnName="DisciplineDocumentCode_ID" />
+                <ScalarProperty Name="ABDFinalFolder_Name" ColumnName="ABDFinalFolder_Name" />
+                <ScalarProperty Name="ABDFinalFolder_ID" ColumnName="ABDFinalFolder_ID" />
+                <ScalarProperty Name="ABDDocument_Name" ColumnName="ABDDocument_Name" />
+                <ScalarProperty Name="ABDDocument_Number" ColumnName="ABDDocument_Number" />
+                <ScalarProperty Name="ABDDocument_ID" ColumnName="ABDDocument_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ABDDocument_Delete" FunctionName="DEV_STL_MainDataModel.Store.ABDDocument_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.ABDDocument_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ABDDocument_Insert" FunctionName="DEV_STL_MainDataModel.Store.ABDDocument_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.ABDDocument_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ABDDocument_To_FileTable_Stream_Delete" FunctionName="DEV_STL_MainDataModel.Store.ABDDocument_To_FileTable_Stream_Delete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.ABDDocument_To_FileTable_Stream_Delete_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ABDDocument_to_FileTable_Stream_Insert" FunctionName="DEV_STL_MainDataModel.Store.ABDDocument_to_FileTable_Stream_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.ABDDocument_to_FileTable_Stream_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ABDDocument_to_FileTable_Stream_Update" FunctionName="DEV_STL_MainDataModel.Store.ABDDocument_to_FileTable_Stream_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.ABDDocument_to_FileTable_Stream_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Register_SequenceNumber" FunctionName="DEV_STL_MainDataModel.Store.Register_SequenceNumber" />
+          <FunctionImportMapping FunctionImportName="ABDDocument_Update" FunctionName="DEV_STL_MainDataModel.Store.ABDDocument_Update">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DEV_STL_MainDataModel.ABDDocument_Update_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

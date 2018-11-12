@@ -1,0 +1,44 @@
+﻿@using System.Drawing
+@model KeyValuePair<bool, string>
+
+@Html.DevExpress().Menu(settings => {
+    settings.Name = "Menu";
+
+    settings.AllowSelectItem = false;
+    settings.Orientation = System.Web.UI.WebControls.Orientation.Horizontal;
+
+    settings.Items.Add(item =>
+    {
+        item.Text = "Home";
+        item.NavigateUrl = Url.RouteUrl("");
+    });
+
+    settings.Items.Add(item =>
+    {
+        item.Text = "Home (react)";
+        item.NavigateUrl = Url.RouteUrl("mainMenuReact");
+    });
+
+    settings.Items.Add(item => {
+        item.Text = "As-built documentation";
+        item.Items.Add("Sets and folders");
+        var registers = item.Items.Add("Registers");
+        registers.NavigateUrl = Url.RouteUrl("registers");
+    });
+
+    var permission = settings.Items.Add("Permission documentation");
+    permission.NavigateUrl = Url.RouteUrl("permission");
+
+    settings.Items.Add(item => {
+        item.Text = "Reference documentation";
+        item.Items.Add("Marka dictionary");
+        item.Items.Add("Title object dictionary");
+        item.Items.Add("Lines and isometrics");
+    });
+
+    var documents = settings.Items.Add("Documents");
+    documents.NavigateUrl = Url.RouteUrl("documents");
+
+}).GetHtml()
+
+

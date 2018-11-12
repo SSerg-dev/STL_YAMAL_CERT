@@ -1,0 +1,206 @@
+﻿@model SmartQA1._1._2.Models.Permission.ViewModels.DocumentForm_NaksAttest
+
+@using System.Web.UI.WebControls
+
+
+@Html.DevExpress().FormLayout(settings =>
+{
+    settings.Name = "DocumentNaksAttestFL";
+
+    settings.Items.AddGroupItem(groupItemSettings =>
+    {
+        groupItemSettings.Caption = "Область аттестации";
+
+        foreach (var hiddenField in new[]
+        {
+            "Document_ID", "DocumentType_ID", "DocumentTemplate_ID", "Employee_ID", "Document_Parent_ID"
+        })
+        {
+            groupItemSettings.Items.Add(itemSettings =>
+            {
+                itemSettings.ClientVisible = false;
+                itemSettings.SetNestedContent(() => {
+                       ViewContext.Writer.Write(Html.Hidden(hiddenField).ToHtmlString());
+                });
+            });
+        }
+
+        groupItemSettings.Items.Add(m => m.WeldingEquipmentAutomationLevel, itemSettings =>
+        {
+            itemSettings.SetNestedContent(() =>
+            {
+                Html.DevExpress().ComboBoxFor(m => m.WeldingEquipmentAutomationLevel, comboBoxSettings =>
+                {
+                    comboBoxSettings.Name = "WeldingEquipmentAutomationLevel";
+                    comboBoxSettings.Width = Unit.Pixel(400);
+                    comboBoxSettings.ShowModelErrors = true;
+
+                    comboBoxSettings.Properties.ValueField = "WeldingEquipmentAutomationLevel_ID";
+                    comboBoxSettings.Properties.TextField = "WeldingEquipmentAutomationLevel_Code";
+
+                }).BindList(((dynamic)ViewData["FieldChoices"])["WeldingEquipmentAutomationLevel"]).Render();
+            });      
+        });
+
+        groupItemSettings.Items.Add(m => m.DetailsType, itemSettings =>
+        {
+            itemSettings.SetNestedContent(() =>
+            {
+                Html.DevExpress().TokenBoxFor(m => m.DetailsType, tokenBoxSettings =>
+                {
+                    tokenBoxSettings.Name = "DetailsType";
+                    tokenBoxSettings.Width = Unit.Pixel(400);
+                    tokenBoxSettings.ShowModelErrors = true;
+
+                    tokenBoxSettings.Properties.AllowCustomTokens = true;
+                    tokenBoxSettings.Properties.ShowDropDownOnFocus = ShowDropDownOnFocusMode.Always;
+                    tokenBoxSettings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                    tokenBoxSettings.Properties.TextField = "DetailsType_Code";
+                    tokenBoxSettings.Properties.ValueField = "DetailsType_ID";
+
+                }).BindList(((dynamic) ViewData["FieldChoices"])["DetailsType"]).Render();
+            });
+        });
+
+        groupItemSettings.Items.Add(m => m.SeamsType, itemSettings =>
+        {
+            itemSettings.SetNestedContent(() =>
+            {
+                Html.DevExpress().TokenBoxFor(m => m.SeamsType, tokenBoxSettings =>
+                {
+                    tokenBoxSettings.Name = "SeamsType";
+                    tokenBoxSettings.Width = Unit.Pixel(400);
+                    tokenBoxSettings.ShowModelErrors = true;
+
+                    tokenBoxSettings.Properties.AllowCustomTokens = true;
+                    tokenBoxSettings.Properties.ShowDropDownOnFocus = ShowDropDownOnFocusMode.Always;
+                    tokenBoxSettings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                    tokenBoxSettings.Properties.TextField = "SeamsType_Code";
+                    tokenBoxSettings.Properties.ValueField = "SeamsType_ID";
+
+                }).BindList(((dynamic) ViewData["FieldChoices"])["SeamsType"]).Render();
+            });
+        });
+
+        groupItemSettings.Items.Add(m => m.JointType, itemSettings =>
+        {
+            itemSettings.SetNestedContent(() =>
+            {
+                Html.DevExpress().ComboBoxFor(m => m.JointType, comboBoxSettings =>
+                {
+                    comboBoxSettings.Name = "JointType";
+                    comboBoxSettings.Width = Unit.Pixel(400);
+                    comboBoxSettings.ShowModelErrors = true;
+
+                    comboBoxSettings.Properties.ValueField = "JointType_ID";
+                    comboBoxSettings.Properties.TextField = "JointType_Code";
+
+                }).BindList(((dynamic)ViewData["FieldChoices"])["JointType"]).Render();
+            });      
+        });
+        
+        groupItemSettings.Items.Add(m => m.WeldMaterialGroup, itemSettings =>
+        {
+            itemSettings.SetNestedContent(() =>
+            {
+                Html.DevExpress().TokenBoxFor(m => m.WeldMaterialGroup, tokenBoxSettings =>
+                {
+                    tokenBoxSettings.Name = "WeldMaterialGroup";
+                    tokenBoxSettings.Width = Unit.Pixel(400);
+                    tokenBoxSettings.ShowModelErrors = true;
+
+                    tokenBoxSettings.Properties.AllowCustomTokens = true;
+                    tokenBoxSettings.Properties.ShowDropDownOnFocus = ShowDropDownOnFocusMode.Always;
+                    tokenBoxSettings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                    tokenBoxSettings.Properties.TextField = "WeldMaterialGroup_Code";
+                    tokenBoxSettings.Properties.ValueField = "WeldMaterialGroup_ID";
+
+                }).BindList(((dynamic) ViewData["FieldChoices"])["WeldMaterialGroup"]).Render();
+            });
+        });
+
+        groupItemSettings.Items.Add(m => m.WeldMaterial, itemSettings =>
+        {
+            itemSettings.SetNestedContent(() =>
+            {
+                Html.DevExpress().TokenBoxFor(m => m.WeldMaterial, tokenBoxSettings =>
+                {
+                    tokenBoxSettings.Name = "WeldMaterial";
+                    tokenBoxSettings.Width = Unit.Pixel(400);
+                    tokenBoxSettings.ShowModelErrors = true;
+
+                    tokenBoxSettings.Properties.AllowCustomTokens = true;
+                    tokenBoxSettings.Properties.ShowDropDownOnFocus = ShowDropDownOnFocusMode.Always;
+                    tokenBoxSettings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                    tokenBoxSettings.Properties.TextField = "WeldMaterial_Code";
+                    tokenBoxSettings.Properties.ValueField = "WeldMaterial_ID";
+
+                }).BindList(((dynamic) ViewData["FieldChoices"])["WeldMaterial"]).Render();
+            });
+        });
+
+        groupItemSettings.Items.Add(m => m.DetailWidth);
+        groupItemSettings.Items.Add(m => m.OuterDiameter);
+
+        groupItemSettings.Items.Add(m => m.WeldPosition, itemSettings =>
+        {
+            itemSettings.SetNestedContent(() =>
+            {
+                Html.DevExpress().TokenBoxFor(m => m.WeldPosition, tokenBoxSettings =>
+                {
+                    tokenBoxSettings.Name = "WeldPosition";
+                    tokenBoxSettings.Width = Unit.Pixel(400);
+                    tokenBoxSettings.ShowModelErrors = true;
+
+                    tokenBoxSettings.Properties.AllowCustomTokens = true;
+                    tokenBoxSettings.Properties.ShowDropDownOnFocus = ShowDropDownOnFocusMode.Always;
+                    tokenBoxSettings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                    tokenBoxSettings.Properties.TextField = "WeldPosition_Code";
+                    tokenBoxSettings.Properties.ValueField = "WeldPosition_ID";
+
+                }).BindList(((dynamic) ViewData["FieldChoices"])["WeldPosition"]).Render();
+            });
+        });
+
+        groupItemSettings.Items.Add(m => m.JointKind, itemSettings =>
+        {
+            itemSettings.SetNestedContent(() =>
+            {
+                Html.DevExpress().TokenBoxFor(m => m.JointKind, tokenBoxSettings =>
+                {
+                    tokenBoxSettings.Name = "JointKind";
+                    tokenBoxSettings.Width = Unit.Pixel(400);
+                    tokenBoxSettings.ShowModelErrors = true;
+
+                    tokenBoxSettings.Properties.AllowCustomTokens = true;
+                    tokenBoxSettings.Properties.ShowDropDownOnFocus = ShowDropDownOnFocusMode.Always;
+                    tokenBoxSettings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+                    tokenBoxSettings.Properties.TextField = "JointKind_Code";
+                    tokenBoxSettings.Properties.ValueField = "JointKind_ID";
+
+                }).BindList(((dynamic) ViewData["FieldChoices"])["JointKind"]).Render();
+            });
+        });
+
+        groupItemSettings.Items.Add(m => m.WeldGOST14098, itemSettings =>
+        {
+            itemSettings.SetNestedContent(() =>
+            {
+                Html.DevExpress().ComboBoxFor(m => m.WeldGOST14098, comboBoxSettings =>
+                {
+                    comboBoxSettings.Name = "WeldGOST14098";
+                    comboBoxSettings.Width = Unit.Pixel(400);
+                    comboBoxSettings.ShowModelErrors = true;
+
+                    comboBoxSettings.Properties.ValueField = "WeldGOST14098_ID";
+                    comboBoxSettings.Properties.TextField = "WeldGOST14098_Code";
+
+                }).BindList(((dynamic)ViewData["FieldChoices"])["WeldGOST14098"]).Render();
+            });      
+        });
+        
+
+    });
+
+}).GetHtml()
+

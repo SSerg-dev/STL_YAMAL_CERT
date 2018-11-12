@@ -1,0 +1,46 @@
+.bottom_line{
+    width:100%;
+    position:fixed;
+    bottom:0px;
+    font-family: 'Segoe UI';
+    background-color:rgba(241, 241, 241, 0.815);
+    border: 1px solid rgb(143, 143, 143);
+    border-bottom:none;
+    font-family: 'Segoe UI';
+    font-size:13.5px;
+    display:none;
+}
+.bottom_container{
+    width:1024px;
+    left:calc(50% - 512px);
+    position: relative;
+    display:inline-block;
+}
+.bottom_container>p{
+    display:inline-block;
+    margin:0;
+    padding:2px;
+    padding-left:20px;
+    padding-right:20px;
+}
+.bottom_searchResult{
+    float:right;
+    background-color:rgba(80, 80, 80, 0.883);
+    padding:2px;
+    padding-bottom:4px;
+    padding-left:20px;
+    padding-right:20px;
+    color:white;
+    margin-right:1px;
+}
+.bottom_closeButton{
+    float:right;    
+    padding:2px;
+    padding-bottom:3px;
+    background-color:rgba(80, 80, 80, 0.883);
+    color:white;
+    padding-left:7px;
+    padding-right:7px;
+    font-weight: 100;
+    cursor: pointer;
+}

@@ -1,0 +1,32 @@
+{
+  "name": "SmartQA1.1.2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "wbp": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.10",
+    "file-loader": "^1.1.11",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "style-loader": "^0.20.2",
+    "url-loader": "^1.0.1",
+    "webpack": "^3.12.0"
+  },
+  "dependencies": {
+    "babel-plugin-transform-remove-strict-mode": "0.0.2",
+    "create-react-class": "^15.6.3",
+    "jquery": "^3.3.1",
+    "react-select": "^1.2.1"
+  }
+}

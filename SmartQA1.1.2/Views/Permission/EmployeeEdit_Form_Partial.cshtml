@@ -1,0 +1,104 @@
+﻿@using System.Web.UI.WebControls
+@model SmartQA1._1._2.Models.Permission.EmployeeEdit
+
+@Html.DevExpress().FormLayout(flSettings =>
+{
+    flSettings.Name = "EmployeeEditFL";
+    flSettings.Items.AddGroupItem(groupItemSettings =>
+    {
+        groupItemSettings.Caption = "Сотрудник";
+
+        foreach (var hiddenField in new[]
+        {
+            "Employee_ID"
+        })
+        {
+            groupItemSettings.Items.Add(itemSettings =>
+            {
+                itemSettings.ClientVisible = false;
+                itemSettings.SetNestedContent(() =>
+                {
+                    ViewContext.Writer.Write(Html.Hidden(hiddenField).ToHtmlString());
+                });
+            });
+        }
+
+        groupItemSettings.Items.Add(m => m.LastName, itemSettings =>
+        {
+            itemSettings.NestedExtension().TextBox(s =>
+            {
+                s.ShowModelErrors = true;
+            });
+        });
+
+        groupItemSettings.Items.Add(m => m.FirstName, itemSettings =>
+        {
+            itemSettings.NestedExtension().TextBox(s =>
+            {
+                s.ShowModelErrors = true;
+            });
+        });
+
+        groupItemSettings.Items.Add(m => m.SecondName, itemSettings =>
+        {
+            itemSettings.NestedExtension().TextBox(s =>
+            {
+                s.ShowModelErrors = true;
+            });
+        });
+
+        groupItemSettings.Items.Add(m => m.BirthDate, itemSettings =>
+        {
+            itemSettings.Name = "BirthDate";
+            itemSettings.NestedExtension().DateEdit(s =>
+            {
+                s.ShowModelErrors = true;
+            });
+        });
+
+        groupItemSettings.Items.Add(m => m.Contragent_ID, itemSettings =>
+        {
+            itemSettings.SetNestedContent(() =>
+            {
+                Html.DevExpress().ComboBoxFor(m => m.Contragent_ID, comboBoxSettings =>
+                {
+                    comboBoxSettings.Name = "Contragent_ID";
+                    comboBoxSettings.Width = Unit.Pixel(400);
+                    comboBoxSettings.ShowModelErrors = true;
+
+                    comboBoxSettings.Properties.ValueField = "Contragent_ID";
+                    comboBoxSettings.Properties.TextField = "Contragent_Code";
+
+                }).BindList(((dynamic) ViewData["FieldChoices"])["Contragent"]).Render();
+            });
+        });
+
+        groupItemSettings.Items.Add(m => m.Position_ID, itemSettings =>
+        {
+            itemSettings.SetNestedContent(() =>
+            {
+                Html.DevExpress().ComboBoxFor(m => m.Position_ID, comboBoxSettings =>
+                {
+                    comboBoxSettings.Name = "Position_ID";
+                    comboBoxSettings.Width = Unit.Pixel(400);
+                    comboBoxSettings.ShowModelErrors = true;
+
+                    comboBoxSettings.Properties.ValueField = "Position_ID";
+                    comboBoxSettings.Properties.TextField = "Position_Description";
+
+                }).BindList(((dynamic) ViewData["FieldChoices"])["Position"]).Render();
+            });
+        });
+
+        groupItemSettings.Items.Add(itemSettings =>
+        {
+            itemSettings.ShowCaption = DefaultBoolean.False;
+            itemSettings.SetNestedContent(() =>
+                Html.DevExpress().ValidationSummary().Render()
+                );
+        });
+
+    });
+
+}).GetHtml()
+

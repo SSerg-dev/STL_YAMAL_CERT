@@ -1,0 +1,86 @@
+@using System.Web.UI.WebControls
+@using SmartQA1._1._2.Models
+@model SmartQA1._1._2.Models.CheckListWrapper
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridResp"+Model.checkType.ToString();
+        settings.CallbackRouteValues = new { Controller = "CheckList", Action = "CheckRespGrid", checkType = Model.checkType};
+        //settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "CheckList", Action = "CheckItemGridPartialUpdate", checkType = Model.checkType };
+
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = false;
+
+        settings.KeyFieldName = "CheckList_ID";
+
+        settings.Settings.ShowStatusBar = GridViewStatusBarMode.Hidden;
+
+        settings.SettingsPager.Visible = false;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = false;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add("CheckParty_Code").ReadOnly = true;
+        settings.Columns.Add("Position_Description").ReadOnly = true;
+        settings.Columns.Add("ShortName").ReadOnly = true;
+        settings.Columns.Add("CheckList_Status").ReadOnly = true;
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Нет больше замечаний";
+            column.HeaderStyle.Wrap = DefaultBoolean.True;
+            column.CellStyle.HorizontalAlign = HorizontalAlign.Center;
+            column.Width = 50;
+            column.SetDataItemTemplateContent(c =>
+            {
+                Html.DevExpress().CheckBox(checkboxSettings =>
+                {
+                    checkboxSettings.Name = "CheckNoMoreComments"+c.KeyValue.ToString();
+                    var CheckList_ID = (Guid)c.KeyValue;
+                    var checkList = Model.CheckList(CheckList_ID);
+                    checkboxSettings.Checked = checkList.state.noMoreDeficiencies;
+                    checkboxSettings.ReadOnly = checkList.state.isCheckBoxReadOnly;
+                    checkboxSettings.Properties.ClientSideEvents.CheckedChanged =
+                        "function(){"+settings.Name+ ".PerformCallback({CheckList_ID: '" + CheckList_ID+ "', command:'noMoreDeficiencies'});}";
+                }).Render();
+            });
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Проверка окончена";
+            column.HeaderStyle.Wrap = DefaultBoolean.True;
+            column.CellStyle.HorizontalAlign = HorizontalAlign.Center;
+            column.Width = 50;
+            column.SetDataItemTemplateContent(c =>
+            {
+                Html.DevExpress().CheckBox(checkboxSettings =>
+                {
+                    checkboxSettings.Name = "CheckIsCompleted"+c.KeyValue.ToString();
+                    var CheckList_ID = (Guid)c.KeyValue;
+                    var checkList = Model.CheckList(CheckList_ID);
+                    checkboxSettings.Checked = checkList.state.isCompleted;
+                    checkboxSettings.ReadOnly = checkList.state.isCheckBoxReadOnly;
+                    checkboxSettings.Properties.ClientSideEvents.CheckedChanged =
+                        "function(){var confirmed = confirm('Вы действительно хотите завершить проверку?'); if(confirmed) {" + settings.Name+ ".PerformCallback({CheckList_ID: '" + CheckList_ID+"', command: 'isCompleted'});}}";
+                }).Render();
+            });
+        });
+
+        settings.Settings.ShowFooter = true;
+        settings.SetFooterRowTemplateContent(c =>
+        {
+            Html.ViewContext.Writer.Write(ViewData["EditError"]);
+        });
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model.CheckLists).GetHtml()

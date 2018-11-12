@@ -1,0 +1,97 @@
+@using System.Web.UI.WebControls
+@using SmartQA1._1._2.BusinessModels
+@using SmartQA1._1._2.Models
+@using SmartQA1._1._2.Views.CommonSettings
+@model CheckListWrapper
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "CheckItemGrid"+Model.checkType.ToString();
+        settings.SettingsText.Title = "Список замечаний";
+        settings.Settings.ShowTitlePanel = true;
+        settings.CallbackRouteValues = new {Controller = "CheckList", Action = "CheckItemGridPartial", checkType = Model.checkType };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new {Controller = "CheckList", Action = "CheckItemGridPartialAddNew", checkType = Model.checkType };
+        settings.SettingsEditing.UpdateRowRouteValues = new {Controller = "CheckList", Action = "CheckItemGridPartialUpdate", checkType = Model.checkType };
+        settings.SettingsEditing.DeleteRowRouteValues = new {Controller = "CheckList", Action = "CheckItemGridPartialDelete", checkType = Model.checkType };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+        settings.ClientSideEvents.BeginCallback = "function OnBeginCallback(s, e) { e.customArgs['command'] = commandName ; }";
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.Width = Unit.Percentage(100);
+
+        settings.Settings.ShowTitlePanel = true;
+
+        settings.SetTitlePanelTemplateContent(
+        (c) => Html.RenderPartial("~/Views/Shared/GridTitle.cshtml", new Tuple<string, string, bool>(settings.Name, "Замечания", true)));
+
+        settings.KeyFieldName = "CheckItem_ID";
+
+        //todo - revise this block;
+        Action<GridViewEditFormTemplateContainer> popupContentAction = (row) =>
+        {
+            Guid? CheckItem_ID = null;
+
+            if (row.KeyValue != null) CheckItem_ID = Guid.Parse(row.KeyValue.ToString());
+            if (ViewData["checkItem"] == null) Html.RenderAction("CheckItemEditForm", new { CheckItem_ID = CheckItem_ID, checkType = Model.checkType });
+            else Html.RenderPartial("CheckItemEditForm", (CheckItem) ViewData["checkItem"]);
+        };
+
+        //apply Context menu with copy button:
+        settings
+            .ApplyContextMenuSettings()
+            .AddCopyButton()
+            .ApplyEditPopupSettings(popupContentAction);
+
+        settings.SettingsText.PopupEditFormCaption = "Замечание";
+
+        //todo - end of the review block;
+
+        settings.SettingsPager.Visible = false;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add("ShortName");
+        settings.Columns.Add("Comment");
+        settings.Columns.Add("Document_Name");
+        settings.Columns.Add("CheckItem_Status");
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Устранено";
+            column.CellStyle.HorizontalAlign = HorizontalAlign.Center;
+            column.Width = 50;      
+            column.SetDataItemTemplateContent(c =>
+            {
+                Html.DevExpress().CheckBox(checkboxSettings =>
+                {
+                    checkboxSettings.Name = "Check"+c.KeyValue.ToString();
+                    var CheckItem_ID = (Guid)c.KeyValue;
+                    var checkItem = Model.CheckItem(CheckItem_ID);
+                    checkboxSettings.Checked = checkItem.isFixed;
+                    checkboxSettings.ReadOnly = checkItem.checkBoxReadonly;
+                    checkboxSettings.ClientVisible = checkItem.showCheckBox;
+                    checkboxSettings.Properties.ClientSideEvents.CheckedChanged = 
+                        "function(){"+settings.Name+".PerformCallback({checkItem_ID: '"+CheckItem_ID+"'});}";
+                }).Render();
+            });
+        });
+
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string) ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model.CheckItems).GetHtml()

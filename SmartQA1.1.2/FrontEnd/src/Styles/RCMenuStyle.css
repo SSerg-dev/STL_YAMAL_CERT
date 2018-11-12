@@ -1,0 +1,67 @@
+body{
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+.RCMenuBlock{
+    opacity: 0.4;
+    background-color: rgb(150, 150, 150);
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:100%;
+    height: 100%;
+    z-index: 2;
+    outline: none;
+}
+.RCMenuContainer{
+    /*width:200px; /*this property have to equal menuWidth in RightMenu.jsx*/
+    /*height:100px; /*this propert have to equal menuHeight in RightMenu.jsx*/
+    text-align: left;
+    position: absolute;
+    top:20px;
+    left:20px;
+    z-index: 3;
+    border:none;
+    border:1px solid rgb(172, 172, 172);
+    background-color: rgb(245, 245, 245);
+}
+.RCMenuContainer>button{
+    display: block;
+    width:100%;
+    text-align:left;
+    border: none;
+    background-color:inherit;
+    padding-top:3px;
+    padding-left:20px;
+    padding-right:10px;
+    padding-bottom:5px;
+    font-size:12px;
+    font-family:'Segoe UI';
+    outline:none;
+    min-width: 110px;
+    border-bottom:none;
+    font-weight:600;
+    border-bottom:1px solid rgb(172, 172, 172);
+}
+.RCMenuContainer > button:hover{
+    background-color:rgb(47, 122, 40);
+    color:white;
+}
+/*
+display: block;
+    width:100%;
+    text-align:left;
+    border: none;
+    background-color: rgb(121, 121, 121);
+    padding-top:3px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-bottom:5px;
+    border:1px solid rgb(54, 54, 54);
+    font-size:12px;
+    font-family:'Segoe UI';
+    color: white;
+    outline:none;
+    min-width: 110px;
+    border-bottom:none;*/

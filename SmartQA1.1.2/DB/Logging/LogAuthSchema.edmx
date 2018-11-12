@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WEB_MainDataModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.AppUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="AppUser_ID" />
+          </Key>
+          <Property Name="AppUser_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AppUser_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="250" />
+          <Property Name="User_Password" Type="varbinary" MaxLength="8000" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.AppUserTask' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AppUserTask">
+          <Key>
+            <PropertyRef Name="AppUserTask_ID" />
+            <PropertyRef Name="AppUserTask_Code" />
+            <PropertyRef Name="TaskName" />
+          </Key>
+          <Property Name="AppUserTask_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AppUserTask_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="TaskName" Type="nvarchar" MaxLength="120" Nullable="false" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="250" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.AppUserTaskLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AppUserTaskLog">
+          <Key>
+            <PropertyRef Name="AppUserTaskLog_ID" />
+            <PropertyRef Name="AppUserTaskLog_Code" />
+            <PropertyRef Name="AppUser_ID" />
+            <PropertyRef Name="AppUserTask_ID" />
+          </Key>
+          <Property Name="AppUserTaskLog_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AppUserTaskLog_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="AppUser_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AppUserTask_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AppUserTaskMessage_ID" Type="uniqueidentifier" />
+          <Property Name="FilePath" Type="nvarchar" MaxLength="250" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="250" />
+          <Property Name="Description_Eng" Type="nvarchar" MaxLength="250" />
+          <Property Name="Description_Rus" Type="nvarchar" MaxLength="250" />
+          <Property Name="StackTrace" Type="nvarchar" MaxLength="2000" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.AppUserTaskMessage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AppUserTaskMessage">
+          <Key>
+            <PropertyRef Name="AppUserTaskMessage_ID" />
+            <PropertyRef Name="AppUserTaskMessage_Code" />
+            <PropertyRef Name="Message_Type" />
+          </Key>
+          <Property Name="AppUserTaskMessage_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AppUserTaskMessage_Code" Type="int" Nullable="false" />
+          <Property Name="Message_Type" Type="int" Nullable="false" />
+          <Property Name="Message_Text" Type="nvarchar" MaxLength="250" />
+          <Property Name="MessageDescription_ENG" Type="nvarchar" MaxLength="250" />
+          <Property Name="MessageDescription_RUS" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DEV_WEB_MainData.dbo.Role' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+            <PropertyRef Name="Role_Code" />
+          </Key>
+          <Property Name="Role_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Role_Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Function Name="AppUser_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_Code" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_User_Password" Type="varbinary" Mode="In" />
+          <Parameter Name="i_Comment" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="AppUserTaskLog_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_RowStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUser_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="i_AppUserTask_ID" Type="varchar" Mode="In" />
+          <Parameter Name="i_AppUserTaskMessage_ID" Type="varchar" Mode="In" />
+          <Parameter Name="i_FilePath" Type="varchar" Mode="In" />
+          <Parameter Name="i_FileName" Type="varchar" Mode="In" />
+          <Parameter Name="i_Description_Eng" Type="varchar" Mode="In" />
+          <Parameter Name="i_Description_Rus" Type="varchar" Mode="In" />
+          <Parameter Name="i_StackTrace" Type="varchar" Mode="In" />
+          <Parameter Name="o_Entity_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="User_FormType_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="i_User_ID" Type="nvarchar" Mode="In" />
+          <Parameter Name="o_Role_Code" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_Division_ID" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_Division_Name" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_Person_ShortName" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="o_IsError" Type="bit" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="WEB_MainDataModel1StoreContainer">
+          <EntitySet Name="AppUser" EntityType="Self.AppUser" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AppUser].[AppUser_ID] AS [AppUser_ID], 
+    [AppUser].[AppUser_Code] AS [AppUser_Code], 
+    [AppUser].[Comment] AS [Comment], 
+    [AppUser].[User_Password] AS [User_Password]
+    FROM [dbo].[AppUser] AS [AppUser]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AppUserTask" EntityType="Self.AppUserTask" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AppUserTask].[AppUserTask_ID] AS [AppUserTask_ID], 
+    [AppUserTask].[AppUserTask_Code] AS [AppUserTask_Code], 
+    [AppUserTask].[TaskName] AS [TaskName], 
+    [AppUserTask].[Description_Eng] AS [Description_Eng], 
+    [AppUserTask].[Description_Rus] AS [Description_Rus]
+    FROM [dbo].[AppUserTask] AS [AppUserTask]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AppUserTaskLog" EntityType="Self.AppUserTaskLog" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AppUserTaskLog].[AppUserTaskLog_ID] AS [AppUserTaskLog_ID], 
+    [AppUserTaskLog].[AppUserTaskLog_Code] AS [AppUserTaskLog_Code], 
+    [AppUserTaskLog].[AppUser_ID] AS [AppUser_ID], 
+    [AppUserTaskLog].[AppUserTask_ID] AS [AppUserTask_ID], 
+    [AppUserTaskLog].[AppUserTaskMessage_ID] AS [AppUserTaskMessage_ID], 
+    [AppUserTaskLog].[FilePath] AS [FilePath], 
+    [AppUserTaskLog].[FileName] AS [FileName], 
+    [AppUserTaskLog].[Description_Eng] AS [Description_Eng], 
+    [AppUserTaskLog].[Description_Rus] AS [Description_Rus], 
+    [AppUserTaskLog].[StackTrace] AS [StackTrace]
+    FROM [dbo].[AppUserTaskLog] AS [AppUserTaskLog]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AppUserTaskMessage" EntityType="Self.AppUserTaskMessage" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AppUserTaskMessage].[AppUserTaskMessage_ID] AS [AppUserTaskMessage_ID], 
+    [AppUserTaskMessage].[AppUserTaskMessage_Code] AS [AppUserTaskMessage_Code], 
+    [AppUserTaskMessage].[Message_Type] AS [Message_Type], 
+    [AppUserTaskMessage].[Message_Text] AS [Message_Text], 
+    [AppUserTaskMessage].[MessageDescription_ENG] AS [MessageDescription_ENG], 
+    [AppUserTaskMessage].[MessageDescription_RUS] AS [MessageDescription_RUS]
+    FROM [dbo].[AppUserTaskMessage] AS [AppUserTaskMessage]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Role" EntityType="Self.Role" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Role].[Role_ID] AS [Role_ID], 
+    [Role].[Role_Code] AS [Role_Code]
+    FROM [dbo].[Role] AS [Role]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WEB_MainDataModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="AppUser_ID" />
+          </Key>
+          <Property Name="AppUser_ID" Type="Guid" Nullable="false" />
+          <Property Name="AppUser_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="User_Password" Type="Binary" MaxLength="8000" FixedLength="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppUserTask">
+          <Key>
+            <PropertyRef Name="AppUserTask_ID" />
+            <PropertyRef Name="AppUserTask_Code" />
+            <PropertyRef Name="TaskName" />
+          </Key>
+          <Property Name="AppUserTask_ID" Type="Guid" Nullable="false" />
+          <Property Name="AppUserTask_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TaskName" Type="String" MaxLength="120" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description_Eng" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AppUserTaskLog">
+          <Key>
+            <PropertyRef Name="AppUserTaskLog_ID" />
+            <PropertyRef Name="AppUserTaskLog_Code" />
+            <PropertyRef Name="AppUser_ID" />
+            <PropertyRef Name="AppUserTask_ID" />
+          </Key>
+          <Property Name="AppUserTaskLog_ID" Type="Guid" Nullable="false" />
+          <Property Name="AppUserTaskLog_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AppUser_ID" Type="Guid" Nullable="false" />
+          <Property Name="AppUserTask_ID" Type="Guid" Nullable="false" />
+          <Property Name="AppUserTaskMessage_ID" Type="Guid" />
+          <Property Name="FilePath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Eng" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description_Rus" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="StackTrace" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AppUserTaskMessage">
+          <Key>
+            <PropertyRef Name="AppUserTaskMessage_ID" />
+            <PropertyRef Name="AppUserTaskMessage_Code" />
+            <PropertyRef Name="Message_Type" />
+          </Key>
+          <Property Name="AppUserTaskMessage_ID" Type="Guid" Nullable="false" />
+          <Property Name="AppUserTaskMessage_Code" Type="Int32" Nullable="false" />
+          <Property Name="Message_Type" Type="Int32" Nullable="false" />
+          <Property Name="Message_Text" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MessageDescription_ENG" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MessageDescription_RUS" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="LogAuthSchema" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppUser" EntityType="Self.AppUser" />
+          <EntitySet Name="AppUserTask" EntityType="Self.AppUserTask" />
+          <EntitySet Name="AppUserTaskLog" EntityType="Self.AppUserTaskLog" />
+          <EntitySet Name="AppUserTaskMessage" EntityType="Self.AppUserTaskMessage" />
+          <FunctionImport Name="AppUser_Insert" ReturnType="Collection(WEB_MainDataModel1.AppUser_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_Code" Mode="In" Type="String" />
+            <Parameter Name="i_User_Password" Mode="In" Type="Binary" />
+            <Parameter Name="i_Comment" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="AppUserTaskLog_Insert" ReturnType="Collection(WEB_MainDataModel1.AppUserTaskLog_Insert_Result)">
+            <Parameter Name="i_RowStatus" Mode="In" Type="String" />
+            <Parameter Name="i_AppUser_ID" Mode="In" Type="String" />
+            <Parameter Name="i_AppUserTask_ID" Mode="In" Type="String" />
+            <Parameter Name="i_AppUserTaskMessage_ID" Mode="In" Type="String" />
+            <Parameter Name="i_FilePath" Mode="In" Type="String" />
+            <Parameter Name="i_FileName" Mode="In" Type="String" />
+            <Parameter Name="i_Description_Eng" Mode="In" Type="String" />
+            <Parameter Name="i_Description_Rus" Mode="In" Type="String" />
+            <Parameter Name="i_StackTrace" Mode="In" Type="String" />
+            <Parameter Name="o_Entity_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="User_FormType_Get" ReturnType="Collection(WEB_MainDataModel1.User_FormType_Get_Result)">
+            <Parameter Name="i_User_ID" Mode="In" Type="String" />
+            <Parameter Name="o_Role_Code" Mode="InOut" Type="String" />
+            <Parameter Name="o_Division_ID" Mode="InOut" Type="String" />
+            <Parameter Name="o_Division_Name" Mode="InOut" Type="String" />
+            <Parameter Name="o_Person_ShortName" Mode="InOut" Type="String" />
+            <Parameter Name="o_IsError" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="Role" EntityType="WEB_MainDataModel1.Role" />
+        </EntityContainer>
+        <ComplexType Name="AppUser_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="AppUserTaskLog_Insert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="User_FormType_Get_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Msg" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+            <PropertyRef Name="Role_Code" />
+          </Key>
+          <Property Name="Role_ID" Type="Guid" Nullable="false" />
+          <Property Name="Role_Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WEB_MainDataModel1StoreContainer" CdmEntityContainer="LogAuthSchema">
+          <EntitySetMapping Name="AppUser">
+            <EntityTypeMapping TypeName="WEB_MainDataModel1.AppUser">
+              <MappingFragment StoreEntitySet="AppUser">
+                <ScalarProperty Name="AppUser_ID" ColumnName="AppUser_ID" />
+                <ScalarProperty Name="AppUser_Code" ColumnName="AppUser_Code" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="User_Password" ColumnName="User_Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppUserTask">
+            <EntityTypeMapping TypeName="WEB_MainDataModel1.AppUserTask">
+              <MappingFragment StoreEntitySet="AppUserTask">
+                <ScalarProperty Name="AppUserTask_ID" ColumnName="AppUserTask_ID" />
+                <ScalarProperty Name="AppUserTask_Code" ColumnName="AppUserTask_Code" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppUserTaskLog">
+            <EntityTypeMapping TypeName="WEB_MainDataModel1.AppUserTaskLog">
+              <MappingFragment StoreEntitySet="AppUserTaskLog">
+                <ScalarProperty Name="AppUserTaskLog_ID" ColumnName="AppUserTaskLog_ID" />
+                <ScalarProperty Name="AppUserTaskLog_Code" ColumnName="AppUserTaskLog_Code" />
+                <ScalarProperty Name="AppUser_ID" ColumnName="AppUser_ID" />
+                <ScalarProperty Name="AppUserTask_ID" ColumnName="AppUserTask_ID" />
+                <ScalarProperty Name="AppUserTaskMessage_ID" ColumnName="AppUserTaskMessage_ID" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Description_Eng" ColumnName="Description_Eng" />
+                <ScalarProperty Name="Description_Rus" ColumnName="Description_Rus" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppUserTaskMessage">
+            <EntityTypeMapping TypeName="WEB_MainDataModel1.AppUserTaskMessage">
+              <MappingFragment StoreEntitySet="AppUserTaskMessage">
+                <ScalarProperty Name="AppUserTaskMessage_ID" ColumnName="AppUserTaskMessage_ID" />
+                <ScalarProperty Name="AppUserTaskMessage_Code" ColumnName="AppUserTaskMessage_Code" />
+                <ScalarProperty Name="Message_Type" ColumnName="Message_Type" />
+                <ScalarProperty Name="Message_Text" ColumnName="Message_Text" />
+                <ScalarProperty Name="MessageDescription_ENG" ColumnName="MessageDescription_ENG" />
+                <ScalarProperty Name="MessageDescription_RUS" ColumnName="MessageDescription_RUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AppUser_Insert" FunctionName="WEB_MainDataModel1.Store.AppUser_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel1.AppUser_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AppUserTaskLog_Insert" FunctionName="WEB_MainDataModel1.Store.AppUserTaskLog_Insert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel1.AppUserTaskLog_Insert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="User_FormType_Get" FunctionName="WEB_MainDataModel1.Store.User_FormType_Get">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_MainDataModel1.User_FormType_Get_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Msg" ColumnName="Msg" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="WEB_MainDataModel1.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Role_Code" ColumnName="Role_Code" />
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

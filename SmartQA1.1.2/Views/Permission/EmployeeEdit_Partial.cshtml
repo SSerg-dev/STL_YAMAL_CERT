@@ -1,0 +1,83 @@
+﻿@using System.Drawing
+@using System.Web.UI.WebControls
+@using DevExpress.DataAccess.Sql
+@using SmartQA1._1._2.Models.Permission
+@using SmartQA1._1._2.Views.CommonSettings
+@model SmartQA1._1._2.DB.PermissionDb.Employee
+
+
+@Html.DevExpress().PopupControl(settings =>
+{
+    settings.Name = "EmployeeEditPopup";
+    settings.Modal = true;
+    settings.ShowHeader = false;
+    settings.CallbackRouteValues = new { Controller = "Permission", Action = "EmployeeEdit" };
+    settings.LoadContentViaCallback = LoadContentViaCallback.OnFirstShow;
+    settings.PopupVerticalAlign = PopupVerticalAlign.Middle;
+    settings.PopupHorizontalAlign = PopupHorizontalAlign.WindowCenter;
+    settings.PopupAnimationType = AnimationType.Fade;
+    settings.AutoUpdatePosition = true;
+    settings.SettingsAdaptivity.Mode = PopupControlAdaptivityMode.Always;
+    settings.SettingsAdaptivity.VerticalAlign = PopupAdaptiveVerticalAlign.WindowCenter;
+    settings.SettingsAdaptivity.HorizontalAlign = PopupAdaptiveHorizontalAlign.WindowCenter;   
+    settings.SettingsAdaptivity.MaxWidth = Unit.Percentage(95);
+    settings.SettingsAdaptivity.MaxHeight = Unit.Percentage(95);
+    settings.ScrollBars = ScrollBars.Auto;
+
+    settings.SetContent(() =>
+    {     
+
+        using (Ajax.BeginForm("EmployeeEdit_Form", "Permission",
+            new AjaxOptions
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "EmployeeEditFormContent",
+                OnComplete = "EmployeeEditForm_AjaxOnComplete",
+                InsertionMode = InsertionMode.Replace 
+            },
+            new
+            {
+                initialOpen = true
+            }
+        ))
+        {
+           
+            ViewContext.Writer.WriteLine("<div id=\"EmployeeEditFormContent\">");
+
+            var formModel = new EmployeeEdit(Model);
+
+            Html.RenderAction("EmployeeEdit_Form", routeValues: new
+            {
+                model = formModel,
+                initialOpen = true,
+            });
+
+            ViewContext.Writer.Write("</div>");
+
+            ViewContext.Writer.Write("<div style=\"display: table; margin: 0px 12px 12px auto;\">");
+
+            Html.DevExpress().Button(s =>
+            {
+                s.Name = "Cancel";
+                s.Text = "Cancel";
+                s.Style.Add("margin-right", "1em");
+                s.ClientSideEvents.Click = "EmployeeEditPopup_OnCancelClicked";
+            }).Render();
+
+            Html.DevExpress().Button(s =>
+            {
+                s.Name = "Submit";
+                s.Text = "Submit";
+                s.UseSubmitBehavior = true;
+            }).Render();
+
+            ViewContext.Writer.Write("</div>");
+        }
+    });
+
+    settings.ClientSideEvents.BeginCallback = "EmployeeEditPopup_OnBeginCallback";
+    settings.ClientSideEvents.EndCallback= "EmployeeEditPopup_OnEndCallback";
+
+}).GetHtml()
+
+

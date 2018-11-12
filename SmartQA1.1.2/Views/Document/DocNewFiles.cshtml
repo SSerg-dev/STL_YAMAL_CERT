@@ -1,0 +1,40 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "DocNewFiles";
+        settings.CallbackRouteValues = new { Controller = "Document", Action = "GridViewNewFiles" };
+
+        //settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Document", Action = "GridView1PartialAddNew" };
+        //settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Document", Action = "GridView1PartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Document", Action = "DeleteNewFile" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+        settings.Caption = "Вновь прикрепленные файлы";
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = false;
+
+        settings.KeyFieldName = "name";
+
+        settings.SettingsPager.Visible = false;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = false;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add("name", "Имя файла");
+        //it's not working out:
+        //settings.Columns.Add("last_write_time", "Последнее изменение");
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

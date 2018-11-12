@@ -1,0 +1,64 @@
+@using SmartQA1._1._2.Models.Register
+@using SmartQA1._1._2.Views.CommonSettings
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "RegisterGridView";
+        settings.CallbackRouteValues = new
+        {
+            Controller = "Register",
+            Action = "GridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Register", Action = "GridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Register", Action = "GridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Register", Action = "GridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.Settings.ShowTitlePanel = true;
+
+        settings.SetTitlePanelTemplateContent(
+        (c) => Html.RenderPartial("~/Views/Shared/GridTitle.cshtml", new Tuple<string, string, bool>(settings.Name, string.Empty, true)));
+
+        //context menu settings:
+        settings
+            .ApplyContextMenuSettings()
+            .ApplyCommonGridViewSettings()
+            .ApplyEditPopupSettings(row =>
+            {
+                Guid? c = null;
+                if (row.KeyValue != null) c = Guid.Parse(row.KeyValue.ToString());
+                if (ViewData["item"] == null) Html.RenderAction("EditForm", new {id = c});
+                else Html.RenderPartial("FormLayout", (Register) ViewData["item"]);
+            });
+
+        settings.SettingsText.PopupEditFormCaption = "Карточка реестра";
+
+        settings.KeyFieldName = "Register_ID";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+
+        settings.SettingsPager.PageSize = 20;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.Columns.Add("Register_Code", "№ реестра");
+        settings.Columns.Add(new GridViewDataColumn("Register_Date", "Дата"));
+        settings.Columns.Add("SubContractor_Code","Субподрядчик");
+        settings.Columns.Add("Project","Проект");
+        settings.Columns.Add("Status_Description_Rus","Статус");
+
+
+
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

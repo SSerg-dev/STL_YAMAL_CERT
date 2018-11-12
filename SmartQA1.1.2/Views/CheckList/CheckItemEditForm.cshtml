@@ -1,0 +1,231 @@
+﻿@using System.Web.UI.WebControls
+@model SmartQA1._1._2.Models.CheckItem
+
+@Html.DevExpress().FormLayout(settings =>
+{
+    settings.Name = "CheckItemFormLayout";
+    settings.ColCount = 4;
+
+    settings.Items.AddGroupItem(groupSettings =>
+    {
+        groupSettings.ColSpan = 3;
+        //groupSettings.Width = Unit.Percentage(100);
+        groupSettings.GroupBoxDecoration = GroupBoxDecoration.None;
+        groupSettings.ColCount = 3;
+        groupSettings.Paddings.PaddingLeft = 0;
+        groupSettings.HorizontalAlign = FormLayoutHorizontalAlign.Left;
+        groupSettings.Caption = "Управление статусом замечания";
+        var sendButton = groupSettings.Items.Add();
+        sendButton.ShowCaption = DefaultBoolean.False;
+        sendButton.SetNestedContent(() =>
+        {
+            Html.DevExpress().Button(bs =>
+            {
+                bs.Name = "CheckItemSendButton";
+                bs.Text = "Выдать замечание";
+                bs.Width = 180;
+                bs.UseSubmitBehavior = false;
+                bs.ControlStyle.Font.Size = 9;
+                bs.ControlStyle.VerticalAlign = VerticalAlign.Top;
+                //bs.Styles.Style.Wrap = DefaultBoolean.True;
+                bs.Images.Image.IconID = IconID.MailSend16x16;
+                bs.Enabled = Model.State.isSendButtonEnabled;
+                var gridName = "CheckItemGrid" + Model.CheckType_Code;
+                bs.ClientSideEvents.Click = "function(s,e){commandName='SendButton';" + gridName+".UpdateEdit();}";
+            }).GetHtml();
+        });
+
+        var cancelDeficiencyButton = groupSettings.Items.Add();
+        cancelDeficiencyButton.ShowCaption = DefaultBoolean.False;
+        cancelDeficiencyButton.SetNestedContent(() =>
+        {
+            Html.DevExpress().Button(bs =>
+            {
+                bs.Name = "CheckItemCancelDefitiencyButton";
+                bs.Text = "Отменить замечание";
+                bs.Width = 180;
+                bs.UseSubmitBehavior = true;
+                bs.ControlStyle.Font.Size = 9;
+                //bs.Styles.Style.Wrap = DefaultBoolean.True;
+                bs.ControlStyle.VerticalAlign = VerticalAlign.Top;
+                bs.Images.Image.IconID = IconID.ActionsCancel16x16;
+                bs.Enabled = Model.State.isCancelDeficiencyButtonEnabled;
+                var gridName = "CheckItemGrid" + Model.CheckType_Code;
+                bs.ClientSideEvents.Click = "function(s,e){commandName='CancelDeficiency';" + gridName + ".UpdateEdit();}";
+            }).GetHtml();
+        });
+
+        var approveButton = groupSettings.Items.Add();
+        approveButton.ShowCaption = DefaultBoolean.False;
+        approveButton.SetNestedContent(() =>
+        {
+            Html.DevExpress().Button(bs =>
+            {
+                bs.Name = "CheckItemApproveButton";
+                bs.Text = "Подтвердить устранение замечания";
+                bs.Width = 180;
+                bs.UseSubmitBehavior = true;
+                bs.ControlStyle.Font.Size = 9;
+                //bs.Styles.Style.Wrap = DefaultBoolean.True;
+                bs.ControlStyle.VerticalAlign = VerticalAlign.Top;
+                bs.Images.Image.IconID = IconID.ActionsApply16x16;
+                bs.Enabled = Model.State.isApproveButtonEnabled;
+                var gridName = "CheckItemGrid" + Model.CheckType_Code;
+                bs.ClientSideEvents.Click = "function(s,e){commandName='Approve';" + gridName + ".UpdateEdit();}";
+            }).GetHtml();
+        });
+    });
+
+
+    settings.Items.AddGroupItem(groupSettings =>
+    {
+        groupSettings.ColCount = 1;
+        groupSettings.GroupBoxDecoration = GroupBoxDecoration.None;
+        groupSettings.RowSpan = 3;
+
+        var saveButton = groupSettings.Items.Add();
+        saveButton.ShowCaption = DefaultBoolean.False;
+        saveButton.SetNestedContent(() =>
+        {
+            Html.DevExpress().Button(bs =>
+            {
+                bs.Name = "CheckItemSaveButton";
+                bs.Text = "Сохранить";
+                bs.Width = 120;
+                bs.UseSubmitBehavior = true;
+                bs.ControlStyle.VerticalAlign = VerticalAlign.Top;
+            }).GetHtml();
+        });
+
+        var cancelButton = groupSettings.Items.Add();
+        cancelButton.ShowCaption = DefaultBoolean.False;
+        cancelButton.SetNestedContent(() =>
+        {
+            Html.DevExpress().Button(bs =>
+            {
+                bs.Name = "CheckItemCancelButton";
+                bs.Text = "Закрыть";
+                bs.Width = 120;
+                bs.UseSubmitBehavior = false;
+                var gridName = "CheckItemGrid" + Model.CheckType_Code;
+                bs.ClientSideEvents.Click = "function(){" + gridName + ".CancelEdit();}";
+                bs.ControlStyle.VerticalAlign = VerticalAlign.Top;
+            }).GetHtml();
+        });
+    });
+
+    settings.Items.Add(x => x.Status_Description_Rus, i =>
+    {
+        i.Caption = "Статус";
+        i.VerticalAlign = FormLayoutVerticalAlign.Top;
+        i.ColumnSpan = 1;
+        i.Width = 200;
+
+
+        i.NestedExtensionType = FormLayoutNestedExtensionItemType.DropDownEdit;
+        var dds = (DropDownEditSettings) i.NestedExtensionSettings;
+        dds.Name = "CheckItem_Status";
+        dds.SetDropDownWindowTemplateContent(c =>
+        {
+            Html.DevExpress().ListBoxFor(m => m.State.Status.Status_ID,
+                listBoxSettings =>
+                {
+                    var staete = Model.State.Status.Status_ID;
+                    var dads = Model.State.Status.Description_Rus;
+                    var d = Model.CheckItem_Status;
+                    listBoxSettings.ControlStyle.Border.BorderWidth = 0;
+                    listBoxSettings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    listBoxSettings.Name = "State.Status.Status_ID";
+                    listBoxSettings.Properties.SelectionMode = ListEditSelectionMode.Single;
+                    listBoxSettings.ReadOnly = true; //ALWAYS READONLY FIELD
+
+                    foreach (var avai in Model.State.Statuses)
+                        listBoxSettings.Properties.Items.Add(avai.Description_Rus, avai.Status_ID);
+
+                    listBoxSettings.Properties.EnableClientSideAPI = true;
+                    listBoxSettings.Properties.ClientSideEvents.SelectedIndexChanged = "updateCheckItemStatus";
+                }
+                ).GetHtml();
+        });
+    });
+    settings.Items.Add(x => x.ShortName, i =>
+    {
+        i.VerticalAlign = FormLayoutVerticalAlign.Top;
+        i.Caption = "Проверяющий";
+        var txbs = (TextBoxSettings) i.NestedExtensionSettings;
+        txbs.ReadOnly = true; //ALWAYS READONLY FIELD
+    });
+    settings.Items.Add(x => x.Issued_Date, i =>
+    {
+        i.Caption = "Дата выдачи";
+        i.HelpText = "Дата перевода замечания в статус \"Выпущено\"";
+        var nest = (DateEditSettings) i.NestedExtensionSettings;
+        nest.ReadOnly = true;
+    });
+
+    settings.Items.Add(
+        x => x.CheckType, 
+        i => i.Caption = "CheckType");
+
+    settings.Items.Add(x => x.Division_Name, i =>
+    {
+        i.Caption = "Сторона";
+        i.ColSpan = 3;
+        var txbs = (TextBoxSettings) i.NestedExtensionSettings;
+        txbs.ReadOnly = true; //ALWAYS READONLY FIELD
+        txbs.Width = Unit.Percentage(100);
+    });
+
+    settings.Items.Add(x => x.CheckItem_Name, i =>
+    {
+        i.Caption = "Имя";
+        i.HelpText = "Наименование замечания";
+        i.ColSpan = 3;
+        var txbs = (TextBoxSettings) i.NestedExtensionSettings;
+        txbs.Width = Unit.Percentage(100);
+    });
+
+    settings.Items.Add(x => x.DocNumberNameConcatenated, i =>
+    {
+        i.Caption = "Документ";
+        i.VerticalAlign = FormLayoutVerticalAlign.Top;
+        i.ColumnSpan = 3;
+        i.HelpText = "Текст замечания";
+        i.HelpText = "Замечание можно отнести только к уже прикрепленному к реестру документу";
+
+        i.NestedExtensionType = FormLayoutNestedExtensionItemType.DropDownEdit;
+        var dds = (DropDownEditSettings) i.NestedExtensionSettings;
+        dds.Name = "CheckItem_Document";
+        dds.Width = Unit.Percentage(100);
+        dds.SetDropDownWindowTemplateContent(c =>
+        {
+            Html.DevExpress().ListBoxFor(m => m.Document_ID,
+                listBoxSettings =>
+                {
+                    listBoxSettings.ControlStyle.Border.BorderWidth = 0;
+                    listBoxSettings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    listBoxSettings.Name = "CheckListDocument_ID";
+                    listBoxSettings.Properties.SelectionMode = ListEditSelectionMode.Single;
+
+                    if (Model.LatestRevisionDocuments != null)
+                        foreach (var avai in Model.LatestRevisionDocuments)
+                            listBoxSettings.Properties.Items.Add(avai.DocNumberNameConcatenated, avai.Document_ID.ToString());
+
+                    listBoxSettings.Properties.EnableClientSideAPI = true;
+                    listBoxSettings.Properties.ClientSideEvents.SelectedIndexChanged = "updateCheckItemDocument";
+                }
+                ).GetHtml();
+        });
+    });
+    settings.Items.Add(m => m.Comment, i =>
+    {
+        i.Caption = "Замечание";
+        i.CaptionSettings.Location = LayoutItemCaptionLocation.Top;
+        i.CaptionSettings.HorizontalAlign = FormLayoutHorizontalAlign.Center;
+        i.ColumnSpan = 4;
+        i.Width = Unit.Percentage(100);
+        i.NestedExtensionType = FormLayoutNestedExtensionItemType.Memo;
+        i.NestedExtensionSettings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        i.NestedExtensionSettings.Height = 300;
+    });
+}).Bind(Model).GetHtml()
