@@ -6,7 +6,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <router-link class="nav-item nav-link active" to="permission">Permission</router-link>
+                <router-link class="nav-item nav-link" to="permission">Permission</router-link>
 
             </div>
         </div>
@@ -20,7 +20,7 @@
             
         },
         data: function() {
-          
+            return {}
         },
         methods: {
            

@@ -21,7 +21,7 @@
 
             <div class="row">
                 <div class="col-sm-3">Дата рождения</div>
-                <div class="col-sm-9">{{ employee.Person.BirthDate }}</div>
+                <div class="col-sm-9">{{ formatDate(employee.Person.BirthDate, 'shortDate') }}</div>
             </div>
             <div class="row">
                 <div class="col-sm-3">Компания</div>
@@ -45,7 +45,7 @@
 
     import { employeeDataSource } from './employee-data.js'    
     import { confirm } from 'devextreme/ui/dialog';
-
+    import { formatDate } from "devextreme/localization";
 
     export default {
         components: {
@@ -107,6 +107,7 @@
             }
         },
         methods: {
+            formatDate: formatDate,
             fetchData() {                
                 console.log(this.employeeId);
                 this.error = this.employee = null;
