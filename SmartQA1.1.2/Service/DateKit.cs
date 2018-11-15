@@ -42,7 +42,7 @@ namespace SmartQA1._1._2
             : DateTime2Sql(new[] { Date }) == null ? null : Date;
 	    public static string convertToUIDate(DateTime inputDateTime) =>
             inputDateTime == default(DateTime) ? string.Empty : $@"{inputDateTime:dd\/MM\/yyyy}";
-        public static string convertToUIDate(DateTimeOffset? inputDateTime) =>
+        public static string convertToUIDate(DateTime? inputDateTime) =>
             inputDateTime.HasValue ? $@"{inputDateTime.Value.LocalDateTime:dd\/MM\/yyyy}" : string.Empty;
     }
 }

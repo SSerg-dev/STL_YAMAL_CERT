@@ -71,7 +71,7 @@ warning 6002: The table/view 'DEV_STL_MainData.dbo.ABDDocument_to_FileTable_Stre
           <Property Name="FileTable_Stream_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="255" />
           <Property Name="file_type" Type="nvarchar" MaxLength="255" />
-          <Property Name="last_write_time" Type="datetimeoffset" Precision="7" />
+          <Property Name="last_write_time" Type="DateTime" Precision="7" />
           <Property Name="Row_Status" Type="int" />
           <Property Name="ABDDocument_to_FileTable_Stream_ID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
@@ -1431,7 +1431,7 @@ warning 6002: The table/view 'DEV_STL_MainData.dbo.UI_TitleObject_to_Phase' does
           <Property Name="FileTable_Stream_ID" Type="Guid" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="file_type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="last_write_time" Type="DateTimeOffset" Precision="7" />
+          <Property Name="last_write_time" Type="DateTime" Precision="7" />
           <Property Name="Row_Status" Type="Int32" />
           <Property Name="ABDDocument_to_FileTable_Stream_ID" Type="Guid" Nullable="false" />
         </EntityType>

@@ -16,13 +16,13 @@ namespace SmartQA.DB.Models.Auth
         public string Comment { get; set; }
         public byte[] User_Password { get; set; }
         
-        [InverseProperty("AppUser")]
-        public List<AppUser_to_Role> AppUser_to_Roles { get; set; }
-
-        [InverseProperty("Created_User")]
-        public List<AppUser> CreatedBy_Users { get; set; }
-        [InverseProperty("Modified_User")]
-        public List<AppUser> ModifiedBy_Users { get; set; }
+//        [InverseProperty("AppUser")]
+//        public List<AppUser_to_Role> AppUser_to_Roles { get; set; }
+//
+//        [InverseProperty("Created_User")]
+//        public List<AppUser> CreatedBy_Users { get; set; }
+//        [InverseProperty("Modified_User")]
+//        public List<AppUser> ModifiedBy_Users { get; set; }
 
     }
 }

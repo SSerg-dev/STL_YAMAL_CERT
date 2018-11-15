@@ -19,18 +19,11 @@ namespace SmartQA.Migrations
                     AppUser_ID = table.Column<Guid>(nullable: false),
                     AppUser_Code = table.Column<string>(nullable: true),
                     Comment = table.Column<string>(nullable: true),
-                    User_Password = table.Column<byte[]>(nullable: true),
-                    AppUser_ID1 = table.Column<Guid>(nullable: true)
+                    User_Password = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_p_AppUser", x => x.AppUser_ID);
-                    table.ForeignKey(
-                        name: "FK_p_AppUser_p_AppUser_AppUser_ID1",
-                        column: x => x.AppUser_ID1,
-                        principalTable: "p_AppUser",
-                        principalColumn: "AppUser_ID",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_p_AppUser_p_AppUser_Created_User_ID",
                         column: x => x.Created_User_ID,
@@ -207,9 +200,9 @@ namespace SmartQA.Migrations
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     Person_ID = table.Column<Guid>(nullable: false),
                     Person_Code = table.Column<string>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: false),
                     SecondName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: false),
                     ShortName = table.Column<string>(nullable: true),
                     BirthDate = table.Column<DateTime>(nullable: false)
                 },
@@ -507,51 +500,6 @@ namespace SmartQA.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "p_Employee",
-                columns: table => new
-                {
-                    RowStatus = table.Column<int>(nullable: false),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
-                    Created_User_ID = table.Column<Guid>(nullable: false),
-                    Modified_User_ID = table.Column<Guid>(nullable: false),
-                    Employee_ID = table.Column<Guid>(nullable: false),
-                    Employee_Code = table.Column<string>(nullable: false),
-                    Person_ID = table.Column<Guid>(nullable: false),
-                    Position_Id = table.Column<Guid>(nullable: true),
-                    AppUser_Id = table.Column<Guid>(nullable: true),
-                    Contragent_ID = table.Column<Guid>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_p_Employee", x => x.Employee_ID);
-                    table.ForeignKey(
-                        name: "FK_p_Employee_p_AppUser_AppUser_Id",
-                        column: x => x.AppUser_Id,
-                        principalTable: "p_AppUser",
-                        principalColumn: "AppUser_ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_p_Employee_p_AppUser_Created_User_ID",
-                        column: x => x.Created_User_ID,
-                        principalTable: "p_AppUser",
-                        principalColumn: "AppUser_ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_p_Employee_p_AppUser_Modified_User_ID",
-                        column: x => x.Modified_User_ID,
-                        principalTable: "p_AppUser",
-                        principalColumn: "AppUser_ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_p_Employee_p_Person_Person_ID",
-                        column: x => x.Person_ID,
-                        principalTable: "p_Person",
-                        principalColumn: "Person_ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "p_AppUser_to_Role",
                 columns: table => new
                 {
@@ -631,10 +579,62 @@ namespace SmartQA.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_p_AppUser_AppUser_ID1",
-                table: "p_AppUser",
-                column: "AppUser_ID1");
+            migrationBuilder.CreateTable(
+                name: "p_Employee",
+                columns: table => new
+                {
+                    RowStatus = table.Column<int>(nullable: false),
+                    Insert_DTS = table.Column<DateTime>(nullable: false),
+                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Created_User_ID = table.Column<Guid>(nullable: false),
+                    Modified_User_ID = table.Column<Guid>(nullable: false),
+                    Employee_ID = table.Column<Guid>(nullable: false),
+                    Employee_Code = table.Column<string>(nullable: false),
+                    Person_ID = table.Column<Guid>(nullable: false),
+                    Position_Id = table.Column<Guid>(nullable: true),
+                    AppUser_Id = table.Column<Guid>(nullable: true),
+                    Contragent_ID = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_p_Employee", x => x.Employee_ID);
+                    table.ForeignKey(
+                        name: "FK_p_Employee_p_AppUser_AppUser_Id",
+                        column: x => x.AppUser_Id,
+                        principalTable: "p_AppUser",
+                        principalColumn: "AppUser_ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_p_Employee_p_Contragent_Contragent_ID",
+                        column: x => x.Contragent_ID,
+                        principalTable: "p_Contragent",
+                        principalColumn: "Contragent_ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_p_Employee_p_AppUser_Created_User_ID",
+                        column: x => x.Created_User_ID,
+                        principalTable: "p_AppUser",
+                        principalColumn: "AppUser_ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_p_Employee_p_AppUser_Modified_User_ID",
+                        column: x => x.Modified_User_ID,
+                        principalTable: "p_AppUser",
+                        principalColumn: "AppUser_ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_p_Employee_p_Person_Person_ID",
+                        column: x => x.Person_ID,
+                        principalTable: "p_Person",
+                        principalColumn: "Person_ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_p_Employee_p_Position_Position_Id",
+                        column: x => x.Position_Id,
+                        principalTable: "p_Position",
+                        principalColumn: "Position_ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_p_AppUser_Created_User_ID",
@@ -707,6 +707,11 @@ namespace SmartQA.Migrations
                 column: "AppUser_Id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_p_Employee_Contragent_ID",
+                table: "p_Employee",
+                column: "Contragent_ID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_p_Employee_Created_User_ID",
                 table: "p_Employee",
                 column: "Created_User_ID");
@@ -720,6 +725,11 @@ namespace SmartQA.Migrations
                 name: "IX_p_Employee_Person_ID",
                 table: "p_Employee",
                 column: "Person_ID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_p_Employee_Position_Id",
+                table: "p_Employee",
+                column: "Position_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_p_HIFGroup_Created_User_ID",
@@ -878,9 +888,6 @@ namespace SmartQA.Migrations
                 name: "p_JointType");
 
             migrationBuilder.DropTable(
-                name: "p_Position");
-
-            migrationBuilder.DropTable(
                 name: "p_SeamsType");
 
             migrationBuilder.DropTable(
@@ -906,6 +913,9 @@ namespace SmartQA.Migrations
 
             migrationBuilder.DropTable(
                 name: "p_Person");
+
+            migrationBuilder.DropTable(
+                name: "p_Position");
 
             migrationBuilder.DropTable(
                 name: "p_Division");

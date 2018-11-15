@@ -18,7 +18,7 @@ namespace SmartQA1._1._2.DB.WebDb
         public System.Guid FileTable_ID { get; set; }
         public string name { get; set; }
         public string file_type { get; set; }
-        public Nullable<System.DateTimeOffset> last_write_time { get; set; }
+        public Nullable<System.DateTime> last_write_time { get; set; }
         public System.Guid Document_to_FileTable_ID { get; set; }
     }
 }

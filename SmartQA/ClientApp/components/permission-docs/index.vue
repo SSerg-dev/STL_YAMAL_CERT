@@ -8,7 +8,7 @@
         </div>
         <div class="col-sm-9">
             <div class="py-md-3">
-                <div v-if="!employeeId" class="alert alert-info" role="alert">
+                <div v-if="!employeeId && !edit" class="alert alert-info" role="alert">
                     Select an employee to proceed
                 </div>
 
@@ -28,14 +28,12 @@
     import EmployeeList from "./employee-list";
     import EmployeeEdit from "./employee-edit";
     import EmployeeDetails from "./employee-details";
-    import TestList from "./test-list";
 
     export default {
         components: {
             EmployeeList,
             EmployeeEdit,
-            EmployeeDetails,
-            TestList
+            EmployeeDetails            
         },        
         props: {
             employeeId: String,

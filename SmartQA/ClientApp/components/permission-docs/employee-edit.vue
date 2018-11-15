@@ -166,7 +166,7 @@
             processForm(event) {
                 this.loading = true;
                 var component = this;
-                var source = new DataSource(this.employeeDataSource);
+                var source =this.employeeDataSource();
                 if (this.employeeId) {
                     source.store().update(new String(this.employeeId.toString()), this.formData)
                         .done(this.processFormSuccess)

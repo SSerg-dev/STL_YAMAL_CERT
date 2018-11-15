@@ -98,7 +98,7 @@ namespace SmartQA1._1._2.Authentication
             throw new NotImplementedException();
         }
 
-        public Task SetLockoutEndDateAsync(User user, DateTimeOffset lockoutEnd)
+        public Task SetLockoutEndDateAsync(User user, DateTime lockoutEnd)
         {
             throw new NotImplementedException();
         }
@@ -107,7 +107,7 @@ namespace SmartQA1._1._2.Authentication
 
         public Task<bool> GetLockoutEnabledAsync(User user) => Task.FromResult(false);
 
-        public Task<DateTimeOffset> GetLockoutEndDateAsync(User user)
+        public Task<DateTime> GetLockoutEndDateAsync(User user)
         {
             throw new NotImplementedException();
         }

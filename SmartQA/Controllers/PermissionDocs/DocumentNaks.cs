@@ -11,8 +11,8 @@ using SmartQA.DB.Models.PermissionDocuments;
 
 namespace SmartQA.Controllers.PermissionDocs
 {
-    [Route("api/PremissionDocs/[controller]")]
-    public class DocumentNaksController
+    [Produces("application/json")]
+    public class DocumentNaksController : ODataController
     {
         private DataContext Context;
         public DocumentNaksController(DataContext context)
@@ -21,7 +21,8 @@ namespace SmartQA.Controllers.PermissionDocs
         }
 
         [EnableQuery]
-        public IQueryable<DocumentNaks> Get() => Context.DocumentNaks
+        public IQueryable<DocumentNaks> Get() => Context
+            .DocumentNaks
             .Include(e => e.Person).AsQueryable();
 
     }

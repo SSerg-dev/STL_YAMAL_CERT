@@ -10,8 +10,8 @@ using SmartQA.DB;
 namespace SmartQA.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181114025656_DocumentNaks")]
-    partial class DocumentNaks
+    [Migration("20181115102615_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,8 +28,6 @@ namespace SmartQA.Migrations
 
                     b.Property<string>("AppUser_Code");
 
-                    b.Property<Guid?>("AppUser_ID1");
-
                     b.Property<string>("Comment");
 
                     b.Property<Guid>("Created_User_ID");
@@ -45,8 +43,6 @@ namespace SmartQA.Migrations
                     b.Property<byte[]>("User_Password");
 
                     b.HasKey("AppUser_ID");
-
-                    b.HasIndex("AppUser_ID1");
 
                     b.HasIndex("Created_User_ID");
 
@@ -501,7 +497,8 @@ namespace SmartQA.Migrations
                     b.Property<Guid>("Employee_ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("AppUser_Id");
+                    b.Property<Guid?>("AppUser_ID")
+                        .HasColumnName("AppUser_Id");
 
                     b.Property<Guid?>("Contragent_ID");
 
@@ -516,7 +513,8 @@ namespace SmartQA.Migrations
 
                     b.Property<Guid>("Person_ID");
 
-                    b.Property<Guid?>("Position_Id");
+                    b.Property<Guid?>("Position_ID")
+                        .HasColumnName("Position_Id");
 
                     b.Property<int>("RowStatus");
 
@@ -524,13 +522,17 @@ namespace SmartQA.Migrations
 
                     b.HasKey("Employee_ID");
 
-                    b.HasIndex("AppUser_Id");
+                    b.HasIndex("AppUser_ID");
+
+                    b.HasIndex("Contragent_ID");
 
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("Person_ID");
+
+                    b.HasIndex("Position_ID");
 
                     b.ToTable("p_Employee");
                 });
@@ -540,15 +542,18 @@ namespace SmartQA.Migrations
                     b.Property<Guid>("Person_ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("BirthDate");
+                    b.Property<DateTime?>("BirthDate")
+                        .IsRequired();
 
                     b.Property<Guid>("Created_User_ID");
 
-                    b.Property<string>("FirstName");
+                    b.Property<string>("FirstName")
+                        .IsRequired();
 
                     b.Property<DateTime>("Insert_DTS");
 
-                    b.Property<string>("LastName");
+                    b.Property<string>("LastName")
+                        .IsRequired();
 
                     b.Property<Guid>("Modified_User_ID");
 
@@ -607,83 +612,8 @@ namespace SmartQA.Migrations
                     b.ToTable("p_Position");
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaks", b =>
-                {
-                    b.Property<Guid>("DocumentNaks_ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<DateTime>("Insert_DTS");
-
-                    b.Property<DateTime>("IssueDate")
-                        .HasColumnType("Date");
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<Guid>("Person_ID");
-
-                    b.Property<int>("RowStatus");
-
-                    b.Property<string>("Schifr")
-                        .IsRequired();
-
-                    b.Property<DateTime>("Update_DTS");
-
-                    b.Property<DateTime>("ValidUntil")
-                        .HasColumnType("Date");
-
-                    b.Property<Guid>("WeldType_ID");
-
-                    b.HasKey("DocumentNaks_ID");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.HasIndex("WeldType_ID");
-
-                    b.ToTable("p_DocumentNaks");
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaks_to_HIFGroup", b =>
-                {
-                    b.Property<Guid>("DocumentNaks_to_HIFGroup_ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<Guid>("DocumentNaks_ID");
-
-                    b.Property<Guid>("HIFGroup_ID");
-
-                    b.Property<DateTime>("Insert_DTS");
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<int>("RowStatus");
-
-                    b.Property<DateTime>("Update_DTS");
-
-                    b.HasKey("DocumentNaks_to_HIFGroup_ID");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("DocumentNaks_ID");
-
-                    b.HasIndex("HIFGroup_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.ToTable("p_DocumentNaks_to_HIFGroup");
-                });
-
             modelBuilder.Entity("SmartQA.DB.Models.Auth.AppUser", b =>
                 {
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser")
-                        .WithMany("CreatedBy_Users")
-                        .HasForeignKey("AppUser_ID1");
-
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
                         .HasForeignKey("Created_User_ID")
@@ -698,7 +628,7 @@ namespace SmartQA.Migrations
             modelBuilder.Entity("SmartQA.DB.Models.Auth.AppUser_to_Role", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "AppUser")
-                        .WithMany("AppUser_to_Roles")
+                        .WithMany()
                         .HasForeignKey("AppUser_ID")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -908,7 +838,11 @@ namespace SmartQA.Migrations
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "AppUser")
                         .WithMany()
-                        .HasForeignKey("AppUser_Id");
+                        .HasForeignKey("AppUser_ID");
+
+                    b.HasOne("SmartQA.DB.Models.People.Contragent", "Contragent")
+                        .WithMany()
+                        .HasForeignKey("Contragent_ID");
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -924,6 +858,10 @@ namespace SmartQA.Migrations
                         .WithMany("Employees")
                         .HasForeignKey("Person_ID")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SmartQA.DB.Models.People.Position", "Position")
+                        .WithMany()
+                        .HasForeignKey("Position_ID");
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.People.Person", b =>
@@ -949,47 +887,6 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.People.Division", "Division")
                         .WithMany()
                         .HasForeignKey("Division_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
-                        .WithMany()
-                        .HasForeignKey("Modified_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaks", b =>
-                {
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
-                        .WithMany()
-                        .HasForeignKey("Created_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
-                        .WithMany()
-                        .HasForeignKey("Modified_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Dictionaries.WeldType", "WeldType")
-                        .WithMany()
-                        .HasForeignKey("WeldType_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaks_to_HIFGroup", b =>
-                {
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
-                        .WithMany()
-                        .HasForeignKey("Created_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaks", "DocumentNaks")
-                        .WithMany("DocumentNaks_to_HIFGroupSet")
-                        .HasForeignKey("DocumentNaks_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SmartQA.DB.Models.Dictionaries.HIFGroup", "HIFGroup")
-                        .WithMany()
-                        .HasForeignKey("HIFGroup_ID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")

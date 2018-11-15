@@ -456,7 +456,7 @@ warning 6002: The table/view 'DEV_WEB_MainData.dbo.UI_FileStream' does not have 
           <Property Name="FileTable_ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="255" />
           <Property Name="file_type" Type="nvarchar" MaxLength="255" />
-          <Property Name="last_write_time" Type="datetimeoffset" Precision="7" />
+          <Property Name="last_write_time" Type="DateTime" Precision="7" />
           <Property Name="Document_to_FileTable_ID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -2047,7 +2047,7 @@ warning 6002: The table/view 'DEV_WEB_MainData.dbo.WorkPackage' does not have a 
           <Property Name="FileTable_ID" Type="Guid" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="file_type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="last_write_time" Type="DateTimeOffset" Precision="7" />
+          <Property Name="last_write_time" Type="DateTime" Precision="7" />
           <Property Name="Document_to_FileTable_ID" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="UI_CheckItem">

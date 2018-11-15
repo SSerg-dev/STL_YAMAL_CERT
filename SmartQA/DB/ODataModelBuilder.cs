@@ -7,6 +7,7 @@ using Microsoft.AspNet.OData.Builder;
 using Microsoft.OData.Edm;
 using SmartQA.DB.Models;
 using SmartQA.DB.Models.People;
+using SmartQA.DB.Models.PermissionDocuments;
 
 namespace SmartQA.DB
 {
@@ -43,7 +44,16 @@ namespace SmartQA.DB
                 .Page() // Allow for the $top and $skip Commands
                 .Select();// Allow for the $select Command; 
 
-            builder.EntitySet<Contragent>(nameof(Position))
+            builder.EntitySet<Position>(nameof(Position))
+                .EntityType
+                .Filter() // Allow for the $filter Command
+                .Count() // Allow for the $count Command
+                .Expand() // Allow for the $expand Command
+                .OrderBy() // Allow for the $orderby Command
+                .Page() // Allow for the $top and $skip Commands
+                .Select();// Allow for the $s
+
+            builder.EntitySet<DocumentNaks>(nameof(DocumentNaks))
                 .EntityType
                 .Filter() // Allow for the $filter Command
                 .Count() // Allow for the $count Command
