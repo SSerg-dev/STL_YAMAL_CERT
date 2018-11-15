@@ -1,22 +1,30 @@
 ﻿<!DOCTYPE html>
 
 <html>
-<head>
+    <head>
 
-    <title>SmartQA</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    @RenderSection("scripts", required: false)
+        <title>SmartQA</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        @RenderSection("scripts", required: false)
 
-</head>
+    </head>
 
-<body>
+    <body>
+    
+        @RenderBody()
 
-    @RenderBody()
+        <script>            
+            var baseUrl = "@Url.Content("~/")";                       
+        </script>
 
-    <!-- <script src="~/dist/main.js" asp-append-version="true"></script> -->
-    <script src="http://localhost:8080/dist/main.js" asp-append-version="true"></script>
-
-
-</body>
+        <environment names="Staging,Production">            
+            <script src="~/dist/main.js" asp-append-version="true"></script>
+        </environment>
+        
+        <environment names="Development">
+            <script src="http://localhost:8080/dist/main.js" asp-append-version="true"></script>
+        </environment>
+ 
+    </body>
 
 </html>

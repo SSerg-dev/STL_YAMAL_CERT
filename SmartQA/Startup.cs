@@ -27,6 +27,7 @@ namespace SmartQA
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOData();
+
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Data")));
             services.AddTransient<ODataModelBuilder>();
 

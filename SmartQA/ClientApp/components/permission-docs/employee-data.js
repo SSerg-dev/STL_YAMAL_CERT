@@ -7,7 +7,7 @@ export function employeeDataSource() {
 export const employeeDataSourceSettings = {
     store: {
         type: 'odata',
-        url: '/odata/Employee',
+        url: baseUrl + 'odata/Employee',
         key: 'Employee_ID',
         keyType: {
             Employee_ID: "Guid"         
@@ -24,7 +24,7 @@ export const employeeDataSourceSettings = {
 export const contragentDataSource = {
     store: {
         type: 'odata',
-        url: '/odata/Contragent',
+        url: baseUrl + 'odata/Contragent',
         version: 4
     }
 }
@@ -32,7 +32,7 @@ export const contragentDataSource = {
 export const positionDataSource = {
     store: {
         type: 'odata',
-        url: '/odata/Position',
+        url: baseUrl + 'odata/Position',
         version: 4
     }
 }

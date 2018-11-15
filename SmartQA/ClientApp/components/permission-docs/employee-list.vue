@@ -48,7 +48,7 @@
                 employeeDataSource: {
                     store: {
                         type: 'odata',
-                        url: '/odata/Employee',
+                        url: baseUrl + 'odata/Employee',
                         version: 4
                     },
                     expand: [

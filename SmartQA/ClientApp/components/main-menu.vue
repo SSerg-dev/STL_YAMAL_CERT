@@ -14,31 +14,16 @@
 </template>
 
 <script>
-    import { DxMenu } from "devextreme-vue/ui/menu";    
-
+  
     export default {
         components: {            
-            DxMenu
+            
         },
         data: function() {
-            return {
-                menuItems: [
-                    {
-                        text: "Home",
-                        route: { name: 'home' }
-                    },
-
-                    {
-                        text: "Permission",
-                        route: { name: 'permission' }
-                    }                                                          
-                ]
-           }
+          
         },
         methods: {
-            itemClick(e) {
-                this.$router.push(e.itemData.route);
-            }
+           
         }
     }
 </script>
