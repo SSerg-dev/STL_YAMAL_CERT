@@ -17,11 +17,15 @@ namespace SmartQA.DB.Models.People
 
         [Required]
         public string Person_Code { get; set; }
+        [Required]
         public string FirstName { get; set; }
         public string SecondName { get; set; }
+        [Display(Name="Фамилия")]
+        [Required]
         public string LastName { get; set; }
         public string ShortName { get; set; }
-        public DateTime BirthDate { get; set; }
+        [Required]
+        public DateTime? BirthDate { get; set; }
 
         public List<Employee> Employees { get; set; }
 

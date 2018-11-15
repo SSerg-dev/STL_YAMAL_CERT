@@ -63,6 +63,7 @@ namespace SmartQA
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapSpaFallbackRoute("spa-fallback", new { controller = "home", action = "index" });
             });
         }
     }

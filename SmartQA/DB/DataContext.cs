@@ -7,6 +7,7 @@ using SmartQA.DB.Models;
 using SmartQA.DB.Models.Auth;
 using SmartQA.DB.Models.Dictionaries;
 using SmartQA.DB.Models.People;
+using SmartQA.DB.Models.PermissionDocuments;
 using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB
@@ -35,6 +36,9 @@ namespace SmartQA.DB
         public DbSet<WeldPosition> WeldPosition { get; set; }
         public DbSet<WeldType> WeldType { get; set; }
 
+        public DbSet<DocumentNaks> DocumentNaks { get; set; }
+        public DbSet<DocumentNaks_to_HIFGroup> DocumentNaks_to_HIFGroup { get; set; }
+
         public DataContext()
         {
         }
@@ -48,11 +52,8 @@ namespace SmartQA.DB
         {
 
             CommonEntity.CommonModelSetup<Contragent>(modelBuilder);
-
             CommonEntity.CommonModelSetup<AppUser>(modelBuilder);
-
             CommonEntity.CommonModelSetup<Role>(modelBuilder);
-                
             CommonEntity.CommonModelSetup<AppUser_to_Role>(modelBuilder);
                 
             modelBuilder.Entity<AppUser_to_Role>()
@@ -60,38 +61,28 @@ namespace SmartQA.DB
             modelBuilder.Entity<AppUser_to_Role>()
                 .HasOne(ur => ur.AppUser);
             modelBuilder.Entity<AppUser_to_Role>()
-                .HasOne(ur => ur.Modified_User);
-            
-                
+                .HasOne(ur => ur.Modified_User);                            
 
             CommonEntity.CommonModelSetup<Person>(modelBuilder);                
             CommonEntity.CommonModelSetup<Employee>(modelBuilder);                
             CommonEntity.CommonModelSetup<Division>(modelBuilder);                
             CommonEntity.CommonModelSetup<Position>(modelBuilder);                
             CommonEntity.CommonModelSetup<Contragent>(modelBuilder);
-            CommonEntity.CommonModelSetup<DetailsType>(modelBuilder);
-                
-            CommonEntity.CommonModelSetup<HIFGroup>(modelBuilder);
-                
-            CommonEntity.CommonModelSetup<JointKind>(modelBuilder);
-                
-            CommonEntity.CommonModelSetup<JointType>(modelBuilder);
-                
-            CommonEntity.CommonModelSetup<SeamsType>(modelBuilder);
-                
-            CommonEntity.CommonModelSetup<WeldGOST14098>(modelBuilder);
-                
-            CommonEntity.CommonModelSetup<WeldingEquipmentAutomationLevel>(modelBuilder);
-                
-            CommonEntity.CommonModelSetup<WeldMaterial>(modelBuilder);
-                
-            CommonEntity.CommonModelSetup<WeldMaterialGroup>(modelBuilder);
-                
-            CommonEntity.CommonModelSetup<WeldPosition>(modelBuilder);
-                
-            CommonEntity.CommonModelSetup<WeldType>(modelBuilder);
-                
 
+            CommonEntity.CommonModelSetup<DetailsType>(modelBuilder);
+            CommonEntity.CommonModelSetup<HIFGroup>(modelBuilder);
+            CommonEntity.CommonModelSetup<JointKind>(modelBuilder);
+            CommonEntity.CommonModelSetup<JointType>(modelBuilder);
+            CommonEntity.CommonModelSetup<SeamsType>(modelBuilder);
+            CommonEntity.CommonModelSetup<WeldGOST14098>(modelBuilder);
+            CommonEntity.CommonModelSetup<WeldingEquipmentAutomationLevel>(modelBuilder);
+            CommonEntity.CommonModelSetup<WeldMaterial>(modelBuilder);
+            CommonEntity.CommonModelSetup<WeldMaterialGroup>(modelBuilder);
+            CommonEntity.CommonModelSetup<WeldPosition>(modelBuilder);
+            CommonEntity.CommonModelSetup<WeldType>(modelBuilder);
+
+            CommonEntity.CommonModelSetup<DocumentNaks>(modelBuilder);
+            CommonEntity.CommonModelSetup<DocumentNaks_to_HIFGroup>(modelBuilder);                
 
         }
     }

@@ -19,13 +19,19 @@ namespace SmartQA.DB.Models.People
         public string Employee_Code { get; set; }
         
         public System.Guid Person_ID { get; set; }
-        public Guid? Position_Id { get; set; }
-        public Guid? AppUser_Id { get; set; }
+        [Column("Position_Id")]
+        public Guid? Position_ID { get; set; }
+        [Column("AppUser_Id")]
+        public Guid? AppUser_ID { get; set; }
         public Guid? Contragent_ID { get; set; }
 
         [ForeignKey("Person_ID")]
         public Person Person { get; set; }
-        [ForeignKey("AppUser_Id")]
+        [ForeignKey("AppUser_ID")]
         public AppUser AppUser { get; set; }
+        [ForeignKey("Contragent_ID")]
+        public Contragent Contragent { get; set; }
+        [ForeignKey("Position_ID")]
+        public Position Position { get; set; }
     }
 }

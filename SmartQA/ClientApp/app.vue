@@ -1,18 +1,9 @@
 <template>      
-    <div id="page">
-        <div class="container-fluid">
-            <div class="row">
-                <main-menu />
-            </div>
-            <div class="row">
-                <div class="col-sm-3">
-                    <employee-list @employee-selected="onEmployeeSelected"/>
-                </div>
-                <div class="col-sm-9">
-                    <test-list />
-                </div>
+    <div id="page">       
+        <main-menu />
 
-            </div>
+        <div class="container-fluid">
+            <router-view></router-view>
         </div>
 
     </div>
@@ -21,38 +12,26 @@
 
 <script>
 
-    import { DxResponsiveBox, DxRow, DxCol } from "devextreme-vue/ui/responsive-box";
     import MainMenu from "./components/main-menu";
-    import EmployeeList from "./components/employee-list";
-    import TestList from "./components/test-list";
     import 'bootstrap';
     import 'bootstrap/dist/css/bootstrap.min.css';
 
+    export default {
+        components: {
+            MainMenu,        
+            },
 
-export default {
-    components: {
-        MainMenu,
-        EmployeeList,
-        TestList,
-        DxResponsiveBox,
-        DxRow,
-        DxCol
-        },
-    methods: {
-        screenByWidth: function(width) {
-            return width < 700 ? "sm" : "lg";
-        },
-        onEmployeeSelected(e) {
-            alert(e.Employee_ID);
-        }
+        methods: {
+            screenByWidth: function(width) {
+                return width < 700 ? "sm" : "lg";
+                }            
+            },
 
-    },
-
-    name: "app"
-}
+        name: "app"
+    }
 </script>
 
 
-    <style scoped>
+<style scoped>
 
 </style>

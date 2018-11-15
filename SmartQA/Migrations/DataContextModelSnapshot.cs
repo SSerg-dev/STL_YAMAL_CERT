@@ -605,6 +605,77 @@ namespace SmartQA.Migrations
                     b.ToTable("p_Position");
                 });
 
+            modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaks", b =>
+                {
+                    b.Property<Guid>("DocumentNaks_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<DateTime>("Insert_DTS");
+
+                    b.Property<DateTime>("IssueDate")
+                        .HasColumnType("Date");
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<Guid>("Person_ID");
+
+                    b.Property<int>("RowStatus");
+
+                    b.Property<string>("Schifr")
+                        .IsRequired();
+
+                    b.Property<DateTime>("Update_DTS");
+
+                    b.Property<DateTime>("ValidUntil")
+                        .HasColumnType("Date");
+
+                    b.Property<Guid>("WeldType_ID");
+
+                    b.HasKey("DocumentNaks_ID");
+
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.HasIndex("WeldType_ID");
+
+                    b.ToTable("p_DocumentNaks");
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaks_to_HIFGroup", b =>
+                {
+                    b.Property<Guid>("DocumentNaks_to_HIFGroup_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<Guid>("DocumentNaks_ID");
+
+                    b.Property<Guid>("HIFGroup_ID");
+
+                    b.Property<DateTime>("Insert_DTS");
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<int>("RowStatus");
+
+                    b.Property<DateTime>("Update_DTS");
+
+                    b.HasKey("DocumentNaks_to_HIFGroup_ID");
+
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("DocumentNaks_ID");
+
+                    b.HasIndex("HIFGroup_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.ToTable("p_DocumentNaks_to_HIFGroup");
+                });
+
             modelBuilder.Entity("SmartQA.DB.Models.Auth.AppUser", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser")
@@ -876,6 +947,47 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.People.Division", "Division")
                         .WithMany()
                         .HasForeignKey("Division_ID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
+                        .WithMany()
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaks", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
+                        .WithMany()
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Dictionaries.WeldType", "WeldType")
+                        .WithMany()
+                        .HasForeignKey("WeldType_ID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaks_to_HIFGroup", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaks", "DocumentNaks")
+                        .WithMany("DocumentNaks_to_HIFGroupSet")
+                        .HasForeignKey("DocumentNaks_ID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SmartQA.DB.Models.Dictionaries.HIFGroup", "HIFGroup")
+                        .WithMany()
+                        .HasForeignKey("HIFGroup_ID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
