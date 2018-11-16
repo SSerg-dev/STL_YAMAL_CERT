@@ -10,7 +10,7 @@ export const employeeDataSourceSettings = {
         url: baseUrl + 'odata/Employee',
         key: 'Employee_ID',
         keyType: {
-            Employee_ID: "Guid"         
+            Employee_ID: "Guid"
         },
         version: 4
     },

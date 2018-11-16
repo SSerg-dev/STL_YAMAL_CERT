@@ -47,24 +47,17 @@ namespace SmartQA.Controllers
 
             var employee = new Employee
             {
-                Employee_Code = Guid.NewGuid().ToString(),
-                Created_User_ID = Guid.Parse("E43B02A5-1EF1-464D-B527-4EA9F9C6AF74"),
-                Modified_User_ID = Guid.Parse("E43B02A5-1EF1-464D-B527-4EA9F9C6AF74"),
-                Insert_DTS = DateTime.Now,
-                Update_DTS = DateTime.Now,
-                RowStatus = 0,
+                Employee_Code = Guid.NewGuid().ToString(),                
                 Person = new Person
                 {
-                    Person_Code = Guid.NewGuid().ToString(),
-                    Created_User_ID = Guid.Parse("E43B02A5-1EF1-464D-B527-4EA9F9C6AF74"),
-                    Modified_User_ID = Guid.Parse("E43B02A5-1EF1-464D-B527-4EA9F9C6AF74"),
-                    Insert_DTS = DateTime.Now,
-                    Update_DTS = DateTime.Now,
-                    RowStatus = 0
+                    Person_Code = Guid.NewGuid().ToString(),                    
                  }
             };
-     
+            
             employeeForm.Serialize(employee);
+            employee.OnSave();
+            employee.Person.OnSave();
+
             Context.Person.Add(employee.Person);
             Context.Employee.Add(employee);
             Context.SaveChanges();
@@ -83,6 +76,10 @@ namespace SmartQA.Controllers
                 .Include(x => x.Person)
                 .Single(x => x.Employee_ID == key);
             employeeForm.Serialize(employee);
+
+            employee.OnSave();
+            employee.Person.OnSave();
+
             Context.SaveChanges();
 
             return Updated(employee);
@@ -99,6 +96,10 @@ namespace SmartQA.Controllers
                 .Include(x => x.Person)
                 .Single(x => x.Employee_ID == key);
             employeeForm.Serialize(employee);
+
+            employee.OnSave();
+            employee.Person.OnSave();
+
             Context.SaveChanges();
             
             return Updated(employee);
@@ -109,7 +110,8 @@ namespace SmartQA.Controllers
             var employee = Context.Employee
                 .Include(x => x.Person)
                 .Single(x => x.Employee_ID == key);
-            employee.RowStatus = 200;
+
+            employee.MarkDeleted();
 
             Context.SaveChanges();
 

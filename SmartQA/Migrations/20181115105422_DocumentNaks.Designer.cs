@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+
 using SmartQA.DB;
 
 namespace SmartQA.Migrations
@@ -109,7 +110,7 @@ namespace SmartQA.Migrations
                     b.ToTable("p_Role");
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.DetailsType", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.DetailsType", b =>
                 {
                     b.Property<Guid>("DetailsType_ID")
                         .ValueGeneratedOnAdd();
@@ -138,7 +139,7 @@ namespace SmartQA.Migrations
                     b.ToTable("p_DetailsType");
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.HIFGroup", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.HIFGroup", b =>
                 {
                     b.Property<Guid>("HIFGroup_ID")
                         .ValueGeneratedOnAdd();
@@ -167,7 +168,7 @@ namespace SmartQA.Migrations
                     b.ToTable("p_HIFGroup");
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.JointKind", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.JointKind", b =>
                 {
                     b.Property<Guid>("JointKind_ID")
                         .ValueGeneratedOnAdd();
@@ -196,7 +197,7 @@ namespace SmartQA.Migrations
                     b.ToTable("p_JointKind");
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.JointType", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.JointType", b =>
                 {
                     b.Property<Guid>("JointType_ID")
                         .ValueGeneratedOnAdd();
@@ -225,7 +226,7 @@ namespace SmartQA.Migrations
                     b.ToTable("p_JointType");
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.SeamsType", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.SeamsType", b =>
                 {
                     b.Property<Guid>("SeamsType_ID")
                         .ValueGeneratedOnAdd();
@@ -254,7 +255,7 @@ namespace SmartQA.Migrations
                     b.ToTable("p_SeamsType");
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.WeldGOST14098", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldGOST14098", b =>
                 {
                     b.Property<Guid>("WeldGOST14098_ID")
                         .ValueGeneratedOnAdd();
@@ -283,7 +284,7 @@ namespace SmartQA.Migrations
                     b.ToTable("p_WeldGOST14098");
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.WeldingEquipmentAutomationLevel", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldingEquipmentAutomationLevel", b =>
                 {
                     b.Property<Guid>("WeldingEquipmentAutomationLevel_ID")
                         .ValueGeneratedOnAdd();
@@ -312,7 +313,7 @@ namespace SmartQA.Migrations
                     b.ToTable("p_WeldingEquipmentAutomationLevel");
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.WeldMaterial", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldMaterial", b =>
                 {
                     b.Property<Guid>("WeldMaterial_ID")
                         .ValueGeneratedOnAdd();
@@ -341,7 +342,7 @@ namespace SmartQA.Migrations
                     b.ToTable("p_WeldMaterial");
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.WeldMaterialGroup", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldMaterialGroup", b =>
                 {
                     b.Property<Guid>("WeldMaterialGroup_ID")
                         .ValueGeneratedOnAdd();
@@ -370,7 +371,7 @@ namespace SmartQA.Migrations
                     b.ToTable("p_WeldMaterialGroup");
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.WeldPosition", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldPosition", b =>
                 {
                     b.Property<Guid>("WeldPosition_ID")
                         .ValueGeneratedOnAdd();
@@ -399,7 +400,7 @@ namespace SmartQA.Migrations
                     b.ToTable("p_WeldPosition");
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.WeldType", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldType", b =>
                 {
                     b.Property<Guid>("WeldType_ID")
                         .ValueGeneratedOnAdd();
@@ -732,7 +733,7 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.DetailsType", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.DetailsType", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -745,7 +746,7 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.HIFGroup", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.HIFGroup", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -758,7 +759,7 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.JointKind", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.JointKind", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -771,7 +772,7 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.JointType", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.JointType", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -784,7 +785,7 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.SeamsType", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.SeamsType", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -797,7 +798,7 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.WeldGOST14098", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldGOST14098", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -810,7 +811,7 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.WeldingEquipmentAutomationLevel", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldingEquipmentAutomationLevel", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -823,7 +824,7 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.WeldMaterial", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldMaterial", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -836,7 +837,7 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.WeldMaterialGroup", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldMaterialGroup", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -849,7 +850,7 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.WeldPosition", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldPosition", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -862,7 +863,7 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Dictionaries.WeldType", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldType", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -978,7 +979,7 @@ namespace SmartQA.Migrations
                         .HasForeignKey("Modified_User_ID")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("SmartQA.DB.Models.Dictionaries.WeldType", "WeldType")
+                    b.HasOne("SmartQA.DB.Models.Reftables.WeldType", "WeldType")
                         .WithMany()
                         .HasForeignKey("WeldType_ID")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -996,7 +997,7 @@ namespace SmartQA.Migrations
                         .HasForeignKey("DocumentNaks_ID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("SmartQA.DB.Models.Dictionaries.HIFGroup", "HIFGroup")
+                    b.HasOne("SmartQA.DB.Models.Reftables.HIFGroup", "HIFGroup")
                         .WithMany()
                         .HasForeignKey("HIFGroup_ID")
                         .OnDelete(DeleteBehavior.Cascade);

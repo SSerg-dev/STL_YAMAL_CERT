@@ -6,15 +6,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using SmartQA.DB.Models.Shared;
 
-namespace SmartQA.DB.Models.Dictionaries
+namespace SmartQA.DB.Models.Reftables
 {
-    [Table("p_WeldType")]
-    public class WeldType : CommonEntity
+    [Table("p_WeldingEquipmentAutomationLevel")]
+    public class WeldingEquipmentAutomationLevel : CommonEntity
     {
         [Key]
-        public System.Guid WeldType_ID { get; set; }
+        public System.Guid WeldingEquipmentAutomationLevel_ID { get; set; }
         [Required]
-        public string WeldType_Code { get; set; }
+        public string WeldingEquipmentAutomationLevel_Code { get; set; }
         public string Description_Rus { get; set; }
     }
 }

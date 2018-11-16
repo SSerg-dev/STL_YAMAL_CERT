@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+
 namespace SmartQA.Migrations
 {
     public partial class DocumentNaks : Migration

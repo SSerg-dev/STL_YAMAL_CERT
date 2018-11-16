@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SmartQA.DB;
 using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.PermissionDocuments;
+using SmartQA.Models;
 
 namespace SmartQA.Controllers.PermissionDocs
 {
@@ -23,7 +24,23 @@ namespace SmartQA.Controllers.PermissionDocs
         [EnableQuery]
         public IQueryable<DocumentNaks> Get() => Context
             .DocumentNaks
-            .Include(e => e.Person).AsQueryable();
+            .AsQueryable();
+
+        public IActionResult Post([FromBody]DocumentNaksEdit documentNaksForm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var documentNaks = new DocumentNaks();
+
+//            Context.Person.Add(employee.Person);
+//            Context.Employee.Add(employee);
+//            Context.SaveChanges();
+
+            return Created(documentNaks);
+        }
 
     }
 }

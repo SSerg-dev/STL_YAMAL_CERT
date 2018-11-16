@@ -6,15 +6,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using SmartQA.DB.Models.Shared;
 
-namespace SmartQA.DB.Models.Dictionaries
+namespace SmartQA.DB.Models.Reftables
 {
-    [Table("p_JointType")]
-    public class JointType : CommonEntity
+    [Table("p_SeamsType")]
+    public class SeamsType : CommonEntity
     {
         [Key]
-        public System.Guid JointType_ID { get; set; }
+        public System.Guid SeamsType_ID { get; set; }
         [Required]
-        public string JointType_Code { get; set; }
+        public string SeamsType_Code { get; set; }
         public string Description_Rus { get; set; }
     }
 }

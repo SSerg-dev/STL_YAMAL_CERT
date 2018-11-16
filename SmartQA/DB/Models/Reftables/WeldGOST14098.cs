@@ -6,16 +6,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using SmartQA.DB.Models.Shared;
 
-namespace SmartQA.DB.Models.Dictionaries
+namespace SmartQA.DB.Models.Reftables
 {
-    [Table("p_HIFGroup")]
-    public class HIFGroup : CommonEntity
+    [Table("p_WeldGOST14098")]
+    public class WeldGOST14098 : CommonEntity
     {
         [Key]
-        public Guid HIFGroup_ID { get; set; }
-
+        public System.Guid WeldGOST14098_ID { get; set; }
         [Required]
-        public string HIFGroup_Code { get; set; }
+        public string WeldGOST14098_Code { get; set; }
         public string Description_Rus { get; set; }
     }
 }

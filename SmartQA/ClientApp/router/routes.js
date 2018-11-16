@@ -1,4 +1,5 @@
 import PermissionDocsIndex from '../components/permission-docs/index'
+import ReftablesIndex from '../components/reftables/index'
 import HomePage from '../components/home'
 
 export const routes = [
@@ -14,6 +15,14 @@ export const routes = [
             edit: route.query.edit
         }),
         display: 'Permission'        
+    },
+    {
+        name: 'reftables',
+        path: '/reftables/:modelName?',
+        component: ReftablesIndex,
+        props: true,
+        display: 'Reftables'
+
     }
   
 ]

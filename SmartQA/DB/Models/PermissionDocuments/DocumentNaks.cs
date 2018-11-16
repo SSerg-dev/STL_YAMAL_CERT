@@ -4,9 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+
 using SmartQA.DB.Models.Auth;
-using SmartQA.DB.Models.Dictionaries;
+
 using SmartQA.DB.Models.People;
+using SmartQA.DB.Models.Reftables;
 using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.PermissionDocuments
@@ -20,15 +22,18 @@ namespace SmartQA.DB.Models.PermissionDocuments
         public Guid Person_ID { get; set; }
         
         [ForeignKey("Person_ID")]
-        public Person Person;
+        public Person Person { get; set; }
 
         [Required]
-        public string Number;
+        public string Number { get; set; }
 
+        [Required]
         [Column(TypeName = "Date")]
-        public DateTime IssueDate { get; set; }
+        public DateTime? IssueDate { get; set; }
+
+        [Required]
         [Column(TypeName = "Date")]
-        public DateTime ValidUntil { get; set; }
+        public DateTime? ValidUntil { get; set; }
 
         [Required]
         public string Schifr { get; set; }

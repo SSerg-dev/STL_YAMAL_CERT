@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.OData.Edm;
+
 using SmartQA.DB.Models.Auth;
 using SmartQA.DB.Models.Shared;
 
@@ -24,8 +26,10 @@ namespace SmartQA.DB.Models.People
         [Required]
         public string LastName { get; set; }
         public string ShortName { get; set; }
+
         [Required]
-        public DateTime? BirthDate { get; set; }
+        [Column(TypeName = "Date")]
+        public DateTime? BirthDate { get; set; }        
 
         public List<Employee> Employees { get; set; }
 

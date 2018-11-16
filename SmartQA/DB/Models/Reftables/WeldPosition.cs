@@ -6,15 +6,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using SmartQA.DB.Models.Shared;
 
-namespace SmartQA.DB.Models.Dictionaries
+namespace SmartQA.DB.Models.Reftables
 {
-    [Table("p_JointKind")]
-    public class JointKind : CommonEntity
+    [Table("p_WeldPosition")]
+    public class WeldPosition : CommonEntity
     {
         [Key]
-        public System.Guid JointKind_ID { get; set; }
+        public System.Guid WeldPosition_ID { get; set; }
         [Required]
-        public string JointKind_Code { get; set; }
+        public string WeldPosition_Code { get; set; }
         public string Description_Rus { get; set; }
     }
 }

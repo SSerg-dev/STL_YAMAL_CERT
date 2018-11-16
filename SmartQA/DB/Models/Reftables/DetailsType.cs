@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SmartQA.DB.Models.Shared;
 
-namespace SmartQA.DB.Models.Dictionaries
+namespace SmartQA.DB.Models.Reftables
 {
     [Table("p_DetailsType")]
     public class DetailsType : CommonEntity

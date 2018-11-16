@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SmartQA.DB.Models;
 using SmartQA.DB.Models.Auth;
-using SmartQA.DB.Models.Dictionaries;
 using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.PermissionDocuments;
+using SmartQA.DB.Models.Reftables;
 using SmartQA.DB.Models.Shared;
+
 
 namespace SmartQA.DB
 {
@@ -63,7 +64,14 @@ namespace SmartQA.DB
             modelBuilder.Entity<AppUser_to_Role>()
                 .HasOne(ur => ur.Modified_User);                            
 
-            CommonEntity.CommonModelSetup<Person>(modelBuilder);                
+            CommonEntity.CommonModelSetup<Person>(modelBuilder);
+
+//            modelBuilder
+//                .Entity<Person>()
+//                .Property(p => p.BirthDate)
+//                .HasConversion(new LocalDateValueConverter());
+
+
             CommonEntity.CommonModelSetup<Employee>(modelBuilder);                
             CommonEntity.CommonModelSetup<Division>(modelBuilder);                
             CommonEntity.CommonModelSetup<Position>(modelBuilder);                
@@ -82,7 +90,18 @@ namespace SmartQA.DB
             CommonEntity.CommonModelSetup<WeldType>(modelBuilder);
 
             CommonEntity.CommonModelSetup<DocumentNaks>(modelBuilder);
-            CommonEntity.CommonModelSetup<DocumentNaks_to_HIFGroup>(modelBuilder);                
+            CommonEntity.CommonModelSetup<DocumentNaks_to_HIFGroup>(modelBuilder);
+
+//            modelBuilder
+//                .Entity<DocumentNaks>()
+//                .Property(p => p.IssueDate)
+//                .HasConversion(new LocalDateValueConverter());
+//
+//            modelBuilder
+//                .Entity<DocumentNaks>()
+//                .Property(p => p.ValidUntil)
+//                .HasConversion(new LocalDateValueConverter());
+
 
         }
     }

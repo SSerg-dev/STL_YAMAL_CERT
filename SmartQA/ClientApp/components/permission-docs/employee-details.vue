@@ -10,8 +10,8 @@
             {{ error }}
         </div>
         <div v-if="employee">
-            <dx-toolbar :items="toolbarItems" 
-                        class="pb-3"/>
+            <dx-toolbar :items="toolbarItems"
+                        class="pb-3" />
 
             <h2>
                 {{ employee.Person.LastName }}
@@ -21,7 +21,9 @@
 
             <div class="row">
                 <div class="col-sm-3">Дата рождения</div>
-                <div class="col-sm-9">{{ formatDate(employee.Person.BirthDate, 'shortDate') }}</div>
+                <div class="col-sm-9">
+                    <p>{{ formatDate(new Date(employee.Person.BirthDate), 'shortDate') }}</p>
+                </div>
             </div>
             <div class="row">
                 <div class="col-sm-3">Компания</div>
@@ -30,9 +32,14 @@
             <div class="row">
                 <div class="col-sm-3">Должность</div>
                 <div class="col-sm-9">{{ employee.Position.Description_Rus }}</div>
-            </div>            
+            </div>
+            <naks-edit :person-id="employee.Person_ID"
+                       />
+        
         </div>
         
+
+
     </div>
 </template>
 
@@ -41,18 +48,21 @@
     import DataSource from 'devextreme/data/data_source';
     import DxLoadIndicator from 'devextreme-vue/load-indicator';
     import DxButton from "devextreme-vue/ui/button";
-    import DxToolbar from 'devextreme-vue/toolbar';
-
-    import { employeeDataSource } from './employee-data.js'    
+    import DxToolbar from 'devextreme-vue/toolbar';    
     import { confirm } from 'devextreme/ui/dialog';
     import { formatDate } from "devextreme/localization";
+
+    import { employeeDataSource } from './employee-data.js'    
+
+    import NaksEdit from './documents/naks-edit';
 
     export default {
         components: {
             DataSource,
             DxLoadIndicator,
             DxButton,
-            DxToolbar
+            DxToolbar,
+            NaksEdit
         },
         props: {
             'employeeId' : String
