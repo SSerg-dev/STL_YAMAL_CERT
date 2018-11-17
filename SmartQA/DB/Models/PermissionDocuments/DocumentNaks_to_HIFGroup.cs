@@ -19,8 +19,8 @@ namespace SmartQA.DB.Models.PermissionDocuments
         public Guid HIFGroup_ID { get; set; }
 
         [ForeignKey("DocumentNaks_ID")]
-        public DocumentNaks DocumentNaks { get; set; }
+        public virtual DocumentNaks DocumentNaks { get; set; }
         [ForeignKey("HIFGroup_ID")]
-        public HIFGroup HIFGroup { get; set; }
+        public virtual HIFGroup HIFGroup { get; set; }
     }
 }

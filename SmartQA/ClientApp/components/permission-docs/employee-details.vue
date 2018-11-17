@@ -33,7 +33,7 @@
                 <div class="col-sm-3">Должность</div>
                 <div class="col-sm-9">{{ employee.Position.Description_Rus }}</div>
             </div>
-            <naks-edit :person-id="employee.Person_ID"
+            <naks-list :person-id="employee.Person_ID.toString()"
                        />
         
         </div>
@@ -54,7 +54,7 @@
 
     import { employeeDataSource } from './employee-data.js'    
 
-    import NaksEdit from './documents/naks-edit';
+    import NaksList from './documents/naks-list';
 
     export default {
         components: {
@@ -62,7 +62,7 @@
             DxLoadIndicator,
             DxButton,
             DxToolbar,
-            NaksEdit
+            NaksList
         },
         props: {
             'employeeId' : String

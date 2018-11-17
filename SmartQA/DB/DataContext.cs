@@ -46,8 +46,15 @@ namespace SmartQA.DB
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
-        {
+        {            
         }
+
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder
+                // Add lazy-load proxies for related entities
+                // for more details see https://docs.microsoft.com/ru-ru/ef/core/querying/related-data
+                .UseLazyLoadingProxies();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

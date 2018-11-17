@@ -14,9 +14,12 @@ namespace SmartQA.Models
     public class DocumentNaksEdit
     {
         [Required]
+        public Guid? Person_ID { get; set; }
+
+        [Required]
         public string Number { get; set; }
 
-        [Required]        
+        [Required]
         public DateTime? IssueDate { get; set; }
 
         [Required]        
@@ -43,24 +46,7 @@ namespace SmartQA.Models
             dbModel.ValidUntil = ValidUntil;
             dbModel.Schifr = Schifr;
             dbModel.WeldType_ID = (Guid) WeldType_ID;
-
-            var ids = dbModel.DocumentNaks_to_HIFGroupSet.Select(x => x.DocumentNaks_to_HIFGroup_ID);
-
-            foreach (var rel in dbModel.DocumentNaks_to_HIFGroupSet.Where(x => !HIFGroup_IDs.Contains(x.HIFGroup_ID)))
-            {
-                rel.MarkDeleted();
-            }
-
-            foreach (var id in HIFGroup_IDs.Where(x => !ids.Contains(x)))
-            {
-                var rel = new DocumentNaks_to_HIFGroup()
-                {
-                    HIFGroup_ID = id
-                };
-                rel.OnSave();
-                dbModel.DocumentNaks_to_HIFGroupSet.Add(rel);
-            }
-                
+            dbModel.HIFGroup_IDs = HIFGroup_IDs;
         }
 
 

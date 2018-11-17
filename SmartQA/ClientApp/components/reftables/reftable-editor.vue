@@ -1,14 +1,17 @@
 ﻿<template>
     <div>
-        <h2>{{ modelName }}</h2>
+        <h2 v-if="reftable">{{ reftable.Title }}</h2>
         <dx-data-grid ref="dataGrid"                      
                       v-bind:dataSource="dataSource">
 
             <dx-editing
                 :allow-updating="true"
                 :allow-deleting="true"
-                :allow-adding="true"
-                mode="row"
+                :allow-adding="true"                       
+                :form="editForm"
+                :popup="editPopup"
+                mode="popup"
+                
             />
 
             <dx-column data-field="Title"
@@ -40,6 +43,7 @@
     import DataSource from 'devextreme/data/data_source';
 
     import 'devextreme/data/odata/store';
+    import { dataSourceConfs } from "./data";
 
     export default {
         components: {
@@ -57,21 +61,43 @@
         },
         props: {
             modelName: String
+
         },
         watch: {
-            '$route': 'setDataSource',
+            '$route': 'fetchData',
             
         },
         created() {
-            this.setDataSource()
+            this.fetchData()
         },
         data: function () {
-            return {
-                dataSource: {}           
+            return {                
+                dataSource: null,
+                reftable: null,
+                editForm: {
+                    colCount: 1
+                },
+                editPopup: {                    
+                    showTitle: false,
+                    width: 400,
+                    height: 200,
+                    position: {
+                        my: "center",
+                        at: "center",
+                        of: window
+                    }
+                }
             }
         },
-        methods: {                   
-            setDataSource() {
+        methods: {
+            fetchData() {
+                var component = this;
+                var refDs = new DataSource(dataSourceConfs.reftables)
+                refDs.filter(["modelName", "=", new String(this.modelName.toString())]);
+                refDs.load().done(function (data) {
+                    component.reftable = data[0];
+                })
+
                 this.dataSource = {
                     store: {
                         type: 'odata',

@@ -26,12 +26,12 @@ namespace SmartQA.DB.Models.People
         public Guid? Contragent_ID { get; set; }
 
         [ForeignKey("Person_ID")]
-        public Person Person { get; set; }
+        public virtual Person Person { get; set; }
         [ForeignKey("AppUser_ID")]
-        public AppUser AppUser { get; set; }
+        public virtual AppUser AppUser { get; set; }
         [ForeignKey("Contragent_ID")]
-        public Contragent Contragent { get; set; }
+        public virtual Contragent Contragent { get; set; }
         [ForeignKey("Position_ID")]
-        public Position Position { get; set; }
+        public virtual Position Position { get; set; }
     }
 }

@@ -23,10 +23,10 @@ namespace SmartQA.DB.Models.Shared
         public Guid Modified_User_ID { get; set; }
         
         [ForeignKey("Created_User_ID")]
-        public AppUser Created_User { get; set; }
+        public virtual AppUser Created_User { get; set; }
 
         [ForeignKey("Modified_User_ID")]
-        public AppUser Modified_User { get; set; }
+        public virtual AppUser Modified_User { get; set; }
 
 
         public static void CommonModelSetup<T>(ModelBuilder modelBuilder) where T : CommonEntity

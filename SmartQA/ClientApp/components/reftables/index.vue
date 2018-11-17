@@ -3,6 +3,7 @@
         <div class="col-sm-3">
             <div class="py-md-3">
                 <dx-list :data-source="reftablesDataSource"
+                         class="nav"
                          height="100%">
                     <reftables-list-item slot="item"
                                   slot-scope="item"
@@ -22,10 +23,13 @@
 <script>
     import ReftableEditor from "./reftable-editor";
     import ReftablesListItem from './reftables-list-item';
+    import DxMenu from 'devextreme-vue';
     import DxList from 'devextreme-vue/list';
+    import { dataSourceConfs } from "./data";
     
     export default {
         components: {
+            DxMenu,
             DxList,
             ReftableEditor,
             ReftablesListItem
@@ -35,18 +39,7 @@
         },
         data: function () {
             return {
-                reftablesDataSource: {
-                    store: {
-                        type: 'odata',
-                        url: baseUrl + 'odata/Reftable',
-                        version: 4,
-                        key: 'modelName',
-                        keyType: {
-                            modelName: "String"
-                        }
-                    },
-                    expand: []
-                }
+                reftablesDataSource: dataSourceConfs.reftables
             }
         },
         methods: {            

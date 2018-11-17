@@ -57,12 +57,12 @@ namespace SmartQA.DB
             BuildCommon<Person>(builder);
             BuildCommon<Contragent>(builder);
             BuildCommon<Position>(builder);
-            BuildCommon<DocumentNaks>(builder);
+            BuildCommon<DocumentNaks>(builder).CollectionProperty(x => x.HIFGroup_IDs);
 
             BuildReftableEntity<HIFGroup>(builder);
             BuildReftableEntity<WeldType>(builder);
 
-            builder.EntitySet<Reftable>(nameof(Reftable)).EntityType.Count().OrderBy().Page().Select();
+            builder.EntitySet<Reftable>(nameof(Reftable)).EntityType.Count().Filter().OrderBy().Page().Select();
 
             return builder.GetEdmModel();
         }

@@ -29,9 +29,9 @@ namespace SmartQA.DB.Models.People
 
         [Required]
         [Column(TypeName = "Date")]
-        public DateTime? BirthDate { get; set; }        
+        public virtual DateTime? BirthDate { get; set; }        
 
-        public List<Employee> Employees { get; set; }
+        public virtual List<Employee> Employees { get; set; }
 
     }
 }

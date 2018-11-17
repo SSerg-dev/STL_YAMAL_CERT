@@ -22,6 +22,6 @@ namespace SmartQA.DB.Models.People
         public string Division_Name { get; set; }        
         
         [ForeignKey("Contragent_ID")]
-        public Contragent Contragent { get; set; }
+        public virtual Contragent Contragent { get; set; }
     }
 }

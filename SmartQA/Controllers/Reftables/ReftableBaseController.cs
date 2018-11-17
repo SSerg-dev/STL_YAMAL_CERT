@@ -21,10 +21,15 @@ namespace SmartQA.Controllers.Reftables
         }
 
         [EnableQuery]
+        public IActionResult Get([FromODataUri] Guid key)
+        {
+            return Ok(GetDbSet().Find(key));
+        }
+
+        [EnableQuery]
         public IQueryable<TModel> Get()
         {
-            return ((DbSet<TModel>)Context.GetType().GetProperty(typeof(TModel).Name).GetValue(Context))
-                .AsQueryable();
+            return GetDbSet().AsQueryable();
         }
 
         private DbSet<TModel> GetDbSet()

@@ -18,9 +18,9 @@ namespace SmartQA.DB.Models.Auth
         public System.Guid Role_ID { get; set; }
 
         [ForeignKey("AppUser_ID")]
-        public AppUser AppUser { get; set; }
+        public virtual AppUser AppUser { get; set; }
         [ForeignKey("Role_ID")]
-        public Role Role { get; set; }
+        public virtual Role Role { get; set; }
 
     }
 }

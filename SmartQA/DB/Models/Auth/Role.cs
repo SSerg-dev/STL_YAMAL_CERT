@@ -16,6 +16,6 @@ namespace SmartQA.DB.Models.Auth
         public string Role_Code { get; set; }
 
         [InverseProperty("Role")]
-        public List<AppUser_to_Role> AppUser_to_Roles { get; set; }
+        public virtual List<AppUser_to_Role> AppUser_to_Roles { get; set; }
     }
 }

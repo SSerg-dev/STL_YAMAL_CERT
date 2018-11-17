@@ -32,30 +32,18 @@ export const dataSourceConfs = {
                 WeldType_ID: "Guid"
             },
             version: 4
-        },
-        expand: [
-            //'Person',
-            //'Contragent',
-            //'Position'
-        ]
+        }
     },
     HIFGroup: {
         store: {
             type: 'odata',
-                url:
-            baseUrl + 'odata/HIFGroup',
-                key:
-            'HIFGroup_ID',
-                keyType:
+            url: baseUrl + 'odata/HIFGroup',
+            key: 'HIFGroup_ID',
+            keyType:
             {
                 HIFGroup_ID: "Guid"
             },
             version: 4
-        },
-        expand: [
-            //'Person',
-            //'Contragent',
-            //'Position'
-        ]
+        }
     }
 }

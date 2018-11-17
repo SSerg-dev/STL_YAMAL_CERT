@@ -20,10 +20,7 @@ namespace SmartQA.DB.Models.PermissionDocuments
         public Guid DocumentNaks_ID { get; set; }
                 
         public Guid Person_ID { get; set; }
-        
-        [ForeignKey("Person_ID")]
-        public Person Person { get; set; }
-
+               
         [Required]
         public string Number { get; set; }
 
@@ -39,12 +36,40 @@ namespace SmartQA.DB.Models.PermissionDocuments
         public string Schifr { get; set; }
 
         public Guid WeldType_ID { get; set; }
-    
+
+        [ForeignKey("Person_ID")]
+        public virtual Person Person { get; set; }
+
         [ForeignKey("WeldType_ID")]
-        public WeldType WeldType { get; set; }
+        public virtual WeldType WeldType { get; set; }
 
         [InverseProperty("DocumentNaks")]
-        public ICollection<DocumentNaks_to_HIFGroup> DocumentNaks_to_HIFGroupSet { get; set; }
+        public virtual ICollection<DocumentNaks_to_HIFGroup> DocumentNaks_to_HIFGroupSet { get; set; }
+
+        [NotMapped]
+        public List<Guid> HIFGroup_IDs
+        {
+            get => DocumentNaks_to_HIFGroupSet.Select(x => x.HIFGroup_ID).ToList();
+            set {
+                var existingIds = DocumentNaks_to_HIFGroupSet.Select(x => x.HIFGroup_ID);
+
+                foreach (var rel in DocumentNaks_to_HIFGroupSet.Where(x => !value.Contains(x.HIFGroup_ID)))
+                {
+                    rel.MarkDeleted();
+                }
+
+                foreach (var id in value.Where(x => !existingIds.Contains(x)))
+                {
+                    var rel = new DocumentNaks_to_HIFGroup()
+                    {
+                        HIFGroup_ID = id
+                    };
+                    rel.OnSave();
+                    DocumentNaks_to_HIFGroupSet.Add(rel);
+                }
+            }
+        }
+
     }
     
 }

@@ -1,11 +1,10 @@
-﻿<template>
-    <div class="product">
-        <router-link class="nav-item nav-link" 
+﻿<template>    
+        <router-link class="nav-item" 
                      :to="'/reftables/' + item.ModelName">
-            {{ item.Title }}
-
-        </router-link>        
-    </div>
+            <a class="nav-link">
+                {{ item.Title }}
+            </a>            
+        </router-link>            
 </template>
 <script>
 

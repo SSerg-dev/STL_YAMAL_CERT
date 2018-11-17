@@ -23,7 +23,7 @@ namespace SmartQA.DB.Models.People
         public string Description_Rus { get; set; }
 
         [ForeignKey("Division_ID")]
-        public Division Division { get; set; }
+        public virtual Division Division { get; set; }
 
     }
 }

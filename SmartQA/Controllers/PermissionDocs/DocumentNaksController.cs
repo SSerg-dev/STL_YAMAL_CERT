@@ -24,6 +24,8 @@ namespace SmartQA.Controllers.PermissionDocs
         [EnableQuery]
         public IQueryable<DocumentNaks> Get() => Context
             .DocumentNaks
+            .Include(x => x.DocumentNaks_to_HIFGroupSet)
+            .Include(x => x.WeldType)
             .AsQueryable();
 
         public IActionResult Post([FromBody]DocumentNaksEdit documentNaksForm)
@@ -34,12 +36,30 @@ namespace SmartQA.Controllers.PermissionDocs
             }
 
             var documentNaks = new DocumentNaks();
+            documentNaksForm.Serialize(Context, documentNaks);
+            documentNaks.OnSave();
 
-//            Context.Person.Add(employee.Person);
-//            Context.Employee.Add(employee);
-//            Context.SaveChanges();
+            Context.DocumentNaks.Add(documentNaks);
+            Context.SaveChanges();
 
             return Created(documentNaks);
+        }    
+
+        public IActionResult Patch([FromODataUri] Guid key, [FromBody]DocumentNaksEdit documentNaksForm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var documentNaks = Context.DocumentNaks.Find(key);
+            documentNaksForm.Serialize(Context, documentNaks);
+
+            documentNaks.OnSave();            
+
+            Context.SaveChanges();
+
+            return Updated(documentNaks);
         }
 
     }
