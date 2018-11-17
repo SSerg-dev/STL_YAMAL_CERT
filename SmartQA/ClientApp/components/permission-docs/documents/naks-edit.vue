@@ -30,7 +30,8 @@
             DxLoadPanel
         },
         props: {
-            'modelKey': String
+            'modelKey': String,
+            'personId': String
         },
         watch: {
             'modelKey': 'fetchData',
@@ -38,7 +39,7 @@
             'model': 'makeFormData'
         },
         created() {
-            this.fetchData()
+            this.fetchData();                
         },
         data: function () {
             return {
@@ -139,21 +140,20 @@
                     this.formData = {}
                 } else {
                     this.formData = model
-                }
+                }                
             },
             processForm(event) {
                 this.loading = true;
                 var component = this;
                 var source = new DataSource(this.dataSource);
+                var data = this.formData;
+                data.Person_ID = this.personId;
+
                 if (this.modelKey) {
-                    source.store().update(new String(this.modelKey.toString()), this.formData)
+                    source.store().update(new String(this.modelKey.toString()), data)
                         .done(this.processFormSuccess)
                         .fail(this.processFormFail);
-
                 } else {
-                    var data = this.formData;
-                    //data.Employee_ID = null;
-
                     source.store().insert(data)
                         .done(this.processFormSuccess)
                         .fail(this.processFormFail);
@@ -162,7 +162,7 @@
             processFormSuccess(data) {
                 this.loading = false;
                 //var employeeId = data.Employee_ID ? data.Employee_ID : this.employeeId;
-                this.$emit('formSubmitSuccess', {
+                this.$emit('editSuccess', {
                     //modelKey: modelKey
                 })
             },
@@ -174,7 +174,7 @@
                 var form = this.$refs.form.instance;
 
                 Object.keys(this.formData).forEach(function (key, index) {
-                    var editor = form.getEditor(key)
+                    var editor = form.getEditor(key);
                     if (editor) {
                         editor.option('isValid', true);
                         editor.option('validationError', {});
@@ -184,8 +184,10 @@
                 for (var i = 0; i < this.formErrors.length; i++) {
                     var err = this.formErrors[i];
                     var editor = form.getEditor(err.target);
-                    editor.option('isValid', false);
-                    editor.option('validationError', { message: err.message });
+                    if (editor) {
+                        editor.option('isValid', false);
+                        editor.option('validationError', { message: err.message });
+                    }
                 }
 
             },

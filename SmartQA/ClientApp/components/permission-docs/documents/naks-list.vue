@@ -1,14 +1,13 @@
 ﻿<template>
-    <div>
+    <div class="pt-5">
+        <h3>Удостоверение НАКС</h3>
+        <dx-toolbar :items="toolbarItems" />        
         <dx-data-grid ref="dataGrid"
                       v-bind:dataSource="dataSource"
                       @editingStart="onEditingStart">
 
             <dx-editing :allow-updating="true"
-                        :allow-deleting="true"
-                        :allow-adding="true"
-                        :form="editForm"
-                        :popup="editPopup"
+                        :allow-deleting="true"                                                
                         mode="popup" />
 
             <dx-column data-field="Number"
@@ -16,14 +15,17 @@
             <dx-column data-field="IssueDate"
                        caption="IssueDate" />
         </dx-data-grid>
-        
+
         <dx-popup ref="editPopup"
                   :show-title="true"
                   :width="700"
-                  :height="345"                  
-                  title="">
+                  :height="400"
+                  title="НАКС"
+                  @onHiding="onEditPopupHiding">
 
-            <naks-edit :modelKey="editModelKey" />
+            <naks-edit :modelKey="editModelKey"
+                       :personId="personId"
+                       @editSuccess="onEditSuccess" />
 
         </dx-popup>
     </div>
@@ -32,16 +34,12 @@
 <script>
     import {
         DxDataGrid,
-        DxColumn,
-        DxSearchPanel,
-        DxPaging,
+        DxColumn,        
         DxEditing,        
-        DxLookup,
         DxPosition
     } from "devextreme-vue/data-grid";
-    import { DxForm, DxValidationSummary, DxPopup } from 'devextreme-vue';
+    import { DxPopup } from 'devextreme-vue';
     import { DxButton } from "devextreme-vue/ui/button";
-
     import DxToolbar from 'devextreme-vue/toolbar';
     import DataSource from 'devextreme/data/data_source';
     import 'devextreme/data/odata/store';
@@ -53,16 +51,12 @@
     export default {
         components: {
             DxDataGrid,
-            DxColumn,
-            DxSearchPanel,
-            DxPaging,
             DxEditing,
+            DxColumn,            
             DxPopup,
-            DxLookup,
             DxPosition,
             DxToolbar,
-            DxButton,
-            DxForm,
+            DxButton,           
             NaksEdit,
         },
         props: {
@@ -74,38 +68,7 @@
         data: function () {
             return {
                 dataSource: {},
-                editModelKey: null,
-                editForm: {
-                    colCount: 1,
-                    items: [
-                        {
-                            label: { text: 'Номер' },
-                            dataField: 'Number',
-                            required: true
-                        },
-                        {
-                            dataField: 'IssueDate',
-                            label: { text: 'Дата выдачи' },
-                            editorType: 'dxDateBox',
-                            editorOptions: {
-                                onValueChanged: 'onEditorValueChanged',
-                            }
-                        },
-                        {
-                            dataField: 'ValidUntil',
-                            label: { text: 'Срок действия' },
-                            editorType: 'dxDateBox',
-                            editorOptions: {
-                                onValueChanged: 'onEditorValueChanged',
-                            }
-                        },
-                        {
-                            label: { text: 'Шифр клейма' },
-                            dataField: 'Schifr',
-                            required: true
-                        },
-                    ]
-                },
+                editModelKey: null,               
                 editPopup: {
                     showTitle: false,
                     width: 400,
@@ -115,7 +78,23 @@
                         at: "center",
                         of: window
                     }
-                }
+                },
+                toolbarItems: [                    
+                    {
+                        location: 'after',
+                        widget: 'dxButton',
+                        options: {
+                            type: 'add',
+                            icon: 'add',
+                            text: 'Add',
+                            onClick: () => {
+                                this.editModelKey = null;
+                                this.$refs.editPopup.instance.show();
+                                }  
+                            }
+                        }
+                ]
+
             }
         },
         methods: {
@@ -129,10 +108,16 @@
                 event.cancel = true;
                 this.editModelKey = event.key.toString();
                 this.$refs.editPopup.instance.show();
-                console.log(event);
-                
-                
+                console.log(event);                                
+            },
+            onEditSuccess() {                
+                this.$refs.editPopup.instance.hide();
+                this.$refs.dataGrid.instance.refresh();
+            },
+            onEditPopupHiding() {
+                this.editModelKey = null;
             }
+
         }
 
     };

@@ -82,7 +82,7 @@
             onSelectionChanged({ selectedRowsData }) {
                 const data = selectedRowsData[0];
                 this.$router.push({
-                    params: { employeeId: data.Employee_ID }                    
+                    params: { employeeId: data.Employee_ID.toString() }                    
                 })
             },
             reload() {

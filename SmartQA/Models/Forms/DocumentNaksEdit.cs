@@ -40,7 +40,8 @@ namespace SmartQA.Models
         }
 
         public void Serialize(DataContext context, DocumentNaks dbModel)
-        {            
+        {
+            dbModel.Person_ID = (Guid) Person_ID;
             dbModel.Number = Number;
             dbModel.IssueDate = IssueDate;
             dbModel.ValidUntil = ValidUntil;

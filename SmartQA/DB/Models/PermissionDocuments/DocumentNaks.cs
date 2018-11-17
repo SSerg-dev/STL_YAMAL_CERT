@@ -51,7 +51,12 @@ namespace SmartQA.DB.Models.PermissionDocuments
         {
             get => DocumentNaks_to_HIFGroupSet.Select(x => x.HIFGroup_ID).ToList();
             set {
-                var existingIds = DocumentNaks_to_HIFGroupSet.Select(x => x.HIFGroup_ID);
+                if (DocumentNaks_to_HIFGroupSet == null)
+                {
+                    DocumentNaks_to_HIFGroupSet = new List<DocumentNaks_to_HIFGroup>();
+                }
+
+                var existingIds = DocumentNaks_to_HIFGroupSet?.Select(x => x.HIFGroup_ID) ;
 
                 foreach (var rel in DocumentNaks_to_HIFGroupSet.Where(x => !value.Contains(x.HIFGroup_ID)))
                 {

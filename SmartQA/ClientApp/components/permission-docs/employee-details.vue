@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-sm-3">Дата рождения</div>
                 <div class="col-sm-9">
-                    <p>{{ formatDate(new Date(employee.Person.BirthDate), 'shortDate') }}</p>
+                    {{ formatDate(new Date(employee.Person.BirthDate), 'shortDate') }}
                 </div>
             </div>
             <div class="row">
@@ -38,8 +38,6 @@
         
         </div>
         
-
-
     </div>
 </template>
 

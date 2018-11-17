@@ -12,6 +12,7 @@ using SmartQA.Models;
 
 namespace SmartQA.Controllers.Reftables
 {
+    [Produces("application/json")]
     public class ReftableBaseController<TModel> : ODataController where TModel : CommonEntity, IReftableEntity, new()
     {
         private DataContext Context;

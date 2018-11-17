@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.WindowsAzure.Storage.Blob.Protocol;
+using SmartQA.DB;
 using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.Models.Forms
@@ -15,16 +16,19 @@ namespace SmartQA.Models.Forms
         [Key]
         public string ModelName { get; set; }
 
+        public static IEnumerable<Type> GetReftableTypes(DbContext context)
+            => context.Model.GetEntityTypes()
+                .Select(t => t.ClrType)
+                .Where(t => t.GetInterfaces().Contains(typeof(IReftableEntity)));                           
+
         public static IEnumerable<Reftable> GetList(DbContext context)
         {
-            return context.Model.GetEntityTypes()
-                .Where(t => t.ClrType.GetInterfaces().Contains(typeof(IReftableEntity)))
-                .Select(t => new Reftable()
+            return GetReftableTypes(context).Select(t => new Reftable()
                 {
-                    ModelName = t.ClrType.Name,
+                    ModelName = t.Name,
                     Title =
-                        (t.ClrType.GetCustomAttributes(true).SingleOrDefault(a => a is DisplayAttribute) as
-                            DisplayAttribute)?.Name ?? t.ClrType.Name
+                        (t.GetCustomAttributes(true).SingleOrDefault(a => a is DisplayAttribute) as
+                            DisplayAttribute)?.Name ?? t.Name
                 });
 
         }

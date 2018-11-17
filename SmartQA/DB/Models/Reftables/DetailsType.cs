@@ -8,13 +8,19 @@ using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.Reftables
 {
+    [Display(Name = "Вид деталей")]
     [Table("p_DetailsType")]
-    public class DetailsType : CommonEntity
+    public class DetailsType : CommonEntity, IReftableEntity
     {
         [Key]
         public System.Guid DetailsType_ID { get; set; }
         [Required]
         public string DetailsType_Code { get; set; }
         public string Description_Rus { get; set; }
+
+        [NotMapped]
+        public string Title { get => DetailsType_Code; set => DetailsType_Code = value; }
+        [NotMapped]
+        public string Description { get => Description_Rus; set => Description_Rus = value; }
     }
 }

@@ -5,6 +5,8 @@ using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Sources;
 using Microsoft.AspNet.OData.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OData.Edm;
 using SmartQA.DB.Models;
 
@@ -38,7 +40,7 @@ namespace SmartQA.DB
             return conf;
         }
 
-        private StructuralTypeConfiguration<TEntityType>
+        public StructuralTypeConfiguration<TEntityType>
             BuildReftableEntity<TEntityType>(ODataConventionModelBuilder builder)
             where TEntityType : CommonEntity, IReftableEntity
         {
@@ -47,7 +49,6 @@ namespace SmartQA.DB
             conf.Property(x => x.Title);
             return conf;
         }
-
 
         public IEdmModel GetEdmModel(IServiceProvider serviceProvider)
         {
@@ -58,9 +59,17 @@ namespace SmartQA.DB
             BuildCommon<Contragent>(builder);
             BuildCommon<Position>(builder);
             BuildCommon<DocumentNaks>(builder).CollectionProperty(x => x.HIFGroup_IDs);
-
-            BuildReftableEntity<HIFGroup>(builder);
-            BuildReftableEntity<WeldType>(builder);
+           
+            using (var context = serviceProvider.GetService<DataContext>())
+            {
+                foreach (var reftableType in Reftable.GetReftableTypes(context))
+                {
+                    GetType()
+                        .GetMethod("BuildReftableEntity")                    
+                        .MakeGenericMethod(reftableType)
+                        .Invoke(this, new object []{ builder });                    
+                }
+            }
 
             builder.EntitySet<Reftable>(nameof(Reftable)).EntityType.Count().Filter().OrderBy().Page().Select();
 

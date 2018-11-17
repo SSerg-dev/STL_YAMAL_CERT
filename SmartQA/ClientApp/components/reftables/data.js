@@ -1,5 +1,4 @@
-﻿
-export const dataSourceConfs = {
+﻿export const dataSourceConfs = {
     reftables: {
         store: {
             type: 'odata',
@@ -9,7 +8,6 @@ export const dataSourceConfs = {
             keyType: {
                 modelName: "String"
             }
-        },
-        expand: []
+        }
     }
 }
