@@ -11,19 +11,21 @@
                         mode="popup" />
 
             <dx-column data-field="Number"
-                       caption="Number" />
+                       caption="Номер" />
+
             <dx-column data-field="IssueDate"
-                       caption="IssueDate" />
+                       caption="Дата выдачи" />
+
         </dx-data-grid>
 
         <dx-popup ref="editPopup"
                   :show-title="true"
-                  :width="700"
-                  :height="400"
+                  :width="800"
+                  :height="600"
                   title="НАКС"
                   @onHiding="onEditPopupHiding">
 
-            <naks-edit :modelKey="editModelKey"
+            <naks-edit :editModelKey="editModelKey"
                        :personId="personId"
                        @editSuccess="onEditSuccess" />
 

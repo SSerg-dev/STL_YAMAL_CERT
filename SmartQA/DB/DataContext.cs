@@ -95,7 +95,7 @@ namespace SmartQA.DB
 
             // ----- permission docs ----
             CommonEntity.CommonModelSetup<DocumentNaks>(modelBuilder);
-           CommonEntity.CommonModelSetup<DocumentNaks_to_HIFGroup>(modelBuilder);
+            CommonEntity.CommonModelSetup<DocumentNaks_to_HIFGroup>(modelBuilder);
 
             CommonEntity.CommonModelSetup<DocumentNaksAttest>(modelBuilder);
             CommonEntity.CommonModelSetup<DocumentNaksAttest_to_DetailsType>(modelBuilder);

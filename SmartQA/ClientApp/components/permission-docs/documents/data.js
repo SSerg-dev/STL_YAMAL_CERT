@@ -17,33 +17,10 @@ export const dataSourceConfs = {
             version: 4
         },
         expand: [
-            //'Person',
-            //'Contragent',
-            //'Position'
+            'DocumentNaksAttestSet',
+            'DocumentNaksAttestSet.WeldingEquipmentAutomationLevel',
+            'DocumentNaksAttestSet.DetailsTypeSet'
         ]
     },
 
-    weldType: {
-        store: {
-            type: 'odata',
-            url: baseUrl + 'odata/WeldType',
-            key: 'WeldType_ID',
-            keyType: {
-                WeldType_ID: "Guid"
-            },
-            version: 4
-        }
-    },
-    HIFGroup: {
-        store: {
-            type: 'odata',
-            url: baseUrl + 'odata/HIFGroup',
-            key: 'HIFGroup_ID',
-            keyType:
-            {
-                HIFGroup_ID: "Guid"
-            },
-            version: 4
-        }
-    }
 }
