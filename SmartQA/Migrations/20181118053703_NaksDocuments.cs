@@ -54,58 +54,6 @@ namespace SmartQA.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "p_DocumentNaksAttest",
-                columns: table => new
-                {
-                    RowStatus = table.Column<int>(nullable: false),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
-                    Created_User_ID = table.Column<Guid>(nullable: false),
-                    Modified_User_ID = table.Column<Guid>(nullable: false),
-                    DocumentNaksAttest_ID = table.Column<Guid>(nullable: false),
-                    DetailWidth = table.Column<string>(nullable: true),
-                    OuterDiameter = table.Column<string>(nullable: true),
-                    SDR = table.Column<string>(nullable: true),
-                    JointType_ID = table.Column<Guid>(nullable: false),
-                    WeldingEquipmentAutomationLevel_ID = table.Column<Guid>(nullable: false),
-                    WeldGOST14098_ID = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_p_DocumentNaksAttest", x => x.DocumentNaksAttest_ID);
-                    table.ForeignKey(
-                        name: "FK_p_DocumentNaksAttest_p_AppUser_Created_User_ID",
-                        column: x => x.Created_User_ID,
-                        principalTable: "p_AppUser",
-                        principalColumn: "AppUser_ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_p_DocumentNaksAttest_p_JointType_JointType_ID",
-                        column: x => x.JointType_ID,
-                        principalTable: "p_JointType",
-                        principalColumn: "JointType_ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_p_DocumentNaksAttest_p_AppUser_Modified_User_ID",
-                        column: x => x.Modified_User_ID,
-                        principalTable: "p_AppUser",
-                        principalColumn: "AppUser_ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_p_DocumentNaksAttest_p_WeldGOST14098_WeldGOST14098_ID",
-                        column: x => x.WeldGOST14098_ID,
-                        principalTable: "p_WeldGOST14098",
-                        principalColumn: "WeldGOST14098_ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_p_DocumentNaksAttest_p_WeldingEquipmentAutomationLevel_WeldingEquipmentAutomationLevel_ID",
-                        column: x => x.WeldingEquipmentAutomationLevel_ID,
-                        principalTable: "p_WeldingEquipmentAutomationLevel",
-                        principalColumn: "WeldingEquipmentAutomationLevel_ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "p_DocumentNaks_to_HIFGroup",
                 columns: table => new
                 {
@@ -145,6 +93,65 @@ namespace SmartQA.Migrations
                         principalTable: "p_AppUser",
                         principalColumn: "AppUser_ID",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "p_DocumentNaksAttest",
+                columns: table => new
+                {
+                    RowStatus = table.Column<int>(nullable: false),
+                    Insert_DTS = table.Column<DateTime>(nullable: false),
+                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Created_User_ID = table.Column<Guid>(nullable: false),
+                    Modified_User_ID = table.Column<Guid>(nullable: false),
+                    DocumentNaksAttest_ID = table.Column<Guid>(nullable: false),
+                    DetailWidth = table.Column<string>(nullable: true),
+                    OuterDiameter = table.Column<string>(nullable: true),
+                    SDR = table.Column<string>(nullable: true),
+                    DocumentNaks_ID = table.Column<Guid>(nullable: false),
+                    JointType_ID = table.Column<Guid>(nullable: false),
+                    WeldingEquipmentAutomationLevel_ID = table.Column<Guid>(nullable: false),
+                    WeldGOST14098_ID = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_p_DocumentNaksAttest", x => x.DocumentNaksAttest_ID);
+                    table.ForeignKey(
+                        name: "FK_p_DocumentNaksAttest_p_AppUser_Created_User_ID",
+                        column: x => x.Created_User_ID,
+                        principalTable: "p_AppUser",
+                        principalColumn: "AppUser_ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_p_DocumentNaksAttest_p_DocumentNaks_DocumentNaks_ID",
+                        column: x => x.DocumentNaks_ID,
+                        principalTable: "p_DocumentNaks",
+                        principalColumn: "DocumentNaks_ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_p_DocumentNaksAttest_p_JointType_JointType_ID",
+                        column: x => x.JointType_ID,
+                        principalTable: "p_JointType",
+                        principalColumn: "JointType_ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_p_DocumentNaksAttest_p_AppUser_Modified_User_ID",
+                        column: x => x.Modified_User_ID,
+                        principalTable: "p_AppUser",
+                        principalColumn: "AppUser_ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_p_DocumentNaksAttest_p_WeldGOST14098_WeldGOST14098_ID",
+                        column: x => x.WeldGOST14098_ID,
+                        principalTable: "p_WeldGOST14098",
+                        principalColumn: "WeldGOST14098_ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_p_DocumentNaksAttest_p_WeldingEquipmentAutomationLevel_WeldingEquipmentAutomationLevel_ID",
+                        column: x => x.WeldingEquipmentAutomationLevel_ID,
+                        principalTable: "p_WeldingEquipmentAutomationLevel",
+                        principalColumn: "WeldingEquipmentAutomationLevel_ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -445,6 +452,11 @@ namespace SmartQA.Migrations
                 column: "Created_User_ID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_p_DocumentNaksAttest_DocumentNaks_ID",
+                table: "p_DocumentNaksAttest",
+                column: "DocumentNaks_ID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_p_DocumentNaksAttest_JointType_ID",
                 table: "p_DocumentNaksAttest",
                 column: "JointType_ID");
@@ -609,10 +621,10 @@ namespace SmartQA.Migrations
                 name: "p_DocumentNaksAttest_to_WeldPosition");
 
             migrationBuilder.DropTable(
-                name: "p_DocumentNaks");
+                name: "p_DocumentNaksAttest");
 
             migrationBuilder.DropTable(
-                name: "p_DocumentNaksAttest");
+                name: "p_DocumentNaks");
         }
     }
 }

@@ -10,7 +10,7 @@ using SmartQA.DB;
 namespace SmartQA.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181118045159_NaksDocuments")]
+    [Migration("20181118053703_NaksDocuments")]
     partial class NaksDocuments
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -412,6 +412,8 @@ namespace SmartQA.Migrations
 
                     b.Property<string>("DetailWidth");
 
+                    b.Property<Guid>("DocumentNaks_ID");
+
                     b.Property<DateTime?>("Insert_DTS")
                         .IsRequired();
 
@@ -436,6 +438,8 @@ namespace SmartQA.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("DocumentNaks_ID");
 
                     b.HasIndex("JointType_ID");
 
@@ -1208,6 +1212,11 @@ namespace SmartQA.Migrations
                         .WithMany()
                         .HasForeignKey("Created_User_ID")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaks", "DocumentNaks")
+                        .WithMany("DocumentNaksAttestSet")
+                        .HasForeignKey("DocumentNaks_ID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SmartQA.DB.Models.Reftables.JointType", "JointType")
                         .WithMany()

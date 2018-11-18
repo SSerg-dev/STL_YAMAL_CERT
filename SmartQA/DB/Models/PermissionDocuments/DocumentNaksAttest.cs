@@ -24,11 +24,15 @@ namespace SmartQA.DB.Models.PermissionDocuments
 
         // ---- foreign keys --------------
 
+        public Guid DocumentNaks_ID { get; set; }
         public Guid JointType_ID { get; set; }
         public Guid WeldingEquipmentAutomationLevel_ID { get; set; }
         public Guid WeldGOST14098_ID { get; set; }
 
         // ---- foreign key relations -----
+
+        [ForeignKey("DocumentNaks_ID")]
+        public virtual DocumentNaks DocumentNaks { get; set; }
 
         [ForeignKey("JointType_ID")]
         public virtual JointType JointType { get; set; }

@@ -43,6 +43,11 @@ namespace SmartQA.DB.Models.PermissionDocuments
         [ForeignKey("WeldType_ID")]
         public virtual WeldType WeldType { get; set; }
 
+        // ---- child relations -----------
+
+        [InverseProperty("DocumentNaks")]
+        public virtual ICollection<DocumentNaksAttest> DocumentNaksAttestSet { get; set; }
+
         // ---- m2m relations -------------
 
         [InverseProperty("DocumentNaks")]
