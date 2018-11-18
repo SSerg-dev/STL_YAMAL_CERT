@@ -11,22 +11,42 @@ namespace SmartQA.DB.Models.Shared
         // this kinda works, but looks really messy
         // TODO: clean up and introduce some clarity
 
-        public static ICollection<TKey> GetM2MKeys<TKey>(this Object obj, Type to, string through = null)
-        {         
+        private static PropertyInfo GetM2MProperty(object obj, Type to, string through = null)
+        {
             if (through == null)
-            {
+            {                
                 var t = obj.GetType();
                 if (t.Namespace == "Castle.Proxies")
                 {
                     t = t.BaseType;
                 }
-                through = $"{t.Name}_to_{to.Name}Set";
+                through = $"{t.Name}_to_{to.Name}Set";             
             }
+            return obj.GetType().GetProperty(through);
+        }
 
-            var m2mProperty = obj.GetType().GetProperty(through);
-            var pt = m2mProperty.PropertyType;
-            var m2mEntityType = pt.GetGenericArguments()[0];
-            var toKeyProperty = m2mEntityType.GetProperty($"{to.Name}_ID");
+        public static ICollection<TEntity> GetM2MObjects<TEntity>(this object obj, string through = null)
+        {
+            var m2mProperty = GetM2MProperty(obj, typeof(TEntity), through);
+            var m2mEntityType = m2mProperty.PropertyType.GetGenericArguments()[0];
+            var targetProperty = m2mEntityType.GetProperty(typeof(TEntity).Name);
+
+            var m2mEntities = GetM2MProperty(obj, typeof(TEntity), through).GetValue(obj);
+
+            var m2mEntitiesObj = (IEnumerable<object>) typeof(Enumerable)
+                .GetMethod("Cast")
+                .MakeGenericMethod(typeof(object))
+                .Invoke(null, new object[] { m2mEntities });
+
+            return m2mEntitiesObj.Select(x => targetProperty.GetValue(x)).Cast<TEntity>().ToList();                        
+        }
+
+        public static ICollection<TKey> GetM2MKeys<TKey, TEntity>(this object obj, string through = null)
+        {
+
+            var m2mProperty = GetM2MProperty(obj, typeof(TEntity), through);            
+            var m2mEntityType = m2mProperty.PropertyType.GetGenericArguments()[0];
+            var toKeyProperty = m2mEntityType.GetProperty($"{typeof(TEntity).Name}_ID");
 
             var m2mEntities = m2mProperty.GetValue(obj);
             if (m2mEntities == null)
@@ -38,38 +58,24 @@ namespace SmartQA.DB.Models.Shared
                         .GetMethod("ToList")
                         .MakeGenericMethod(typeof(object))
                         .Invoke(null, new object[] {m2mEntities});
-            return (List<TKey>) list.Select(x => toKeyProperty.GetValue(x)).Cast<TKey>().ToList();            
+            return list.Select(x => toKeyProperty.GetValue(x)).Cast<TKey>().ToList();            
         }
 
-        public static ICollection<Guid> GetM2MKeys(this Object obj, Type to, string through = null)
+        public static ICollection<Guid> GetM2MKeys<TEntity>(this Object obj, string through = null)
         {
-            return GetM2MKeys<Guid>(obj, to, through);
+            return GetM2MKeys<Guid, TEntity>(obj, through);
         }
 
-        public static void SetM2MKeys<TKey>(this Object obj, Type to, ICollection<TKey> value, string through = null)
+        public static void SetM2MKeys<TKey, TEntity>(this Object obj, ICollection<TKey> value, string through = null)
         {
-            
-            if (through == null)
-            {
-                var t = obj.GetType();
-                if (t.Namespace == "Castle.Proxies")
-                {
-                    t = t.BaseType;
-                }
-                through = $"{t.Name}_to_{to.Name}Set";
-            }
-
-            var existingIds = GetM2MKeys<TKey>(obj, to, through);
-
-            var m2mProperty = obj.GetType().GetProperty(through);
-            var pt = m2mProperty.PropertyType;
-            var m2mEntityType = pt.GetGenericArguments()[0];
-            var toKeyProperty = m2mEntityType.GetProperty($"{to.Name}_ID");
+            var m2mProperty = GetM2MProperty(obj, typeof(TEntity), through);                                    
+            var m2mEntityType = m2mProperty.PropertyType.GetGenericArguments()[0];
+            var toKeyProperty = m2mEntityType.GetProperty($"{typeof(TEntity).Name}_ID");
 
             var m2mEntities = m2mProperty.GetValue(obj);
             if (m2mEntities == null)
             {
-                m2mEntities = Activator.CreateInstance(typeof(List<>).MakeGenericType(to));
+                m2mEntities = Activator.CreateInstance(typeof(List<>).MakeGenericType(typeof(TEntity)));
             }
 
             var list = (List<object>) typeof(Enumerable)
@@ -79,14 +85,16 @@ namespace SmartQA.DB.Models.Shared
 
             foreach (var rel in list.Where(x => !value.Contains((TKey) toKeyProperty.GetValue(x))))
             {
-                to.GetMethod("MarkDeleted").Invoke(rel, new object[]{});                
+                typeof(TEntity).GetMethod("MarkDeleted").Invoke(rel, new object[]{});                
             }
+
+            var existingIds = GetM2MKeys<TKey, TEntity>(obj, through);
 
             foreach (var id in value.Where(x => !existingIds.Contains(x)))
             {
                 var rel = Activator.CreateInstance(m2mEntityType);
                 toKeyProperty.SetValue(rel, id);
-                to.GetMethod("OnSave").Invoke(rel, new object[] { });
+                typeof(TEntity).GetMethod("OnSave").Invoke(rel, new object[] { });
                 list.Add(rel);                
             }
 
@@ -103,9 +111,9 @@ namespace SmartQA.DB.Models.Shared
             m2mProperty.SetValue(obj, result);
         }
 
-        public static void SetM2MKeys(this Object obj, Type to, ICollection<Guid> value, string through = null)
+        public static void SetM2MKeys<TEntity>(this Object obj, ICollection<Guid> value, string through = null)
         {
-            SetM2MKeys<Guid>(obj, to, value, through);
+            SetM2MKeys<Guid, TEntity>(obj, value, through);
         }
 
     }

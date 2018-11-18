@@ -49,60 +49,67 @@ namespace SmartQA.DB.Models.PermissionDocuments
         public virtual ICollection<DocumentNaksAttest_to_DetailsType> DocumentNaksAttest_to_DetailsTypeSet { get; set; }
 
         [NotMapped]
+        public ICollection<DetailsType> DetailsTypeSet => this.GetM2MObjects<DetailsType>();
+        [NotMapped]
         public ICollection<Guid> DetailsType_IDs
         {
-            get => this.GetM2MKeys(typeof(DetailsType));
-            set => this.SetM2MKeys(typeof(DetailsType), value);
+            get => this.GetM2MKeys<DetailsType>();
+            set => this.SetM2MKeys<DetailsType>( value);
         }
 
         [InverseProperty("DocumentNaksAttest")]
         public virtual ICollection<DocumentNaksAttest_to_SeamsType> DocumentNaksAttest_to_SeamsTypeSet { get; set; }
-
+        [NotMapped]
+        public ICollection<SeamsType> SeamsTypeSet => this.GetM2MObjects<SeamsType>();
         [NotMapped]
         public ICollection<Guid> SeamsType_IDs
         {
-            get => this.GetM2MKeys(typeof(SeamsType));
-            set => this.SetM2MKeys(typeof(SeamsType), value);
+            get => this.GetM2MKeys<SeamsType>();
+            set => this.SetM2MKeys<SeamsType>( value);
         }
 
         [InverseProperty("DocumentNaksAttest")]
         public virtual ICollection<DocumentNaksAttest_to_WeldMaterialGroup> DocumentNaksAttest_to_WeldMaterialGroupSet { get; set; }
-
+        [NotMapped]
+        public ICollection<WeldMaterialGroup> WeldMaterialGroupSet => this.GetM2MObjects<WeldMaterialGroup>();
         [NotMapped]
         public ICollection<Guid> WeldMaterialGroup_IDs
         {
-            get => this.GetM2MKeys(typeof(WeldMaterialGroup));
-            set => this.SetM2MKeys(typeof(WeldMaterialGroup), value);
+            get => this.GetM2MKeys<WeldMaterialGroup>();
+            set => this.SetM2MKeys<WeldMaterialGroup>( value);
         }
 
         [InverseProperty("DocumentNaksAttest")]
         public virtual ICollection<DocumentNaksAttest_to_WeldMaterial> DocumentNaksAttest_to_WeldMaterialSet { get; set; }
-
+        [NotMapped]
+        public ICollection<WeldMaterial> WeldMaterialSet => this.GetM2MObjects<WeldMaterial>();
         [NotMapped]
         public ICollection<Guid> WeldMaterial_IDs
         {
-            get => this.GetM2MKeys(typeof(WeldMaterial));
-            set => this.SetM2MKeys(typeof(WeldMaterial), value);
+            get => this.GetM2MKeys<WeldMaterial>();
+            set => this.SetM2MKeys<WeldMaterial>( value);
         }
 
         [InverseProperty("DocumentNaksAttest")]
         public virtual ICollection<DocumentNaksAttest_to_WeldPosition> DocumentNaksAttest_to_WeldPositionSet { get; set; }
-
+        [NotMapped]
+        public ICollection<WeldPosition> WeldPositionSet => this.GetM2MObjects<WeldPosition>();
         [NotMapped]
         public ICollection<Guid> WeldPosition_IDs
         {
-            get => this.GetM2MKeys(typeof(WeldPosition));
-            set => this.SetM2MKeys(typeof(WeldPosition), value);
+            get => this.GetM2MKeys<WeldPosition>();
+            set => this.SetM2MKeys<WeldPosition>( value);
         }
 
         [InverseProperty("DocumentNaksAttest")]
         public virtual ICollection<DocumentNaksAttest_to_JointKind> DocumentNaksAttest_to_JointKindSet { get; set; }
-
+        [NotMapped]
+        public ICollection<JointKind> JointKindSet => this.GetM2MObjects<JointKind>();
         [NotMapped]
         public ICollection<Guid> JointKind_IDs
         {
-            get => this.GetM2MKeys(typeof(JointKind));
-            set => this.SetM2MKeys(typeof(JointKind), value);
+            get => this.GetM2MKeys<JointKind>();
+            set => this.SetM2MKeys<JointKind>( value);
         }
 
 

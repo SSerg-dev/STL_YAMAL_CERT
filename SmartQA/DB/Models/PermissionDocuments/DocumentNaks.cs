@@ -30,7 +30,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
         [Column(TypeName = "Date")]
         public DateTime? ValidUntil { get; set; }
 
-        [Required]
         public string Schifr { get; set; }
 
         public Guid WeldType_ID { get; set; }
@@ -52,12 +51,13 @@ namespace SmartQA.DB.Models.PermissionDocuments
 
         [InverseProperty("DocumentNaks")]
         public virtual ICollection<DocumentNaks_to_HIFGroup> DocumentNaks_to_HIFGroupSet { get; set; }
-
+        [NotMapped]
+        public ICollection<HIFGroup> HIFGroupSet => this.GetM2MObjects<HIFGroup>();
         [NotMapped]
         public ICollection<Guid> HIFGroup_IDs
         {
-            get => this.GetM2MKeys(typeof(HIFGroup));
-            set => this.SetM2MKeys(typeof(HIFGroup), value);                
+            get => this.GetM2MKeys<HIFGroup>();
+            set => this.SetM2MKeys<HIFGroup>(value);                
         }
 
     }

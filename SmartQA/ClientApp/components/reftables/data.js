@@ -14,3 +14,17 @@
         ]
     }
 }
+
+export function reftableDatasourceConf(modelName) {
+    return {
+        store: {
+            type: 'odata',
+            url: baseUrl + 'odata/' + modelName,
+            key: modelName + '_ID',
+            keyType: {
+                WeldType_ID: "Guid"
+            },
+            version: 4
+        }
+    }
+}

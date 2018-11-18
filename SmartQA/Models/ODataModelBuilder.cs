@@ -59,7 +59,16 @@ namespace SmartQA.DB
             BuildCommon<Contragent>(builder);
             BuildCommon<Position>(builder);
             BuildCommon<DocumentNaks>(builder).CollectionProperty(x => x.HIFGroup_IDs);
-           
+
+            var attest = BuildCommon<DocumentNaksAttest>(builder);
+            attest.ContainsMany(x => x.DetailsTypeSet);
+            attest.ContainsMany(x => x.SeamsTypeSet);
+            attest.ContainsMany(x => x.JointKindSet);
+            attest.ContainsMany(x => x.WeldMaterialGroupSet);
+            attest.ContainsMany(x => x.WeldPositionSet);
+            attest.ContainsMany(x => x.WeldMaterialSet);
+            
+            // create models  for reftables
             using (var context = serviceProvider.GetService<DataContext>())
             {
                 foreach (var reftableType in Reftable.GetReftableTypes(context))
@@ -70,7 +79,7 @@ namespace SmartQA.DB
                         .Invoke(this, new object []{ builder });                    
                 }
             }
-
+            
             builder.EntitySet<Reftable>(nameof(Reftable)).EntityType.Count().Filter().OrderBy().Page().Select();
 
             return builder.GetEdmModel();

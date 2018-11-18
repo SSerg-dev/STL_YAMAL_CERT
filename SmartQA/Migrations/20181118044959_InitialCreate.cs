@@ -7,7 +7,7 @@ namespace SmartQA.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
+/*            migrationBuilder.CreateTable(
                 name: "p_AppUser",
                 columns: table => new
                 {
@@ -865,6 +865,7 @@ namespace SmartQA.Migrations
                 name: "IX_p_WeldType_Modified_User_ID",
                 table: "p_WeldType",
                 column: "Modified_User_ID");
+                */
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

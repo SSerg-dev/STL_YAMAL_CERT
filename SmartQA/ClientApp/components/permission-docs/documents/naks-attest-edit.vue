@@ -15,39 +15,37 @@
             </form>
 
             <naks-attest-list v-if="modelKey"
-                         :model-key="modelKey" />
+                              :model-key="modelKey" />
 
         </div>
     </dx-scroll-view>
 </template>
 
 <script>
-    import { DxForm, DxScrollView } from 'devextreme-vue';   
+    import { DxForm, DxScrollView } from 'devextreme-vue';
     import DataSource from 'devextreme/data/data_source';
-    import { DxLoadPanel } from 'devextreme-vue/load-panel';    
-
-    import NaksAttestList from './naks-attest-list';
-    import { dataSourceConfs } from './data.js';
+    import { DxLoadPanel } from 'devextreme-vue/load-panel';
     import { reftableFormItem } from '../../reftables/forms.js';
+    import { dataSourceConfs } from './data.js';
 
     export default {
-        components: {            
-            DxForm,            
+        components: {
+            DxForm,
             DxLoadPanel,
             DataSource,
             DxScrollView,
-            NaksAttestList
+            NaksAttest
         },
         props: {
             'editModelKey': String,
-            'personId': String
+            'parentId': String
         },
         watch: {
             'editModelKey': 'fetchData',
             'formErrors': 'updateFormErrors',
             'model': 'makeFormData'
         },
-        created() {            
+        created() {
             this.fetchData();
         },
         data: function () {
@@ -58,52 +56,34 @@
                 error: null,
                 dataSource: dataSourceConfs.documentNaks,
                 formItems: [
+                    reftableFormItem('WeldingEquipmentAutomationLevel', 'Степень автоматизации сварочного оборудования'),
+                    reftableFormItem('DetailsType', 'Вид деталей'),
+                    reftableFormItem('SeamsType', 'Типы швов'),
+                    reftableFormItem('JointType', 'Тип соединения'),
+                    reftableFormItem('WeldMaterialGroup', 'Группа свариваемого материала'),
+                    reftableFormItem('WeldMaterial', 'Сварочные материалы'),
                     {
-                        label: { text: 'Номер' },
+                        label: { text: 'Толщина деталей, мм' },
                         dataField: 'Number',
                         required: true
                     },
                     {
-                        dataField: 'IssueDate',
-                        label: { text: 'Дата выдачи' },
-                        editorType: 'dxDateBox',
-                        editorOptions: {
-                            onValueChanged: 'onEditorValueChanged',
-                        }
-                    },
-                    {
-                        dataField: 'ValidUntil',
-                        label: { text: 'Срок действия' },
-                        editorType: 'dxDateBox',
-                        editorOptions: {
-                            onValueChanged: 'onEditorValueChanged',
-                        }
-                    },
-                    {
-                        label: { text: 'Шифр клейма' },
-                        dataField: 'Schifr',
+                        label: { text: 'Наружный диаметр, мм' },
+                        dataField: 'Number',
                         required: true
                     },
-                    reftableFormItem('WeldType', 'Вид (способ) сварки (наплавки)', false),
-                    reftableFormItem('HIFGroup', 'Группы технических устройств ОПО', true),
-                    {
-                        itemType: "button",
-                        horizontalAlignment: "left",
-                        buttonOptions: {
-                            text: "Submit",
-                            type: "success",
-                            useSubmitBehavior: true
-                        }
-                    }
 
+                    reftableFormItem('WeldPosition', 'Положение при сварке'),
+                    reftableFormItem('JointKind', 'Вид соединения'),
+                    reftableFormItem('WeldGOST14098', 'Обозначение по ГОСТ 14098')
                 ],
                 formData: {},
                 formErrors: {}
             }
         },
         methods: {
-            fetchData() {               
-                this.modelKey = this.editModelKey;            
+            fetchData() {
+                this.modelKey = this.editModelKey;
                 this.error = this.model = null;
                 this.formData = {};
                 this.formErrors = {};
@@ -133,7 +113,7 @@
                     this.formData = {}
                 } else {
                     this.formData = model
-                }                
+                }
             },
             processForm(event) {
                 this.loading = true;
