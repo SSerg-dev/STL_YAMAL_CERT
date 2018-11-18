@@ -1,11 +1,13 @@
 ﻿<template>    
-        <router-link class="nav-item" 
+    <div>
+        <router-link class="nav-link"                     
                      :to="'/reftables/' + item.ModelName">
-            <a class="nav-link">
-                {{ item.Title }}
-            </a>            
-        </router-link>            
+
+            {{ item.Title }}
+        </router-link>
+    </div>
 </template>
+
 <script>
 
 export default {

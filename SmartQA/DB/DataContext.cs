@@ -40,15 +40,18 @@ namespace SmartQA.DB
         public DbSet<DocumentNaks> DocumentNaks { get; set; }
         public DbSet<DocumentNaks_to_HIFGroup> DocumentNaks_to_HIFGroup { get; set; }
 
-        public DataContext()
-        {
-        }
+        public DbSet<DocumentNaksAttest> DocumentNaksAttest { get; set; }
+        public DbSet<DocumentNaksAttest_to_DetailsType> DocumentNaksAttest_to_DetailsType { get; set; }
+        public DbSet<DocumentNaksAttest_to_SeamsType> DocumentNaksAttest_to_SeamsType { get; set; }
+        public DbSet<DocumentNaksAttest_to_WeldMaterialGroup> DocumentNaksAttest_to_WeldMaterialGroup { get; set; }
+        public DbSet<DocumentNaksAttest_to_WeldMaterial> DocumentNaksAttest_to_WeldMaterial { get; set; }
+        public DbSet<DocumentNaksAttest_to_WeldPosition> DocumentNaksAttest_to_WeldPosition { get; set; }
+        public DbSet<DocumentNaksAttest_to_JointKind> DocumentNaksAttest_to_JointKind { get; set; }
+
+        public DataContext() {}
 
         public DataContext(DbContextOptions<DataContext> options)
-            : base(options)
-        {            
-        }
-
+            : base(options) {}
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
@@ -58,8 +61,7 @@ namespace SmartQA.DB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            CommonEntity.CommonModelSetup<Contragent>(modelBuilder);
+            // ----- auth ---------------
             CommonEntity.CommonModelSetup<AppUser>(modelBuilder);
             CommonEntity.CommonModelSetup<Role>(modelBuilder);
             CommonEntity.CommonModelSetup<AppUser_to_Role>(modelBuilder);
@@ -69,21 +71,16 @@ namespace SmartQA.DB
             modelBuilder.Entity<AppUser_to_Role>()
                 .HasOne(ur => ur.AppUser);
             modelBuilder.Entity<AppUser_to_Role>()
-                .HasOne(ur => ur.Modified_User);                            
+                .HasOne(ur => ur.Modified_User);
 
+            // ----- people -------------
             CommonEntity.CommonModelSetup<Person>(modelBuilder);
-
-//            modelBuilder
-//                .Entity<Person>()
-//                .Property(p => p.BirthDate)
-//                .HasConversion(new LocalDateValueConverter());
-
-
             CommonEntity.CommonModelSetup<Employee>(modelBuilder);                
             CommonEntity.CommonModelSetup<Division>(modelBuilder);                
             CommonEntity.CommonModelSetup<Position>(modelBuilder);                
             CommonEntity.CommonModelSetup<Contragent>(modelBuilder);
-
+            
+            // ----- reftables ----------
             CommonEntity.CommonModelSetup<DetailsType>(modelBuilder);
             CommonEntity.CommonModelSetup<HIFGroup>(modelBuilder);
             CommonEntity.CommonModelSetup<JointKind>(modelBuilder);
@@ -96,19 +93,17 @@ namespace SmartQA.DB
             CommonEntity.CommonModelSetup<WeldPosition>(modelBuilder);
             CommonEntity.CommonModelSetup<WeldType>(modelBuilder);
 
+            // ----- permission docs ----
             CommonEntity.CommonModelSetup<DocumentNaks>(modelBuilder);
-            CommonEntity.CommonModelSetup<DocumentNaks_to_HIFGroup>(modelBuilder);
+           CommonEntity.CommonModelSetup<DocumentNaks_to_HIFGroup>(modelBuilder);
 
-//            modelBuilder
-//                .Entity<DocumentNaks>()
-//                .Property(p => p.IssueDate)
-//                .HasConversion(new LocalDateValueConverter());
-//
-//            modelBuilder
-//                .Entity<DocumentNaks>()
-//                .Property(p => p.ValidUntil)
-//                .HasConversion(new LocalDateValueConverter());
-
+            CommonEntity.CommonModelSetup<DocumentNaksAttest>(modelBuilder);
+            CommonEntity.CommonModelSetup<DocumentNaksAttest_to_DetailsType>(modelBuilder);
+            CommonEntity.CommonModelSetup<DocumentNaksAttest_to_SeamsType>(modelBuilder);
+            CommonEntity.CommonModelSetup<DocumentNaksAttest_to_WeldMaterialGroup>(modelBuilder);
+            CommonEntity.CommonModelSetup<DocumentNaksAttest_to_WeldMaterial>(modelBuilder);
+            CommonEntity.CommonModelSetup<DocumentNaksAttest_to_WeldPosition>(modelBuilder);
+            CommonEntity.CommonModelSetup<DocumentNaksAttest_to_JointKind>(modelBuilder);
 
         }
     }

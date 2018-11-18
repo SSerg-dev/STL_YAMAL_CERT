@@ -5,6 +5,7 @@
                 <dx-list :data-source="reftablesDataSource"
                          class="nav"
                          height="100%">
+
                     <reftables-list-item slot="item"
                                   slot-scope="item"
                                   :item="item" />

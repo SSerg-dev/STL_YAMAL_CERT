@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Protocols;
 using Newtonsoft.Json.Serialization;
+using SmartQA.Controllers.Reftables;
 using SmartQA.DB;
 
 namespace SmartQA
@@ -26,10 +27,8 @@ namespace SmartQA
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOData();
 
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Data")));
-            services.AddTransient<ODataModelBuilder>();
 
             services
                 .AddMvc()
@@ -39,7 +38,10 @@ namespace SmartQA
                     options.SerializerSettings.ReferenceLoopHandling =
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
-            
+
+            services.AddOData();
+
+            services.AddTransient<ODataModelBuilder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

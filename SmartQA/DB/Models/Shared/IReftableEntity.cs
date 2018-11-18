@@ -8,11 +8,9 @@ namespace SmartQA.DB.Models.Shared
 {
     public interface IReftableEntity
     {
-                
-        [NotMapped]
+                        
         string Title { get; set; }
-
-        [NotMapped]
+        
         string Description { get; set; }
 
     }

@@ -7,7 +7,10 @@
             key: 'modelName',
             keyType: {
                 modelName: "String"
-            }
-        }
+            },            
+        },
+        sort: [
+            'Title'
+        ]
     }
 }

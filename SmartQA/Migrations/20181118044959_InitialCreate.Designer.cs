@@ -5,14 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-
 using SmartQA.DB;
 
 namespace SmartQA.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181115105422_DocumentNaks")]
-    partial class DocumentNaks
+    [Migration("20181118044959_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,13 +32,16 @@ namespace SmartQA.Migrations
 
                     b.Property<Guid>("Created_User_ID");
 
-                    b.Property<DateTime>("Insert_DTS");
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
 
                     b.Property<Guid>("Modified_User_ID");
 
-                    b.Property<int>("RowStatus");
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
 
-                    b.Property<DateTime>("Update_DTS");
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
 
                     b.Property<byte[]>("User_Password");
 
@@ -61,15 +63,18 @@ namespace SmartQA.Migrations
 
                     b.Property<Guid>("Created_User_ID");
 
-                    b.Property<DateTime>("Insert_DTS");
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
 
                     b.Property<Guid>("Modified_User_ID");
 
                     b.Property<Guid>("Role_ID");
 
-                    b.Property<int>("RowStatus");
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
 
-                    b.Property<DateTime>("Update_DTS");
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
 
                     b.HasKey("AppUser_to_Role_ID");
 
@@ -91,15 +96,18 @@ namespace SmartQA.Migrations
 
                     b.Property<Guid>("Created_User_ID");
 
-                    b.Property<DateTime>("Insert_DTS");
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
 
                     b.Property<Guid>("Modified_User_ID");
 
                     b.Property<string>("Role_Code");
 
-                    b.Property<int>("RowStatus");
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
 
-                    b.Property<DateTime>("Update_DTS");
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
 
                     b.HasKey("Role_ID");
 
@@ -108,325 +116,6 @@ namespace SmartQA.Migrations
                     b.HasIndex("Modified_User_ID");
 
                     b.ToTable("p_Role");
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.DetailsType", b =>
-                {
-                    b.Property<Guid>("DetailsType_ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<string>("Description_Rus");
-
-                    b.Property<string>("DetailsType_Code")
-                        .IsRequired();
-
-                    b.Property<DateTime>("Insert_DTS");
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<int>("RowStatus");
-
-                    b.Property<DateTime>("Update_DTS");
-
-                    b.HasKey("DetailsType_ID");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.ToTable("p_DetailsType");
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.HIFGroup", b =>
-                {
-                    b.Property<Guid>("HIFGroup_ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<string>("Description_Rus");
-
-                    b.Property<string>("HIFGroup_Code")
-                        .IsRequired();
-
-                    b.Property<DateTime>("Insert_DTS");
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<int>("RowStatus");
-
-                    b.Property<DateTime>("Update_DTS");
-
-                    b.HasKey("HIFGroup_ID");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.ToTable("p_HIFGroup");
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.JointKind", b =>
-                {
-                    b.Property<Guid>("JointKind_ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<string>("Description_Rus");
-
-                    b.Property<DateTime>("Insert_DTS");
-
-                    b.Property<string>("JointKind_Code")
-                        .IsRequired();
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<int>("RowStatus");
-
-                    b.Property<DateTime>("Update_DTS");
-
-                    b.HasKey("JointKind_ID");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.ToTable("p_JointKind");
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.JointType", b =>
-                {
-                    b.Property<Guid>("JointType_ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<string>("Description_Rus");
-
-                    b.Property<DateTime>("Insert_DTS");
-
-                    b.Property<string>("JointType_Code")
-                        .IsRequired();
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<int>("RowStatus");
-
-                    b.Property<DateTime>("Update_DTS");
-
-                    b.HasKey("JointType_ID");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.ToTable("p_JointType");
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.SeamsType", b =>
-                {
-                    b.Property<Guid>("SeamsType_ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<string>("Description_Rus");
-
-                    b.Property<DateTime>("Insert_DTS");
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<int>("RowStatus");
-
-                    b.Property<string>("SeamsType_Code")
-                        .IsRequired();
-
-                    b.Property<DateTime>("Update_DTS");
-
-                    b.HasKey("SeamsType_ID");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.ToTable("p_SeamsType");
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldGOST14098", b =>
-                {
-                    b.Property<Guid>("WeldGOST14098_ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<string>("Description_Rus");
-
-                    b.Property<DateTime>("Insert_DTS");
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<int>("RowStatus");
-
-                    b.Property<DateTime>("Update_DTS");
-
-                    b.Property<string>("WeldGOST14098_Code")
-                        .IsRequired();
-
-                    b.HasKey("WeldGOST14098_ID");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.ToTable("p_WeldGOST14098");
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldingEquipmentAutomationLevel", b =>
-                {
-                    b.Property<Guid>("WeldingEquipmentAutomationLevel_ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<string>("Description_Rus");
-
-                    b.Property<DateTime>("Insert_DTS");
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<int>("RowStatus");
-
-                    b.Property<DateTime>("Update_DTS");
-
-                    b.Property<string>("WeldingEquipmentAutomationLevel_Code")
-                        .IsRequired();
-
-                    b.HasKey("WeldingEquipmentAutomationLevel_ID");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.ToTable("p_WeldingEquipmentAutomationLevel");
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldMaterial", b =>
-                {
-                    b.Property<Guid>("WeldMaterial_ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<string>("Description_Rus");
-
-                    b.Property<DateTime>("Insert_DTS");
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<int>("RowStatus");
-
-                    b.Property<DateTime>("Update_DTS");
-
-                    b.Property<string>("WeldMaterial_Code")
-                        .IsRequired();
-
-                    b.HasKey("WeldMaterial_ID");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.ToTable("p_WeldMaterial");
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldMaterialGroup", b =>
-                {
-                    b.Property<Guid>("WeldMaterialGroup_ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<string>("Description_Rus");
-
-                    b.Property<DateTime>("Insert_DTS");
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<int>("RowStatus");
-
-                    b.Property<DateTime>("Update_DTS");
-
-                    b.Property<string>("WeldMaterialGroup_Code")
-                        .IsRequired();
-
-                    b.HasKey("WeldMaterialGroup_ID");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.ToTable("p_WeldMaterialGroup");
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldPosition", b =>
-                {
-                    b.Property<Guid>("WeldPosition_ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<string>("Description_Rus");
-
-                    b.Property<DateTime>("Insert_DTS");
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<int>("RowStatus");
-
-                    b.Property<DateTime>("Update_DTS");
-
-                    b.Property<string>("WeldPosition_Code")
-                        .IsRequired();
-
-                    b.HasKey("WeldPosition_ID");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.ToTable("p_WeldPosition");
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldType", b =>
-                {
-                    b.Property<Guid>("WeldType_ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<string>("Description_Rus");
-
-                    b.Property<DateTime>("Insert_DTS");
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<int>("RowStatus");
-
-                    b.Property<DateTime>("Update_DTS");
-
-                    b.Property<string>("WeldType_Code")
-                        .IsRequired();
-
-                    b.HasKey("WeldType_ID");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.ToTable("p_WeldType");
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.People.Contragent", b =>
@@ -443,13 +132,16 @@ namespace SmartQA.Migrations
 
                     b.Property<string>("Description_Rus");
 
-                    b.Property<DateTime>("Insert_DTS");
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
 
                     b.Property<Guid>("Modified_User_ID");
 
-                    b.Property<int>("RowStatus");
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
 
-                    b.Property<DateTime>("Update_DTS");
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
 
                     b.HasKey("Contragent_ID");
 
@@ -474,13 +166,16 @@ namespace SmartQA.Migrations
 
                     b.Property<string>("Division_Name");
 
-                    b.Property<DateTime>("Insert_DTS");
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
 
                     b.Property<Guid>("Modified_User_ID");
 
-                    b.Property<int>("RowStatus");
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
 
-                    b.Property<DateTime>("Update_DTS");
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
 
                     b.HasKey("Division_ID");
 
@@ -508,7 +203,8 @@ namespace SmartQA.Migrations
                     b.Property<string>("Employee_Code")
                         .IsRequired();
 
-                    b.Property<DateTime>("Insert_DTS");
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
 
                     b.Property<Guid>("Modified_User_ID");
 
@@ -517,9 +213,11 @@ namespace SmartQA.Migrations
                     b.Property<Guid?>("Position_ID")
                         .HasColumnName("Position_Id");
 
-                    b.Property<int>("RowStatus");
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
 
-                    b.Property<DateTime>("Update_DTS");
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
 
                     b.HasKey("Employee_ID");
 
@@ -544,14 +242,16 @@ namespace SmartQA.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("BirthDate")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("Date");
 
                     b.Property<Guid>("Created_User_ID");
 
                     b.Property<string>("FirstName")
                         .IsRequired();
 
-                    b.Property<DateTime>("Insert_DTS");
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
 
                     b.Property<string>("LastName")
                         .IsRequired();
@@ -561,13 +261,15 @@ namespace SmartQA.Migrations
                     b.Property<string>("Person_Code")
                         .IsRequired();
 
-                    b.Property<int>("RowStatus");
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
 
                     b.Property<string>("SecondName");
 
                     b.Property<string>("ShortName");
 
-                    b.Property<DateTime>("Update_DTS");
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
 
                     b.HasKey("Person_ID");
 
@@ -591,16 +293,19 @@ namespace SmartQA.Migrations
 
                     b.Property<Guid>("Division_ID");
 
-                    b.Property<DateTime>("Insert_DTS");
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
 
                     b.Property<Guid>("Modified_User_ID");
 
                     b.Property<string>("Position_Code")
                         .IsRequired();
 
-                    b.Property<int>("RowStatus");
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
 
-                    b.Property<DateTime>("Update_DTS");
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
 
                     b.HasKey("Position_ID");
 
@@ -613,75 +318,356 @@ namespace SmartQA.Migrations
                     b.ToTable("p_Position");
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaks", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.DetailsType", b =>
                 {
-                    b.Property<Guid>("DocumentNaks_ID")
+                    b.Property<Guid>("DetailsType_ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("Created_User_ID");
 
-                    b.Property<DateTime>("Insert_DTS");
+                    b.Property<string>("Description_Rus");
 
-                    b.Property<DateTime>("IssueDate")
-                        .HasColumnType("Date");
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<Guid>("Person_ID");
-
-                    b.Property<int>("RowStatus");
-
-                    b.Property<string>("Schifr")
+                    b.Property<string>("DetailsType_Code")
                         .IsRequired();
 
-                    b.Property<DateTime>("Update_DTS");
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
 
-                    b.Property<DateTime>("ValidUntil")
-                        .HasColumnType("Date");
+                    b.Property<Guid>("Modified_User_ID");
 
-                    b.Property<Guid>("WeldType_ID");
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
 
-                    b.HasKey("DocumentNaks_ID");
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
+
+                    b.HasKey("DetailsType_ID");
 
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
-                    b.HasIndex("WeldType_ID");
-
-                    b.ToTable("p_DocumentNaks");
+                    b.ToTable("p_DetailsType");
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaks_to_HIFGroup", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.HIFGroup", b =>
                 {
-                    b.Property<Guid>("DocumentNaks_to_HIFGroup_ID")
+                    b.Property<Guid>("HIFGroup_ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("Created_User_ID");
 
-                    b.Property<Guid>("DocumentNaks_ID");
+                    b.Property<string>("Description_Rus");
 
-                    b.Property<Guid>("HIFGroup_ID");
+                    b.Property<string>("HIFGroup_Code")
+                        .IsRequired();
 
-                    b.Property<DateTime>("Insert_DTS");
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
 
                     b.Property<Guid>("Modified_User_ID");
 
-                    b.Property<int>("RowStatus");
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
 
-                    b.Property<DateTime>("Update_DTS");
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
 
-                    b.HasKey("DocumentNaks_to_HIFGroup_ID");
+                    b.HasKey("HIFGroup_ID");
 
                     b.HasIndex("Created_User_ID");
 
-                    b.HasIndex("DocumentNaks_ID");
+                    b.HasIndex("Modified_User_ID");
 
-                    b.HasIndex("HIFGroup_ID");
+                    b.ToTable("p_HIFGroup");
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.JointKind", b =>
+                {
+                    b.Property<Guid>("JointKind_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<string>("Description_Rus");
+
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<string>("JointKind_Code")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
+
+                    b.HasKey("JointKind_ID");
+
+                    b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
-                    b.ToTable("p_DocumentNaks_to_HIFGroup");
+                    b.ToTable("p_JointKind");
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.JointType", b =>
+                {
+                    b.Property<Guid>("JointType_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<string>("Description_Rus");
+
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<string>("JointType_Code")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
+
+                    b.HasKey("JointType_ID");
+
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.ToTable("p_JointType");
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.SeamsType", b =>
+                {
+                    b.Property<Guid>("SeamsType_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<string>("Description_Rus");
+
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<string>("SeamsType_Code")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
+
+                    b.HasKey("SeamsType_ID");
+
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.ToTable("p_SeamsType");
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldGOST14098", b =>
+                {
+                    b.Property<Guid>("WeldGOST14098_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<string>("Description_Rus");
+
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
+
+                    b.Property<string>("WeldGOST14098_Code")
+                        .IsRequired();
+
+                    b.HasKey("WeldGOST14098_ID");
+
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.ToTable("p_WeldGOST14098");
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldingEquipmentAutomationLevel", b =>
+                {
+                    b.Property<Guid>("WeldingEquipmentAutomationLevel_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<string>("Description_Rus");
+
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
+
+                    b.Property<string>("WeldingEquipmentAutomationLevel_Code")
+                        .IsRequired();
+
+                    b.HasKey("WeldingEquipmentAutomationLevel_ID");
+
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.ToTable("p_WeldingEquipmentAutomationLevel");
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldMaterial", b =>
+                {
+                    b.Property<Guid>("WeldMaterial_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<string>("Description_Rus");
+
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
+
+                    b.Property<string>("WeldMaterial_Code")
+                        .IsRequired();
+
+                    b.HasKey("WeldMaterial_ID");
+
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.ToTable("p_WeldMaterial");
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldMaterialGroup", b =>
+                {
+                    b.Property<Guid>("WeldMaterialGroup_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<string>("Description_Rus");
+
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
+
+                    b.Property<string>("WeldMaterialGroup_Code")
+                        .IsRequired();
+
+                    b.HasKey("WeldMaterialGroup_ID");
+
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.ToTable("p_WeldMaterialGroup");
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldPosition", b =>
+                {
+                    b.Property<Guid>("WeldPosition_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<string>("Description_Rus");
+
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
+
+                    b.Property<string>("WeldPosition_Code")
+                        .IsRequired();
+
+                    b.HasKey("WeldPosition_ID");
+
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.ToTable("p_WeldPosition");
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldType", b =>
+                {
+                    b.Property<Guid>("WeldType_ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<string>("Description_Rus");
+
+                    b.Property<DateTime?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("Update_DTS")
+                        .IsRequired();
+
+                    b.Property<string>("WeldType_Code")
+                        .IsRequired();
+
+                    b.HasKey("WeldType_ID");
+
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.ToTable("p_WeldType");
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Auth.AppUser", b =>
@@ -721,149 +707,6 @@ namespace SmartQA.Migrations
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Auth.Role", b =>
-                {
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
-                        .WithMany()
-                        .HasForeignKey("Created_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
-                        .WithMany()
-                        .HasForeignKey("Modified_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.DetailsType", b =>
-                {
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
-                        .WithMany()
-                        .HasForeignKey("Created_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
-                        .WithMany()
-                        .HasForeignKey("Modified_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.HIFGroup", b =>
-                {
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
-                        .WithMany()
-                        .HasForeignKey("Created_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
-                        .WithMany()
-                        .HasForeignKey("Modified_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.JointKind", b =>
-                {
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
-                        .WithMany()
-                        .HasForeignKey("Created_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
-                        .WithMany()
-                        .HasForeignKey("Modified_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.JointType", b =>
-                {
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
-                        .WithMany()
-                        .HasForeignKey("Created_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
-                        .WithMany()
-                        .HasForeignKey("Modified_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.SeamsType", b =>
-                {
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
-                        .WithMany()
-                        .HasForeignKey("Created_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
-                        .WithMany()
-                        .HasForeignKey("Modified_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldGOST14098", b =>
-                {
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
-                        .WithMany()
-                        .HasForeignKey("Created_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
-                        .WithMany()
-                        .HasForeignKey("Modified_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldingEquipmentAutomationLevel", b =>
-                {
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
-                        .WithMany()
-                        .HasForeignKey("Created_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
-                        .WithMany()
-                        .HasForeignKey("Modified_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldMaterial", b =>
-                {
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
-                        .WithMany()
-                        .HasForeignKey("Created_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
-                        .WithMany()
-                        .HasForeignKey("Modified_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldMaterialGroup", b =>
-                {
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
-                        .WithMany()
-                        .HasForeignKey("Created_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
-                        .WithMany()
-                        .HasForeignKey("Modified_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldPosition", b =>
-                {
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
-                        .WithMany()
-                        .HasForeignKey("Created_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
-                        .WithMany()
-                        .HasForeignKey("Modified_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldType", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -967,7 +810,7 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaks", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.DetailsType", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -978,29 +821,131 @@ namespace SmartQA.Migrations
                         .WithMany()
                         .HasForeignKey("Modified_User_ID")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Reftables.WeldType", "WeldType")
-                        .WithMany()
-                        .HasForeignKey("WeldType_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaks_to_HIFGroup", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.HIFGroup", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
                         .HasForeignKey("Created_User_ID")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaks", "DocumentNaks")
-                        .WithMany("DocumentNaks_to_HIFGroupSet")
-                        .HasForeignKey("DocumentNaks_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SmartQA.DB.Models.Reftables.HIFGroup", "HIFGroup")
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
-                        .HasForeignKey("HIFGroup_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.JointKind", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
+                        .WithMany()
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.JointType", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
+                        .WithMany()
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.SeamsType", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
+                        .WithMany()
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldGOST14098", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
+                        .WithMany()
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldingEquipmentAutomationLevel", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
+                        .WithMany()
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldMaterial", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
+                        .WithMany()
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldMaterialGroup", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
+                        .WithMany()
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldPosition", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
+                        .WithMany()
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldType", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()

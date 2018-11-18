@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-
 namespace SmartQA.Migrations
 {
     public partial class InitialCreate : Migration
@@ -205,7 +204,7 @@ namespace SmartQA.Migrations
                     SecondName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: false),
                     ShortName = table.Column<string>(nullable: true),
-                    BirthDate = table.Column<DateTime>(nullable: false)
+                    BirthDate = table.Column<DateTime>(type: "Date", nullable: false)
                 },
                 constraints: table =>
                 {
