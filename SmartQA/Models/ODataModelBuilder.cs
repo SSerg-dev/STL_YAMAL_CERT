@@ -94,17 +94,15 @@ namespace SmartQA.DB
             });
 
             // create models  for reftables
-            using (var context = serviceProvider.GetService<DataContext>())
+
+            foreach (var reftableType in Reftable.GetReftableTypes())
             {
-                foreach (var reftableType in Reftable.GetReftableTypes(context))
-                {
-                    GetType()
-                        .GetMethod("BuildReftableEntity")                    
-                        .MakeGenericMethod(reftableType)
-                        .Invoke(this, new object []{ builder });                    
-                }
+                GetType()
+                    .GetMethod("BuildReftableEntity")                    
+                    .MakeGenericMethod(reftableType)
+                    .Invoke(this, new object []{ builder });                    
             }
-            
+                        
             builder.EntitySet<Reftable>(nameof(Reftable)).EntityType.Count().Filter().OrderBy().Page().Select();
 
             return builder.GetEdmModel();

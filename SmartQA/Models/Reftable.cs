@@ -16,14 +16,17 @@ namespace SmartQA.Models.Forms
         [Key]
         public string ModelName { get; set; }
 
-        public static IEnumerable<Type> GetReftableTypes(DbContext context)
-            => context.Model.GetEntityTypes()
-                .Select(t => t.ClrType)
-                .Where(t => t.GetInterfaces().Contains(typeof(IReftableEntity)));                           
-
-        public static IEnumerable<Reftable> GetList(DbContext context)
+        public static IEnumerable<Type> GetReftableTypes()
         {
-            return GetReftableTypes(context).Select(t => new Reftable()
+            var currentAssembly = typeof(Reftable).Assembly;
+            return currentAssembly.GetExportedTypes().Where(
+                x => x.GetInterfaces().Contains(typeof(IReftableEntity))
+            );
+        }                      
+
+        public static IEnumerable<Reftable> GetList()
+        {
+            return GetReftableTypes().Select(t => new Reftable()
                 {
                     ModelName = t.Name,
                     Title =

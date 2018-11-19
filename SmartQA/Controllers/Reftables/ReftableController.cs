@@ -21,7 +21,7 @@ namespace SmartQA.Controllers.Reftables
         [EnableQuery]
         public IQueryable<Reftable> Get()
         {
-            return Reftable.GetList(Context).AsQueryable();
+            return Reftable.GetList().AsQueryable();
         }
 
     }

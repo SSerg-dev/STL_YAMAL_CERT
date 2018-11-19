@@ -24,7 +24,6 @@ namespace SmartQA.Controllers.Shared
             Context = context;
         }
 
-
         public virtual DbSet<TEntity> GetDbSet()
             => ((DbSet<TEntity>)Context.GetType().GetProperty(typeof(TEntity).Name).GetValue(Context));
 

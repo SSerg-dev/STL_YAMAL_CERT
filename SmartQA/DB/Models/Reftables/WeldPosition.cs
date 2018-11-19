@@ -19,6 +19,7 @@ namespace SmartQA.DB.Models.Reftables
         [Required]
         [Column("WeldPosition_Code")]
         public string Title { get; set; }
+
         [Column("Description_Rus")]
         public string Description { get; set; }
     }

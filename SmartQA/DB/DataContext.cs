@@ -9,6 +9,7 @@ using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.PermissionDocuments;
 using SmartQA.DB.Models.Reftables;
 using SmartQA.DB.Models.Shared;
+using SmartQA.Models.Forms;
 
 
 namespace SmartQA.DB
@@ -79,19 +80,15 @@ namespace SmartQA.DB
             CommonEntity.CommonModelSetup<Division>(modelBuilder);                
             CommonEntity.CommonModelSetup<Position>(modelBuilder);                
             CommonEntity.CommonModelSetup<Contragent>(modelBuilder);
-            
+
             // ----- reftables ----------
-            CommonEntity.CommonModelSetup<DetailsType>(modelBuilder);
-            CommonEntity.CommonModelSetup<HIFGroup>(modelBuilder);
-            CommonEntity.CommonModelSetup<JointKind>(modelBuilder);
-            CommonEntity.CommonModelSetup<JointType>(modelBuilder);
-            CommonEntity.CommonModelSetup<SeamsType>(modelBuilder);
-            CommonEntity.CommonModelSetup<WeldGOST14098>(modelBuilder);
-            CommonEntity.CommonModelSetup<WeldingEquipmentAutomationLevel>(modelBuilder);
-            CommonEntity.CommonModelSetup<WeldMaterial>(modelBuilder);
-            CommonEntity.CommonModelSetup<WeldMaterialGroup>(modelBuilder);
-            CommonEntity.CommonModelSetup<WeldPosition>(modelBuilder);
-            CommonEntity.CommonModelSetup<WeldType>(modelBuilder);
+            foreach (var reftableType in Reftable.GetReftableTypes())
+            {
+                typeof(CommonEntity)
+                    .GetMethod("CommonModelSetup")
+                    .MakeGenericMethod(reftableType)
+                    .Invoke(null, new object[] { modelBuilder });
+            }
 
             // ----- permission docs ----
             CommonEntity.CommonModelSetup<DocumentNaks>(modelBuilder);
