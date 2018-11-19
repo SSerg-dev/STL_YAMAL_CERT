@@ -22,10 +22,13 @@
                   :show-title="true"
                   :width="800"
                   :height="600"
+                  :toolbar-items="editPopupToolbarItems"
                   title="НАКС"
+                  
                   @onHiding="onEditPopupHiding">
 
-            <naks-edit :editModelKey="editModelKey"
+            <naks-edit ref="editForm"
+                       :editModelKey="editModelKey"
                        :personId="personId"
                        @editSuccess="onEditSuccess" />
 
@@ -95,6 +98,20 @@
                                 }  
                             }
                         }
+                ],
+                editPopupToolbarItems: [
+                    {
+                        toolbar: 'bottom',
+                        widget: "dxButton",
+                        location: "after",
+                        options: {
+                            text: "Submit",
+                            type: "success",
+                            onClick: () => {
+                                this.$refs.editForm.submitForm();                                
+                            }
+                        }                        
+                    }
                 ]
 
             }

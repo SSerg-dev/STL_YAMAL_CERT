@@ -6,6 +6,8 @@ import "devextreme/dist/css/dx.light.compact.css";
 
 import "devextreme-intl";
 
+import { FontAwesomeIcon } from './icons'
+
 import Vue from 'vue'
 import App from './app.vue'
 

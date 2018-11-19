@@ -116,8 +116,7 @@
         },
         methods: {
             formatDate: formatDate,
-            fetchData() {                
-                console.log(this.employeeId);
+            fetchData() {                                
                 this.error = this.employee = null;
                 if (!this.employeeId) {
                     this.loading = false;                

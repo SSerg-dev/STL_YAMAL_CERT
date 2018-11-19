@@ -1,8 +1,7 @@
 ﻿<template>
     <dx-scroll-view>
         <div>
-
-            <form v-on:submit.prevent="processForm">
+            <form ref="form" v-on:submit.prevent="processForm">
                 <dx-load-panel :visible.sync="loading"
                                :close-on-outside-click="false"
                                :shading="true"
@@ -86,16 +85,6 @@
                     },
                     reftableFormItem('WeldType', 'Вид (способ) сварки (наплавки)', false),
                     reftableFormItem('HIFGroup', 'Группы технических устройств ОПО', true),
-                    {
-                        itemType: "button",
-                        horizontalAlignment: "left",
-                        buttonOptions: {
-                            text: "Submit",
-                            type: "success",
-                            useSubmitBehavior: true
-                        }
-                    }
-
                 ],
                 formData: {},
                 formErrors: {}
@@ -134,6 +123,9 @@
                 } else {
                     this.formData = model
                 }                
+            },
+            submitForm() {
+                this.processForm(null);
             },
             processForm(event) {
                 this.loading = true;
@@ -188,8 +180,7 @@
                 }
 
             },
-            onEditorValueChanged(e) {
-                console.log(e);
+            onEditorValueChanged(e) {                
             }
 
         }

@@ -126,8 +126,7 @@
             }
         },
         methods: {
-            fetchData() {
-                console.log(this.employeeId);
+            fetchData() {                
                 this.error = this.employee = null;
                 if (!this.employeeId) {
                     this.loading = false;
@@ -216,7 +215,7 @@
 
             },
             onEditorValueChanged(e) {
-                console.log(e);
+                
             }
 
         }

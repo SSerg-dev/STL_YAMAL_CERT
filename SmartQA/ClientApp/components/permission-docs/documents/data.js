@@ -17,10 +17,20 @@ export const dataSourceConfs = {
             version: 4
         },
         expand: [
-            'DocumentNaksAttestSet',
-            'DocumentNaksAttestSet.WeldingEquipmentAutomationLevel',
-            'DocumentNaksAttestSet.DetailsTypeSet'
+            'DocumentNaksAttestSet'            
         ]
+    },
+    documentNaksAttest: {
+        store: {
+            type: 'odata',
+            url: baseUrl + 'odata/DocumentNaksAttest',
+            key: 'ID',
+            keyType: {
+                DocumentNaks_ID: "Guid"
+            },
+            version: 4
+        }
+        
     },
 
 }

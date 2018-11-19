@@ -5,6 +5,7 @@ using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Sources;
 using Microsoft.AspNet.OData.Builder;
+using Microsoft.AspNet.OData.Query;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OData.Edm;
@@ -61,13 +62,37 @@ namespace SmartQA.DB
             BuildCommon<DocumentNaks>(builder).CollectionProperty(x => x.HIFGroup_IDs);
 
             var attest = BuildCommon<DocumentNaksAttest>(builder);
+            attest.CollectionProperty(x => x.DetailsType_IDs);
+            attest.CollectionProperty(x => x.SeamsType_IDs);
+            attest.CollectionProperty(x => x.JointKind_IDs);
+            attest.CollectionProperty(x => x.WeldMaterialGroup_IDs);
+            attest.CollectionProperty(x => x.WeldPosition_IDs);
+            attest.CollectionProperty(x => x.WeldMaterial_IDs);
+
             attest.ContainsMany(x => x.DetailsTypeSet);
             attest.ContainsMany(x => x.SeamsTypeSet);
             attest.ContainsMany(x => x.JointKindSet);
             attest.ContainsMany(x => x.WeldMaterialGroupSet);
             attest.ContainsMany(x => x.WeldPositionSet);
             attest.ContainsMany(x => x.WeldMaterialSet);
-            
+            attest.ContainsOptional(x => x.JointType);
+            attest.ContainsOptional(x => x.WeldingEquipmentAutomationLevel);
+            attest.ContainsOptional(x => x.WeldGOST14098);
+
+            attest.Expand(SelectExpandType.Automatic, new[]
+            {
+                "DetailsTypeSet"                       ,
+                "SeamsTypeSet"                         ,
+                "JointKindSet"                         ,
+                "WeldMaterialGroupSet"                 ,
+                "WeldPositionSet"                      ,
+                "WeldMaterialSet"                      ,
+                "JointType"                            ,
+                "WeldingEquipmentAutomationLevel"      ,
+                "WeldGOST14098"                        ,
+                "DetailsTypeSet"
+            });
+
             // create models  for reftables
             using (var context = serviceProvider.GetService<DataContext>())
             {

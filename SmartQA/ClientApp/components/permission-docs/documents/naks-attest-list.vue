@@ -1,145 +1,222 @@
 ﻿<template>
-    <div>
-        <h4>Области аттестации</h4>
-        
-        <table v-if="model != null">
+    <div class="pt-3">
 
+        <table v-if="model != null" class="table table-sm">
+            <tr class="table-secondary">
+                <th scope="row">
+                    Области аттестации
+                    <dx-button>
+                        <font-awesome-icon icon="plus" 
+                                           @click="onNewButtonClick"/>
+                    </dx-button>
+                </th>
+                <th scope="col" v-for="(item, index) in model.DocumentNaksAttestSet">
+                    <span>
+                        {{ index + 1 }}
+                    </span>
+                    <div class="float-right">
+                        <dx-button
+                                   :modelId="item.DocumentNaksAttest_ID"
+                                   @click="onEditButtonClick($event, item)">
+                            <font-awesome-icon icon="edit" />
+                        </dx-button>
+                        <dx-button
+                                   :modelId="item.DocumentNaksAttest_ID"
+                                   @click="onDeleteButtonClick($event, item)">
+                            <font-awesome-icon icon="trash" />
+                        </dx-button>
+                    </div>
+                </th>
+            </tr>
             <tr>
-                <th>Степень автоматизации сварочного оборудования</th>
-                <td v-for="item in model.DocumentNaksAttestSet">                    
-                    <p v-if="item.WeldingEquipmentAutomationLevel">
+                <th scope="row">Степень автоматизации сварочного оборудования</th>
+                <td v-for="item in model.DocumentNaksAttestSet">
+                    <div v-if="item.WeldingEquipmentAutomationLevel">
                         {{ item.WeldingEquipmentAutomationLevel.Title }}
-                    </p>
+                    </div>
                 </td>
             </tr>
 
             <tr>
-                <th>Вид деталей</th>
+                <th scope="row">Вид деталей</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
-                    <p v-for="val in item.DetailsTypeSet">
+                    <div v-for="val in item.DetailsTypeSet">
                         {{ val.Title }}
-                    </p>
-                </td>
-            </tr>
-            
-            <tr>
-                <th>Типы швов</th>
-                <td v-for="item in model.DocumentNaksAttestSet">
-                    <p v-for="val in item.SeamsTypeSet">
-                        {{ val.Title }}
-                    </p>
+                    </div>
                 </td>
             </tr>
 
             <tr>
-                <th>Тип соединения</th>
-                <td v-for="item in model.DocumentNaksAttestSet">          
-                    <p v-if="item.JointType">
+                <th scope="row">Типы швов</th>
+                <td v-for="item in model.DocumentNaksAttestSet">
+                    <div v-for="val in item.SeamsTypeSet">
+                        {{ val.Title }}
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th scope="row">Тип соединения</th>
+                <td v-for="item in model.DocumentNaksAttestSet">
+                    <div v-if="item.JointType">
                         {{ item.JointType.Title }}
-                    </p>                          
+                    </div>
                 </td>
             </tr>
             <tr>
-                <th>Группа свариваемого материала</th>
+                <th scope="row">Группа свариваемого материала</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
-                    <p v-for="val in item.WeldMaterialGroupSet">
+                    <div v-for="val in item.WeldMaterialGroupSet">
                         {{ val.Title }}
-                    </p>
+                    </div>
                 </td>
-            </tr>          
+            </tr>
 
             <tr>
-                <th>Сварочные материалы</th>
+                <th scope="row">Сварочные материалы</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
-                    <p v-for="val in item.WeldMaterialSet">
+                    <div v-for="val in item.WeldMaterialSet">
                         {{ val.Title }}
-                    </p>
+                    </div>
                 </td>
             </tr>
             <tr>
-                <th>Толщина деталей, мм</th>
+                <th scope="row">Толщина деталей, мм</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
-                    <p v-if="item.JointType">
-                        {{ item.DetailWidth.Title }}
-                    </p>                       
-                    
+                    <div>
+                        {{ item.DetailWidth }}
+                    </div>
                 </td>
             </tr>
             <tr>
-                <th>Наружный диаметр, мм</th>
+                <th scope="row">Наружный диаметр, мм</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
                     {{ item.OuterDiameter }}
                 </td>
             </tr>
             <tr>
-                <th>SDR</th>
+                <th scope="row">SDR</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
                     {{ item.SDR }}
                 </td>
             </tr>
             <tr>
-                <th>Положение при сварке</th>
+                <th scope="row">Положение при сварке</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
-                    <p v-for="val in item.WeldPositionSet">
+                    <div v-for="val in item.WeldPositionSet">
                         {{ val.Title }}
-                    </p>
-                </td>
-            </tr>           
-
-            <tr>
-                <th>Вид соединения</th>
-                <td v-for="item in model.DocumentNaksAttestSet">
-                    <p v-for="val in item.JointKindSet">
-                        {{ val.Title }}
-                    </p>
+                    </div>
                 </td>
             </tr>
 
             <tr>
-                <th>Обозначение по ГОСТ 14098</th>
+                <th scope="row">Вид соединения</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
-                    <p v-if="item.WeldGOST14098">
+                    <div v-for="val in item.JointKindSet">
+                        {{ val.Title }}
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <th scope="row">Обозначение по ГОСТ 14098</th>
+                <td v-for="item in model.DocumentNaksAttestSet">
+                    <div v-if="item.WeldGOST14098">
                         {{ item.WeldGOST14098.Title }}
-                    </p>                         
+                    </div>
                 </td>
             </tr>
 
 
         </table>
+
+        <dx-popup ref="editPopup"
+                  :show-title="true"
+                  :width="600"
+                  :height="600"
+                  title="Область аттестации"
+                  :toolbarItems="editPopupToolbarItems"
+                  @onHiding="onEditPopupHiding">
+
+            <naks-attest-edit ref="editForm"
+                              :editModelKey="editModelKey"
+                              :parentId="modelKey"
+                              @editSuccess="onEditSuccess" />
+
+        </dx-popup>
+
     </div>
 </template>
 
 
 <script>    
-    import DataSource from 'devextreme/data/data_source';    
-
+    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+    import { DxButton } from 'devextreme-vue';
+    import DxToolbar from 'devextreme-vue/toolbar'; 
+    import DataSource from 'devextreme/data/data_source';
+    import DxPopup from 'devextreme-vue/popup';
     import { dataSourceConfs } from './data.js';
+
+    import NaksAttestEdit from './naks-attest-edit';
 
     export default {
         components: {
-            DataSource
+            FontAwesomeIcon,
+            DxButton,
+            DxToolbar,
+            DataSource,
+            DxPopup,
+            NaksAttestEdit
         },
         props: {
             'modelKey': String,            
         },
         watch: {
-            'modelKey': 'fetchData'                   
+            'modelKey': 'loadModel'                   
         },
         created() {
-            this.fetchData();
+            this.loadModel();
         },
         data: function () {
-            return {
-                
-               loading: false,
+            return {                
+                loading: false,
                 model: null,
                 error: null,
+                editModelKey: null,
                 dataSource: dataSourceConfs.documentNaks,              
+                toolbarItems: [
+                    {
+                        location: 'before',
+                        widget: 'dxButton',
+                        options: {
+                            type: 'add',
+                            icon: 'add',
+                            text: 'Add',
+                            onClick: () => {
+                                this.editModelKey = null;
+                                this.$refs.editPopup.instance.show();
+                            }
+                        }
+                    }                    
+                ],
+                editPopupToolbarItems: [
+                    {
+                        toolbar: 'bottom',
+                        widget: "dxButton",
+                        location: "after",
+                        options: {
+                            text: "Submit",
+                            type: "success",
+                            onClick: () => {
+                                this.$refs.editForm.submitForm();
+                            }
+                        }
+                    }
+                ]
             }
         },
         methods: {
-            fetchData() {   
-                console.log(this.modelKey);
+            loadModel() {                   
                 this.error = this.model = null;
 
                 if (!this.modelKey) {
@@ -161,7 +238,33 @@
                         component.loading = false;
                         component.error = error;
                     });
+            },
+            onNewButtonClick(event) {
+                this.editModelKey = null;
+                this.$refs.editPopup.instance.show();
+            },
+            onEditButtonClick(event, model) {
+                this.editModelKey = model.ID.toString();
+                this.$refs.editPopup.instance.show();                
+            },            
+            onDeleteButtonClick(event, model) {
+                var component = this;
+                this.editModelKey = model.ID.toString();
+                var source = new DataSource(dataSourceConfs.documentNaksAttest);
+                source.store().remove(model.ID)
+                    .done(function (data) {
+                        component.loadModel()
+                    });            
+            },
+            onEditSuccess() {
+                this.$refs.editPopup.instance.hide();
+                this.loadModel()                
+            },
+            onEditPopupHiding() {
+                this.editModelKey = null;
             }
+
+
         }
     };
 

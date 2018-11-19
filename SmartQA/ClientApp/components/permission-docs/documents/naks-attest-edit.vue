@@ -1,7 +1,7 @@
 ﻿<template>
     <dx-scroll-view>
         <div>
-
+            
             <form v-on:submit.prevent="processForm">
                 <dx-load-panel :visible.sync="loading"
                                :close-on-outside-click="false"
@@ -13,9 +13,6 @@
                          :items="formItems" />
 
             </form>
-
-            <naks-attest-list v-if="modelKey"
-                              :model-key="modelKey" />
 
         </div>
     </dx-scroll-view>
@@ -33,8 +30,7 @@
             DxForm,
             DxLoadPanel,
             DataSource,
-            DxScrollView,
-            NaksAttest
+            DxScrollView,            
         },
         props: {
             'editModelKey': String,
@@ -54,27 +50,27 @@
                 loading: false,
                 model: null,
                 error: null,
-                dataSource: dataSourceConfs.documentNaks,
+                dataSource: dataSourceConfs.documentNaksAttest,
                 formItems: [
                     reftableFormItem('WeldingEquipmentAutomationLevel', 'Степень автоматизации сварочного оборудования'),
-                    reftableFormItem('DetailsType', 'Вид деталей'),
-                    reftableFormItem('SeamsType', 'Типы швов'),
+                    reftableFormItem('DetailsType', 'Вид деталей', true),
+                    reftableFormItem('SeamsType', 'Типы швов', true),
                     reftableFormItem('JointType', 'Тип соединения'),
-                    reftableFormItem('WeldMaterialGroup', 'Группа свариваемого материала'),
-                    reftableFormItem('WeldMaterial', 'Сварочные материалы'),
+                    reftableFormItem('WeldMaterialGroup', 'Группа свариваемого материала', true),
+                    reftableFormItem('WeldMaterial', 'Сварочные материалы', true),
                     {
                         label: { text: 'Толщина деталей, мм' },
-                        dataField: 'Number',
+                        dataField: 'DetailWidth',
                         required: true
                     },
                     {
                         label: { text: 'Наружный диаметр, мм' },
-                        dataField: 'Number',
+                        dataField: 'OuterDiameter',
                         required: true
                     },
 
-                    reftableFormItem('WeldPosition', 'Положение при сварке'),
-                    reftableFormItem('JointKind', 'Вид соединения'),
+                    reftableFormItem('WeldPosition', 'Положение при сварке', true),
+                    reftableFormItem('JointKind', 'Вид соединения', true),
                     reftableFormItem('WeldGOST14098', 'Обозначение по ГОСТ 14098')
                 ],
                 formData: {},
@@ -115,12 +111,15 @@
                     this.formData = model
                 }
             },
+            submitForm() {
+                this.processForm(null);
+            },
             processForm(event) {
                 this.loading = true;
                 var component = this;
                 var source = new DataSource(this.dataSource);
                 var data = this.formData;
-                data.Person_ID = this.personId;
+                data.DocumentNaks_ID = this.parentId;
 
                 if (this.modelKey) {
                     source.store().update(new String(this.modelKey.toString()), data)
@@ -167,9 +166,6 @@
                     }
                 }
 
-            },
-            onEditorValueChanged(e) {
-                console.log(e);
             }
 
         }
