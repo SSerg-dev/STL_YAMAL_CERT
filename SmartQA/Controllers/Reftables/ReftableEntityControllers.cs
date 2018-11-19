@@ -72,6 +72,7 @@ namespace SmartQA.Controllers.Reftables
         public WeldMaterialGroupController(DataContext context) : base(context)
         { }
     }
+
     public class WeldPositionController : ReftableBaseController<WeldPosition>
     {
         public WeldPositionController(DataContext context) : base(context)
