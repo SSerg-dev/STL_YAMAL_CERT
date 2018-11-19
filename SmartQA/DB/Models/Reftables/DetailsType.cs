@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Query.Expressions;
 using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.Reftables
@@ -13,14 +14,13 @@ namespace SmartQA.DB.Models.Reftables
     public class DetailsType : CommonEntity, IReftableEntity
     {
         [Key]
-        public System.Guid DetailsType_ID { get; set; }
-        [Required]
-        public string DetailsType_Code { get; set; }
-        public string Description_Rus { get; set; }
+        [Column("DetailsType_ID")]
+        public System.Guid ID { get; set; }
 
-        [NotMapped]
-        public string Title { get => DetailsType_Code; set => DetailsType_Code = value; }
-        [NotMapped]
-        public string Description { get => Description_Rus; set => Description_Rus = value; }
+        [Required]
+        [Column("DetailsType_Code")]
+        public string Title { get; set; }
+        [Column("Description_Rus")]
+        public string Description { get; set; }        
     }
 }

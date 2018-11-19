@@ -13,14 +13,13 @@ namespace SmartQA.DB.Models.Reftables
     public class WeldMaterialGroup : CommonEntity, IReftableEntity
     {
         [Key]
-        public System.Guid WeldMaterialGroup_ID { get; set; }
-        [Required]
-        public string WeldMaterialGroup_Code { get; set; }
-        public string Description_Rus { get; set; }
+        [Column("WeldMaterialGroup_ID")]
+        public System.Guid ID { get; set; }
 
-        [NotMapped]
-        public string Title { get => WeldMaterialGroup_Code; set => WeldMaterialGroup_Code = value; }
-        [NotMapped]
-        public string Description { get => Description_Rus; set => Description_Rus = value; }
+        [Required]
+        [Column("WeldMaterialGroup_Code")]
+        public string Title { get; set; }
+        [Column("Description_Rus")]
+        public string Description { get; set; }
     }
 }

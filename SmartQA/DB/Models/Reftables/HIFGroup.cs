@@ -13,16 +13,13 @@ namespace SmartQA.DB.Models.Reftables
     public class HIFGroup : CommonEntity, IReftableEntity
     {
         [Key]
-        public Guid HIFGroup_ID { get; set; }
+        [Column("HIFGroup_ID")]
+        public System.Guid ID { get; set; }
 
         [Required]
-        public string HIFGroup_Code { get; set; }
-        public string Description_Rus { get; set; }
-
-        [NotMapped]
-        public string Title { get => HIFGroup_Code; set => HIFGroup_Code = value; }
-        [NotMapped]
-        public string Description { get => Description_Rus; set => Description_Rus = value; }
-
+        [Column("HIFGroup_Code")]
+        public string Title { get; set; }
+        [Column("Description_Rus")]
+        public string Description { get; set; }    
     }
 }

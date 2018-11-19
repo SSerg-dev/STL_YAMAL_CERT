@@ -5,7 +5,7 @@
                       v-bind:dataSource="dataSource">
 
             <dx-editing
-                :allow-updating="true"
+                :allow-updating="false"
                 :allow-deleting="true"
                 :allow-adding="true"                       
                 :form="editForm"
@@ -103,9 +103,9 @@
                         type: 'odata',
                             url: baseUrl + 'odata/' + this.modelName,
                                 version: 4,
-                                    key: this.modelName + '_ID',
+                                    key: 'ID',
                                         keyType: {
-                            [this.modelName + '_ID']: "Guid"
+                                        'ID': "Guid"
                         }
                     },
                     expand: []

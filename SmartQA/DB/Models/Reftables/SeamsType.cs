@@ -13,14 +13,13 @@ namespace SmartQA.DB.Models.Reftables
     public class SeamsType : CommonEntity, IReftableEntity
     {
         [Key]
-        public System.Guid SeamsType_ID { get; set; }
-        [Required]
-        public string SeamsType_Code { get; set; }
-        public string Description_Rus { get; set; }
+        [Column("SeamsType_ID")]
+        public System.Guid ID { get; set; }
 
-        [NotMapped]
-        public string Title { get => SeamsType_Code; set => SeamsType_Code = value; }
-        [NotMapped]
-        public string Description { get => Description_Rus; set => Description_Rus = value; }
+        [Required]
+        [Column("SeamsType_Code")]
+        public string Title { get; set; }
+        [Column("Description_Rus")]
+        public string Description { get; set; }
     }
 }

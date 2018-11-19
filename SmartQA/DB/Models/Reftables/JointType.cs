@@ -13,14 +13,13 @@ namespace SmartQA.DB.Models.Reftables
     public class JointType : CommonEntity, IReftableEntity
     {
         [Key]
-        public System.Guid JointType_ID { get; set; }
-        [Required]
-        public string JointType_Code { get; set; }
-        public string Description_Rus { get; set; }
+        [Column("JointType_ID")]
+        public System.Guid ID { get; set; }
 
-        [NotMapped]
-        public string Title { get => JointType_Code; set => JointType_Code = value; }
-        [NotMapped]
-        public string Description { get => Description_Rus; set => Description_Rus = value; }
+        [Required]
+        [Column("JointType_Code")]
+        public string Title { get; set; }
+        [Column("Description_Rus")]
+        public string Description { get; set; }
     }
 }

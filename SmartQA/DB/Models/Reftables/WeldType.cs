@@ -13,14 +13,13 @@ namespace SmartQA.DB.Models.Reftables
     public class WeldType : CommonEntity, IReftableEntity
     {
         [Key]
-        public System.Guid WeldType_ID { get; set; }
-        [Required]
-        public string WeldType_Code { get; set; }
-        public string Description_Rus { get; set; }
+        [Column("WeldType_ID")]
+        public System.Guid ID { get; set; }
 
-        [NotMapped]
-        public string Title { get => WeldType_Code; set => WeldType_Code = value; }
-        [NotMapped]
-        public string Description { get => Description_Rus; set => Description_Rus = value; }
+        [Required]
+        [Column("WeldType_Code")]
+        public string Title { get; set; }
+        [Column("Description_Rus")]
+        public string Description { get; set; }
     }
 }

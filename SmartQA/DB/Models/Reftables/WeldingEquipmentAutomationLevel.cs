@@ -13,14 +13,13 @@ namespace SmartQA.DB.Models.Reftables
     public class WeldingEquipmentAutomationLevel : CommonEntity, IReftableEntity
     {
         [Key]
-        public System.Guid WeldingEquipmentAutomationLevel_ID { get; set; }
-        [Required]
-        public string WeldingEquipmentAutomationLevel_Code { get; set; }
-        public string Description_Rus { get; set; }
+        [Column("WeldingEquipmentAutomationLevel_ID")]
+        public System.Guid ID { get; set; }
 
-        [NotMapped]
-        public string Title { get => WeldingEquipmentAutomationLevel_Code; set => WeldingEquipmentAutomationLevel_Code = value; }
-        [NotMapped]
-        public string Description { get => Description_Rus; set => Description_Rus = value; }
+        [Required]
+        [Column("WeldingEquipmentAutomationLevel_Code")]
+        public string Title { get; set; }
+        [Column("Description_Rus")]
+        public string Description { get; set; }
     }
 }

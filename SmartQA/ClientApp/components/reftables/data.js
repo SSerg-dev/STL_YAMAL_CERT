@@ -20,9 +20,9 @@ export function reftableDatasourceConf(modelName) {
         store: {
             type: 'odata',
             url: baseUrl + 'odata/' + modelName,
-            key: modelName + '_ID',
+            key: 'ID',
             keyType: {
-                WeldType_ID: "Guid"
+                ID: "Guid"
             },
             version: 4
         }

@@ -9,6 +9,7 @@ namespace SmartQA.DB.Models.Shared
     public interface IReftableEntity
     {
                         
+        Guid ID { get; set; }
         string Title { get; set; }
         
         string Description { get; set; }
