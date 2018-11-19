@@ -78,4 +78,9 @@ namespace SmartQA.Controllers.Reftables
         public WeldPositionController(DataContext context) : base(context)
         { }
     }
+    public class TestTypeRefController : ReftableBaseController<TestTypeRef>
+    {
+        public TestTypeRefController(DataContext context) : base(context)
+        { }
+    }
 }

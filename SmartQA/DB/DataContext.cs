@@ -37,6 +37,7 @@ namespace SmartQA.DB
         public DbSet<WeldMaterialGroup> WeldMaterialGroup { get; set; }
         public DbSet<WeldPosition> WeldPosition { get; set; }
         public DbSet<WeldType> WeldType { get; set; }
+        public DbSet<TestTypeRef> TestTypeRef { get; set; }
 
         public DbSet<DocumentNaks> DocumentNaks { get; set; }
         public DbSet<DocumentNaks_to_HIFGroup> DocumentNaks_to_HIFGroup { get; set; }
