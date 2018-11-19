@@ -13,7 +13,7 @@ using SmartQA.Models;
 namespace SmartQA.Controllers.Reftables
 {
     [Produces("application/json")]
-    public class ReftableBaseController<TModel> : ODataController where TModel : CommonEntity, IReftableEntity, new()
+    public class ReftableBaseController<TEntity> : ODataController where TEntity : CommonEntity, IReftableEntity, new()
     {
         private DataContext Context;
         public ReftableBaseController(DataContext context)
@@ -21,20 +21,21 @@ namespace SmartQA.Controllers.Reftables
             Context = context;
         }
 
+        public virtual DbSet<TEntity> GetDbSet()
+            => ((DbSet<TEntity>)Context.GetType().GetProperty(typeof(TEntity).Name).GetValue(Context));
+
+        public virtual IQueryable<TEntity> GetQuery()
+            => GetDbSet()
+                .OrderBy(x => x.Title)
+                .AsQueryable();
+
         [EnableQuery]
         public IActionResult Get([FromODataUri] Guid key)
-        {
-            return Ok(GetDbSet().Find(key));
-        }
+            => Ok(GetDbSet().Find(key));
 
         [EnableQuery]
-        public IQueryable<TModel> Get()
-        {
-            return GetDbSet().AsQueryable();
-        }
-
-        private DbSet<TModel> GetDbSet()
-            => ((DbSet<TModel>)Context.GetType().GetProperty(typeof(TModel).Name).GetValue(Context));        
+        public IQueryable<TEntity> Get()
+            => GetQuery();
 
         public IActionResult Post([FromBody]ReftableItem form)
         {
@@ -43,7 +44,7 @@ namespace SmartQA.Controllers.Reftables
                 return BadRequest(ModelState);
             }
 
-            var item = new TModel()
+            var item = new TEntity()
             {
                 Title = form.Title,
                 Description = form.Description                
@@ -57,6 +58,25 @@ namespace SmartQA.Controllers.Reftables
 
             return Created(item);
         }
+
+
+        public IActionResult Patch([FromODataUri] Guid key, [FromBody]ReftableItem form)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var entity = GetDbSet().Find(key);
+            form.Serialize(entity);
+
+            entity.OnSave();
+
+            Context.SaveChanges();
+
+            return Updated(entity);
+        }
+
 
         public IActionResult Delete([FromODataUri] Guid key)
         {

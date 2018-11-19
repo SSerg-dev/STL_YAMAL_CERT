@@ -5,7 +5,7 @@
                       v-bind:dataSource="dataSource">
 
             <dx-editing
-                :allow-updating="false"
+                :allow-updating="true"
                 :allow-deleting="true"
                 :allow-adding="true"                       
                 :form="editForm"
