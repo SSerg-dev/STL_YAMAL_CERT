@@ -1,6 +1,6 @@
 <template>
 
-    <div class="container-fluid">
+    <div class="container-fluid login-container">
         <div class="card" id="login-form" style="width: 25rem;">
             <div class="card-body">
                 <h5 class="card-title">Sign in</h5>
@@ -27,19 +27,7 @@
 </template>
 <style scoped>
     
-    .container-fluid {
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        background: url('~images/login_background.png') no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        
-    }
+  
     
 
 </style>

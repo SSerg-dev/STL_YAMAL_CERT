@@ -43,19 +43,26 @@ module.exports = {
                 test: /\.scss$/,
                 use: [
                     devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-                    'css-loader', // translates CSS into CommonJS
+                    {
+                        loader: 'css-loader'
+                        //options: { url: false }
+                    },
                     'sass-loader' // compiles Sass to CSS, using Node Sass by default
                 ]
             },
             {
                 test: /\.(png|jp(e*)g|svg)$/,
-                use: [{
-                    loader: 'url-loader',
-                    options: {
-                        limit: 8000, // Convert images < 8kb to base64 strings
-                        name: 'images/[hash]-[name].[ext]'
-                    }
-                }]
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[path][name]_[hash].[ext]',
+                            context: path.resolve(__dirname, "ClientApp/"),
+                            outputPath: '',
+                            publicPath: '.',
+                            useRelativePaths: true
+                        }
+                    }]
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2)$/,
