@@ -11,7 +11,11 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="app.vue" />
+    <None Remove="ClientApp\auth\headers.js" />
     <None Remove="ClientApp\index.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClientApp\auth\headers.js" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.5" />
@@ -20,6 +24,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.1.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>

@@ -1,31 +1,25 @@
 <template>      
-    <div id="page">       
-        <main-menu />
-
-        <div class="container-fluid">
-            <router-view></router-view>
-        </div>
-
-    </div>
-
+    <component :is="layout">
+        <router-view></router-view>
+    </component>
 </template>
 
 <script>
-
-    import MainMenu from "./components/main-menu";
-    import 'bootstrap';
-    import 'bootstrap/dist/css/bootstrap.min.css';
+    const defaultLayout = 'default';
 
     export default {
+        computed: {
+            layout() {
+                return (this.$route.meta.layout || defaultLayout) + '-layout';
+            }
+        },
         components: {
-            MainMenu,        
-            },
+              
+        },
 
         methods: {
-            screenByWidth: function(width) {
-                return width < 700 ? "sm" : "lg";
-                }            
-            },
+           
+        },
 
         name: "app"
     }

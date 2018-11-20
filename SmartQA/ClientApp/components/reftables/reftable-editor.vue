@@ -43,7 +43,7 @@
     import DataSource from 'devextreme/data/data_source';
 
     import 'devextreme/data/odata/store';
-    import { dataSourceConfs } from "./data";
+    import { dataSourceConfs, reftableDatasourceConf } from "./data";
 
     export default {
         components: {
@@ -92,24 +92,13 @@
         methods: {
             fetchData() {
                 var component = this;
-                var refDs = new DataSource(dataSourceConfs.reftables)
+                var refDs = new DataSource(dataSourceConfs.reftables);
                 refDs.filter(["modelName", "=", new String(this.modelName.toString())]);
                 refDs.load().done(function (data) {
                     component.reftable = data[0];
                 })
 
-                this.dataSource = {
-                    store: {
-                        type: 'odata',
-                            url: baseUrl + 'odata/' + this.modelName,
-                                version: 4,
-                                    key: 'ID',
-                                        keyType: {
-                                        'ID': "Guid"
-                        }
-                    },
-                    expand: []
-                }
+                this.dataSource = reftableDatasourceConf(this.modelName);
             }
         }
         

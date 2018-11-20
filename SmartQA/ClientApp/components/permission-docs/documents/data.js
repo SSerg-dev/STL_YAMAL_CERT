@@ -1,9 +1,9 @@
 ﻿import DataSource from 'devextreme/data/data_source';
+import authHeaders from 'auth/headers.js';
 
 export function naksDataSource() {
     return new DataSource(dataSourceConfs.documentNaks);
 }
-
 
 export const dataSourceConfs = {
     documentNaks: {
@@ -13,6 +13,9 @@ export const dataSourceConfs = {
             key: 'DocumentNaks_ID',
             keyType: {
                 DocumentNaks_ID: "Guid"
+            },
+            beforeSend: function (e) {
+                e.headers = authHeaders.getAuthHeaders();
             },
             version: 4
         },
@@ -27,6 +30,9 @@ export const dataSourceConfs = {
             key: 'ID',
             keyType: {
                 DocumentNaks_ID: "Guid"
+            },
+            beforeSend: function (e) {
+                e.headers = authHeaders.getAuthHeaders();
             },
             version: 4
         }

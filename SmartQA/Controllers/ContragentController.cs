@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using SmartQA.DB;
 using SmartQA.DB.Models.People;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SmartQA.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     public class ContragentController : ODataController
     {

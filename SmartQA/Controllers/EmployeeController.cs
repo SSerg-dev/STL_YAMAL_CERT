@@ -6,9 +6,11 @@ using SmartQA.DB.Models.People;
 using SmartQA.Models;
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SmartQA.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     public class EmployeeController : ODataController
     {

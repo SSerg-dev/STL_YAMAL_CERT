@@ -1,4 +1,5 @@
 ﻿import DataSource from 'devextreme/data/data_source';
+import authHeaders from 'auth/headers.js';
 
 export function employeeDataSource() {
     return new DataSource(employeeDataSourceSettings);
@@ -11,6 +12,9 @@ export const employeeDataSourceSettings = {
         key: 'Employee_ID',
         keyType: {
             Employee_ID: "Guid"
+        },
+        beforeSend: function (e) {
+            e.headers = authHeaders.getAuthHeaders();
         },
         version: 4
     },
@@ -25,6 +29,9 @@ export const contragentDataSource = {
     store: {
         type: 'odata',
         url: baseUrl + 'odata/Contragent',
+        beforeSend: function (e) {
+            e.headers = authHeaders.getAuthHeaders();
+        },
         version: 4
     }
 }
@@ -33,6 +40,9 @@ export const positionDataSource = {
     store: {
         type: 'odata',
         url: baseUrl + 'odata/Position',
+        beforeSend: function (e) {
+            e.headers = authHeaders.getAuthHeaders();
+        },
         version: 4
     }
 }

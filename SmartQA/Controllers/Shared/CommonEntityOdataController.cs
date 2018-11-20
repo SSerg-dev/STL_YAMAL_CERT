@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.OData;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartQA.DB;
@@ -12,7 +13,8 @@ using SmartQA.Models.Shared;
 
 namespace SmartQA.Controllers.Shared
 {
-    [Produces("application/json")]
+    [Authorize]
+    [Produces("application/json")]    
     public class CommonEntityODataController<TEntity, TForm> : ODataController
         where TEntity : CommonEntity, new()
         where TForm : EntityForm<TEntity>, new ()

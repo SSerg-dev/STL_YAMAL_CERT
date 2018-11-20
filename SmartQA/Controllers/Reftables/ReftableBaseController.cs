@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.OData;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartQA.DB;
@@ -12,6 +13,7 @@ using SmartQA.Models;
 
 namespace SmartQA.Controllers.Reftables
 {
+    [Authorize]
     [Produces("application/json")]
     public class ReftableBaseController<TEntity> : ODataController where TEntity : CommonEntity, IReftableEntity, new()
     {

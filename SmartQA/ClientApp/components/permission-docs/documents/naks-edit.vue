@@ -27,7 +27,7 @@
 
     import NaksAttestList from './naks-attest-list';
     import { dataSourceConfs } from './data.js';
-    import { reftableFormItem } from '../../reftables/forms.js';
+    import { reftableFormItem } from 'components/reftables/forms.js';
 
     export default {
         components: {            

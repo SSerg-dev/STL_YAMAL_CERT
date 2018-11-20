@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using SmartQA.DB;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Position = SmartQA.DB.Models.People.Position;
 
 namespace SmartQA.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     public class PositionController : ODataController
     {

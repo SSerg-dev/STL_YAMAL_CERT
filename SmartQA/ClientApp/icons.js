@@ -13,7 +13,7 @@ fontawesome.library.add(
   require('@fortawesome/fontawesome-free-solid/faSpinner'),
   require('@fortawesome/fontawesome-free-solid/faPlus'),
   require('@fortawesome/fontawesome-free-solid/faEdit'),
-  require('@fortawesome/fontawesome-free-solid/faTrash'),
+  require('@fortawesome/fontawesome-free-solid/faTrash')
 
 )
 

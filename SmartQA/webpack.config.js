@@ -9,7 +9,12 @@ module.exports = {
       filename: '[name].js',
       library: '[name]_[hash]'
     },
-  resolve: {
+    resolve: {
+        modules: [
+            path.resolve('./ClientApp'),
+            path.resolve('./node_modules')
+        ],
+
     extensions: [".webpack.js", ".web.js", ".ts", ".vue", ".js"],
     alias: {
       'vue$': 'vue/dist/vue.esm.js'

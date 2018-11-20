@@ -27,6 +27,7 @@
         DxPosition
     } from "devextreme-vue/data-grid";    
     import DxToolbar from 'devextreme-vue/toolbar';
+    import { employeeDataSourceSettings } from './employee-data.js'
 
     import 'devextreme/data/odata/store';
 
@@ -45,16 +46,7 @@
         props: ['employeeId'],
         data: function() {
             return {
-                employeeDataSource: {
-                    store: {
-                        type: 'odata',
-                        url: baseUrl + 'odata/Employee',
-                        version: 4
-                    },
-                    expand: [
-                        'Person'
-                    ]
-                },
+                employeeDataSource: employeeDataSourceSettings,
                 selectedEmployee: null,
                 toolbarItems: [{
                     location: 'before',

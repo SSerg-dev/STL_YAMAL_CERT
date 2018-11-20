@@ -22,7 +22,7 @@
     import { DxForm, DxScrollView } from 'devextreme-vue';
     import DataSource from 'devextreme/data/data_source';
     import { DxLoadPanel } from 'devextreme-vue/load-panel';
-    import { reftableFormItem } from '../../reftables/forms.js';
+    import { reftableFormItem } from 'components/reftables/forms.js';
     import { dataSourceConfs } from './data.js';
 
     export default {
