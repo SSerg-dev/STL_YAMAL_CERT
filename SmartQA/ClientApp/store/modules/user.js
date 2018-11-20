@@ -40,10 +40,12 @@ const mutations = {
         Vue.set(state, 'profile', data);
     },
     [USER_ERROR]: (state) => {
+        state.profile = null;
         state.status = 'error';
     },
     [AUTH_LOGOUT]: (state) => {
         state.profile = null;
+        state.status = '';
     }
 }
 

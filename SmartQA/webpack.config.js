@@ -1,13 +1,16 @@
-const path = require('path')
+const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const devMode = process.env.NODE_ENV === 'development';
 
 module.exports = {
-  entry: "./ClientApp/app.js",
+    mode: devMode ? "development" : "production",
+    entry: './ClientApp/app.js',
     output: {
-      path: path.join(__dirname, 'wwwroot', 'dist'),
-      publicPath: '/dist/',
-      filename: '[name].js',
-      library: '[name]_[hash]'
+        path: path.join(__dirname, 'wwwroot', 'dist'),
+        publicPath: '/dist/',
+        filename: '[name].js',
+        library: '[name]_[hash]'
     },
     resolve: {
         modules: [
@@ -15,34 +18,58 @@ module.exports = {
             path.resolve('./node_modules')
         ],
 
-    extensions: [".webpack.js", ".web.js", ".ts", ".vue", ".js"],
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js'
-    }
-  },  
-  module: {
-    rules: [
-      {
-          test: /\.vue$/,
-          loader: 'vue-loader',
-          options: {
-              esModule: true
-          }
-      },
-      {
-        test: /\.css$/,
-        use: [
-          { loader: "style-loader" },
-          { loader: "css-loader" }
+        extensions: ['.webpack.js', '.web.js', '.ts', '.vue', '.js'],
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js'
+        }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+                options: {
+                    esModule: true
+                }
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    'css-loader'
+                ]
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    'css-loader', // translates CSS into CommonJS
+                    'sass-loader' // compiles Sass to CSS, using Node Sass by default
+                ]
+            },
+            {
+                test: /\.(png|jp(e*)g|svg)$/,
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 8000, // Convert images < 8kb to base64 strings
+                        name: 'images/[hash]-[name].[ext]'
+                    }
+                }]
+            },
+            {
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                use: 'url-loader?name=[name].[ext]'
+            }
         ]
-      },
-      { 
-        test: /\.(eot|svg|ttf|woff|woff2)$/, 
-        use: "url-loader?name=[name].[ext]"
-      }
+    },
+    plugins: [
+        new VueLoaderPlugin(),
+        new MiniCssExtractPlugin({
+            path: path.join(__dirname, 'wwwroot', 'dist'),
+            publicPath: '/dist/',
+            filename: "[name].css",
+            chunkFilename: "[id].css"
+        })
     ]
-  },
-  plugins: [
-    new VueLoaderPlugin()
-  ]
 };

@@ -18,6 +18,7 @@
     <Content Include="ClientApp\auth\headers.js" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="DevExpress.Xpo" Version="18.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.0.1" />
@@ -29,6 +30,9 @@
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ClientApp\images\" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->

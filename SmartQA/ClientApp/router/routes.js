@@ -6,7 +6,7 @@ import LoginPage from 'components/account/login-page'
 import store from 'store' 
 
 const ifNotAuthenticated = (to, from, next) => {
-    console.log(to, store.getters.isAuthenticated);
+
     if (!store.getters.isAuthenticated) {
         next();
         return;
@@ -14,13 +14,33 @@ const ifNotAuthenticated = (to, from, next) => {
     next('/');
 }
 
+
 const ifAuthenticated = (to, from, next) => {
-    console.log(to, store.getters.isAuthenticated);
-    if (store.getters.isAuthenticated) {
-        next();
-        return;
+    console.debug('[router] ifAuthenticated');
+    var watchStop;
+    function proceed() {
+        if (watchStop) watchStop();
+
+        if (store.getters.getProfile)
+            next();
+        else
+            next('/login');
     }
-    next('/login');
+
+    if (store.state.user.status === 'loading') {
+        console.debug('[router] user is loading');
+        watchStop = store.watch(
+            (state) => state.user.status,
+            (value) => {
+                console.debug('[router] user status === ' + value);
+                if (value !== 'loading') 
+                    proceed();                
+            }
+        );
+    } else {
+        proceed();
+    }
+
 }
 
 export const routes = [

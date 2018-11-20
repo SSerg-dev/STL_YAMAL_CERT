@@ -2,10 +2,12 @@
 
 <html>
     <head>
-
         <title>SmartQA</title>
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        @RenderSection("scripts", required: false)
+       
+        <environment names="Staging,Production">                        
+            <link rel="stylesheet" type="text/css" href="~dist/main.css"/>
+        </environment>
 
     </head>
 
