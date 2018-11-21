@@ -85,12 +85,12 @@ namespace SmartQA.Controllers.Reftables
         public TestTypeRefController(DataContext context, AppUserManager userManager) : base(context, userManager)
         { }
     }
-    public class InspectionTechniqueController : ReftableBaseController<TestTypeRef>
+    public class InspectionTechniqueController : ReftableBaseController<InspectionTechnique>
     {
         public InspectionTechniqueController(DataContext context, AppUserManager userManager) : base(context, userManager)
         { }
     }
-    public class InspectionSubjectController : ReftableBaseController<TestTypeRef>
+    public class InspectionSubjectController : ReftableBaseController<InspectionSubject>
     {
         public InspectionSubjectController(DataContext context, AppUserManager userManager) : base(context, userManager)
         { }
