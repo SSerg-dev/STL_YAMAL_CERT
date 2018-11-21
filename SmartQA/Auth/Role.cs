@@ -8,8 +8,8 @@ namespace SmartQA.Auth
 {
     public class Role : IdentityRole<Guid>
     {
-        public Guid Id { get; private set; }
-        public string Name { get; set; }
+        public override Guid Id { get; set; }
+        public override string Name { get; set; }
 
         public Role(DB.Models.Auth.Role dbRole)
         {

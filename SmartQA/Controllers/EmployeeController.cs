@@ -6,7 +6,9 @@ using SmartQA.DB.Models.People;
 using SmartQA.Models;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using SmartQA.Auth;
 
 namespace SmartQA.Controllers
 {
@@ -14,25 +16,27 @@ namespace SmartQA.Controllers
     [Produces("application/json")]
     public class EmployeeController : ODataController
     {
-        private readonly DataContext Context;
+        private readonly DataContext _context;
+        private readonly AppUserManager _userManager;
 
-        public EmployeeController(DataContext context)
+        public EmployeeController(DataContext context, AppUserManager userManager)
         {
-            Context = context;
+            _context = context;
+            _userManager = userManager;
         }
 
         [EnableQuery]
-        public IQueryable<Employee> Get() => Context.Employee                        
+        public IQueryable<Employee> Get() => _context.Employee                        
             .AsQueryable();
 
 
         [EnableQuery]
         public IActionResult Get([FromODataUri] Guid key)
         {
-            return Ok(Context.Employee.Single(x => x.Employee_ID == key));
+            return Ok(_context.Employee.Single(x => x.Employee_ID == key));
         }
 
-        public IActionResult Post([FromBody]EmployeeEdit employeeForm)
+        public async Task<IActionResult> Post([FromBody]EmployeeEdit employeeForm)
         {
             if (!ModelState.IsValid)
             {
@@ -47,67 +51,70 @@ namespace SmartQA.Controllers
                     Person_Code = Guid.NewGuid().ToString(),                    
                  }
             };
-            
-            employeeForm.Serialize(employee);
-            employee.OnSave();
-            employee.Person.OnSave();
 
-            Context.Person.Add(employee.Person);
-            Context.Employee.Add(employee);
-            Context.SaveChanges();
+            var user = await _userManager.Get(User);
+            employeeForm.Serialize(employee);
+            employee.OnSave(user);
+            employee.Person.OnSave(user);
+
+            _context.Person.Add(employee.Person);
+            _context.Employee.Add(employee);
+            _context.SaveChanges();
 
             return Created(employee);
         }
 
-        public IActionResult Put([FromODataUri] Guid key, [FromBody]EmployeeEdit employeeForm)
+        public async Task<IActionResult> Put([FromODataUri] Guid key, [FromBody]EmployeeEdit employeeForm)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            var employee = Context.Employee
+            
+            var employee = _context.Employee
                 .Include(x => x.Person)
                 .Single(x => x.Employee_ID == key);
             employeeForm.Serialize(employee);
 
-            employee.OnSave();
-            employee.Person.OnSave();
+            var user = await _userManager.Get(User);
+            employee.OnSave(user);
+            employee.Person.OnSave(user);
 
-            Context.SaveChanges();
+            _context.SaveChanges();
 
             return Updated(employee);
         }
 
-        public IActionResult Patch([FromODataUri] Guid key, [FromBody]EmployeeEdit employeeForm)
+        public async Task<IActionResult> Patch([FromODataUri] Guid key, [FromBody]EmployeeEdit employeeForm)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var employee = Context.Employee
+            var employee = _context.Employee
                 .Include(x => x.Person)
                 .Single(x => x.Employee_ID == key);
             employeeForm.Serialize(employee);
 
-            employee.OnSave();
-            employee.Person.OnSave();
+            var user = await _userManager.Get(User);
+            employee.OnSave(user);
+            employee.Person.OnSave(user);
 
-            Context.SaveChanges();
+            _context.SaveChanges();
             
             return Updated(employee);
         }
 
-        public IActionResult Delete([FromODataUri] Guid key)
+        public async Task<IActionResult> Delete([FromODataUri] Guid key)
         {
-            var employee = Context.Employee
+            var employee = _context.Employee
                 .Include(x => x.Person)
                 .Single(x => x.Employee_ID == key);
 
-            employee.MarkDeleted();
+            employee.MarkDeleted(await _userManager.Get(User));
 
-            Context.SaveChanges();
+            _context.SaveChanges();
 
             return Ok();
         }

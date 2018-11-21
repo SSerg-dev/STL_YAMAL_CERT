@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SmartQA.Auth;
 using SmartQA.DB;
 using SmartQA.DB.Models.Shared;
 using SmartQA.Models;
@@ -20,27 +22,32 @@ namespace SmartQA.Controllers.Shared
         where TForm : EntityForm<TEntity>, new ()
 
     {
-        private DataContext Context;
-        public CommonEntityODataController(DataContext context)
+        private readonly DataContext _context;
+        private readonly AppUserManager _userManager;
+
+        public CommonEntityODataController(DataContext context, AppUserManager userManager)
         {
-            Context = context;
+            _context = context;
+            _userManager = userManager;
         }
 
         public virtual DbSet<TEntity> GetDbSet()
-            => ((DbSet<TEntity>)Context.GetType().GetProperty(typeof(TEntity).Name).GetValue(Context));
+            => ((DbSet<TEntity>)_context.GetType().GetProperty(typeof(TEntity).Name).GetValue(_context));
 
         public virtual IQueryable<TEntity> GetQuery()
             => GetDbSet().AsQueryable();
 
-        [EnableQuery]
-        public IActionResult Get([FromODataUri] Guid key)
-            => Ok(GetDbSet().Find(key));
-        
+        public async Task<IActionResult> Get([FromODataUri] Guid key)
+        {
+            var entity = await GetDbSet().FindAsync(key);
+            return Ok(entity);
+        }
+
         [EnableQuery]
         public IQueryable<TEntity> Get()
             => GetQuery();       
 
-        public IActionResult Post([FromBody]TForm form)
+        public async Task<IActionResult> Post([FromBody]TForm form)
         {
             if (!ModelState.IsValid)
             {
@@ -50,16 +57,16 @@ namespace SmartQA.Controllers.Shared
             var entity = new TEntity();
             form.Serialize(entity);
 
-            entity.OnSave();
+            entity.OnSave(await _userManager.Get(this.User));
 
             GetDbSet().Add(entity);
 
-            Context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Created(entity);
         }
 
-        public IActionResult Patch([FromODataUri] Guid key, [FromBody]TForm form)
+        public async Task<IActionResult> Patch([FromODataUri] Guid key, [FromBody]TForm form)
         {
             if (!ModelState.IsValid)
             {
@@ -69,21 +76,21 @@ namespace SmartQA.Controllers.Shared
             var entity = GetDbSet().Find(key);
             form.Serialize(entity);
 
-            entity.OnSave();
+            entity.OnSave(await _userManager.Get(this.User));
 
-            Context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Updated(entity);
         }
 
-        public IActionResult Delete([FromODataUri] Guid key)
+        public async Task<IActionResult> Delete([FromODataUri] Guid key)
         {
 
             var item = GetDbSet().Find(key);
 
-            item.MarkDeleted();
+            item.MarkDeleted(await _userManager.Get(this.User));
 
-            Context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok();
         }

@@ -21,11 +21,11 @@ namespace SmartQA.Controllers
     public class AccountController : Controller
     {
 
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
+        private readonly AppUserManager _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _configuration;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager,
+        public AccountController(AppUserManager userManager, SignInManager<ApplicationUser> signInManager,
             IConfiguration configuration)
         {
             _userManager = userManager;
@@ -36,10 +36,10 @@ namespace SmartQA.Controllers
         [Authorize]
         [HttpGet]
         public async Task<object> UserInfo()
-        {
-            var key = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var user = await _userManager.FindByIdAsync(key);
-            return Ok(new UserInfo(user));
+        {                        
+            var user = await _userManager.Get(User);
+            var roles = await _userManager.GetRolesAsync(user);
+            return Ok(new UserInfo(user, roles));
         }
 
         [HttpPost]
@@ -56,13 +56,14 @@ namespace SmartQA.Controllers
             {
                
                 var appUser = await _userManager.FindByNameAsync(model.UserName);
+                var roles = await _userManager.GetRolesAsync(appUser);
 
                 return await GenerateJwtToken(appUser)
                     .ContinueWith(tokenTask =>
                         Ok(new LoginInfo()
                         {
                             Token = tokenTask.Result,
-                            UserInfo = new UserInfo(appUser)                            
+                            UserInfo = new UserInfo(appUser, roles)                            
                         })
                     );
             }
@@ -70,28 +71,32 @@ namespace SmartQA.Controllers
             return Unauthorized();            
         }
 
-        private async Task<string> GenerateJwtToken(User user)
+        private async Task<string> GenerateJwtToken(ApplicationUser applicationUser)
         {
-            var claims = new List<Claim>
+            return await Task.Run(() =>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
-            };
+                var claims = new List<Claim>
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, applicationUser.UserName),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, applicationUser.Id.ToString())
+                };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtKey"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddDays(Convert.ToDouble(30));
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtKey"]));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var expires = DateTime.Now.AddDays(Convert.ToDouble(30));
 
-            var token = new JwtSecurityToken(
-                _configuration["JwtIssuer"],
-                _configuration["JwtIssuer"],
-                claims,
-                expires: expires,
-                signingCredentials: creds
-            );
+                var token = new JwtSecurityToken(
+                    _configuration["JwtIssuer"],
+                    _configuration["JwtIssuer"],
+                    claims,
+                    expires: expires,
+                    signingCredentials: creds
+                );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                return new JwtSecurityTokenHandler().WriteToken(token);
+            });
+            
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -8,13 +9,19 @@ using Microsoft.Extensions.Options;
 
 namespace SmartQA.Auth
 {
-    public class AppUserManager : UserManager<User>
+    public class AppUserManager : UserManager<ApplicationUser>
     {
-        public AppUserManager(IUserStore<User> store, IOptions<IdentityOptions> optionsAccessor, IPasswordHasher<User> passwordHasher, IEnumerable<IUserValidator<User>> userValidators, IEnumerable<IPasswordValidator<User>> passwordValidators, ILookupNormalizer keyNormalizer, IdentityErrorDescriber errors, IServiceProvider services, ILogger<UserManager<User>> logger) : base(store, optionsAccessor, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger)
+        public AppUserManager(IUserStore<ApplicationUser> store, IOptions<IdentityOptions> optionsAccessor, IPasswordHasher<ApplicationUser> passwordHasher, IEnumerable<IUserValidator<ApplicationUser>> userValidators, IEnumerable<IPasswordValidator<ApplicationUser>> passwordValidators, ILookupNormalizer keyNormalizer, IdentityErrorDescriber errors, IServiceProvider services, ILogger<UserManager<ApplicationUser>> logger) : base(store, optionsAccessor, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger)
         {
         }
 
-        public override Task<bool> CheckPasswordAsync(User user, string password)
-            => Task.FromResult(user.CheckPassword(password));
+        public override Task<bool> CheckPasswordAsync(ApplicationUser applicationUser, string password)
+            => Task.FromResult(applicationUser.CheckPassword(password));
+
+        public async Task<ApplicationUser> Get(ClaimsPrincipal controllerUser)
+        {
+            var key = controllerUser.FindFirst(ClaimTypes.NameIdentifier).Value;            
+            return await FindByIdAsync(key);
+        }
     }
 }

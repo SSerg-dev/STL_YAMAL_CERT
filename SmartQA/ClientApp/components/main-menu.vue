@@ -16,21 +16,31 @@
         <ul class="navbar-nav" v-if="user">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ user.UserName }}
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a href="#" class="dropdown-item" @click.prevent="logout">Log out</a>                    
-                </ul>
+                    <font-awesome-icon icon="user" />&ensp;{{ user.UserName }}
+                </a>                
+                
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <a v-for="role in user.Roles" href="#" class="dropdown-item disabled" @click.prevent="">
+                        {{ role }}
+                    </a>
+                    <div v-if="user.Roles.length > 0" class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item" @click.prevent="logout">
+                        <font-awesome-icon icon="sign-out-alt" />&ensp;Log out
+                    </a>
+                </div>
             </li>
         </ul>
     </nav>
 </template>
 
 <script>    
+    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
     import { AUTH_LOGOUT } from 'store/actions/auth';
+
     export default {
         components: {        
-            
+            FontAwesomeIcon
         },
         computed: {            
             user() {

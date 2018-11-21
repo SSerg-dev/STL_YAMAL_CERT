@@ -150,7 +150,7 @@
 
 
 <script>    
-    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
     import { DxButton } from 'devextreme-vue';
     import DxToolbar from 'devextreme-vue/toolbar'; 
     import DataSource from 'devextreme/data/data_source';

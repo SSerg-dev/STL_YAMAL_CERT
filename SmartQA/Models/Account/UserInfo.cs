@@ -10,12 +10,13 @@ namespace SmartQA.Models.Account
     {
         public Guid ID { get; set; }
         public string UserName { get; set; }
-        public List<string> Roles { get; set; }
+        public IList<string> Roles { get; set; }
 
-        public UserInfo(User user)
+        public UserInfo(ApplicationUser applicationUser, IList<string> roles)
         {
-            ID = user.Id;
-            UserName = user.UserName;            
+            ID = applicationUser.Id;
+            UserName = applicationUser.UserName;
+            Roles = roles;
         }
     }
 

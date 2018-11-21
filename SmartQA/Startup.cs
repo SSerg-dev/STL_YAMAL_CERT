@@ -36,7 +36,7 @@ namespace SmartQA
         {
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Data")));            
             
-            services.AddIdentity<User, Role>()                
+            services.AddIdentity<ApplicationUser, Role>()                
                 .AddUserStore<UserStore>()
                 .AddRoleStore<RoleStore>()
                 .AddUserManager<AppUserManager>()

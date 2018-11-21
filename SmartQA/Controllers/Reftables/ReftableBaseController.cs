@@ -6,6 +6,7 @@ using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SmartQA.Auth;
 using SmartQA.DB;
 using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.Shared;
@@ -17,29 +18,34 @@ namespace SmartQA.Controllers.Reftables
     [Produces("application/json")]
     public class ReftableBaseController<TEntity> : ODataController where TEntity : CommonEntity, IReftableEntity, new()
     {
-        private DataContext Context;
-        public ReftableBaseController(DataContext context)
+        private readonly DataContext _context;
+        private readonly AppUserManager _userManager;
+
+        public ReftableBaseController(DataContext context, AppUserManager userManager)
         {
-            Context = context;
+            _context = context;
+            _userManager = userManager;
         }
 
         public virtual DbSet<TEntity> GetDbSet()
-            => ((DbSet<TEntity>)Context.GetType().GetProperty(typeof(TEntity).Name).GetValue(Context));
+            => ((DbSet<TEntity>)_context.GetType().GetProperty(typeof(TEntity).Name).GetValue(_context));
 
         public virtual IQueryable<TEntity> GetQuery()
             => GetDbSet()
                 .OrderBy(x => x.Title)
                 .AsQueryable();
 
-        [EnableQuery]
-        public IActionResult Get([FromODataUri] Guid key)
-            => Ok(GetDbSet().Find(key));
+        public async Task<IActionResult> Get([FromODataUri] Guid key)
+        {
+            var entity = await GetDbSet().FindAsync(key);
+            return Ok(entity);
+        }
 
         [EnableQuery]
         public IQueryable<TEntity> Get()
             => GetQuery();
 
-        public IActionResult Post([FromBody]ReftableItem form)
+        public async Task<IActionResult> Post([FromBody]ReftableItem form)
         {
             if (!ModelState.IsValid)
             {
@@ -52,17 +58,17 @@ namespace SmartQA.Controllers.Reftables
                 Description = form.Description                
             };
 
-            item.OnSave();
+            item.OnSave(await _userManager.Get(User));
 
             GetDbSet().Add(item);
                         
-            Context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Created(item);
         }
 
 
-        public IActionResult Patch([FromODataUri] Guid key, [FromBody]ReftableItem form)
+        public async Task<IActionResult> Patch([FromODataUri] Guid key, [FromBody]ReftableItem form)
         {
             if (!ModelState.IsValid)
             {
@@ -72,22 +78,22 @@ namespace SmartQA.Controllers.Reftables
             var entity = GetDbSet().Find(key);
             form.Serialize(entity);
 
-            entity.OnSave();
+            entity.OnSave(await _userManager.Get(User));
 
-            Context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Updated(entity);
         }
 
 
-        public IActionResult Delete([FromODataUri] Guid key)
+        public async Task<IActionResult> Delete([FromODataUri] Guid key)
         {
 
             var item = GetDbSet().Find(key);
 
-            item.MarkDeleted();
+            item.MarkDeleted(await _userManager.Get(User));
 
-            Context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok();
         }

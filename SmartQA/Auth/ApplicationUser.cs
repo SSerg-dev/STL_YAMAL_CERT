@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -11,10 +12,10 @@ using SmartQA.Util;
 
 namespace SmartQA.Auth
 {
-    public class User : IdentityUser<Guid>
+    public class ApplicationUser : IdentityUser<Guid>
     {
-        public Guid Id { get; private set; }
-        public string UserName { get; set; }
+        public override Guid Id { get; set; }
+        public override string UserName { get; set; }
         public string Password { get; set; }
 
         private static byte[] p1 = {
@@ -24,7 +25,7 @@ namespace SmartQA.Auth
             0x6C, 0x69, 0x6E, 0x65
         };
 
-        public User(AppUser dbUser)
+        public ApplicationUser(AppUser dbUser)
         {
             Id = dbUser.AppUser_ID;
             UserName = dbUser.AppUser_Code;
@@ -34,8 +35,7 @@ namespace SmartQA.Auth
                 var TdesEncryptor = new Encryptor3DES(p1);
                 var PasswordDecryptedDB = TdesEncryptor.decrypt(PasswordEncryptedDB);
                 Password = Encoding.UTF8.GetString(PasswordDecryptedDB);
-            }
-
+            }            
         }
 
         public bool CheckPassword(string password)
@@ -43,5 +43,6 @@ namespace SmartQA.Auth
             return Password.Equals(password);
         }
 
+        
     }
 }
