@@ -10,14 +10,16 @@
                            :close-on-outside-click="false"
                            :position="{ of: '#employeeForm' }"
                            :shading="true"
-                           shading-color="rgba(0,0,0,0.2)"
-                    />
+                           shading-color="rgba(0,0,0,0.2)" />
 
             <dx-form ref="form"
                      :form-data="formData"
                      :items="formItems" />
 
-            <dx-validation-summary></dx-validation-summary>
+            <div class="pt-3 float-right">
+                <dx-button type="success" useSubmitBehavior="true" text="Submit"></dx-button>
+                <dx-button @click="cancelEdit" text="Cancel"></dx-button>
+            </div>
         </form>        
     </div>
 </template>
@@ -35,7 +37,6 @@
         components: {
             DxButton,
             DxForm,
-            DxValidationSummary,
             DataSource,
             DxLoadPanel
         },
@@ -60,7 +61,7 @@
                     {
                         itemType: 'group',
                         items: [
-                            {                  
+                            {
                                 label: { text: 'Фамилия' },
                                 dataField: 'LastName',
                                 required: true
@@ -109,17 +110,7 @@
                                 }
                             },
                         ]
-                    },
-                    {
-                        itemType: "button",
-                        horizontalAlignment: "left",
-                        buttonOptions: {
-                            text: "Submit",
-                            type: "success",
-                            useSubmitBehavior: true
-                        }
                     }
-
                 ],
                 formData: {},
                 formErrors: {}
@@ -213,6 +204,11 @@
                     editor.option('validationError', { message: err.message });
                 }
 
+            },
+            cancelEdit() {
+                this.$router.push({
+                    params: { employeeId: this.employeeId }
+                })
             },
             onEditorValueChanged(e) {
                 
