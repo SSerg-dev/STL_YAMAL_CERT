@@ -16,6 +16,8 @@ namespace SmartQA.Models
     {
         [Required]
         public Guid? Person_ID { get; set; }
+        
+        public Guid? ParentDocumentNaks_ID { get; set; }
 
         [Required]
         public string Number { get; set; }
@@ -35,14 +37,10 @@ namespace SmartQA.Models
         [Required]
         public List<Guid> HIFGroup_IDs { get; set; }
 
-        public DocumentNaksEdit()
-        {
-
-        }
-
         public override void Serialize(DocumentNaks dbModel)
         {
             dbModel.Person_ID = (Guid) Person_ID;
+            dbModel.ParentDocumentNaks_ID = ParentDocumentNaks_ID;
             dbModel.Number = Number;
             dbModel.IssueDate = IssueDate;
             dbModel.ValidUntil = ValidUntil;

@@ -1,6 +1,6 @@
 ﻿import { reftableDatasourceConf } from './data';
 
-export function reftableFormItem(modelName, label, multiple = false) {
+export function reftableFormItem(modelName, label, multiple = false, required = true) {
     var conf = {
         label: { text: label },
         editorOptions: {
@@ -8,7 +8,8 @@ export function reftableFormItem(modelName, label, multiple = false) {
             displayExpr: "Title",
             valueExpr: "ID",
             searchEnabled: true,
-        }
+        },
+        isRequired: required
 
     };
 

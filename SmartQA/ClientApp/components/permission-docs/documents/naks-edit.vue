@@ -1,7 +1,7 @@
 ﻿<template>
     <dx-scroll-view>
         <div>
-            <form ref="form" v-on:submit.prevent="processForm">
+            <form v-on:submit.prevent="processForm">
                 <dx-load-panel :visible.sync="loading"
                                :close-on-outside-click="false"
                                :shading="true"
@@ -30,23 +30,27 @@
     import { reftableFormItem } from 'components/reftables/forms.js';
 
     export default {
-        components: {            
-            DxForm,            
+        components: {
+            DxForm,
             DxLoadPanel,
             DataSource,
             DxScrollView,
             NaksAttestList
         },
         props: {
-            'editModelKey': String,
-            'personId': String
+            editModelKey: String,
+            personId: String,
+            editParentModelKey: {
+                type: String,
+                default: () => null
+            }
         },
         watch: {
             'editModelKey': 'fetchData',
             'formErrors': 'updateFormErrors',
             'model': 'makeFormData'
         },
-        created() {            
+        created() {
             this.fetchData();
         },
         data: function () {
@@ -91,8 +95,8 @@
             }
         },
         methods: {
-            fetchData() {               
-                this.modelKey = this.editModelKey;            
+            fetchData() {
+                this.modelKey = this.editModelKey;
                 this.error = this.model = null;
                 this.formData = {};
                 this.formErrors = {};
@@ -122,7 +126,7 @@
                     this.formData = {}
                 } else {
                     this.formData = model
-                }                
+                }
             },
             submitForm() {
                 this.processForm(null);
@@ -133,6 +137,9 @@
                 var source = new DataSource(this.dataSource);
                 var data = this.formData;
                 data.Person_ID = this.personId;
+                if (this.editParentModelKey) {
+                    data.ParentDocumentNaks_ID = this.editParentModelKey;
+                }
 
                 if (this.modelKey) {
                     source.store().update(new String(this.modelKey.toString()), data)
@@ -148,9 +155,10 @@
                 this.loading = false;
                 var source = new DataSource(this.dataSource);
                 if (!this.modelKey) {
-                    this.modelKey = data[source.key()]
+                    
+                    this.modelKey = data[source.key()].toString()
                 }
-                //var employeeId = data.Employee_ID ? data.Employee_ID : this.employeeId;
+                
                 this.$emit('editSuccess', {
                     //modelKey: modelKeyi
                 })
@@ -159,7 +167,7 @@
                 this.loading = false;
                 this.formErrors = error.errorDetails.details;
             },
-            updateFormErrors() {
+            updateFormErrors: function (errors) {
                 var form = this.$refs.form.instance;
 
                 Object.keys(this.formData).forEach(function (key, index) {
@@ -170,7 +178,7 @@
                     }
                 });
 
-                for (var i = 0; i < this.formErrors.length; i++) {
+                for (var i = 0; i < errors.length; i++) {
                     var err = this.formErrors[i];
                     var editor = form.getEditor(err.target);
                     if (editor) {
@@ -180,10 +188,8 @@
                 }
 
             },
-            onEditorValueChanged(e) {                
+            onEditorValueChanged(e) {
             }
-
         }
     };
-
 </script>

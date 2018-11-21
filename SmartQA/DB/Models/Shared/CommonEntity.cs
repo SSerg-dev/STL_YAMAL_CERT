@@ -2,6 +2,7 @@
 using SmartQA.Auth;
 using SmartQA.DB.Models.Auth;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -65,6 +66,20 @@ namespace SmartQA.DB.Models.Shared
 
             Update_DTS = DateTime.UtcNow;            
             Modified_User_ID = applicationUser.Id;
+
+            M2MEntityCache?.ForEach(x => x.OnSave(applicationUser));
         }
+
+        [NotMapped] private List<CommonEntity> M2MEntityCache { get; set; }
+
+        public void AddM2MToCache(CommonEntity m2mEntity)
+        {
+            if (M2MEntityCache == null)
+            {
+                M2MEntityCache = new List<CommonEntity>();
+            }
+            M2MEntityCache.Add(m2mEntity);
+        }
+
     }
 }

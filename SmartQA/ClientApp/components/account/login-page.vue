@@ -25,12 +25,7 @@
                        />
     </div>
 </template>
-<style scoped>
-    
-  
-    
 
-</style>
 <script>
     import {
         DxForm,

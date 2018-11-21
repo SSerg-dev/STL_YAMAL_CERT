@@ -1,22 +1,41 @@
 ﻿<template>
-    <div class="pt-5">
-        <h3>Удостоверение НАКС</h3>
-        <dx-toolbar :items="toolbarItems" />        
-        <dx-data-grid ref="dataGrid"
-                      v-bind:dataSource="dataSource"
-                      @editingStart="onEditingStart">
-
-            <dx-editing :allow-updating="true"
-                        :allow-deleting="true"                                                
-                        mode="popup" />
-
+    <div>
+        <dx-toolbar :items="toolbarItems" />
+        
+        <dx-tree-list ref="dataGrid"
+                      :columnFixing="{ enabled: true }"
+                      :dataSource="dataSource"
+                      parent-id-expr="ParentDocumentNaks_ID">
+            
             <dx-column data-field="Number"
                        caption="Номер" />
 
             <dx-column data-field="IssueDate"
+                       
                        caption="Дата выдачи" />
 
-        </dx-data-grid>
+            <dx-column fixed="true"
+                       fixedPosition="right"
+                       width="160px"
+                       cellTemplate="edit-column-cell"></dx-column>
+
+            <div slot="edit-column-cell" slot-scope="row">
+                <dx-button @click="onEditRowButtonClick($event, row.data.DocumentNaks_ID.toString())">
+                    <font-awesome-icon icon="edit" />
+                </dx-button>
+
+                <dx-button @click="onDeleteRowButtonClick($event, row.data.DocumentNaks_ID.toString())">
+                    <font-awesome-icon icon="trash" />
+                </dx-button>
+
+                <dx-button v-if="row.data.ParentDocumentNaks_ID == null"                           
+                           @click="onNewChildRowButtonClick($event, row.data.DocumentNaks_ID.toString())">
+                    <font-awesome-icon icon="plus" /> вкладыш
+                </dx-button>
+
+            </div>
+
+        </dx-tree-list>
 
         <dx-popup ref="editPopup"
                   :show-title="true"
@@ -24,12 +43,12 @@
                   :height="600"
                   :toolbar-items="editPopupToolbarItems"
                   title="НАКС"
-                  
                   @onHiding="onEditPopupHiding">
 
             <naks-edit ref="editForm"
                        :editModelKey="editModelKey"
-                       :personId="personId"
+                       :editParentModelKey="editParentModelKey"
+                       :personId="personId"                       
                        @editSuccess="onEditSuccess" />
 
         </dx-popup>
@@ -37,12 +56,9 @@
 </template>
 
 <script>
-    import {
-        DxDataGrid,
-        DxColumn,        
-        DxEditing,        
-        DxPosition
-    } from "devextreme-vue/data-grid";
+    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';    
+    import { confirm } from 'devextreme/ui/dialog';
+    import { DxTreeList, DxColumn } from 'devextreme-vue/tree-list';
     import { DxPopup } from 'devextreme-vue';
     import { DxButton } from "devextreme-vue/ui/button";
     import DxToolbar from 'devextreme-vue/toolbar';
@@ -50,22 +66,28 @@
     import 'devextreme/data/odata/store';
 
     import NaksEdit from './naks-edit';
+    import NaksInsertList from './naks-insert-list';
 
     import { dataSourceConfs } from './data.js'    
 
     export default {
+        name: "naks-list",
         components: {
-            DxDataGrid,
-            DxEditing,
+            FontAwesomeIcon,
+            DxTreeList,
             DxColumn,            
             DxPopup,
-            DxPosition,
             DxToolbar,
             DxButton,           
             NaksEdit,
+            NaksInsertList
         },
         props: {
-            personId: String
+            personId: String,
+            parentNaksId: {
+                type: String,
+                default: () => null
+            }
         },
         created() {
             this.setDataSource()
@@ -73,7 +95,8 @@
         data: function () {
             return {
                 dataSource: {},
-                editModelKey: null,               
+                editModelKey: null,     
+                editParentModelKey: null,
                 editPopup: {
                     showTitle: false,
                     width: 400,
@@ -92,12 +115,9 @@
                             type: 'add',
                             icon: 'add',
                             text: 'Add',
-                            onClick: () => {
-                                this.editModelKey = null;
-                                this.$refs.editPopup.instance.show();
-                                }  
-                            }
+                            onClick: (event) => this.onNewButtonClick(event)
                         }
+                    }
                 ],
                 editPopupToolbarItems: [
                     {
@@ -107,9 +127,7 @@
                         options: {
                             text: "Submit",
                             type: "success",
-                            onClick: () => {
-                                this.$refs.editForm.submitForm();                                
-                            }
+                            onClick: () => this.$refs.editForm.submitForm()                                                         
                         }                        
                     }
                 ]
@@ -119,24 +137,54 @@
         methods: {
             setDataSource() {
                 this.dataSource = new DataSource(dataSourceConfs.documentNaks);
-                this.dataSource.filter([
+
+                var filter = [[
                     'Person_ID', '=', new String(this.personId)
-                ])
+                ]];
+                
+                this.dataSource.filter(filter);
             },
-            onEditingStart(event) {
-                event.cancel = true;
-                this.editModelKey = event.key.toString();
-                this.$refs.editPopup.instance.show();
-                console.log(event);                                
+            reloadData() {
+                this.$refs.dataGrid.instance.refresh();
             },
             onEditSuccess() {                
                 this.$refs.editPopup.instance.hide();
-                this.$refs.dataGrid.instance.refresh();
+                this.reloadData();
             },
             onEditPopupHiding() {
                 this.editModelKey = null;
-            }
+                this.editParentModelKey = null;
+            },
+            onNewButtonClick(event) {
+                this.editModelKey = null;
+                this.editParentModelKey = null;
+                this.$refs.editPopup.instance.show();
+            },
+            onNewChildRowButtonClick(event, modelId) {                
+                this.editModelKey = null;
+                this.editParentModelKey = modelId;
+                this.$refs.editPopup.instance.show();
+            },
+            onEditRowButtonClick(event, modelId) {
+                console.log(modelId);
+                this.editModelKey = modelId;
+                this.editParentModelKey = null;
+                this.$refs.editPopup.instance.show();
+            },
+            onDeleteRowButtonClick(event, modelId) {                
+                var component = this;                
+                confirm("Really delete?", "Confirm")
+                    .done(function (dialogResult) {
+                        if (dialogResult) {
+                            var source = new DataSource(dataSourceConfs.documentNaks);
+                            source.store().remove(modelId)
+                                .done(function (data) {
+                                    component.reloadData()
+                                });
+                        }
+                    });
 
+            }
         }
 
     };

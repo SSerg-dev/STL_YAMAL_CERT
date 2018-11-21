@@ -94,7 +94,12 @@ namespace SmartQA.DB.Models.Shared
             {
                 var rel = Activator.CreateInstance(m2mEntityType);
                 toKeyProperty.SetValue(rel, id);
-                typeof(TEntity).GetMethod("OnSave").Invoke(rel, new object[] { });
+
+                if (obj is CommonEntity entity)
+                {                    
+                    entity.AddM2MToCache((CommonEntity) rel);
+                }
+                
                 list.Add(rel);                
             }
 

@@ -251,6 +251,7 @@
                 var component = this;
                 this.editModelKey = model.ID.toString();
                 var source = new DataSource(dataSourceConfs.documentNaksAttest);
+
                 source.store().remove(model.ID)
                     .done(function (data) {
                         component.loadModel()

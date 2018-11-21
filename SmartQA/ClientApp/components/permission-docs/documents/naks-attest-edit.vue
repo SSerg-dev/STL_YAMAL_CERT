@@ -61,12 +61,12 @@
                     {
                         label: { text: 'Толщина деталей, мм' },
                         dataField: 'DetailWidth',
-                        required: true
+                        isRequired: true
                     },
                     {
                         label: { text: 'Наружный диаметр, мм' },
                         dataField: 'OuterDiameter',
-                        required: true
+                        isRequired: true
                     },
 
                     reftableFormItem('WeldPosition', 'Положение при сварке', true),

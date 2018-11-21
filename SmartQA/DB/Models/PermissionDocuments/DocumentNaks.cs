@@ -18,7 +18,9 @@ namespace SmartQA.DB.Models.PermissionDocuments
         public Guid DocumentNaks_ID { get; set; }
                 
         public Guid Person_ID { get; set; }
-               
+
+        public Guid? ParentDocumentNaks_ID { get; set; }
+
         [Required]
         public string Number { get; set; }
 
@@ -41,6 +43,9 @@ namespace SmartQA.DB.Models.PermissionDocuments
 
         [ForeignKey("WeldType_ID")]
         public virtual WeldType WeldType { get; set; }
+
+        [ForeignKey("ParentDocumentNaks_ID")]
+        public virtual DocumentNaks ParentDocumentNaks { get; set; }
 
         // ---- child relations -----------
 
