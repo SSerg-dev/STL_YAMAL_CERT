@@ -40,6 +40,16 @@ namespace SmartQA.DB
         public DbSet<TestTypeRef> TestTypeRef { get; set; }
         public DbSet<InspectionTechnique> InspectionTechnique { get; set; }
         public DbSet<InspectionSubject> InspectionSubject { get; set; }
+        public DbSet<TestMethod> TestMethod { get; set; }
+        public DbSet<QualificationLevel> QualificationLevel { get; set; }
+        public DbSet<Responsibility> Responsibility { get; set; }
+        public DbSet<WeldPasses> WeldPasses { get; set; }
+        public DbSet<QualificationField> QualificationField { get; set; }
+        public DbSet<ElectricalSafetyAbilitation> ElectricalSafetyAbilitation { get; set; }
+        public DbSet<AccessToPIVoltageRange> AccessToPIVoltageRange { get; set; }
+        public DbSet<AccessToPIStaffFunction> AccessToPIStaffFunction { get; set; }
+        public DbSet<AuthToSignInspActsForWSUN> AuthToSignInspActsForWSUN { get; set; }
+        public DbSet<ShieldingGas> ShieldingGas { get; set; }
 
         public DbSet<DocumentNaks> DocumentNaks { get; set; }
         public DbSet<DocumentNaks_to_HIFGroup> DocumentNaks_to_HIFGroup { get; set; }

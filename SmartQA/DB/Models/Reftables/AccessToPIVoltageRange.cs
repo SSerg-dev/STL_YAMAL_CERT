@@ -4,19 +4,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartQA.DB.Models.Reftables
 {
-    [Display(Name = "Тестовый справочник")]
-    [Table("p_TestTypeRef")]
-    public class TestTypeRef : CommonEntity, IReftableEntity
+
+    [Display(Name = "Допуск к работе в электроустановках напряжением")]
+    [Table("p_AccessToPIVoltageRange")]
+    public class AccessToPIVoltageRange : CommonEntity, IReftableEntity
     {
         [Key]
-        [Column("TestTypeRef_ID")]
+        [Column("AccessToPIVoltageRange_ID")]
         public System.Guid ID { get; set; }
 
         [Required]
-        [Column("TestTypeRef_Code")]
+        [Column("AccessToPIVoltageRange_Code")]
         public string Title { get; set; }
-
         [Column("Description_Rus")]
         public string Description { get; set; }
     }
+
 }

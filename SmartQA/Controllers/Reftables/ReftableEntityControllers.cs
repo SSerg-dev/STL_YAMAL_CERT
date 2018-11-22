@@ -95,4 +95,55 @@ namespace SmartQA.Controllers.Reftables
         public InspectionSubjectController(DataContext context, AppUserManager userManager) : base(context, userManager)
         { }
     }
+
+    public class TestMethodController : ReftableBaseController<TestMethod>
+    {
+        public TestMethodController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+    public class QualificationLevelController : ReftableBaseController<QualificationLevel>
+    {
+        public QualificationLevelController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+    public class ResponsibilityController : ReftableBaseController<Responsibility>
+    {
+        public ResponsibilityController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+    public class WeldPassesController : ReftableBaseController<WeldPasses>
+    {
+        public WeldPassesController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+    public class QualificationFieldController : ReftableBaseController<QualificationField>
+    {
+        public QualificationFieldController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+    public class ElectricalSafetyAbilitationController : ReftableBaseController<ElectricalSafetyAbilitation>
+    {
+        public ElectricalSafetyAbilitationController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+    public class AccessToPIVoltageRangeController : ReftableBaseController<AccessToPIVoltageRange>
+    {
+        public AccessToPIVoltageRangeController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+    public class AccessToPIStaffFunctionController : ReftableBaseController<AccessToPIStaffFunction>
+    {
+        public AccessToPIStaffFunctionController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+    public class AuthToSignInspActsForWSUNController : ReftableBaseController<AuthToSignInspActsForWSUN>
+    {
+        public AuthToSignInspActsForWSUNController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+    public class ShieldingGasController : ReftableBaseController<ShieldingGas>
+    {
+        public ShieldingGasController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
 }

@@ -4,19 +4,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartQA.DB.Models.Reftables
 {
-    [Display(Name = "Тестовый справочник")]
-    [Table("p_TestTypeRef")]
-    public class TestTypeRef : CommonEntity, IReftableEntity
+
+    [Display(Name = "Допуск к работе в электроустановках в качестве")]
+    [Table("p_AccessToPIStaffFunction")]
+    public class AccessToPIStaffFunction : CommonEntity, IReftableEntity
     {
         [Key]
-        [Column("TestTypeRef_ID")]
+        [Column("AccessToPIStaffFunction_ID")]
         public System.Guid ID { get; set; }
 
         [Required]
-        [Column("TestTypeRef_Code")]
+        [Column("AccessToPIStaffFunction_Code")]
         public string Title { get; set; }
-
         [Column("Description_Rus")]
         public string Description { get; set; }
     }
+
 }
