@@ -18,7 +18,7 @@ namespace SmartQA.Auth
         public override string UserName { get; set; }
         public string Password { get; set; }
 
-        private static byte[] p1 = {
+        public static byte[] passKey = {
             0x32, 0x44, 0x65, 0x63,
             0x6C, 0x69, 0x6E, 0x65,
             0x34, 0x49, 0x6E, 0x63,
@@ -32,7 +32,7 @@ namespace SmartQA.Auth
             var PasswordEncryptedDB = dbUser.User_Password;
             if (dbUser.User_Password != null)
             {
-                var TdesEncryptor = new Encryptor3DES(p1);
+                var TdesEncryptor = new Encryptor3DES(passKey);
                 var PasswordDecryptedDB = TdesEncryptor.decrypt(PasswordEncryptedDB);
                 Password = Encoding.UTF8.GetString(PasswordDecryptedDB);
             }            

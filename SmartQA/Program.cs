@@ -21,5 +21,10 @@ namespace SmartQA
                 .UseDefaultServiceProvider(options =>
                     options.ValidateScopes = false)
                 .Build();
+
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>
+                    ();
     }
 }

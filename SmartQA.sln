@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartQA", "SmartQA\SmartQA.csproj", "{7C5E9938-5B38-4D7C-A076-AFFCC095CF33}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartQA.Tests", "..\..\..\..\..\Users\mgolyaviev\source\Workspaces\STL_YAMAL_CERT\SmartQA.Tests\SmartQA.Tests.csproj", "{71F0B8BA-8EC1-4F55-A78B-CFB5B8BCAA5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7C5E9938-5B38-4D7C-A076-AFFCC095CF33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C5E9938-5B38-4D7C-A076-AFFCC095CF33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C5E9938-5B38-4D7C-A076-AFFCC095CF33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71F0B8BA-8EC1-4F55-A78B-CFB5B8BCAA5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71F0B8BA-8EC1-4F55-A78B-CFB5B8BCAA5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71F0B8BA-8EC1-4F55-A78B-CFB5B8BCAA5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71F0B8BA-8EC1-4F55-A78B-CFB5B8BCAA5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
