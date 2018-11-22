@@ -1,4 +1,4 @@
-﻿import { reftableDatasourceConf } from './data';
+﻿import { reftableDatasourceConf } from 'components/reftables/data';
 
 export function reftableFormItem(modelName, label, multiple = false, required = true) {
     var conf = {

@@ -1,55 +1,70 @@
 ﻿<template>
-    <dx-scroll-view>
-        <div>
-            
-            <form v-on:submit.prevent="processForm">
-                <dx-load-panel :visible.sync="loading"
-                               :close-on-outside-click="false"
-                               :shading="true"
-                               shading-color="rgba(0,0,0,0.2)" />
+    <div>
 
-                <dx-form ref="form"
-                         :form-data="formData"
-                         :items="formItems" />
+        <dx-popup ref="editPopup"
+                  :visible="false"
+                  :show-title="true"
+                  :width="800"
+                  :height="600"
+                  :toolbar-items="toolbarItems"
+                  @hiding="onEditPopupHiding"
+                  title="Область аттестации">
 
-            </form>
+            <dx-scroll-view>
+                <div>
+                    <entity-form ref="form"
+                                 :formItems="formItems"
+                                 :editRequests="editRequests"
+                                 :commandRequests="formCommands"
+                                 :dataSource="dataSource"
+                                 v-stream:state="formStateEvents$" />
 
-        </div>
-    </dx-scroll-view>
+                </div>
+
+            </dx-scroll-view>
+
+        </dx-popup>
+    </div>
 </template>
 
 <script>
-    import { DxForm, DxScrollView } from 'devextreme-vue';
-    import DataSource from 'devextreme/data/data_source';
-    import { DxLoadPanel } from 'devextreme-vue/load-panel';
-    import { reftableFormItem } from 'components/reftables/forms.js';
+    import { Subject } from 'rxjs';
+    import { pluck, map, first } from 'rxjs/operators';
+
+    import { DxScrollView, DxPopup } from 'devextreme-vue';
+    import DataSource from 'devextreme/data/data_source';    
     import { dataSourceConfs } from './data.js';
+
+    import EntityForm from 'components/forms/entity-form';
+    import { reftableFormItem } from 'components/forms/reftables';
 
     export default {
         components: {
-            DxForm,
-            DxLoadPanel,
+            DxPopup,            
             DataSource,
-            DxScrollView,            
+            DxScrollView,
+            EntityForm            
         },
-        props: {
-            'editModelKey': String,
-            'parentId': String
+        props: {           
+            editRequests: Object,
         },
-        watch: {
-            'editModelKey': 'fetchData',
-            'formErrors': 'updateFormErrors',
-            'model': 'makeFormData'
-        },
-        created() {
-            this.fetchData();
+        subscriptions() {
+            this.formStateEvents$ = new Subject();
+
+            this.$subscribeTo(this.editRequests, req => {
+                var popup = this.$refs.editPopup;
+                if (req !== null) {
+                    if (popup) popup.instance.show();                
+                }
+            });
+
+            this.formStateObs = this.formStateEvents$.pipe(
+                map(e => e.event.msg)
+            )
         },
         data: function () {
             return {
-                modelKey: null,
-                loading: false,
-                model: null,
-                error: null,
+                formCommands: new Subject(),
                 dataSource: dataSourceConfs.documentNaksAttest,
                 formItems: [
                     reftableFormItem('WeldingEquipmentAutomationLevel', 'Степень автоматизации сварочного оборудования'),
@@ -73,102 +88,49 @@
                     reftableFormItem('JointKind', 'Вид соединения', true),
                     reftableFormItem('WeldGOST14098', 'Обозначение по ГОСТ 14098')
                 ],
-                formData: {},
-                formErrors: {}
+                toolbarItems: [
+                    {
+                        toolbar: 'bottom',
+                        widget: "dxButton",
+                        location: "after",
+                        options: {
+                            text: "Close",
+                            onClick: this.onCloseButton
+                        }
+                    },
+                    {
+                        toolbar: 'bottom',
+                        widget: "dxButton",
+                        location: "after",
+                        options: {
+                            text: "Save and close",
+                            type: "success",
+                            onClick: this.onSaveAndCloseButton
+                        }
+                    }
+                ]
             }
         },
         methods: {
-            fetchData() {
-                this.modelKey = this.editModelKey;
-                this.error = this.model = null;
-                this.formData = {};
-                this.formErrors = {};
-
-                if (!this.modelKey) {
-                    this.loading = false;
-                    return;
-                }
-                this.loading = true;
-                var component = this;
-                var source = new DataSource(this.dataSource);
-                source.filter([source.key(), "=", new String(component.modelKey.toString())]);
-
-                source
-                    .load()
-                    .done(function (data) {
-                        component.loading = false;
-                        component.model = data[0];
-                    })
-                    .fail(function (error) {
-                        component.loading = false;
-                        component.error = error;
-                    });
+            onEditPopupHiding() {
+                this.$emit('editingDone');
             },
-            makeFormData(model) {
-                if (model == null) {
-                    this.formData = {}
-                } else {
-                    this.formData = model
-                }
+            close() {
+                this.$refs.editPopup.instance.hide();
             },
-            submitForm() {
-                this.processForm(null);
+            onCloseButton() {
+                this.close();
             },
-            processForm(event) {
-                this.loading = true;
-                var component = this;
-                var source = new DataSource(this.dataSource);
-                var data = this.formData;
-                data.DocumentNaks_ID = this.parentId;
-
-                if (this.modelKey) {
-                    source.store().update(new String(this.modelKey.toString()), data)
-                        .done(this.processFormSuccess)
-                        .fail(this.processFormFail);
-                } else {
-                    source.store().insert(data)
-                        .done(this.processFormSuccess)
-                        .fail(this.processFormFail);
-                }
+            onSaveButton() {
+                this.formCommands.next({ command: 'submit' });
             },
-            processFormSuccess(data) {
-                this.loading = false;
-                var source = new DataSource(this.dataSource);
-                if (!this.modelKey) {
-                    this.modelKey = data[source.key()]
-                }
-                //var employeeId = data.Employee_ID ? data.Employee_ID : this.employeeId;
-                this.$emit('editSuccess', {
-                    //modelKey: modelKeyi
-                })
-            },
-            processFormFail(error) {
-                this.loading = false;
-                this.formErrors = error.errorDetails.details;
-            },
-            updateFormErrors() {
-                var form = this.$refs.form.instance;
-
-                Object.keys(this.formData).forEach(function (key, index) {
-                    var editor = form.getEditor(key);
-                    if (editor) {
-                        editor.option('isValid', true);
-                        editor.option('validationError', {});
-                    }
-                });
-
-                for (var i = 0; i < this.formErrors.length; i++) {
-                    var err = this.formErrors[i];
-                    var editor = form.getEditor(err.target);
-                    if (editor) {
-                        editor.option('isValid', false);
-                        editor.option('validationError', { message: err.message });
-                    }
-                }
-
+            onSaveAndCloseButton() {
+                this.formCommands.next({ command: 'submit' });
+                this.$subscribeTo(
+                    this.formStateObs.pipe(first(s => !s.isProgress)),
+                    s => { if (s.state === 'success') this.close() }
+                );
             }
-
         }
     };
-
 </script>

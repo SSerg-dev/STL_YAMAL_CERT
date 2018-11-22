@@ -6,8 +6,8 @@
                 <th scope="row">
                     Области аттестации
                     <dx-button>
-                        <font-awesome-icon icon="plus" 
-                                           @click="onNewButtonClick"/>
+                        <font-awesome-icon icon="plus"
+                                           @click="onNewButtonClick" />
                     </dx-button>
                 </th>
                 <th scope="col" v-for="(item, index) in model.DocumentNaksAttestSet">
@@ -15,14 +15,10 @@
                         {{ index + 1 }}
                     </span>
                     <div class="float-right">
-                        <dx-button
-                                   :modelId="item.DocumentNaksAttest_ID"
-                                   @click="onEditButtonClick($event, item)">
+                        <dx-button @click="onEditButtonClick($event, item.ID.toString())">
                             <font-awesome-icon icon="edit" />
                         </dx-button>
-                        <dx-button
-                                   :modelId="item.DocumentNaksAttest_ID"
-                                   @click="onDeleteButtonClick($event, item)">
+                        <dx-button @click="onDeleteButtonClick($event, item.ID.toString())">
                             <font-awesome-icon icon="trash" />
                         </dx-button>
                     </div>
@@ -130,26 +126,14 @@
 
         </table>
 
-        <dx-popup ref="editPopup"
-                  :show-title="true"
-                  :width="600"
-                  :height="600"
-                  title="Область аттестации"
-                  :toolbarItems="editPopupToolbarItems"
-                  @onHiding="onEditPopupHiding">
-
-            <naks-attest-edit ref="editForm"
-                              :editModelKey="editModelKey"
-                              :parentId="modelKey"
-                              @editSuccess="onEditSuccess" />
-
-        </dx-popup>
-
+        <naks-attest-edit :editRequests="editRequests"
+                          @editingDone="onEditingDone"/>
     </div>
 </template>
 
 
 <script>    
+    import { Subject } from 'rxjs';
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
     import { DxButton } from 'devextreme-vue';
     import DxToolbar from 'devextreme-vue/toolbar'; 
@@ -169,20 +153,20 @@
             NaksAttestEdit
         },
         props: {
-            'modelKey': String,            
+            modelKey: String,            
         },
         watch: {
-            'modelKey': 'loadModel'                   
+            modelKey: 'loadModel'
         },
         created() {
             this.loadModel();
         },
         data: function () {
-            return {                
+            return {       
+                editRequests: new Subject(),
                 loading: false,
                 model: null,
-                error: null,
-                editModelKey: null,
+                error: null,                
                 dataSource: dataSourceConfs.documentNaks,              
                 toolbarItems: [
                     {
@@ -239,32 +223,36 @@
                         component.error = error;
                     });
             },
+            onEditingDone() {                
+                this.loadModel();
+            },
             onNewButtonClick(event) {
-                this.editModelKey = null;
-                this.$refs.editPopup.instance.show();
+                this.editRequests.next({
+                    modelKey: null,
+                    formDataInitial: {
+                        DocumentNaks_ID: this.modelKey,
+                    }
+                });
             },
-            onEditButtonClick(event, model) {
-                this.editModelKey = model.ID.toString();
-                this.$refs.editPopup.instance.show();                
-            },            
-            onDeleteButtonClick(event, model) {
+            onEditButtonClick(event, modelId) {
+                this.editRequests.next({
+                    modelKey: modelId,
+                    formDataInitial: Object()
+                });
+            },
+            onDeleteButtonClick(event, modelId) {
                 var component = this;
-                this.editModelKey = model.ID.toString();
-                var source = new DataSource(dataSourceConfs.documentNaksAttest);
-
-                source.store().remove(model.ID)
-                    .done(function (data) {
-                        component.loadModel()
-                    });            
-            },
-            onEditSuccess() {
-                this.$refs.editPopup.instance.hide();
-                this.loadModel()                
-            },
-            onEditPopupHiding() {
-                this.editModelKey = null;
+                confirm("Really delete?", "Confirm")
+                    .done(function (dialogResult) {
+                        if (dialogResult) {
+                            var source = new DataSource(component.dataSource);
+                            source.store().remove(modelId)
+                                .done(function (data) {
+                                    component.reloadData()
+                                });
+                        }
+                    });
             }
-
 
         }
     };

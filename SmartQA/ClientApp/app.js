@@ -7,6 +7,10 @@ import "devextreme-intl";
 import { FontAwesomeIcon } from './icons'
 
 import Vue from 'vue'
+import Rx from 'rxjs/Rx';
+import VueRx from 'vue-rx';
+
+
 import App from './app.vue'
 
 import router from './router/index'
@@ -21,8 +25,11 @@ authHelper.onAppInit();
 import DefaultLayout from './layouts/default'
 import BlankLayout from './layouts/blank'
 
+
 Vue.component('default-layout', DefaultLayout);
 Vue.component('blank-layout', BlankLayout);
+
+Vue.use(VueRx, Rx)
 
 new Vue({
     router,

@@ -27,8 +27,7 @@ namespace SmartQA.Models
 
         [Required]        
         public DateTime? ValidUntil { get; set; }
-
-        [Required]
+        
         public string Schifr { get; set; }
 
         [Required]

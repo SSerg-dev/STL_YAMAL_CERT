@@ -14,7 +14,7 @@
                        
                        caption="Дата выдачи" />
 
-            <dx-column fixed="true"
+            <dx-column :fixed="true"
                        fixedPosition="right"
                        width="160px"
                        cellTemplate="edit-column-cell"></dx-column>
@@ -37,21 +37,9 @@
 
         </dx-tree-list>
 
-        <dx-popup ref="editPopup"
-                  :show-title="true"
-                  :width="800"
-                  :height="600"
-                  :toolbar-items="editPopupToolbarItems"
-                  title="НАКС"
-                  @onHiding="onEditPopupHiding">
+        <naks-edit :editRequests="editRequestsNaks"
+                   @editingDone="onEditSuccess" />
 
-            <naks-edit ref="editForm"
-                       :editModelKey="editModelKey"
-                       :editParentModelKey="editParentModelKey"
-                       :personId="personId"                       
-                       @editSuccess="onEditSuccess" />
-
-        </dx-popup>
     </div>
 </template>
 
@@ -65,10 +53,10 @@
     import DataSource from 'devextreme/data/data_source';
     import 'devextreme/data/odata/store';
 
-    import NaksEdit from './naks-edit';
-    import NaksInsertList from './naks-insert-list';
+    import NaksEdit from './naks-edit';    
 
-    import { dataSourceConfs } from './data.js'    
+    import { dataSourceConfs } from './data.js';
+    import { BehaviorSubject } from 'rxjs';
 
     export default {
         name: "naks-list",
@@ -79,24 +67,32 @@
             DxPopup,
             DxToolbar,
             DxButton,           
-            NaksEdit,
-            NaksInsertList
+            NaksEdit
+        },
+        subscriptions: {
+            
         },
         props: {
             personId: String,
-            parentNaksId: {
-                type: String,
-                default: () => null
-            }
         },
         created() {
-            this.setDataSource()
+            this.setDataSource();
+            this.$subscribeTo(this.editRequestsNaks,  (val) => {
+
+            });
+        },
+        watch: {
+            naksEditing(value) {
+                console.log("asadfadsf", value);
+                if (value) this.$refs.editPopup.instance.show();
+                else this.$refs.editPopup.instance.hide();
+            }
+
         },
         data: function () {
             return {
-                dataSource: {},
-                editModelKey: null,     
-                editParentModelKey: null,
+                editRequestsNaks: new BehaviorSubject(),                
+                dataSource: {},                
                 editPopup: {
                     showTitle: false,
                     width: 400,
@@ -106,7 +102,7 @@
                         at: "center",
                         of: window
                     }
-                },
+                },                
                 toolbarItems: [                    
                     {
                         location: 'after',
@@ -119,19 +115,7 @@
                         }
                     }
                 ],
-                editPopupToolbarItems: [
-                    {
-                        toolbar: 'bottom',
-                        widget: "dxButton",
-                        location: "after",
-                        options: {
-                            text: "Submit",
-                            type: "success",
-                            onClick: () => this.$refs.editForm.submitForm()                                                         
-                        }                        
-                    }
-                ]
-
+                
             }
         },
         methods: {
@@ -148,28 +132,32 @@
                 this.$refs.dataGrid.instance.refresh();
             },
             onEditSuccess() {                
-                this.$refs.editPopup.instance.hide();
+                //this.$refs.editPopup.instance.hide();
                 this.reloadData();
-            },
-            onEditPopupHiding() {
-                this.editModelKey = null;
-                this.editParentModelKey = null;
+                
             },
             onNewButtonClick(event) {
-                this.editModelKey = null;
-                this.editParentModelKey = null;
-                this.$refs.editPopup.instance.show();
+                this.editRequestsNaks.next({
+                    modelKey: null,
+                    formDataInitial: {
+                        Person_ID: this.personId,
+                    }
+                });                
             },
             onNewChildRowButtonClick(event, modelId) {                
-                this.editModelKey = null;
-                this.editParentModelKey = modelId;
-                this.$refs.editPopup.instance.show();
+                this.editRequestsNaks.next({
+                    modelKey: null,
+                    formDataInitial: {
+                        Person_ID: this.personId,
+                        ParentDocumentNaks_ID: modelId
+                    }
+                });                
             },
             onEditRowButtonClick(event, modelId) {
-                console.log(modelId);
-                this.editModelKey = modelId;
-                this.editParentModelKey = null;
-                this.$refs.editPopup.instance.show();
+                this.editRequestsNaks.next({
+                    modelKey: modelId,
+                    formDataInitial: Object()
+                });                 
             },
             onDeleteRowButtonClick(event, modelId) {                
                 var component = this;                
@@ -183,7 +171,6 @@
                                 });
                         }
                     });
-
             }
         }
 
