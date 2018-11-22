@@ -67,7 +67,7 @@ namespace SmartQA.Auth
         public Task<ApplicationUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
             => Context.AppUser.SingleOrDefaultAsync(
                     // TODO: fix this "TP\" bullshit
-                    x => x.AppUser_Code == normalizedUserName || x.AppUser_Code == $"TP\\{normalizedUserName}",
+                    x => x.AppUser_Code.ToUpper() == normalizedUserName.ToUpper() || x.AppUser_Code.ToUpper() == $"TP\\{normalizedUserName}".ToUpper(),
                     cancellationToken)
                 .ContinueWith((task) => task.Result == null ? null : new ApplicationUser(task.Result));
 

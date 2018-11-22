@@ -34,7 +34,8 @@ namespace SmartQA
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Data")));            
+            services.AddDbContext<DataContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("Data")));            
             
             services.AddIdentity<ApplicationUser, Role>()                
                 .AddUserStore<UserStore>()
@@ -69,17 +70,6 @@ namespace SmartQA
             {
             });
 
-            services.ConfigureApplicationCookie(options =>
-            {
-                // Cookie settings
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-
-                options.LoginPath = "/Identity/Account/Login";
-                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-                options.SlidingExpiration = true;
-            });
-
             services
                 .AddMvc()
                 .AddJsonOptions(options =>
@@ -92,8 +82,6 @@ namespace SmartQA
             services.AddOData();
 
             services.AddTransient<ODataModelBuilder>();
-
-
 
         }
 
