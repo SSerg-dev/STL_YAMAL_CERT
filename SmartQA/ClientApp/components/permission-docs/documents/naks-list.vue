@@ -20,18 +20,21 @@
                        cellTemplate="edit-column-cell"></dx-column>
 
             <div slot="edit-column-cell" slot-scope="row">
-                <dx-button @click="onEditRowButtonClick($event, row.data.DocumentNaks_ID.toString())">
+                <button type="button" class="btn btn-sm btn-light"
+                        @click="onEditRowButtonClick($event, row.data.DocumentNaks_ID.toString())">
                     <font-awesome-icon icon="edit" />
-                </dx-button>
+                </button>
 
-                <dx-button @click="onDeleteRowButtonClick($event, row.data.DocumentNaks_ID.toString())">
+                <button type="button" class="btn btn-sm btn-light"
+                        @click="onDeleteRowButtonClick($event, row.data.DocumentNaks_ID.toString())">
                     <font-awesome-icon icon="trash" />
-                </dx-button>
+                </button>
 
-                <dx-button v-if="row.data.ParentDocumentNaks_ID == null"                           
+                <button type="button" class="btn btn-sm btn-light"
+                        v-if="row.data.ParentDocumentNaks_ID == null"                           
                            @click="onNewChildRowButtonClick($event, row.data.DocumentNaks_ID.toString())">
                     <font-awesome-icon icon="plus" /> вкладыш
-                </dx-button>
+                </button>
 
             </div>
 

@@ -5,22 +5,22 @@
             <tr class="table-secondary">
                 <th scope="row">
                     Области аттестации
-                    <dx-button>
+                    <button type="button" class="btn btn-sm btn-light">
                         <font-awesome-icon icon="plus"
                                            @click="onNewButtonClick" />
-                    </dx-button>
+                    </button>
                 </th>
                 <th scope="col" v-for="(item, index) in model.DocumentNaksAttestSet">
                     <span>
                         {{ index + 1 }}
                     </span>
                     <div class="float-right">
-                        <dx-button @click="onEditButtonClick($event, item.ID.toString())">
+                        <button type="button" class="btn btn-sm btn-light" @click="onEditButtonClick($event, item.ID.toString())">
                             <font-awesome-icon icon="edit" />
-                        </dx-button>
-                        <dx-button @click="onDeleteButtonClick($event, item.ID.toString())">
+                        </button>
+                        <button type="button" class="btn btn-sm btn-light" @click="onDeleteButtonClick($event, item.ID.toString())">
                             <font-awesome-icon icon="trash" />
-                        </dx-button>
+                        </button>
                     </div>
                 </th>
             </tr>
