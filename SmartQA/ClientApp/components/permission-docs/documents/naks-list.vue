@@ -3,8 +3,9 @@
         <dx-toolbar :items="toolbarItems" />
         
         <dx-tree-list ref="dataGrid"
-                      :columnFixing="{ enabled: true }"
-                      :dataSource="dataSource"
+                      :column-fixing="{ enabled: true }"
+                      :remoteOperations="{ filtering: false }"
+                      :data-source="dataSource"                            
                       parent-id-expr="ParentDocumentNaks_ID">
             
             <dx-column data-field="Number"
@@ -123,13 +124,9 @@
         },
         methods: {
             setDataSource() {
-                this.dataSource = new DataSource(dataSourceConfs.documentNaks);
-
-                var filter = [[
-                    'Person_ID', '=', new String(this.personId)
-                ]];
-                
-                this.dataSource.filter(filter);
+                var conf = Object.assign({}, dataSourceConfs.documentNaks);
+                conf.filter = ['Person_ID', '=', new String(this.personId)];
+                this.dataSource = conf;                
             },
             reloadData() {
                 this.$refs.dataGrid.instance.refresh();

@@ -105,6 +105,10 @@ namespace SmartQA.DB
 
             // ----- permission docs ----
             CommonEntity.CommonModelSetup<DocumentNaks>(modelBuilder);
+            modelBuilder.Entity<DocumentNaks>()
+                .HasOne(d => d.ParentDocumentNaks)
+                .WithMany(d => d.Inserts);
+
             CommonEntity.CommonModelSetup<DocumentNaks_to_HIFGroup>(modelBuilder);
 
             CommonEntity.CommonModelSetup<DocumentNaksAttest>(modelBuilder);

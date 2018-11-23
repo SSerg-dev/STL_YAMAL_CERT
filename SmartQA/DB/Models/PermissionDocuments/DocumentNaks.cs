@@ -51,6 +51,8 @@ namespace SmartQA.DB.Models.PermissionDocuments
 
         [InverseProperty("DocumentNaks")]
         public virtual ICollection<DocumentNaksAttest> DocumentNaksAttestSet { get; set; }
+        
+        public virtual ICollection<DocumentNaks> Inserts { get; set; }
 
         // ---- m2m relations -------------
 
@@ -65,6 +67,8 @@ namespace SmartQA.DB.Models.PermissionDocuments
             set => this.SetM2MKeys<HIFGroup>(value);                
         }
 
+        [NotMapped]
+        public bool HasInserts => Inserts.Any();
     }
     
 }
