@@ -50,6 +50,7 @@ namespace SmartQA.DB
         public DbSet<AccessToPIStaffFunction> AccessToPIStaffFunction { get; set; }
         public DbSet<AuthToSignInspActsForWSUN> AuthToSignInspActsForWSUN { get; set; }
         public DbSet<ShieldingGas> ShieldingGas { get; set; }
+        public DbSet<AttCenterNaks> AttCenterNaks { get; set; }
 
         public DbSet<DocumentNaks> DocumentNaks { get; set; }
         public DbSet<DocumentNaks_to_HIFGroup> DocumentNaks_to_HIFGroup { get; set; }

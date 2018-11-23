@@ -146,4 +146,9 @@ namespace SmartQA.Controllers.Reftables
         public ShieldingGasController(DataContext context, AppUserManager userManager) : base(context, userManager)
         { }
     }
+    public class AttCenterNaksController : ReftableBaseController<AttCenterNaks>
+    {
+        public AttCenterNaksController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
 }
