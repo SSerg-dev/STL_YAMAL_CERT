@@ -59,8 +59,8 @@ namespace SmartQA.DB
             BuildCommon<Person>(builder);
             BuildCommon<Contragent>(builder);
             BuildCommon<Position>(builder);
-//            var naks = BuildCommon<DocumentNaks>(builder);
-//            naks.CollectionProperty(x => x.HIFGroup_IDs);
+            var naks = BuildCommon<DocumentNaks>(builder);
+            naks.CollectionProperty(x => x.HIFGroup_IDs);
 //            naks.Property(x => x.HasInserts).Name = "HasInserts";
 
             var attest = BuildCommon<DocumentNaksAttest>(builder);
