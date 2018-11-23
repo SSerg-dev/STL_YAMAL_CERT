@@ -14,7 +14,7 @@
                 <div>
                     <entity-form ref="form"
                                  :formItems="formItems"
-                                 :editRequests="editRequests"
+                                 :formSettings="editRequests"
                                  :commandRequests="formCommands"
                                  :dataSource="dataSource"
                                  v-stream:state="formStateEvents$" />

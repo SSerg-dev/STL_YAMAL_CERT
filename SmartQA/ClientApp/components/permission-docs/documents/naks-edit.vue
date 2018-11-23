@@ -13,7 +13,7 @@
                 <div>                    
                     <entity-form ref="naksForm"
                                  :formItems="naksFormItems"
-                                 :editRequests="editRequests"
+                                 :formSettings="editRequests"
                                  :commandRequests="formCommands"
                                  :dataSource="dataSource"
                                  v-stream:state="formStateEvents$" />
@@ -56,13 +56,11 @@
         },
         subscriptions() {
             this.formStateEvents$ = new Subject();
-            
+
             this.$subscribeTo(this.editRequests, req => {
                 var popup = this.$refs.editPopup;
                 if (req !== null) {
-                    if (popup) popup.instance.show();
-                } else {
-                    if (popup) popup.instance.hide();
+                    if (popup) popup.instance.show();               
                 }
             });
 
@@ -97,9 +95,7 @@
                 )
             }
         },
-        data: function () {
-            
-
+        data: function () {            
             return {                                
                 formCommands: new Subject(),
                 dataSource: dataSourceConfs.documentNaks,

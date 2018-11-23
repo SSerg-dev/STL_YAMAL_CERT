@@ -60,7 +60,7 @@
     import NaksEdit from './naks-edit';    
 
     import { dataSourceConfs } from './data.js';
-    import { BehaviorSubject } from 'rxjs';
+    import { Subject } from 'rxjs';
 
     export default {
         name: "naks-list",
@@ -95,7 +95,7 @@
         },
         data: function () {
             return {
-                editRequestsNaks: new BehaviorSubject(),                
+                editRequestsNaks: new Subject(),                
                 dataSource: {},                
                 editPopup: {
                     showTitle: false,

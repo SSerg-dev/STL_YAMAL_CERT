@@ -1,13 +1,14 @@
 ﻿<template>    
-    <form  v-on:submit.prevent="processForm">
+    <form v-on:submit.prevent="processForm">
         <dx-load-panel :visible="false"
                        :close-on-outside-click="false"
-                       :shading="true"                       
+                       :shading="true"
                        shading-color="rgba(0,0,0,0.2)" />
 
-        <dx-form ref="form"                 
+        <dx-form ref="form"
                  :form-data="formData"
-                 :items="formItems" />        
+                 :items="formItems" />
+
     </form>            
 </template>
 
@@ -27,7 +28,7 @@
         },
         props: {
             dataSource: Object, // devetreme datasource settings
-            editRequests: { // form settings Observable, e.g. { modelKey: "123" }
+            formSettings: { // form settings Observable, e.g. { modelKey: "123", formDataInitial: {} }
                 type: Object,
                 default: () => empty()
             },
@@ -35,21 +36,11 @@
                 type: Object,
                 default: () => empty()
             }, 
-            formItems: Array
+            formItems: Array,            
         },
-        subscriptions: function () {                    
-            this.$subscribeTo(this.editRequests, req => {
-                if (req) {
-                    console.debug('[entity-form] new edit request', req);
-                    this.formSettings.next({
-                        modelKey: req.modelKey,
-                        formDataInitial: req.formDataInitial || {}
-                    })
-                }
-            });
-            
+       
+        subscriptions: function () {                               
             this.$subscribeTo(this.commandRequests, this.runCommand)          
-
             this.$subscribeTo(this.formSettings, this.init);             
 
             this.$subscribeTo(this.state.pipe(
@@ -70,8 +61,7 @@
             }
         },
         data: function () {
-            return {
-                formSettings: new BehaviorSubject({ modelKey: null }),
+            return {                       
                 state: new BehaviorSubject({ state: 'uninitialized', modelKey: null }),
                 modelKey: null,                                
                 formData: {}
@@ -88,10 +78,10 @@
                 this.state.next(s);
             },
 
-            init(settings) {
+            init(settings) {                
                 this.formErrors = {};
                 this.modelKey = settings.modelKey;
-                var formDataInitial = Object.assign(settings.formDataInitial || {})
+                var formDataInitial = Object.assign({}, settings.formDataInitial || {})
 
                 if (!this.modelKey) {                    
                     this.initFormData(formDataInitial);
@@ -120,7 +110,6 @@
                     .fail(function (error) {
                         component.changeState({
                             state: 'error',
-
                             error: error
                         });
                     });
@@ -131,9 +120,10 @@
                     this.processForm(null);
                 }
             },
-
-            initFormData(data) {
+            initFormData(data) {                
+                this.$refs.form.instance.resetValues();
                 this.formData = Object.assign({}, data);                
+                this.updateFormErrors([]);                
             },            
             processForm(event) {
                 this.changeState({
@@ -192,9 +182,6 @@
                         editor.option('validationError', { message: err.message });
                     }
                 }
-            },
-
-            onEditorValueChanged(e) {
             }
         }
     };
