@@ -22,7 +22,7 @@
 
             <div slot="edit-column-cell" slot-scope="row">
                 <button type="button" class="btn btn-sm btn-light"
-                        @click="onEditRowButtonClick($event, row.data.DocumentNaks_ID.toString())">
+                        @click="onEditRowButtonClick($event, row.data)">
                     <font-awesome-icon icon="edit" />
                 </button>
 
@@ -139,6 +139,7 @@
             onNewButtonClick(event) {
                 this.editRequestsNaks.next({
                     modelKey: null,
+                    isChild: false,
                     formDataInitial: {
                         Person_ID: this.personId,
                     }
@@ -147,15 +148,17 @@
             onNewChildRowButtonClick(event, modelId) {                
                 this.editRequestsNaks.next({
                     modelKey: null,
+                    isChild: true,
                     formDataInitial: {
                         Person_ID: this.personId,
                         ParentDocumentNaks_ID: modelId
                     }
                 });                
             },
-            onEditRowButtonClick(event, modelId) {
+            onEditRowButtonClick(event, model) {
                 this.editRequestsNaks.next({
-                    modelKey: modelId,
+                    modelKey: model.DocumentNaks_ID.toString(),
+                    isChild: model.ParentDocumentNaks_ID != null,
                     formDataInitial: Object()
                 });                 
             },

@@ -3,15 +3,14 @@
         
         <dx-popup ref="editPopup"
                   :visible="false"
-                  :show-title="true"
+                  :show-title="false"
                   :width="800"
                   :height="600"
                   :toolbar-items="toolbarItems"
-                  @hiding="onEditPopupHiding"
-                  title="НАКС">
+                  @hiding="onEditPopupHiding">            
 
             <dx-scroll-view>
-                <div>
+                <div>                    
                     <entity-form ref="naksForm"
                                  :formItems="naksFormItems"
                                  :editRequests="editRequests"
@@ -22,7 +21,7 @@
                     <naks-attest-list v-if="modelKey"
                                       :model-key="modelKey" />
 
-                </div>                
+                </div>
             </dx-scroll-view>
 
         </dx-popup>
@@ -31,7 +30,7 @@
 
 <script>
     import { Subject } from 'rxjs';
-    import { pluck, map, first } from 'rxjs/operators';
+    import { pluck, map, first, filter } from 'rxjs/operators';
 
     import { DxScrollView, DxPopup } from 'devextreme-vue';   
     import DataSource from 'devextreme/data/data_source';
@@ -75,45 +74,31 @@
                 pluck('modelKey')
             );
 
-            return {                
-                modelKey: modelKeyObs,
+            return {
+                isChild: this.editRequests.pipe(
+                    map(x => x ? x.isChild : false)
+                ),
+                modelKey: modelKeyObs,                
                 toolbarItems: modelKeyObs.pipe(
-                    map(key => key == null ? this.newNaksToolbar : this.existingNaksToolbar)
+                    map(key => key == null ? 
+                        [ 
+                            // toolbar items for new naks
+                            this.toolbarItemChoices.toolbarTitle,
+                            this.toolbarItemChoices.closeButton,
+                            this.toolbarItemChoices.saveButton
+                        ] :
+                        [
+                            // toolbar items for existing naks
+                            this.toolbarItemChoices.toolbarTitle,
+                            this.toolbarItemChoices.closeButton,
+                            this.toolbarItemChoices.saveAndCloseButton
+                        ]
+                    )
                 )
             }
         },
         data: function () {
-            var closeButton = {
-                toolbar: 'bottom',
-                widget: "dxButton",
-                location: "after",
-                options: {
-                    text: "Close",
-                    onClick: this.onCloseButton
-                }
-            };
-
-            var saveButton = {
-                toolbar: 'bottom',
-                widget: "dxButton",
-                location: "after",                
-                options: {
-                    text: "Save",
-                    type: "success",
-                    onClick: this.onSaveButton
-                }
-            };
-
-            var saveAndCloseButton = {
-                toolbar: 'bottom',
-                widget: "dxButton",
-                location: "after",                
-                options: {
-                    text: "Save and close",
-                    type: "success",
-                    onClick: this.onSaveAndCloseButton
-                }
-            };
+            
 
             return {                                
                 formCommands: new Subject(),
@@ -148,16 +133,58 @@
                     reftableFormItem('WeldType', 'Вид (способ) сварки (наплавки)', false),
                     reftableFormItem('HIFGroup', 'Группы технических устройств ОПО', true),
                 ],                
-                newNaksToolbar: [
-                    closeButton, saveButton
-                ],
-                existingNaksToolbar: [
-                    closeButton, saveAndCloseButton
-                ]
-                
+                toolbarItemChoices: {
+                    toolbarTitle: {
+                        toolbar: 'top',
+                        location: 'before',
+                        template: this.getToolbarTitle
+                    },
+                    closeButton: {
+                        toolbar: 'bottom',
+                        widget: "dxButton",
+                        location: "after",
+                        options: {
+                            text: "Close",
+                            onClick: this.onCloseButton
+                        }
+                    },
+                    saveButton: {
+                        toolbar: 'bottom',
+                        widget: "dxButton",
+                        location: "after",
+                        options: {
+                            text: "Save",
+                            type: "success",
+                            onClick: this.onSaveButton
+                        }
+                    },
+                    saveAndCloseButton: {
+                        toolbar: 'bottom',
+                        widget: "dxButton",
+                        location: "after",
+                        options: {
+                            text: "Save and close",
+                            type: "success",
+                            onClick: this.onSaveAndCloseButton
+                        }
+                    }
+                }
             }
         },
         methods: {
+            getToolbarTitle() {                
+                var text;
+                if (!this.modelKey && !this.isChild) {
+                    text = "Новое свидетельство НАКС";
+                } else if (!this.modelKey && this.isChild) {
+                    text = "Новый вкладыш";
+                } else if (!this.isChild) {
+                    text = "Свидетельство НАКС";
+                } else {
+                    text =  "Вкладыш";
+                }
+                return '<h5>' + text + '</h5>';
+            },
             onEditPopupHiding() {
                 this.$emit('editingDone');
             },      

@@ -58,7 +58,7 @@
             ), this.updateFormErrors);                          
 
             this.$subscribeTo(this.state, s => {
-                console.debug('[entity-form] state ' + s.state);
+                console.debug('[entity-form] state ' + s.state, s);
                 this.$emit('state', s);
             });
 
@@ -81,7 +81,8 @@
             changeState(state) {
                 var s = Object.assign({
                     isProgress: state.state === 'loading' || state.state === 'submitting',
-                    modelKey: this.modelKey
+                    modelKey: this.modelKey,
+                    formData: this.formData
                 }, state);
 
                 this.state.next(s);
