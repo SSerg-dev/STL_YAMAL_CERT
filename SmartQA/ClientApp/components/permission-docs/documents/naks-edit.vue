@@ -1,6 +1,5 @@
 ﻿<template>
-    <div>
-        
+    <div>        
         <dx-popup ref="editPopup"
                   :visible="false"
                   :show-title="false"
@@ -138,8 +137,8 @@
                             minSearchLength: 0,
                             maxItemCount: 100,
                             
-                            onFocusIn: function(e) {
-                                e.component.open();
+                            onFocusIn: function (e) {
+                                if (!e.component.field().value) e.component.open();
                             },
                             selectionChanged: function(e) {
                                 console.log(e);
