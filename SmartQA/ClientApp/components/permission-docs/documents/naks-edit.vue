@@ -34,6 +34,7 @@
 
     import { DxScrollView, DxPopup } from 'devextreme-vue';   
     import DataSource from 'devextreme/data/data_source';
+    import CustomStore from 'devextreme/data/custom_store';
     import { DxLoadPanel } from 'devextreme-vue/load-panel';    
 
     import NaksAttestList from './naks-attest-list';
@@ -96,9 +97,32 @@
             }
         },
         data: function () {
-            let attCenterNaksDs = reftableDatasourceConf('AttCenterNaks');
-            attCenterNaksDs.sort = ['Title'];
             
+            // custom autocomplete source for Naks Number field
+            const attCenterNaksDs = new CustomStore({
+                key: "Title",
+                load: function (loadOptions) {
+                    let attCenterNaksDsConf = reftableDatasourceConf('AttCenterNaks');
+                    attCenterNaksDsConf.sort = ['Title'];
+                    let ds = new DataSource(attCenterNaksDsConf);
+                    if (loadOptions.searchValue) {
+                        ds.filter(['Title', 'startswith', loadOptions.searchValue])
+                    }
+
+                    return ds.load().then(function (data) {
+                        let result = [];
+                        for (let i = 0; i < data.length; i++) {
+                            let r = data[i];
+                            result.push({'Title': r.Title + '-I-'});
+                            result.push({'Title': r.Title + '-II-'});
+                            result.push({'Title': r.Title + '-III-'});
+                            result.push({'Title': r.Title + '-IV-'});
+                        }
+                        return result;
+                    });
+                }
+            });
+
             return {                                
                 formCommands: new Subject(),
                 dataSource: dataSourceConfs.documentNaks,
@@ -110,7 +134,7 @@
                         editorOptions: {
                             dataSource: attCenterNaksDs,
                             searchExpr: 'Title',
-                            valueExpr: d => d ? d.Title + '-' : '',
+                            valueExpr: 'Title',
                             minSearchLength: 0,
                             maxItemCount: 100,
                             
