@@ -289,7 +289,7 @@ namespace SmartQA.Migrations
 
                     b.Property<string>("Description_Rus");
 
-                    b.Property<Guid>("Division_ID");
+                    b.Property<Guid?>("Division_ID");
 
                     b.Property<DateTime?>("Insert_DTS")
                         .IsRequired();

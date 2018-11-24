@@ -17,7 +17,7 @@ namespace SmartQA.DB.Models.People
         [Required]
         public string Position_Code { get; set; }
 
-        public System.Guid Division_ID { get; set; }
+        public System.Guid? Division_ID { get; set; }
 
         public string Description_Eng { get; set; }
         public string Description_Rus { get; set; }
