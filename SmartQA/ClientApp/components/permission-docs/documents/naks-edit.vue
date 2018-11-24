@@ -41,7 +41,7 @@
     
     import EntityForm from 'components/forms/entity-form';
     import { reftableFormItem } from 'components/forms/reftables';
-    
+    import { reftableDatasourceConf } from 'components/reftables/data'; 
     
     export default {
         components: {        
@@ -58,7 +58,7 @@
             this.formStateEvents$ = new Subject();
 
             this.$subscribeTo(this.editRequests, req => {
-                var popup = this.$refs.editPopup;
+                const popup = this.$refs.editPopup;
                 if (req !== null) {
                     if (popup) popup.instance.show();               
                 }
@@ -68,7 +68,7 @@
                 map(e => e.event.msg)
             );
 
-            var modelKeyObs = this.formStateObs.pipe(
+            const modelKeyObs = this.formStateObs.pipe(
                 pluck('modelKey')
             );
 
@@ -95,7 +95,10 @@
                 )
             }
         },
-        data: function () {            
+        data: function () {
+            let attCenterNaksDs = reftableDatasourceConf('AttCenterNaks');
+            attCenterNaksDs.sort = ['Title'];
+            
             return {                                
                 formCommands: new Subject(),
                 dataSource: dataSourceConfs.documentNaks,
@@ -103,6 +106,21 @@
                     {
                         label: { text: 'Номер' },
                         dataField: 'Number',
+                        editorType: 'dxAutocomplete',
+                        editorOptions: {
+                            dataSource: attCenterNaksDs,
+                            searchExpr: 'Title',
+                            valueExpr: d => d ? d.Title + '-' : '',
+                            minSearchLength: 0,
+                            maxItemCount: 100,
+                            
+                            onFocusIn: function(e) {
+                                e.component.open();
+                            },
+                            selectionChanged: function(e) {
+                                console.log(e);
+                            }
+                        },
                         isRequired: true
                     },
                     {
@@ -168,16 +186,16 @@
             }
         },
         methods: {
-            getToolbarTitle() {                
-                var text;
+            getToolbarTitle() {
+                let text;
                 if (!this.modelKey && !this.isChild) {
-                    text = "Новое свидетельство НАКС";
+                    text = "Новое удостоверение НАКС";
                 } else if (!this.modelKey && this.isChild) {
                     text = "Новый вкладыш";
                 } else if (!this.isChild) {
-                    text = "Свидетельство НАКС";
+                    text = "Удостоверение НАКС";
                 } else {
-                    text =  "Вкладыш";
+                    text = "Вкладыш";
                 }
                 return '<h5>' + text + '</h5>';
             },

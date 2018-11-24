@@ -36,7 +36,7 @@ namespace SmartQA.DB.Models.Shared
             var m2mEntitiesObj = (IEnumerable<object>) typeof(Enumerable)
                 .GetMethod("Cast")
                 .MakeGenericMethod(typeof(object))
-                .Invoke(null, new object[] { m2mEntities });
+                .Invoke(null, new object[] { m2mEntities });            
 
             return m2mEntitiesObj.Select(x => targetProperty.GetValue(x)).Cast<TEntity>().ToList();                        
         }

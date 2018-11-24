@@ -33,9 +33,10 @@
                 <div class="col-sm-3">Должность</div>
                 <div class="col-sm-9">{{ employee.Position.Description_Rus }}</div>
             </div>
-            <naks-list :person-id="employee.Person_ID.toString()"
-                       />
-        
+            <div class="pt-5">
+                <h3>Удостоверения НАКС</h3>
+                <naks-list :person-id="employee.Person_ID.toString()" />
+            </div>
         </div>
         
     </div>

@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\Documents and Settings\mgolyaviev\source\Workspaces\STL_YAMAL_CERT\SmartQA\SmartQA.csproj" />
+    <ProjectReference Include="..\SmartQA\SmartQA.csproj" />
   </ItemGroup>
 
 </Project>
