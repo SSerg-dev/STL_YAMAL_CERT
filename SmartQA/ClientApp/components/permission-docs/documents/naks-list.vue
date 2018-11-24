@@ -27,13 +27,13 @@
                 </button>
 
                 <button type="button" class="btn btn-sm btn-light"
-                        @click="onDeleteRowButtonClick($event, row.data.DocumentNaks_ID.toString())">
+                        @click="onDeleteRowButtonClick($event, row.data)">
                     <font-awesome-icon icon="trash" />
                 </button>
 
                 <button type="button" class="btn btn-sm btn-light"
                         v-if="row.data.ParentDocumentNaks_ID == null"                           
-                           @click="onNewChildRowButtonClick($event, row.data.DocumentNaks_ID.toString())">
+                           @click="onNewChildRowButtonClick($event, row.data)">
                     <font-awesome-icon icon="plus" /> вкладыш
                 </button>
 
@@ -145,13 +145,14 @@
                     }
                 });                
             },
-            onNewChildRowButtonClick(event, modelId) {                
+            onNewChildRowButtonClick(event, model) {                
                 this.editRequestsNaks.next({
                     modelKey: null,
                     isChild: true,
                     formDataInitial: {
                         Person_ID: this.personId,
-                        ParentDocumentNaks_ID: modelId
+                        ParentDocumentNaks_ID: model.DocumentNaks_ID.toString(),
+                        Number: model.Number + ' В'
                     }
                 });                
             },
@@ -162,13 +163,13 @@
                     formDataInitial: Object()
                 });                 
             },
-            onDeleteRowButtonClick(event, modelId) {                
+            onDeleteRowButtonClick(event, model) {                
                 var component = this;                
                 confirm("Really delete?", "Confirm")
                     .done(function (dialogResult) {
                         if (dialogResult) {
                             var source = new DataSource(dataSourceConfs.documentNaks);
-                            source.store().remove(modelId)
+                            source.store().remove(model.DocumentNaks_ID)
                                 .done(function (data) {
                                     component.reloadData()
                                 });
