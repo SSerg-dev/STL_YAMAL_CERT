@@ -112,7 +112,8 @@ namespace SmartQA.Controllers
                 .Include(x => x.Person)
                 .Single(x => x.Employee_ID == key);
 
-            employee.MarkDeleted(await _userManager.Get(User));
+            employee.MarkDeleted();
+            employee.OnSave(await _userManager.Get(User));
 
             _context.SaveChanges();
 

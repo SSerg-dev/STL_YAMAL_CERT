@@ -42,10 +42,9 @@ namespace SmartQA.DB.Models.Shared
                 .HasQueryFilter(x => x.RowStatus < 100);
         }
 
-        public void MarkDeleted(ApplicationUser applicationUser)
+        public void MarkDeleted()
         {
-            this.RowStatus = 200;
-            this.OnSave(applicationUser);
+            this.RowStatus = 200;            
         }
 
         public virtual void OnSave(ApplicationUser applicationUser)

@@ -41,7 +41,10 @@
        
         subscriptions: function () {                               
             this.$subscribeTo(this.commandRequests, this.runCommand)          
-            this.$subscribeTo(this.formSettings, this.init);             
+            this.$subscribeTo(
+                this.formSettings.pipe(filter(s => !!s)),
+                this.init
+            );             
 
             this.$subscribeTo(this.state.pipe(
                 filter(s => s.state !== 'uninitialized'),
@@ -121,7 +124,7 @@
                 }
             },
             initFormData(data) {                
-                this.$refs.form.instance.resetValues();
+                if (this.$refs.form) this.$refs.form.instance.resetValues();
                 this.formData = Object.assign({}, data);                
                 this.updateFormErrors([]);                
             },            

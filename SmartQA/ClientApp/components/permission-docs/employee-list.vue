@@ -4,7 +4,7 @@
         <dx-data-grid ref="dataGrid"
                       :dataSource="employeeDataSource"
                       :selection="{ mode: 'single' }"
-                      :filterRow="{ visible: true }",                      
+                      :filterRow="{ visible: true }"                      
                       @selection-changed="onSelectionChanged">
 
             <dx-column

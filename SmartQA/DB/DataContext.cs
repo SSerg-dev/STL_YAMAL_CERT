@@ -84,7 +84,8 @@ namespace SmartQA.DB
             modelBuilder.Entity<AppUser_to_Role>()
                 .HasOne(ur => ur.Created_User);
             modelBuilder.Entity<AppUser_to_Role>()
-                .HasOne(ur => ur.AppUser);
+                .HasOne(ur => ur.AppUser)
+                .WithMany(u => u.AppUser_to_RoleSet);
             modelBuilder.Entity<AppUser_to_Role>()
                 .HasOne(ur => ur.Modified_User);
 

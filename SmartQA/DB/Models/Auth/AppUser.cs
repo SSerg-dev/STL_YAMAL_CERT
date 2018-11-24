@@ -16,9 +16,18 @@ namespace SmartQA.DB.Models.Auth
         public string Comment { get; set; }
         public byte[] User_Password { get; set; }
         
-//        [InverseProperty("AppUser")]
-//        public List<AppUser_to_Role> AppUser_to_Roles { get; set; }
-//
+        [InverseProperty("AppUser")]
+        public virtual ICollection<AppUser_to_Role> AppUser_to_RoleSet { get; set; }
+                
+        [NotMapped]
+        public ICollection<Role> RoleSet => this.GetM2MObjects<Role>();
+        [NotMapped]
+        public ICollection<Guid> Role_IDs
+        {
+            get => this.GetM2MKeys<Role>();
+            set => this.SetM2MKeys<Role>(value);                
+        }
+        //
 //        [InverseProperty("Created_User")]
 //        public List<AppUser> CreatedBy_Users { get; set; }
 //        [InverseProperty("Modified_User")]

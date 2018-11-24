@@ -18,7 +18,9 @@ using Newtonsoft.Json.Serialization;
 using SmartQA.Auth;
 using SmartQA.Controllers.Reftables;
 using SmartQA.DB;
+using SmartQA.DB.Models.Auth;
 using SmartQA.Util;
+using Role = SmartQA.Auth.Role;
 
 namespace SmartQA
 {
@@ -40,9 +42,11 @@ namespace SmartQA
             services.AddIdentity<ApplicationUser, Role>()                
                 .AddUserStore<UserStore>()
                 .AddRoleStore<RoleStore>()
-                .AddUserManager<AppUserManager>()
+                .AddUserManager<AppUserManager>()       
+                .AddRoleManager<RoleManager<Role>>()                
                 .AddDefaultTokenProviders();
 
+            
             //var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtKey"]));
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();

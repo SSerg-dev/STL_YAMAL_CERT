@@ -37,17 +37,17 @@ namespace SmartQA.Controllers.Shared
         public virtual IQueryable<TEntity> GetQuery()
             => GetDbSet().AsQueryable();
 
-        public async Task<IActionResult> Get([FromODataUri] Guid key)
+        public virtual async Task<IActionResult> Get([FromODataUri] Guid key)
         {
             var entity = await GetDbSet().FindAsync(key);
             return Ok(entity);
         }
 
         [EnableQuery]
-        public IQueryable<TEntity> Get()
+        public virtual IQueryable<TEntity> Get()
             => GetQuery();       
 
-        public async Task<IActionResult> Post([FromBody]TForm form)
+        public virtual async Task<IActionResult> Post([FromBody]TForm form)
         {
             if (!ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace SmartQA.Controllers.Shared
             return Created(entity);
         }
 
-        public async Task<IActionResult> Patch([FromODataUri] Guid key, [FromBody]TForm form)
+        public virtual async Task<IActionResult> Patch([FromODataUri] Guid key, [FromBody]TForm form)
         {
             if (!ModelState.IsValid)
             {
@@ -83,12 +83,13 @@ namespace SmartQA.Controllers.Shared
             return Updated(entity);
         }
 
-        public async Task<IActionResult> Delete([FromODataUri] Guid key)
+        public virtual async Task<IActionResult> Delete([FromODataUri] Guid key)
         {
 
             var item = GetDbSet().Find(key);
 
-            item.MarkDeleted(await _userManager.Get(this.User));
+            item.MarkDeleted();
+            item.OnSave(await _userManager.Get(this.User));
 
             await _context.SaveChangesAsync();
 

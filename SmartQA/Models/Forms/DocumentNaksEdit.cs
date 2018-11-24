@@ -47,7 +47,5 @@ namespace SmartQA.Models
             dbModel.WeldType_ID = (Guid) WeldType_ID;
             dbModel.HIFGroup_IDs = HIFGroup_IDs;
         }
-
-
     }
 }

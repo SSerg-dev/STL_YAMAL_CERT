@@ -91,7 +91,8 @@ namespace SmartQA.Controllers.Reftables
 
             var item = GetDbSet().Find(key);
 
-            item.MarkDeleted(await _userManager.Get(User));
+            item.MarkDeleted();
+            item.OnSave(await _userManager.Get(User));
 
             await _context.SaveChangesAsync();
 

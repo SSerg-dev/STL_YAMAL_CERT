@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OData.Edm;
 using SmartQA.DB.Models;
-
+using SmartQA.DB.Models.Auth;
 using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.PermissionDocuments;
 using SmartQA.DB.Models.Reftables;
@@ -59,9 +59,16 @@ namespace SmartQA.DB
             BuildCommon<Person>(builder);
             BuildCommon<Contragent>(builder);
             BuildCommon<Position>(builder);
+
+            var user = BuildCommon<AppUser>(builder);
+            user.Ignore(u => u.User_Password);
+            user.CollectionProperty(u => u.Role_IDs);
+            user.ContainsMany(u => u.RoleSet);
+            
+            var role = BuildCommon<Role>(builder);                        
+
             var naks = BuildCommon<DocumentNaks>(builder);
             naks.CollectionProperty(x => x.HIFGroup_IDs);
-//            naks.Property(x => x.HasInserts).Name = "HasInserts";
 
             var attest = BuildCommon<DocumentNaksAttest>(builder);
             attest.CollectionProperty(x => x.DetailsType_IDs);

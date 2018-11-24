@@ -17,7 +17,7 @@
                      :items="formItems" />
 
             <div class="pt-3 float-right">
-                <dx-button type="success" useSubmitBehavior="true" text="Submit"></dx-button>
+                <dx-button type="success" :useSubmitBehavior="true" text="Submit"></dx-button>
                 <dx-button @click="cancelEdit" text="Cancel"></dx-button>
             </div>
         </form>        

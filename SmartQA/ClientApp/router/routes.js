@@ -2,6 +2,7 @@ import PermissionDocsIndex from 'components/permission-docs/index'
 import ReftablesIndex from 'components/reftables/index'
 import HomePage from 'components/home'
 import LoginPage from 'components/account/login-page'
+import UserAdminIndex from 'components/useradmin/index'
 
 import store from 'store' 
 
@@ -14,34 +15,39 @@ const ifNotAuthenticated = (to, from, next) => {
     next('/');
 }
 
+// check if user is logged in
+// if role is specified, also check if user has it
+function ifAuthenticated(role) {
+    return (to, from, next) => {
+        console.debug('[router] ifAuthenticated');
+        var watchStop;
 
-const ifAuthenticated = (to, from, next) => {
-    console.debug('[router] ifAuthenticated');
-    var watchStop;
-    function proceed() {
-        if (watchStop) watchStop();
+        function proceed() {
+            if (watchStop) watchStop();
 
-        if (store.getters.getProfile)
-            next();
-        else
-            next('/login');
+            let userProfile = store.getters.getProfile;
+            if (userProfile && (!role || userProfile.Roles.indexOf(role) !== -1))
+                next();
+            else
+                next('/login');
+        }
+
+        if (store.state.user.status === 'loading') {
+            console.debug('[router] user is loading');
+            watchStop = store.watch(
+                (state) => state.user.status,
+                (value) => {
+                    console.debug('[router] user status === ' + value);
+                    if (value !== 'loading')
+                        proceed();
+                }
+            );
+        } else {
+            proceed();
+        }
     }
-
-    if (store.state.user.status === 'loading') {
-        console.debug('[router] user is loading');
-        watchStop = store.watch(
-            (state) => state.user.status,
-            (value) => {
-                console.debug('[router] user status === ' + value);
-                if (value !== 'loading') 
-                    proceed();                
-            }
-        );
-    } else {
-        proceed();
-    }
-
 }
+
 
 export const routes = [
     {
@@ -49,7 +55,7 @@ export const routes = [
         path: '/',
         component: HomePage,
         display: 'Home',
-        beforeEnter: ifAuthenticated,
+        beforeEnter: ifAuthenticated(),
     },
     {
         name: 'login',
@@ -59,6 +65,18 @@ export const routes = [
         beforeEnter: ifNotAuthenticated,
     },
     {
+        name: 'useradmin',
+        path: '/useradmin',
+        component: UserAdminIndex,
+        props: (route) => ({
+            employeeId: route.params.employeeId,
+            edit: route.query.edit
+        }),
+        display: 'Permission',
+        beforeEnter: ifAuthenticated('Administrator'),
+    },
+
+    {
         name: 'permission',
         path: '/permission/:employeeId?',
         component: PermissionDocsIndex,
@@ -67,7 +85,7 @@ export const routes = [
             edit: route.query.edit
         }),
         display: 'Permission',
-        beforeEnter: ifAuthenticated,
+        beforeEnter: ifAuthenticated(),
     },
     {
         name: 'reftables',
@@ -75,7 +93,7 @@ export const routes = [
         component: ReftablesIndex,
         props: true,
         display: 'Reftables',
-        beforeEnter: ifAuthenticated,
+        beforeEnter: ifAuthenticated(),
     }
   
 ]
