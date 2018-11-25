@@ -18,7 +18,7 @@ namespace SmartQA.Controllers
         }
 
         [EnableQuery]
-        public IQueryable<Position> Get() => Context.Position
+        public IQueryable<Position> Get() => Context.Position.OrderBy(x => x.Description_Rus)
             .AsQueryable();
 
    

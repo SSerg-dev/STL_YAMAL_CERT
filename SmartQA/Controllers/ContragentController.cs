@@ -18,7 +18,7 @@ namespace SmartQA.Controllers
         }
 
         [EnableQuery]
-        public IQueryable<Contragent> Get() => Context.Contragent
+        public IQueryable<Contragent> Get() => Context.Contragent.OrderBy(x => x.Contragent_Code)
             .AsQueryable();
 
    
