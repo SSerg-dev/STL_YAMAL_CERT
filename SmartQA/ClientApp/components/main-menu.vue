@@ -9,7 +9,7 @@
                 <router-link class="nav-item nav-link" to="/permission">Permission</router-link>
                 <router-link class="nav-item nav-link" to="/reftables">Reference tables</router-link>
                 <router-link
-                        v-if="user.Roles.indexOf('Administrator') !== -1"
+                        v-if="user && user.Roles.indexOf('Administrator') !== -1"
                         class="nav-item nav-link" to="/useradmin">
                     Users
                 </router-link>

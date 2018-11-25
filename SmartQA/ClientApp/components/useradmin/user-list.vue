@@ -75,6 +75,7 @@
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
     import { DxToolbar, DxButton } from 'devextreme-vue'
     import { DxDataGrid, DxColumn } from 'devextreme-vue/data-grid'
+    import { confirm } from 'devextreme/ui/dialog';
     import DataSource from 'devextreme/data/data_source';
     
     import { Subject } from 'rxjs';
@@ -182,7 +183,7 @@
                 confirm("Really delete?", "Confirm")
                     .done(function (dialogResult) {
                         if (dialogResult) {
-                            let source = new DataSource(this.dataSource);
+                            let source = new DataSource(component.dataSource);
                             source.store().remove(model.AppUser_ID)
                                 .done(function (data) {
                                     component.reloadData()
