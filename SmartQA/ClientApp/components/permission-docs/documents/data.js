@@ -18,9 +18,23 @@ export const dataSourceConfs = {
                 e.headers = authHeaders.getAuthHeaders();
             },
             version: 4
+        }
+    },
+    documentNaksDetailed: {
+        store: {
+            type: 'odata',
+            url: baseUrl + 'odata/DocumentNaks',
+            key: 'DocumentNaks_ID',
+            keyType: {
+                DocumentNaks_ID: "Guid"
+            },
+            beforeSend: function (e) {
+                e.headers = authHeaders.getAuthHeaders();
+            },
+            version: 4
         },
         expand: [
-            'DocumentNaksAttestSet'            
+            'DocumentNaksAttestSet'
         ]
     },
     documentNaksAttest: {

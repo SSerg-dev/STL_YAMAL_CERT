@@ -124,7 +124,7 @@
 
             return {                                
                 formCommands: new Subject(),
-                dataSource: dataSourceConfs.documentNaks,
+                dataSource: dataSourceConfs.documentNaksDetailed,
                 naksFormItems: [
                     {
                         label: { text: 'Номер' },

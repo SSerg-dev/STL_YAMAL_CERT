@@ -167,7 +167,7 @@
                 loading: false,
                 model: null,
                 error: null,                
-                dataSource: dataSourceConfs.documentNaks,              
+                dataSource: dataSourceConfs.documentNaksDetailed,              
                 toolbarItems: [
                     {
                         location: 'before',
