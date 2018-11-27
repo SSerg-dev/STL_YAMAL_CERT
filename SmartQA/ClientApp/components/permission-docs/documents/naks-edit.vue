@@ -31,7 +31,7 @@
     import { Subject } from 'rxjs';
     import { pluck, map, first, filter } from 'rxjs/operators';
 
-    import { DxScrollView, DxPopup } from 'devextreme-vue';   
+    import { DxScrollView, DxPopup } from 'devextreme-vue';
     import DataSource from 'devextreme/data/data_source';
     import CustomStore from 'devextreme/data/custom_store';
     import { DxLoadPanel } from 'devextreme-vue/load-panel';    
@@ -165,6 +165,11 @@
                     {
                         label: { text: 'Шифр клейма' },
                         dataField: 'Schifr',
+                        validationRules: [{
+                            type: "pattern",
+                            pattern: /^[a-zA-Z0-9]*$/,
+                            message: "В поле шифр клейма допускаются только латинские буквы и арабские цифры."
+                        }],
                         isRequired: false
                     },
                     reftableFormItem('WeldType', 'Вид (способ) сварки (наплавки)', false),
