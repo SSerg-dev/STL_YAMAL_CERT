@@ -168,7 +168,7 @@
                         validationRules: [{
                             type: "pattern",
                             pattern: /^[a-zA-Z0-9]*$/,
-                            message: "Используйте только цифры и латинские буквы."
+                            message: "В поле шифр клейма допускаются только латинские буквы и арабские цифры."
                         }],
                         isRequired: false
                     },
