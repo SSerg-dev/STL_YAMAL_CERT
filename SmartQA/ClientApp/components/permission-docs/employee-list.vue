@@ -10,7 +10,12 @@
             <dx-column
                        :allowFiltering="true"
                        :allowSearch="true"
-                       :calculate-cell-value="calculatePersonCellValue" />
+                       :allow-sorting="true"
+                       sort-order="asc"
+                       :calculate-cell-value="calculatePersonCellValue"
+                       :calculate-sort-value="'Person.LastName'"
+                       :calculate-filter-expression="(f, o, t) => ['Person.LastName', 'startswith', f]"
+                       />
         </dx-data-grid>
     </div>
 </template>
