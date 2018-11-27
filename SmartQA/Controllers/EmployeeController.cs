@@ -26,7 +26,7 @@ namespace SmartQA.Controllers
         }
 
         [EnableQuery]
-        public IQueryable<Employee> Get() => _context.Employee                        
+        public IQueryable<Employee> Get() => _context.Employee.OrderBy(x => x.Person.LastName).ThenByDescending(x => x.Person.FirstName).ThenByDescending(x => x.Person.SecondName)
             .AsQueryable();
 
 
