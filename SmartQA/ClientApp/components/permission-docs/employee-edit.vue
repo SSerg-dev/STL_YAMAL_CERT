@@ -93,7 +93,7 @@
                                 editorType: 'dxSelectBox',
                                 editorOptions: {
                                     dataSource: contragentDataSource,
-                                    displayExpr: "Contragent_Code",
+                                    displayExpr: "Description_Rus",
                                     valueExpr: "Contragent_ID",
                                     searchEnabled: true
                                 }
