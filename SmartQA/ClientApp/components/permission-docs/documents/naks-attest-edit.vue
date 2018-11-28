@@ -66,13 +66,26 @@
             return {
                 formCommands: new Subject(),
                 dataSource: dataSourceConfs.documentNaksAttest,
-                formItems: [
-                    reftableFormItem('WeldingEquipmentAutomationLevel', 'Степень автоматизации сварочного оборудования'),
-                    reftableFormItem('DetailsType', 'Вид деталей', true),
+                formItems: [                    
+                    reftableFormItem('DetailsType', 'Вид деталей', true),                    
                     reftableFormItem('SeamsType', 'Типы швов', true),
                     reftableFormItem('JointType', 'Тип соединения'),
                     reftableFormItem('WeldMaterialGroup', 'Группа свариваемого материала', true),
-                    reftableFormItem('WeldMaterial', 'Сварочные материалы', true),
+                    reftableFormItem('WeldMaterial', 'Сварочные материалы (вид покрытия электродов):', true),
+                    {
+                        label: { text: 'Сварочные материалы (сварочная проволока):' },
+                        dataField: 'WeldingWire',
+                        editorOptions: {
+                            disabled: false
+                        }
+                    },
+                    {
+                        label: { text: 'Сварочные материалы (защитный газ / флюс):' },
+                        dataField: 'ShieldingGasFlux',
+                        editorOptions: {
+                            disabled: false
+                        }
+                    },
                     {
                         label: { text: 'Толщина деталей, мм' },
                         dataField: 'DetailWidth',
@@ -83,10 +96,10 @@
                         dataField: 'OuterDiameter',
                         isRequired: true
                     },
-
                     reftableFormItem('WeldPosition', 'Положение при сварке', true),
                     reftableFormItem('JointKind', 'Вид соединения', true),
-                    reftableFormItem('WeldGOST14098', 'Обозначение по ГОСТ 14098')
+                    reftableFormItem('WeldGOST14098', 'Обозначение по ГОСТ 14098'),
+                    reftableFormItem('WeldingEquipmentAutomationLevel', 'Степень автоматизации сварочного оборудования')
                 ],
                 toolbarItems: [
                     {

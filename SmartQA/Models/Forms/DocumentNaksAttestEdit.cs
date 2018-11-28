@@ -18,7 +18,8 @@ namespace SmartQA.Models
         public Guid? DocumentNaks_ID { get; set; }
 
         // ---- basic columns -------------
-
+        public string WeldingWire { get; set; }
+        public string ShieldingGasFlux { get; set; }
         [Required]
         public string DetailWidth { get; set; }
         [Required]
@@ -48,6 +49,8 @@ namespace SmartQA.Models
         public override void Serialize(DocumentNaksAttest dbModel)
         {
             dbModel.DocumentNaks_ID                       = (Guid) DocumentNaks_ID                         ;
+            dbModel.WeldingWire                           = WeldingWire;  
+            dbModel.ShieldingGasFlux                      = ShieldingGasFlux;
             dbModel.DetailWidth                           = DetailWidth                             ;
             dbModel.OuterDiameter                         = OuterDiameter                           ;
             dbModel.SDR                                   = SDR                                     ;

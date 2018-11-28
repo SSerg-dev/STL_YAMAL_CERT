@@ -20,6 +20,8 @@ namespace SmartQA.DB.Models.PermissionDocuments
 
         public string DetailWidth { get; set; }        
         public string OuterDiameter { get; set; }
+        public string WeldingWire { get; set; }
+        public string ShieldingGasFlux { get; set; }
         public string SDR { get; set; }
 
         // ---- foreign keys --------------
