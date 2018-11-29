@@ -36,14 +36,16 @@ export function reftableFormItem2(modelName, label, multiple = false, required =
             onValueChanged: function (e) {
                 console.log(e);
                 let dxForm = $(e.element).closest('.dx-form').get()[0].__vue__.instance;
+                //TODO переделать на отслеживание не GUID, а текста Ручной ввод
                 let isCustom = e.value.map(function (x) { return x._value; }).indexOf("6100a1f1-1716-4956-4904-08d654edd27a"); 
                 let isDisabled = true;
                 if (isCustom < 0) {
                     isDisabled = true;
                 } else {
                     isDisabled = false;
-                }
-                dxForm.getEditor("WeldingWire").option("disabled", isDisabled);               
+                }               
+                dxForm.getEditor("WeldingWire").option("disabled", isDisabled); 
+                dxForm.getEditor("ShieldingGasFlux").option("disabled", isDisabled);   
 
             }
         },
