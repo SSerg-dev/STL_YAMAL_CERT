@@ -32,7 +32,7 @@ namespace SmartQA.Controllers.Reftables
 
         public virtual IQueryable<TEntity> GetQuery()
             => GetDbSet()
-                .OrderBy(x => x.Title)
+                .OrderByDescending(x => x.Title=="N/A").ThenBy(x => x.Title)
                 .AsQueryable();
 
         public async Task<IActionResult> Get([FromODataUri] Guid key)
