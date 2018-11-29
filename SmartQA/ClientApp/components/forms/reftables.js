@@ -41,6 +41,8 @@ export function reftableFormItem2(modelName, label, multiple = false, required =
                 let isDisabled = true;
                 if (isCustom < 0) {
                     isDisabled = true;
+                    dxForm.getEditor("WeldingWire").option("value", null);
+                    dxForm.getEditor("ShieldingGasFlux").option("value", null);
                 } else {
                     isDisabled = false;
                 }               
