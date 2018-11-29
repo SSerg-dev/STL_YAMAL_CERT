@@ -37,6 +37,7 @@
 
     import EntityForm from 'components/forms/entity-form';
     import { reftableFormItem } from 'components/forms/reftables';
+    import { reftableFormItem2 } from 'components/forms/reftables';    
 
     export default {
         components: {
@@ -71,19 +72,19 @@
                     reftableFormItem('SeamsType', 'Типы швов', true),
                     reftableFormItem('JointType', 'Тип соединения'),
                     reftableFormItem('WeldMaterialGroup', 'Группа свариваемого материала', true),
-                    reftableFormItem('WeldMaterial', 'Сварочные материалы (вид покрытия электродов):', true),
+                    reftableFormItem2('WeldMaterial', 'Сварочные материалы (вид покрытия электродов):', true),
                     {
                         label: { text: 'Сварочные материалы (сварочная проволока):' },
                         dataField: 'WeldingWire',
                         editorOptions: {
-                            disabled: false
+                            disabled: true
                         }
                     },
                     {
                         label: { text: 'Сварочные материалы (защитный газ / флюс):' },
                         dataField: 'ShieldingGasFlux',
                         editorOptions: {
-                            disabled: false
+                            disabled: true
                         }
                     },
                     {
