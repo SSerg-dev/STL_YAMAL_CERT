@@ -71,7 +71,7 @@
             const modelKeyObs = this.formStateObs.pipe(
                 pluck('modelKey')
             );
-            //
+
             return {
                 isChild: this.editRequests.pipe(
                     map(x => x ? x.isChild : false)
