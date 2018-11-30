@@ -90,11 +90,21 @@
                     {
                         label: { text: 'Толщина деталей, мм' },
                         dataField: 'DetailWidth',
+                        editorType: 'dxTextArea',
+                        editorOptions: {
+                            autoResizeEnabled: true,
+                            maxHeight: 100,
+                        },
                         isRequired: true
                     },
                     {
                         label: { text: 'Наружный диаметр, мм' },
                         dataField: 'OuterDiameter',
+                        editorType: 'dxTextArea',
+                        editorOptions: {
+                            autoResizeEnabled: true,
+                            maxHeight: 100
+                        },
                         isRequired: true
                     },
                     reftableFormItem('WeldPosition', 'Положение при сварке', true),
