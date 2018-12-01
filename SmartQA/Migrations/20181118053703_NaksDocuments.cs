@@ -105,6 +105,8 @@ namespace SmartQA.Migrations
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     DocumentNaksAttest_ID = table.Column<Guid>(nullable: false),
+                    WeldingWire = table.Column<string>(nullable: true),
+                    ShieldingGasFlux = table.Column<string>(nullable: true),
                     DetailWidth = table.Column<string>(nullable: true),
                     OuterDiameter = table.Column<string>(nullable: true),
                     SDR = table.Column<string>(nullable: true),

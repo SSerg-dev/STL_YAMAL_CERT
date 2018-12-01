@@ -1,14 +1,8 @@
-﻿using System;
+﻿using SmartQA.DB.Models.PermissionDocuments;
+using SmartQA.Models.Shared;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-
-using SmartQA.DB;
-using SmartQA.DB.Models.People;
-using SmartQA.DB.Models.PermissionDocuments;
-using SmartQA.Models.Shared;
 
 namespace SmartQA.Models
 {
@@ -18,7 +12,9 @@ namespace SmartQA.Models
         public Guid? DocumentNaks_ID { get; set; }
 
         // ---- basic columns -------------
-
+        public string WeldingWire { get; set; }
+        public string ShieldingGasFlux { get; set; }
+        public string WeldPositionCustom { get; set; }
         [Required]
         public string DetailWidth { get; set; }
         [Required]
@@ -48,6 +44,8 @@ namespace SmartQA.Models
         public override void Serialize(DocumentNaksAttest dbModel)
         {
             dbModel.DocumentNaks_ID                       = (Guid) DocumentNaks_ID                         ;
+            dbModel.WeldingWire                           = WeldingWire;  
+            dbModel.ShieldingGasFlux                      = ShieldingGasFlux;
             dbModel.DetailWidth                           = DetailWidth                             ;
             dbModel.OuterDiameter                         = OuterDiameter                           ;
             dbModel.SDR                                   = SDR                                     ;
@@ -59,6 +57,7 @@ namespace SmartQA.Models
             dbModel.WeldMaterialGroup_IDs                 = WeldMaterialGroup_IDs                   ;
             dbModel.WeldMaterial_IDs                      = WeldMaterial_IDs                        ;
             dbModel.WeldPosition_IDs                      = WeldPosition_IDs                        ;
+            dbModel.WeldPositionCustom = WeldPositionCustom;
             dbModel.JointKind_IDs = JointKind_IDs;
 
 

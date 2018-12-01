@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartQA.DB;
 
 namespace SmartQA.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20181128054426_AddWeldingWireShieldingGasFlux")]
+    partial class AddWeldingWireShieldingGasFlux
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -435,8 +437,6 @@ namespace SmartQA.Migrations
                         .IsRequired();
 
                     b.Property<Guid>("WeldGOST14098_ID");
-
-                    b.Property<string>("WeldPositionCustom");
 
                     b.Property<Guid>("WeldingEquipmentAutomationLevel_ID");
 

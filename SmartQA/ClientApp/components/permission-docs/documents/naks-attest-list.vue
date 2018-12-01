@@ -25,15 +25,6 @@
                 </th>
             </tr>
             <tr>
-                <th scope="row">Степень автоматизации сварочного оборудования</th>
-                <td v-for="item in model.DocumentNaksAttestSet">
-                    <div v-if="item.WeldingEquipmentAutomationLevel">
-                        {{ item.WeldingEquipmentAutomationLevel.Title }}
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
                 <th scope="row">Вид деталей</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
                     <div v-for="val in item.DetailsTypeSet">
@@ -41,7 +32,6 @@
                     </div>
                 </td>
             </tr>
-
             <tr>
                 <th scope="row">Типы швов</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
@@ -50,7 +40,6 @@
                     </div>
                 </td>
             </tr>
-
             <tr>
                 <th scope="row">Тип соединения</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
@@ -67,9 +56,8 @@
                     </div>
                 </td>
             </tr>
-
             <tr>
-                <th scope="row">Сварочные материалы</th>
+                <th scope="row">Сварочные материалы (вид покрытия электродов):</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
                     <div v-for="val in item.WeldMaterialSet">
                         {{ val.Title }}
@@ -77,23 +65,31 @@
                 </td>
             </tr>
             <tr>
-                <th scope="row">Толщина деталей, мм</th>
+                <th scope="row">Сварочные материалы (сварочная проволока):</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
                     <div>
-                        {{ item.DetailWidth }}
+                        {{ item.WeldingWire }}
                     </div>
                 </td>
             </tr>
             <tr>
-                <th scope="row">Наружный диаметр, мм</th>
+                <th scope="row">Сварочные материалы (защитный газ / флюс):</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
-                    {{ item.OuterDiameter }}
+                    <div>
+                        {{ item.ShieldingGasFlux }}
+                    </div>
                 </td>
             </tr>
             <tr>
-                <th scope="row">SDR</th>
-                <td v-for="item in model.DocumentNaksAttestSet">
-                    {{ item.SDR }}
+                <th scope="row">Толщина деталей, мм</th>
+                <td v-for="item in model.DocumentNaksAttestSet" style="max-width:100px;word-wrap:break-word;">
+                    {{ item.DetailWidth }}
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">Наружный диаметр, мм</th>
+                <td v-for="item in model.DocumentNaksAttestSet" style="max-width:100px;word-wrap:break-word;">
+                    {{ item.OuterDiameter }}
                 </td>
             </tr>
             <tr>
@@ -104,7 +100,14 @@
                     </div>
                 </td>
             </tr>
-
+            <tr>
+                <th scope="row">Положение при сварке. Пользовательское значение:</th>
+                <td v-for="item in model.DocumentNaksAttestSet">
+                    <div>
+                        {{ item.WeldPositionCustom}}
+                    </div>
+                </td>
+            </tr>
             <tr>
                 <th scope="row">Вид соединения</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
@@ -113,7 +116,6 @@
                     </div>
                 </td>
             </tr>
-
             <tr>
                 <th scope="row">Обозначение по ГОСТ 14098</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
@@ -122,7 +124,20 @@
                     </div>
                 </td>
             </tr>
-
+            <tr>
+                <th scope="row">Степень автоматизации сварочного оборудования</th>
+                <td v-for="item in model.DocumentNaksAttestSet">
+                    <div v-if="item.WeldingEquipmentAutomationLevel">
+                        {{ item.WeldingEquipmentAutomationLevel.Title }}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">SDR</th>
+                <td v-for="item in model.DocumentNaksAttestSet">
+                    {{ item.SDR }}
+                </td>
+            </tr>
 
         </table>
 

@@ -37,6 +37,8 @@
 
     import EntityForm from 'components/forms/entity-form';
     import { reftableFormItem } from 'components/forms/reftables';
+    import { reftableFormItem2 } from 'components/forms/reftables';
+    import { reftableFormItem3 } from 'components/forms/reftables'; 
 
     export default {
         components: {
@@ -66,27 +68,57 @@
             return {
                 formCommands: new Subject(),
                 dataSource: dataSourceConfs.documentNaksAttest,
-                formItems: [
-                    reftableFormItem('WeldingEquipmentAutomationLevel', 'Степень автоматизации сварочного оборудования'),
-                    reftableFormItem('DetailsType', 'Вид деталей', true),
+                formItems: [                    
+                    reftableFormItem('DetailsType', 'Вид деталей', true),                    
                     reftableFormItem('SeamsType', 'Типы швов', true),
                     reftableFormItem('JointType', 'Тип соединения'),
                     reftableFormItem('WeldMaterialGroup', 'Группа свариваемого материала', true),
-                    reftableFormItem('WeldMaterial', 'Сварочные материалы', true),
+                    reftableFormItem2('WeldMaterial', 'Сварочные материалы (вид покрытия электродов):', true),
+                    {
+                        label: { text: 'Сварочные материалы (сварочная проволока):' },
+                        dataField: 'WeldingWire',
+                        editorOptions: {
+                            disabled: true
+                        }
+                    },
+                    {
+                        label: { text: 'Сварочные материалы (защитный газ / флюс):' },
+                        dataField: 'ShieldingGasFlux',
+                        editorOptions: {
+                            disabled: true
+                        }
+                    },
                     {
                         label: { text: 'Толщина деталей, мм' },
                         dataField: 'DetailWidth',
+                        editorType: 'dxTextArea',
+                        editorOptions: {
+                            autoResizeEnabled: true,
+                            maxHeight: 100,
+                        },
                         isRequired: true
                     },
                     {
                         label: { text: 'Наружный диаметр, мм' },
                         dataField: 'OuterDiameter',
+                        editorType: 'dxTextArea',
+                        editorOptions: {
+                            autoResizeEnabled: true,
+                            maxHeight: 100
+                        },
                         isRequired: true
                     },
-
-                    reftableFormItem('WeldPosition', 'Положение при сварке', true),
+                    reftableFormItem3('WeldPosition', 'Положение при сварке', true),
+                    {
+                        label: { text: 'Положение при сварке. Пользовательское значение:' },
+                        dataField: 'WeldPositionCustom',
+                        editorOptions: {
+                            disabled: true
+                        }
+                    },
                     reftableFormItem('JointKind', 'Вид соединения', true),
-                    reftableFormItem('WeldGOST14098', 'Обозначение по ГОСТ 14098')
+                    reftableFormItem('WeldGOST14098', 'Обозначение по ГОСТ 14098'),
+                    reftableFormItem('WeldingEquipmentAutomationLevel', 'Степень автоматизации сварочного оборудования')
                 ],
                 toolbarItems: [
                     {
