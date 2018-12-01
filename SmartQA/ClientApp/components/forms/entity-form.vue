@@ -138,17 +138,7 @@
                 if (dxForm) {
                     dxForm.instance.beginUpdate();
                     this.updateFormErrors([]);
-                    let formData = Object.assign({}, data);
-
-                    // fix weird bug with dxSelectBox where setting Guid value doesn't work
-                    Object.keys(formData).forEach(k => {
-                        let editor = dxForm.instance.getEditor(k);
-                        if (editor && editor.NAME === 'dxSelectBox' && formData[k]) {
-                            formData[k] = formData[k].toString();
-                        }
-                    })
-
-                    dxForm.instance.updateData(formData);
+                    this.formData = Object.assign({}, data);
                     dxForm.instance.endUpdate();
                 }
             },            
