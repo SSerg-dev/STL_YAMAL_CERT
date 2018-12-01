@@ -82,15 +82,13 @@
             </tr>
             <tr>
                 <th scope="row">Толщина деталей, мм</th>
-                <td v-for="item in model.DocumentNaksAttestSet">
-                    <div>
-                        {{ item.DetailWidth }}
-                    </div>
+                <td v-for="item in model.DocumentNaksAttestSet" style="max-width:100px;word-wrap:break-word;">
+                    {{ item.DetailWidth }}
                 </td>
             </tr>
             <tr>
                 <th scope="row">Наружный диаметр, мм</th>
-                <td v-for="item in model.DocumentNaksAttestSet">
+                <td v-for="item in model.DocumentNaksAttestSet" style="max-width:100px;word-wrap:break-word;">
                     {{ item.OuterDiameter }}
                 </td>
             </tr>
