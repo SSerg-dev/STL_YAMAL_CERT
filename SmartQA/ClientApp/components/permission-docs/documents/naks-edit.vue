@@ -152,7 +152,8 @@
                         editorType: 'dxDateBox',
                         editorOptions: {
                             onValueChanged: 'onEditorValueChanged',
-                        }
+                        },
+                        isRequired: true
                     },
                     {
                         dataField: 'ValidUntil',
@@ -160,11 +161,13 @@
                         editorType: 'dxDateBox',
                         editorOptions: {
                             onValueChanged: 'onEditorValueChanged',
-                        }
+                        },
+                        isRequired: true
                     },
                     {
                         label: { text: 'Шифр клейма' },
                         dataField: 'Schifr',
+                        valueChangeEvent: 'keyup',
                         validationRules: [{
                             type: "pattern",
                             pattern: /^[a-zA-Z0-9]*$/,

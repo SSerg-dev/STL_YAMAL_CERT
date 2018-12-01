@@ -14,6 +14,7 @@
 
 <script>
     import { DxForm, DxScrollView } from 'devextreme-vue';
+    import notify from 'devextreme/ui/notify';
     import DataSource from 'devextreme/data/data_source';
     import { DxLoadPanel } from 'devextreme-vue/load-panel';           
     import { BehaviorSubject, empty } from 'rxjs';    
@@ -73,7 +74,7 @@
         methods: {
             changeState(state) {
                 var s = Object.assign({
-                    isProgress: state.state === 'loading' || state.state === 'submitting',
+                    isProgress: ['loading', 'submitting', 'initializing'].includes(state.state),
                     modelKey: this.modelKey,
                     formData: this.formData
                 }, state);
@@ -81,7 +82,18 @@
                 this.state.next(s);
             },
 
-            init(settings) {                
+            init(settings) {           
+                this.changeState({
+                    state: 'initializing'
+                });
+
+                let dxForm = this.$refs.form;
+                if (dxForm) {
+                    dxForm.instance.beginUpdate();
+                    dxForm.instance.resetValues();
+                    dxForm.instance.endUpdate();
+                }
+
                 this.formErrors = {};
                 this.modelKey = settings.modelKey;
                 var formDataInitial = Object.assign({}, settings.formDataInitial || {})
@@ -96,16 +108,14 @@
                 
                 var component = this;
                 var source = new DataSource(this.dataSource);
-                source.filter([source.key(), "=", new String(component.modelKey.toString())]);
 
                 component.changeState({
                     state: 'loading'
                 });
 
-                source
-                    .load()
+                source.store().byKey(component.modelKey)
                     .done(function (data) {                        
-                        component.initFormData(data[0]);
+                        component.initFormData(data);
                         component.changeState({
                             state: 'ready'
                         });
@@ -124,11 +134,30 @@
                 }
             },
             initFormData(data) {                
-                if (this.$refs.form) this.$refs.form.instance.resetValues();
-                this.formData = Object.assign({}, data);                
-                this.updateFormErrors([]);                
+                let dxForm = this.$refs.form;
+                if (dxForm) {
+                    dxForm.instance.beginUpdate();
+                    this.updateFormErrors([]);
+                    let formData = Object.assign({}, data);
+
+                    // fix weird bug with dxSelectBox where setting Guid value doesn't work
+                    Object.keys(formData).forEach(k => {
+                        let editor = dxForm.instance.getEditor(k);
+                        if (editor && editor.NAME === 'dxSelectBox' && formData[k]) {
+                            formData[k] = formData[k].toString();
+                        }
+                    })
+
+                    dxForm.instance.updateData(formData);
+                    dxForm.instance.endUpdate();
+                }
             },            
             processForm(event) {
+                if (!this.$refs.form.instance.validate().isValid) {
+                    notify('Исправьте ошибки на форме и попробуйте ещё раз', 'warning');
+                    return;
+                }
+
                 this.changeState({
                     state: 'submitting',
                 });
@@ -157,6 +186,8 @@
                     state: 'success',
                     modelKey: this.modelKey
                 });
+
+                notify('Сохранение прошло успешно', 'success');
             },
             processFormFail(error) {
                 this.changeState({
@@ -186,6 +217,7 @@
                     }
                 }
             }
+            
         }
     };
 </script>
