@@ -65,3 +65,40 @@ export function reftableFormItem2(modelName, label, multiple = false, required =
 
     return conf;
 }
+export function reftableFormItem3(modelName, label, multiple = false, required = true) {
+    var conf = {
+        label: { text: label },
+        editorOptions: {
+            dataSource: reftableDatasourceConf(modelName),
+            displayExpr: "Title",
+            valueExpr: "ID",
+            searchEnabled: true,
+            onValueChanged: function (e) {                
+                let dxForm = $(e.element).closest('.dx-form').get()[0].__vue__.instance;
+                //TODO переделать на отслеживание не GUID, а текста Ручной ввод
+                let isCustom = e.value.map(function (x) { return x._value; }).indexOf("be4b2aa8-7e0a-49bb-7e28-08d65671be0b");
+                let isDisabled = true;
+                if (isCustom < 0) {                    
+                    dxForm.getEditor("WeldPositionCustom").option("_value", "");
+                    isDisabled = true;
+                } else {
+                    isDisabled = false;
+                }                
+                dxForm.getEditor("WeldPositionCustom").option("disabled", isDisabled);
+
+            }
+        },
+        isRequired: required
+
+    };
+
+    if (!multiple) {
+        conf.dataField = modelName + '_ID';
+        conf.editorType = 'dxSelectBox';
+    } else {
+        conf.dataField = modelName + '_IDs';
+        conf.editorType = 'dxTagBox';
+    }
+
+    return conf;
+}

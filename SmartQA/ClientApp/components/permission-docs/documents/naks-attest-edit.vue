@@ -37,7 +37,8 @@
 
     import EntityForm from 'components/forms/entity-form';
     import { reftableFormItem } from 'components/forms/reftables';
-    import { reftableFormItem2 } from 'components/forms/reftables';    
+    import { reftableFormItem2 } from 'components/forms/reftables';
+    import { reftableFormItem3 } from 'components/forms/reftables'; 
 
     export default {
         components: {
@@ -107,7 +108,14 @@
                         },
                         isRequired: true
                     },
-                    reftableFormItem('WeldPosition', 'Положение при сварке', true),
+                    reftableFormItem3('WeldPosition', 'Положение при сварке', true),
+                    {
+                        label: { text: 'Положение при сварке. Пользовательское значение:' },
+                        dataField: 'WeldPositionCustom',
+                        editorOptions: {
+                            disabled: true
+                        }
+                    },
                     reftableFormItem('JointKind', 'Вид соединения', true),
                     reftableFormItem('WeldGOST14098', 'Обозначение по ГОСТ 14098'),
                     reftableFormItem('WeldingEquipmentAutomationLevel', 'Степень автоматизации сварочного оборудования')

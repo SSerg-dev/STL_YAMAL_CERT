@@ -102,7 +102,14 @@
                     </div>
                 </td>
             </tr>
-
+            <tr>
+                <th scope="row">Положение при сварке. Пользовательское значение:</th>
+                <td v-for="item in model.DocumentNaksAttestSet">
+                    <div>
+                        {{ item.WeldPositionCustom}}
+                    </div>
+                </td>
+            </tr>
             <tr>
                 <th scope="row">Вид соединения</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
