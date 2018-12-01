@@ -13,7 +13,7 @@ export const dataSourceConfs = {
             key: 'DocumentNaks_ID',
             keyType: {
                 DocumentNaks_ID: "Guid"
-            },
+            },    
             beforeSend: function (e) {
                 e.headers = authHeaders.getAuthHeaders();
             },
@@ -43,7 +43,7 @@ export const dataSourceConfs = {
             url: baseUrl + 'odata/DocumentNaksAttest',
             key: 'ID',
             keyType: {
-                DocumentNaks_ID: "Guid"
+                ID: "Guid"
             },
             beforeSend: function (e) {
                 e.headers = authHeaders.getAuthHeaders();

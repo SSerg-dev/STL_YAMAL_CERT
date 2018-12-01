@@ -9,7 +9,19 @@ export function reftableFormItem(modelName, label, multiple = false, required = 
             dataSource: reftableDatasourceConf(modelName),
             displayExpr: "Title",
             valueExpr: "ID",
+            searchExpr: ['Title', 'Description'],
             searchEnabled: true,
+            itemTemplate (itemData, itemIndex, itemElement) {
+                var result = '<div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">'
+                    + itemData.Title;
+                if (itemData.Description) {
+                    result += '&emsp;&emsp;<span class="text-muted">'
+                        + itemData.Description.toString()
+                        + '</span>';
+                }
+                result += '</div>';
+                return result;
+            }
         },
         isRequired: required
 
