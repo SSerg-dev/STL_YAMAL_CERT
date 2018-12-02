@@ -66,7 +66,7 @@
             </tr>
             <tr>
                 <th scope="row">Сварочные материалы (сварочная проволока):</th>
-                <td v-for="item in model.DocumentNaksAttestSet">
+                <td v-for="item in model.DocumentNaksAttestSet" style="max-width:100px;word-wrap:break-word;">
                     <div>
                         {{ item.WeldingWire }}
                     </div>
@@ -74,7 +74,7 @@
             </tr>
             <tr>
                 <th scope="row">Сварочные материалы (защитный газ / флюс):</th>
-                <td v-for="item in model.DocumentNaksAttestSet">
+                <td v-for="item in model.DocumentNaksAttestSet" style="max-width:100px;word-wrap:break-word;">
                     <div>
                         {{ item.ShieldingGasFlux }}
                     </div>
@@ -102,7 +102,7 @@
             </tr>
             <tr>
                 <th scope="row">Положение при сварке. Пользовательское значение:</th>
-                <td v-for="item in model.DocumentNaksAttestSet">
+                <td v-for="item in model.DocumentNaksAttestSet" style="max-width:100px;word-wrap:break-word;">
                     <div>
                         {{ item.WeldPositionCustom}}
                     </div>
