@@ -104,6 +104,7 @@
                     let attCenterNaksDsConf = reftableDatasourceConf('AttCenterNaks');
                     attCenterNaksDsConf.sort = ['Title'];
                     let ds = new DataSource(attCenterNaksDsConf);
+                    ds.paginate(false);
                     if (loadOptions.searchValue) {
                         ds.filter(['Title', 'startswith', loadOptions.searchValue])
                     }
