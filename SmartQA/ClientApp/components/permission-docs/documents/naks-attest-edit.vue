@@ -39,6 +39,7 @@
     import { reftableFormItem } from 'components/forms/reftables';
     import { reftableFormItem2 } from 'components/forms/reftables';
     import { reftableFormItem3 } from 'components/forms/reftables'; 
+    import { reftableFormItem4 } from 'components/forms/reftables'; 
 
     export default {
         components: {
@@ -124,7 +125,7 @@
                     },
                     reftableFormItem('JointKind', 'Вид соединения', true),
                     reftableFormItem('WeldGOST14098', 'Обозначение по ГОСТ 14098'),
-                    reftableFormItem('WeldingEquipmentAutomationLevel', 'Степень автоматизации сварочного оборудования')
+                    reftableFormItem4('WeldingEquipmentAutomationLevel', 'Степень автоматизации сварочного оборудования')
                 ],
                 toolbarItems: [
                     {
