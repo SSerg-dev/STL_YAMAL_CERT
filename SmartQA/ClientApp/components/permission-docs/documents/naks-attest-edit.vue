@@ -73,16 +73,16 @@
                     reftableFormItem('SeamsType', 'Типы швов', true),
                     reftableFormItem('JointType', 'Тип соединения'),
                     reftableFormItem('WeldMaterialGroup', 'Группа свариваемого материала', true),
-                    reftableFormItem2('WeldMaterial', 'Сварочные материалы (вид покрытия электродов):', true),
+                    reftableFormItem2('WeldMaterial', 'Сварочные материалы (вид покрытия электродов)', true),
                     {
-                        label: { text: 'Сварочные материалы (сварочная проволока):' },
+                        label: { text: 'Сварочные материалы (сварочная проволока)' },
                         dataField: 'WeldingWire',
                         editorOptions: {
                             disabled: true
                         }
                     },
                     {
-                        label: { text: 'Сварочные материалы (защитный газ / флюс):' },
+                        label: { text: 'Сварочные материалы (защитный газ / флюс)' },
                         dataField: 'ShieldingGasFlux',
                         editorOptions: {
                             disabled: true
@@ -110,7 +110,7 @@
                     },
                     reftableFormItem3('WeldPosition', 'Положение при сварке', true),
                     {
-                        label: { text: 'Положение при сварке. Пользовательское значение:' },
+                        label: { text: 'Положение при сварке. Пользовательское значение' },
                         dataField: 'WeldPositionCustom',
                         editorOptions: {
                             disabled: true

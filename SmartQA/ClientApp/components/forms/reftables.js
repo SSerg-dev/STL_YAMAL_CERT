@@ -43,6 +43,7 @@ export function reftableFormItem2(modelName, label, multiple = false, required =
                     isDisabled = true;
                     dxForm.getEditor("WeldingWire").option("value", null);
                     dxForm.getEditor("ShieldingGasFlux").option("value", null);
+
                 } else {
                     isDisabled = false;
                 }               
@@ -79,7 +80,7 @@ export function reftableFormItem3(modelName, label, multiple = false, required =
                 let isCustom = e.value.map(function (x) { return x._value; }).indexOf("be4b2aa8-7e0a-49bb-7e28-08d65671be0b");
                 let isDisabled = true;
                 if (isCustom < 0) {                    
-                    dxForm.getEditor("WeldPositionCustom").option("_value", "");
+                    dxForm.getEditor("WeldPositionCustom").option("value", null);
                     isDisabled = true;
                 } else {
                     isDisabled = false;
