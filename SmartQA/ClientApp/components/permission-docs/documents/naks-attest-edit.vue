@@ -78,6 +78,7 @@
                     {
                         label: { text: 'Сварочные материалы (сварочная проволока)' },
                         dataField: 'WeldingWire',
+                        editorType: 'dxTextArea',
                         editorOptions: {
                             autoResizeEnabled: true,
                             maxHeight: 100,
@@ -87,6 +88,7 @@
                     {
                         label: { text: 'Сварочные материалы (защитный газ / флюс)' },
                         dataField: 'ShieldingGasFlux',
+                        editorType: 'dxTextArea',
                         editorOptions: {
                             autoResizeEnabled: true,
                             maxHeight: 100,
@@ -117,6 +119,7 @@
                     {
                         label: { text: 'Положение при сварке. Пользовательское значение' },
                         dataField: 'WeldPositionCustom',
+                        editorType: 'dxTextArea',
                         editorOptions: {
                             autoResizeEnabled: true,
                             maxHeight: 100,
