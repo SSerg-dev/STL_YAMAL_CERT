@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.OData;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartQA.Auth;
 using SmartQA.Controllers.Shared;
 using SmartQA.DB;
-using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.PermissionDocuments;
 using SmartQA.Models;
+using System.Linq;
 
 namespace SmartQA.Controllers.PermissionDocs
 {
@@ -38,7 +33,10 @@ namespace SmartQA.Controllers.PermissionDocs
             
             .Include(y => y.DocumentNaksAttest_to_WeldPositionSet)
             .ThenInclude(z => z.WeldPosition)
-            
+
+            .Include(y => y.DocumentNaksAttest_to_WeldGOST14098Set)
+            .ThenInclude(z => z.WeldGOST14098)
+
             .AsQueryable();
     }
 }

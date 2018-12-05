@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Threading.Tasks;
-using System.Threading.Tasks.Sources;
-using Microsoft.AspNet.OData.Builder;
+﻿using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Query;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OData.Edm;
-using SmartQA.DB.Models;
 using SmartQA.DB.Models.Auth;
 using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.PermissionDocuments;
-using SmartQA.DB.Models.Reftables;
 using SmartQA.DB.Models.Shared;
 using SmartQA.Models.Forms;
+using System;
 
 namespace SmartQA.DB
 {
@@ -77,6 +68,7 @@ namespace SmartQA.DB
             attest.CollectionProperty(x => x.WeldMaterialGroup_IDs);
             attest.CollectionProperty(x => x.WeldPosition_IDs);
             attest.CollectionProperty(x => x.WeldMaterial_IDs);
+            attest.CollectionProperty(x => x.WeldGOST14098_IDs);
 
             attest.ContainsMany(x => x.DetailsTypeSet);
             attest.ContainsMany(x => x.SeamsTypeSet);
@@ -86,7 +78,7 @@ namespace SmartQA.DB
             attest.ContainsMany(x => x.WeldMaterialSet);
             attest.ContainsOptional(x => x.JointType);
             attest.ContainsOptional(x => x.WeldingEquipmentAutomationLevel);
-            attest.ContainsOptional(x => x.WeldGOST14098);
+            attest.ContainsMany(x => x.WeldGOST14098Set);
 
             attest.Expand(SelectExpandType.Automatic, new[]
             {
@@ -98,7 +90,7 @@ namespace SmartQA.DB
                 "WeldMaterialSet"                      ,
                 "JointType"                            ,
                 "WeldingEquipmentAutomationLevel"      ,
-                "WeldGOST14098"                        ,
+                "WeldGOST14098Set"                     ,
                 "DetailsTypeSet"
             });
 

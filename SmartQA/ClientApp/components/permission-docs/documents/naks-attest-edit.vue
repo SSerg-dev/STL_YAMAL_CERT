@@ -127,7 +127,7 @@
                         }
                     },
                     reftableFormItem('JointKind', 'Вид соединения', true),
-                    reftableFormItem('WeldGOST14098', 'Обозначение по ГОСТ 14098'),
+                    reftableFormItem('WeldGOST14098', 'Обозначение по ГОСТ 14098', true),
                     reftableFormItem4('WeldingEquipmentAutomationLevel', 'Степень автоматизации сварочного оборудования')
                 ],
                 toolbarItems: [

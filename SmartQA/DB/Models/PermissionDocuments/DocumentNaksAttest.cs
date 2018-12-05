@@ -30,7 +30,7 @@ namespace SmartQA.DB.Models.PermissionDocuments
         public Guid DocumentNaks_ID { get; set; }
         public Guid JointType_ID { get; set; }
         public Guid WeldingEquipmentAutomationLevel_ID { get; set; }
-        public Guid WeldGOST14098_ID { get; set; }
+        //public Guid WeldGOST14098_ID { get; set; }
 
         // ---- foreign key relations -----
 
@@ -43,8 +43,8 @@ namespace SmartQA.DB.Models.PermissionDocuments
         [ForeignKey("WeldingEquipmentAutomationLevel_ID")]
         public virtual WeldingEquipmentAutomationLevel WeldingEquipmentAutomationLevel { get; set; }
 
-        [ForeignKey("WeldGOST14098_ID")]
-        public virtual WeldGOST14098 WeldGOST14098 { get; set; }
+        //[ForeignKey("WeldGOST14098_ID")]
+        //public virtual WeldGOST14098 WeldGOST14098 { get; set; }
 
         // ---- m2m relations -------------
 
@@ -113,6 +113,17 @@ namespace SmartQA.DB.Models.PermissionDocuments
         {
             get => this.GetM2MKeys<JointKind>();
             set => this.SetM2MKeys<JointKind>( value);
+        }
+
+        [InverseProperty("DocumentNaksAttest")]
+        public virtual ICollection<DocumentNaksAttest_to_WeldGOST14098> DocumentNaksAttest_to_WeldGOST14098Set { get; set; }
+        [NotMapped]
+        public ICollection<WeldGOST14098> WeldGOST14098Set => this.GetM2MObjects<WeldGOST14098>();
+        [NotMapped]
+        public ICollection<Guid> WeldGOST14098_IDs
+        {
+            get => this.GetM2MKeys<WeldGOST14098>();
+            set => this.SetM2MKeys<WeldGOST14098>( value);
         }
 
 

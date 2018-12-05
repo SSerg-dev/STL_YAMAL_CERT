@@ -26,8 +26,8 @@ namespace SmartQA.Models
         public Guid? JointType_ID { get; set; }
         [Required]
         public Guid? WeldingEquipmentAutomationLevel_ID { get; set; }
-        [Required]
-        public Guid? WeldGOST14098_ID { get; set; }
+        //[Required]
+        //public Guid? WeldGOST14098_ID { get; set; }
 
         public ICollection<Guid> DetailsType_IDs { get; set; }
         public ICollection<Guid> SeamsType_IDs { get; set; }
@@ -35,6 +35,7 @@ namespace SmartQA.Models
         public ICollection<Guid> WeldMaterial_IDs { get; set; }        
         public ICollection<Guid> WeldPosition_IDs { get; set; }
         public ICollection<Guid> JointKind_IDs { get; set; }
+        public ICollection<Guid> WeldGOST14098_IDs { get; set; }
 
         public DocumentNaksAttestEdit()
         {        
@@ -51,7 +52,7 @@ namespace SmartQA.Models
             dbModel.SDR                                   = SDR                                     ;
             dbModel.JointType_ID                          = (Guid) JointType_ID                            ;
             dbModel.WeldingEquipmentAutomationLevel_ID    = (Guid) WeldingEquipmentAutomationLevel_ID      ;
-            dbModel.WeldGOST14098_ID                      = (Guid) WeldGOST14098_ID                        ;
+            dbModel.WeldGOST14098_IDs                     = WeldGOST14098_IDs                        ;
             dbModel.DetailsType_IDs                       = DetailsType_IDs                         ;
             dbModel.SeamsType_IDs                         = SeamsType_IDs                           ;
             dbModel.WeldMaterialGroup_IDs                 = WeldMaterialGroup_IDs                   ;

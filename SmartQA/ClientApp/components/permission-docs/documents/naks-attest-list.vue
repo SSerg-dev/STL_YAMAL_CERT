@@ -119,9 +119,9 @@
             <tr>
                 <th scope="row">Обозначение по ГОСТ 14098</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
-                    <div v-if="item.WeldGOST14098">
-                        {{ item.WeldGOST14098.Title }}
-                    </div>
+                    <div v-for="val in item.WeldGOST14098Set">
+                        {{ val.Title }}
+                    </div>                    
                 </td>
             </tr>
             <tr>

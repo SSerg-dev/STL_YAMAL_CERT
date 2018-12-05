@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SmartQA.DB.Models.Reftables;
+using SmartQA.DB.Models.Shared;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-using SmartQA.DB.Models.Reftables;
-using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.PermissionDocuments
 {
@@ -105,6 +102,21 @@ namespace SmartQA.DB.Models.PermissionDocuments
         public virtual JointKind JointKind { get; set; }
     }
 
+    [Table("p_DocumentNaksAttest_to_WeldGOST14098")]
+    public class DocumentNaksAttest_to_WeldGOST14098 : CommonEntity
+    {
+        [Key]
+        [Column("DocumentNaksAttest_to_WeldGOST14098_ID")]
+        public Guid ID { get; set; }
+
+        public Guid DocumentNaksAttest_ID { get; set; }
+        public Guid WeldGOST14098_ID { get; set; }
+
+        [ForeignKey("DocumentNaksAttest_ID")]
+        public virtual DocumentNaksAttest DocumentNaksAttest { get; set; }
+        [ForeignKey("WeldGOST14098_ID")]
+        public virtual WeldGOST14098 WeldGOST14098 { get; set; }
+    }
 
 
 }
