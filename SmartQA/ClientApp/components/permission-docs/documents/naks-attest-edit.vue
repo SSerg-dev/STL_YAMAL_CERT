@@ -72,7 +72,7 @@
                 formItems: [                    
                     reftableFormItem('DetailsType', 'Вид деталей', true),                    
                     reftableFormItem('SeamsType', 'Типы швов', true),
-                    reftableFormItem('JointType', 'Тип соединения'),
+                    reftableFormItem('JointType', 'Тип соединения',true),
                     reftableFormItem('WeldMaterialGroup', 'Группа свариваемого материала', true),
                     reftableFormItem2('WeldMaterial', 'Сварочные материалы (вид покрытия электродов)', true),
                     {

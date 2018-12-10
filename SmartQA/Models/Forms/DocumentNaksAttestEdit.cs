@@ -22,8 +22,8 @@ namespace SmartQA.Models
         public string SDR { get; set; }
 
         // ---- foreign keys --------------
-        [Required]
-        public Guid? JointType_ID { get; set; }
+        //[Required]
+        //public Guid? JointType_ID { get; set; }
         [Required]
         public Guid? WeldingEquipmentAutomationLevel_ID { get; set; }
         //[Required]
@@ -36,6 +36,7 @@ namespace SmartQA.Models
         public ICollection<Guid> WeldPosition_IDs { get; set; }
         public ICollection<Guid> JointKind_IDs { get; set; }
         public ICollection<Guid> WeldGOST14098_IDs { get; set; }
+        public ICollection<Guid> JointType_IDs { get; set; }
 
         public DocumentNaksAttestEdit()
         {        
@@ -44,20 +45,20 @@ namespace SmartQA.Models
 
         public override void Serialize(DocumentNaksAttest dbModel)
         {
-            dbModel.DocumentNaks_ID                       = (Guid) DocumentNaks_ID                         ;
-            dbModel.WeldingWire                           = WeldingWire;  
-            dbModel.ShieldingGasFlux                      = ShieldingGasFlux;
-            dbModel.DetailWidth                           = DetailWidth                             ;
-            dbModel.OuterDiameter                         = OuterDiameter                           ;
-            dbModel.SDR                                   = SDR                                     ;
-            dbModel.JointType_ID                          = (Guid) JointType_ID                            ;
-            dbModel.WeldingEquipmentAutomationLevel_ID    = (Guid) WeldingEquipmentAutomationLevel_ID      ;
-            dbModel.WeldGOST14098_IDs                     = WeldGOST14098_IDs                        ;
-            dbModel.DetailsType_IDs                       = DetailsType_IDs                         ;
-            dbModel.SeamsType_IDs                         = SeamsType_IDs                           ;
-            dbModel.WeldMaterialGroup_IDs                 = WeldMaterialGroup_IDs                   ;
-            dbModel.WeldMaterial_IDs                      = WeldMaterial_IDs                        ;
-            dbModel.WeldPosition_IDs                      = WeldPosition_IDs                        ;
+            dbModel.DocumentNaks_ID                       = (Guid) DocumentNaks_ID                          ;
+            dbModel.WeldingWire                           = WeldingWire                                     ;  
+            dbModel.ShieldingGasFlux                      = ShieldingGasFlux                                ;
+            dbModel.DetailWidth                           = DetailWidth                                     ;
+            dbModel.OuterDiameter                         = OuterDiameter                                   ;
+            dbModel.SDR                                   = SDR                                             ;
+            dbModel.JointType_IDs                         = JointType_IDs                                   ;
+            dbModel.WeldingEquipmentAutomationLevel_ID    = (Guid) WeldingEquipmentAutomationLevel_ID       ;
+            dbModel.WeldGOST14098_IDs                     = WeldGOST14098_IDs                               ;
+            dbModel.DetailsType_IDs                       = DetailsType_IDs                                 ;
+            dbModel.SeamsType_IDs                         = SeamsType_IDs                                   ;
+            dbModel.WeldMaterialGroup_IDs                 = WeldMaterialGroup_IDs                           ;
+            dbModel.WeldMaterial_IDs                      = WeldMaterial_IDs                                ;
+            dbModel.WeldPosition_IDs                      = WeldPosition_IDs                                ;
             dbModel.WeldPositionCustom = WeldPositionCustom;
             dbModel.JointKind_IDs = JointKind_IDs;
 

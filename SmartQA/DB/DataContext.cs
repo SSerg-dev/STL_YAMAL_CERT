@@ -63,6 +63,7 @@ namespace SmartQA.DB
         public DbSet<DocumentNaksAttest_to_WeldPosition> DocumentNaksAttest_to_WeldPosition { get; set; }
         public DbSet<DocumentNaksAttest_to_JointKind> DocumentNaksAttest_to_JointKind { get; set; }
         public DbSet<DocumentNaksAttest_to_WeldGOST14098> DocumentNaksAttest_to_WeldGOST14098 { get; set; }
+        public DbSet<DocumentNaksAttest_to_JointType> DocumentNaksAttest_to_JointType { get; set; }
 
         public DataContext() {}
 
@@ -122,6 +123,7 @@ namespace SmartQA.DB
             CommonEntity.CommonModelSetup<DocumentNaksAttest_to_WeldPosition>(modelBuilder);
             CommonEntity.CommonModelSetup<DocumentNaksAttest_to_JointKind>(modelBuilder);
             CommonEntity.CommonModelSetup<DocumentNaksAttest_to_WeldGOST14098>(modelBuilder);
+            CommonEntity.CommonModelSetup<DocumentNaksAttest_to_JointType>(modelBuilder);
 
         }
     }
