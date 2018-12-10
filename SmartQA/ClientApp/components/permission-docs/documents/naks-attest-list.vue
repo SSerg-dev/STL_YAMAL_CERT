@@ -43,8 +43,8 @@
             <tr>
                 <th scope="row">Тип соединения</th>
                 <td v-for="item in model.DocumentNaksAttestSet">
-                    <div v-if="item.JointType">
-                        {{ item.JointType.Title }}
+                    <div v-for="val in item.JointTypeSet">
+                        {{ val.Title }}
                     </div>
                 </td>
             </tr>

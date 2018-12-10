@@ -118,5 +118,20 @@ namespace SmartQA.DB.Models.PermissionDocuments
         public virtual WeldGOST14098 WeldGOST14098 { get; set; }
     }
 
+    [Table("p_DocumentNaksAttest_to_JointType")]
+    public class DocumentNaksAttest_to_JointType : CommonEntity
+    {
+        [Key]
+        [Column("DocumentNaksAttest_to_JointType_ID")]
+        public Guid ID { get; set; }
+
+        public Guid DocumentNaksAttest_ID { get; set; }
+        public Guid JointType_ID { get; set; }
+
+        [ForeignKey("DocumentNaksAttest_ID")]
+        public virtual DocumentNaksAttest DocumentNaksAttest { get; set; }
+        [ForeignKey("JointType_ID")]
+        public virtual JointType JointType { get; set; }
+    }
 
 }
