@@ -119,14 +119,6 @@ namespace SmartQA.Migrations
                 table: "p_DocumentNaksAttest",
                 column: "JointType_ID");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_p_DocumentNaksAttest_p_JointType_JointType_ID",
-                table: "p_DocumentNaksAttest",
-                column: "JointType_ID",
-                principalTable: "p_JointType",
-                principalColumn: "JointType_ID",
-                onDelete: ReferentialAction.Cascade);
-
             migrationBuilder.Sql(@"UPDATE a
                                    SET a.JointType_ID = a2j.JointType_ID
                                    from dbo.p_DocumentNaksAttest a
@@ -134,6 +126,14 @@ namespace SmartQA.Migrations
 
             migrationBuilder.DropTable(
                 name: "p_DocumentNaksAttest_to_JointType");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_p_DocumentNaksAttest_p_JointType_JointType_ID",
+                table: "p_DocumentNaksAttest",
+                column: "JointType_ID",
+                principalTable: "p_JointType",
+                principalColumn: "JointType_ID",
+                onDelete: ReferentialAction.Cascade);
 
         }
     }
