@@ -69,6 +69,7 @@ namespace SmartQA.DB
             attest.CollectionProperty(x => x.WeldPosition_IDs);
             attest.CollectionProperty(x => x.WeldMaterial_IDs);
             attest.CollectionProperty(x => x.WeldGOST14098_IDs);
+            attest.CollectionProperty(x => x.JointType_IDs);
 
             attest.ContainsMany(x => x.DetailsTypeSet);
             attest.ContainsMany(x => x.SeamsTypeSet);
@@ -76,9 +77,9 @@ namespace SmartQA.DB
             attest.ContainsMany(x => x.WeldMaterialGroupSet);
             attest.ContainsMany(x => x.WeldPositionSet);
             attest.ContainsMany(x => x.WeldMaterialSet);
-            attest.ContainsOptional(x => x.JointType);
             attest.ContainsOptional(x => x.WeldingEquipmentAutomationLevel);
             attest.ContainsMany(x => x.WeldGOST14098Set);
+            attest.ContainsMany(x => x.JointTypeSet);
 
             attest.Expand(SelectExpandType.Automatic, new[]
             {
@@ -88,9 +89,9 @@ namespace SmartQA.DB
                 "WeldMaterialGroupSet"                 ,
                 "WeldPositionSet"                      ,
                 "WeldMaterialSet"                      ,
-                "JointType"                            ,
                 "WeldingEquipmentAutomationLevel"      ,
                 "WeldGOST14098Set"                     ,
+                "JointTypeSet"                         ,
                 "DetailsTypeSet"
             });
 

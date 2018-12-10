@@ -51,6 +51,10 @@ namespace SmartQA.Controllers.PermissionDocs
             .ThenInclude(y => y.DocumentNaksAttest_to_WeldGOST14098Set)
             .ThenInclude(z => z.WeldGOST14098)
 
+            .Include(x => x.DocumentNaksAttestSet)
+            .ThenInclude(y => y.DocumentNaksAttest_to_JointTypeSet)
+            .ThenInclude(z => z.JointType)
+
             .Include(x => x.WeldType)
             .AsQueryable();
       
