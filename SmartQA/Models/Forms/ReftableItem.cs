@@ -20,8 +20,8 @@ namespace SmartQA.Models
                 
         public void Serialize(IReftableEntity dbModel)
         {
-            dbModel.Title = Title;
-            dbModel.Description = Description;
+            dbModel.Title = Title ?? dbModel.Title;
+            dbModel.Description = Description ?? dbModel.Description;
         }
     }
 
