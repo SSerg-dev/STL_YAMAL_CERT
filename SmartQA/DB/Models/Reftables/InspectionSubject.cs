@@ -13,7 +13,7 @@ namespace SmartQA.DB.Models.Reftables
         public System.Guid ID { get; set; }
 
         [Column("Parent_Id")]
-        public System.Guid Parent_Id { get; set; }
+        public System.Guid? Parent_Id { get; set; }
         [Required]
         [Column("Structure_Level")]
         public int Structure_Level { get; set; }
