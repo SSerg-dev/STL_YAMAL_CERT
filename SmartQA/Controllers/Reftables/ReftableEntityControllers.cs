@@ -151,4 +151,26 @@ namespace SmartQA.Controllers.Reftables
         public AttCenterNaksController(DataContext context, AppUserManager userManager) : base(context, userManager)
         { }
     }
+    public class ContragentController : ReftableBaseController<Contragent>
+    {
+        private DataContext _context;
+        public ContragentController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        {
+            _context = context;
+        }
+
+        [EnableQuery]
+        public new IQueryable<Contragent> Get() => _context.Contragent.OrderBy(x => x.Description).AsQueryable();
+    }
+    public class PositionController : ReftableBaseController<Position>
+    {
+        private DataContext _context;
+        public PositionController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        {
+            _context = context;
+        }
+
+        [EnableQuery]
+        public new IQueryable<Position> Get() => _context.Position.OrderBy(x => x.Description).AsQueryable();
+    }
 }

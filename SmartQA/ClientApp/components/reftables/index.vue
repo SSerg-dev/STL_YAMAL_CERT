@@ -27,6 +27,7 @@
     import DxMenu from 'devextreme-vue';
     import DxList from 'devextreme-vue/list';
     import { dataSourceConfs } from "./data";
+    import DataSource from 'devextreme/data/data_source';
     
     export default {
         components: {
@@ -39,11 +40,14 @@
             modelName: String,            
         },
         data: function () {
+            var source = new DataSource(dataSourceConfs.reftables);
+            //Для показа справочников Contragent и Position закоментировать строку ниже - вызов фильтра source.filter([...]);
+            source.filter(['modelName', '<>', 'Contragent'], ['modelName', '<>', 'Position']);
             return {
-                reftablesDataSource: dataSourceConfs.reftables
+                reftablesDataSource: source
             }
         },
-        methods: {            
+        methods: {
         }
     }
 </script>

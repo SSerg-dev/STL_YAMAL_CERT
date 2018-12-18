@@ -24,33 +24,3 @@ export const employeeDataSourceSettings = {
         'Position'
     ]
 }
-
-export const contragentDataSource = {
-    store: {
-        type: 'odata',
-        url: baseUrl + 'odata/Contragent',
-        key: 'Contragent_ID',
-        keyType: {
-            Contragent_ID: "Guid"
-        },
-        beforeSend: function (e) {
-            e.headers = authHeaders.getAuthHeaders();
-        },
-        version: 4
-    }
-};
-
-export const positionDataSource = {
-    store: {
-        type: 'odata',
-        url: baseUrl + 'odata/Position',
-        key: 'Position_ID',
-        keyType: {
-            Position_ID: "Guid"
-        },
-        beforeSend: function (e) {
-            e.headers = authHeaders.getAuthHeaders();
-        },
-        version: 4
-    }
-};

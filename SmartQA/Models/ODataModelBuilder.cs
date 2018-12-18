@@ -4,6 +4,7 @@ using Microsoft.OData.Edm;
 using SmartQA.DB.Models.Auth;
 using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.PermissionDocuments;
+using SmartQA.DB.Models.Reftables;
 using SmartQA.DB.Models.Shared;
 using SmartQA.Models.Forms;
 using System;

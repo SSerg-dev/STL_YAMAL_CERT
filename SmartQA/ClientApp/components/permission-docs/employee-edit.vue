@@ -31,7 +31,8 @@
 
     import DataSource from 'devextreme/data/data_source';   
     import { DxLoadPanel } from 'devextreme-vue/load-panel';
-    import { employeeDataSource, contragentDataSource, positionDataSource } from './employee-data.js'
+    import { employeeDataSource } from './employee-data.js';
+    import { reftableFormItem5 } from 'components/forms/reftables';
 
     export default {
         components: {
@@ -87,28 +88,8 @@
                     {
                         itemType: 'group',
                         items: [
-                            {
-                                dataField: 'Contragent_ID',
-                                label: { text: 'Организация' },
-                                editorType: 'dxSelectBox',
-                                editorOptions: {
-                                    dataSource: contragentDataSource,
-                                    displayExpr: "Description_Rus",
-                                    valueExpr: "Contragent_ID",
-                                    searchEnabled: true
-                                }
-                            },
-                            {
-                                dataField: 'Position_ID',
-                                label: { text: 'Должность' },
-                                editorType: 'dxSelectBox',
-                                editorOptions: {
-                                    dataSource: positionDataSource,
-                                    displayExpr: "Description_Rus",
-                                    valueExpr: "Position_ID",
-                                    searchEnabled: true
-                                }
-                            },
+                            reftableFormItem5('Contragent', 'Организация', false, false),
+                            reftableFormItem5('Position', 'Должность', false, false)
                         ]
                     }
                 ],
@@ -178,7 +159,7 @@
                     employeeId: employeeId
                 })
                 this.$router.push({
-                    params: { employeeId: employeeId },
+                    params: { employeeId: employeeId.toString() },
                     query: { edit: false }
                 })
             },

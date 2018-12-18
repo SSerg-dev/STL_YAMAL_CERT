@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using SmartQA.DB.Models.Auth;
+using SmartQA.DB.Models.Reftables;
 using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.People

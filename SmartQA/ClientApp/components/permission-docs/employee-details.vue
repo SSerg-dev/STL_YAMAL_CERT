@@ -26,19 +26,19 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-3">Компания</div>
-                <div class="col-sm-9">{{ employee.Contragent.Contragent_Code }}</div>
+                <div class="col-sm-3">Организация</div>
+                <div class="col-sm-9">{{ employee.Contragent.Title }}</div>
             </div>
             <div class="row">
                 <div class="col-sm-3">Должность</div>
-                <div class="col-sm-9">{{ employee.Position.Description_Rus }}</div>
+                <div class="col-sm-9">{{ employee.Position.Description }}</div>
             </div>
             <div class="pt-5">
                 <h3>Удостоверения НАКС</h3>
                 <naks-list :person-id="employee.Person_ID.toString()" />
             </div>
         </div>
-        
+
     </div>
 </template>
 
@@ -88,7 +88,7 @@
                             text: 'Edit employee',
                             onClick: () => {
                                 this.$router.push({
-                                    params: { employeeId: this.employeeId },
+                                    params: { employeeId: this.employeeId.toString() },
                                     query: { edit: true }
                                 })
                             }
@@ -140,7 +140,7 @@
                     });                                
             },
             deleteEmployee() {
-                var component = this;        
+                var component = this;
                 this.employeeDataSource().store().remove(component.employeeId)
                     .done(function (data) {
                         component.$emit("employeeDeleted", {

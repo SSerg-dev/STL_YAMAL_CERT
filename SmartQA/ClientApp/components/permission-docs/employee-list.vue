@@ -78,9 +78,11 @@
             },
             onSelectionChanged({ selectedRowsData }) {
                 const data = selectedRowsData[0];
-                this.$router.push({
-                    params: { employeeId: data.Employee_ID.toString() }                    
-                })
+                if (data) {
+                    this.$router.push({
+                        params: { employeeId: data.Employee_ID.toString() }
+                    })
+                }
             },
             reload() {
                 this.$refs.dataGrid.instance.refresh();
