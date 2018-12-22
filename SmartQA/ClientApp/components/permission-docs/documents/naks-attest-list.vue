@@ -12,10 +12,10 @@
                 </th>
                 <th scope="col" v-for="(item, index) in model.DocumentNaksAttestSet">
                     <span>
-                        {{ index + 1 }}
+                        {{ ++index }}
                     </span>
                     <div class="float-right">
-                        <button type="button" class="btn btn-sm btn-light" @click="onEditButtonClick($event, item.ID.toString())">
+                        <button type="button" class="btn btn-sm btn-light" @click="onEditButtonClick($event, item.ID.toString(), index)">
                             <font-awesome-icon icon="edit" />
                         </button>
                         <button type="button" class="btn btn-sm btn-light" @click="onDeleteButtonClick($event, item.ID.toString())">
@@ -121,7 +121,7 @@
                 <td v-for="item in model.DocumentNaksAttestSet">
                     <div v-for="val in item.WeldGOST14098Set">
                         {{ val.Title }}
-                    </div>                    
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -249,9 +249,10 @@
                     }
                 });
             },
-            onEditButtonClick(event, modelId) {
+            onEditButtonClick(event, modelId, index) {
                 this.editRequests.next({
                     modelKey: modelId,
+                    index: index,
                     formDataInitial: Object()
                 });
             },

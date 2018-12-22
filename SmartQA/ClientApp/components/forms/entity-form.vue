@@ -66,8 +66,9 @@
         },
         data: function () {
             return {                       
-                state: new BehaviorSubject({ state: 'uninitialized', modelKey: null }),
-                modelKey: null,                                
+                state: new BehaviorSubject({ state: 'uninitialized', modelKey: null, index: null }),
+                modelKey: null,
+                index: null,
                 formData: {}
             }
         },
@@ -76,6 +77,7 @@
                 var s = Object.assign({
                     isProgress: ['loading', 'submitting', 'initializing'].includes(state.state),
                     modelKey: this.modelKey,
+                    index: this.index,
                     formData: this.formData
                 }, state);
 
@@ -96,6 +98,7 @@
 
                 this.formErrors = {};
                 this.modelKey = settings.modelKey;
+                this.index = settings.index;
                 var formDataInitial = Object.assign({}, settings.formDataInitial || {})
 
                 if (!this.modelKey) {                    

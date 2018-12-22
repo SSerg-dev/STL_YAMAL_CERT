@@ -7,8 +7,7 @@
                   :width="800"
                   :height="600"
                   :toolbar-items="toolbarItems"
-                  @hiding="onEditPopupHiding"
-                  title="Область аттестации">
+                  @hiding="onEditPopupHiding">
 
             <dx-scroll-view>
                 <div>
@@ -57,20 +56,28 @@
             this.$subscribeTo(this.editRequests, req => {
                 var popup = this.$refs.editPopup;
                 if (req !== null) {
-                    if (popup) popup.instance.show();                
+                    if (popup) popup.instance.show();
                 }
             });
 
             this.formStateObs = this.formStateEvents$.pipe(
                 map(e => e.event.msg)
             )
+            const indexObs = this.formStateObs.pipe(
+                pluck('index')
+            );
+
+            return {
+                index: indexObs,
+                toolbarItems: indexObs.pipe(map(key => [this.title]))
+            }
         },
         data: function () {
             return {
                 formCommands: new Subject(),
                 dataSource: dataSourceConfs.documentNaksAttest,
-                formItems: [                    
-                    reftableFormItem('DetailsType', 'Вид деталей', true),                    
+                formItems: [
+                    reftableFormItem('DetailsType', 'Вид деталей', true),
                     reftableFormItem('SeamsType', 'Типы швов', true),
                     reftableFormItem('JointType', 'Тип соединения',true),
                     reftableFormItem('WeldMaterialGroup', 'Группа свариваемого материала', true),
@@ -130,30 +137,38 @@
                     reftableFormItem('WeldGOST14098', 'Обозначение по ГОСТ 14098', true),
                     reftableFormItem4('WeldingEquipmentAutomationLevel', 'Степень автоматизации сварочного оборудования')
                 ],
+                title: {
+                    location: 'before',
+                    template: this.getToolbarTitle
+                },
                 toolbarItems: [
                     {
-                        toolbar: 'bottom',
-                        widget: "dxButton",
-                        location: "after",
-                        options: {
-                            text: "Close",
-                            onClick: this.onCloseButton
+                            toolbar: 'bottom',
+                            widget: "dxButton",
+                            location: "after",
+                            options: {
+                                text: "Close",
+                                onClick: this.onCloseButton
+                            }
+                        },
+                        {
+                            toolbar: 'bottom',
+                            widget: "dxButton",
+                            location: "after",
+                            options: {
+                                text: "Save and close",
+                                type: "success",
+                                onClick: this.onSaveAndCloseButton
+                            }
                         }
-                    },
-                    {
-                        toolbar: 'bottom',
-                        widget: "dxButton",
-                        location: "after",
-                        options: {
-                            text: "Save and close",
-                            type: "success",
-                            onClick: this.onSaveAndCloseButton
-                        }
-                    }
-                ]
+                    ]
             }
         },
         methods: {
+            getToolbarTitle() {
+                if (this.index) return "<div class='dx-item dx-toolbar-item dx-toolbar-label'><div class='dx-item-content dx-toolbar-item-content'>Область аттестации " + this.index + "</div></div>";
+                return "<div class='dx-item dx-toolbar-item dx-toolbar-label'><div class='dx-item-content dx-toolbar-item-content'>Новая область аттестации</div></div>";
+            },
             onEditPopupHiding() {
                 this.$emit('editingDone');
             },
