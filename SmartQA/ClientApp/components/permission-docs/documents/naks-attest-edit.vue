@@ -69,7 +69,8 @@
 
             return {
                 index: indexObs,
-                toolbarItems: indexObs.pipe(map(key => [this.title]))
+                toolbarItems: indexObs.pipe(map(key =>
+                    [this.title, this.toolbarItemChoices.closeButton, this.toolbarItemChoices.saveAndCloseButton]))
             }
         },
         data: function () {
@@ -141,27 +142,27 @@
                     location: 'before',
                     template: this.getToolbarTitle
                 },
-                toolbarItems: [
-                    {
-                            toolbar: 'bottom',
-                            widget: "dxButton",
-                            location: "after",
-                            options: {
-                                text: "Close",
-                                onClick: this.onCloseButton
-                            }
-                        },
-                        {
-                            toolbar: 'bottom',
-                            widget: "dxButton",
-                            location: "after",
-                            options: {
-                                text: "Save and close",
-                                type: "success",
-                                onClick: this.onSaveAndCloseButton
-                            }
+                toolbarItemChoices: {
+                    closeButton: {
+                        toolbar: 'bottom',
+                        widget: "dxButton",
+                        location: "after",
+                        options: {
+                            text: "Close",
+                            onClick: this.onCloseButton
                         }
-                    ]
+                    },
+                    saveAndCloseButton: {
+                        toolbar: 'bottom',
+                        widget: "dxButton",
+                        location: "after",
+                        options: {
+                            text: "Save and close",
+                            type: "success",
+                            onClick: this.onSaveAndCloseButton
+                        }
+                    }
+                }
             }
         },
         methods: {
