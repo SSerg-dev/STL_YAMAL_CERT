@@ -8,10 +8,6 @@ namespace SmartQA.DB.Models.People
     [Table("p_Division")]
     public class Division : CommonEntity
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-        public System.Guid Division_ID { get; set; }
-        
         [Required]
         [StringLength(255)]
         public string Division_Code { get; set; }

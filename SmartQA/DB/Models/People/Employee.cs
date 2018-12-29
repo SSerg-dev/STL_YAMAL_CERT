@@ -10,9 +10,6 @@ namespace SmartQA.DB.Models.People
     [Table("p_Employee")]
     public class Employee : CommonEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public System.Guid Employee_ID { get; set; }
-
         [Required]
         [StringLength(255)]
         public string Employee_Code { get; set; }

@@ -9,17 +9,13 @@ namespace SmartQA.DB.Models.Auth
     [Table("p_AppUser")]
     public class AppUser : CommonEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public System.Guid AppUser_ID { get; set; }
-        
         [Required]
         [StringLength(255)]
         public string AppUser_Code { get; set; }
         
         [StringLength(250)]
         public string Comment { get; set; }
-        
-        [Required]
+               
         [StringLength(8000)]
         public byte[] User_Password { get; set; }
         
@@ -34,11 +30,6 @@ namespace SmartQA.DB.Models.Auth
             get => this.GetM2MKeys<Role>();
             set => this.SetM2MKeys<Role>(value);                
         }
-        //
-//        [InverseProperty("Created_User")]
-//        public List<AppUser> CreatedBy_Users { get; set; }
-//        [InverseProperty("Modified_User")]
-//        public List<AppUser> ModifiedBy_Users { get; set; }
 
     }
 }

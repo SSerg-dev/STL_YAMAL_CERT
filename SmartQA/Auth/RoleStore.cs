@@ -58,7 +58,7 @@ namespace SmartQA.Auth
 
         public Task<Role> FindByIdAsync(string roleId, CancellationToken cancellationToken)
             => Context.Role
-                .Where(x => x.Role_ID == Guid.Parse(roleId))
+                .Where(x => x.ID == Guid.Parse(roleId))
                 .Select(x => new Role(x))
                 .SingleAsync();
 

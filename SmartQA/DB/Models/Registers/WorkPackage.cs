@@ -7,10 +7,7 @@ namespace SmartQA.DB.Models.Documents
     [Table("p_WorkPackage")]
     public class WorkPackage
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("WorkPackage_ID")]
-        public Guid ID { get; set; }
-        
+
         [StringLength(255)]
         public string WorkPackage_Code { get; set; }
         

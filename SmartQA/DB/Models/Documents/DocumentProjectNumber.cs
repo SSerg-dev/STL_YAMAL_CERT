@@ -8,10 +8,6 @@ namespace SmartQA.DB.Models.Documents
     [Table("p_DocumentProjectNumber")]
     public class DocumentProjectNumber : CommonEntity, IReftableEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("DocumentProjectNumber_ID")]
-        public Guid ID { get; set; }
-        
         [Required]
         [Column("DocumentProjectNumber_Code")]
         [StringLength(255)]

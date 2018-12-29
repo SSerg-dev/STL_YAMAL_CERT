@@ -6,9 +6,9 @@ export const dataSourceConfs = {
             type: 'odata',
             url: baseUrl + 'odata/AppUser',
             version: 4,
-            key: 'AppUser_ID',
+            key: 'ID',
             keyType: {
-                AppUser_ID: "Guid"
+                ID: "Guid"
             },
             beforeSend: function (e) {
                 e.headers = authHeaders.getAuthHeaders();
@@ -26,9 +26,9 @@ export const dataSourceConfs = {
             type: 'odata',
             url: baseUrl + 'odata/Role',
             version: 4,
-            key: 'Role_ID',
+            key: 'ID',
             keyType: {
-                Role_ID: "Guid"
+                ID: "Guid"
             },
             beforeSend: function (e) {
                 e.headers = authHeaders.getAuthHeaders();

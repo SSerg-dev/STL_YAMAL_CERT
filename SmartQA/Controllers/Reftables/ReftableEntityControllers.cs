@@ -150,6 +150,11 @@ namespace SmartQA.Controllers.Reftables
     {
         public AttCenterNaksController(DataContext context, AppUserManager userManager) : base(context, userManager)
         { }
+    }    
+    public class ContragentRoleController : ReftableBaseController<ContragentRole>
+    {
+        public ContragentRoleController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
     }
     public class ContragentController : ReftableBaseController<Contragent>
     {

@@ -8,10 +8,6 @@ namespace SmartQA.DB.Models.Documents
     [Table("p_Status")]
     public class Status : CommonEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("Status_ID")]
-        public Guid ID { get; set; }
-        
         [Required]
         [StringLength(255)]
         public string Status_Code { get; set; }

@@ -13,7 +13,7 @@ namespace SmartQA.Auth
 
         public Role(DB.Models.Auth.Role dbRole)
         {
-            Id = dbRole.Role_ID;
+            Id = dbRole.ID;
             Name = dbRole.Role_Code;
         }
     }

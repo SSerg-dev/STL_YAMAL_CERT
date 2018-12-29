@@ -8,9 +8,6 @@ namespace SmartQA.DB.Models.Documents
      [Table("p_GOST_to_PID")]
      public class GOST_to_PID : M2MEntity
      {
-         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-         public Guid GOST_to_PID_ID { get; set; }
- 
          public Guid GOST_ID { get; set; }
          public Guid PID_ID { get; set; }
  

@@ -107,7 +107,7 @@
                 this.loading = true;
                 var component = this;
                 var source = this.employeeDataSource();
-                source.filter(["Employee_ID", "=", new String(component.employeeId.toString())]);
+                source.filter(["ID", "=", new String(component.employeeId.toString())]);
 
                 source
                     .load()
@@ -145,7 +145,7 @@
 
                 } else {
                     var data = this.formData;
-                    data.Employee_ID = null;
+                    data.ID = null;
 
                     source.store().insert(data)
                         .done(this.processFormSuccess)
@@ -154,7 +154,7 @@
             },
             processFormSuccess(data) {
                 this.loading = false;
-                var employeeId = data.Employee_ID ? data.Employee_ID : this.employeeId;
+                var employeeId = data.ID ? data.ID : this.employeeId;
                 this.$emit('employeeChanged', {
                     employeeId: employeeId
                 })

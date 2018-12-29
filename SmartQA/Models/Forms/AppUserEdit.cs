@@ -23,23 +23,11 @@ namespace SmartQA.Models
             entity.AppUser_Code = AppUser_Code;
             entity.Role_IDs = Role_IDs;
 
-            if (string.IsNullOrEmpty(User_Password))
-            {
-                // set garbage password if none provided when creating new user 
-                if (entity.User_Password == null)
-                {
-                    entity.User_Password = new Encryptor3DES(ApplicationUser.passKey).encrypt(
-                        Encoding.UTF8.GetBytes(Guid.NewGuid().ToString())
-                    );
-                }
-            }
-            else
-            {
-                entity.User_Password = new Encryptor3DES(ApplicationUser.passKey).encrypt(
+            entity.User_Password = string.IsNullOrEmpty(User_Password)
+                ? null
+                : new Encryptor3DES(ApplicationUser.passKey).encrypt(
                     Encoding.UTF8.GetBytes(User_Password)
                 );
-            }
-
         }
     }
 }

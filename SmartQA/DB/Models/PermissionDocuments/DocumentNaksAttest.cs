@@ -10,10 +10,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
     [Table("p_DocumentNaksAttest")]
     public class DocumentNaksAttest : CommonEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("DocumentNaksAttest_ID")]
-        public Guid ID { get; set; }
-
         // ---- basic columns -------------
 
         public string DetailWidth { get; set; }        

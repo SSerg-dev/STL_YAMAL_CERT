@@ -1,18 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.Reftables
 {
-    
+    [UseDefaultReftableEditor]
     [Display(Name = "Объект контроля")]
     [Table("p_InspectionSubject")]
     public class InspectionSubject : CommonEntity, IReftableEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("InspectionSubject_ID")]
-        public System.Guid ID { get; set; }
-
         [Column("Parent_ID")]
         public System.Guid? Parent_ID { get; set; }
         

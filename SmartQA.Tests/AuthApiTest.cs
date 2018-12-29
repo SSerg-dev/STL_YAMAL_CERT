@@ -21,7 +21,10 @@ namespace SmartQA.Tests
         [Theory]
         [InlineData("test_user", "test_password", true)]
         [InlineData("test_user", "bad_password", false)]
+        [InlineData("test_user_nopassword", "123", false)]
         [InlineData("bad_user", "bad_password", false)]
+        [InlineData("root", "root_pwd_18", true)]
+        [InlineData("root", "root_pwd_000", false)]
         public async Task LoginIsWorking(string username, string password, bool shouldSucceed)
         {
             var client = _factory.CreateClient();

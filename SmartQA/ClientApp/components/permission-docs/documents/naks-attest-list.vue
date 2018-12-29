@@ -245,7 +245,7 @@
                 this.editRequests.next({
                     modelKey: null,
                     formDataInitial: {
-                        DocumentNaks_ID: this.modelKey,
+                        ID: this.modelKey,
                     }
                 });
             },

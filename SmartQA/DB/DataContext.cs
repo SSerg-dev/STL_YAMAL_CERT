@@ -15,7 +15,7 @@ namespace SmartQA.DB
     {
         
         public static readonly Guid rootUserId = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
-        private static readonly string rootUserDefaultPassword = "ShareWare724";
+        private static readonly string rootUserDefaultPassword = "root_pwd_18";
 
         public DbSet<RowStatus> RowStatus { get; set; }
         

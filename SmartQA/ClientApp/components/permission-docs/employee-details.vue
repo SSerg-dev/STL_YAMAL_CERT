@@ -126,7 +126,7 @@
                 this.loading = true;                
                 var component = this;                                
                 var source = this.employeeDataSource();
-                source.filter(["Employee_ID", "=", new String(component.employeeId.toString())]);
+                source.filter(["ID", "=", new String(component.employeeId.toString())]);
                 
                 source
                     .load()

@@ -2,10 +2,11 @@ import 'styles/main.scss'
 
 import "devextreme-intl";
 
+import { FontAwesomeIcon } from './icons'
+
 import Vue from 'vue'
 import Rx from 'rxjs/Rx';
 import VueRx from 'vue-rx';
-
 
 import App from './app.vue'
 

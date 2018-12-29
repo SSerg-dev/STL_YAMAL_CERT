@@ -7,9 +7,6 @@ namespace SmartQA.DB.Models.Auth
     [Table("p_AppUser_to_Role")]
     public class AppUser_to_Role : M2MEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public System.Guid AppUser_to_Role_ID { get; set; }
-
         public System.Guid AppUser_ID { get; set; }
         public System.Guid Role_ID { get; set; }
 

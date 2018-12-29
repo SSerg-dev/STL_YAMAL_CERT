@@ -7,9 +7,6 @@ namespace SmartQA.DB.Models.Registers
 {
     public class CheckItem : CommonEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("CheckItem_ID")]
-        public Guid ID { get; set; }
 
     }
 }

@@ -27,7 +27,7 @@ namespace SmartQA.Auth
 
         public Task<ApplicationUser> FindByIdAsync(string userId, CancellationToken cancellationToken)
             => Context.AppUser
-                .Where(x => x.AppUser_ID == Guid.Parse(userId))
+                .Where(x => x.ID == Guid.Parse(userId))
                 .Select(x => new ApplicationUser(x))
                 .SingleAsync();
 

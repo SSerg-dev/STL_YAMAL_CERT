@@ -80,7 +80,7 @@
                 const data = selectedRowsData[0];
                 if (data) {
                     this.$router.push({
-                        params: { employeeId: data.Employee_ID.toString() }
+                        params: { employeeId: data.ID.toString() }
                     })
                 }
             },

@@ -8,10 +8,6 @@ namespace SmartQA.DB.Models.Documents
     [Table("p_TitleObject")]
     public class TitleObject : CommonEntity, IReftableEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("TitleObject_ID")]
-        public Guid ID { get; set; }
-        
         [Required]
         [StringLength(255)]
         [Column("TitleObject_Code")]

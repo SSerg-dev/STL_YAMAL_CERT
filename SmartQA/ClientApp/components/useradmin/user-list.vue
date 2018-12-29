@@ -138,7 +138,7 @@
                         editorOptions: {
                             dataSource: dataSourceConfs.roles,
                             displayExpr: "Role_Code",
-                            valueExpr: "Role_ID",
+                            valueExpr: "ID",
                             searchEnabled: true,
                         },
                         isRequired: false,
@@ -174,7 +174,7 @@
             },           
             onEditRowButtonClick(event, model) {
                 this.editRequests.next({
-                    modelKey: model.AppUser_ID,
+                    modelKey: model.ID,
                     formDataInitial: {}
                 });
             },
@@ -184,7 +184,7 @@
                     .done(function (dialogResult) {
                         if (dialogResult) {
                             let source = new DataSource(component.dataSource);
-                            source.store().remove(model.AppUser_ID)
+                            source.store().remove(model.ID)
                                 .done(function (data) {
                                     component.reloadData()
                                 });

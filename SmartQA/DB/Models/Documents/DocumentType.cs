@@ -8,10 +8,6 @@ namespace SmartQA.DB.Models.Documents
     [Table("p_DocumentType")]
     public class DocumentType : CommonEntity, IReftableEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("DocumentType_ID")]
-        public Guid ID { get; set; }
-        
         [Required]
         [Column("DocumentType_Code")]
         [StringLength(255)]

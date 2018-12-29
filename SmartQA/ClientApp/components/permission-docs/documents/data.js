@@ -10,9 +10,9 @@ export const dataSourceConfs = {
         store: {
             type: 'odata',
             url: baseUrl + 'odata/DocumentNaks',
-            key: 'DocumentNaks_ID',
+            key: 'ID',
             keyType: {
-                DocumentNaks_ID: "Guid"
+                ID: "Guid"
             },    
             beforeSend: function (e) {
                 e.headers = authHeaders.getAuthHeaders();
@@ -24,9 +24,9 @@ export const dataSourceConfs = {
         store: {
             type: 'odata',
             url: baseUrl + 'odata/DocumentNaks',
-            key: 'DocumentNaks_ID',
+            key: 'ID',
             keyType: {
-                DocumentNaks_ID: "Guid"
+                ID: "Guid"
             },
             beforeSend: function (e) {
                 e.headers = authHeaders.getAuthHeaders();

@@ -9,10 +9,6 @@ namespace SmartQA.DB.Models.Documents
     
     public class Marka : CommonEntity, IReftableEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("Marka_ID")]
-        public Guid ID { get; set; }
-        
         [Required]
         [StringLength(255)]
         [Column("Marka_Code")]

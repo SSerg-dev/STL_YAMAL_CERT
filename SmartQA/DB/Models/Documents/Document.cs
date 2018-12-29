@@ -9,10 +9,6 @@ namespace SmartQA.DB.Models.Documents
     [Table("p_Document")]
     public class Document : CommonEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("Document_ID")]
-        public Guid ID { get; set; }
-        
         [Required]
         [StringLength(255)]
         public string Document_Code { get; set; }

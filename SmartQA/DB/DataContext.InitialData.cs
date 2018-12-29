@@ -17,7 +17,7 @@ namespace SmartQA.DB
                 .HasData(
                     new RowStatus
                     {
-                        RowStatus_ID = 0,
+                        ID = 0,
                         Status_Name_Eng = "Basic_Row",
                         Status_Name_Rus = "Базовое состояние строки",
                         Description_Eng = "Basic row",
@@ -25,7 +25,7 @@ namespace SmartQA.DB
                     },
                     new RowStatus
                     {
-                        RowStatus_ID = 120,
+                        ID = 120,
                         Status_Name_Eng = "Historical_Row",
                         Status_Name_Rus = "Историческая строка",
                         Description_Eng = "Previous condition of row",
@@ -33,7 +33,7 @@ namespace SmartQA.DB
                     },
                     new RowStatus
                     {
-                        RowStatus_ID = 200,
+                        ID = 200,
                         Status_Name_Eng = "Deleted",
                         Status_Name_Rus = "Удалённая строка",
                         Description_Eng = "Deleted row",
@@ -48,7 +48,7 @@ namespace SmartQA.DB
                     {
                         RowStatus = 0,
                         AppUser_Code = "root",
-                        AppUser_ID = rootUserId,
+                        ID = rootUserId,
                         Comment = "superuser",
                         Created_User_ID = rootUserId,
                         Modified_User_ID = rootUserId,

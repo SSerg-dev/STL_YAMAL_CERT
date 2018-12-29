@@ -11,50 +11,58 @@ using SmartQA.DB.Models.Common;
 namespace SmartQA.DB.Models.Shared
 {
     public class CommonEntity
-    {
-        [Required]
-        public int? RowStatus { get; set; }
+    {        
+        [Key]
+        public Guid ID { get; set; }
+        
         [Required]
         public DateTime? Insert_DTS { get; set; }
         [Required]
         public DateTime? Update_DTS { get; set; }
         public Guid Created_User_ID { get; set; }
         public Guid Modified_User_ID { get; set; }
-        
-        [ForeignKey("Created_User_ID")]
-        public virtual AppUser Created_User { get; set; }
 
-        [ForeignKey("Modified_User_ID")]
+        [Required]
+        public int? RowStatus { get; set; }
+        
+        // ---- foreign key relations -----
+        
+        public virtual AppUser Created_User { get; set; }
         public virtual AppUser Modified_User { get; set; }
 
         public static void CommonModelSetup<T>(ModelBuilder modelBuilder) where T : CommonEntity
         {
+            // setup primary key
+            modelBuilder.Entity<T>()
+                .Property(x => x.ID)
+                .HasColumnName($"{typeof(T).Name}_ID")
+                .HasDefaultValueSql("newsequentialid()")
+                .ValueGeneratedOnAdd();
+
+            // setup row status
+            modelBuilder.Entity<T>()
+                .HasOne(typeof(RowStatus))
+                .WithMany()
+                .HasForeignKey("RowStatus")
+                .OnDelete(DeleteBehavior.Restrict);           
+            
+            // setup users fkey
             modelBuilder.Entity<T>()
                 .HasOne(x => x.Created_User)
                 .WithMany()
+                .HasForeignKey("Created_User_ID")                
                 .OnDelete(DeleteBehavior.Restrict);            
 
             modelBuilder.Entity<T>()
                 .HasOne(x => x.Modified_User)
                 .WithMany()
+                .HasForeignKey("Modified_User_ID")
                 .OnDelete(DeleteBehavior.Restrict);
-
+            
+            // setup default query parameters
             modelBuilder.Entity<T>()
                 .HasQueryFilter(x => x.RowStatus < 100);
-
-            modelBuilder.Entity<T>().HasOne(typeof(RowStatus))
-                .WithMany()
-                .HasForeignKey("RowStatus")
-                .OnDelete(DeleteBehavior.Restrict);
-
-             foreach (var guidPkey in typeof(T).GetProperties().Where(p => 
-                 p.GetCustomAttributes(true).Any(a => a is KeyAttribute) && p.PropertyType == typeof(Guid)))
-             {
-                 modelBuilder.Entity<T>()
-                     .Property(guidPkey.Name)
-                     .HasDefaultValueSql("newsequentialid()")
-                     .ValueGeneratedOnAdd();
-             }
+  
         }
 
         public void MarkDeleted()

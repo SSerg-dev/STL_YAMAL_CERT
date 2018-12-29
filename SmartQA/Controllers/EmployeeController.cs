@@ -33,7 +33,7 @@ namespace SmartQA.Controllers
         [EnableQuery]
         public IActionResult Get([FromODataUri] Guid key)
         {
-            return Ok(_context.Employee.Single(x => x.Employee_ID == key));
+            return Ok(_context.Employee.Single(x => x.ID == key));
         }
 
         public async Task<IActionResult> Post([FromBody]EmployeeEdit employeeForm)
@@ -73,7 +73,7 @@ namespace SmartQA.Controllers
             
             var employee = _context.Employee
                 .Include(x => x.Person)
-                .Single(x => x.Employee_ID == key);
+                .Single(x => x.ID == key);
             employeeForm.Serialize(employee);
 
             var user = await _userManager.Get(User);
@@ -94,7 +94,7 @@ namespace SmartQA.Controllers
 
             var employee = _context.Employee
                 .Include(x => x.Person)
-                .Single(x => x.Employee_ID == key);
+                .Single(x => x.ID == key);
             employeeForm.Serialize(employee);
 
             var user = await _userManager.Get(User);
@@ -110,7 +110,7 @@ namespace SmartQA.Controllers
         {
             var employee = _context.Employee
                 .Include(x => x.Person)
-                .Single(x => x.Employee_ID == key);
+                .Single(x => x.ID == key);
 
             employee.MarkDeleted();
             employee.OnSave(_context, await _userManager.Get(User));
@@ -119,6 +119,5 @@ namespace SmartQA.Controllers
 
             return Ok();
         }
-
     }
 }

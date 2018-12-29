@@ -27,20 +27,19 @@ namespace SmartQA.Auth
 
         public ApplicationUser(AppUser dbUser)
         {
-            Id = dbUser.AppUser_ID;
+            Id = dbUser.ID;
             UserName = dbUser.AppUser_Code;
             var PasswordEncryptedDB = dbUser.User_Password;
-            if (dbUser.User_Password != null)
-            {
-                var TdesEncryptor = new Encryptor3DES(passKey);
-                var PasswordDecryptedDB = TdesEncryptor.decrypt(PasswordEncryptedDB);
-                Password = Encoding.UTF8.GetString(PasswordDecryptedDB);
-            }            
+                        
+            Password = dbUser.User_Password == null ?
+                null :
+                Encoding.UTF8.GetString(new Encryptor3DES(passKey).decrypt(PasswordEncryptedDB));
+                    
         }
 
         public bool CheckPassword(string password)
         {
-            return Password.Equals(password);
+            return Password != null && Password.Equals(password);
         }
 
         

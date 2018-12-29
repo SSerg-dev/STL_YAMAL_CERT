@@ -9,10 +9,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
     [Table("p_DocumentNaksAttest_to_DetailsType")]
     public class DocumentNaksAttest_to_DetailsType : M2MEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("DocumentNaksAttest_to_DetailsType_ID")]
-        public Guid ID { get; set; }
-
         public Guid DocumentNaksAttest_ID { get; set; }
         public Guid DetailsType_ID { get; set; }
 

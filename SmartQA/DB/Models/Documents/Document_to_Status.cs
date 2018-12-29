@@ -8,9 +8,6 @@ namespace SmartQA.DB.Models.Documents
     [Table("p_Document_to_Status")]
     public class Document_to_Status : M2MEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Document_to_Status_ID { get; set; }
- 
         public Guid Document_ID { get; set; }
         public Guid Status_ID { get; set; }
 

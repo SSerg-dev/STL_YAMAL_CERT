@@ -151,14 +151,14 @@
                     isChild: true,
                     formDataInitial: {
                         Person_ID: this.personId,
-                        ParentDocumentNaks_ID: model.DocumentNaks_ID.toString(),
+                        ParentDocumentNaks_ID: model.ID.toString(),
                         Number: model.Number + ' В'
                     }
                 });                
             },
             onEditRowButtonClick(event, model) {
                 this.editRequestsNaks.next({
-                    modelKey: model.DocumentNaks_ID.toString(),
+                    modelKey: model.ID.toString(),
                     isChild: model.ParentDocumentNaks_ID != null,
                     formDataInitial: Object()
                 });                 
@@ -169,7 +169,7 @@
                     .done(function (dialogResult) {
                         if (dialogResult) {
                             var source = new DataSource(dataSourceConfs.documentNaks);
-                            source.store().remove(model.DocumentNaks_ID)
+                            source.store().remove(model.ID)
                                 .done(function (data) {
                                     component.reloadData()
                                 });

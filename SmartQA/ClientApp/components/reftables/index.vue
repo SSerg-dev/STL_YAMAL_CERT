@@ -41,8 +41,8 @@
         },
         data: function () {
             var source = new DataSource(dataSourceConfs.reftables);
-            //Для показа справочников Contragent и Position закоментировать строку ниже - вызов фильтра source.filter([...]);
-            source.filter(['modelName', '<>', 'Contragent'], ['modelName', '<>', 'Position']);
+            source.filter(['UseDefaultEditor', '=', true]);
+            
             return {
                 reftablesDataSource: source
             }

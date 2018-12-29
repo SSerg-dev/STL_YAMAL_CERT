@@ -8,9 +8,6 @@ namespace SmartQA.DB.Models.Auth
     [Table("p_Role")]
     public class Role : CommonEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public System.Guid Role_ID { get; set; }
-        
         [Required]
         [StringLength(255)]
         public string Role_Code { get; set; }

@@ -9,10 +9,6 @@ namespace SmartQA.DB.Models.Documents
     [Table("p_GOST")]
     public class GOST : CommonEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("GOST_ID")]
-        public Guid ID { get; set; }
-        
         [Required]
         [StringLength(255)]
         public string GOST_Code { get; set; }

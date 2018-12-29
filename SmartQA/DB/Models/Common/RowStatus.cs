@@ -8,7 +8,8 @@ namespace SmartQA.DB.Models.Common
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Required]
-        public int RowStatus_ID { get; set; }
+        [Column("RowStatus_ID")]
+        public int ID { get; set; }
         
         [Required]
         [StringLength(100)]

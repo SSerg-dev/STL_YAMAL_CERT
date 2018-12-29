@@ -9,9 +9,9 @@ export const employeeDataSourceSettings = {
     store: {
         type: 'odata',
         url: baseUrl + 'odata/Employee',
-        key: 'Employee_ID',
+        key: 'ID',
         keyType: {
-            Employee_ID: "Guid"
+            ID: "Guid"
         },
         beforeSend: function (e) {
             e.headers = authHeaders.getAuthHeaders();

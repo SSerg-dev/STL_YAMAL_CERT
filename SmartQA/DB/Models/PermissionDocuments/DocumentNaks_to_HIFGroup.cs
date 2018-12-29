@@ -9,9 +9,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
     [Table("p_DocumentNaks_to_HIFGroup")]
     public class DocumentNaks_to_HIFGroup : M2MEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid DocumentNaks_to_HIFGroup_ID { get; set; }
-
         public Guid DocumentNaks_ID { get; set; }
         public Guid HIFGroup_ID { get; set; }
 

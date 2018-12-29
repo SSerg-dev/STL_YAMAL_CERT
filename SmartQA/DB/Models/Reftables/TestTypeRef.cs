@@ -4,13 +4,13 @@ using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.Reftables
 {
+    [UseDefaultReftableEditor]
     [Display(Name = "Тестовый справочник")]
     [Table("p_TestTypeRef")]
     public class TestTypeRef : CommonEntity, IReftableEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("TestTypeRef_ID")]
-        public System.Guid ID { get; set; }
+        [StringLength(255)] public string Description_Eng { get; set; }
+
 
         [Required]
         [Column("TestTypeRef_Code")]
@@ -20,8 +20,5 @@ namespace SmartQA.DB.Models.Reftables
         [Column("Description_Rus")]
         [StringLength(255)]
         public string Description { get; set; }
-
-        [StringLength(255)]
-        public string Description_Eng { get; set; }
     }
 }

@@ -12,9 +12,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
     [Table("p_DocumentNaks")]
     public class DocumentNaks : CommonEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]                
-        public Guid DocumentNaks_ID { get; set; }
-                
         public Guid Person_ID { get; set; }
 
         public Guid? ParentDocumentNaks_ID { get; set; }
