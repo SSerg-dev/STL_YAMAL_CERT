@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SmartQA.Models.Account;
 using Xunit;
 
@@ -21,7 +22,7 @@ namespace SmartQA.Tests
         [Theory]
         [InlineData("test_user", "test_password", true)]
         [InlineData("test_user", "bad_password", false)]
-        [InlineData("test_user_nopassword", "123", false)]
+        [InlineData("test_user_nopassword", "123", false)]        
         [InlineData("bad_user", "bad_password", false)]
         [InlineData("root", "root_pwd_18", true)]
         [InlineData("root", "root_pwd_000", false)]
@@ -40,6 +41,11 @@ namespace SmartQA.Tests
             if (shouldSucceed)
             {
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                var responseText = await response.Content.ReadAsStringAsync();
+                JObject loginInfo = JObject.Parse(responseText);
+                               
+                Assert.NotEmpty(loginInfo["Token"].Value<string>());
+                Assert.Equal(username, loginInfo["UserInfo"]["UserName"].Value<string>());                
             }
             else
             {
