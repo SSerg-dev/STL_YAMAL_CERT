@@ -16,9 +16,9 @@ namespace SmartQA.DB.Models.Shared
         public Guid ID { get; set; }
         
         [Required]
-        public DateTime? Insert_DTS { get; set; }
+        public DateTimeOffset? Insert_DTS { get; set; }
         [Required]
-        public DateTime? Update_DTS { get; set; }
+        public DateTimeOffset? Update_DTS { get; set; }
         public Guid Created_User_ID { get; set; }
         public Guid Modified_User_ID { get; set; }
 
@@ -58,7 +58,7 @@ namespace SmartQA.DB.Models.Shared
                 .WithMany()
                 .HasForeignKey("Modified_User_ID")
                 .OnDelete(DeleteBehavior.Restrict);
-            
+                   
             // setup default query parameters
             modelBuilder.Entity<T>()
                 .HasQueryFilter(x => x.RowStatus < 100);
@@ -76,9 +76,10 @@ namespace SmartQA.DB.Models.Shared
             {
                 RowStatus = 0;
             }
+            
             if (Insert_DTS == null)
             {
-                Insert_DTS = DateTime.UtcNow;                
+                Insert_DTS = DateTimeOffset.Now;                
             }
 
             if (Created_User_ID == Guid.Empty)
@@ -86,7 +87,7 @@ namespace SmartQA.DB.Models.Shared
                 Created_User_ID = applicationUser.Id;
             }
 
-            Update_DTS = DateTime.UtcNow;            
+            Update_DTS = DateTimeOffset.Now;            
             Modified_User_ID = applicationUser.Id;
             
             M2MEntityCache?.ForEach(x =>

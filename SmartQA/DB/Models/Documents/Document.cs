@@ -14,12 +14,12 @@ namespace SmartQA.DB.Models.Documents
         public string Document_Code { get; set; }
         
         [Required]
-        public DateTime Issue_Date { get; set; }
+        public DateTimeOffset? Issue_Date { get; set; }
         
         [StringLength(255)]
         public string Document_Number { get; set; }
         
-        //[Column(TypeName="date")]
+        [Column(TypeName="date")]
         public DateTime? Document_Date { get; set; }
         
         public int? TotalSheets { get; set; }

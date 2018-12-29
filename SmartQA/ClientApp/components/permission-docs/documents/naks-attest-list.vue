@@ -151,6 +151,8 @@
     import { Subject } from 'rxjs';
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
     import { DxButton } from 'devextreme-vue';
+    import { confirm } from 'devextreme/ui/dialog';
+    
     import DxToolbar from 'devextreme-vue/toolbar'; 
     import DataSource from 'devextreme/data/data_source';
     import DxPopup from 'devextreme-vue/popup';
@@ -245,7 +247,7 @@
                 this.editRequests.next({
                     modelKey: null,
                     formDataInitial: {
-                        ID: this.modelKey,
+                        DocumentNaks_ID: this.modelKey,
                     }
                 });
             },
@@ -261,7 +263,8 @@
                 confirm("Really delete?", "Confirm")
                     .done(function (dialogResult) {
                         if (dialogResult) {
-                            var source = new DataSource(component.dataSource);
+                            
+                            var source = new DataSource(dataSourceConfs.documentNaksAttest);
                             source.store().remove(modelId)
                                 .done(function (data) {
                                     component.reloadData()

@@ -52,8 +52,8 @@ namespace SmartQA.DB
                         Comment = "superuser",
                         Created_User_ID = rootUserId,
                         Modified_User_ID = rootUserId,
-                        Insert_DTS = DateTime.UtcNow,
-                        Update_DTS = DateTime.UtcNow,
+                        Insert_DTS = DateTimeOffset.Now,
+                        Update_DTS = DateTimeOffset.Now,
                         User_Password = new Encryptor3DES(ApplicationUser.passKey)
                             .encrypt(Encoding.UTF8.GetBytes(rootUserDefaultPassword)
                             )
@@ -202,12 +202,12 @@ namespace SmartQA.DB
                 }
             };
             foreach (var status in statuses)
-            {
+            {                
                 status.RowStatus = 0;
                 status.Created_User_ID = rootUserId;
                 status.Modified_User_ID = rootUserId;
-                status.Insert_DTS = DateTime.UtcNow;
-                status.Update_DTS = DateTime.UtcNow;
+                status.Insert_DTS = DateTimeOffset.Now;
+                status.Update_DTS = DateTimeOffset.Now;
             }
 
             modelBuilder.Entity<Status>()

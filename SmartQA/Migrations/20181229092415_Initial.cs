@@ -36,14 +36,14 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     AppUser_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
                     AppUser_Code = table.Column<string>(maxLength: 255, nullable: false),
                     Comment = table.Column<string>(maxLength: 250, nullable: true),
-                    User_Password = table.Column<byte[]>(maxLength: 8000, nullable: false)
+                    User_Password = table.Column<byte[]>(maxLength: 8000, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -74,8 +74,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     AccessToPIStaffFunction_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -111,8 +111,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     AccessToPIVoltageRange_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -148,14 +148,14 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     AttCenterNaks_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
+                    City = table.Column<string>(nullable: true),
                     AttCenterNaks_Code = table.Column<string>(maxLength: 255, nullable: false),
-                    Description_Rus = table.Column<string>(maxLength: 255, nullable: true),
-                    City = table.Column<string>(nullable: true)
+                    Description_Rus = table.Column<string>(maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -186,8 +186,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     AuthToSignInspActsForWSUN_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -223,8 +223,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     ContragentRole_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -260,8 +260,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     DetailsType_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -297,8 +297,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     DocumentProjectNumber_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -333,8 +333,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     DocumentType_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -369,8 +369,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     ElectricalSafetyAbilitation_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -406,8 +406,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     HIFGroup_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -443,8 +443,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     InspectionSubject_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -482,8 +482,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     InspectionTechnique_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -519,8 +519,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     JointKind_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -556,8 +556,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     JointType_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -593,8 +593,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     Marka_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -638,8 +638,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     Person_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -678,8 +678,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     PID_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -714,8 +714,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     QualificationField_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -753,8 +753,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     QualificationLevel_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -790,8 +790,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     Responsibility_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -827,8 +827,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     Role_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -862,8 +862,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     SeamsType_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -899,8 +899,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     ShieldingGas_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -936,8 +936,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     Status_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -977,8 +977,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     TestMethod_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1016,14 +1016,14 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     TestTypeRef_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
+                    Description_Eng = table.Column<string>(maxLength: 255, nullable: true),
                     TestTypeRef_Code = table.Column<string>(maxLength: 255, nullable: false),
-                    Description_Rus = table.Column<string>(maxLength: 255, nullable: true),
-                    Description_Eng = table.Column<string>(maxLength: 255, nullable: true)
+                    Description_Rus = table.Column<string>(maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1054,8 +1054,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     TitleObject_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1110,8 +1110,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     WeldGOST14098_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1147,8 +1147,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     WeldingEquipmentAutomationLevel_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1184,8 +1184,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     WeldMaterial_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1221,8 +1221,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     WeldMaterialGroup_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1258,8 +1258,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     WeldPasses_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1295,8 +1295,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     WeldPosition_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1332,8 +1332,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     WeldType_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1369,15 +1369,15 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     Contragent_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
-                    Contragent_Code = table.Column<string>(maxLength: 255, nullable: false),
-                    Description_Rus = table.Column<string>(maxLength: 255, nullable: true),
                     Description_Eng = table.Column<string>(maxLength: 255, nullable: true),
-                    ContragentRole_ID = table.Column<Guid>(nullable: true)
+                    ContragentRole_ID = table.Column<Guid>(nullable: true),
+                    Contragent_Code = table.Column<string>(maxLength: 255, nullable: false),
+                    Description_Rus = table.Column<string>(maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1414,8 +1414,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     GOST_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1458,8 +1458,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     AppUser_to_Role_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1507,8 +1507,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     DocumentNaks_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1566,8 +1566,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     Division_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1610,8 +1610,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     GOST_to_PID_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1659,8 +1659,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     GOST_to_TitleObject_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1708,8 +1708,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     DocumentNaks_to_HIFGroup_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1756,8 +1756,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     DocumentNaksAttest_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1810,15 +1810,15 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     Position_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
-                    Position_Code = table.Column<string>(maxLength: 255, nullable: false),
-                    Description_Rus = table.Column<string>(maxLength: 255, nullable: true),
                     Description_Eng = table.Column<string>(maxLength: 255, nullable: true),
-                    Division_ID = table.Column<Guid>(nullable: true)
+                    Division_ID = table.Column<Guid>(nullable: true),
+                    Position_Code = table.Column<string>(maxLength: 255, nullable: false),
+                    Description_Rus = table.Column<string>(maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1855,8 +1855,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     DocumentNaksAttest_to_DetailsType_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1903,8 +1903,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     DocumentNaksAttest_to_JointKind_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1951,8 +1951,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     DocumentNaksAttest_to_JointType_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -1999,8 +1999,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     DocumentNaksAttest_to_SeamsType_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -2047,8 +2047,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     DocumentNaksAttest_to_WeldGOST14098_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -2095,8 +2095,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     DocumentNaksAttest_to_WeldMaterial_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -2143,8 +2143,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     DocumentNaksAttest_to_WeldMaterialGroup_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -2191,8 +2191,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     DocumentNaksAttest_to_WeldPosition_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -2239,8 +2239,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     Employee_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -2303,15 +2303,15 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     Document_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
                     Document_Code = table.Column<string>(maxLength: 255, nullable: false),
-                    Issue_Date = table.Column<DateTime>(nullable: false),
+                    Issue_Date = table.Column<DateTimeOffset>(nullable: false),
                     Document_Number = table.Column<string>(maxLength: 255, nullable: true),
-                    Document_Date = table.Column<DateTime>(nullable: true),
+                    Document_Date = table.Column<DateTime>(type: "date", nullable: true),
                     TotalSheets = table.Column<int>(nullable: true),
                     Document_Name = table.Column<string>(maxLength: 255, nullable: true),
                     VersionNumber = table.Column<int>(nullable: false),
@@ -2367,8 +2367,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     Document_to_GOST_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -2416,8 +2416,8 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     Document_to_PID_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
@@ -2465,15 +2465,15 @@ namespace SmartQA.Migrations
                 columns: table => new
                 {
                     Document_to_Status_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
-                    Insert_DTS = table.Column<DateTime>(nullable: false),
-                    Update_DTS = table.Column<DateTime>(nullable: false),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
                     Created_User_ID = table.Column<Guid>(nullable: false),
                     Modified_User_ID = table.Column<Guid>(nullable: false),
                     RowStatus = table.Column<int>(nullable: false),
                     Document_ID = table.Column<Guid>(nullable: false),
                     Status_ID = table.Column<Guid>(nullable: false),
-                    DTS_Start = table.Column<DateTime>(nullable: false),
-                    DTS_End = table.Column<DateTime>(nullable: true),
+                    DTS_Start = table.Column<DateTimeOffset>(nullable: false),
+                    DTS_End = table.Column<DateTimeOffset>(nullable: true),
                     Parent_ID = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
@@ -2535,34 +2535,34 @@ namespace SmartQA.Migrations
             migrationBuilder.InsertData(
                 table: "p_AppUser",
                 columns: new[] { "AppUser_ID", "AppUser_Code", "Comment", "Created_User_ID", "Insert_DTS", "Modified_User_ID", "RowStatus", "Update_DTS", "User_Password" },
-                values: new object[] { new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "root", "superuser", new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTime(2018, 12, 29, 5, 6, 58, 181, DateTimeKind.Utc).AddTicks(1156), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), 0, new DateTime(2018, 12, 29, 5, 6, 58, 181, DateTimeKind.Utc).AddTicks(1405), new byte[] { 195, 146, 201, 42, 72, 160, 70, 204, 91, 189, 0, 255, 186, 177, 190, 82 } });
+                values: new object[] { new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "root", "superuser", new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 755, DateTimeKind.Unspecified).AddTicks(5436), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), 0, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 755, DateTimeKind.Unspecified).AddTicks(5695), new TimeSpan(0, 0, 0, 0, 0)), new byte[] { 154, 188, 48, 112, 67, 142, 69, 201, 47, 42, 14, 147, 89, 44, 163, 254 } });
 
             migrationBuilder.InsertData(
                 table: "p_Status",
                 columns: new[] { "Status_ID", "Created_User_ID", "Description_Eng", "Description_Rus", "EntityLocked", "Insert_DTS", "Modified_User_ID", "ReportColor", "ReportOrder", "RowStatus", "StatusEntity", "Status_Code", "Update_DTS" },
                 values: new object[,]
                 {
-                    { new Guid("5e1a9818-f8a5-481c-20f0-c16d362df87a"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Draft", "Черновик", false, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5712), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Document", "wDd", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5715) },
-                    { new Guid("27d94262-2830-1d24-5764-2a90ae9094e7"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Fixed", "Исправлено", false, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5733), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLIf", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5733) },
-                    { new Guid("9ac37fd3-b2c2-c309-5f39-69fb7150a824"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Issued", "Выпущено", false, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5733), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLIss", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5733) },
-                    { new Guid("6e2d4292-5383-bd3a-24fc-e67857fbf182"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Draft", "Черновик", false, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5733), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLId", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5733) },
-                    { new Guid("60486e51-ef01-2480-9e25-7ae2f56f034d"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Fixed", "Замечания устранены", true, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5730), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckList", "wCLf", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5730) },
-                    { new Guid("4f24b41a-dac7-3e73-9c0d-b31fb2f19d56"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Completed", "Проверка завершена", true, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5730), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckList", "wСLc", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5730) },
-                    { new Guid("3dbfcb25-3ec5-f5f6-b619-43a6e0f73926"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Review", "Проверка", false, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5730), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckList", "wСLr", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5730) },
-                    { new Guid("86cb8686-6b39-13c9-bf28-70cf2d6d62ef"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Draft", "Черновик", false, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5727), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckList", "wСLd", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5730) },
-                    { new Guid("c0327b4c-b2eb-32dc-ce07-80f23940350a"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Cancelled", "Аннулирован", true, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5727), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCcan", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5727) },
-                    { new Guid("ce34a401-3dea-c8eb-f304-86c73e9ffd9a"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Approved", "Утверждено", true, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5733), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLIa", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5733) },
-                    { new Guid("95e4f0ea-9378-dc03-cf36-eb9efa314512"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Archived", "Архивирование", true, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5727), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCarh", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5727) },
-                    { new Guid("e10cd869-3878-29b0-1b30-a4a2855c6986"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "NotApproved", "Отказано в утверждении", true, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5724), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCCuna", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5727) },
-                    { new Guid("2e96ff56-a2c3-7e5f-d06f-28eb06f8106f"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Approvement", "Утверждение", true, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5724), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCCua", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5724) },
-                    { new Guid("bcfd9a12-a2d8-f81c-c7d5-d43f190ed507"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "SecondReview", "Повторная проверка", true, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5724), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCCuAsr", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5724) },
-                    { new Guid("28fe952a-5094-3f4e-96cf-f9cddfae5e74"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "CommentsIncorporation", "Устранение замечаний", false, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5724), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wSCci", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5724) },
-                    { new Guid("81f3ef08-bfa7-4176-e0c1-54ef6d687b6b"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "ComentsExists", "Выданы замечания", true, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5721), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wSCce", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5724) },
-                    { new Guid("e65bd063-4b28-9174-db6d-83319a90ad76"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Review", "Проверка", true, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5721), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCCuAr", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5721) },
-                    { new Guid("ec3dfdb9-2c7a-9a45-9ced-fde8e9fe7617"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Draft", "Черновик", false, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5721), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wSCd", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5721) },
-                    { new Guid("12c12fe0-2085-5d30-87a5-5d98ba3c6ed8"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Accepted", "Действующий", true, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5721), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Document", "wDa", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5721) },
-                    { new Guid("55bc74c0-937a-1691-9c19-4d40d6028c96"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "WaitingSMR", "Ожидание завершения СМР", true, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5727), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCwsmr", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5727) },
-                    { new Guid("2192a6b9-d13b-3e13-597c-cdd6ebed10df"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Cancelled", "Отменено", true, new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5733), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLIc", new DateTime(2018, 12, 29, 5, 6, 58, 185, DateTimeKind.Utc).AddTicks(5736) }
+                    { new Guid("5e1a9818-f8a5-481c-20f0-c16d362df87a"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Draft", "Черновик", false, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(639), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Document", "wDd", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(645), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("27d94262-2830-1d24-5764-2a90ae9094e7"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Fixed", "Исправлено", false, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(666), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLIf", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(666), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("9ac37fd3-b2c2-c309-5f39-69fb7150a824"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Issued", "Выпущено", false, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(666), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLIss", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(666), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("6e2d4292-5383-bd3a-24fc-e67857fbf182"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Draft", "Черновик", false, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(666), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLId", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(666), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("60486e51-ef01-2480-9e25-7ae2f56f034d"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Fixed", "Замечания устранены", true, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(663), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckList", "wCLf", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(663), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("4f24b41a-dac7-3e73-9c0d-b31fb2f19d56"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Completed", "Проверка завершена", true, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(663), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckList", "wСLc", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(663), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("3dbfcb25-3ec5-f5f6-b619-43a6e0f73926"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Review", "Проверка", false, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(660), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckList", "wСLr", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(663), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("86cb8686-6b39-13c9-bf28-70cf2d6d62ef"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Draft", "Черновик", false, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(660), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckList", "wСLd", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(660), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("c0327b4c-b2eb-32dc-ce07-80f23940350a"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Cancelled", "Аннулирован", true, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(660), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCcan", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(660), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("ce34a401-3dea-c8eb-f304-86c73e9ffd9a"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Approved", "Утверждено", true, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(669), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLIa", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(669), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("95e4f0ea-9378-dc03-cf36-eb9efa314512"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Archived", "Архивирование", true, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(657), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCarh", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(660), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("e10cd869-3878-29b0-1b30-a4a2855c6986"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "NotApproved", "Отказано в утверждении", true, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(657), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCCuna", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(657), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("2e96ff56-a2c3-7e5f-d06f-28eb06f8106f"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Approvement", "Утверждение", true, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(654), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCCua", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(657), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("bcfd9a12-a2d8-f81c-c7d5-d43f190ed507"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "SecondReview", "Повторная проверка", true, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(654), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCCuAsr", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(654), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("28fe952a-5094-3f4e-96cf-f9cddfae5e74"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "CommentsIncorporation", "Устранение замечаний", false, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(654), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wSCci", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(654), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("81f3ef08-bfa7-4176-e0c1-54ef6d687b6b"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "ComentsExists", "Выданы замечания", true, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(651), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wSCce", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(654), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("e65bd063-4b28-9174-db6d-83319a90ad76"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Review", "Проверка", true, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(651), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCCuAr", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(651), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("ec3dfdb9-2c7a-9a45-9ced-fde8e9fe7617"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Draft", "Черновик", false, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(651), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wSCd", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(651), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("12c12fe0-2085-5d30-87a5-5d98ba3c6ed8"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Accepted", "Действующий", true, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(648), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Document", "wDa", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(648), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("55bc74c0-937a-1691-9c19-4d40d6028c96"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "WaitingSMR", "Ожидание завершения СМР", true, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(657), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCwsmr", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(657), new TimeSpan(0, 0, 0, 0, 0)) },
+                    { new Guid("2192a6b9-d13b-3e13-597c-cdd6ebed10df"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Cancelled", "Отменено", true, new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(669), new TimeSpan(0, 0, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLIc", new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(669), new TimeSpan(0, 0, 0, 0, 0)) }
                 });
 
             migrationBuilder.CreateIndex(

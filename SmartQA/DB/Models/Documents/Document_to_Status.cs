@@ -11,8 +11,9 @@ namespace SmartQA.DB.Models.Documents
         public Guid Document_ID { get; set; }
         public Guid Status_ID { get; set; }
 
-        public DateTime DTS_Start { get; set; }
-        public DateTime? DTS_End { get; set; }
+        [Required]
+        public DateTimeOffset? DTS_Start { get; set; }
+        public DateTimeOffset? DTS_End { get; set; }
         public Guid? Parent_ID { get; set;  }
         
         [ForeignKey("Document_ID")]

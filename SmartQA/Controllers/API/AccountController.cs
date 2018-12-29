@@ -84,7 +84,7 @@ namespace SmartQA.Controllers
 
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtKey"]));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                var expires = DateTime.Now.AddDays(Convert.ToDouble(30));
+                var expires = DateTime.UtcNow.AddDays(Convert.ToDouble(30));
 
                 var token = new JwtSecurityToken(
                     _configuration["JwtIssuer"],
