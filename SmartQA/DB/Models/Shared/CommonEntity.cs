@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SmartQA.Auth;
-using SmartQA.DB.Models.Auth;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using SmartQA.Auth;
+using SmartQA.DB.Models.Auth;
+using SmartQA.DB.Models.Common;
 
 namespace SmartQA.DB.Models.Shared
 {
@@ -25,13 +27,12 @@ namespace SmartQA.DB.Models.Shared
         [ForeignKey("Modified_User_ID")]
         public virtual AppUser Modified_User { get; set; }
 
-
         public static void CommonModelSetup<T>(ModelBuilder modelBuilder) where T : CommonEntity
-        {            
+        {
             modelBuilder.Entity<T>()
                 .HasOne(x => x.Created_User)
                 .WithMany()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict);            
 
             modelBuilder.Entity<T>()
                 .HasOne(x => x.Modified_User)
@@ -40,6 +41,20 @@ namespace SmartQA.DB.Models.Shared
 
             modelBuilder.Entity<T>()
                 .HasQueryFilter(x => x.RowStatus < 100);
+
+            modelBuilder.Entity<T>().HasOne(typeof(RowStatus))
+                .WithMany()
+                .HasForeignKey("RowStatus")
+                .OnDelete(DeleteBehavior.Restrict);
+
+             foreach (var guidPkey in typeof(T).GetProperties().Where(p => 
+                 p.GetCustomAttributes(true).Any(a => a is KeyAttribute) && p.PropertyType == typeof(Guid)))
+             {
+                 modelBuilder.Entity<T>()
+                     .Property(guidPkey.Name)
+                     .HasDefaultValueSql("newsequentialid()")
+                     .ValueGeneratedOnAdd();
+             }
         }
 
         public void MarkDeleted()
@@ -47,7 +62,7 @@ namespace SmartQA.DB.Models.Shared
             this.RowStatus = 200;            
         }
 
-        public virtual void OnSave(ApplicationUser applicationUser)
+        public virtual void OnSave(DbContext context, ApplicationUser applicationUser)
         {                        
             if (RowStatus == null)
             {
@@ -65,8 +80,18 @@ namespace SmartQA.DB.Models.Shared
 
             Update_DTS = DateTime.UtcNow;            
             Modified_User_ID = applicationUser.Id;
-
-            M2MEntityCache?.ForEach(x => x.OnSave(applicationUser));
+            
+            M2MEntityCache?.ForEach(x =>
+            {
+                if (x.RowStatus != 200)
+                {
+                    x.OnSave(context, applicationUser);
+                }
+                else
+                {
+                    context.Remove((object) x);
+                }
+            });
         }
 
         [NotMapped] private List<CommonEntity> M2MEntityCache { get; set; }

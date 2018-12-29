@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.WindowsAzure.Storage.Blob.Protocol;
-using SmartQA.DB;
 using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.Models.Forms

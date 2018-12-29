@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.Auth
 {
     [Table("p_AppUser_to_Role")]
-    public class AppUser_to_Role : CommonEntity
+    public class AppUser_to_Role : M2MEntity
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public System.Guid AppUser_to_Role_ID { get; set; }
 
         public System.Guid AppUser_ID { get; set; }

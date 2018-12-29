@@ -1,10 +1,6 @@
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'styles/main.scss'
 
 import "devextreme-intl";
-
-import { FontAwesomeIcon } from './icons'
 
 import Vue from 'vue'
 import Rx from 'rxjs/Rx';
@@ -17,13 +13,13 @@ import router from './router/index'
 import store from './store'
 import authHelper from 'auth/helper'
 
-import { locale, loadMessages } from "devextreme/localization";
+import {locale} from "devextreme/localization";
+import DefaultLayout from './layouts/default'
+import BlankLayout from './layouts/blank'
+
 locale(navigator.language || navigator.browserLanguage);
 
 authHelper.onAppInit();
-
-import DefaultLayout from './layouts/default'
-import BlankLayout from './layouts/blank'
 
 
 Vue.component('default-layout', DefaultLayout);

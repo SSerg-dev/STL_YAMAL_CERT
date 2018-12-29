@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.OData;
@@ -8,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartQA.Auth;
 using SmartQA.DB;
-using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.Shared;
 using SmartQA.Models;
 
@@ -58,7 +56,7 @@ namespace SmartQA.Controllers.Reftables
                 Description = form.Description                
             };
 
-            item.OnSave(await _userManager.Get(User));
+            item.OnSave(_context, await _userManager.Get(User));
 
             GetDbSet().Add(item);
                         
@@ -78,7 +76,7 @@ namespace SmartQA.Controllers.Reftables
             var entity = GetDbSet().Find(key);
             form.Serialize(entity);
 
-            entity.OnSave(await _userManager.Get(User));
+            entity.OnSave(_context, await _userManager.Get(User));
 
             await _context.SaveChangesAsync();
 
@@ -92,7 +90,7 @@ namespace SmartQA.Controllers.Reftables
             var item = GetDbSet().Find(key);
 
             item.MarkDeleted();
-            item.OnSave(await _userManager.Get(User));
+            item.OnSave(_context, await _userManager.Get(User));
 
             await _context.SaveChangesAsync();
 

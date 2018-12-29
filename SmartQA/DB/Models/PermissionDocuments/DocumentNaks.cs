@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Threading.Tasks;
-using SmartQA.DB.Models.Auth;
 using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.Reftables;
 using SmartQA.DB.Models.Shared;
@@ -14,7 +12,7 @@ namespace SmartQA.DB.Models.PermissionDocuments
     [Table("p_DocumentNaks")]
     public class DocumentNaks : CommonEntity
     {
-        [Key]                
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]                
         public Guid DocumentNaks_ID { get; set; }
                 
         public Guid Person_ID { get; set; }

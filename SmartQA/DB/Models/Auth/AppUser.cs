@@ -9,11 +9,18 @@ namespace SmartQA.DB.Models.Auth
     [Table("p_AppUser")]
     public class AppUser : CommonEntity
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public System.Guid AppUser_ID { get; set; }
+        
+        [Required]
+        [StringLength(255)]
         public string AppUser_Code { get; set; }
         
+        [StringLength(250)]
         public string Comment { get; set; }
+        
+        [Required]
+        [StringLength(8000)]
         public byte[] User_Password { get; set; }
         
         [InverseProperty("AppUser")]

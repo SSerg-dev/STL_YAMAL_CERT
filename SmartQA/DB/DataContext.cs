@@ -1,21 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using SmartQA.DB.Models;
 using SmartQA.DB.Models.Auth;
+using SmartQA.DB.Models.Common;
+using SmartQA.DB.Models.Documents;
 using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.PermissionDocuments;
 using SmartQA.DB.Models.Reftables;
 using SmartQA.DB.Models.Shared;
 using SmartQA.Models.Forms;
 
-
 namespace SmartQA.DB
 {
-    public class DataContext : DbContext
+    public partial class DataContext : DbContext
     {
+        
+        public static readonly Guid rootUserId = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
+        private static readonly string rootUserDefaultPassword = "ShareWare724";
+
+        public DbSet<RowStatus> RowStatus { get; set; }
+        
         public DbSet<AppUser> AppUser { get; set; }
         public DbSet<Role> Role { get; set; }        
         public DbSet<AppUser_to_Role> AppUser_to_Role { get; set; }        
@@ -25,6 +28,7 @@ namespace SmartQA.DB
         public DbSet<Division> Division { get; set; }
         public DbSet<Position> Position { get; set; }
         public DbSet<Contragent> Contragent { get; set; }
+        public DbSet<ContragentRole> ContragentRole { get; set; }
 
         public DbSet<DetailsType> DetailsType { get; set; }
         public DbSet<HIFGroup> HIFGroup { get; set; }
@@ -65,6 +69,22 @@ namespace SmartQA.DB
         public DbSet<DocumentNaksAttest_to_WeldGOST14098> DocumentNaksAttest_to_WeldGOST14098 { get; set; }
         public DbSet<DocumentNaksAttest_to_JointType> DocumentNaksAttest_to_JointType { get; set; }
 
+        public DbSet<Marka> Marka { get; set; }
+        public DbSet<TitleObject> TitleObject { get; set; }
+        
+        public DbSet<PID> PID { get; set; }
+        public DbSet<GOST> GOST { get; set; }
+        public DbSet<GOST_to_TitleObject> GOST_to_TitleObject { get; set; }
+        public DbSet<GOST_to_PID> GOST_to_PID { get; set; }
+        
+        public DbSet<Status> Status { get; set; }
+        public DbSet<DocumentType> DocumentType { get; set; }
+        public DbSet<DocumentProjectNumber> DocumentProjectNumber { get; set; }
+        public DbSet<Document> Document { get; set; }
+        public DbSet<Document_to_GOST> Document_to_GOST { get; set; }
+        public DbSet<Document_to_PID> Document_to_PID { get; set; }
+        public DbSet<Document_to_Status> Document_to_Status { get; set; }
+     
         public DataContext() {}
 
         public DataContext(DbContextOptions<DataContext> options)
@@ -124,7 +144,102 @@ namespace SmartQA.DB
             CommonEntity.CommonModelSetup<DocumentNaksAttest_to_JointKind>(modelBuilder);
             CommonEntity.CommonModelSetup<DocumentNaksAttest_to_WeldGOST14098>(modelBuilder);
             CommonEntity.CommonModelSetup<DocumentNaksAttest_to_JointType>(modelBuilder);
+            
+            // ----- documents ----
+            CommonEntity.CommonModelSetup<PID>(modelBuilder);
+            CommonEntity.CommonModelSetup<GOST>(modelBuilder);
+            CommonEntity.CommonModelSetup<GOST_to_TitleObject>(modelBuilder);
+            CommonEntity.CommonModelSetup<GOST_to_PID>(modelBuilder);
+            CommonEntity.CommonModelSetup<Status>(modelBuilder);
+            CommonEntity.CommonModelSetup<Document>(modelBuilder);
+            CommonEntity.CommonModelSetup<Document_to_PID>(modelBuilder);
+            CommonEntity.CommonModelSetup<Document_to_GOST>(modelBuilder);
+            CommonEntity.CommonModelSetup<Document_to_Status>(modelBuilder);         
+            
+            modelBuilder.Entity<Document>()
+                .HasOne(d => d.Root)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            modelBuilder.Entity<Document_to_Status>()
+                .HasOne(d => d.Parent)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.HasSequence<long>("Sequence_Document_Number");
+            modelBuilder.HasSequence<long>("Sequence_CheckList_Number");
+            modelBuilder.HasSequence<long>("Sequence_Register_Number");
+            
+            SetupConstraints(modelBuilder);
+            SetupInitialData(modelBuilder);
+        }
+
+        private void SetupConstraints(ModelBuilder modelBuilder)
+        {        
+            // ----- reftables ----------
+            foreach (var reftableType in Reftable.GetReftableTypes())
+            {
+                var entity = modelBuilder.GetType()
+                    .GetMethod("Entity", new Type[] {})
+                    .MakeGenericMethod(reftableType)
+                    .Invoke(modelBuilder, new object[] { });
+
+                var ak = entity.GetType()
+                    .GetMethod("HasAlternateKey", new Type[] { (new string[]{}).GetType() })
+                    .Invoke(entity, new object[] { new string[] {"Title"}});
+
+            }
+            
+            modelBuilder.Entity<Employee>()
+                .HasAlternateKey(u => u.Employee_Code)
+                .HasName("UQ_p_Employee");
+
+            modelBuilder.Entity<Contragent>()
+                .HasAlternateKey(u => u.Title)
+                .HasName("UQ_p_Contragent");
+            
+            // TODO: rework or remove this
+            modelBuilder.Entity<Division>()
+                .HasAlternateKey(u => u.Division_Code)
+                .HasName("UQ_p_Division");
+            
+            modelBuilder.Entity<DocumentType>()
+                .HasAlternateKey(u => u.Title)
+                .HasName("UQ_p_DocumentType");
+            
+            modelBuilder.Entity<Document>()
+                .HasAlternateKey(u => u.Document_Code)
+                .HasName("UQ_p_Document");
+            
+            modelBuilder.Entity<Document_to_GOST>()
+                .HasAlternateKey(u => new { u.Document_ID, u.GOST_ID })
+                .HasName("UQ_p_Document_to_GOST");
+            
+            modelBuilder.Entity<Document_to_PID>()
+                .HasAlternateKey(u => new { u.Document_ID, u.PID_ID })
+                .HasName("UQ_p_Document_to_PID");
+
+            modelBuilder.Entity<GOST>()
+                .HasAlternateKey(u => u.GOST_Code)
+                .HasName("UQ_p_GOST");
+            
+            modelBuilder.Entity<GOST_to_PID>()
+                .HasAlternateKey(u => new { u.GOST_ID, u.PID_ID })
+                .HasName("UQ_p_GOST_to_PID");
+            
+            modelBuilder.Entity<GOST_to_TitleObject>()
+                .HasAlternateKey(u => new { u.GOST_ID, u.TitleObject_ID })
+                .HasName("UQ_p_GOST_to_TitleObject");
+            
+            modelBuilder.Entity<AppUser>()
+                .HasAlternateKey(u => u.AppUser_Code)
+                .HasName("UQ_p_AppUser");
+            
+            modelBuilder.Entity<AppUser_to_Role>()
+                .HasAlternateKey(u => new { u.AppUser_ID, u.Role_ID })
+                .HasName("UQ_p_AppUser_to_Role");
 
         }
+
     }
 }

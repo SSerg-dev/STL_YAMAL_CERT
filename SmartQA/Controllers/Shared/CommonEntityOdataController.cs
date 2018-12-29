@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartQA.Auth;
 using SmartQA.DB;
 using SmartQA.DB.Models.Shared;
-using SmartQA.Models;
 using SmartQA.Models.Shared;
 
 namespace SmartQA.Controllers.Shared
@@ -57,7 +54,7 @@ namespace SmartQA.Controllers.Shared
             var entity = new TEntity();
             form.Serialize(entity);
 
-            entity.OnSave(await _userManager.Get(this.User));
+            entity.OnSave(_context, await _userManager.Get(this.User));
 
             GetDbSet().Add(entity);
 
@@ -76,7 +73,7 @@ namespace SmartQA.Controllers.Shared
             var entity = GetDbSet().Find(key);
             form.Serialize(entity);
 
-            entity.OnSave(await _userManager.Get(this.User));
+            entity.OnSave(_context, await _userManager.Get(this.User));
 
             await _context.SaveChangesAsync();
 
@@ -89,7 +86,7 @@ namespace SmartQA.Controllers.Shared
             var item = GetDbSet().Find(key);
 
             item.MarkDeleted();
-            item.OnSave(await _userManager.Get(this.User));
+            item.OnSave(_context, await _userManager.Get(this.User));
 
             await _context.SaveChangesAsync();
 

@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNet.OData;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNet.OData;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SmartQA.Auth;
 using SmartQA.DB;
 using SmartQA.DB.Models.People;
 using SmartQA.Models;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using SmartQA.Auth;
 
 namespace SmartQA.Controllers
 {
@@ -54,8 +54,8 @@ namespace SmartQA.Controllers
 
             var user = await _userManager.Get(User);
             employeeForm.Serialize(employee);
-            employee.OnSave(user);
-            employee.Person.OnSave(user);
+            employee.OnSave(_context, user);
+            employee.Person.OnSave(_context, user);
 
             _context.Person.Add(employee.Person);
             _context.Employee.Add(employee);
@@ -77,8 +77,8 @@ namespace SmartQA.Controllers
             employeeForm.Serialize(employee);
 
             var user = await _userManager.Get(User);
-            employee.OnSave(user);
-            employee.Person.OnSave(user);
+            employee.OnSave(_context, user);
+            employee.Person.OnSave(_context, user);
 
             _context.SaveChanges();
 
@@ -98,8 +98,8 @@ namespace SmartQA.Controllers
             employeeForm.Serialize(employee);
 
             var user = await _userManager.Get(User);
-            employee.OnSave(user);
-            employee.Person.OnSave(user);
+            employee.OnSave(_context, user);
+            employee.Person.OnSave(_context, user);
 
             _context.SaveChanges();
             
@@ -113,7 +113,7 @@ namespace SmartQA.Controllers
                 .Single(x => x.Employee_ID == key);
 
             employee.MarkDeleted();
-            employee.OnSave(await _userManager.Get(User));
+            employee.OnSave(_context, await _userManager.Get(User));
 
             _context.SaveChanges();
 

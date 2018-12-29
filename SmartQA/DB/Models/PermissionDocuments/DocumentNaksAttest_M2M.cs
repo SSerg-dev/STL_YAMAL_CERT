@@ -1,15 +1,15 @@
-﻿using SmartQA.DB.Models.Reftables;
-using SmartQA.DB.Models.Shared;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SmartQA.DB.Models.Reftables;
+using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.PermissionDocuments
 {
     [Table("p_DocumentNaksAttest_to_DetailsType")]
-    public class DocumentNaksAttest_to_DetailsType : CommonEntity
+    public class DocumentNaksAttest_to_DetailsType : M2MEntity
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("DocumentNaksAttest_to_DetailsType_ID")]
         public Guid ID { get; set; }
 
@@ -23,9 +23,9 @@ namespace SmartQA.DB.Models.PermissionDocuments
     }
 
     [Table("p_DocumentNaksAttest_to_SeamsType")]
-    public class DocumentNaksAttest_to_SeamsType : CommonEntity
+    public class DocumentNaksAttest_to_SeamsType : M2MEntity
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("DocumentNaksAttest_to_SeamsType_ID")]
         public Guid ID { get; set; }
 
@@ -39,9 +39,9 @@ namespace SmartQA.DB.Models.PermissionDocuments
     }
 
     [Table("p_DocumentNaksAttest_to_WeldMaterialGroup")]
-    public class DocumentNaksAttest_to_WeldMaterialGroup : CommonEntity
+    public class DocumentNaksAttest_to_WeldMaterialGroup : M2MEntity
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("DocumentNaksAttest_to_WeldMaterialGroup_ID")]
         public Guid ID { get; set; }
 
@@ -55,9 +55,9 @@ namespace SmartQA.DB.Models.PermissionDocuments
     }
 
     [Table("p_DocumentNaksAttest_to_WeldMaterial")]
-    public class DocumentNaksAttest_to_WeldMaterial : CommonEntity
+    public class DocumentNaksAttest_to_WeldMaterial : M2MEntity
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("DocumentNaksAttest_to_WeldMaterial_ID")]
         public Guid ID { get; set; }
 
@@ -71,9 +71,9 @@ namespace SmartQA.DB.Models.PermissionDocuments
     }
 
     [Table("p_DocumentNaksAttest_to_WeldPosition")]
-    public class DocumentNaksAttest_to_WeldPosition : CommonEntity
+    public class DocumentNaksAttest_to_WeldPosition : M2MEntity
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("DocumentNaksAttest_to_WeldPosition_ID")]
         public Guid ID { get; set; }
 
@@ -87,9 +87,9 @@ namespace SmartQA.DB.Models.PermissionDocuments
     }
 
     [Table("p_DocumentNaksAttest_to_JointKind")]
-    public class DocumentNaksAttest_to_JointKind : CommonEntity
+    public class DocumentNaksAttest_to_JointKind : M2MEntity
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("DocumentNaksAttest_to_JointKind_ID")]
         public Guid ID { get; set; }
 
@@ -103,9 +103,9 @@ namespace SmartQA.DB.Models.PermissionDocuments
     }
 
     [Table("p_DocumentNaksAttest_to_WeldGOST14098")]
-    public class DocumentNaksAttest_to_WeldGOST14098 : CommonEntity
+    public class DocumentNaksAttest_to_WeldGOST14098 : M2MEntity
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("DocumentNaksAttest_to_WeldGOST14098_ID")]
         public Guid ID { get; set; }
 
@@ -119,9 +119,9 @@ namespace SmartQA.DB.Models.PermissionDocuments
     }
 
     [Table("p_DocumentNaksAttest_to_JointType")]
-    public class DocumentNaksAttest_to_JointType : CommonEntity
+    public class DocumentNaksAttest_to_JointType : M2MEntity
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("DocumentNaksAttest_to_JointType_ID")]
         public Guid ID { get; set; }
 

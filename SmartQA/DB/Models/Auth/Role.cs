@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.Auth
@@ -11,8 +8,11 @@ namespace SmartQA.DB.Models.Auth
     [Table("p_Role")]
     public class Role : CommonEntity
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public System.Guid Role_ID { get; set; }
+        
+        [Required]
+        [StringLength(255)]
         public string Role_Code { get; set; }
 
         [InverseProperty("Role")]

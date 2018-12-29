@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.OData.Edm;
-
-using SmartQA.DB.Models.Auth;
 using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.People
@@ -14,7 +9,7 @@ namespace SmartQA.DB.Models.People
     [Table("p_Person")]
     public class Person : CommonEntity
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Person_ID { get; set; }
 
         [Required]
