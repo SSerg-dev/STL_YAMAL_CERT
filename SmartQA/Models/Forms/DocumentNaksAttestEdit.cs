@@ -22,12 +22,8 @@ namespace SmartQA.Models
         public string SDR { get; set; }
 
         // ---- foreign keys --------------
-        //[Required]
-        //public Guid? JointType_ID { get; set; }
         [Required]
         public Guid? WeldingEquipmentAutomationLevel_ID { get; set; }
-        //[Required]
-        //public Guid? WeldGOST14098_ID { get; set; }
 
         public ICollection<Guid> DetailsType_IDs { get; set; }
         public ICollection<Guid> SeamsType_IDs { get; set; }

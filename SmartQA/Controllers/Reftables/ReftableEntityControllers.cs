@@ -167,16 +167,26 @@ namespace SmartQA.Controllers.Reftables
         [EnableQuery]
         public new IQueryable<Contragent> Get() => _context.Contragent.OrderBy(x => x.Description).AsQueryable();
     }
+    //public class PositionController : ReftableBaseController<Position>
+    //{
+    //    private DataContext _context;
+    //    public PositionController(DataContext context, AppUserManager userManager) : base(context, userManager)
+    //    {
+    //        _context = context;
+    //    }
+
+    //    [EnableQuery]
+    //    public new IQueryable<Position> Get() => _context.Position.OrderBy(x => x.Description).AsQueryable();
+    //}
     public class PositionController : ReftableBaseController<Position>
     {
-        private DataContext _context;
         public PositionController(DataContext context, AppUserManager userManager) : base(context, userManager)
-        {
-            _context = context;
-        }
-
-        [EnableQuery]
-        public new IQueryable<Position> Get() => _context.Position.OrderBy(x => x.Description).AsQueryable();
+        { }
+    }
+    public class DivisionController : ReftableBaseController<Division>
+    {
+        public DivisionController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
     }
     public class StaffFunctionController : ReftableBaseController<StaffFunction>
     {

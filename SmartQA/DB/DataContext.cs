@@ -125,8 +125,8 @@ namespace SmartQA.DB
             // ----- people -------------
             CommonEntity.CommonModelSetup<Person>(modelBuilder);
             CommonEntity.CommonModelSetup<Employee>(modelBuilder);                
-            CommonEntity.CommonModelSetup<Division>(modelBuilder);                
-            CommonEntity.CommonModelSetup<Position>(modelBuilder);                
+            //CommonEntity.CommonModelSetup<Division>(modelBuilder);                
+            //CommonEntity.CommonModelSetup<Position>(modelBuilder);                
             CommonEntity.CommonModelSetup<Contragent>(modelBuilder);
 
             // ----- reftables ----------
@@ -207,14 +207,17 @@ namespace SmartQA.DB
             modelBuilder.Entity<Employee>()
                 .HasAlternateKey(u => u.Employee_Code);
 
-
             modelBuilder.Entity<Contragent>()
                 .HasAlternateKey(u => u.Title);
-                
-            
-            // TODO: rework or remove this
+
             modelBuilder.Entity<Division>()
-                .HasAlternateKey(u => u.Division_Code);
+                .HasAlternateKey(u => u.Title);
+
+            modelBuilder.Entity<Position>()
+                .HasAlternateKey(u => u.Title);
+
+            // TODO: rework or remove this
+
 
             modelBuilder.Entity<DocumentType>()
                 .HasAlternateKey(u => u.Title);
