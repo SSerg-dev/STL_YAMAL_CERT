@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using SmartQA.Auth;
@@ -6,6 +7,7 @@ using SmartQA.DB.Models.Auth;
 using SmartQA.DB.Models.Common;
 using SmartQA.DB.Models.Documents;
 using SmartQA.Util;
+using Role = SmartQA.DB.Models.Auth.Role;
 
 namespace SmartQA.DB
 {
@@ -60,11 +62,32 @@ namespace SmartQA.DB
                     }
                 );
 
-//            modelBuilder.Entity<Role>()
-//                .HasData(new Role
-//                {
-//                    
-//                })
+            modelBuilder.Entity<Role>()
+                .HasData(new Role
+                {
+                    ID = Guid.Parse("CCD8C1EE-F6A8-E811-AA0B-005056947B15"),
+                    RowStatus = 0,
+                    Created_User_ID = rootUserId,
+                    Modified_User_ID = rootUserId,
+                    Insert_DTS = DateTimeOffset.Now,
+                    Update_DTS = DateTimeOffset.Now,
+                    Role_Code = "Administrator"
+                });
+
+            
+            // admin rights for root user
+            modelBuilder.Entity<AppUser_to_Role>()
+                .HasData(new AppUser_to_Role()
+                {
+                    ID = Guid.Parse("C2D77D20-D557-4291-8DA8-5B6765256A95"),
+                    RowStatus = 0,
+                    Created_User_ID = rootUserId,
+                    Modified_User_ID = rootUserId,
+                    Insert_DTS = DateTimeOffset.Now,
+                    Update_DTS = DateTimeOffset.Now,
+                    AppUser_ID = rootUserId,
+                    Role_ID = Guid.Parse("CCD8C1EE-F6A8-E811-AA0B-005056947B15")
+                });
 
 
             var statuses = new[]
@@ -187,16 +210,12 @@ namespace SmartQA.DB
                 new Status
                 {
                     ID = Guid.Parse("CE34A401-3DEA-C8EB-F304-86C73E9FFD9A"),
-
-
                     Status_Code = "wCLIa", StatusEntity = "CheckItem", Description_Eng = "Approved",
                     Description_Rus = "Утверждено", EntityLocked = true
                 },
                 new Status
                 {
                     ID = Guid.Parse("2192A6B9-D13B-3E13-597C-CDD6EBED10DF"),
-
-
                     Status_Code = "wCLIc", StatusEntity = "CheckItem", Description_Eng = "Cancelled",
                     Description_Rus = "Отменено", EntityLocked = true
                 }
