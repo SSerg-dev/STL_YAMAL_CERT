@@ -21,9 +21,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
     [Table("p_DocumentNaksAttest_to_SeamsType")]
     public class DocumentNaksAttest_to_SeamsType : M2MEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("DocumentNaksAttest_to_SeamsType_ID")]
-        public Guid ID { get; set; }
 
         public Guid DocumentNaksAttest_ID { get; set; }
         public Guid SeamsType_ID { get; set; }
@@ -37,9 +34,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
     [Table("p_DocumentNaksAttest_to_WeldMaterialGroup")]
     public class DocumentNaksAttest_to_WeldMaterialGroup : M2MEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("DocumentNaksAttest_to_WeldMaterialGroup_ID")]
-        public Guid ID { get; set; }
 
         public Guid DocumentNaksAttest_ID { get; set; }
         public Guid WeldMaterialGroup_ID { get; set; }
@@ -53,9 +47,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
     [Table("p_DocumentNaksAttest_to_WeldMaterial")]
     public class DocumentNaksAttest_to_WeldMaterial : M2MEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("DocumentNaksAttest_to_WeldMaterial_ID")]
-        public Guid ID { get; set; }
 
         public Guid DocumentNaksAttest_ID { get; set; }
         public Guid WeldMaterial_ID { get; set; }
@@ -69,9 +60,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
     [Table("p_DocumentNaksAttest_to_WeldPosition")]
     public class DocumentNaksAttest_to_WeldPosition : M2MEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("DocumentNaksAttest_to_WeldPosition_ID")]
-        public Guid ID { get; set; }
 
         public Guid DocumentNaksAttest_ID { get; set; }
         public Guid WeldPosition_ID { get; set; }
@@ -85,9 +73,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
     [Table("p_DocumentNaksAttest_to_JointKind")]
     public class DocumentNaksAttest_to_JointKind : M2MEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("DocumentNaksAttest_to_JointKind_ID")]
-        public Guid ID { get; set; }
 
         public Guid DocumentNaksAttest_ID { get; set; }
         public Guid JointKind_ID { get; set; }
@@ -101,9 +86,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
     [Table("p_DocumentNaksAttest_to_WeldGOST14098")]
     public class DocumentNaksAttest_to_WeldGOST14098 : M2MEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("DocumentNaksAttest_to_WeldGOST14098_ID")]
-        public Guid ID { get; set; }
 
         public Guid DocumentNaksAttest_ID { get; set; }
         public Guid WeldGOST14098_ID { get; set; }
@@ -117,9 +99,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
     [Table("p_DocumentNaksAttest_to_JointType")]
     public class DocumentNaksAttest_to_JointType : M2MEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("DocumentNaksAttest_to_JointType_ID")]
-        public Guid ID { get; set; }
 
         public Guid DocumentNaksAttest_ID { get; set; }
         public Guid JointType_ID { get; set; }

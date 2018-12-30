@@ -89,7 +89,12 @@ namespace SmartQA.DB
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options) {}
-        
+
+        // ----- UDF ---------------
+        [DbFunction("f_SiteDT", "dbo")]
+        public static DateTime GetConstructionSiteDT(DateTimeOffset i_datetimeoffset) { throw new NotImplementedException();}
+
+  
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
                 // Add lazy-load proxies for related entities
@@ -239,7 +244,7 @@ namespace SmartQA.DB
                 .HasAlternateKey(u => new { u.AppUser_ID, u.Role_ID })
                 .HasName("UQ_p_AppUser_to_Role");
 
-        }
+    }
 
         
     }
