@@ -267,7 +267,7 @@
                             var source = new DataSource(dataSourceConfs.documentNaksAttest);
                             source.store().remove(modelId)
                                 .done(function (data) {
-                                    component.reloadData()
+                                    component.loadModel()
                                 });
                         }
                     });
