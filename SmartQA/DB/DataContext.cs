@@ -18,6 +18,7 @@ namespace SmartQA.DB
         private static readonly string rootUserDefaultPassword = "root_pwd_18";
 
         public DbSet<RowStatus> RowStatus { get; set; }
+        public DbSet<Parameter> Parameter { get; set; }
         
         public DbSet<AppUser> AppUser { get; set; }
         public DbSet<Role> Role { get; set; }        
@@ -103,6 +104,8 @@ namespace SmartQA.DB
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            CommonEntity.CommonModelSetup<Parameter>(modelBuilder);
+            
             // ----- auth ---------------
             CommonEntity.CommonModelSetup<AppUser>(modelBuilder);
             CommonEntity.CommonModelSetup<Role>(modelBuilder);
@@ -194,57 +197,50 @@ namespace SmartQA.DB
                     .Invoke(entity, new object[] { new string[] {"Title"}});
 
             }
-            
+
+            modelBuilder.Entity<Parameter>()
+                .HasAlternateKey(u => u.Parameter_Code);
+
             modelBuilder.Entity<Employee>()
-                .HasAlternateKey(u => u.Employee_Code)
-                .HasName("UQ_p_Employee");
+                .HasAlternateKey(u => u.Employee_Code);
+
 
             modelBuilder.Entity<Contragent>()
-                .HasAlternateKey(u => u.Title)
-                .HasName("UQ_p_Contragent");
+                .HasAlternateKey(u => u.Title);
+                
             
             // TODO: rework or remove this
             modelBuilder.Entity<Division>()
-                .HasAlternateKey(u => u.Division_Code)
-                .HasName("UQ_p_Division");
-            
+                .HasAlternateKey(u => u.Division_Code);
+
             modelBuilder.Entity<DocumentType>()
-                .HasAlternateKey(u => u.Title)
-                .HasName("UQ_p_DocumentType");
-            
+                .HasAlternateKey(u => u.Title);
+
             modelBuilder.Entity<Document>()
-                .HasAlternateKey(u => u.Document_Code)
-                .HasName("UQ_p_Document");
-            
+                .HasAlternateKey(u => u.Document_Code);
+
             modelBuilder.Entity<Document_to_GOST>()
-                .HasAlternateKey(u => new { u.Document_ID, u.GOST_ID })
-                .HasName("UQ_p_Document_to_GOST");
-            
+                .HasAlternateKey(u => new {u.Document_ID, u.GOST_ID});
+
             modelBuilder.Entity<Document_to_PID>()
-                .HasAlternateKey(u => new { u.Document_ID, u.PID_ID })
-                .HasName("UQ_p_Document_to_PID");
+                .HasAlternateKey(u => new {u.Document_ID, u.PID_ID});
 
             modelBuilder.Entity<GOST>()
-                .HasAlternateKey(u => u.GOST_Code)
-                .HasName("UQ_p_GOST");
-            
-            modelBuilder.Entity<GOST_to_PID>()
-                .HasAlternateKey(u => new { u.GOST_ID, u.PID_ID })
-                .HasName("UQ_p_GOST_to_PID");
-            
-            modelBuilder.Entity<GOST_to_TitleObject>()
-                .HasAlternateKey(u => new { u.GOST_ID, u.TitleObject_ID })
-                .HasName("UQ_p_GOST_to_TitleObject");
-            
-            modelBuilder.Entity<AppUser>()
-                .HasAlternateKey(u => u.AppUser_Code)
-                .HasName("UQ_p_AppUser");
-            
-            modelBuilder.Entity<AppUser_to_Role>()
-                .HasAlternateKey(u => new { u.AppUser_ID, u.Role_ID })
-                .HasName("UQ_p_AppUser_to_Role");
+                .HasAlternateKey(u => u.GOST_Code);
 
-    }
+            modelBuilder.Entity<GOST_to_PID>()
+                .HasAlternateKey(u => new {u.GOST_ID, u.PID_ID});
+
+            modelBuilder.Entity<GOST_to_TitleObject>()
+                .HasAlternateKey(u => new {u.GOST_ID, u.TitleObject_ID});
+
+            modelBuilder.Entity<AppUser>()
+                .HasAlternateKey(u => u.AppUser_Code);
+
+            modelBuilder.Entity<AppUser_to_Role>()
+                .HasAlternateKey(u => new {u.AppUser_ID, u.Role_ID});
+
+        }
 
         
     }

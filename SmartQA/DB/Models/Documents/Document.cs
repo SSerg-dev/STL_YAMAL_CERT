@@ -17,7 +17,7 @@ namespace SmartQA.DB.Models.Documents
         public DateTimeOffset? Issue_Date { get; set; }
 
         [Required]
-        public DateTime? Issue_DT { get; set; }
+        public DateTime? Issue_Date_DT { get; set; }
         
         [StringLength(255)]
         public string Document_Number { get; set; }

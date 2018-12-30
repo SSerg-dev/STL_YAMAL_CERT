@@ -10,8 +10,8 @@ using SmartQA.DB;
 namespace SmartQA.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181230034222_Initial")]
-    partial class Initial
+    [Migration("20181230044731_DocDateFunction")]
+    partial class DocDateFunction
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,8 +56,7 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("AppUser_Code")
-                        .HasName("UQ_p_AppUser");
+                    b.HasAlternateKey("AppUser_Code");
 
                     b.HasIndex("Created_User_ID");
 
@@ -74,11 +73,11 @@ namespace SmartQA.Migrations
                             AppUser_Code = "root",
                             Comment = "superuser",
                             Created_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 814, DateTimeKind.Unspecified).AddTicks(6134), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             RowStatus = 0,
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 816, DateTimeKind.Unspecified).AddTicks(8059), new TimeSpan(0, 5, 0, 0, 0)),
-                            User_Password = new byte[] { 154, 188, 48, 112, 67, 142, 69, 201, 63, 202, 229, 213, 205, 18, 207, 71 }
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
+                            User_Password = new byte[] { 154, 188, 48, 112, 67, 142, 69, 201, 80, 125, 104, 193, 197, 212, 204, 212 }
                         });
                 });
 
@@ -108,8 +107,7 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("AppUser_ID", "Role_ID")
-                        .HasName("UQ_p_AppUser_to_Role");
+                    b.HasAlternateKey("AppUser_ID", "Role_ID");
 
                     b.HasIndex("Created_User_ID");
 
@@ -127,11 +125,11 @@ namespace SmartQA.Migrations
                             ID = new Guid("c2d77d20-d557-4291-8da8-5b6765256a95"),
                             AppUser_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             Created_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(290), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             Role_ID = new Guid("ccd8c1ee-f6a8-e811-aa0b-005056947b15"),
                             RowStatus = 0,
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(296), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         });
                 });
 
@@ -174,11 +172,69 @@ namespace SmartQA.Migrations
                         {
                             ID = new Guid("ccd8c1ee-f6a8-e811-aa0b-005056947b15"),
                             Created_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 820, DateTimeKind.Unspecified).AddTicks(9389), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             Role_Code = "Administrator",
                             RowStatus = 0,
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 820, DateTimeKind.Unspecified).AddTicks(9404), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
+                        });
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Common.Parameter", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Parameter_ID")
+                        .HasDefaultValueSql("newsequentialid()");
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<string>("Description_Rus")
+                        .HasMaxLength(255);
+
+                    b.Property<DateTimeOffset?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<string>("Parameter_Code")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("Parameter_Value")
+                        .IsRequired()
+                        .HasMaxLength(1000);
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<DateTimeOffset?>("Update_DTS")
+                        .IsRequired();
+
+                    b.HasKey("ID");
+
+                    b.HasAlternateKey("Parameter_Code");
+
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.HasIndex("RowStatus");
+
+                    b.ToTable("p_Parameter");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = new Guid("c2a74178-34ae-407d-af20-bcbcf8be649f"),
+                            Created_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                            Description_Rus = "UTC часовой пояс строительной площадки",
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
+                            Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                            Parameter_Code = "SiteTimezone",
+                            Parameter_Value = "Ekaterinburg Standard Time",
+                            RowStatus = 0,
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         });
                 });
 
@@ -261,6 +317,9 @@ namespace SmartQA.Migrations
 
                     b.Property<bool>("IsActual");
 
+                    b.Property<DateTime?>("Issue_Date_DT")
+                        .IsRequired();
+
                     b.Property<DateTimeOffset?>("Issue_Date")
                         .IsRequired();
 
@@ -282,8 +341,7 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Document_Code")
-                        .HasName("UQ_p_Document");
+                    b.HasAlternateKey("Document_Code");
 
                     b.HasIndex("Created_User_ID");
 
@@ -365,8 +423,7 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title")
-                        .HasName("UQ_p_DocumentType");
+                    b.HasAlternateKey("Title");
 
                     b.HasIndex("Created_User_ID");
 
@@ -403,8 +460,7 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Document_ID", "GOST_ID")
-                        .HasName("UQ_p_Document_to_GOST");
+                    b.HasAlternateKey("Document_ID", "GOST_ID");
 
                     b.HasIndex("Created_User_ID");
 
@@ -443,8 +499,7 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Document_ID", "PID_ID")
-                        .HasName("UQ_p_Document_to_PID");
+                    b.HasAlternateKey("Document_ID", "PID_ID");
 
                     b.HasIndex("Created_User_ID");
 
@@ -538,8 +593,7 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("GOST_Code")
-                        .HasName("UQ_p_GOST");
+                    b.HasAlternateKey("GOST_Code");
 
                     b.HasIndex("Created_User_ID");
 
@@ -578,8 +632,7 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("GOST_ID", "PID_ID")
-                        .HasName("UQ_p_GOST_to_PID");
+                    b.HasAlternateKey("GOST_ID", "PID_ID");
 
                     b.HasIndex("Created_User_ID");
 
@@ -618,8 +671,7 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("GOST_ID", "TitleObject_ID")
-                        .HasName("UQ_p_GOST_to_TitleObject");
+                    b.HasAlternateKey("GOST_ID", "TitleObject_ID");
 
                     b.HasIndex("Created_User_ID");
 
@@ -792,14 +844,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Draft",
                             Description_Rus = "Черновик",
                             EntityLocked = false,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2216), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Document",
                             Status_Code = "wDd",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2222), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -808,14 +860,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Accepted",
                             Description_Rus = "Действующий",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2222), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Document",
                             Status_Code = "wDa",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2225), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -824,14 +876,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Draft",
                             Description_Rus = "Черновик",
                             EntityLocked = false,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2225), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wSCd",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2228), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -840,14 +892,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Review",
                             Description_Rus = "Проверка",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2228), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wCCuAr",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2228), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -856,14 +908,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "ComentsExists",
                             Description_Rus = "Выданы замечания",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2231), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wSCce",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2231), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -872,14 +924,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "CommentsIncorporation",
                             Description_Rus = "Устранение замечаний",
                             EntityLocked = false,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2234), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wSCci",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2234), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -888,14 +940,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "SecondReview",
                             Description_Rus = "Повторная проверка",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2234), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wCCuAsr",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2237), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -904,14 +956,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Approvement",
                             Description_Rus = "Утверждение",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2237), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wCCua",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2240), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -920,14 +972,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "NotApproved",
                             Description_Rus = "Отказано в утверждении",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2240), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wCCuna",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2240), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -936,14 +988,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "WaitingSMR",
                             Description_Rus = "Ожидание завершения СМР",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2243), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wCwsmr",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2243), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -952,14 +1004,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Archived",
                             Description_Rus = "Архивирование",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2246), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wCarh",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2246), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -968,14 +1020,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Cancelled",
                             Description_Rus = "Аннулирован",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2246), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wCcan",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2249), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -984,14 +1036,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Draft",
                             Description_Rus = "Черновик",
                             EntityLocked = false,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2249), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckList",
                             Status_Code = "wСLd",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2249), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -1000,14 +1052,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Review",
                             Description_Rus = "Проверка",
                             EntityLocked = false,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2252), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckList",
                             Status_Code = "wСLr",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2252), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -1016,14 +1068,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Completed",
                             Description_Rus = "Проверка завершена",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2255), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckList",
                             Status_Code = "wСLc",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2255), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -1032,14 +1084,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Fixed",
                             Description_Rus = "Замечания устранены",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2255), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckList",
                             Status_Code = "wCLf",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2258), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -1048,14 +1100,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Draft",
                             Description_Rus = "Черновик",
                             EntityLocked = false,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2258), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckItem",
                             Status_Code = "wCLId",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2258), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -1064,14 +1116,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Issued",
                             Description_Rus = "Выпущено",
                             EntityLocked = false,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2261), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckItem",
                             Status_Code = "wCLIss",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2261), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -1080,14 +1132,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Fixed",
                             Description_Rus = "Исправлено",
                             EntityLocked = false,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2264), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckItem",
                             Status_Code = "wCLIf",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2264), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -1096,14 +1148,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Approved",
                             Description_Rus = "Утверждено",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2264), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckItem",
                             Status_Code = "wCLIa",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2267), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -1112,14 +1164,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Cancelled",
                             Description_Rus = "Отменено",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2267), new TimeSpan(0, 5, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckItem",
                             Status_Code = "wCLIc",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2267), new TimeSpan(0, 5, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         });
                 });
 
@@ -1239,8 +1291,7 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Division_Code")
-                        .HasName("UQ_p_Division");
+                    b.HasAlternateKey("Division_Code");
 
                     b.HasIndex("Contragent_ID");
 
@@ -1287,8 +1338,7 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Employee_Code")
-                        .HasName("UQ_p_Employee");
+                    b.HasAlternateKey("Employee_Code");
 
                     b.HasIndex("AppUser_ID");
 
@@ -2020,8 +2070,7 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title")
-                        .HasName("UQ_p_Contragent");
+                    b.HasAlternateKey("Title");
 
                     b.HasIndex("ContragentRole_ID");
 
@@ -3075,6 +3124,24 @@ namespace SmartQA.Migrations
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Auth.Role", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
+                        .WithMany()
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Common.RowStatus")
+                        .WithMany()
+                        .HasForeignKey("RowStatus")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Common.Parameter", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()

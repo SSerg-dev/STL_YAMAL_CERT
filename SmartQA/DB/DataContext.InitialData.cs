@@ -15,6 +15,26 @@ namespace SmartQA.DB
     {
         private static void SetupInitialData(ModelBuilder modelBuilder)
         {
+            var fakeDate = DateTimeOffset.Parse("1900-01-01");
+
+            modelBuilder.Entity<Parameter>()
+                .HasData(
+                    new Parameter
+                    {
+                        RowStatus = 0,
+                        ID = Guid.Parse("c2a74178-34ae-407d-af20-bcbcf8be649f"),
+                        Created_User_ID = rootUserId,
+                        Modified_User_ID = rootUserId,
+                        Insert_DTS = fakeDate,
+                        Update_DTS = fakeDate,
+                        Parameter_Code = "SiteTimezone",
+                        Parameter_Value = "Ekaterinburg Standard Time",
+                        Description_Rus =  "UTC часовой пояс строительной площадки"
+
+                    }
+                );
+            
+            
             modelBuilder.Entity<RowStatus>()
                 .HasData(
                     new RowStatus
@@ -54,11 +74,11 @@ namespace SmartQA.DB
                         Comment = "superuser",
                         Created_User_ID = rootUserId,
                         Modified_User_ID = rootUserId,
-                        Insert_DTS = DateTimeOffset.Now,
-                        Update_DTS = DateTimeOffset.Now,
-                        User_Password = new Encryptor3DES(ApplicationUser.passKey)
-                            .encrypt(Encoding.UTF8.GetBytes(rootUserDefaultPassword)
-                            )
+                        Insert_DTS = fakeDate,
+                        Update_DTS = fakeDate,
+                        
+                        // "root_user_18"
+                        User_Password = new byte[] { 154, 188, 48, 112, 67, 142, 69, 201, 80, 125, 104, 193, 197, 212, 204, 212 }
                     }
                 );
 
@@ -69,8 +89,8 @@ namespace SmartQA.DB
                     RowStatus = 0,
                     Created_User_ID = rootUserId,
                     Modified_User_ID = rootUserId,
-                    Insert_DTS = DateTimeOffset.Now,
-                    Update_DTS = DateTimeOffset.Now,
+                    Insert_DTS = fakeDate,
+                    Update_DTS = fakeDate,
                     Role_Code = "Administrator"
                 });
 
@@ -83,8 +103,8 @@ namespace SmartQA.DB
                     RowStatus = 0,
                     Created_User_ID = rootUserId,
                     Modified_User_ID = rootUserId,
-                    Insert_DTS = DateTimeOffset.Now,
-                    Update_DTS = DateTimeOffset.Now,
+                    Insert_DTS = fakeDate,
+                    Update_DTS = fakeDate,
                     AppUser_ID = rootUserId,
                     Role_ID = Guid.Parse("CCD8C1EE-F6A8-E811-AA0B-005056947B15")
                 });
@@ -225,8 +245,8 @@ namespace SmartQA.DB
                 status.RowStatus = 0;
                 status.Created_User_ID = rootUserId;
                 status.Modified_User_ID = rootUserId;
-                status.Insert_DTS = DateTimeOffset.Now;
-                status.Update_DTS = DateTimeOffset.Now;
+                status.Insert_DTS = fakeDate;
+                status.Update_DTS = fakeDate;
             }
 
             modelBuilder.Entity<Status>()

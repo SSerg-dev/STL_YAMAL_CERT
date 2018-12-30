@@ -48,7 +48,7 @@ namespace SmartQA.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_p_AppUser", x => x.AppUser_ID);
-                    table.UniqueConstraint("UQ_p_AppUser", x => x.AppUser_Code);
+                    table.UniqueConstraint("AK_p_AppUser_AppUser_Code", x => x.AppUser_Code);
                     table.ForeignKey(
                         name: "FK_p_AppUser_p_AppUser_Created_User_ID",
                         column: x => x.Created_User_ID,
@@ -343,7 +343,7 @@ namespace SmartQA.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_p_DocumentType", x => x.DocumentType_ID);
-                    table.UniqueConstraint("UQ_p_DocumentType", x => x.DocumentType_Code);
+                    table.UniqueConstraint("AK_p_DocumentType_DocumentType_Code", x => x.DocumentType_Code);
                     table.ForeignKey(
                         name: "FK_p_DocumentType_p_AppUser_Created_User_ID",
                         column: x => x.Created_User_ID,
@@ -627,6 +627,44 @@ namespace SmartQA.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_p_Marka_p_RowStatus_RowStatus",
+                        column: x => x.RowStatus,
+                        principalTable: "p_RowStatus",
+                        principalColumn: "RowStatus_ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "p_Parameter",
+                columns: table => new
+                {
+                    Parameter_ID = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
+                    Insert_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Update_DTS = table.Column<DateTimeOffset>(nullable: false),
+                    Created_User_ID = table.Column<Guid>(nullable: false),
+                    Modified_User_ID = table.Column<Guid>(nullable: false),
+                    RowStatus = table.Column<int>(nullable: false),
+                    Parameter_Code = table.Column<string>(maxLength: 255, nullable: false),
+                    Parameter_Value = table.Column<string>(maxLength: 1000, nullable: false),
+                    Description_Rus = table.Column<string>(maxLength: 255, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_p_Parameter", x => x.Parameter_ID);
+                    table.UniqueConstraint("AK_p_Parameter_Parameter_Code", x => x.Parameter_Code);
+                    table.ForeignKey(
+                        name: "FK_p_Parameter_p_AppUser_Created_User_ID",
+                        column: x => x.Created_User_ID,
+                        principalTable: "p_AppUser",
+                        principalColumn: "AppUser_ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_p_Parameter_p_AppUser_Modified_User_ID",
+                        column: x => x.Modified_User_ID,
+                        principalTable: "p_AppUser",
+                        principalColumn: "AppUser_ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_p_Parameter_p_RowStatus_RowStatus",
                         column: x => x.RowStatus,
                         principalTable: "p_RowStatus",
                         principalColumn: "RowStatus_ID",
@@ -1382,7 +1420,7 @@ namespace SmartQA.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_p_Contragent", x => x.Contragent_ID);
-                    table.UniqueConstraint("UQ_p_Contragent", x => x.Contragent_Code);
+                    table.UniqueConstraint("AK_p_Contragent_Contragent_Code", x => x.Contragent_Code);
                     table.ForeignKey(
                         name: "FK_p_Contragent_p_ContragentRole_ContragentRole_ID",
                         column: x => x.ContragentRole_ID,
@@ -1426,7 +1464,7 @@ namespace SmartQA.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_p_GOST", x => x.GOST_ID);
-                    table.UniqueConstraint("UQ_p_GOST", x => x.GOST_Code);
+                    table.UniqueConstraint("AK_p_GOST_GOST_Code", x => x.GOST_Code);
                     table.ForeignKey(
                         name: "FK_p_GOST_p_AppUser_Created_User_ID",
                         column: x => x.Created_User_ID,
@@ -1469,7 +1507,7 @@ namespace SmartQA.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_p_AppUser_to_Role", x => x.AppUser_to_Role_ID);
-                    table.UniqueConstraint("UQ_p_AppUser_to_Role", x => new { x.AppUser_ID, x.Role_ID });
+                    table.UniqueConstraint("AK_p_AppUser_to_Role_AppUser_ID_Role_ID", x => new { x.AppUser_ID, x.Role_ID });
                     table.ForeignKey(
                         name: "FK_p_AppUser_to_Role_p_AppUser_AppUser_ID",
                         column: x => x.AppUser_ID,
@@ -1578,7 +1616,7 @@ namespace SmartQA.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_p_Division", x => x.Division_ID);
-                    table.UniqueConstraint("UQ_p_Division", x => x.Division_Code);
+                    table.UniqueConstraint("AK_p_Division_Division_Code", x => x.Division_Code);
                     table.ForeignKey(
                         name: "FK_p_Division_p_Contragent_Contragent_ID",
                         column: x => x.Contragent_ID,
@@ -1621,7 +1659,7 @@ namespace SmartQA.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_p_GOST_to_PID", x => x.GOST_to_PID_ID);
-                    table.UniqueConstraint("UQ_p_GOST_to_PID", x => new { x.GOST_ID, x.PID_ID });
+                    table.UniqueConstraint("AK_p_GOST_to_PID_GOST_ID_PID_ID", x => new { x.GOST_ID, x.PID_ID });
                     table.ForeignKey(
                         name: "FK_p_GOST_to_PID_p_AppUser_Created_User_ID",
                         column: x => x.Created_User_ID,
@@ -1670,7 +1708,7 @@ namespace SmartQA.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_p_GOST_to_TitleObject", x => x.GOST_to_TitleObject_ID);
-                    table.UniqueConstraint("UQ_p_GOST_to_TitleObject", x => new { x.GOST_ID, x.TitleObject_ID });
+                    table.UniqueConstraint("AK_p_GOST_to_TitleObject_GOST_ID_TitleObject_ID", x => new { x.GOST_ID, x.TitleObject_ID });
                     table.ForeignKey(
                         name: "FK_p_GOST_to_TitleObject_p_AppUser_Created_User_ID",
                         column: x => x.Created_User_ID,
@@ -2253,7 +2291,7 @@ namespace SmartQA.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_p_Employee", x => x.Employee_ID);
-                    table.UniqueConstraint("UQ_p_Employee", x => x.Employee_Code);
+                    table.UniqueConstraint("AK_p_Employee_Employee_Code", x => x.Employee_Code);
                     table.ForeignKey(
                         name: "FK_p_Employee_p_AppUser_AppUser_ID",
                         column: x => x.AppUser_ID,
@@ -2310,6 +2348,7 @@ namespace SmartQA.Migrations
                     RowStatus = table.Column<int>(nullable: false),
                     Document_Code = table.Column<string>(maxLength: 255, nullable: false),
                     Issue_Date = table.Column<DateTimeOffset>(nullable: false),
+                    Issue_Date_DT = table.Column<DateTime>(nullable: false),
                     Document_Number = table.Column<string>(maxLength: 255, nullable: true),
                     Document_Date = table.Column<DateTime>(type: "date", nullable: true),
                     TotalSheets = table.Column<int>(nullable: true),
@@ -2323,7 +2362,7 @@ namespace SmartQA.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_p_Document", x => x.Document_ID);
-                    table.UniqueConstraint("UQ_p_Document", x => x.Document_Code);
+                    table.UniqueConstraint("AK_p_Document_Document_Code", x => x.Document_Code);
                     table.ForeignKey(
                         name: "FK_p_Document_p_AppUser_Created_User_ID",
                         column: x => x.Created_User_ID,
@@ -2378,7 +2417,7 @@ namespace SmartQA.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_p_Document_to_GOST", x => x.Document_to_GOST_ID);
-                    table.UniqueConstraint("UQ_p_Document_to_GOST", x => new { x.Document_ID, x.GOST_ID });
+                    table.UniqueConstraint("AK_p_Document_to_GOST_Document_ID_GOST_ID", x => new { x.Document_ID, x.GOST_ID });
                     table.ForeignKey(
                         name: "FK_p_Document_to_GOST_p_AppUser_Created_User_ID",
                         column: x => x.Created_User_ID,
@@ -2427,7 +2466,7 @@ namespace SmartQA.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_p_Document_to_PID", x => x.Document_to_PID_ID);
-                    table.UniqueConstraint("UQ_p_Document_to_PID", x => new { x.Document_ID, x.PID_ID });
+                    table.UniqueConstraint("AK_p_Document_to_PID_Document_ID_PID_ID", x => new { x.Document_ID, x.PID_ID });
                     table.ForeignKey(
                         name: "FK_p_Document_to_PID_p_AppUser_Created_User_ID",
                         column: x => x.Created_User_ID,
@@ -2535,45 +2574,50 @@ namespace SmartQA.Migrations
             migrationBuilder.InsertData(
                 table: "p_AppUser",
                 columns: new[] { "AppUser_ID", "AppUser_Code", "Comment", "Created_User_ID", "Insert_DTS", "Modified_User_ID", "RowStatus", "Update_DTS", "User_Password" },
-                values: new object[] { new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "root", "superuser", new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 814, DateTimeKind.Unspecified).AddTicks(6134), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), 0, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 816, DateTimeKind.Unspecified).AddTicks(8059), new TimeSpan(0, 5, 0, 0, 0)), new byte[] { 154, 188, 48, 112, 67, 142, 69, 201, 63, 202, 229, 213, 205, 18, 207, 71 } });
+                values: new object[] { new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "root", "superuser", new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), 0, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new byte[] { 154, 188, 48, 112, 67, 142, 69, 201, 80, 125, 104, 193, 197, 212, 204, 212 } });
+
+            migrationBuilder.InsertData(
+                table: "p_Parameter",
+                columns: new[] { "Parameter_ID", "Created_User_ID", "Description_Rus", "Insert_DTS", "Modified_User_ID", "Parameter_Code", "Parameter_Value", "RowStatus", "Update_DTS" },
+                values: new object[] { new Guid("c2a74178-34ae-407d-af20-bcbcf8be649f"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "UTC часовой пояс строительной площадки", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "SiteTimezone", "Ekaterinburg Standard Time", 0, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) });
 
             migrationBuilder.InsertData(
                 table: "p_Role",
                 columns: new[] { "Role_ID", "Created_User_ID", "Insert_DTS", "Modified_User_ID", "Role_Code", "RowStatus", "Update_DTS" },
-                values: new object[] { new Guid("ccd8c1ee-f6a8-e811-aa0b-005056947b15"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 820, DateTimeKind.Unspecified).AddTicks(9389), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Administrator", 0, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 820, DateTimeKind.Unspecified).AddTicks(9404), new TimeSpan(0, 5, 0, 0, 0)) });
+                values: new object[] { new Guid("ccd8c1ee-f6a8-e811-aa0b-005056947b15"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Administrator", 0, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) });
 
             migrationBuilder.InsertData(
                 table: "p_Status",
                 columns: new[] { "Status_ID", "Created_User_ID", "Description_Eng", "Description_Rus", "EntityLocked", "Insert_DTS", "Modified_User_ID", "ReportColor", "ReportOrder", "RowStatus", "StatusEntity", "Status_Code", "Update_DTS" },
                 values: new object[,]
                 {
-                    { new Guid("27d94262-2830-1d24-5764-2a90ae9094e7"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Fixed", "Исправлено", false, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2264), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLIf", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2264), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("9ac37fd3-b2c2-c309-5f39-69fb7150a824"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Issued", "Выпущено", false, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2261), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLIss", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2261), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("6e2d4292-5383-bd3a-24fc-e67857fbf182"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Draft", "Черновик", false, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2258), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLId", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2258), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("60486e51-ef01-2480-9e25-7ae2f56f034d"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Fixed", "Замечания устранены", true, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2255), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckList", "wCLf", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2258), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("4f24b41a-dac7-3e73-9c0d-b31fb2f19d56"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Completed", "Проверка завершена", true, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2255), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckList", "wСLc", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2255), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("3dbfcb25-3ec5-f5f6-b619-43a6e0f73926"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Review", "Проверка", false, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2252), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckList", "wСLr", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2252), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("86cb8686-6b39-13c9-bf28-70cf2d6d62ef"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Draft", "Черновик", false, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2249), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckList", "wСLd", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2249), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("c0327b4c-b2eb-32dc-ce07-80f23940350a"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Cancelled", "Аннулирован", true, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2246), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCcan", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2249), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("95e4f0ea-9378-dc03-cf36-eb9efa314512"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Archived", "Архивирование", true, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2246), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCarh", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2246), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("55bc74c0-937a-1691-9c19-4d40d6028c96"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "WaitingSMR", "Ожидание завершения СМР", true, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2243), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCwsmr", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2243), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("e10cd869-3878-29b0-1b30-a4a2855c6986"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "NotApproved", "Отказано в утверждении", true, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2240), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCCuna", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2240), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("2e96ff56-a2c3-7e5f-d06f-28eb06f8106f"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Approvement", "Утверждение", true, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2237), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCCua", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2240), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("bcfd9a12-a2d8-f81c-c7d5-d43f190ed507"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "SecondReview", "Повторная проверка", true, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2234), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCCuAsr", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2237), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("28fe952a-5094-3f4e-96cf-f9cddfae5e74"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "CommentsIncorporation", "Устранение замечаний", false, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2234), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wSCci", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2234), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("81f3ef08-bfa7-4176-e0c1-54ef6d687b6b"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "ComentsExists", "Выданы замечания", true, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2231), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wSCce", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2231), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("e65bd063-4b28-9174-db6d-83319a90ad76"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Review", "Проверка", true, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2228), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCCuAr", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2228), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("ec3dfdb9-2c7a-9a45-9ced-fde8e9fe7617"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Draft", "Черновик", false, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2225), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wSCd", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2228), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("12c12fe0-2085-5d30-87a5-5d98ba3c6ed8"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Accepted", "Действующий", true, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2222), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Document", "wDa", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2225), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("5e1a9818-f8a5-481c-20f0-c16d362df87a"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Draft", "Черновик", false, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2216), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Document", "wDd", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2222), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("ce34a401-3dea-c8eb-f304-86c73e9ffd9a"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Approved", "Утверждено", true, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2264), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLIa", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2267), new TimeSpan(0, 5, 0, 0, 0)) },
-                    { new Guid("2192a6b9-d13b-3e13-597c-cdd6ebed10df"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Cancelled", "Отменено", true, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2267), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLIc", new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(2267), new TimeSpan(0, 5, 0, 0, 0)) }
+                    { new Guid("27d94262-2830-1d24-5764-2a90ae9094e7"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Fixed", "Исправлено", false, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLIf", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("9ac37fd3-b2c2-c309-5f39-69fb7150a824"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Issued", "Выпущено", false, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLIss", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("6e2d4292-5383-bd3a-24fc-e67857fbf182"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Draft", "Черновик", false, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLId", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("60486e51-ef01-2480-9e25-7ae2f56f034d"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Fixed", "Замечания устранены", true, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckList", "wCLf", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("4f24b41a-dac7-3e73-9c0d-b31fb2f19d56"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Completed", "Проверка завершена", true, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckList", "wСLc", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("3dbfcb25-3ec5-f5f6-b619-43a6e0f73926"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Review", "Проверка", false, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckList", "wСLr", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("86cb8686-6b39-13c9-bf28-70cf2d6d62ef"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Draft", "Черновик", false, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckList", "wСLd", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("c0327b4c-b2eb-32dc-ce07-80f23940350a"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Cancelled", "Аннулирован", true, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCcan", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("95e4f0ea-9378-dc03-cf36-eb9efa314512"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Archived", "Архивирование", true, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCarh", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("55bc74c0-937a-1691-9c19-4d40d6028c96"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "WaitingSMR", "Ожидание завершения СМР", true, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCwsmr", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("e10cd869-3878-29b0-1b30-a4a2855c6986"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "NotApproved", "Отказано в утверждении", true, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCCuna", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("2e96ff56-a2c3-7e5f-d06f-28eb06f8106f"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Approvement", "Утверждение", true, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCCua", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("bcfd9a12-a2d8-f81c-c7d5-d43f190ed507"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "SecondReview", "Повторная проверка", true, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCCuAsr", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("28fe952a-5094-3f4e-96cf-f9cddfae5e74"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "CommentsIncorporation", "Устранение замечаний", false, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wSCci", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("81f3ef08-bfa7-4176-e0c1-54ef6d687b6b"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "ComentsExists", "Выданы замечания", true, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wSCce", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("e65bd063-4b28-9174-db6d-83319a90ad76"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Review", "Проверка", true, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wCCuAr", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("ec3dfdb9-2c7a-9a45-9ced-fde8e9fe7617"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Draft", "Черновик", false, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Register", "wSCd", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("12c12fe0-2085-5d30-87a5-5d98ba3c6ed8"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Accepted", "Действующий", true, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Document", "wDa", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("5e1a9818-f8a5-481c-20f0-c16d362df87a"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Draft", "Черновик", false, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "Document", "wDd", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("ce34a401-3dea-c8eb-f304-86c73e9ffd9a"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Approved", "Утверждено", true, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLIa", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) },
+                    { new Guid("2192a6b9-d13b-3e13-597c-cdd6ebed10df"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), "Cancelled", "Отменено", true, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), false, 0, 0, "CheckItem", "wCLIc", new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) }
                 });
 
             migrationBuilder.InsertData(
                 table: "p_AppUser_to_Role",
                 columns: new[] { "AppUser_to_Role_ID", "AppUser_ID", "Created_User_ID", "Insert_DTS", "Modified_User_ID", "Role_ID", "RowStatus", "Update_DTS" },
-                values: new object[] { new Guid("c2d77d20-d557-4291-8da8-5b6765256a95"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(290), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("ccd8c1ee-f6a8-e811-aa0b-005056947b15"), 0, new DateTimeOffset(new DateTime(2018, 12, 30, 8, 42, 21, 821, DateTimeKind.Unspecified).AddTicks(296), new TimeSpan(0, 5, 0, 0, 0)) });
+                values: new object[] { new Guid("c2d77d20-d557-4291-8da8-5b6765256a95"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)), new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"), new Guid("ccd8c1ee-f6a8-e811-aa0b-005056947b15"), 0, new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_p_AccessToPIStaffFunction_Created_User_ID",
@@ -3353,6 +3397,21 @@ namespace SmartQA.Migrations
                 column: "RowStatus");
 
             migrationBuilder.CreateIndex(
+                name: "IX_p_Parameter_Created_User_ID",
+                table: "p_Parameter",
+                column: "Created_User_ID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_p_Parameter_Modified_User_ID",
+                table: "p_Parameter",
+                column: "Modified_User_ID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_p_Parameter_RowStatus",
+                table: "p_Parameter",
+                column: "RowStatus");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_p_Person_Created_User_ID",
                 table: "p_Person",
                 column: "Created_User_ID");
@@ -3728,6 +3787,9 @@ namespace SmartQA.Migrations
 
             migrationBuilder.DropTable(
                 name: "p_InspectionTechnique");
+
+            migrationBuilder.DropTable(
+                name: "p_Parameter");
 
             migrationBuilder.DropTable(
                 name: "p_QualificationField");
