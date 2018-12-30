@@ -56,6 +56,9 @@ namespace SmartQA.DB
         public DbSet<AuthToSignInspActsForWSUN> AuthToSignInspActsForWSUN { get; set; }
         public DbSet<ShieldingGas> ShieldingGas { get; set; }
         public DbSet<AttCenterNaks> AttCenterNaks { get; set; }
+        public DbSet<StaffFunction> StaffFunction { get; set; }
+        public DbSet<VoltageRange> VoltageRange { get; set; }
+        public DbSet<Level> Level { get; set; }
 
         public DbSet<DocumentNaks> DocumentNaks { get; set; }
         public DbSet<DocumentNaks_to_HIFGroup> DocumentNaks_to_HIFGroup { get; set; }
