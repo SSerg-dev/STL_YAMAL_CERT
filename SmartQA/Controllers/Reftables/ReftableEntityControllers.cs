@@ -178,4 +178,20 @@ namespace SmartQA.Controllers.Reftables
         [EnableQuery]
         public new IQueryable<Position> Get() => _context.Position.OrderBy(x => x.Description).AsQueryable();
     }
+    public class StaffFunctionController : ReftableBaseController<StaffFunction>
+    {
+        public StaffFunctionController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+    public class VoltageRangeController : ReftableBaseController<VoltageRange>
+    {
+        public VoltageRangeController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+    public class LevelController : ReftableBaseController<Level>
+    {
+        public LevelController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+
 }

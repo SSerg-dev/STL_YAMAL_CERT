@@ -15,7 +15,7 @@ namespace SmartQA.DB
     {
         private static void SetupInitialData(ModelBuilder modelBuilder)
         {
-            var fakeDate = DateTimeOffset.Parse("1900-01-01");
+            var fakeDate = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0));
 
             modelBuilder.Entity<Parameter>()
                 .HasData(
