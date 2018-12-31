@@ -50,8 +50,7 @@ namespace SmartQA.DB
             BuildCommon<Employee>(builder);
             BuildCommon<Person>(builder);
             BuildCommon<Contragent>(builder);
-            BuildCommon<Position>(builder);
-
+            
             var user = BuildCommon<AppUser>(builder);
             user.Ignore(u => u.User_Password);
             user.CollectionProperty(u => u.Role_IDs);
