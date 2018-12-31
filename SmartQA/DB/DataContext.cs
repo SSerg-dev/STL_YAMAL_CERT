@@ -216,7 +216,6 @@ namespace SmartQA.DB
 
             // TODO: rework or remove this
 
-
             modelBuilder.Entity<DocumentType>()
                 .HasAlternateKey(u => u.Title);
 
