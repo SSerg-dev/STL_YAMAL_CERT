@@ -13,7 +13,7 @@ namespace SmartQA.Tests.Util
     {
         public static void InitializeDbForTests(DataContext context)
         {            
-            context.AppUser.AddRange(new AppUser
+            context.Set<AppUser>().AddRange(new AppUser
                     {
                         RowStatus = 0,
                         AppUser_Code = "test_user",

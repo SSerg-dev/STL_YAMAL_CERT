@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SmartQA.DB;
+using DbRole = SmartQA.DB.Models.Auth.Role;
+
 
 namespace SmartQA.Auth
 {
@@ -57,13 +59,13 @@ namespace SmartQA.Auth
             => SetRoleNameAsync(role, normalizedName, cancellationToken);
 
         public Task<Role> FindByIdAsync(string roleId, CancellationToken cancellationToken)
-            => Context.Role
+            => Context.Set<DbRole>()
                 .Where(x => x.ID == Guid.Parse(roleId))
                 .Select(x => new Role(x))
                 .SingleAsync();
 
         public Task<Role> FindByNameAsync(string normalizedRoleName, CancellationToken cancellationToken)
-            => Context.Role
+            => Context.Set<DbRole>()
                 .Where(x => x.Role_Code == normalizedRoleName)
                 .Select(x => new Role(x))
                 .SingleAsync();

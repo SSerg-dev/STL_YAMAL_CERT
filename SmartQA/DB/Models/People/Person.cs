@@ -23,7 +23,7 @@ namespace SmartQA.DB.Models.People
         [Column(TypeName = "Date")]
         public virtual DateTime? BirthDate { get; set; }        
 
-        public virtual List<Employee> Employees { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
 
     }
 }

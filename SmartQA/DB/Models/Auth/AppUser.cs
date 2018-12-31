@@ -18,8 +18,7 @@ namespace SmartQA.DB.Models.Auth
                
         [StringLength(8000)]
         public byte[] User_Password { get; set; }
-        
-        [InverseProperty("AppUser")]
+                
         public virtual ICollection<AppUser_to_Role> AppUser_to_RoleSet { get; set; }
                 
         [NotMapped]

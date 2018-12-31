@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
 using SmartQA.Auth;
 using SmartQA.DB.Models.Auth;
@@ -50,19 +52,27 @@ namespace SmartQA.DB.Models.Shared
             modelBuilder.Entity<T>()
                 .HasOne(x => x.Created_User)
                 .WithMany()
-                .HasForeignKey("Created_User_ID")                
+                .HasForeignKey(x => x.Created_User_ID)                
                 .OnDelete(DeleteBehavior.Restrict);            
 
             modelBuilder.Entity<T>()
                 .HasOne(x => x.Modified_User)
                 .WithMany()
-                .HasForeignKey("Modified_User_ID")
+                .HasForeignKey(x => x.Modified_User_ID)
                 .OnDelete(DeleteBehavior.Restrict);
                    
             // setup default query parameters
             modelBuilder.Entity<T>()
                 .HasQueryFilter(x => x.RowStatus < 100);
-  
+              
+            // call any custom setup methods on model 
+            foreach (var setupMethod in typeof(T).GetMethods()
+                .Where(
+                    m => m.GetCustomAttributes(true).Any(a => a is RunAtModelSetupAttribute) && m.IsStatic 
+                    ))
+            {
+                setupMethod.Invoke(null, new object[] {modelBuilder});                
+            }                                    
         }
 
         public void MarkDeleted()

@@ -6,14 +6,13 @@ using SmartQA.DB.Models.Shared;
 namespace SmartQA.DB.Models.Documents
 {
     [Table("p_Document_to_GOST")]
-    public class Document_to_GOST : M2MEntity
+    [M2M(typeof(Document), typeof(GOST))]
+    public class Document_to_GOST : CommonEntity
     {
         public Guid Document_ID { get; set; }
         public Guid GOST_ID { get; set; }
 
-        [ForeignKey("Document_ID")]
         public virtual Document Document { get; set; }
-        [ForeignKey("GOST_ID")]
         public virtual GOST GOST { get; set; }
     }
 }

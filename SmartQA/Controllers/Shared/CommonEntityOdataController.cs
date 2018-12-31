@@ -29,8 +29,8 @@ namespace SmartQA.Controllers.Shared
         }
 
         public virtual DbSet<TEntity> GetDbSet()
-            => ((DbSet<TEntity>)_context.GetType().GetProperty(typeof(TEntity).Name).GetValue(_context));
-
+            => _context.Set<TEntity>();
+        
         public virtual IQueryable<TEntity> GetQuery()
             => GetDbSet().AsQueryable();
 

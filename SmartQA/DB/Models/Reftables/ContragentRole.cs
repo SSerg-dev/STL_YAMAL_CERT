@@ -5,7 +5,7 @@ using SmartQA.DB.Models.Shared;
 namespace SmartQA.DB.Models.Reftables
 {
     [UseDefaultReftableEditor]
-    [Display(Name = "Роль организации")]
+    [Display(Name = "Р РѕР»СЊ РѕСЂРіР°РЅРёР·Р°С†РёРё")]
     [Table("p_ContragentRole")]
     public class ContragentRole : CommonEntity, IReftableEntity
     {

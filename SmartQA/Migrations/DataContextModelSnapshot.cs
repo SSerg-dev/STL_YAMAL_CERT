@@ -549,9 +549,7 @@ namespace SmartQA.Migrations
 
                     b.HasIndex("Modified_User_ID");
 
-                    b.HasIndex("Parent_ID")
-                        .IsUnique()
-                        .HasFilter("[Parent_ID] IS NOT NULL");
+                    b.HasIndex("Parent_ID");
 
                     b.HasIndex("RowStatus");
 
@@ -3215,7 +3213,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "AppUser")
                         .WithMany("AppUser_to_RoleSet")
                         .HasForeignKey("AppUser_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -3228,9 +3226,9 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.Role", "Role")
-                        .WithMany("AppUser_to_Roles")
+                        .WithMany("AppUser_to_RoleSet")
                         .HasForeignKey("Role_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Common.RowStatus")
                         .WithMany()
@@ -3281,10 +3279,10 @@ namespace SmartQA.Migrations
                         .HasForeignKey("Created_User_ID")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("SmartQA.DB.Models.Documents.DocumentType", "DocumentType")
+                    b.HasOne("SmartQA.DB.Models.Documents.Document", "Root")
                         .WithMany()
                         .HasForeignKey("DocumentType_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3293,9 +3291,10 @@ namespace SmartQA.Migrations
 
                     b.HasOne("SmartQA.DB.Models.People.Employee", "Resp_Employee")
                         .WithMany()
-                        .HasForeignKey("Resp_Employee_ID");
+                        .HasForeignKey("Resp_Employee_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("SmartQA.DB.Models.Documents.Document", "Root")
+                    b.HasOne("SmartQA.DB.Models.Documents.DocumentType", "DocumentType")
                         .WithMany()
                         .HasForeignKey("Root_ID")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -3352,12 +3351,12 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.Document", "Document")
                         .WithMany()
                         .HasForeignKey("Document_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Documents.GOST", "GOST")
                         .WithMany()
                         .HasForeignKey("GOST_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3380,7 +3379,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.Document", "Document")
                         .WithMany()
                         .HasForeignKey("Document_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3390,7 +3389,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.PID", "PID")
                         .WithMany()
                         .HasForeignKey("PID_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Common.RowStatus")
                         .WithMany()
@@ -3408,7 +3407,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.Document", "Document")
                         .WithMany()
                         .HasForeignKey("Document_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3416,8 +3415,8 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Documents.Document_to_Status", "Parent")
-                        .WithOne()
-                        .HasForeignKey("SmartQA.DB.Models.Documents.Document_to_Status", "Parent_ID")
+                        .WithMany()
+                        .HasForeignKey("Parent_ID")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Common.RowStatus")
@@ -3428,7 +3427,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.Status", "Status")
                         .WithMany()
                         .HasForeignKey("Status_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Documents.GOST", b =>
@@ -3440,7 +3439,8 @@ namespace SmartQA.Migrations
 
                     b.HasOne("SmartQA.DB.Models.Documents.Marka", "Marka")
                         .WithMany()
-                        .HasForeignKey("Marka_ID");
+                        .HasForeignKey("Marka_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3463,7 +3463,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.GOST", "GOST")
                         .WithMany()
                         .HasForeignKey("GOST_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3473,7 +3473,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.PID", "PID")
                         .WithMany()
                         .HasForeignKey("PID_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Common.RowStatus")
                         .WithMany()
@@ -3491,7 +3491,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.GOST", "GOST")
                         .WithMany()
                         .HasForeignKey("GOST_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3506,7 +3506,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.TitleObject", "TitleObject")
                         .WithMany()
                         .HasForeignKey("TitleObject_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Documents.Marka", b =>
@@ -3585,11 +3585,13 @@ namespace SmartQA.Migrations
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "AppUser")
                         .WithMany()
-                        .HasForeignKey("AppUser_ID");
+                        .HasForeignKey("AppUser_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Reftables.Contragent", "Contragent")
                         .WithMany()
-                        .HasForeignKey("Contragent_ID");
+                        .HasForeignKey("Contragent_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -3604,12 +3606,12 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.People.Person", "Person")
                         .WithMany("Employees")
                         .HasForeignKey("Person_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Reftables.Position", "Position")
                         .WithMany()
                         .HasForeignKey("Position_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Common.RowStatus")
                         .WithMany()
@@ -3649,12 +3651,13 @@ namespace SmartQA.Migrations
 
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaks", "ParentDocumentNaks")
                         .WithMany("Inserts")
-                        .HasForeignKey("ParentDocumentNaks_ID");
+                        .HasForeignKey("ParentDocumentNaks_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.People.Person", "Person")
                         .WithMany()
                         .HasForeignKey("Person_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Common.RowStatus")
                         .WithMany()
@@ -3664,7 +3667,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Reftables.WeldType", "WeldType")
                         .WithMany()
                         .HasForeignKey("WeldType_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", b =>
@@ -3677,7 +3680,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaks", "DocumentNaks")
                         .WithMany("DocumentNaksAttestSet")
                         .HasForeignKey("DocumentNaks_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3692,7 +3695,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Reftables.WeldingEquipmentAutomationLevel", "WeldingEquipmentAutomationLevel")
                         .WithMany()
                         .HasForeignKey("WeldingEquipmentAutomationLevel_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest_to_DetailsType", b =>
@@ -3705,12 +3708,12 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Reftables.DetailsType", "DetailsType")
                         .WithMany()
                         .HasForeignKey("DetailsType_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", "DocumentNaksAttest")
                         .WithMany("DocumentNaksAttest_to_DetailsTypeSet")
                         .HasForeignKey("DocumentNaksAttest_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3733,12 +3736,12 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", "DocumentNaksAttest")
                         .WithMany("DocumentNaksAttest_to_JointKindSet")
                         .HasForeignKey("DocumentNaksAttest_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Reftables.JointKind", "JointKind")
                         .WithMany()
                         .HasForeignKey("JointKind_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3761,12 +3764,12 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", "DocumentNaksAttest")
                         .WithMany("DocumentNaksAttest_to_JointTypeSet")
                         .HasForeignKey("DocumentNaksAttest_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Reftables.JointType", "JointType")
                         .WithMany()
                         .HasForeignKey("JointType_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3789,7 +3792,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", "DocumentNaksAttest")
                         .WithMany("DocumentNaksAttest_to_SeamsTypeSet")
                         .HasForeignKey("DocumentNaksAttest_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3804,7 +3807,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Reftables.SeamsType", "SeamsType")
                         .WithMany()
                         .HasForeignKey("SeamsType_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest_to_WeldGOST14098", b =>
@@ -3817,7 +3820,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", "DocumentNaksAttest")
                         .WithMany("DocumentNaksAttest_to_WeldGOST14098Set")
                         .HasForeignKey("DocumentNaksAttest_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3832,7 +3835,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Reftables.WeldGOST14098", "WeldGOST14098")
                         .WithMany()
                         .HasForeignKey("WeldGOST14098_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest_to_WeldMaterial", b =>
@@ -3845,7 +3848,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", "DocumentNaksAttest")
                         .WithMany("DocumentNaksAttest_to_WeldMaterialSet")
                         .HasForeignKey("DocumentNaksAttest_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3860,7 +3863,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Reftables.WeldMaterial", "WeldMaterial")
                         .WithMany()
                         .HasForeignKey("WeldMaterial_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest_to_WeldMaterialGroup", b =>
@@ -3873,7 +3876,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", "DocumentNaksAttest")
                         .WithMany("DocumentNaksAttest_to_WeldMaterialGroupSet")
                         .HasForeignKey("DocumentNaksAttest_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3888,7 +3891,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Reftables.WeldMaterialGroup", "WeldMaterialGroup")
                         .WithMany()
                         .HasForeignKey("WeldMaterialGroup_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest_to_WeldPosition", b =>
@@ -3901,7 +3904,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", "DocumentNaksAttest")
                         .WithMany("DocumentNaksAttest_to_WeldPositionSet")
                         .HasForeignKey("DocumentNaksAttest_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3916,7 +3919,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Reftables.WeldPosition", "WeldPosition")
                         .WithMany()
                         .HasForeignKey("WeldPosition_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaks_to_HIFGroup", b =>
@@ -3929,12 +3932,12 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaks", "DocumentNaks")
                         .WithMany("DocumentNaks_to_HIFGroupSet")
                         .HasForeignKey("DocumentNaks_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Reftables.HIFGroup", "HIFGroup")
                         .WithMany()
                         .HasForeignKey("HIFGroup_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -4023,7 +4026,8 @@ namespace SmartQA.Migrations
                 {
                     b.HasOne("SmartQA.DB.Models.Reftables.ContragentRole", "ContragentRole")
                         .WithMany()
-                        .HasForeignKey("ContragentRole_ID");
+                        .HasForeignKey("ContragentRole_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()

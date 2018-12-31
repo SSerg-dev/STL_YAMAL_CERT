@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using SmartQA.DB.Models.Auth;
 using SmartQA.DB.Models.Common;
@@ -12,83 +14,10 @@ using SmartQA.Models.Forms;
 namespace SmartQA.DB
 {
     public partial class DataContext : DbContext
-    {
-        
+    {        
         public static readonly Guid rootUserId = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
         private static readonly string rootUserDefaultPassword = "root_pwd_18";
 
-        public DbSet<RowStatus> RowStatus { get; set; }
-        public DbSet<Parameter> Parameter { get; set; }
-        
-        public DbSet<AppUser> AppUser { get; set; }
-        public DbSet<Role> Role { get; set; }        
-        public DbSet<AppUser_to_Role> AppUser_to_Role { get; set; }        
-
-        public DbSet<Person> Person { get; set; }
-        public DbSet<Employee> Employee { get; set; }
-        public DbSet<Division> Division { get; set; }
-        public DbSet<Position> Position { get; set; }
-        public DbSet<Contragent> Contragent { get; set; }
-        public DbSet<ContragentRole> ContragentRole { get; set; }
-
-        public DbSet<DetailsType> DetailsType { get; set; }
-        public DbSet<HIFGroup> HIFGroup { get; set; }
-        public DbSet<JointKind> JointKind { get; set; }
-        public DbSet<JointType> JointType { get; set; }
-        public DbSet<SeamsType> SeamsType { get; set; }
-        public DbSet<WeldGOST14098> WeldGOST14098 { get; set; }
-        public DbSet<WeldingEquipmentAutomationLevel> WeldingEquipmentAutomationLevel { get; set; }
-        public DbSet<WeldMaterial> WeldMaterial { get; set; }
-        public DbSet<WeldMaterialGroup> WeldMaterialGroup { get; set; }
-        public DbSet<WeldPosition> WeldPosition { get; set; }
-        public DbSet<WeldType> WeldType { get; set; }
-        public DbSet<TestTypeRef> TestTypeRef { get; set; }
-        public DbSet<InspectionTechnique> InspectionTechnique { get; set; }
-        public DbSet<InspectionSubject> InspectionSubject { get; set; }
-        public DbSet<TestMethod> TestMethod { get; set; }
-        public DbSet<QualificationLevel> QualificationLevel { get; set; }
-        public DbSet<Responsibility> Responsibility { get; set; }
-        public DbSet<WeldPasses> WeldPasses { get; set; }
-        public DbSet<QualificationField> QualificationField { get; set; }
-        public DbSet<ElectricalSafetyAbilitation> ElectricalSafetyAbilitation { get; set; }
-        public DbSet<AccessToPIVoltageRange> AccessToPIVoltageRange { get; set; }
-        public DbSet<AccessToPIStaffFunction> AccessToPIStaffFunction { get; set; }
-        public DbSet<AuthToSignInspActsForWSUN> AuthToSignInspActsForWSUN { get; set; }
-        public DbSet<ShieldingGas> ShieldingGas { get; set; }
-        public DbSet<AttCenterNaks> AttCenterNaks { get; set; }
-        public DbSet<StaffFunction> StaffFunction { get; set; }
-        public DbSet<VoltageRange> VoltageRange { get; set; }
-        public DbSet<Level> Level { get; set; }
-
-        public DbSet<DocumentNaks> DocumentNaks { get; set; }
-        public DbSet<DocumentNaks_to_HIFGroup> DocumentNaks_to_HIFGroup { get; set; }
-
-        public DbSet<DocumentNaksAttest> DocumentNaksAttest { get; set; }
-        public DbSet<DocumentNaksAttest_to_DetailsType> DocumentNaksAttest_to_DetailsType { get; set; }
-        public DbSet<DocumentNaksAttest_to_SeamsType> DocumentNaksAttest_to_SeamsType { get; set; }
-        public DbSet<DocumentNaksAttest_to_WeldMaterialGroup> DocumentNaksAttest_to_WeldMaterialGroup { get; set; }
-        public DbSet<DocumentNaksAttest_to_WeldMaterial> DocumentNaksAttest_to_WeldMaterial { get; set; }
-        public DbSet<DocumentNaksAttest_to_WeldPosition> DocumentNaksAttest_to_WeldPosition { get; set; }
-        public DbSet<DocumentNaksAttest_to_JointKind> DocumentNaksAttest_to_JointKind { get; set; }
-        public DbSet<DocumentNaksAttest_to_WeldGOST14098> DocumentNaksAttest_to_WeldGOST14098 { get; set; }
-        public DbSet<DocumentNaksAttest_to_JointType> DocumentNaksAttest_to_JointType { get; set; }
-
-        public DbSet<Marka> Marka { get; set; }
-        public DbSet<TitleObject> TitleObject { get; set; }
-        
-        public DbSet<PID> PID { get; set; }
-        public DbSet<GOST> GOST { get; set; }
-        public DbSet<GOST_to_TitleObject> GOST_to_TitleObject { get; set; }
-        public DbSet<GOST_to_PID> GOST_to_PID { get; set; }
-        
-        public DbSet<Status> Status { get; set; }
-        public DbSet<DocumentType> DocumentType { get; set; }
-        public DbSet<DocumentProjectNumber> DocumentProjectNumber { get; set; }
-        public DbSet<Document> Document { get; set; }
-        public DbSet<Document_to_GOST> Document_to_GOST { get; set; }
-        public DbSet<Document_to_PID> Document_to_PID { get; set; }
-        public DbSet<Document_to_Status> Document_to_Status { get; set; }
-     
         public DataContext() {}
 
         public DataContext(DbContextOptions<DataContext> options)
@@ -106,81 +35,51 @@ namespace SmartQA.DB
                 .UseLazyLoadingProxies();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            CommonEntity.CommonModelSetup<Parameter>(modelBuilder);
-            
-            // ----- auth ---------------
-            CommonEntity.CommonModelSetup<AppUser>(modelBuilder);
-            CommonEntity.CommonModelSetup<Role>(modelBuilder);
-            CommonEntity.CommonModelSetup<AppUser_to_Role>(modelBuilder);
-                
-            modelBuilder.Entity<AppUser_to_Role>()
-                .HasOne(ur => ur.Created_User);
-            modelBuilder.Entity<AppUser_to_Role>()
-                .HasOne(ur => ur.AppUser)
-                .WithMany(u => u.AppUser_to_RoleSet);
-            modelBuilder.Entity<AppUser_to_Role>()
-                .HasOne(ur => ur.Modified_User);
-
-            // ----- people -------------
-            CommonEntity.CommonModelSetup<Person>(modelBuilder);
-            CommonEntity.CommonModelSetup<Employee>(modelBuilder);
-            CommonEntity.CommonModelSetup<Contragent>(modelBuilder);
-
-            // ----- reftables ----------
-            foreach (var reftableType in Reftable.GetReftableTypes())
-            {
-                typeof(CommonEntity)
-                    .GetMethod("CommonModelSetup")
-                    .MakeGenericMethod(reftableType)
-                    .Invoke(null, new object[] { modelBuilder });
-            }
-
-            // ----- permission docs ----
-            CommonEntity.CommonModelSetup<DocumentNaks>(modelBuilder);
-            modelBuilder.Entity<DocumentNaks>()
-                .HasOne(d => d.ParentDocumentNaks)
-                .WithMany(d => d.Inserts);
-
-            CommonEntity.CommonModelSetup<DocumentNaks_to_HIFGroup>(modelBuilder);
-
-            CommonEntity.CommonModelSetup<DocumentNaksAttest>(modelBuilder);
-            CommonEntity.CommonModelSetup<DocumentNaksAttest_to_DetailsType>(modelBuilder);
-            CommonEntity.CommonModelSetup<DocumentNaksAttest_to_SeamsType>(modelBuilder);
-            CommonEntity.CommonModelSetup<DocumentNaksAttest_to_WeldMaterialGroup>(modelBuilder);
-            CommonEntity.CommonModelSetup<DocumentNaksAttest_to_WeldMaterial>(modelBuilder);
-            CommonEntity.CommonModelSetup<DocumentNaksAttest_to_WeldPosition>(modelBuilder);
-            CommonEntity.CommonModelSetup<DocumentNaksAttest_to_JointKind>(modelBuilder);
-            CommonEntity.CommonModelSetup<DocumentNaksAttest_to_WeldGOST14098>(modelBuilder);
-            CommonEntity.CommonModelSetup<DocumentNaksAttest_to_JointType>(modelBuilder);
-            
-            // ----- documents ----
-            CommonEntity.CommonModelSetup<PID>(modelBuilder);
-            CommonEntity.CommonModelSetup<GOST>(modelBuilder);
-            CommonEntity.CommonModelSetup<GOST_to_TitleObject>(modelBuilder);
-            CommonEntity.CommonModelSetup<GOST_to_PID>(modelBuilder);
-            CommonEntity.CommonModelSetup<Status>(modelBuilder);
-            CommonEntity.CommonModelSetup<Document>(modelBuilder);
-            CommonEntity.CommonModelSetup<Document_to_PID>(modelBuilder);
-            CommonEntity.CommonModelSetup<Document_to_GOST>(modelBuilder);
-            CommonEntity.CommonModelSetup<Document_to_Status>(modelBuilder);         
-            
-            modelBuilder.Entity<Document>()
-                .HasOne(d => d.Root)
-                .WithMany()
-                .OnDelete(DeleteBehavior.Restrict);
-            
-            modelBuilder.Entity<Document_to_Status>()
-                .HasOne(d => d.Parent)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Restrict);
-
+        {            
             modelBuilder.HasSequence<long>("Sequence_Document_Number");
             modelBuilder.HasSequence<long>("Sequence_CheckList_Number");
             modelBuilder.HasSequence<long>("Sequence_Register_Number");
             
+            SetupCommonEntities(modelBuilder);
             SetupConstraints(modelBuilder);
             SetupInitialData(modelBuilder);
+        }
+
+        private void SetupCommonEntities(ModelBuilder modelBuilder)
+        {
+            
+            var currentAssembly = typeof(Reftable).Assembly;
+
+            var commonEntityTypes =  currentAssembly.GetExportedTypes().Where(
+                x => x.IsSubclassOf(typeof(CommonEntity)) && !x.IsAbstract
+            );            
+            
+            foreach (var commonType in commonEntityTypes)
+            {
+                typeof(CommonEntity)
+                    .GetMethod("CommonModelSetup")
+                    .MakeGenericMethod(commonType)
+                    .Invoke(null, new object[] { modelBuilder });                
+  
+                if (commonType.GetCustomAttributes(true).FirstOrDefault(a => a is M2MAttribute) is M2MAttribute m2mAttr)
+                {
+                    var m2mRelName = $"{commonType.Name}Set";
+                    var m2mRelNameLeft = m2mAttr.Left.GetProperty(m2mRelName) != null ? m2mRelName : null;
+                    var m2mRelNameRight = m2mAttr.Right.GetProperty(m2mRelName) != null ? m2mRelName : null;
+                                      
+                    modelBuilder.Entity(commonType)
+                        .HasOne(m2mAttr.Left, m2mAttr.Left.Name)                        
+                        .WithMany(m2mRelNameLeft)
+                        .HasForeignKey(m2mAttr.LeftFKey)
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    modelBuilder.Entity(commonType)
+                        .HasOne(m2mAttr.Right, m2mAttr.Right.Name)
+                        .WithMany(m2mRelNameRight)
+                        .HasForeignKey(m2mAttr.RightFKey)
+                        .OnDelete(DeleteBehavior.Restrict);
+                }
+            }
         }
 
         private void SetupConstraints(ModelBuilder modelBuilder)
@@ -213,8 +112,6 @@ namespace SmartQA.DB
 
             modelBuilder.Entity<Position>()
                 .HasAlternateKey(u => u.Title);
-
-            // TODO: rework or remove this
 
             modelBuilder.Entity<DocumentType>()
                 .HasAlternateKey(u => u.Title);

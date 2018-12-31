@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.Reftables;
 using SmartQA.DB.Models.Shared;
@@ -32,21 +33,14 @@ namespace SmartQA.DB.Models.PermissionDocuments
         public Guid WeldType_ID { get; set; }
 
         // ---- foreign key relations -----
-
-        [ForeignKey("Person_ID")]
+        
         public virtual Person Person { get; set; }
-
-        [ForeignKey("WeldType_ID")]
         public virtual WeldType WeldType { get; set; }
-
-        [ForeignKey("ParentDocumentNaks_ID")]
         public virtual DocumentNaks ParentDocumentNaks { get; set; }
 
         // ---- child relations -----------
-
-        [InverseProperty("DocumentNaks")]
-        public virtual ICollection<DocumentNaksAttest> DocumentNaksAttestSet { get; set; }
         
+        public virtual ICollection<DocumentNaksAttest> DocumentNaksAttestSet { get; set; }       
         public virtual ICollection<DocumentNaks> Inserts { get; set; }
 
         // ---- m2m relations -------------
@@ -64,6 +58,29 @@ namespace SmartQA.DB.Models.PermissionDocuments
 
         [NotMapped]
         public bool HasInserts => Inserts.Any();
+
+        [RunAtModelSetup]
+        public static void SetupRelations(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DocumentNaks>()
+                .HasOne(x => x.ParentDocumentNaks)
+                .WithMany(x => x.Inserts)
+                .HasForeignKey(x => x.ParentDocumentNaks_ID)
+                .OnDelete(DeleteBehavior.Restrict);
+               
+            modelBuilder.Entity<DocumentNaks>()
+                .HasOne(x => x.Person)
+                .WithMany()
+                .HasForeignKey(x => x.Person_ID)
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            modelBuilder.Entity<DocumentNaks>()
+                .HasOne(x => x.WeldType)
+                .WithMany()
+                .HasForeignKey(x => x.WeldType_ID)
+                .OnDelete(DeleteBehavior.Restrict);                              
+        }
+
     }
     
 }

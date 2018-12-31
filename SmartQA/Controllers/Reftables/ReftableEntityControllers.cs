@@ -165,7 +165,7 @@ namespace SmartQA.Controllers.Reftables
         }
 
         [EnableQuery]
-        public new IQueryable<Contragent> Get() => _context.Contragent.OrderBy(x => x.Description).AsQueryable();
+        public new IQueryable<Contragent> Get() => _context.Set<Contragent>().OrderBy(x => x.Description).AsQueryable();
     }
     public class PositionController : ReftableBaseController<Position>
     {

@@ -1,6 +1,8 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+using SmartQA.DB.Models.Auth;
 using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.Shared;
 
@@ -42,13 +44,31 @@ namespace SmartQA.DB.Models.Documents
         
         public Guid? Resp_Employee_ID { get; set; }     
                 
-        [ForeignKey("DocumentType_ID")]
         public virtual DocumentType DocumentType { get; set; }
-        
-        [ForeignKey("Root_ID")]
         public virtual Document Root { get; set; }
-        
-        [ForeignKey("Resp_Employee_ID")]
         public virtual Employee Resp_Employee { get; set; }
+        
+        [RunAtModelSetup]
+        public static void SetupRelations(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Document>()
+                .HasOne(d => d.Root)
+                .WithMany()
+                .HasForeignKey(x => x.DocumentType_ID)
+                .OnDelete(DeleteBehavior.Restrict); 
+            
+            modelBuilder.Entity<Document>()
+                .HasOne(d => d.DocumentType)
+                .WithMany()
+                .HasForeignKey(x => x.Root_ID)
+                .OnDelete(DeleteBehavior.Restrict);            
+            
+            modelBuilder.Entity<Document>()
+                .HasOne(d => d.Resp_Employee)
+                .WithMany()
+                .HasForeignKey(x => x.Resp_Employee_ID)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+        
     }
 }

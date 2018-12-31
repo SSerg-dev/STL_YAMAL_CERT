@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 using SmartQA.DB.Models.Reftables;
 using SmartQA.DB.Models.Shared;
 
@@ -22,27 +23,15 @@ namespace SmartQA.DB.Models.PermissionDocuments
         // ---- foreign keys --------------
 
         public Guid DocumentNaks_ID { get; set; }
-        //public Guid JointType_ID { get; set; }
         public Guid WeldingEquipmentAutomationLevel_ID { get; set; }
-        //public Guid WeldGOST14098_ID { get; set; }
 
         // ---- foreign key relations -----
-
-        [ForeignKey("DocumentNaks_ID")]
+        
         public virtual DocumentNaks DocumentNaks { get; set; }
-
-        //[ForeignKey("JointType_ID")]
-        //public virtual JointType JointType { get; set; }
-
-        [ForeignKey("WeldingEquipmentAutomationLevel_ID")]
         public virtual WeldingEquipmentAutomationLevel WeldingEquipmentAutomationLevel { get; set; }
-
-        //[ForeignKey("WeldGOST14098_ID")]
-        //public virtual WeldGOST14098 WeldGOST14098 { get; set; }
 
         // ---- m2m relations -------------
 
-        [InverseProperty("DocumentNaksAttest")]
         public virtual ICollection<DocumentNaksAttest_to_DetailsType> DocumentNaksAttest_to_DetailsTypeSet { get; set; }
 
         [NotMapped]
@@ -54,7 +43,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
             set => this.SetM2MKeys<DetailsType>( value);
         }
 
-        [InverseProperty("DocumentNaksAttest")]
         public virtual ICollection<DocumentNaksAttest_to_SeamsType> DocumentNaksAttest_to_SeamsTypeSet { get; set; }
         [NotMapped]
         public ICollection<SeamsType> SeamsTypeSet => this.GetM2MObjects<SeamsType>();
@@ -65,7 +53,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
             set => this.SetM2MKeys<SeamsType>( value);
         }
 
-        [InverseProperty("DocumentNaksAttest")]
         public virtual ICollection<DocumentNaksAttest_to_WeldMaterialGroup> DocumentNaksAttest_to_WeldMaterialGroupSet { get; set; }
         [NotMapped]
         public ICollection<WeldMaterialGroup> WeldMaterialGroupSet => this.GetM2MObjects<WeldMaterialGroup>();
@@ -76,7 +63,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
             set => this.SetM2MKeys<WeldMaterialGroup>( value);
         }
 
-        [InverseProperty("DocumentNaksAttest")]
         public virtual ICollection<DocumentNaksAttest_to_WeldMaterial> DocumentNaksAttest_to_WeldMaterialSet { get; set; }
         [NotMapped]
         public ICollection<WeldMaterial> WeldMaterialSet => this.GetM2MObjects<WeldMaterial>();
@@ -87,7 +73,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
             set => this.SetM2MKeys<WeldMaterial>( value);
         }
 
-        [InverseProperty("DocumentNaksAttest")]
         public virtual ICollection<DocumentNaksAttest_to_WeldPosition> DocumentNaksAttest_to_WeldPositionSet { get; set; }
         [NotMapped]
         public ICollection<WeldPosition> WeldPositionSet => this.GetM2MObjects<WeldPosition>();
@@ -98,7 +83,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
             set => this.SetM2MKeys<WeldPosition>( value);
         }
 
-        [InverseProperty("DocumentNaksAttest")]
         public virtual ICollection<DocumentNaksAttest_to_JointKind> DocumentNaksAttest_to_JointKindSet { get; set; }
         [NotMapped]
         public ICollection<JointKind> JointKindSet => this.GetM2MObjects<JointKind>();
@@ -109,7 +93,6 @@ namespace SmartQA.DB.Models.PermissionDocuments
             set => this.SetM2MKeys<JointKind>( value);
         }
 
-        [InverseProperty("DocumentNaksAttest")]
         public virtual ICollection<DocumentNaksAttest_to_WeldGOST14098> DocumentNaksAttest_to_WeldGOST14098Set { get; set; }
         [NotMapped]
         public ICollection<WeldGOST14098> WeldGOST14098Set => this.GetM2MObjects<WeldGOST14098>();
@@ -119,8 +102,7 @@ namespace SmartQA.DB.Models.PermissionDocuments
             get => this.GetM2MKeys<WeldGOST14098>();
             set => this.SetM2MKeys<WeldGOST14098>( value);
         }
-
-        [InverseProperty("DocumentNaksAttest")]
+        
         public virtual ICollection<DocumentNaksAttest_to_JointType> DocumentNaksAttest_to_JointTypeSet { get; set; }
         [NotMapped]
         public ICollection<JointType> JointTypeSet => this.GetM2MObjects<JointType>();
@@ -131,7 +113,23 @@ namespace SmartQA.DB.Models.PermissionDocuments
             set => this.SetM2MKeys<JointType>(value);
         }
 
+        [RunAtModelSetup]
+        public static void SetupRelations(ModelBuilder modelBuilder)
+        {
 
+            modelBuilder.Entity<DocumentNaksAttest>()
+                .HasOne(x => x.DocumentNaks)
+                .WithMany(x => x.DocumentNaksAttestSet)
+                .HasForeignKey(x => x.DocumentNaks_ID)
+                .OnDelete(DeleteBehavior.Restrict);
+               
+            modelBuilder.Entity<DocumentNaksAttest>()
+                .HasOne(x => x.WeldingEquipmentAutomationLevel)
+                .WithMany()
+                .HasForeignKey(x => x.WeldingEquipmentAutomationLevel_ID)
+                .OnDelete(DeleteBehavior.Restrict);
+                 
+        }
 
     }
 }

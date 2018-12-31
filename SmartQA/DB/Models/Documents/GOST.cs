@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.Documents
@@ -18,7 +19,6 @@ namespace SmartQA.DB.Models.Documents
         
         public Guid? Marka_ID { get; set; }
         
-        [ForeignKey("Marka_ID")]
         public virtual Marka Marka { get; set; }
 
         [NotMapped]
@@ -38,6 +38,15 @@ namespace SmartQA.DB.Models.Documents
             get => this.GetM2MKeys<TitleObject>();
             set => this.SetM2MKeys<TitleObject>(value);                
         }
-        
+
+        [RunAtModelSetup]
+        public static void SetupRelations(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<GOST>()
+                .HasOne(x => x.Marka)
+                .WithMany()
+                .HasForeignKey(x => x.Marka_ID)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
     }
 }
