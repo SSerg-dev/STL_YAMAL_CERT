@@ -124,9 +124,8 @@ namespace SmartQA.DB
 
             // ----- people -------------
             CommonEntity.CommonModelSetup<Person>(modelBuilder);
-            CommonEntity.CommonModelSetup<Employee>(modelBuilder);                
-            CommonEntity.CommonModelSetup<Division>(modelBuilder);                
-            CommonEntity.CommonModelSetup<Position>(modelBuilder);                
+            CommonEntity.CommonModelSetup<Employee>(modelBuilder);
+
             CommonEntity.CommonModelSetup<Contragent>(modelBuilder);
 
             // ----- reftables ----------
