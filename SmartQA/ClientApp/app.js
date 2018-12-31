@@ -2,8 +2,6 @@ import 'styles/main.scss'
 
 import "devextreme-intl";
 
-import { FontAwesomeIcon } from './icons'
-
 import Vue from 'vue'
 import Rx from 'rxjs/Rx';
 import VueRx from 'vue-rx';
@@ -14,10 +12,13 @@ import router from './router/index'
 import store from './store'
 import authHelper from 'auth/helper'
 
-import {locale} from "devextreme/localization";
 import DefaultLayout from './layouts/default'
 import BlankLayout from './layouts/blank'
 
+import {loadMessages, locale} from "devextreme/localization";
+import ruMessages from "devextreme/localization/messages/ru.json";
+
+loadMessages(ruMessages);
 locale(navigator.language || navigator.browserLanguage);
 
 authHelper.onAppInit();

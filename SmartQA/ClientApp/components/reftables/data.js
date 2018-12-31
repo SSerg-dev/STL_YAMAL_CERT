@@ -1,19 +1,9 @@
-﻿import authHeaders from 'auth/headers.js';
+﻿import context from 'api/odata-context';
+
 
 export const dataSourceConfs = {
     reftables: {
-        store: {
-            type: 'odata',
-            url: baseUrl + 'odata/Reftable',
-            version: 4,
-            key: 'modelName',
-            keyType: {
-                modelName: "String"
-            },
-            beforeSend: function (e) {                
-                e.headers = authHeaders.getAuthHeaders();
-            }
-        },
+        store: context.Reftable,
         sort: [
             'Title'
         ]
@@ -22,18 +12,6 @@ export const dataSourceConfs = {
 
 export function reftableDatasourceConf(modelName) {
     return {
-        store: {
-            type: 'odata',
-            url: baseUrl + 'odata/' + modelName,
-            key: 'ID',
-            keyType: {
-                ID: "Guid"
-            },
-            version: 4,
-            beforeSend: function (e) {
-                e.headers = authHeaders.getAuthHeaders();
-            }
-
-        }
+        store: context[modelName]
     }
 }

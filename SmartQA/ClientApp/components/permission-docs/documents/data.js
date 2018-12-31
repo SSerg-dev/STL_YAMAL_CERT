@@ -1,56 +1,18 @@
 ﻿import DataSource from 'devextreme/data/data_source';
-import authHeaders from 'auth/headers.js';
+import context from 'api/odata-context';
 
 export function naksDataSource() {
     return new DataSource(dataSourceConfs.documentNaks);
 }
 
 export const dataSourceConfs = {
-    documentNaks: {
-        store: {
-            type: 'odata',
-            url: baseUrl + 'odata/DocumentNaks',
-            key: 'ID',
-            keyType: {
-                ID: "Guid"
-            },    
-            beforeSend: function (e) {
-                e.headers = authHeaders.getAuthHeaders();
-            },
-            version: 4
-        }
-    },
+    documentNaks: { store: context.DocumentNaks },
     documentNaksDetailed: {
-        store: {
-            type: 'odata',
-            url: baseUrl + 'odata/DocumentNaks',
-            key: 'ID',
-            keyType: {
-                ID: "Guid"
-            },
-            beforeSend: function (e) {
-                e.headers = authHeaders.getAuthHeaders();
-            },
-            version: 4
-        },
+        store: context.DocumentNaks,
         expand: [
             'DocumentNaksAttestSet'
         ]
     },
-    documentNaksAttest: {
-        store: {
-            type: 'odata',
-            url: baseUrl + 'odata/DocumentNaksAttest',
-            key: 'ID',
-            keyType: {
-                ID: "Guid"
-            },
-            beforeSend: function (e) {
-                e.headers = authHeaders.getAuthHeaders();
-            },
-            version: 4
-        }
-        
-    },
+    documentNaksAttest: { store: context.DocumentNaksAttest },
 
 }

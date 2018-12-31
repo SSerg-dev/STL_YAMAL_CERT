@@ -22,19 +22,17 @@
 
 <script>
     import {
-        DxDataGrid,
         DxColumn,
-        DxSearchPanel,
-        DxPaging,
+        DxDataGrid,
         DxEditing,
-        DxPopup,
         DxLookup,
-        DxPosition
-    } from "devextreme-vue/data-grid";    
+        DxPaging,
+        DxPopup,
+        DxPosition,
+        DxSearchPanel
+    } from "devextreme-vue/data-grid";
     import DxToolbar from 'devextreme-vue/toolbar';
-    import { employeeDataSourceSettings } from './employee-data.js'
-
-    import 'devextreme/data/odata/store';
+    import {employeeDataSourceSettings} from './employee-data.js'
 
     export default {
         components: {

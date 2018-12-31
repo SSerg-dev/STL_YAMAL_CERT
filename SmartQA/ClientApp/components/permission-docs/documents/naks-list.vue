@@ -48,19 +48,18 @@
 </template>
 
 <script>
-    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';    
-    import { confirm } from 'devextreme/ui/dialog';
-    import { DxTreeList, DxColumn } from 'devextreme-vue/tree-list';
-    import { DxPopup } from 'devextreme-vue';
-    import { DxButton } from "devextreme-vue/ui/button";
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+    import {confirm} from 'devextreme/ui/dialog';
+    import {DxColumn, DxTreeList} from 'devextreme-vue/tree-list';
+    import {DxPopup} from 'devextreme-vue';
+    import {DxButton} from "devextreme-vue/ui/button";
     import DxToolbar from 'devextreme-vue/toolbar';
     import DataSource from 'devextreme/data/data_source';
-    import 'devextreme/data/odata/store';
 
-    import NaksEdit from './naks-edit';    
+    import NaksEdit from './naks-edit';
 
-    import { dataSourceConfs } from './data.js';
-    import { Subject } from 'rxjs';
+    import {dataSourceConfs} from './data.js';
+    import {Subject} from 'rxjs';
 
     export default {
         name: "naks-list",
