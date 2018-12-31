@@ -5,9 +5,9 @@
             <tr class="table-secondary">
                 <th scope="row">
                     Области аттестации
-                    <button type="button" class="btn btn-sm btn-light">
-                        <font-awesome-icon icon="plus"
-                                           @click="onNewButtonClick" />
+                    <button type="button" class="btn btn-sm btn-light"
+                            @click="onNewButtonClick">
+                        <font-awesome-icon icon="plus" />
                     </button>
                 </th>
                 <th scope="col" v-for="(item, index) in model.DocumentNaksAttestSet">
@@ -147,16 +147,16 @@
 </template>
 
 
-<script>    
-    import { Subject } from 'rxjs';
-    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-    import { DxButton } from 'devextreme-vue';
-    import { confirm } from 'devextreme/ui/dialog';
-    
-    import DxToolbar from 'devextreme-vue/toolbar'; 
+<script>
+    import {Subject} from 'rxjs';
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+    import {DxButton} from 'devextreme-vue';
+    import {confirm} from 'devextreme/ui/dialog';
+
+    import DxToolbar from 'devextreme-vue/toolbar';
     import DataSource from 'devextreme/data/data_source';
     import DxPopup from 'devextreme-vue/popup';
-    import { dataSourceConfs } from './data.js';
+    import {dataSourceConfs} from './data.js';
 
     import NaksAttestEdit from './naks-attest-edit';
 
