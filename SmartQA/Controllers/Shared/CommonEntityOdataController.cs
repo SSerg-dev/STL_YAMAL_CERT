@@ -19,8 +19,8 @@ namespace SmartQA.Controllers.Shared
         where TForm : EntityForm<TEntity>, new ()
 
     {
-        private readonly DataContext _context;
-        private readonly AppUserManager _userManager;
+        protected readonly DataContext _context;
+        protected readonly AppUserManager _userManager;
 
         public CommonEntityODataController(DataContext context, AppUserManager userManager)
         {

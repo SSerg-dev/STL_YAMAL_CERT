@@ -3,6 +3,8 @@ import ReftablesIndex from 'components/reftables/index'
 import HomePage from 'components/home'
 import LoginPage from 'components/account/login-page'
 import UserAdminIndex from 'components/useradmin/index'
+import DocumentsIndex from 'components/documents/index'
+import DocumentEdit from 'components/documents/document-edit'
 
 import store from 'store' 
 
@@ -94,6 +96,19 @@ export const routes = [
         props: true,
         display: 'Reftables',
         beforeEnter: ifAuthenticated(),
+    },
+    {
+        name: 'documents',
+        path: '/documents',
+        component: DocumentsIndex,
+        beforeEnter: ifAuthenticated(),
+        children: [
+            {
+                path: '/:id?',
+                component: DocumentEdit,
+                props: true
+            }
+        ]
     }
   
-]
+];

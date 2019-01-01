@@ -12,7 +12,7 @@
                        caption="Номер" />
 
             <dx-column data-field="IssueDate"
-                       
+                       data-type="date"
                        caption="Дата выдачи" />
 
             <dx-column :fixed="true"

@@ -54,13 +54,13 @@ namespace SmartQA.DB.Models.Documents
             modelBuilder.Entity<Document>()
                 .HasOne(d => d.Root)
                 .WithMany()
-                .HasForeignKey(x => x.DocumentType_ID)
+                .HasForeignKey(x => x.Root_ID)
                 .OnDelete(DeleteBehavior.Restrict); 
             
             modelBuilder.Entity<Document>()
                 .HasOne(d => d.DocumentType)
                 .WithMany()
-                .HasForeignKey(x => x.Root_ID)
+                .HasForeignKey(x => x.DocumentType_ID)
                 .OnDelete(DeleteBehavior.Restrict);            
             
             modelBuilder.Entity<Document>()
@@ -68,7 +68,15 @@ namespace SmartQA.DB.Models.Documents
                 .WithMany()
                 .HasForeignKey(x => x.Resp_Employee_ID)
                 .OnDelete(DeleteBehavior.Restrict);
-        }
+                        
+            modelBuilder.Entity<Document>()
+                .HasAlternateKey(u => u.Document_Code);                ;
+
+            modelBuilder.Entity<Document>()
+                .Property(d => d.Document_Code)
+                .HasDefaultValueSql("next value for [Sequence_Document_Number]");            
+
+        }                
         
     }
 }

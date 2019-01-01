@@ -251,6 +251,18 @@ namespace SmartQA.DB
 
             modelBuilder.Entity<Status>()
                 .HasData(statuses);
+
+            modelBuilder.Entity<DocumentType>()
+                .HasData(new DocumentType
+                {
+                    ID = Guid.Parse("724b20fd-df8d-4b4c-8afc-d54fe796f254"),
+                    RowStatus = 0,
+                    Created_User_ID = rootUserId,
+                    Modified_User_ID = rootUserId,
+                    Insert_DTS = fakeDate,
+                    Update_DTS = fakeDate,
+                    Title = "N/A"
+                });
         }
     }
 }

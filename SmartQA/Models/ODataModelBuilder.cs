@@ -8,6 +8,7 @@ using SmartQA.DB.Models.Reftables;
 using SmartQA.DB.Models.Shared;
 using SmartQA.Models.Forms;
 using System;
+using SmartQA.DB.Models.Documents;
 
 namespace SmartQA.DB
 {
@@ -52,11 +53,15 @@ namespace SmartQA.DB
             BuildCommon<Contragent>(builder);
             
             var user = BuildCommon<AppUser>(builder);
-            user.Ignore(u => u.User_Password);
+            user.Ignore(u => u.User_Password);            
             user.CollectionProperty(u => u.Role_IDs);
             user.ContainsMany(u => u.RoleSet);
             
-            var role = BuildCommon<Role>(builder);                        
+            var role = BuildCommon<Role>(builder);
+
+            var document = BuildCommon<Document>(builder);
+            document.Ignore(d => d.Issue_Date_DT);
+            //document.Property(d => d.Issue_Date).
 
             var naks = BuildCommon<DocumentNaks>(builder);
             naks.CollectionProperty(x => x.HIFGroup_IDs);

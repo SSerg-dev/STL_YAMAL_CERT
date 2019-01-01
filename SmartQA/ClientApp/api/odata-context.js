@@ -12,7 +12,7 @@ function common_entity_conf(options = Object()) {
     return Object.assign(default_options, options)
 }
 
-var context = new ODataContext({
+let context = new ODataContext({
     url: baseUrl + "odata/",
     errorHandler: function (error) {
         notify(error.message, 'error');
@@ -20,11 +20,13 @@ var context = new ODataContext({
     beforeSend: function (e) {
         e.headers = authHeaders.getAuthHeaders();
     },
+    deserializeDates: false,
     version: 4,
     entities: {
         Employee: common_entity_conf(),
         Person: common_entity_conf(),
         Contragent: common_entity_conf(),
+        Document: common_entity_conf(),
         AppUser: common_entity_conf(),
         Role: common_entity_conf(),
         DocumentNaks: common_entity_conf(),

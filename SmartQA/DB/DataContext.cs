@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.Classification;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Scaffolding;
 using SmartQA.DB.Models.Auth;
 using SmartQA.DB.Models.Common;
 using SmartQA.DB.Models.Documents;
@@ -10,6 +15,7 @@ using SmartQA.DB.Models.PermissionDocuments;
 using SmartQA.DB.Models.Reftables;
 using SmartQA.DB.Models.Shared;
 using SmartQA.Models.Forms;
+using SQLitePCL;
 
 namespace SmartQA.DB
 {
@@ -22,10 +28,17 @@ namespace SmartQA.DB
 
         public DataContext(DbContextOptions<DataContext> options)
             : base(options) {}
-
-        // ----- UDF ---------------
-        [DbFunction("f_SiteDT", "dbo")]
-        public static DateTime GetConstructionSiteDT(DateTimeOffset i_datetimeoffset) { throw new NotImplementedException();}
+        
+        public async Task<DateTime> GetConstructionSiteDT(DateTimeOffset datetimeoffset)
+        {
+            
+            var resultParameter = new SqlParameter("@result", SqlDbType.DateTime2);            
+            resultParameter.Direction = ParameterDirection.Output;
+            await Database.ExecuteSqlCommandAsync("set @result = dbo.f_SiteDTS({0});", datetimeoffset, resultParameter);
+            var result = (DateTime) resultParameter.Value;
+                  
+            return result;
+        }
 
   
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -116,9 +129,6 @@ namespace SmartQA.DB
             modelBuilder.Entity<DocumentType>()
                 .HasAlternateKey(u => u.Title);
 
-            modelBuilder.Entity<Document>()
-                .HasAlternateKey(u => u.Document_Code);
-
             modelBuilder.Entity<Document_to_GOST>()
                 .HasAlternateKey(u => new {u.Document_ID, u.GOST_ID});
 
@@ -140,8 +150,6 @@ namespace SmartQA.DB
             modelBuilder.Entity<AppUser_to_Role>()
                 .HasAlternateKey(u => new {u.AppUser_ID, u.Role_ID});
 
-        }
-
-        
+        }               
     }
 }
