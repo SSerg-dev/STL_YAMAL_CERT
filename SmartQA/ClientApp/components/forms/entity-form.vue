@@ -1,80 +1,111 @@
-﻿<template>    
-    <form v-on:submit.prevent="processForm">
-        <dx-load-panel :visible="false"
-                       :close-on-outside-click="false"
+﻿<template>
+    <div class="form-container">
+        <h2 v-if="formTitle">{{ formTitle }}</h2>
+        
+        <form v-on:submit.prevent="onSubmitButtonClick" class="my-5">
+            <dx-form ref="form"
+                     :form-data="formData"
+                     :items="formItems" />
+            
+        </form>
+        
+        <dx-load-panel :position="{ of: '.form-container' }"
+                       :visible="loading"
+                       :show-indicator="true"
+                       :show-pane="true"
                        :shading="true"
-                       shading-color="rgba(0,0,0,0.2)" />
-
-        <dx-form ref="form"
-                 :form-data="formData"
-                 :items="formItems" />
-
-    </form>            
+                       shading-color="rgba(0,0,0,0.2)"
+                       :close-on-outside-click="false"
+        />
+        
+        <dx-toolbar :items="toolbarItems" />
+        
+    </div>
 </template>
 
 <script>
-    import { DxForm, DxScrollView } from 'devextreme-vue';
+    import { DxForm, DxScrollView, DxToolbar } from 'devextreme-vue';
     import notify from 'devextreme/ui/notify';
     import DataSource from 'devextreme/data/data_source';
     import { DxLoadPanel } from 'devextreme-vue/load-panel';           
-    import { BehaviorSubject, empty } from 'rxjs';    
+    import { BehaviorSubject, Subject, empty } from 'rxjs';    
     import { filter, map, distinctUntilChanged, pluck } from 'rxjs/operators';
 
     export default {
+        name: 'EntityForm',
+        
         components: {
             DxForm,
             DxLoadPanel,
             DataSource,
             DxScrollView,
+            DxToolbar,
         },
         props: {
-            dataSource: Object, // devetreme datasource settings
-            formSettings: { // form settings Observable, e.g. { modelKey: "123", formDataInitial: {} }
-                type: Object,
-                default: () => empty()
-            },
-            commandRequests: { // form commands Observable, e.g { command: "submit" }
-                type: Object,
-                default: () => empty()
-            }, 
-            formItems: Array,            
+
         },
-       
-        subscriptions: function () {                               
-            this.$subscribeTo(this.commandRequests, this.runCommand)          
-            this.$subscribeTo(
-                this.formSettings.pipe(filter(s => !!s)),
-                this.init
-            );             
+        data: function () {
+            return {
+                state: new Subject(),
+                formCommands: new Subject(),
+                dataStore: {},
+                dataStoreLoadOptions: {},
+                modelKey: null,
+                formTitle: null,
+                formData: {},
+                formItems: [],
+                toolbarItems: [
+                    {
+                        widget: "dxButton",
+                        location: "after",
+                        options: {
+                            text: "Отмена",
+                            onClick: this.onCancelButtonClick
+                        }
+                    },                
+                    {
+                        widget: "dxButton",
+                        location: "after",
+                        options: {
+                            text: "Сохранить",
+                            type: "success",
+                            onClick: this.onSubmitButtonClick
+                        }
+                    }
+                ],
+                index: null,
+                loading: false
+            }
+        },
+        mounted() {
+            this.$subscribeTo(this.formCommands, this.runCommand);
 
             this.$subscribeTo(this.state.pipe(
                 filter(s => s.state !== 'uninitialized'),
-                map(s => s.state === 'failure' ? s.formErrors : [])                
-            ), this.updateFormErrors);                          
+                map(s => s.state === 'failure' ? s.formErrors : [])
+            ), this.updateFormErrors);
 
             this.$subscribeTo(this.state, s => {
                 console.debug('[entity-form] state ' + s.state, s);
-                this.$emit('state', s);
+                //this.$emit('state', s);
             });
 
-            return {
-                loading: this.state.pipe(
-                    pluck('isProgress'),
-                    distinctUntilChanged()
-                )
-            }
-        },
-        data: function () {
-            return {                       
-                state: new BehaviorSubject({ state: 'uninitialized', modelKey: null, index: null }),
-                modelKey: null,
-                index: null,
-                formData: {}
-            }
+
+            this.$subscribeTo(this.formCommands, s => {
+                console.debug('[entity-form] formCommands ' + s.command, s);
+            });
+            
+            this.$subscribeTo(
+                this.state.pipe(filter(s => s.state === 'success')),
+                this.afterSubmitSuccess
+            )             
         },
         methods: {
             changeState(state) {
-                var s = Object.assign({
+                if(typeof state === "string") {
+                    state = { state: state }
+                }
+                let s = Object.assign({
                     isProgress: ['loading', 'submitting', 'initializing'].includes(state.state),
                     modelKey: this.modelKey,
                     index: this.index,
@@ -83,7 +114,6 @@
 
                 this.state.next(s);
             },
-
             init(settings) {           
                 this.changeState({
                     state: 'initializing'
@@ -99,53 +129,59 @@
                 this.formErrors = {};
                 this.modelKey = settings.modelKey;
                 this.index = settings.index;
-                var formDataInitial = Object.assign({}, settings.formDataInitial || {})
+                let formDataInitial = Object.assign({}, settings.formDataInitial || {})
 
-                if (!this.modelKey) {                    
-                    this.initFormData(formDataInitial);
-                    this.changeState({
-                        state: 'ready',
-                    });
-                    return;
+                if (!this.modelKey) {
+                    this.formData = this.makeFormData(null, formDataInitial);
+                    this.changeState('ready');
+                    
+                } else {
+                    this.loadModel()
                 }
                 
-                var component = this;
-                var source = new DataSource(this.dataSource);
+                this.$subscribeTo(this.state.pipe(
+                    pluck('isProgress'),
+                    distinctUntilChanged()
+                ), (loading) => this.loading = loading);
 
-                component.changeState({
-                    state: 'loading'
+            },
+            loadModel() {
+                this.changeState('loading');
+
+                this.dataStore.byKey(this.modelKey, this.dataStoreLoadOptions)
+                    .done(this.onLoadModelSuccess)
+                    .fail(this.onLoadModelFail);  
+            },
+            onLoadModelSuccess(data) {
+                this.formData = this.makeFormData(data);
+                this.changeState('ready');
+            },
+            onLoadModelFail(error){
+                console.debug('onLoadModelFail');
+                this.changeState({
+                    state: 'error',
+                    error: error
                 });
-
-                source.store().byKey(component.modelKey)
-                    .done(function (data) {                        
-                        component.initFormData(data);
-                        component.changeState({
-                            state: 'ready'
-                        });
-                    })
-                    .fail(function (error) {
-                        component.changeState({
-                            state: 'error',
-                            error: error
-                        });
-                    });
             },
             runCommand(cmd) {
                 if (!cmd) return;
                 if (cmd.command === 'submit') {
-                    this.processForm(null);
+                    this.submitForm(null);
+                } else if (cmd.command === 'init') {
+                    this.init(cmd);
                 }
             },
-            initFormData(data) {                
-                let dxForm = this.$refs.form;
-                if (dxForm) {
-                    dxForm.instance.beginUpdate();
-                    this.updateFormErrors([]);
-                    this.formData = Object.assign({}, data);
-                    dxForm.instance.endUpdate();
+            makeFormData(model = null, initialData = null) {
+                let data = {};
+                if (initialData) {
+                    data = Object.assign(data, initialData)
                 }
+                if (model) {
+                    data = Object.assign(data, model)
+                }
+                return data;
             },            
-            processForm(event) {
+            submitForm(event) {
                 if (!this.$refs.form.instance.validate().isValid) {
                     notify('Исправьте ошибки на форме и попробуйте ещё раз', 'warning');
                     return;
@@ -155,24 +191,21 @@
                     state: 'submitting',
                 });
                 
-                var component = this;
-                var source = new DataSource(this.dataSource);
                 var data = this.formData;
 
                 if (this.modelKey) {
-                    source.store().update(new String(this.modelKey.toString()), data)
-                        .done(this.processFormSuccess)
-                        .fail(this.processFormFail);
+                    this.dataStore.update(String(this.modelKey.toString()), data)
+                        .done(this.onSubmitFormSuccess)
+                        .fail(this.onSubmitFormFail);
                 } else {
-                    source.store().insert(data)
-                        .done(this.processFormSuccess)
-                        .fail(this.processFormFail);
+                    this.dataStore.insert(data)
+                        .done(this.onSubmitFormSuccess)
+                        .fail(this.onSubmitFormFail);
                 }
             },
-            processFormSuccess(data) {  
-                var source = new DataSource(this.dataSource);
+            onSubmitFormSuccess(data) {
                 if (!this.modelKey) {
-                    this.modelKey = data[source.key()].toString()
+                    this.modelKey = data[this.dataStore.key()].toString()
                 }
 
                 this.changeState({
@@ -182,13 +215,13 @@
 
                 notify('Сохранение прошло успешно', 'success');
             },
-            processFormFail(error) {
+            onSubmitFormFail(error) {
                 this.changeState({
                     state: 'failure',
                     formErrors: error.errorDetails.details,
                 });                
             },
-            updateFormErrors: function (errors) {
+            updateFormErrors(errors) {
                 if (!this.$refs.form) return;
 
                 var form = this.$refs.form.instance;
@@ -209,8 +242,12 @@
                         editor.option('validationError', { message: err.message });
                     }
                 }
-            }
-            
+            },
+            onSubmitButtonClick(event) {
+                this.submitForm();
+            },
+            onCancelButtonClick(event) {},
+            afterSubmitSuccess(state) {}
         }
     };
 </script>

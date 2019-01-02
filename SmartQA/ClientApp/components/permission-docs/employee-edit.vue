@@ -1,63 +1,34 @@
-﻿<template>
-    <div>
-        <h2 v-if="employeeId">Edit employee</h2>
-        <h2 v-if="!employeeId">New employee</h2>
-
-        <form class="py-3"
-              v-on:submit.prevent="processForm"
-              id="employeeForm">
-            <dx-load-panel :visible.sync="loading"
-                           :close-on-outside-click="false"
-                           :position="{ of: '#employeeForm' }"
-                           :shading="true"
-                           shading-color="rgba(0,0,0,0.2)" />
-
-            <dx-form ref="form"
-                     :form-data="formData"
-                     :items="formItems" />
-
-            <div class="pt-3 float-right">
-                <dx-button type="success" :useSubmitBehavior="true" text="Submit"></dx-button>
-                <dx-button @click="cancelEdit" text="Cancel"></dx-button>
-            </div>
-        </form>        
-    </div>
-</template>
-
-<script>
-
-    import { DxForm, DxValidationSummary } from 'devextreme-vue';
-    import { DxButton } from "devextreme-vue/ui/button";
-
-    import DataSource from 'devextreme/data/data_source';   
-    import { DxLoadPanel } from 'devextreme-vue/load-panel';
-    import { employeeDataSource } from './employee-data.js';
-    import { reftableFormItem5 } from 'components/forms/reftables';
-
+﻿<script>
+    import {reftableDatasourceConf} from "components/reftables/data"
+    import context from 'api/odata-context'
+    import EntityForm from 'components/forms/entity-form'
+    
     export default {
-        components: {
-            DxButton,
-            DxForm,
-            DataSource,
-            DxLoadPanel
-        },
+        extends: EntityForm,
         props: {
             'employeeId': String
         },
         watch: {
-            '$route': 'fetchData',
-            'formErrors': 'updateFormErrors',
-            'employee': 'makeFormData'
-        },
-        created() {
-            this.fetchData()
+            employeeId: {
+                immediate: true,
+                handler(val) {
+                    this.init({
+                        modelKey: val
+                    });
+                }
+            },
+            modelKey: {
+                immediate: true,
+                handler(val) {
+                    this.formTitle = val ? 'Карточка сотрудника' : 'Новый сотрудник';
+                }
+            }
         },
         data: function () {
             return {
-                loading: false,
-                employee: null,
-                error: null,
-                employeeDataSource: employeeDataSource,
+                dataStore: context.Employee,
+                dataStoreLoadOptions: { expand: 'Person' },
+                formTitle: null,
                 formItems: [
                     {
                         itemType: 'group',
@@ -79,122 +50,75 @@
                                 dataField: 'BirthDate',
                                 label: { text: 'Дата рождения' },
                                 editorType: 'dxDateBox',
-                                editorOptions: {
-                                    onValueChanged: 'onEditorValueChanged',
-                                }
                             }
                         ]
                     },
                     {
                         itemType: 'group',
                         items: [
-                            reftableFormItem5('Contragent', 'Организация', false, false),
-                            reftableFormItem5('Position', 'Должность', false, false)
+                            {
+                                label: { text: 'Организация' },
+                                editorOptions: {
+                                    dataSource: reftableDatasourceConf("Contragent"),
+                                    displayExpr: "Description",
+                                    valueExpr: "ID",
+                                    searchExpr: ['Description'],
+                                    searchEnabled: true,
+                                },
+                                dataField: 'Contragent_ID',
+                                editorType:'dxSelectBox',
+                                isRequired: true
+                            },                            
+                            {
+                                label: { text: 'Должность' },
+                                editorOptions: {
+                                    dataSource: reftableDatasourceConf("Position"),
+                                    displayExpr: "Description",
+                                    valueExpr: "ID",
+                                    searchExpr: ['Description'],
+                                    searchEnabled: true,
+                                },
+                                dataField: 'Position_ID',
+                                editorType:'dxSelectBox',
+                                isRequired: true
+                            }
                         ]
                     }
-                ],
-                formData: {},
-                formErrors: {}
+                ]
             }
         },
         methods: {
-            fetchData() {                
-                this.error = this.employee = null;
-                if (!this.employeeId) {
-                    this.loading = false;
-                    return;
+            makeFormData(model = null, initialData = null) {
+                let data = {};
+                if (initialData) {
+                    data = Object.assign(data, initialData)
                 }
-                this.loading = true;
-                var component = this;
-                var source = this.employeeDataSource();
-                source.filter(["ID", "=", new String(component.employeeId.toString())]);
-
-                source
-                    .load()
-                    .done(function (data) {
-                        component.loading = false;
-                        component.employee = data[0];
-                    })
-                    .fail(function (error) {
-                        component.loading = false;
-                        component.error = error;
+                if (model) {
+                    data = Object.assign(data, {
+                        FirstName: model.Person.FirstName,
+                        LastName: model.Person.LastName,
+                        SecondName: model.Person.SecondName,
+                        BirthDate: model.Person.BirthDate,
+                        Position_ID: model.Position_ID,
+                        Contragent_ID: model.Contragent_ID
                     });
-            },
-            makeFormData(employee) {
-                if (employee == null) {
-                    this.formData = {}
-                } else {
-                    this.formData = {
-                        FirstName: employee.Person.FirstName,
-                        LastName: employee.Person.LastName,
-                        SecondName: employee.Person.SecondName,
-                        BirthDate: employee.Person.BirthDate,
-                        Position_ID: employee.Position_ID,
-                        Contragent_ID: employee.Contragent_ID
-                    }
                 }
+                return data;
             },
-            processForm(event) {
-                this.loading = true;
-                var component = this;
-                var source =this.employeeDataSource();
-                if (this.employeeId) {
-                    source.store().update(new String(this.employeeId.toString()), this.formData)
-                        .done(this.processFormSuccess)
-                        .fail(this.processFormFail);
-
-                } else {
-                    var data = this.formData;
-                    data.ID = null;
-
-                    source.store().insert(data)
-                        .done(this.processFormSuccess)
-                        .fail(this.processFormFail);
-                }                
-            },
-            processFormSuccess(data) {
-                this.loading = false;
-                var employeeId = data.ID ? data.ID : this.employeeId;
-                this.$emit('employeeChanged', {
-                    employeeId: employeeId
-                })
-                this.$router.push({
-                    params: { employeeId: employeeId.toString() },
-                    query: { edit: false }
-                })
-            },
-            processFormFail(error) {
-                this.loading = false;
-                this.formErrors = error.errorDetails.details;                
-            },
-            updateFormErrors() {
-                var form = this.$refs.form.instance;
-
-                Object.keys(this.formData).forEach(function (key, index) {
-                    var editor = form.getEditor(key)
-                    if (editor) {
-                        editor.option('isValid', true);
-                        editor.option('validationError', {});
-                    }                    
-                });
-   
-                for (var i = 0; i < this.formErrors.length; i++) {
-                    var err = this.formErrors[i];
-                    var editor = form.getEditor(err.target);
-                    editor.option('isValid', false);
-                    editor.option('validationError', { message: err.message });
-                }
-
-            },
-            cancelEdit() {
+            onCancelButtonClick() {
                 this.$router.push({
                     params: { employeeId: this.employeeId }
                 })
             },
-            onEditorValueChanged(e) {
-                
+            afterSubmitSuccess(state) {
+                this.$emit('employeeChanged', {
+                    employeeId: this.modelKey
+                });
+                this.$router.push({
+                    params: { employeeId: this.modelKey.toString() },
+                    query: { edit: false }
+                })
             }
-
         }
     };
 

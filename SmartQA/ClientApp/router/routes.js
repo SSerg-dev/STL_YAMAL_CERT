@@ -100,15 +100,14 @@ export const routes = [
     {
         name: 'documents',
         path: '/documents',
-        component: DocumentsIndex,
         beforeEnter: ifAuthenticated(),
-        children: [
-            {
-                path: '/:id?',
-                component: DocumentEdit,
-                props: true
-            }
-        ]
+        component: DocumentsIndex,
+    },       
+    {
+        name: 'document-edit',
+        path: '/documents/:id?',
+        component: DocumentEdit,
+        props: true
     }
-  
+
 ];

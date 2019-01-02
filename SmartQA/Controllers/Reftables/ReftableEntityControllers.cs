@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartQA.Auth;
 using SmartQA.DB;
+using SmartQA.DB.Models.Documents;
 using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.PermissionDocuments;
 using SmartQA.DB.Models.Reftables;
@@ -192,5 +193,11 @@ namespace SmartQA.Controllers.Reftables
         public LevelController(DataContext context, AppUserManager userManager) : base(context, userManager)
         { }
     }
-
+    
+    public class DocumentTypeController : ReftableBaseController<DocumentType>
+    {
+        public DocumentTypeController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        {
+        }
+    }
 }

@@ -9,7 +9,6 @@ import Rx from 'rxjs/Rx';
 import VueRx from 'vue-rx';
 import moment from 'moment';
 
-
 import App from './app.vue'
 
 import router from './router/index'
@@ -19,8 +18,8 @@ import authHelper from 'auth/helper'
 import DefaultLayout from './layouts/default'
 import BlankLayout from './layouts/blank'
 
-import config from 'devextreme/core/config'
-import {loadMessages, locale} from "devextreme/localization";
+import devExtremeConfig from 'devextreme/core/config'
+import { loadMessages, locale } from "devextreme/localization";
 import ruMessages from "devextreme/localization/messages/ru.json";
 
 loadMessages(ruMessages);
@@ -29,10 +28,11 @@ moment.locale(navigator.language || navigator.browserLanguage);
 
 authHelper.onAppInit();
 
-config({
-    //forceIsoDateParsing: false,
+devExtremeConfig({
     editorStylingMode: 'underlined'
 });
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.component('default-layout', DefaultLayout);
 Vue.component('blank-layout', BlankLayout);

@@ -12,10 +12,10 @@
                 </th>
                 <th scope="col" v-for="(item, index) in model.DocumentNaksAttestSet">
                     <span>
-                        {{ ++index }}
+                        {{ index + 1 }}
                     </span>
                     <div class="float-right">
-                        <button type="button" class="btn btn-sm btn-light" @click="onEditButtonClick($event, item.ID.toString(), index)">
+                        <button type="button" class="btn btn-sm btn-light" @click="onEditButtonClick($event, item.ID.toString(), index + 1)">
                             <font-awesome-icon icon="edit" />
                         </button>
                         <button type="button" class="btn btn-sm btn-light" @click="onDeleteButtonClick($event, item.ID.toString())">
@@ -141,8 +141,7 @@
 
         </table>
 
-        <naks-attest-edit :editRequests="editRequests"
-                          @editingDone="onEditingDone"/>
+        <naks-attest-edit ref="editor" @editingDone="onEditingDone"/>
     </div>
 </template>
 
@@ -244,19 +243,13 @@
                 this.loadModel();
             },
             onNewButtonClick(event) {
-                this.editRequests.next({
-                    modelKey: null,
-                    formDataInitial: {
-                        DocumentNaks_ID: this.modelKey,
-                    }
+                this.$refs.editor.show(null, null, {
+                    DocumentNaks_ID: this.modelKey,
                 });
+                
             },
             onEditButtonClick(event, modelId, index) {
-                this.editRequests.next({
-                    modelKey: modelId,
-                    index: index,
-                    formDataInitial: Object()
-                });
+                this.$refs.editor.show(modelId, index);
             },
             onDeleteButtonClick(event, modelId) {
                 var component = this;

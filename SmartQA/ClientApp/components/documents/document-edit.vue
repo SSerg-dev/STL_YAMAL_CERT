@@ -1,23 +1,17 @@
-<template>
-    <entity-form ref="form"
-                 :formItems="formItems"
-                 :formSettings="editRequests"
-                 :commandRequests="formCommands"
-                 :dataSource="dataSource"
-                 v-stream:state="formStateEvents$" />
-
-</template>
 
 <script>
     import EntityForm from "../forms/entity-form";
-    import {dataSourceConfs} from "./data";
-    import {reftableFormItem} from "../forms/reftables";
+    import { reftableFormItem } from "../forms/reftables";
+    
+    import context from "api/odata-context";
+    
     export default {
         name: "DocumentEdit",
+        extends: EntityForm,
         components: {EntityForm},
         data() {
             return {
-                dataSource: dataSourceConfs.document,
+                dataStore: context.Document,
                 formItems: [
                     {
                         label: { text: 'Номер' },
@@ -27,6 +21,7 @@
                     {
                         label: { text: 'Дата' },
                         dataField: 'Document_Date',
+                        editorType: 'dxDateBox',
                         required: false
                     },
                     reftableFormItem("DocumentType", "Тип"),
@@ -36,29 +31,25 @@
                         required: false
                     },
                     
-                ],
-                editRequests: new Subject(),
-                formCommands: new Subject(),
+                ]
             }
         },
         props: {
             id: String,
         },
-        subscriptions() {
-            return {}
-        },
-        activated() {
-            this.editRequests.next({
+
+        mounted() {
+            this.formCommands.next({
+                command: 'init', 
                 modelKey: this.id,
                 formDataInitial: {}
-            })
+            });
+            
         },
         methods: {
             
         }
-        
     }
-    
 </script>
 
 <style scoped>

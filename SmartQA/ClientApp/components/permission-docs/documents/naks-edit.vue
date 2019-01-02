@@ -1,25 +1,33 @@
 ﻿<template>
-    <div>        
+    <div class="form-container">
         <dx-popup ref="editPopup"
                   :visible="false"
                   :show-title="false"
                   :width="800"
                   :height="600"
                   :toolbar-items="toolbarItems"
-                  @hiding="onEditPopupHiding">            
+                  @hiding="onEditPopupHiding">
 
             <dx-scroll-view>
-                <div>                    
-                    <entity-form ref="naksForm"
-                                 :formItems="naksFormItems"
-                                 :formSettings="editRequests"
-                                 :commandRequests="formCommands"
-                                 :dataSource="dataSource"
-                                 v-stream:state="formStateEvents$" />
-
+                <div>
+                    <form v-on:submit.prevent="onSubmitButtonClick">
+                        <dx-form ref="form"
+                                 :form-data="formData"
+                                 :items="formItems" />
+            
+                    </form>
+                    
                     <naks-attest-list v-if="modelKey"
                                       :model-key="modelKey" />
-
+    
+                    <dx-load-panel :position="{ of: '.form-container' }"
+                           :visible="loading"
+                           :show-indicator="true"
+                           :show-pane="true"
+                           :shading="true"
+                           shading-color="rgba(0,0,0,0.2)"
+                           :close-on-outside-click="false"
+                    />
                 </div>
             </dx-scroll-view>
 
@@ -31,71 +39,75 @@
     import { Subject } from 'rxjs';
     import { pluck, map, first, filter } from 'rxjs/operators';
 
-    import { DxScrollView, DxPopup } from 'devextreme-vue';
+    import { DxScrollView, DxPopup, DxForm} from 'devextreme-vue';
     import DataSource from 'devextreme/data/data_source';
     import CustomStore from 'devextreme/data/custom_store';
     import { DxLoadPanel } from 'devextreme-vue/load-panel';    
 
     import NaksAttestList from './naks-attest-list';
-    import { dataSourceConfs } from './data.js';
     
     import EntityForm from 'components/forms/entity-form';
     import { reftableFormItem } from 'components/forms/reftables';
     import { reftableDatasourceConf } from 'components/reftables/data'; 
     
+    import context from 'api/odata-context';
+    
     export default {
-        components: {        
+        name: 'NaksEdit',
+        extends: EntityForm,
+        components: {
+            EntityForm,
             DxPopup,            
             DataSource,
             DxScrollView,
-            EntityForm,
+            DxLoadPanel,
+            DxForm,
             NaksAttestList
         },
         props: {            
             editRequests: Object,            
         },
         subscriptions() {
-            this.formStateEvents$ = new Subject();
-
-            this.$subscribeTo(this.editRequests, req => {
-                const popup = this.$refs.editPopup;
-                if (req !== null) {
-                    if (popup) popup.instance.show();               
-                }
-            });
-
-            this.formStateObs = this.formStateEvents$.pipe(
-                map(e => e.event.msg)
-            );
-
-            const modelKeyObs = this.formStateObs.pipe(
-                pluck('modelKey')
-            );
-
             return {
                 isChild: this.editRequests.pipe(
                     map(x => x ? x.isChild : false)
-                ),
-                modelKey: modelKeyObs,                
-                toolbarItems: modelKeyObs.pipe(
-                    map(key => key == null ? 
-                        [ 
-                            // toolbar items for new naks
-                            this.toolbarItemChoices.toolbarTitle,
-                            this.toolbarItemChoices.closeButton,
-                            this.toolbarItemChoices.saveButton
-                        ] :
+                )
+            }
+        },
+        mounted(){
+            this.$subscribeTo(this.editRequests, req => {
+                if (req === null) return;
+                let popup = this.$refs.editPopup;
+                if (popup) popup.instance.show();                     
+               
+                this.formCommands.next(Object.assign({
+                    command: 'init',
+                }, req));
+                
+            });
+
+        },
+        watch: {
+            modelKey: {
+                immediate: true,
+                handler(val) {
+                    this.toolbarItems = val ?
                         [
                             // toolbar items for existing naks
                             this.toolbarItemChoices.toolbarTitle,
                             this.toolbarItemChoices.closeButton,
                             this.toolbarItemChoices.saveAndCloseButton
+                        ] :
+                        [
+                            // toolbar items for new naks
+                            this.toolbarItemChoices.toolbarTitle,
+                            this.toolbarItemChoices.closeButton,
+                            this.toolbarItemChoices.saveButton
                         ]
-                    )
-                )
+                }
             }
         },
-        data: function () {
+        data() {
             
             // custom autocomplete source for Naks Number field
             const attCenterNaksDs = new CustomStore({
@@ -123,10 +135,10 @@
                 }
             });
 
-            return {                                
-                formCommands: new Subject(),
-                dataSource: dataSourceConfs.documentNaksDetailed,
-                naksFormItems: [
+            return {
+                dataStore: context.DocumentNaks,
+                dataStoreLoadOptions: { expand: 'DocumentNaksAttestSet' },
+                formItems: [
                     {
                         label: { text: 'Номер' },
                         dataField: 'Number',
@@ -246,7 +258,7 @@
             onSaveAndCloseButton() {
                 this.formCommands.next({ command: 'submit' });
                 this.$subscribeTo(
-                    this.formStateObs.pipe(first(s => !s.isProgress)),
+                    this.state.pipe(first(s => !s.isProgress)),
                     s => { if (s.state === 'success') this.close() }
                 );
             }

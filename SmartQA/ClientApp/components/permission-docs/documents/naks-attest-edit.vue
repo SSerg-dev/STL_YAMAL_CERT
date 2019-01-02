@@ -1,25 +1,31 @@
 ﻿<template>
-    <div>
-
+    <div class="form-container">
         <dx-popup ref="editPopup"
                   :visible="false"
-                  :show-title="true"
+                  :show-title="false"
                   :width="800"
                   :height="600"
-                  :toolbar-items="toolbarItems"
+                  :toolbar-items="popupToolbarItems"
                   @hiding="onEditPopupHiding">
 
             <dx-scroll-view>
                 <div>
-                    <entity-form ref="form"
-                                 :formItems="formItems"
-                                 :formSettings="editRequests"
-                                 :commandRequests="formCommands"
-                                 :dataSource="dataSource"
-                                 v-stream:state="formStateEvents$" />
+                    <form v-on:submit.prevent="onSubmitButtonClick">
+                        <dx-form ref="form"
+                                 :form-data="formData"
+                                 :items="formItems" />
 
+                    </form>
+
+                    <dx-load-panel :position="{ of: '.form-container' }"
+                                   :visible="loading"
+                                   :show-indicator="true"
+                                   :show-pane="true"
+                                   :shading="true"
+                                   shading-color="rgba(0,0,0,0.2)"
+                                   :close-on-outside-click="false"
+                    />
                 </div>
-
             </dx-scroll-view>
 
         </dx-popup>
@@ -27,56 +33,66 @@
 </template>
 
 <script>
-    import { Subject } from 'rxjs';
-    import { pluck, map, first } from 'rxjs/operators';
+    import { first } from 'rxjs/operators'
 
-    import { DxScrollView, DxPopup } from 'devextreme-vue';
-    import DataSource from 'devextreme/data/data_source';    
-    import { dataSourceConfs } from './data.js';
-
-    import EntityForm from 'components/forms/entity-form';
-    import { reftableFormItem } from 'components/forms/reftables';
-    import { reftableFormItem2 } from 'components/forms/reftables';
-    import { reftableFormItem3 } from 'components/forms/reftables'; 
-    import { reftableFormItem4 } from 'components/forms/reftables'; 
+    import { DxScrollView, DxPopup } from 'devextreme-vue'
+    
+    import context from 'api/odata-context'
+    
+    import EntityForm from 'components/forms/entity-form'
+    import { reftableFormItem } from 'components/forms/reftables'
+    import { reftableFormItem2 } from 'components/forms/reftables'
+    import { reftableFormItem3 } from 'components/forms/reftables' 
+    import { reftableFormItem4 } from 'components/forms/reftables' 
 
     export default {
+        name: 'NaksAttestEdit',
+        extends: EntityForm,
         components: {
-            DxPopup,            
-            DataSource,
+            DxPopup,
             DxScrollView,
             EntityForm            
         },
-        props: {           
-            editRequests: Object,
-        },
-        subscriptions() {
-            this.formStateEvents$ = new Subject();
+        computed: {
+            popupToolbarItems () {
+                let titleText = this.naksAttestIndex ?
+                    'Область аттестации ' + this.naksAttestIndex :
+                    'Новая область аттестации';
 
-            this.$subscribeTo(this.editRequests, req => {
-                var popup = this.$refs.editPopup;
-                if (req !== null) {
-                    if (popup) popup.instance.show();
-                }
-            });
-
-            this.formStateObs = this.formStateEvents$.pipe(
-                map(e => e.event.msg)
-            )
-            const indexObs = this.formStateObs.pipe(
-                pluck('index')
-            );
-
-            return {
-                index: indexObs,
-                toolbarItems: indexObs.pipe(map(key =>
-                    [this.title, this.toolbarItemChoices.closeButton, this.toolbarItemChoices.saveAndCloseButton]))
+                let toolbarTitleHtml = "<div class='dx-item dx-toolbar-item dx-toolbar-label'>" +
+                    "<div class='dx-item-content dx-toolbar-item-content'>" + titleText + "</div></div>";
+                
+                return [
+                    {
+                        location: 'before',
+                        template: toolbarTitleHtml
+                    },
+                    {
+                        toolbar: 'bottom',
+                        widget: "dxButton",
+                        location: "after",
+                        options: {
+                            text: "Close",
+                            onClick: this.onCloseButton
+                        }
+                    },
+                    {
+                        toolbar: 'bottom',
+                        widget: "dxButton",
+                        location: "after",
+                        options: {
+                            text: "Save and close",
+                            type: "success",
+                            onClick: this.onSaveAndCloseButton
+                        }
+                    }
+                ]
             }
         },
         data: function () {
             return {
-                formCommands: new Subject(),
-                dataSource: dataSourceConfs.documentNaksAttest,
+                naksAttestIndex: 0,
+                dataStore: context.DocumentNaksAttest,
                 formItems: [
                     reftableFormItem('DetailsType', 'Вид деталей', true),
                     reftableFormItem('SeamsType', 'Типы швов', true),
@@ -137,38 +153,20 @@
                     reftableFormItem('JointKind', 'Вид соединения', true),
                     reftableFormItem('WeldGOST14098', 'Обозначение по ГОСТ 14098', true),
                     reftableFormItem4('WeldingEquipmentAutomationLevel', 'Степень автоматизации сварочного оборудования')
-                ],
-                title: {
-                    location: 'before',
-                    template: this.getToolbarTitle
-                },
-                toolbarItemChoices: {
-                    closeButton: {
-                        toolbar: 'bottom',
-                        widget: "dxButton",
-                        location: "after",
-                        options: {
-                            text: "Close",
-                            onClick: this.onCloseButton
-                        }
-                    },
-                    saveAndCloseButton: {
-                        toolbar: 'bottom',
-                        widget: "dxButton",
-                        location: "after",
-                        options: {
-                            text: "Save and close",
-                            type: "success",
-                            onClick: this.onSaveAndCloseButton
-                        }
-                    }
-                }
+                ]
+
             }
         },
         methods: {
-            getToolbarTitle() {
-                if (this.index) return "<div class='dx-item dx-toolbar-item dx-toolbar-label'><div class='dx-item-content dx-toolbar-item-content'>Область аттестации " + this.index + "</div></div>";
-                return "<div class='dx-item dx-toolbar-item dx-toolbar-label'><div class='dx-item-content dx-toolbar-item-content'>Новая область аттестации</div></div>";
+            show(modelKey, index, formDataInitial={}) {
+                console.log(modelKey, index, formDataInitial);
+                this.naksAttestIndex = index;
+                this.formCommands.next({
+                    command: 'init',
+                    modelKey: modelKey,
+                    formDataInitial: formDataInitial
+                });
+                this.$refs.editPopup.instance.show();
             },
             onEditPopupHiding() {
                 this.$emit('editingDone');
@@ -185,7 +183,7 @@
             onSaveAndCloseButton() {
                 this.formCommands.next({ command: 'submit' });
                 this.$subscribeTo(
-                    this.formStateObs.pipe(first(s => !s.isProgress)),
+                    this.state.pipe(first(s => !s.isProgress)),
                     s => { if (s.state === 'success') this.close() }
                 );
             }
