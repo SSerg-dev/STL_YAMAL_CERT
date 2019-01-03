@@ -45,27 +45,13 @@
             </dx-data-grid>
         </div>
         <div class="col py-5" v-show="editing">
-
-                
-            <entity-form ref="userForm"
-                         :formItems="formItems"
-                         :formSettings="editRequests"
-                         :commandRequests="formCommands"
-                         :dataSource="dataSource"
-                         v-stream:state="formStateEvents" />
-            <div class="float-right mt-3">
-                <dx-button
-                        text="Cancel" 
-                        @click="onCancelButtonClick"
-                />
-
-                <dx-button
-                        type="success"
-                        @click="onSubmitButtonClick"
-                        text="Save" 
-                />
-                
-            </div>
+             
+            <base-entity-editor 
+                    ref="editor"
+                    :store="dataSource.store"
+                    :storeLoadOptions="{ expand: ['RoleSet'] }"
+                    v-stream:state="formStateEvents" 
+            />
                  
         </div>
         
@@ -81,7 +67,7 @@
     import { Subject } from 'rxjs';
     import { map, filter } from 'rxjs/operators';
     
-    import EntityForm from 'components/forms/entity-form'
+    import BaseEntityEditor from 'components/forms/base-entity-editor'
     import { dataSourceConfs } from './data'
     
     
@@ -93,34 +79,89 @@
             DxDataGrid,
             DxColumn,
             DxButton,
-            EntityForm
+            BaseEntityEditor
         },
-        subscriptions() {
+        subscriptions () {
             this.formStateEvents = new Subject();
-            
-            this.$subscribeTo(
-                this.formStateEvents.pipe(
-                    filter(s => s.event.msg.state === 'success')
-                ), 
-                this.onEditSuccess
+            let formStateObs = this.formStateEvents.pipe(
+                map(e => e.event.msg)
             );
             
+            this.$subscribeTo(
+                formStateObs.pipe(
+                    filter(s => s.state === 'success')
+                ), 
+                this.onEditSuccess
+            );  
+            
             return {
-                editing: this.editRequests.pipe(
-                    map(request => request != null)
+                editing: formStateObs.pipe(
+                    map(s => !(['uninitialized', 'success', 'canceled'].includes(s.state)))
                 )
             }
         },
         data() {
             return {
-                editRequests: new Subject(),
-                formCommands: new Subject(),
                 dataSource: dataSourceConfs.users,
-                formItems: [
+                toolbarItems: [
+                    {
+                        location: 'after',
+                        widget: 'dxButton',
+                        options: {
+                            type: 'add',
+                            icon: 'add',
+                            text: 'Add',
+                            onClick: (event) => this.onNewButtonClick(event)
+                        }
+                    }
+                ],
+            }
+        },
+        methods: {
+            reloadData() {
+                this.$refs.dataGrid.instance.refresh();
+            },
+            onEditSuccess() {
+                this.reloadData();
+            },
+            onNewButtonClick(event) {
+                this.$refs.editor.init({
+                    modelKey: null,
+                    formDataInitial: {}
+                }, {
+                    formItems: this.getFormItems(null)
+                });
+            },           
+            onEditRowButtonClick(event, model) {
+                this.$refs.editor.init({
+                    modelKey: model.ID,
+                    formDataInitial: {}
+                }, {
+                    formItems: this.getFormItems(model.ID)
+                });
+            },
+            onDeleteRowButtonClick(event, model) {
+                var component = this;
+                confirm("Really delete?", "Confirm")
+                    .done(function (dialogResult) {
+                        if (dialogResult) {
+                            let source = new DataSource(component.dataSource);
+                            source.store().remove(model.ID)
+                                .done(function (data) {
+                                    component.reloadData()
+                                });
+                        }
+                    });
+            },
+            getFormItems(modelKey) {
+                return [
                     {
                         label: { text: 'Имя пользователя' },
                         dataField: 'AppUser_Code',
-                        isRequired: true
+                        isRequired: true,
+                        editorOptions: {
+                            disabled: !!modelKey,
+                        }
                     },
                     {
                         label: { text: 'Пароль' },
@@ -142,61 +183,9 @@
                             searchEnabled: true,
                         },
                         isRequired: false,
-                    },
-                ],
-                toolbarItems: [
-                    {
-                        location: 'after',
-                        widget: 'dxButton',
-                        options: {
-                            type: 'add',
-                            icon: 'add',
-                            text: 'Add',
-                            onClick: (event) => this.onNewButtonClick(event)
-                        }
                     }
-                ],
-            }
-        },
-        methods: {
-            reloadData() {
-                this.$refs.dataGrid.instance.refresh();
-            },
-            onEditSuccess() {
-                this.reloadData();
-                this.editRequests.next(null);
-            },
-            onNewButtonClick(event) {
-                this.editRequests.next({
-                    modelKey: null,
-                    formDataInitial: {}
-                });
-            },           
-            onEditRowButtonClick(event, model) {
-                this.editRequests.next({
-                    modelKey: model.ID,
-                    formDataInitial: {}
-                });
-            },
-            onDeleteRowButtonClick(event, model) {
-                var component = this;
-                confirm("Really delete?", "Confirm")
-                    .done(function (dialogResult) {
-                        if (dialogResult) {
-                            let source = new DataSource(component.dataSource);
-                            source.store().remove(model.ID)
-                                .done(function (data) {
-                                    component.reloadData()
-                                });
-                        }
-                    });
-            },
-            onSubmitButtonClick(event){
-                this.formCommands.next({ command: 'submit' });
-            },
-            onCancelButtonClick(event){
-                this.editRequests.next(null)
-            }
+                ]
+            } 
 
         }
     }

@@ -1,10 +1,10 @@
 ﻿<script>
     import {reftableDatasourceConf} from "components/reftables/data"
     import context from 'api/odata-context'
-    import EntityForm from 'components/forms/entity-form'
+    import BaseEntityEditor from 'components/forms/base-entity-editor'
     
     export default {
-        extends: EntityForm,
+        extends: BaseEntityEditor,
         props: {
             'employeeId': String
         },

@@ -1,14 +1,14 @@
 
 <script>
-    import EntityForm from "../forms/entity-form";
+    import BaseEntityEditor from "../forms/base-entity-editor";
     import { reftableFormItem } from "../forms/reftables";
     
     import context from "api/odata-context";
     
     export default {
         name: "DocumentEdit",
-        extends: EntityForm,
-        components: {EntityForm},
+        extends: BaseEntityEditor,
+        components: {BaseEntityEditor},
         data() {
             return {
                 dataStore: context.Document,
@@ -39,12 +39,10 @@
         },
 
         mounted() {
-            this.formCommands.next({
-                command: 'init', 
+            this.init({                 
                 modelKey: this.id,
                 formDataInitial: {}
             });
-            
         },
         methods: {
             

@@ -33,13 +33,13 @@
 </template>
 
 <script>
-    import { first } from 'rxjs/operators'
+    import {filter, first} from 'rxjs/operators'
 
     import { DxScrollView, DxPopup } from 'devextreme-vue'
     
     import context from 'api/odata-context'
     
-    import EntityForm from 'components/forms/entity-form'
+    import BaseEntityEditor from 'components/forms/base-entity-editor'
     import { reftableFormItem } from 'components/forms/reftables'
     import { reftableFormItem2 } from 'components/forms/reftables'
     import { reftableFormItem3 } from 'components/forms/reftables' 
@@ -47,11 +47,11 @@
 
     export default {
         name: 'NaksAttestEdit',
-        extends: EntityForm,
+        extends: BaseEntityEditor,
         components: {
             DxPopup,
             DxScrollView,
-            EntityForm            
+            BaseEntityEditor            
         },
         computed: {
             popupToolbarItems () {
@@ -88,6 +88,12 @@
                     }
                 ]
             }
+        },
+        mounted(){
+            this.$subscribeTo(
+                this.state.pipe(filter(s => s.state === 'initializing')),
+                s => this.$refs.editPopup.instance.show()
+            )
         },
         data: function () {
             return {
@@ -158,16 +164,6 @@
             }
         },
         methods: {
-            show(modelKey, index, formDataInitial={}) {
-                console.log(modelKey, index, formDataInitial);
-                this.naksAttestIndex = index;
-                this.formCommands.next({
-                    command: 'init',
-                    modelKey: modelKey,
-                    formDataInitial: formDataInitial
-                });
-                this.$refs.editPopup.instance.show();
-            },
             onEditPopupHiding() {
                 this.$emit('editingDone');
             },
@@ -178,10 +174,10 @@
                 this.close();
             },
             onSaveButton() {
-                this.formCommands.next({ command: 'submit' });
+                this.submit();
             },
             onSaveAndCloseButton() {
-                this.formCommands.next({ command: 'submit' });
+                this.submit();
                 this.$subscribeTo(
                     this.state.pipe(first(s => !s.isProgress)),
                     s => { if (s.state === 'success') this.close() }

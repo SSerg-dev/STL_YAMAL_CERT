@@ -5,7 +5,7 @@
                   :show-title="false"
                   :width="800"
                   :height="600"
-                  :toolbar-items="toolbarItems"
+                  :toolbar-items="popupToolbarItems"
                   @hiding="onEditPopupHiding">
 
             <dx-scroll-view>
@@ -46,7 +46,7 @@
 
     import NaksAttestList from './naks-attest-list';
     
-    import EntityForm from 'components/forms/entity-form';
+    import BaseEntityEditor from 'components/forms/base-entity-editor';
     import { reftableFormItem } from 'components/forms/reftables';
     import { reftableDatasourceConf } from 'components/reftables/data'; 
     
@@ -54,9 +54,9 @@
     
     export default {
         name: 'NaksEdit',
-        extends: EntityForm,
+        extends: BaseEntityEditor,
         components: {
-            EntityForm,
+            BaseEntityEditor,
             DxPopup,            
             DataSource,
             DxScrollView,
@@ -64,46 +64,51 @@
             DxForm,
             NaksAttestList
         },
-        props: {            
-            editRequests: Object,            
+        mounted() {
+            this.$subscribeTo(
+                this.state.pipe(filter(s => s.state === 'initializing')),
+                s => this.$refs.editPopup.instance.show()
+            )
         },
-        subscriptions() {
-            return {
-                isChild: this.editRequests.pipe(
-                    map(x => x ? x.isChild : false)
-                )
-            }
-        },
-        mounted(){
-            this.$subscribeTo(this.editRequests, req => {
-                if (req === null) return;
-                let popup = this.$refs.editPopup;
-                if (popup) popup.instance.show();                     
-               
-                this.formCommands.next(Object.assign({
-                    command: 'init',
-                }, req));
+        computed: {
+            popupToolbarItems () {
+                let text;
+                if (!this.modelKey && !this.isChild) {
+                    text = "Новое удостоверение НАКС";
+                } else if (!this.modelKey && this.isChild) {
+                    text = "Новый вкладыш";
+                } else if (!this.isChild) {
+                    text = "Удостоверение НАКС";
+                } else {
+                    text = "Вкладыш";
+                }
                 
-            });
-
+                let toolbarTitle = {
+                    toolbar: 'top',
+                    location: 'before',
+                    template: '<h5>' + text + '</h5>'
+                };
+                
+                return this.modelKey ?
+                    [
+                        // toolbar items for existing naks
+                        toolbarTitle,
+                        this.toolbarItemChoices.closeButton,
+                        this.toolbarItemChoices.saveAndCloseButton
+                    ] :
+                    [
+                        // toolbar items for new naks
+                        toolbarTitle,
+                        this.toolbarItemChoices.closeButton,
+                        this.toolbarItemChoices.saveButton
+                    ]
+            }
         },
         watch: {
             modelKey: {
                 immediate: true,
                 handler(val) {
-                    this.toolbarItems = val ?
-                        [
-                            // toolbar items for existing naks
-                            this.toolbarItemChoices.toolbarTitle,
-                            this.toolbarItemChoices.closeButton,
-                            this.toolbarItemChoices.saveAndCloseButton
-                        ] :
-                        [
-                            // toolbar items for new naks
-                            this.toolbarItemChoices.toolbarTitle,
-                            this.toolbarItemChoices.closeButton,
-                            this.toolbarItemChoices.saveButton
-                        ]
+                  
                 }
             }
         },
@@ -136,6 +141,7 @@
             });
 
             return {
+                isChild: false,
                 dataStore: context.DocumentNaks,
                 dataStoreLoadOptions: { expand: 'DocumentNaksAttestSet' },
                 formItems: [
@@ -192,11 +198,6 @@
                     reftableFormItem('HIFGroup', 'Группы технических устройств ОПО', true),
                 ],                
                 toolbarItemChoices: {
-                    toolbarTitle: {
-                        toolbar: 'top',
-                        location: 'before',
-                        template: this.getToolbarTitle
-                    },
                     closeButton: {
                         toolbar: 'bottom',
                         widget: "dxButton",
@@ -230,19 +231,6 @@
             }
         },
         methods: {
-            getToolbarTitle() {
-                let text;
-                if (!this.modelKey && !this.isChild) {
-                    text = "Новое удостоверение НАКС";
-                } else if (!this.modelKey && this.isChild) {
-                    text = "Новый вкладыш";
-                } else if (!this.isChild) {
-                    text = "Удостоверение НАКС";
-                } else {
-                    text = "Вкладыш";
-                }
-                return '<h5>' + text + '</h5>';
-            },
             onEditPopupHiding() {
                 this.$emit('editingDone');
             },      
@@ -253,10 +241,10 @@
                 this.close();
             },
             onSaveButton() {
-                this.formCommands.next({ command: 'submit' });
+                this.submit();
             },
             onSaveAndCloseButton() {
-                this.formCommands.next({ command: 'submit' });
+                this.submit();
                 this.$subscribeTo(
                     this.state.pipe(first(s => !s.isProgress)),
                     s => { if (s.state === 'success') this.close() }

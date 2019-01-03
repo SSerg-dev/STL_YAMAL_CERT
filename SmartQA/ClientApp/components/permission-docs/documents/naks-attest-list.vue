@@ -224,8 +224,8 @@
                     return;
                 }
                 this.loading = true;
-                var component = this;
-                var source = new DataSource(this.dataSource);
+                let component = this;
+                let source = new DataSource(this.dataSource);
                 source.filter([source.key(), "=", new String(component.modelKey.toString())]);
 
                 source
@@ -243,13 +243,22 @@
                 this.loadModel();
             },
             onNewButtonClick(event) {
-                this.$refs.editor.show(null, null, {
-                    DocumentNaks_ID: this.modelKey,
+                this.$refs.editor.init({
+                    modelKey: null, 
+                    formDataInitial: {
+                        DocumentNaks_ID: this.modelKey,
+                    }
+                }, {
+                    naksAttestIndex: null
                 });
-                
             },
             onEditButtonClick(event, modelId, index) {
-                this.$refs.editor.show(modelId, index);
+                this.$refs.editor.init({
+                    modelKey: modelId,
+                    formDataInitial: {}
+                }, {
+                    naksAttestIndex: index
+                });
             },
             onDeleteButtonClick(event, modelId) {
                 var component = this;

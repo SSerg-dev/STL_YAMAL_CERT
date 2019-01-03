@@ -32,7 +32,7 @@
     import { filter, map, distinctUntilChanged, pluck } from 'rxjs/operators';
 
     export default {
-        name: 'EntityForm',
+        name: 'BaseEntityEditor',
         
         components: {
             DxForm,
@@ -42,18 +42,38 @@
             DxToolbar,
         },
         props: {
-
+            items: {
+                type: Array,
+                default: () => [],
+                required: false,
+            },
+            store: {
+                type: Object,
+                default: () => {},
+                required: false,
+            },
+            storeLoadOptions: {
+                type: Object,
+                default: () => {},
+                required: false,
+            },
+            titleText: {
+                type: String,
+                default: () => null,
+                required: false
+            }
+        },
+        computed: {
+            formTitle() { return this.titleText }
         },
         data: function () {
             return {
                 state: new Subject(),
-                formCommands: new Subject(),
-                dataStore: {},
-                dataStoreLoadOptions: {},
+                dataStore: this.store,
+                dataStoreLoadOptions: this.storeLoadOptions,
                 modelKey: null,
-                formTitle: null,
                 formData: {},
-                formItems: [],
+                formItems: this.items,
                 toolbarItems: [
                     {
                         widget: "dxButton",
@@ -78,21 +98,22 @@
             }
         },
         mounted() {
-            this.$subscribeTo(this.formCommands, this.runCommand);
-
             this.$subscribeTo(this.state.pipe(
                 filter(s => s.state !== 'uninitialized'),
                 map(s => s.state === 'failure' ? s.formErrors : [])
             ), this.updateFormErrors);
-
+            
+            this.$subscribeTo(this.state.pipe(
+                filter(s => s.state !== 'uninitialized'),
+                pluck('isProgress'),
+                distinctUntilChanged()),
+              
+                (loading) => this.loading = loading
+            );
+            
             this.$subscribeTo(this.state, s => {
-                console.debug('[entity-form] state ' + s.state, s);
-                //this.$emit('state', s);
-            });
-
-
-            this.$subscribeTo(this.formCommands, s => {
-                console.debug('[entity-form] formCommands ' + s.command, s);
+                console.debug('[base-entity-editor] state ' + s.state, s);
+                this.$emit('state', s);
             });
             
             this.$subscribeTo(
@@ -101,7 +122,40 @@
             )             
         },
         methods: {
-            changeState(state) {
+            init(settings, componentData = null) {
+                this.setState({
+                    state: 'initializing'
+                });
+
+                if (componentData) {
+                    Object.assign(this, componentData);
+                }
+                
+                let dxForm = this.$refs.form;
+                if (dxForm) {
+                    dxForm.instance.beginUpdate();
+                    dxForm.instance.resetValues();
+                    dxForm.instance.endUpdate();
+                }
+
+                this.formErrors = {};
+                this.modelKey = settings.modelKey;
+                let formDataInitial = Object.assign({}, settings.formDataInitial || {})
+
+                if (!this.modelKey) {
+                    this.formData = this.makeFormData(null, formDataInitial);
+                    this.setState('ready');
+                } else {
+                    this.loadModel()
+                }
+            },
+            submit() {
+                this.onSubmitForm();
+            },
+            cancel() {
+                this.setState('canceled');
+            },
+            setState(state) {
                 if(typeof state === "string") {
                     state = { state: state }
                 }
@@ -114,39 +168,9 @@
 
                 this.state.next(s);
             },
-            init(settings) {           
-                this.changeState({
-                    state: 'initializing'
-                });
-
-                let dxForm = this.$refs.form;
-                if (dxForm) {
-                    dxForm.instance.beginUpdate();
-                    dxForm.instance.resetValues();
-                    dxForm.instance.endUpdate();
-                }
-
-                this.formErrors = {};
-                this.modelKey = settings.modelKey;
-                this.index = settings.index;
-                let formDataInitial = Object.assign({}, settings.formDataInitial || {})
-
-                if (!this.modelKey) {
-                    this.formData = this.makeFormData(null, formDataInitial);
-                    this.changeState('ready');
-                    
-                } else {
-                    this.loadModel()
-                }
-                
-                this.$subscribeTo(this.state.pipe(
-                    pluck('isProgress'),
-                    distinctUntilChanged()
-                ), (loading) => this.loading = loading);
-
-            },
+            
             loadModel() {
-                this.changeState('loading');
+                this.setState('loading');
 
                 this.dataStore.byKey(this.modelKey, this.dataStoreLoadOptions)
                     .done(this.onLoadModelSuccess)
@@ -154,22 +178,14 @@
             },
             onLoadModelSuccess(data) {
                 this.formData = this.makeFormData(data);
-                this.changeState('ready');
+                this.setState('ready');
             },
             onLoadModelFail(error){
                 console.debug('onLoadModelFail');
-                this.changeState({
+                this.setState({
                     state: 'error',
                     error: error
                 });
-            },
-            runCommand(cmd) {
-                if (!cmd) return;
-                if (cmd.command === 'submit') {
-                    this.submitForm(null);
-                } else if (cmd.command === 'init') {
-                    this.init(cmd);
-                }
             },
             makeFormData(model = null, initialData = null) {
                 let data = {};
@@ -180,14 +196,14 @@
                     data = Object.assign(data, model)
                 }
                 return data;
-            },            
-            submitForm(event) {
+            },
+            onSubmitForm(event) {
                 if (!this.$refs.form.instance.validate().isValid) {
                     notify('Исправьте ошибки на форме и попробуйте ещё раз', 'warning');
                     return;
                 }
 
-                this.changeState({
+                this.setState({
                     state: 'submitting',
                 });
                 
@@ -208,7 +224,7 @@
                     this.modelKey = data[this.dataStore.key()].toString()
                 }
 
-                this.changeState({
+                this.setState({
                     state: 'success',
                     modelKey: this.modelKey
                 });
@@ -216,7 +232,7 @@
                 notify('Сохранение прошло успешно', 'success');
             },
             onSubmitFormFail(error) {
-                this.changeState({
+                this.setState({
                     state: 'failure',
                     formErrors: error.errorDetails.details,
                 });                
@@ -244,9 +260,11 @@
                 }
             },
             onSubmitButtonClick(event) {
-                this.submitForm();
+                this.submit();
             },
-            onCancelButtonClick(event) {},
+            onCancelButtonClick(event) {
+                this.cancel();
+            },
             afterSubmitSuccess(state) {}
         }
     };

@@ -41,8 +41,7 @@
 
         </dx-tree-list>
 
-        <naks-edit :editRequests="editRequestsNaks"
-                   @editingDone="onEditSuccess" />
+        <naks-edit ref="editor" @editingDone="onEditSuccess" />
 
     </div>
 </template>
@@ -80,9 +79,6 @@
         },
         created() {
             this.setDataSource();
-            this.$subscribeTo(this.editRequestsNaks,  (val) => {
-
-            });
         },
         watch: {
             naksEditing(value) {
@@ -93,8 +89,7 @@
 
         },
         data: function () {
-            return {
-                editRequestsNaks: new Subject(),                
+            return {                 
                 dataSource: {},                
                 editPopup: {
                     showTitle: false,
@@ -136,31 +131,34 @@
                 
             },
             onNewButtonClick(event) {
-                this.editRequestsNaks.next({
+                this.$refs.editor.init({
                     modelKey: null,
-                    isChild: false,
                     formDataInitial: {
                         Person_ID: this.personId,
                     }
+                }, {
+                    isChild: false
                 });                
             },
-            onNewChildRowButtonClick(event, model) {                
-                this.editRequestsNaks.next({
+            onNewChildRowButtonClick(event, model) {
+                this.$refs.editor.init({
                     modelKey: null,
-                    isChild: true,
                     formDataInitial: {
                         Person_ID: this.personId,
                         ParentDocumentNaks_ID: model.ID.toString(),
                         Number: model.Number + ' В'
                     }
-                });                
+                }, {
+                    isChild: true
+                });
             },
             onEditRowButtonClick(event, model) {
-                this.editRequestsNaks.next({
+                this.$refs.editor.init({
                     modelKey: model.ID.toString(),
+                    formDataInitial: {}
+                }, {
                     isChild: model.ParentDocumentNaks_ID != null,
-                    formDataInitial: Object()
-                });                 
+                });
             },
             onDeleteRowButtonClick(event, model) {                
                 var component = this;                
