@@ -64,6 +64,12 @@
             DxForm,
             NaksAttestList
         },
+        props: {
+            naksIsChild: {
+                type: Boolean,
+                required: true
+            }
+        },
         mounted() {
             this.$subscribeTo(
                 this.state.pipe(filter(s => s.state === 'initializing')),
@@ -73,11 +79,11 @@
         computed: {
             popupToolbarItems () {
                 let text;
-                if (!this.modelKey && !this.isChild) {
+                if (!this.modelKey && !this.naksIsChild) {
                     text = "Новое удостоверение НАКС";
-                } else if (!this.modelKey && this.isChild) {
+                } else if (!this.modelKey && this.naksIsChild) {
                     text = "Новый вкладыш";
-                } else if (!this.isChild) {
+                } else if (!this.naksIsChild) {
                     text = "Удостоверение НАКС";
                 } else {
                     text = "Вкладыш";
@@ -141,7 +147,6 @@
             });
 
             return {
-                isChild: false,
                 dataStore: context.DocumentNaks,
                 dataStoreLoadOptions: { expand: 'DocumentNaksAttestSet' },
                 formItems: [

@@ -141,7 +141,10 @@
 
         </table>
 
-        <naks-attest-edit ref="editor" @editingDone="onEditingDone"/>
+        <naks-attest-edit ref="editor"
+                          :editor-settings="editorSettings"
+                          :naks-attest-index="editorIndex"
+                          @editingDone="onEditingDone"/>
     </div>
 </template>
 
@@ -183,7 +186,9 @@
                 loading: false,
                 model: null,
                 error: null,                
-                dataSource: dataSourceConfs.documentNaksDetailed,              
+                dataSource: dataSourceConfs.documentNaksDetailed,
+                editorSettings: {},
+                editorIndex: 0,
                 toolbarItems: [
                     {
                         location: 'before',
@@ -198,20 +203,6 @@
                             }
                         }
                     }                    
-                ],
-                editPopupToolbarItems: [
-                    {
-                        toolbar: 'bottom',
-                        widget: "dxButton",
-                        location: "after",
-                        options: {
-                            text: "Submit",
-                            type: "success",
-                            onClick: () => {
-                                this.$refs.editForm.submitForm();
-                            }
-                        }
-                    }
                 ]
             }
         },
@@ -243,22 +234,22 @@
                 this.loadModel();
             },
             onNewButtonClick(event) {
-                this.$refs.editor.init({
-                    modelKey: null, 
+                this.editorSettings = {
+                    modelKey: null,
                     formDataInitial: {
                         DocumentNaks_ID: this.modelKey,
                     }
-                }, {
-                    naksAttestIndex: null
-                });
+                };
+
+                this.editorIndex = null
             },
             onEditButtonClick(event, modelId, index) {
-                this.$refs.editor.init({
+                this.editorSettings = {
                     modelKey: modelId,
                     formDataInitial: {}
-                }, {
-                    naksAttestIndex: index
-                });
+                };
+                
+                this.editorIndex = index;                 
             },
             onDeleteButtonClick(event, modelId) {
                 var component = this;

@@ -57,11 +57,23 @@
                 default: () => {},
                 required: false,
             },
-            titleText: {
-                type: String,
-                default: () => null,
-                required: false
+            editorSettings: {
+                type: Object,
+                default: () => {},
+                required: true
             }
+        },
+        watch: {
+            editorSettings: {
+                immediate: true,
+                handler(settings) {
+                    if (!settings || Object.keys(settings).length === 0) {
+                        return
+                    } 
+                        
+                    this.init(settings)
+                }
+            }  
         },
         data: function () {
             return {
@@ -70,7 +82,7 @@
                 dataStoreLoadOptions: this.storeLoadOptions,
                 modelKey: null,
                 formData: {},
-                formTitle: this.titleText,
+                formTitle: '',
                 formItems: this.items,
                 toolbarItems: [
                     {
@@ -120,14 +132,10 @@
             )             
         },
         methods: {
-            init(settings, componentData = null) {
+            init(settings) {
                 this.setState({
                     state: 'initializing'
                 });
-
-                if (componentData) {
-                    Object.assign(this, componentData);
-                }
                 
                 let dxForm = this.$refs.form;
                 if (dxForm) {
@@ -138,6 +146,11 @@
 
                 this.formErrors = {};
                 this.modelKey = settings.modelKey;
+                
+                if(settings.hasOwnProperty('formTitle')) {
+                    this.formTitle = settings.formTitle;
+                }  
+                
                 let formDataInitial = Object.assign({}, settings.formDataInitial || {})
 
                 if (!this.modelKey) {

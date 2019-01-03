@@ -53,6 +53,13 @@
             DxScrollView,
             BaseEntityEditor            
         },
+        props: {
+            naksAttestIndex: {
+                type: Number,
+                default: () => null,
+                required: true,
+            }
+        },
         computed: {
             popupToolbarItems () {
                 let titleText = this.naksAttestIndex ?
@@ -97,7 +104,6 @@
         },
         data: function () {
             return {
-                naksAttestIndex: 0,
                 dataStore: context.DocumentNaksAttest,
                 formItems: [
                     reftableFormItem('DetailsType', 'Вид деталей', true),

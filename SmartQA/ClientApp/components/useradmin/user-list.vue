@@ -49,7 +49,9 @@
             <base-entity-editor 
                     ref="editor"
                     :store="dataSource.store"
-                    :storeLoadOptions="{ expand: ['RoleSet'] }"
+                    :store-load-options="{ expand: ['RoleSet'] }"
+                    :items="editorFormItems"
+                    :editor-settings="editorSettings"
                     v-stream:state="formStateEvents" 
             />
                  
@@ -100,69 +102,15 @@
                 )
             }
         },
-        data() {
-            return {
-                dataSource: dataSourceConfs.users,
-                toolbarItems: [
-                    {
-                        location: 'after',
-                        widget: 'dxButton',
-                        options: {
-                            type: 'add',
-                            icon: 'add',
-                            text: 'Add',
-                            onClick: (event) => this.onNewButtonClick(event)
-                        }
-                    }
-                ],
-            }
-        },
-        methods: {
-            reloadData() {
-                this.$refs.dataGrid.instance.refresh();
-            },
-            onEditSuccess() {
-                this.reloadData();
-            },
-            onNewButtonClick(event) {
-                this.$refs.editor.init({
-                    modelKey: null,
-                    formDataInitial: {}
-                }, {
-                    formItems: this.getFormItems(null),
-                    formTitle: 'Новый пользователь'
-                });
-            },           
-            onEditRowButtonClick(event, model) {
-                this.$refs.editor.init({
-                    modelKey: model.ID,
-                    formDataInitial: {}
-                }, {
-                    formItems: this.getFormItems(model.ID),
-                    formTitle: model.AppUser_Code
-                });
-            },
-            onDeleteRowButtonClick(event, model) {
-                var component = this;
-                confirm("Really delete?", "Confirm")
-                    .done(function (dialogResult) {
-                        if (dialogResult) {
-                            let source = new DataSource(component.dataSource);
-                            source.store().remove(model.ID)
-                                .done(function (data) {
-                                    component.reloadData()
-                                });
-                        }
-                    });
-            },
-            getFormItems(modelKey) {
+        computed: {
+            editorFormItems() {
                 return [
                     {
                         label: { text: 'Имя пользователя' },
                         dataField: 'AppUser_Code',
                         isRequired: true,
                         editorOptions: {
-                            disabled: !!modelKey,
+                            disabled: !!this.editorSettings.modelKey,
                         }
                     },
                     {
@@ -187,7 +135,64 @@
                         isRequired: false,
                     }
                 ]
-            } 
+            },
+            editorTitle() {
+                this.editorSettings 
+            }
+        },
+        data() {
+            return {
+                dataSource: dataSourceConfs.users,
+                toolbarItems: [
+                    {
+                        location: 'after',
+                        widget: 'dxButton',
+                        options: {
+                            type: 'add',
+                            icon: 'add',
+                            text: 'Add',
+                            onClick: (event) => this.onNewButtonClick(event)
+                        }
+                    }
+                ],
+                editorSettings: {},
+            }
+        },
+        methods: {
+            reloadData() {
+                this.$refs.dataGrid.instance.refresh();
+            },
+            onEditSuccess() {
+                this.reloadData();
+            },
+            onNewButtonClick(event) {
+                this.editorSettings = {
+                    modelKey: null,
+                    formTitle: 'Новый пользователь',
+                    formDataInitial: {}
+                };
+            },           
+            onEditRowButtonClick(event, model) {
+                this.editorSettings = {
+                    modelKey: model.ID,
+                    formTitle: model.AppUser_Code,
+                    formDataInitial: {}
+                };
+            },
+            onDeleteRowButtonClick(event, model) {
+                var component = this;
+                confirm("Really delete?", "Confirm")
+                    .done(function (dialogResult) {
+                        if (dialogResult) {
+                            let source = new DataSource(component.dataSource);
+                            source.store().remove(model.ID)
+                                .done(function (data) {
+                                    component.reloadData()
+                                });
+                        }
+                    });
+            },
+            
 
         }
     }

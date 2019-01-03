@@ -1,16 +1,6 @@
 <template>
     <div class="mt-5">
-        <dx-toolbar>
-            <dx-item location="before"
-                     widget="dxButton"
-                     :options="{
-                        type: 'add',
-                        icon: 'add',
-                        text: 'Создать документ'
-                        }" />
-            
-        </dx-toolbar>
-        lkjhlkhj
+       
         <document-list />
     </div>
 </template>

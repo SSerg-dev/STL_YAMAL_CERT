@@ -41,7 +41,10 @@
 
         </dx-tree-list>
 
-        <naks-edit ref="editor" @editingDone="onEditSuccess" />
+        <naks-edit ref="editor"
+                   :editor-settings="editorSettings"
+                   :naks-is-child="editorIsChild"
+                   @editingDone="onEditSuccess" />
 
     </div>
 </template>
@@ -65,8 +68,7 @@
         components: {
             FontAwesomeIcon,
             DxTreeList,
-            DxColumn,            
-            DxPopup,
+            DxColumn,
             DxToolbar,
             DxButton,           
             NaksEdit
@@ -80,27 +82,11 @@
         created() {
             this.setDataSource();
         },
-        watch: {
-            naksEditing(value) {
-                console.log("asadfadsf", value);
-                if (value) this.$refs.editPopup.instance.show();
-                else this.$refs.editPopup.instance.hide();
-            }
-
-        },
         data: function () {
             return {                 
                 dataSource: {},                
-                editPopup: {
-                    showTitle: false,
-                    width: 400,
-                    height: 200,
-                    position: {
-                        my: "center",
-                        at: "center",
-                        of: window
-                    }
-                },                
+                editorSettings: {},
+                editorIsChild: false,
                 toolbarItems: [                    
                     {
                         location: 'after',
@@ -131,34 +117,36 @@
                 
             },
             onNewButtonClick(event) {
-                this.$refs.editor.init({
+                this.editorSettings = {
                     modelKey: null,
                     formDataInitial: {
                         Person_ID: this.personId,
                     }
-                }, {
-                    isChild: false
-                });                
+                };
+                
+                this.editorIsChild = false;
             },
             onNewChildRowButtonClick(event, model) {
-                this.$refs.editor.init({
+                this.editorSettings = {
                     modelKey: null,
                     formDataInitial: {
                         Person_ID: this.personId,
                         ParentDocumentNaks_ID: model.ID.toString(),
                         Number: model.Number + ' В'
                     }
-                }, {
-                    isChild: true
-                });
+                };
+
+                this.editorIsChild = true;
+                
             },
             onEditRowButtonClick(event, model) {
-                this.$refs.editor.init({
+                this.editorSettings = {
                     modelKey: model.ID.toString(),
                     formDataInitial: {}
-                }, {
-                    isChild: model.ParentDocumentNaks_ID != null,
-                });
+                };
+                
+                this.editorIsChild = model.ParentDocumentNaks_ID != null;
+                
             },
             onDeleteRowButtonClick(event, model) {                
                 var component = this;                

@@ -6,7 +6,10 @@
     export default {
         extends: BaseEntityEditor,
         props: {
-            'employeeId': String
+            employeeId: {
+                type: String,
+                required: true
+            }             
         },
         watch: {
             employeeId: {
