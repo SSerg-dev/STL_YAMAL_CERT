@@ -23,11 +23,12 @@ namespace SmartQA.Models
             entity.AppUser_Code = AppUser_Code;
             entity.Role_IDs = Role_IDs;
 
-            entity.User_Password = string.IsNullOrEmpty(User_Password)
-                ? null
-                : new Encryptor3DES(ApplicationUser.passKey).encrypt(
+            if (!string.IsNullOrEmpty(User_Password))
+            {
+                entity.User_Password = new Encryptor3DES(ApplicationUser.passKey).encrypt(
                     Encoding.UTF8.GetBytes(User_Password)
                 );
+            }             
         }
     }
 }
