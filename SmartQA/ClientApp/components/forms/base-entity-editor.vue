@@ -2,7 +2,7 @@
     <div class="form-container">
         <h2 v-if="formTitle">{{ formTitle }}</h2>
         
-        <form v-on:submit.prevent="onSubmitButtonClick" class="my-5">
+        <form v-on:submit.prevent="onSubmitButtonClick" class="my-3">
             <dx-form ref="form"
                      :form-data="formData"
                      :items="formItems" />
@@ -63,9 +63,6 @@
                 required: false
             }
         },
-        computed: {
-            formTitle() { return this.titleText }
-        },
         data: function () {
             return {
                 state: new Subject(),
@@ -73,6 +70,7 @@
                 dataStoreLoadOptions: this.storeLoadOptions,
                 modelKey: null,
                 formData: {},
+                formTitle: this.titleText,
                 formItems: this.items,
                 toolbarItems: [
                     {

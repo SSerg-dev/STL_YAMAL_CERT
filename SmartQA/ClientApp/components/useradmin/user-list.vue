@@ -129,7 +129,8 @@
                     modelKey: null,
                     formDataInitial: {}
                 }, {
-                    formItems: this.getFormItems(null)
+                    formItems: this.getFormItems(null),
+                    formTitle: 'Новый пользователь'
                 });
             },           
             onEditRowButtonClick(event, model) {
@@ -137,7 +138,8 @@
                     modelKey: model.ID,
                     formDataInitial: {}
                 }, {
-                    formItems: this.getFormItems(model.ID)
+                    formItems: this.getFormItems(model.ID),
+                    formTitle: model.AppUser_Code
                 });
             },
             onDeleteRowButtonClick(event, model) {
