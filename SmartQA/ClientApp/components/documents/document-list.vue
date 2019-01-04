@@ -6,8 +6,15 @@
                       :allow-column-resizing="true"
                       :dataSource="dataSource">
             
+            <dx-paging
+                enabled="true"
+                page-size="10" />
+
+            <dx-column data-field="Status.Description_Rus"
+                       caption="Статус" />
+
             <dx-column data-field="Document_Code"
-                       template="documentCodeCellTemplate"
+                       cell-template="documentCodeCellTemplate"
                        caption="№ карточки" />
             
             <dx-column data-field="Issue_Date"
@@ -22,6 +29,9 @@
             
             <dx-column data-field="Document_Name"
                        caption="Название" />
+
+            <dx-column data-field="DocumentType.Title"
+                       caption="Тип" />
 
             <div slot="documentCodeCellTemplate" slot-scope="cellInfo">
                 <router-link :to="{ name: 'document-edit', params: { id: cellInfo.data.ID }}">
@@ -44,7 +54,7 @@
     import { dataSourceConfs } from './data';
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
     import { confirm } from 'devextreme/ui/dialog';
-    import { DxDataGrid, DxColumn } from 'devextreme-vue/data-grid';
+    import { DxDataGrid, DxColumn, DxPaging } from 'devextreme-vue/data-grid';
     
     import { DxPopup, DxLoadPanel } from 'devextreme-vue';
     import { DxButton } from "devextreme-vue/ui/button";
@@ -61,12 +71,14 @@
             DxPopup,
             DxToolbar,
             DxButton,
-            DxLoadPanel
+            DxLoadPanel,
+            DxPaging
+            
         },
         data() {
             return {
                 loading: false,
-                dataSource: dataSourceConfs.document,
+                dataSource: dataSourceConfs.documentUI,
                 toolbarItems: [{
                     location: 'before',
                     widget: 'dxButton',

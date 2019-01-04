@@ -27,6 +27,7 @@ let context = new ODataContext({
         Person: common_entity_conf(),
         Contragent: common_entity_conf(),
         Document: common_entity_conf(),
+        DocumentUI: common_entity_conf(),
         AppUser: common_entity_conf(),
         Role: common_entity_conf(),
         DocumentNaks: common_entity_conf(),

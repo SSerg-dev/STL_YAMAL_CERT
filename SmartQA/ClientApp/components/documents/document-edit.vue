@@ -9,9 +9,17 @@
         name: "DocumentEdit",
         extends: BaseEntityEditor,
         components: {BaseEntityEditor},
+        watch: {
+            model(val) {
+                this.formTitle = 'Карточка документа № ' + val.Document_Code; 
+            } 
+        },
         data() {
             return {
                 dataStore: context.Document,
+                dataStoreLoadOptions: {
+                    expand: ['DocumentStatusSet']
+                },
                 formItems: [
                     {
                         label: { text: 'Номер' },

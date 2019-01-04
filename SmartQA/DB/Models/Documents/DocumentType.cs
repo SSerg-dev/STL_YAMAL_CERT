@@ -13,7 +13,7 @@ namespace SmartQA.DB.Models.Documents
         [StringLength(255)]
         public string Title { get; set; }
         
-        [NotMapped]
+        [StringLength(255)]
         public string Description { get; set; }
     }
 }

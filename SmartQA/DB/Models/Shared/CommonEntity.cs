@@ -63,16 +63,7 @@ namespace SmartQA.DB.Models.Shared
                    
             // setup default query parameters
             modelBuilder.Entity<T>()
-                .HasQueryFilter(x => x.RowStatus < 100);
-              
-            // call any custom setup methods on model 
-            foreach (var setupMethod in typeof(T).GetMethods()
-                .Where(
-                    m => m.GetCustomAttributes(true).Any(a => a is RunAtModelSetupAttribute) && m.IsStatic 
-                    ))
-            {
-                setupMethod.Invoke(null, new object[] {modelBuilder});                
-            }                                    
+                .HasQueryFilter(x => x.RowStatus < 100);                           
         }
 
         public void MarkDeleted()

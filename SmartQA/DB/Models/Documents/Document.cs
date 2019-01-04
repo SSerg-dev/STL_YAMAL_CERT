@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ namespace SmartQA.DB.Models.Documents
         public string Document_Number { get; set; }
         
         [Column(TypeName="date")]
+        [DataType(DataType.Date)]
         public DateTime? Document_Date { get; set; }
         
         public int? TotalSheets { get; set; }
@@ -47,6 +49,11 @@ namespace SmartQA.DB.Models.Documents
         public virtual DocumentType DocumentType { get; set; }
         public virtual Document Root { get; set; }
         public virtual Employee Resp_Employee { get; set; }
+                        
+        public virtual ICollection<DocumentStatus> DocumentStatusSet { get; set; } 
+        
+        [NotMapped]
+        public virtual DocumentStatus DocumentStatus { get; set; }
         
         [RunAtModelSetup]
         public static void SetupRelations(ModelBuilder modelBuilder)
@@ -74,7 +81,8 @@ namespace SmartQA.DB.Models.Documents
 
             modelBuilder.Entity<Document>()
                 .Property(d => d.Document_Code)
-                .HasDefaultValueSql("next value for [Sequence_Document_Number]");            
+                .HasDefaultValueSql("next value for [Sequence_Document_Number]");
+                        
 
         }                
         

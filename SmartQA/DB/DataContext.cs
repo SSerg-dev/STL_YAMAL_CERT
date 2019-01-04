@@ -92,7 +92,18 @@ namespace SmartQA.DB
                         .HasForeignKey(m2mAttr.RightFKey)
                         .OnDelete(DeleteBehavior.Restrict);
                 }
-            }
+
+                // call any custom setup methods on model 
+                foreach (var setupMethod in commonType.GetMethods()
+                    .Where(
+                        m => m.GetCustomAttributes(true).Any(a => a is RunAtModelSetupAttribute) && m.IsStatic 
+                    ))
+                {
+                    setupMethod.Invoke(null, new object[] { modelBuilder });                
+                }                                 
+
+            }            
+            
         }
 
         private void SetupConstraints(ModelBuilder modelBuilder)

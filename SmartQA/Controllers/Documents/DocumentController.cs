@@ -1,10 +1,16 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Query;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using SmartQA.Auth;
 using SmartQA.Controllers.Shared;
 using SmartQA.DB;
@@ -21,6 +27,10 @@ namespace SmartQA.Controllers.Documents
             
         }
 
+        public override IQueryable<Document> GetQuery()
+            => base.GetQuery()                
+                .Include(d => d.DocumentStatusSet);
+
         public async Task<IActionResult> Post(DocumentNew form)
         {
             if (!ModelState.IsValid)
@@ -28,6 +38,7 @@ namespace SmartQA.Controllers.Documents
                 return BadRequest(ModelState);
             }
 
+            var user = await _userManager.Get(User);
             var now = DateTimeOffset.Now;
             var document = new Document
             {
@@ -37,6 +48,16 @@ namespace SmartQA.Controllers.Documents
                 DocumentType = await _context.Set<DocumentType>().Where(t => t.Title == "N/A").SingleAsync()
             };
             
+            var status = new DocumentStatus
+            {
+                Document = document,
+                Status = await _context.Set<Status>().SingleAsync(s => s.Status_Code == "wDd"),
+                Parent_ID = null,
+                DTS_Start = DateTimeOffset.Now
+            };                            
+            status.OnSave(_context, user);            
+            _context.Set<DocumentStatus>().Add(status);
+            
             form.Serialize(document);
             
             if (document.Root_ID == Guid.Empty)
@@ -44,7 +65,7 @@ namespace SmartQA.Controllers.Documents
                 document.Root_ID = document.ID;
             }                                                              
 
-            document.OnSave(_context, await _userManager.Get(User));
+            document.OnSave(_context, user);
 
             GetDbSet().Add(document);
 

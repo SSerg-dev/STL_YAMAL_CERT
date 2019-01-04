@@ -9,6 +9,7 @@ using SmartQA.DB.Models.Shared;
 using SmartQA.Models.Forms;
 using System;
 using SmartQA.DB.Models.Documents;
+using SmartQA.Models;
 
 namespace SmartQA.DB
 {
@@ -25,7 +26,7 @@ namespace SmartQA.DB
             var conf = entitySet
                 .EntityType
                 .Filter()
-                .Count()
+                .Count()                
                 .Expand()
                 .OrderBy()
                 .Page()
@@ -59,10 +60,28 @@ namespace SmartQA.DB
             
             var role = BuildCommon<Role>(builder);
 
+            BuildCommon<Status>(builder);
+
             var document = BuildCommon<Document>(builder);
             document.Ignore(d => d.Issue_Date_DT);
-            //document.Property(d => d.Issue_Date).
-
+            
+            
+            var documentUI = builder.EntitySet<DocumentUI>("DocumentUI")
+                .EntityType
+                .Filter()
+                .Count()                
+                .Expand()
+                .OrderBy()
+                .Page()
+                .Select();
+            
+            documentUI.Expand(SelectExpandType.Automatic,                
+                "DocumentType",
+                "Status"
+            );           
+            
+            BuildCommon<DocumentStatus>(builder);
+            
             var naks = BuildCommon<DocumentNaks>(builder);
             naks.CollectionProperty(x => x.HIFGroup_IDs);
 

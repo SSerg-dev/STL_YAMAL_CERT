@@ -32,17 +32,17 @@ namespace SmartQA.Controllers.Shared
             => _context.Set<TEntity>();
         
         public virtual IQueryable<TEntity> GetQuery()
-            => GetDbSet().AsQueryable();
-
-        public virtual async Task<IActionResult> Get([FromODataUri] Guid key)
+            => GetDbSet();        
+        
+        [EnableQuery]
+        public SingleResult<TEntity> Get([FromODataUri] Guid key)
         {
-            var entity = await GetDbSet().FindAsync(key);
-            return Ok(entity);
+            return SingleResult.Create(GetQuery().Where(x => x.ID == key));            
         }
 
         [EnableQuery]
         public virtual IQueryable<TEntity> Get()
-            => GetQuery();       
+            => GetQuery().IgnoreQueryFilters();       
 
         public virtual async Task<IActionResult> Post([FromBody]TForm form)
         {

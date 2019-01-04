@@ -33,12 +33,12 @@ namespace SmartQA.Controllers.Reftables
                 .OrderByDescending(x => x.Title=="N/A").ThenBy(x => x.Title)
                 .AsQueryable();
 
-        public async Task<IActionResult> Get([FromODataUri] Guid key)
+        [EnableQuery]
+        public SingleResult<TEntity> Get([FromODataUri] Guid key)
         {
-            var entity = await GetDbSet().FindAsync(key);
-            return Ok(entity);
+            return SingleResult.Create(GetDbSet().Where(x => x.ID == key));            
         }
-
+        
         [EnableQuery]
         public IQueryable<TEntity> Get()
             => GetQuery();

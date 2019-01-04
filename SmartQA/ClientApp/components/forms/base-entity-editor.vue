@@ -81,6 +81,7 @@
                 dataStore: this.store,
                 dataStoreLoadOptions: this.storeLoadOptions,
                 modelKey: null,
+                model: null,
                 formData: {},
                 formTitle: '',
                 formItems: this.items,
@@ -155,6 +156,7 @@
 
                 if (!this.modelKey) {
                     this.formData = this.makeFormData(null, formDataInitial);
+                    this.model = {};
                     this.setState('ready');
                 } else {
                     this.loadModel()
@@ -188,6 +190,7 @@
                     .fail(this.onLoadModelFail);  
             },
             onLoadModelSuccess(data) {
+                this.model = data;
                 this.formData = this.makeFormData(data);
                 this.setState('ready');
             },

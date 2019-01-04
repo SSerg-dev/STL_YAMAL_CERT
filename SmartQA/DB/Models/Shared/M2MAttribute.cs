@@ -15,7 +15,7 @@ namespace SmartQA.DB.Models.Shared
             Left = left;
             Right = right;
             LeftFKey = leftFKey ?? $"{Left.Name}_ID";
-            RightFKey = rightFKey ?? $"{Right.Name}_ID";            
+            RightFKey = rightFKey ?? $"{Right.Name}_ID";
         }
     }
 }

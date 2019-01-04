@@ -32,9 +32,9 @@ namespace SmartQA.Controllers
 
 
         [EnableQuery]
-        public IActionResult Get([FromODataUri] Guid key)
+        public SingleResult<Employee> Get([FromODataUri] Guid key)
         {
-            return Ok(_context.Set<Employee>().Single(x => x.ID == key));
+            return SingleResult.Create(_context.Set<Employee>().Where(x => x.ID == key));            
         }
 
         public async Task<IActionResult> Post([FromBody]EmployeeEdit employeeForm)
