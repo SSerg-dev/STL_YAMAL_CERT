@@ -14,6 +14,7 @@ namespace SmartQA.DB.Models.Documents
         public string Title { get; set; }
         
         [StringLength(255)]
+        [Column("Description_Rus")]
         public string Description { get; set; }
     }
 }

@@ -6,9 +6,9 @@ using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.Documents
 {
-    [Table("p_DocumentStatus")]    
+    [Table("p_Document_to_Status")]    
     public class DocumentStatus : CommonEntity
-    {
+    {                   
         public Guid Document_ID { get; set; }
         public Guid Status_ID { get; set; }
 
@@ -22,12 +22,18 @@ namespace SmartQA.DB.Models.Documents
         
         public virtual Status Status { get; set; }
         
-        public virtual DocumentStatus PreviousStatus { get; set; }
-        public virtual DocumentStatus NextStatus { get; set; }
+        public virtual DocumentStatus PreviousStatus { get; set; }        
                   
         [RunAtModelSetup]
         public static void SetupRelations(ModelBuilder modelBuilder)
-        {            
+        {                        
+            // setup primary key
+            modelBuilder.Entity<DocumentStatus>()
+                .Property(x => x.ID)
+                .HasColumnName($"Document_to_Status_ID")
+                .HasDefaultValueSql("newsequentialid()")
+                .ValueGeneratedOnAdd();
+            
             modelBuilder.Entity<DocumentStatus>()
                 .HasOne(ds => ds.Status)
                 .WithMany()
@@ -36,8 +42,8 @@ namespace SmartQA.DB.Models.Documents
             
             modelBuilder.Entity<DocumentStatus>()
                 .HasOne(ds => ds.PreviousStatus)                
-                .WithOne(p => p.NextStatus)
-                .HasForeignKey<DocumentStatus>(x => x.Parent_ID)                
+                .WithMany()
+                .HasForeignKey(x => x.Parent_ID)                
                 .OnDelete(DeleteBehavior.Restrict);  
             
             modelBuilder.Entity<DocumentStatus>()

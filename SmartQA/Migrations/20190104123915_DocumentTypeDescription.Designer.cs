@@ -10,8 +10,8 @@ using SmartQA.DB;
 namespace SmartQA.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190104085023_DocumentChanges2")]
-    partial class DocumentChanges2
+    [Migration("20190104123915_DocumentTypeDescription")]
+    partial class DocumentTypeDescription
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -402,7 +402,7 @@ namespace SmartQA.Migrations
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("DocumentStatus_ID")
+                        .HasColumnName("Document_to_Status_ID")
                         .HasDefaultValueSql("newsequentialid()");
 
                     b.Property<Guid>("Created_User_ID");
@@ -437,15 +437,13 @@ namespace SmartQA.Migrations
 
                     b.HasIndex("Modified_User_ID");
 
-                    b.HasIndex("Parent_ID")
-                        .IsUnique()
-                        .HasFilter("[Parent_ID] IS NOT NULL");
+                    b.HasIndex("Parent_ID");
 
                     b.HasIndex("RowStatus");
 
                     b.HasIndex("Status_ID");
 
-                    b.ToTable("p_DocumentStatus");
+                    b.ToTable("p_Document_to_Status");
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Documents.DocumentType", b =>
@@ -458,6 +456,7 @@ namespace SmartQA.Migrations
                     b.Property<Guid>("Created_User_ID");
 
                     b.Property<string>("Description")
+                        .HasColumnName("Description_Rus")
                         .HasMaxLength(255);
 
                     b.Property<DateTimeOffset?>("Insert_DTS")
@@ -3362,8 +3361,8 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Documents.DocumentStatus", "PreviousStatus")
-                        .WithOne("NextStatus")
-                        .HasForeignKey("SmartQA.DB.Models.Documents.DocumentStatus", "Parent_ID")
+                        .WithMany()
+                        .HasForeignKey("Parent_ID")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Common.RowStatus")
