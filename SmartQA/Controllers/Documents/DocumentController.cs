@@ -22,14 +22,12 @@ namespace SmartQA.Controllers.Documents
     public class DocumentController : CommonEntityODataController<Document, DocumentEdit>
     {
         public DocumentController(DataContext context, AppUserManager userManager) : base(context, userManager)
-        {
-            
-            
-        }
+        {}
 
         public override IQueryable<Document> GetQuery()
             => base.GetQuery()                
-                .Include(d => d.DocumentStatusSet);
+                .Include(d => d.DocumentStatusSet)
+                .ThenInclude(ds => ds.Status);
 
         public async Task<IActionResult> Post(DocumentNew form)
         {
@@ -45,19 +43,12 @@ namespace SmartQA.Controllers.Documents
                 ID = Guid.NewGuid(),
                 Issue_Date = now,
                 Issue_Date_DT = await _context.GetConstructionSiteDT(now),
-                DocumentType = await _context.Set<DocumentType>().Where(t => t.Title == "N/A").SingleAsync()
+                DocumentType = await _context.Set<DocumentType>().Where(t => t.Title == "N/A").SingleAsync(),
+                Status = await _context.Set<Status>().SingleAsync(s => s.Status_Code == "wDd")
             };
-            
-            var status = new DocumentStatus
-            {
-                Document = document,
-                Status = await _context.Set<Status>().SingleAsync(s => s.Status_Code == "wDd"),
-                Parent_ID = null,
-                DTS_Start = DateTimeOffset.Now
-            };                            
-            status.OnSave(_context, user);            
-            _context.Set<DocumentStatus>().Add(status);
-            
+
+
+
             form.Serialize(document);
             
             if (document.Root_ID == Guid.Empty)
@@ -73,5 +64,7 @@ namespace SmartQA.Controllers.Documents
 
             return Created(document);
         }
+        
+        
     }
 }

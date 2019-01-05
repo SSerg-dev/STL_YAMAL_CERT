@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Security.Cryptography.Xml;
 using Microsoft.EntityFrameworkCore;
+using SmartQA.Auth;
 using SmartQA.DB.Models.Auth;
 using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.Shared;
@@ -50,11 +53,45 @@ namespace SmartQA.DB.Models.Documents
         public virtual Document Root { get; set; }
         public virtual Employee Resp_Employee { get; set; }
                         
-        public virtual ICollection<DocumentStatus> DocumentStatusSet { get; set; } 
+        public virtual ICollection<DocumentStatus> DocumentStatusSet { get; set; }
+
+        [NotMapped]
+        public virtual Status Status
+        {
+            get => DocumentStatusSet.FirstOrDefault(ds => ds.RowStatus == 0)?.Status;
+            set => Status_ID = value.ID;
+        }
         
         [NotMapped]
-        public virtual DocumentStatus DocumentStatus { get; set; }
-        
+        public Guid? Status_ID
+        {
+            get => Status?.ID;
+            set {
+                var now = DateTimeOffset.Now;
+                var prev = DocumentStatusSet.FirstOrDefault(ds => ds.RowStatus == 0);
+                if (prev != null)
+                {
+                    prev.RowStatus = 120;
+                    prev.DTS_End = now;
+                    AddToOnSaveCache(prev);
+                }
+    
+                var s = new DocumentStatus
+                {
+                    DTS_Start = now,
+                    Document = this,
+                    PreviousStatus = prev,
+                    RowStatus = 0,
+                    Status_ID = (Guid) value
+                };
+                    
+                DocumentStatusSet.Add(s);
+                    
+                AddToOnSaveCache(s); 
+            }
+
+        } 
+
         [RunAtModelSetup]
         public static void SetupRelations(ModelBuilder modelBuilder)
         {

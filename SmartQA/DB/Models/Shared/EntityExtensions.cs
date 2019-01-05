@@ -86,7 +86,7 @@ namespace SmartQA.DB.Models.Shared
             foreach (var rel in list.Where(x => !value.Contains((TKey) toKeyProperty.GetValue(x))))
             {
                 typeof(TEntity).GetMethod("MarkDeleted").Invoke(rel, new object[]{});
-                if (obj is CommonEntity entity) entity.AddM2MToCache((CommonEntity) rel);
+                if (obj is CommonEntity entity) entity.AddToOnSaveCache((CommonEntity) rel, true);
             }
 
             var existingIds = GetM2MKeys<TKey, TEntity>(obj, through);
@@ -96,7 +96,7 @@ namespace SmartQA.DB.Models.Shared
                 var rel = Activator.CreateInstance(m2mEntityType);
                 toKeyProperty.SetValue(rel, id);
 
-                if (obj is CommonEntity entity) entity.AddM2MToCache((CommonEntity) rel);
+                if (obj is CommonEntity entity) entity.AddToOnSaveCache((CommonEntity) rel);
                 
                 list.Add(rel);                
             }

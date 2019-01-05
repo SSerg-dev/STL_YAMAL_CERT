@@ -64,8 +64,9 @@ namespace SmartQA.DB
 
             var document = BuildCommon<Document>(builder);
             document.Ignore(d => d.Issue_Date_DT);
-            
-            
+            document.Property(d => d.Status_ID);
+            document.HasOptional(d => d.Status);
+                        
             var documentUI = builder.EntitySet<DocumentUI>("DocumentUI")
                 .EntityType
                 .Filter()

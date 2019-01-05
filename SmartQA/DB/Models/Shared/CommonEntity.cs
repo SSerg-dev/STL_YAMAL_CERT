@@ -91,29 +91,33 @@ namespace SmartQA.DB.Models.Shared
 
             Update_DTS = DateTimeOffset.Now;            
             Modified_User_ID = applicationUser.Id;
-            
-            M2MEntityCache?.ForEach(x =>
-            {
-                if (x.RowStatus != 200)
-                {
-                    x.OnSave(context, applicationUser);
-                }
-                else
-                {
-                    context.Remove((object) x);
-                }
-            });
+
+            OnSaveUpdateCache?.ForEach(x => x.OnSave(context, applicationUser));
+            OnSaveDeleteCache?.ForEach(x => context.Remove((object) x));
         }
+        
+        [NotMapped] 
+        private List<CommonEntity> OnSaveUpdateCache { get; set; }
+        private List<CommonEntity> OnSaveDeleteCache { get; set; }
 
-        [NotMapped] private List<CommonEntity> M2MEntityCache { get; set; }
-
-        public void AddM2MToCache(CommonEntity m2mEntity)
+        public void AddToOnSaveCache(CommonEntity obj, bool trueDelete = false)
         {
-            if (M2MEntityCache == null)
+            
+            if (OnSaveUpdateCache == null)
             {
-                M2MEntityCache = new List<CommonEntity>();
+                OnSaveUpdateCache = new List<CommonEntity>();
+                OnSaveDeleteCache = new List<CommonEntity>();
             }
-            M2MEntityCache.Add(m2mEntity);
+
+            if (obj.RowStatus == 200 && trueDelete)
+            {
+                OnSaveDeleteCache.Add(obj);
+            }
+            else
+            {
+                OnSaveUpdateCache.Add(obj);    
+            }
+            
         }
 
     }

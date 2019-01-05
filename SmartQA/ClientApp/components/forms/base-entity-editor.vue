@@ -24,12 +24,12 @@
 </template>
 
 <script>
-    import { DxForm, DxScrollView, DxToolbar } from 'devextreme-vue';
+    import {DxForm, DxScrollView, DxToolbar} from 'devextreme-vue';
     import notify from 'devextreme/ui/notify';
     import DataSource from 'devextreme/data/data_source';
-    import { DxLoadPanel } from 'devextreme-vue/load-panel';           
-    import { BehaviorSubject, Subject, empty } from 'rxjs';    
-    import { filter, map, distinctUntilChanged, pluck } from 'rxjs/operators';
+    import {DxLoadPanel} from 'devextreme-vue/load-panel';
+    import {Subject} from 'rxjs';
+    import {distinctUntilChanged, filter, map, pluck} from 'rxjs/operators';
 
     export default {
         name: 'BaseEntityEditor',
@@ -60,7 +60,7 @@
             editorSettings: {
                 type: Object,
                 default: () => {},
-                required: true
+                required: false
             }
         },
         watch: {

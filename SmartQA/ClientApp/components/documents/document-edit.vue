@@ -1,10 +1,10 @@
 
 <script>
     import BaseEntityEditor from "../forms/base-entity-editor";
-    import { reftableFormItem } from "../forms/reftables";
-    
+    import {reftableFormItem} from "../forms/reftables";
+
     import context from "api/odata-context";
-    
+
     export default {
         name: "DocumentEdit",
         extends: BaseEntityEditor,
@@ -18,9 +18,34 @@
             return {
                 dataStore: context.Document,
                 dataStoreLoadOptions: {
-                    expand: ['DocumentStatusSet']
+                    expand: [
+                        'DocumentStatusSet',
+                        'Status'
+                    ]
                 },
                 formItems: [
+                    {
+                        itemType: 'group',
+                        caption: 'Карточка',
+                        items: [
+                            {
+                                dataField: 'Status_ID',
+                                label: {text: 'Статус'},
+                                editorType: 'dxSelectBox',
+                                editorOptions: {
+                                    dataSource: {
+                                        store: context.Status,
+                                        filter: ['StatusEntity', '=', 'Document'],
+                                    },
+                                    displayExpr: "Description_Rus",
+                                    valueExpr: "ID",
+                                    searchExpr: ['Description_Rus'],
+                                    searchEnabled: true,
+                                }
+                            }
+                        ]
+                    },
+                    
                     {
                         label: { text: 'Номер' },
                         dataField: 'Document_Number',

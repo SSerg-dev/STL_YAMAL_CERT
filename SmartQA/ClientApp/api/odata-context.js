@@ -67,6 +67,7 @@ let context = new ODataContext({
         DocumentType: common_entity_conf(),
         Marka: common_entity_conf(),
         TitleObject: common_entity_conf(),
+        Status: common_entity_conf(),
         Reftable : { key: "modelName", keyType: { modelName: "String" }}
     },
 });
