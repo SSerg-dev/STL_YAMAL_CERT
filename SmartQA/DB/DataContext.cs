@@ -116,50 +116,67 @@ namespace SmartQA.DB
                     .MakeGenericMethod(reftableType)
                     .Invoke(modelBuilder, new object[] { });
 
-                var ak = entity.GetType()
-                    .GetMethod("HasAlternateKey", new Type[] { (new string[]{}).GetType() })
+                var ix = entity.GetType()                  
+                    .GetMethod("HasIndex", new Type[] { (new string[]{}).GetType() })                    
                     .Invoke(entity, new object[] { new string[] {"Title"}});
+                
+                ix.GetType()
+                    .GetMethod("IsUnique", new Type[] { typeof(bool) })
+                    .Invoke(ix, new object[] { true });
 
             }
 
             modelBuilder.Entity<Parameter>()
-                .HasAlternateKey(u => u.Parameter_Code);
+                .HasIndex(u => u.Parameter_Code)
+                .IsUnique();
 
             modelBuilder.Entity<Employee>()
-                .HasAlternateKey(u => u.Employee_Code);
+                .HasIndex(u => u.Employee_Code)
+                .IsUnique();
 
             modelBuilder.Entity<Contragent>()
-                .HasAlternateKey(u => u.Title);
+                .HasIndex(u => u.Title)
+                .IsUnique();
 
             modelBuilder.Entity<Division>()
-                .HasAlternateKey(u => u.Title);
+                .HasIndex(u => u.Title)
+                .IsUnique();
 
             modelBuilder.Entity<Position>()
-                .HasAlternateKey(u => u.Title);
+                .HasIndex(u => u.Title)
+                .IsUnique();
 
             modelBuilder.Entity<DocumentType>()
-                .HasAlternateKey(u => u.Title);
+                .HasIndex(u => u.Title)
+                .IsUnique();
 
             modelBuilder.Entity<Document_to_GOST>()
-                .HasAlternateKey(u => new {u.Document_ID, u.GOST_ID});
+                .HasIndex(u => new {u.Document_ID, u.GOST_ID})
+                .IsUnique();
 
             modelBuilder.Entity<Document_to_PID>()
-                .HasAlternateKey(u => new {u.Document_ID, u.PID_ID});
+                .HasIndex(u => new {u.Document_ID, u.PID_ID})
+                .IsUnique();
 
             modelBuilder.Entity<GOST>()
-                .HasAlternateKey(u => u.GOST_Code);
+                .HasIndex(u => u.GOST_Code)
+                .IsUnique();
 
             modelBuilder.Entity<GOST_to_PID>()
-                .HasAlternateKey(u => new {u.GOST_ID, u.PID_ID});
+                .HasIndex(u => new {u.GOST_ID, u.PID_ID})
+                .IsUnique();
 
             modelBuilder.Entity<GOST_to_TitleObject>()
-                .HasAlternateKey(u => new {u.GOST_ID, u.TitleObject_ID});
+                .HasIndex(u => new {u.GOST_ID, u.TitleObject_ID})
+                .IsUnique();
 
             modelBuilder.Entity<AppUser>()
-                .HasAlternateKey(u => u.AppUser_Code);
+                .HasIndex(u => u.AppUser_Code)
+                .IsUnique();
 
             modelBuilder.Entity<AppUser_to_Role>()
-                .HasAlternateKey(u => new {u.AppUser_ID, u.Role_ID});
+                .HasIndex(u => new {u.AppUser_ID, u.Role_ID})
+                .IsUnique();
 
         }               
     }

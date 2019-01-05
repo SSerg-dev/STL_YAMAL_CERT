@@ -15,6 +15,7 @@ using SmartQA.Auth;
 using SmartQA.Controllers.Shared;
 using SmartQA.DB;
 using SmartQA.DB.Models.Documents;
+using SmartQA.DB.Models.People;
 using SmartQA.Models;
 
 namespace SmartQA.Controllers.Documents
@@ -41,15 +42,15 @@ namespace SmartQA.Controllers.Documents
             var document = new Document
             {
                 ID = Guid.NewGuid(),
-                Issue_Date = now,
+                Issue_Date = now,                
                 Issue_Date_DT = await _context.GetConstructionSiteDT(now),
+                DocumentStatusSet = new List<DocumentStatus>(),
                 DocumentType = await _context.Set<DocumentType>().Where(t => t.Title == "N/A").SingleAsync(),
-                Status = await _context.Set<Status>().SingleAsync(s => s.Status_Code == "wDd")
+                Status = await _context.Set<Status>().SingleAsync(s => s.Status_Code == "wDd"),
+                Resp_Employee = await _context.Set<Employee>().FirstOrDefaultAsync(e => e.AppUser_ID == user.Id)                 
             };
-
-
-
-            form.Serialize(document);
+                       
+            form.Serialize(document, _context);
             
             if (document.Root_ID == Guid.Empty)
             {

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using Castle.Core.Internal;
 using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.People
@@ -19,11 +21,15 @@ namespace SmartQA.DB.Models.People
         public string LastName { get; set; }
         public string ShortName { get; set; }
 
+        [NotMapped]
+        public string FullName 
+            => string.Join(" ", new[] {LastName, FirstName, SecondName}.Where(x => !x.IsNullOrEmpty()));
+
         [Required]
         [Column(TypeName = "Date")]
         public virtual DateTime? BirthDate { get; set; }        
 
-        public virtual ICollection<Employee> Employees { get; set; }
-
+        public virtual ICollection<Employee> Employees { get; set; }       
+        
     }
 }

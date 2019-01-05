@@ -9,10 +9,14 @@
                           :dataSource="dataSource">
     
                 <dx-column
-                        caption="User name"
+                        caption="Имя пользователя"
                         :allow-filtering="true"
                         :allow-search="true"
                         data-field="AppUser_Code" />
+                
+                <dx-column
+                        caption="Сотрудник"
+                        data-field="Employee.Person.FullName" />
                 
                 <dx-column caption="Roles"
                         cell-template="roles-cell" />
@@ -49,7 +53,7 @@
             <base-entity-editor 
                     ref="editor"
                     :store="dataSource.store"
-                    :store-load-options="{ expand: ['RoleSet'] }"
+                    :store-load-options="{ expand: ['RoleSet', 'Employee'] }"
                     :items="editorFormItems"
                     :editor-settings="editorSettings"
                     v-stream:state="formStateEvents" 
@@ -60,19 +64,21 @@
     </div>
 </template>
 <script>
-    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-    import { DxToolbar, DxButton } from 'devextreme-vue'
-    import { DxDataGrid, DxColumn } from 'devextreme-vue/data-grid'
-    import { confirm } from 'devextreme/ui/dialog';
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+    import {DxButton, DxToolbar} from 'devextreme-vue'
+    import {DxColumn, DxDataGrid} from 'devextreme-vue/data-grid'
+    import {confirm} from 'devextreme/ui/dialog';
     import DataSource from 'devextreme/data/data_source';
-    
-    import { Subject } from 'rxjs';
-    import { map, filter } from 'rxjs/operators';
-    
+
+    import {Subject} from 'rxjs';
+    import {filter, map} from 'rxjs/operators';
+
     import BaseEntityEditor from 'components/forms/base-entity-editor'
-    import { dataSourceConfs } from './data'
-    
-    
+    import {dataSourceConfs} from './data'
+
+    import context from 'api/odata-context'
+
+
     export default {
         name: "user-list",
         components: {
@@ -123,6 +129,38 @@
                         }
                     },
                     {
+                        label: { text: 'Сотрудник' },
+                        dataField: 'Employee.ID',
+                        editorType: 'dxSelectBox',
+                        editorOptions: {
+                            dataSource: {
+                                store: context.Employee,
+                                expand: ['Person', 'Contragent', 'Position']
+                            },
+                            displayExpr(itemData) {
+                                console.log(itemData);
+                                return !itemData ? '' :  
+                                `${itemData.Person.FullName} (${itemData.Position.Title}, ${itemData.Contragent.Title})`
+                            },
+                            valueExpr: "ID",
+                            searchEnabled: true,
+                            searchExpr: 'Person.LastName',
+                            showClearButton: true,
+                            itemTemplate(itemData, itemIndex, itemElement) {
+                                return `
+                                    <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                        ${itemData.Person.FullName}
+                                        <span class="text-muted">                                        
+                                            (${itemData.Position.Title}, ${itemData.Contragent.Title})
+                                        </span>
+                                    </div>
+                                `;
+                            }
+                            
+                        },
+                        isRequired: false,
+                    },
+                    {
                         label: { text: 'Роли' },
                         dataField: 'Role_IDs',
                         editorType: 'dxTagBox',
@@ -135,9 +173,6 @@
                         isRequired: false,
                     }
                 ]
-            },
-            editorTitle() {
-                this.editorSettings 
             }
         },
         data() {

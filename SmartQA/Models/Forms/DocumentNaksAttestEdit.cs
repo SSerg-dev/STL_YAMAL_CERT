@@ -3,6 +3,7 @@ using SmartQA.Models.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using SmartQA.DB;
 
 namespace SmartQA.Models
 {
@@ -39,7 +40,7 @@ namespace SmartQA.Models
                
         }
 
-        public override void Serialize(DocumentNaksAttest dbModel)
+        public override void Serialize(DocumentNaksAttest dbModel, DataContext context)
         {
             dbModel.DocumentNaks_ID                       = (Guid) DocumentNaks_ID                          ;
             dbModel.WeldingWire                           = WeldingWire                                     ;  

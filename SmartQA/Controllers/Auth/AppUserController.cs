@@ -20,7 +20,9 @@ namespace SmartQA.Controllers
 
         public override IQueryable<AppUser> GetQuery()
             => GetDbSet()
-                .Include(u => u.AppUser_to_RoleSet)
+                .Include(u => u.Employee)
+                .ThenInclude(e => e.Person)
+                .Include(u => u.AppUser_to_RoleSet)                
                 .ThenInclude(ur => ur.Role)
                 .AsQueryable();              
         

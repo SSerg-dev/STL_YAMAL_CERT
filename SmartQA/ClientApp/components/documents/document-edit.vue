@@ -42,28 +42,67 @@
                                     searchExpr: ['Description_Rus'],
                                     searchEnabled: true,
                                 }
+                            },
+                            {
+                                dataField: 'Document_Code',
+                                label: {text: 'Номер карточки'},
+                                disabled: true
+                            },
+                            {
+                                dataField: 'Issue_Date',
+                                label: {text: 'Дата регистрации'},
+                                disabled: true,
+                                editorType: 'dxDateBox',
+                                editorOptions: {
+                                    type: 'datetime'
+                                }
+                            },
+                            {
+                                dataField: 'Resp_Employee_ID',
+                                label: {text: 'Ответственный'},
+                                editorType: 'dxSelectBox',
+                                editorOptions: {
+                                    dataSource: {
+                                        store: context.Employee,
+                                        expand: ['Person', 'Contragent', 'Position']
+                                    },
+                                    displayExpr(itemData) {
+                                        console.log(itemData);
+                                        return !itemData ? '' :
+                                            `${itemData.Person.FullName} (${itemData.Position.Title}, ${itemData.Contragent.Title})`
+                                    },
+                                    valueExpr: "ID"
+                                },
+                                disabled: true
+                                
                             }
+                            
+                            
                         ]
                     },
-                    
                     {
-                        label: { text: 'Номер' },
-                        dataField: 'Document_Number',
-                        required: false
-                    },
-                    {
-                        label: { text: 'Дата' },
-                        dataField: 'Document_Date',
-                        editorType: 'dxDateBox',
-                        required: false
-                    },
-                    reftableFormItem("DocumentType", "Тип"),
-                    {
-                        label: { text: 'Название' },
-                        dataField: 'Document_Name',
-                        required: false
-                    },
-                    
+                        itemType: 'group',
+                        caption: 'Документ',
+                        items: [
+                            {
+                                label: { text: 'Номер' },
+                                dataField: 'Document_Number',
+                                required: false
+                            },
+                            {
+                                label: { text: 'Дата' },
+                                dataField: 'Document_Date',
+                                editorType: 'dxDateBox',
+                                required: false
+                            },
+                            reftableFormItem("DocumentType", "Тип"),
+                            {
+                                label: { text: 'Название' },
+                                dataField: 'Document_Name',
+                                required: false
+                            },        
+                        ]
+                    }
                 ]
             }
         },

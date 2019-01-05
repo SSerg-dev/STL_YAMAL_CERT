@@ -1,4 +1,5 @@
 using System;
+using SmartQA.DB;
 using SmartQA.DB.Models.Documents;
 using SmartQA.Models.Shared;
 
@@ -9,7 +10,7 @@ namespace SmartQA.Models
         public Guid? Root_ID { get; set; }
         public Guid? Status_ID { get; set; }
         
-        public override void Serialize(Document entity)
+        public override void Serialize(Document entity, DataContext context)
         {            
             entity.Root_ID = Root_ID ?? Guid.Empty;
                                                     
@@ -20,7 +21,7 @@ namespace SmartQA.Models
     {
         public Guid? Status_ID { get; set; }
 
-        public override void Serialize(Document entity)
+        public override void Serialize(Document entity, DataContext context)
         {
             if (Status_ID != null && Status_ID != entity.Status_ID)
             {

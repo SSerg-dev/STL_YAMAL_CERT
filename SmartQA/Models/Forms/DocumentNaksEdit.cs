@@ -36,7 +36,7 @@ namespace SmartQA.Models
         [Required]
         public List<Guid> HIFGroup_IDs { get; set; }
 
-        public override void Serialize(DocumentNaks dbModel)
+        public override void Serialize(DocumentNaks dbModel, DataContext context)
         {
             dbModel.Person_ID = (Guid) Person_ID;
             dbModel.ParentDocumentNaks_ID = ParentDocumentNaks_ID;

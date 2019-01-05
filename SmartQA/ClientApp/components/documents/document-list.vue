@@ -51,17 +51,16 @@
 </template>
 
 <script>
-    import { dataSourceConfs } from './data';
-    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-    import { confirm } from 'devextreme/ui/dialog';
-    import { DxDataGrid, DxColumn, DxPaging } from 'devextreme-vue/data-grid';
-    
-    import { DxPopup, DxLoadPanel } from 'devextreme-vue';
-    import { DxButton } from "devextreme-vue/ui/button";
+    import {dataSourceConfs} from './data';
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+    import {DxColumn, DxDataGrid, DxPaging} from 'devextreme-vue/data-grid';
+
+    import {DxLoadPanel, DxPopup} from 'devextreme-vue';
+    import {DxButton} from "devextreme-vue/ui/button";
     import DxToolbar from 'devextreme-vue/toolbar';
     import DataSource from 'devextreme/data/data_source';
-    import 'devextreme/data/odata/store';
-    
+    import context from 'api/odata-context'
+
     export default {
         name: "DocumentList",
         components: {
@@ -94,7 +93,7 @@
         methods: {
             onNewDocumentClick(event) {
                 this.loading = true;
-                let ds = new DataSource(this.dataSource);
+                let ds = new DataSource({ store: context.Document });
 
                 ds.store().insert({})
                     .then(this.onNewDocumentCreated);

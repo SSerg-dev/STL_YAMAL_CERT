@@ -38,8 +38,8 @@ namespace SmartQA.DB.Models.People
             
             modelBuilder.Entity<Employee>()
                 .HasOne(x => x.AppUser)
-                .WithMany()
-                .HasForeignKey(x => x.AppUser_ID)
+                .WithOne(u => u.Employee)
+                .HasForeignKey<Employee>(x => x.AppUser_ID)
                 .OnDelete(DeleteBehavior.Restrict);
             
             modelBuilder.Entity<Employee>()

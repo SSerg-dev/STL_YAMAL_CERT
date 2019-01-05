@@ -7,7 +7,11 @@ export const dataSourceConfs = {
             'AppUser_Code'
         ],
         expand: [
-            'RoleSet'
+            'RoleSet',
+            'Employee',
+            'Employee.Person',
+            'Employee.Position',
+            'Employee.Contragent'
         ]
     },
     roles: {

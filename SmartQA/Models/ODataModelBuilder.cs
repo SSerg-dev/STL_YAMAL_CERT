@@ -50,7 +50,9 @@ namespace SmartQA.DB
             var builder = new ODataConventionModelBuilder(serviceProvider);
 
             BuildCommon<Employee>(builder);
-            BuildCommon<Person>(builder);
+            var person = BuildCommon<Person>(builder);
+            person.Property(p => p.FullName);                
+                
             BuildCommon<Contragent>(builder);
             
             var user = BuildCommon<AppUser>(builder);

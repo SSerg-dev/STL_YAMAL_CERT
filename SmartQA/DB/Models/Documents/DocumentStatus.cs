@@ -23,6 +23,7 @@ namespace SmartQA.DB.Models.Documents
         public virtual Status Status { get; set; }
         
         public virtual DocumentStatus PreviousStatus { get; set; }        
+        public virtual DocumentStatus NextStatus { get; set; }        
                   
         [RunAtModelSetup]
         public static void SetupRelations(ModelBuilder modelBuilder)
@@ -42,8 +43,8 @@ namespace SmartQA.DB.Models.Documents
             
             modelBuilder.Entity<DocumentStatus>()
                 .HasOne(ds => ds.PreviousStatus)                
-                .WithMany()
-                .HasForeignKey(x => x.Parent_ID)                
+                .WithOne(ds => ds.NextStatus)
+                .HasForeignKey<DocumentStatus>(x => x.Parent_ID)                
                 .OnDelete(DeleteBehavior.Restrict);  
             
             modelBuilder.Entity<DocumentStatus>()

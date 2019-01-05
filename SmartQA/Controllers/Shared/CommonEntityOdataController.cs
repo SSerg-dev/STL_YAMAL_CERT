@@ -52,7 +52,7 @@ namespace SmartQA.Controllers.Shared
             }
 
             var entity = new TEntity();
-            form.Serialize(entity);
+            form.Serialize(entity, _context);
 
             entity.OnSave(_context, await _userManager.Get(this.User));
 
@@ -71,7 +71,7 @@ namespace SmartQA.Controllers.Shared
             }
 
             var entity = GetDbSet().Find(key);
-            form.Serialize(entity);
+            form.Serialize(entity, _context);
 
             entity.OnSave(_context, await _userManager.Get(this.User));
 

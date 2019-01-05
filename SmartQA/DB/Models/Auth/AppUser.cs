@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.Auth
@@ -20,7 +21,9 @@ namespace SmartQA.DB.Models.Auth
         public byte[] User_Password { get; set; }
                 
         public virtual ICollection<AppUser_to_Role> AppUser_to_RoleSet { get; set; }
-                
+                        
+        public virtual Employee Employee { get; set; }
+        
         [NotMapped]
         public ICollection<Role> RoleSet => this.GetM2MObjects<Role>();
         [NotMapped]
@@ -30,5 +33,6 @@ namespace SmartQA.DB.Models.Auth
             set => this.SetM2MKeys<Role>(value);                
         }
 
+        
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartQA.DB;
 
 namespace SmartQA.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20190105112029_OneToOne")]
+    partial class OneToOne
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,8 +56,7 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AppUser_Code")
-                        .IsUnique();
+                    b.HasAlternateKey("AppUser_Code");
 
                     b.HasIndex("Created_User_ID");
 
@@ -106,6 +107,8 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("AppUser_ID", "Role_ID");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
@@ -113,9 +116,6 @@ namespace SmartQA.Migrations
                     b.HasIndex("Role_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("AppUser_ID", "Role_ID")
-                        .IsUnique();
 
                     b.ToTable("p_AppUser_to_Role");
 
@@ -213,12 +213,11 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Parameter_Code");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
-
-                    b.HasIndex("Parameter_Code")
-                        .IsUnique();
 
                     b.HasIndex("RowStatus");
 
@@ -388,14 +387,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_DocumentProjectNumber");
                 });
@@ -481,14 +479,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_DocumentType");
 
@@ -531,6 +528,8 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Document_ID", "GOST_ID");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("GOST_ID");
@@ -538,9 +537,6 @@ namespace SmartQA.Migrations
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Document_ID", "GOST_ID")
-                        .IsUnique();
 
                     b.ToTable("p_Document_to_GOST");
                 });
@@ -571,6 +567,8 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Document_ID", "PID_ID");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
@@ -578,9 +576,6 @@ namespace SmartQA.Migrations
                     b.HasIndex("PID_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Document_ID", "PID_ID")
-                        .IsUnique();
 
                     b.ToTable("p_Document_to_PID");
                 });
@@ -616,10 +611,9 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("Created_User_ID");
+                    b.HasAlternateKey("GOST_Code");
 
-                    b.HasIndex("GOST_Code")
-                        .IsUnique();
+                    b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Marka_ID");
 
@@ -656,6 +650,8 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("GOST_ID", "PID_ID");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
@@ -663,9 +659,6 @@ namespace SmartQA.Migrations
                     b.HasIndex("PID_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("GOST_ID", "PID_ID")
-                        .IsUnique();
 
                     b.ToTable("p_GOST_to_PID");
                 });
@@ -696,6 +689,8 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("GOST_ID", "TitleObject_ID");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
@@ -703,9 +698,6 @@ namespace SmartQA.Migrations
                     b.HasIndex("RowStatus");
 
                     b.HasIndex("TitleObject_ID");
-
-                    b.HasIndex("GOST_ID", "TitleObject_ID")
-                        .IsUnique();
 
                     b.ToTable("p_GOST_to_TitleObject");
                 });
@@ -762,14 +754,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_Marka");
                 });
@@ -1276,14 +1267,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_TitleObject");
                 });
@@ -1322,6 +1312,8 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Employee_Code");
+
                     b.HasIndex("AppUser_ID")
                         .IsUnique()
                         .HasFilter("[AppUser_ID] IS NOT NULL");
@@ -1329,9 +1321,6 @@ namespace SmartQA.Migrations
                     b.HasIndex("Contragent_ID");
 
                     b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Employee_Code")
-                        .IsUnique();
 
                     b.HasIndex("Modified_User_ID");
 
@@ -1881,14 +1870,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_AccessToPIStaffFunction");
                 });
@@ -1924,14 +1912,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_AccessToPIVoltageRange");
                 });
@@ -1970,14 +1957,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_AttCenterNaks");
                 });
@@ -2013,14 +1999,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_AuthToSignInspActsForWSUN");
                 });
@@ -2061,6 +2046,8 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("ContragentRole_ID");
 
                     b.HasIndex("Created_User_ID");
@@ -2068,9 +2055,6 @@ namespace SmartQA.Migrations
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_Contragent");
                 });
@@ -2106,14 +2090,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_ContragentRole");
                 });
@@ -2149,14 +2132,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_DetailsType");
                 });
@@ -2192,14 +2174,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_Division");
                 });
@@ -2235,14 +2216,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_ElectricalSafetyAbilitation");
                 });
@@ -2278,14 +2258,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_HIFGroup");
                 });
@@ -2327,14 +2306,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_InspectionSubject");
                 });
@@ -2370,14 +2348,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_InspectionTechnique");
                 });
@@ -2413,14 +2390,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_JointKind");
                 });
@@ -2456,14 +2432,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_JointType");
                 });
@@ -2499,14 +2474,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_Level");
                 });
@@ -2542,14 +2516,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_Position");
                 });
@@ -2591,14 +2564,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_QualificationField");
                 });
@@ -2634,14 +2606,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_QualificationLevel");
                 });
@@ -2677,14 +2648,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_Responsibility");
                 });
@@ -2720,14 +2690,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_SeamsType");
                 });
@@ -2763,14 +2732,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_ShieldingGas");
                 });
@@ -2806,14 +2774,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_StaffFunction");
                 });
@@ -2855,14 +2822,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_TestMethod");
                 });
@@ -2901,14 +2867,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_TestTypeRef");
                 });
@@ -2944,14 +2909,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_VoltageRange");
                 });
@@ -2987,14 +2951,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_WeldGOST14098");
                 });
@@ -3030,14 +2993,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_WeldMaterial");
                 });
@@ -3073,14 +3035,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_WeldMaterialGroup");
                 });
@@ -3116,14 +3077,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_WeldPasses");
                 });
@@ -3159,14 +3119,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_WeldPosition");
                 });
@@ -3202,14 +3161,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_WeldType");
                 });
@@ -3245,14 +3203,13 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasAlternateKey("Title");
+
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("p_WeldingEquipmentAutomationLevel");
                 });
