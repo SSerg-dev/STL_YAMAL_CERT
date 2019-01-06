@@ -83,11 +83,18 @@ namespace SmartQA.Cli
                 context.Model
                 .GetEntityTypes()
                 .Where(iet => !ExcludeEntities.Contains(iet.ClrType.Name))
-                )                
-            {                
-                var coll = context.GetType().GetMethod("Set").MakeGenericMethod(iet.ClrType).Invoke(
-                    context, new object[] { });
-
+                )
+            {
+                var set = context.GetType()
+                    .GetMethod("Set")
+                    .MakeGenericMethod(iet.ClrType)
+                    .Invoke(context, new object[] { });
+                
+                var coll = typeof(EntityFrameworkQueryableExtensions)
+                    .GetMethod("IgnoreQueryFilters")
+                    .MakeGenericMethod(iet.ClrType)
+                    .Invoke(null, new object[] { set });            
+                
                 Console.WriteLine($"Exporting {iet.ClrType.Name}...");
                                 
                 var objs = converter.Serialize((IEnumerable<object>) coll);
@@ -106,8 +113,8 @@ namespace SmartQA.Cli
         {            
             
             
-            var configPath = "../SmartQA/appsettings.Development.json";                       
-            //const string configPath = "../SmartQA/appsettings.Production.json";                       
+            //var configPath = "../SmartQA/appsettings.Development.json";                       
+            const string configPath = "../SmartQA/appsettings.Production.json";                       
             var workingDir = Directory.GetCurrentDirectory();
             
             IServiceCollection services = new ServiceCollection();
@@ -126,16 +133,15 @@ namespace SmartQA.Cli
 //                .CreateLogger<Program>();
                    
             Console.WriteLine("ok");
-            
-//            using (StreamWriter sw = new StreamWriter("data.json"))
-//            {
-//                DbExport(context, sw);
-//            }
-
-            using (StreamReader sr = new StreamReader("data.json"))
+            using (StreamWriter sw = new StreamWriter("data.json"))
             {
-                DbImport(context, sr);
+                DbExport(context, sw);
             }
+
+//            using (StreamReader sr = new StreamReader("data.json"))
+//            {
+//                DbImport(context, sr);
+//            }
             
         }
 
