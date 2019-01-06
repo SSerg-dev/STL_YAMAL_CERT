@@ -1,10 +1,13 @@
 ﻿<template>
-    <div>
-        <div class="loading" v-if="loading">
-            <dx-load-indicator id="large-indicator"
-                               :height="60"
-                               :width="60" />
-        </div>
+    <div class="employee-container">
+        <dx-load-panel :visible="loading"
+                       :position="{ of: '.employee-container' }"
+                       :delay="100"
+                       :show-indicator="true"
+                       :show-pane="true"
+                       :shading="true"
+                       shading-color="rgba(0,0,0,0.2)"
+                       :close-on-outside-click="false" />
 
         <div v-if="error" class="error">
             {{ error }}
@@ -44,21 +47,21 @@
 
 <script>
 
-    import DataSource from 'devextreme/data/data_source';
-    import DxLoadIndicator from 'devextreme-vue/load-indicator';
-    import DxButton from "devextreme-vue/ui/button";
-    import DxToolbar from 'devextreme-vue/toolbar';    
-    import { confirm } from 'devextreme/ui/dialog';
-    import { formatDate } from "devextreme/localization";
+    import DataSource from 'devextreme/data/data_source'
+    import DxLoadPanel from 'devextreme-vue/load-panel'
+    import DxButton from "devextreme-vue/ui/button"
+    import DxToolbar from 'devextreme-vue/toolbar'
+    import {confirm} from 'devextreme/ui/dialog'
+    import {formatDate} from "devextreme/localization"
 
-    import { employeeDataSource } from './employee-data.js'    
+    import {employeeDataSource} from './employee-data.js'
 
     import NaksList from './documents/naks-list';
 
     export default {
         components: {
             DataSource,
-            DxLoadIndicator,
+            DxLoadPanel,
             DxButton,
             DxToolbar,
             NaksList

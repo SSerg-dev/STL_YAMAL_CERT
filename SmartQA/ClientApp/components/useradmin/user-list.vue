@@ -138,9 +138,8 @@
                                 expand: ['Person', 'Contragent', 'Position']
                             },
                             displayExpr(itemData) {
-                                console.log(itemData);
                                 return !itemData ? '' :  
-                                `${itemData.Person.FullName} (${itemData.Position.Title}, ${itemData.Contragent.Title})`
+                                    `${itemData.Person.FullName} (${itemData.Position.Title}, ${itemData.Contragent.Title})`
                             },
                             valueExpr: "ID",
                             searchEnabled: true,

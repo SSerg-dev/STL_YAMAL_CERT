@@ -18,6 +18,7 @@
                     </form>
 
                     <dx-load-panel :position="{ of: '.form-container' }"
+                                   :delay="100"
                                    :visible="loading"
                                    :show-indicator="true"
                                    :show-pane="true"
@@ -35,15 +36,12 @@
 <script>
     import {filter, first} from 'rxjs/operators'
 
-    import { DxScrollView, DxPopup } from 'devextreme-vue'
-    
+    import {DxPopup, DxScrollView} from 'devextreme-vue'
+
     import context from 'api/odata-context'
-    
+
     import BaseEntityEditor from 'components/forms/base-entity-editor'
-    import { reftableFormItem } from 'components/forms/reftables'
-    import { reftableFormItem2 } from 'components/forms/reftables'
-    import { reftableFormItem3 } from 'components/forms/reftables' 
-    import { reftableFormItem4 } from 'components/forms/reftables' 
+    import {reftableFormItem, reftableFormItem2, reftableFormItem3, reftableFormItem4} from 'components/forms/reftables'
 
     export default {
         name: 'NaksAttestEdit',

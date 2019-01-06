@@ -42,6 +42,7 @@
         </dx-data-grid>
 
         <dx-load-panel :visible="loading"
+                       :delay="100"
                        :show-indicator="true"
                        :show-pane="true"
                        :shading="true"
@@ -99,7 +100,6 @@
                     .then(this.onNewDocumentCreated);
             },
             onNewDocumentCreated(data){
-                console.log(data);
                 this.loading = false;
                 
                 this.$router.push({

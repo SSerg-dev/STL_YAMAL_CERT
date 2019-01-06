@@ -6,7 +6,7 @@ import UserAdminIndex from 'components/useradmin/index'
 import DocumentsIndex from 'components/documents/index'
 import DocumentEdit from 'components/documents/document-edit'
 
-import store from 'store' 
+import store from 'store'
 
 const ifNotAuthenticated = (to, from, next) => {
 
@@ -107,7 +107,11 @@ export const routes = [
         name: 'document-edit',
         path: '/documents/:id?',
         component: DocumentEdit,
-        props: true
+        props: (route) => ({
+            editorSettings: {
+                modelKey: route.params.id
+            }
+        }),
     }
 
 ];

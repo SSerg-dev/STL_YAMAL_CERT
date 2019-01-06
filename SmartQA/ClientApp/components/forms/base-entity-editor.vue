@@ -1,16 +1,18 @@
 ﻿<template>
     <div class="form-container">
-        <h2 v-if="formTitle">{{ formTitle }}</h2>
+        <h2 class="mt-4" v-if="formTitle">{{ formTitle }}</h2>
         
         <form v-on:submit.prevent="onSubmitButtonClick" class="my-3">
             <dx-form ref="form"
                      :form-data="formData"
                      :items="formItems" />
-            
+
+            <dx-toolbar :items="toolbarItems" />
         </form>
         
         <dx-load-panel :position="{ of: '.form-container' }"
                        :visible="loading"
+                       :delay="100"
                        :show-indicator="true"
                        :show-pane="true"
                        :shading="true"
@@ -18,7 +20,6 @@
                        :close-on-outside-click="false"
         />
         
-        <dx-toolbar :items="toolbarItems" />
         
     </div>
 </template>
@@ -100,7 +101,7 @@
                         options: {
                             text: "Сохранить",
                             type: "success",
-                            onClick: this.onSubmitButtonClick
+                            useSubmitBehavior: true,
                         }
                     }
                 ],
@@ -150,7 +151,7 @@
                 
                 if(settings.hasOwnProperty('formTitle')) {
                     this.formTitle = settings.formTitle;
-                }  
+                } 
                 
                 let formDataInitial = Object.assign({}, settings.formDataInitial || {})
 
@@ -195,7 +196,6 @@
                 this.setState('ready');
             },
             onLoadModelFail(error){
-                console.debug('onLoadModelFail');
                 this.setState({
                     state: 'error',
                     error: error

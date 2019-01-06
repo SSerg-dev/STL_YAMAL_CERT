@@ -1,4 +1,3 @@
-
 <script>
     import BaseEntityEditor from "../forms/base-entity-editor";
     import {reftableFormItem} from "../forms/reftables";
@@ -10,9 +9,12 @@
         extends: BaseEntityEditor,
         components: {BaseEntityEditor},
         watch: {
-            model(val) {
-                this.formTitle = 'Карточка документа № ' + val.Document_Code; 
-            } 
+            model: {
+                immediate: true,
+                handler(val) {
+                    this.formTitle = !val ? "" : `Карточка документа № ${val.Document_Code}`;
+                }
+            }
         },
         data() {
             return {
@@ -67,7 +69,6 @@
                                         expand: ['Person', 'Contragent', 'Position']
                                     },
                                     displayExpr(itemData) {
-                                        console.log(itemData);
                                         return !itemData ? '' :
                                             `${itemData.Person.FullName} (${itemData.Position.Title}, ${itemData.Contragent.Title})`
                                     },
@@ -106,18 +107,13 @@
                 ]
             }
         },
-        props: {
-            id: String,
-        },
-
-        mounted() {
-            this.init({                 
-                modelKey: this.id,
-                formDataInitial: {}
-            });
-        },
+        mounted() {},
         methods: {
-            
+            onCancelButtonClick() {
+                this.$router.push({
+                    name: 'documents'
+                });
+            },
         }
     }
 </script>

@@ -22,6 +22,7 @@
     
                     <dx-load-panel :position="{ of: '.form-container' }"
                            :visible="loading"
+                           :delay="100"
                            :show-indicator="true"
                            :show-pane="true"
                            :shading="true"
@@ -36,22 +37,21 @@
 </template>
 
 <script>
-    import { Subject } from 'rxjs';
-    import { pluck, map, first, filter } from 'rxjs/operators';
+    import {filter, first} from 'rxjs/operators';
 
-    import { DxScrollView, DxPopup, DxForm} from 'devextreme-vue';
+    import {DxForm, DxPopup, DxScrollView} from 'devextreme-vue';
     import DataSource from 'devextreme/data/data_source';
     import CustomStore from 'devextreme/data/custom_store';
-    import { DxLoadPanel } from 'devextreme-vue/load-panel';    
+    import {DxLoadPanel} from 'devextreme-vue/load-panel';
 
     import NaksAttestList from './naks-attest-list';
-    
+
     import BaseEntityEditor from 'components/forms/base-entity-editor';
-    import { reftableFormItem } from 'components/forms/reftables';
-    import { reftableDatasourceConf } from 'components/reftables/data'; 
-    
+    import {reftableFormItem} from 'components/forms/reftables';
+    import {reftableDatasourceConf} from 'components/reftables/data';
+
     import context from 'api/odata-context';
-    
+
     export default {
         name: 'NaksEdit',
         extends: BaseEntityEditor,
@@ -161,11 +161,11 @@
                             minSearchLength: 0,
                             maxItemCount: 100,
                             
-                            onFocusIn: function (e) {
+                            onFocusIn(e) {
                                 if (!e.component.field().value) e.component.open();
                             },
                             selectionChanged: function(e) {
-                                console.log(e);
+                                
                             }
                         },
                         isRequired: true
