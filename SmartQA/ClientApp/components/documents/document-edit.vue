@@ -109,6 +109,9 @@
                                 editorOptions: {
                                     dataSource: {
                                         store: context.GOST,
+                                        paginate: true,
+                                        pageSize: 20,
+                                        sort: ['GOST_Code']
                                     },
                                     displayExpr: "GOST_Code",
                                     valueExpr: "ID",
@@ -123,6 +126,9 @@
                                 editorOptions: {
                                     dataSource: {
                                         store: context.PID,
+                                        paginate: true,
+                                        pageSize: 20,
+                                        sort: ['PID_Code'] 
                                     },
                                     displayExpr: "PID_Code",
                                     valueExpr: "ID",
