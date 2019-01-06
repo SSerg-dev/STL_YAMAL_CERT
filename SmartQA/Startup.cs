@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json.Serialization;
 using SmartQA.Auth;
 using SmartQA.Controllers.Reftables;
@@ -102,7 +103,14 @@ namespace SmartQA
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions {
+                OnPrepareResponse = ctx =>
+                {
+                    const int durationInSeconds = 30* 60 * 60 * 24;
+                    ctx.Context.Response.Headers[HeaderNames.CacheControl] =
+                        $"public,max-age={durationInSeconds}";
+                }
+                });
 
             app.UseAuthentication();
 
