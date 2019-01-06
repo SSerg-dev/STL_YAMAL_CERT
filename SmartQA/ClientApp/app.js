@@ -1,8 +1,9 @@
 import 'styles/main.scss'
+import 'bootstrap'
 
 import "devextreme-intl";
 
-import { FontAwesomeIcon } from './icons'
+import {FontAwesomeIcon} from './icons'
 
 import Vue from 'vue'
 import Rx from 'rxjs/Rx';
@@ -19,7 +20,7 @@ import DefaultLayout from './layouts/default'
 import BlankLayout from './layouts/blank'
 
 import devExtremeConfig from 'devextreme/core/config'
-import { loadMessages, locale } from "devextreme/localization";
+import {loadMessages, locale} from "devextreme/localization";
 import ruMessages from "devextreme/localization/messages/ru.json";
 
 loadMessages(ruMessages);
