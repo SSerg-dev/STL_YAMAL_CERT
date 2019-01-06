@@ -20,6 +20,11 @@ namespace SmartQA.DB.Models.Documents
         public Guid? Marka_ID { get; set; }
         
         public virtual Marka Marka { get; set; }
+        
+        
+        // ---- m2m relations -------------
+
+        public virtual ICollection<GOST_to_PID> GOST_to_PIDSet { get; set; }
 
         [NotMapped]
         public ICollection<PID> PIDSet => this.GetM2MObjects<PID>();
@@ -30,6 +35,8 @@ namespace SmartQA.DB.Models.Documents
             set => this.SetM2MKeys<PID>(value);                
         }        
         
+        public virtual ICollection<GOST_to_TitleObject> GOST_to_TitleObjectSet { get; set; }
+
         [NotMapped]
         public ICollection<TitleObject> TitleObjectSet => this.GetM2MObjects<TitleObject>();
         [NotMapped]

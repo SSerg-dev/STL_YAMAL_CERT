@@ -6,6 +6,8 @@ using SmartQA.DB.Models.Shared;
 namespace SmartQA.DB.Models.Documents
 {
     [Table("p_DocumentType")]
+    [UseDefaultReftableEditor]
+    [Display(Name = "Тип документа")]
     public class DocumentType : CommonEntity, IReftableEntity
     {
         [Required]

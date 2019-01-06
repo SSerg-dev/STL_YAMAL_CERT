@@ -68,6 +68,10 @@ namespace SmartQA.DB
             document.Ignore(d => d.Issue_Date_DT);
             document.Property(d => d.Status_ID);
             document.HasOptional(d => d.Status);
+            document.CollectionProperty(d => d.GOST_IDs);
+            document.CollectionProperty(d => d.PID_IDs);
+            document.ContainsMany(d => d.GOSTSet);
+            document.ContainsMany(d => d.PIDSet);
                         
             var documentUI = builder.EntitySet<DocumentUI>("DocumentUI")
                 .EntityType
@@ -84,6 +88,8 @@ namespace SmartQA.DB
             );           
             
             BuildCommon<DocumentStatus>(builder);
+            BuildCommon<GOST>(builder);
+            BuildCommon<PID>(builder);
             
             var naks = BuildCommon<DocumentNaks>(builder);
             naks.CollectionProperty(x => x.HIFGroup_IDs);

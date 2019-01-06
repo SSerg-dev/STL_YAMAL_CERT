@@ -101,7 +101,35 @@
                                 label: { text: 'Название' },
                                 dataField: 'Document_Name',
                                 required: false
-                            },        
+                            },
+                            {
+                                dataField: 'GOST_IDs',
+                                label: {text: 'ГОСТ'},
+                                editorType: 'dxTagBox',
+                                editorOptions: {
+                                    dataSource: {
+                                        store: context.GOST,
+                                    },
+                                    displayExpr: "GOST_Code",
+                                    valueExpr: "ID",
+                                    searchExpr: ['GOST_Code'],
+                                    searchEnabled: true,
+                                }
+                            },
+                            {
+                                dataField: 'PID_IDs',
+                                label: {text: 'PID'},
+                                editorType: 'dxTagBox',
+                                editorOptions: {
+                                    dataSource: {
+                                        store: context.PID,
+                                    },
+                                    displayExpr: "PID_Code",
+                                    valueExpr: "ID",
+                                    searchExpr: ['PID_Code'],
+                                    searchEnabled: true,
+                                }
+                            },
                         ]
                     }
                 ]

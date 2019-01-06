@@ -26,9 +26,14 @@ namespace SmartQA.Controllers.Documents
         {}
 
         public override IQueryable<Document> GetQuery()
-            => base.GetQuery()                
+            => base.GetQuery()
                 .Include(d => d.DocumentStatusSet)
-                .ThenInclude(ds => ds.Status);
+                .ThenInclude(ds => ds.Status)
+                .Include(d => d.Document_to_GOSTSet)
+                .ThenInclude(dtg => dtg.GOST)
+                .Include(d => d.Document_to_PIDSet)
+                .ThenInclude(dtp => dtp.PID);
+                
 
         public async Task<IActionResult> Post(DocumentNew form)
         {

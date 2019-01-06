@@ -118,10 +118,31 @@ namespace SmartQA.DB.Models.Documents
 
             modelBuilder.Entity<Document>()
                 .Property(d => d.Document_Code)
-                .HasDefaultValueSql("next value for [Sequence_Document_Number]");
-                        
+                .HasDefaultValueSql("next value for [Sequence_Document_Number]");                        
+        }               
+        
+        // ---- m2m relations -------------
+        
+        public virtual ICollection<Document_to_GOST> Document_to_GOSTSet { get; set; }
+        [NotMapped]
+        public ICollection<GOST> GOSTSet => this.GetM2MObjects<GOST>();
+        [NotMapped]
+        public ICollection<Guid> GOST_IDs
+        {
+            get => this.GetM2MKeys<GOST>();
+            set => this.SetM2MKeys<GOST>(value);                
+        }
+        
+        public virtual ICollection<Document_to_PID> Document_to_PIDSet { get; set; }
+        [NotMapped]
+        public ICollection<PID> PIDSet => this.GetM2MObjects<PID>();
+        [NotMapped]
+        public ICollection<Guid> PID_IDs
+        {
+            get => this.GetM2MKeys<PID>();
+            set => this.SetM2MKeys<PID>(value);                
+        }
 
-        }                
         
     }
 }

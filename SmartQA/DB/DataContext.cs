@@ -74,23 +74,9 @@ namespace SmartQA.DB
                     .MakeGenericMethod(commonType)
                     .Invoke(null, new object[] { modelBuilder });                
   
-                if (commonType.GetCustomAttributes(true).FirstOrDefault(a => a is M2MAttribute) is M2MAttribute m2mAttr)
+                if (commonType.GetCustomAttributes(true).Any(a => a is M2MAttribute))
                 {
-                    var m2mRelName = $"{commonType.Name}Set";
-                    var m2mRelNameLeft = m2mAttr.Left.GetProperty(m2mRelName) != null ? m2mRelName : null;
-                    var m2mRelNameRight = m2mAttr.Right.GetProperty(m2mRelName) != null ? m2mRelName : null;
-                                      
-                    modelBuilder.Entity(commonType)
-                        .HasOne(m2mAttr.Left, m2mAttr.Left.Name)                        
-                        .WithMany(m2mRelNameLeft)
-                        .HasForeignKey(m2mAttr.LeftFKey)
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    modelBuilder.Entity(commonType)
-                        .HasOne(m2mAttr.Right, m2mAttr.Right.Name)
-                        .WithMany(m2mRelNameRight)
-                        .HasForeignKey(m2mAttr.RightFKey)
-                        .OnDelete(DeleteBehavior.Restrict);
+                    SetupM2MModel(modelBuilder, commonType);
                 }
 
                 // call any custom setup methods on model 
@@ -104,6 +90,32 @@ namespace SmartQA.DB
 
             }            
             
+        }
+
+        private void SetupM2MModel(ModelBuilder modelBuilder, Type commonType)
+        {
+            // setup m2m table, ex. 'Document_to_GOST'
+            
+            var m2mAttr = (M2MAttribute) commonType.GetCustomAttributes(true).First(a => a is M2MAttribute);
+            
+            // navigation property to m2m table, ex. 'Document_to_GOSTSet' on Document and GOST classes 
+            var m2mRelName = $"{commonType.Name}Set";
+            
+            // check if classes actually have the navigation property
+            var m2mRelNameLeft = m2mAttr.Left.GetProperty(m2mRelName) != null ? m2mRelName : null;
+            var m2mRelNameRight = m2mAttr.Right.GetProperty(m2mRelName) != null ? m2mRelName : null;
+                                      
+            modelBuilder.Entity(commonType)
+                .HasOne(m2mAttr.Left, m2mAttr.Left.Name)                        
+                .WithMany(m2mRelNameLeft)
+                .HasForeignKey(m2mAttr.LeftFKey)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity(commonType)
+                .HasOne(m2mAttr.Right, m2mAttr.Right.Name)
+                .WithMany(m2mRelNameRight)
+                .HasForeignKey(m2mAttr.RightFKey)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         private void SetupConstraints(ModelBuilder modelBuilder)
