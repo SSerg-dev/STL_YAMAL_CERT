@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SmartQA.DB;
+using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.Cli
 {
@@ -58,9 +59,9 @@ namespace SmartQA.Cli
         }
 
         /// <summary>
-        /// Convert objects to json array string
+        /// Convert objects to json array
         /// </summary>
-        public string Serialize(IEnumerable<object> objects)
+        public JArray Serialize(IEnumerable<object> objects)
         {
             var arr = new JArray();
             foreach (var obj in objects)
@@ -68,11 +69,11 @@ namespace SmartQA.Cli
                 arr.Add(ToJObject(obj));
             }
             
-            return arr.ToString();
+            return arr;
         }
         
         public JObject ToJObject(object obj)
-        {
+        {                        
             dynamic item = new ExpandoObject();
             var dItem = item as IDictionary<string, object>;
             
@@ -81,15 +82,17 @@ namespace SmartQA.Cli
                 : obj.GetType();
                   
             var entityType = Context.Model.GetEntityTypes().First(et => et.ClrType == objType);
+
+            Console.WriteLine($"Exporting {obj})");
             
             dItem["__EntityType"] = entityType.Name;
 
             foreach (var prop in entityType.GetProperties())
             {
                 dItem[prop.Name] = obj.GetType().GetProperty(prop.Name).GetValue(obj);  
-            }
-
-            ;
+            };
+                       
+            
             return JObject.FromObject(item);
         }
     }

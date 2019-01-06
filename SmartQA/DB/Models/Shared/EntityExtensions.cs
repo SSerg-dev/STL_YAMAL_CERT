@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Castle.DynamicProxy;
+using Microsoft.AspNetCore.Hosting.Internal;
 
 namespace SmartQA.DB.Models.Shared
 {
@@ -119,5 +121,20 @@ namespace SmartQA.DB.Models.Shared
             SetM2MKeys<Guid, TEntity>(obj, value, through);
         }
 
+        public static object GetPKey(this Object obj, DataContext context)
+        {               
+            var objType = (obj is IProxyTargetAccessor)
+                ? ProxyUtil.GetUnproxiedType(obj)
+                : obj.GetType();
+                  
+            var keyName = context.Model.GetEntityTypes()
+                .First(et => et.ClrType == objType)
+                .FindPrimaryKey().Properties
+                .Select(x => x.Name).Single();
+                        
+            return obj.GetType().GetProperty(keyName).GetValue(obj, null);
+        }
+        
+        
     }
 }

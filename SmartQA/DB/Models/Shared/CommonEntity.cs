@@ -6,6 +6,8 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
+using Castle.DynamicProxy;
+using MessagePack.Resolvers;
 using Microsoft.EntityFrameworkCore;
 using SmartQA.Auth;
 using SmartQA.DB.Models.Auth;
@@ -120,5 +122,10 @@ namespace SmartQA.DB.Models.Shared
             
         }
 
+        public override string ToString()
+        {
+            return $"{GetType().Name} ({ID})";
+        }
     }
+    
 }
