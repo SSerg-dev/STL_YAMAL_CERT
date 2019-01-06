@@ -5,7 +5,7 @@ using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.Registers
 {
-    public class CheckItem : CommonEntity
+    public class CheckItem 
     {
 
     }

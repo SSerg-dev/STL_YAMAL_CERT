@@ -3,6 +3,7 @@ using SmartQA.Models.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using SmartQA.DB;
 
 namespace SmartQA.Models
 {
@@ -22,12 +23,8 @@ namespace SmartQA.Models
         public string SDR { get; set; }
 
         // ---- foreign keys --------------
-        //[Required]
-        //public Guid? JointType_ID { get; set; }
         [Required]
         public Guid? WeldingEquipmentAutomationLevel_ID { get; set; }
-        //[Required]
-        //public Guid? WeldGOST14098_ID { get; set; }
 
         public ICollection<Guid> DetailsType_IDs { get; set; }
         public ICollection<Guid> SeamsType_IDs { get; set; }
@@ -43,7 +40,7 @@ namespace SmartQA.Models
                
         }
 
-        public override void Serialize(DocumentNaksAttest dbModel)
+        public override void Serialize(DocumentNaksAttest dbModel, DataContext context)
         {
             dbModel.DocumentNaks_ID                       = (Guid) DocumentNaks_ID                          ;
             dbModel.WeldingWire                           = WeldingWire                                     ;  

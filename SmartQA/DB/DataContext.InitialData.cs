@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using SmartQA.Auth;
@@ -6,6 +7,7 @@ using SmartQA.DB.Models.Auth;
 using SmartQA.DB.Models.Common;
 using SmartQA.DB.Models.Documents;
 using SmartQA.Util;
+using Role = SmartQA.DB.Models.Auth.Role;
 
 namespace SmartQA.DB
 {
@@ -13,6 +15,26 @@ namespace SmartQA.DB
     {
         private static void SetupInitialData(ModelBuilder modelBuilder)
         {
+            var fakeDate = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0));
+
+            modelBuilder.Entity<Parameter>()
+                .HasData(
+                    new Parameter
+                    {
+                        RowStatus = 0,
+                        ID = Guid.Parse("c2a74178-34ae-407d-af20-bcbcf8be649f"),
+                        Created_User_ID = rootUserId,
+                        Modified_User_ID = rootUserId,
+                        Insert_DTS = fakeDate,
+                        Update_DTS = fakeDate,
+                        Parameter_Code = "SiteTimezone",
+                        Parameter_Value = "Ekaterinburg Standard Time",
+                        Description_Rus =  "UTC часовой пояс строительной площадки"
+
+                    }
+                );
+            
+            
             modelBuilder.Entity<RowStatus>()
                 .HasData(
                     new RowStatus
@@ -52,19 +74,40 @@ namespace SmartQA.DB
                         Comment = "superuser",
                         Created_User_ID = rootUserId,
                         Modified_User_ID = rootUserId,
-                        Insert_DTS = DateTimeOffset.Now,
-                        Update_DTS = DateTimeOffset.Now,
-                        User_Password = new Encryptor3DES(ApplicationUser.passKey)
-                            .encrypt(Encoding.UTF8.GetBytes(rootUserDefaultPassword)
-                            )
+                        Insert_DTS = fakeDate,
+                        Update_DTS = fakeDate,
+                        
+                        // "root_user_18"
+                        User_Password = new byte[] { 154, 188, 48, 112, 67, 142, 69, 201, 80, 125, 104, 193, 197, 212, 204, 212 }
                     }
                 );
 
-//            modelBuilder.Entity<Role>()
-//                .HasData(new Role
-//                {
-//                    
-//                })
+            modelBuilder.Entity<Role>()
+                .HasData(new Role
+                {
+                    ID = Guid.Parse("CCD8C1EE-F6A8-E811-AA0B-005056947B15"),
+                    RowStatus = 0,
+                    Created_User_ID = rootUserId,
+                    Modified_User_ID = rootUserId,
+                    Insert_DTS = fakeDate,
+                    Update_DTS = fakeDate,
+                    Role_Code = "Administrator"
+                });
+
+            
+            // admin rights for root user
+            modelBuilder.Entity<AppUser_to_Role>()
+                .HasData(new AppUser_to_Role()
+                {
+                    ID = Guid.Parse("C2D77D20-D557-4291-8DA8-5B6765256A95"),
+                    RowStatus = 0,
+                    Created_User_ID = rootUserId,
+                    Modified_User_ID = rootUserId,
+                    Insert_DTS = fakeDate,
+                    Update_DTS = fakeDate,
+                    AppUser_ID = rootUserId,
+                    Role_ID = Guid.Parse("CCD8C1EE-F6A8-E811-AA0B-005056947B15")
+                });
 
 
             var statuses = new[]
@@ -187,16 +230,12 @@ namespace SmartQA.DB
                 new Status
                 {
                     ID = Guid.Parse("CE34A401-3DEA-C8EB-F304-86C73E9FFD9A"),
-
-
                     Status_Code = "wCLIa", StatusEntity = "CheckItem", Description_Eng = "Approved",
                     Description_Rus = "Утверждено", EntityLocked = true
                 },
                 new Status
                 {
                     ID = Guid.Parse("2192A6B9-D13B-3E13-597C-CDD6EBED10DF"),
-
-
                     Status_Code = "wCLIc", StatusEntity = "CheckItem", Description_Eng = "Cancelled",
                     Description_Rus = "Отменено", EntityLocked = true
                 }
@@ -206,12 +245,24 @@ namespace SmartQA.DB
                 status.RowStatus = 0;
                 status.Created_User_ID = rootUserId;
                 status.Modified_User_ID = rootUserId;
-                status.Insert_DTS = DateTimeOffset.Now;
-                status.Update_DTS = DateTimeOffset.Now;
+                status.Insert_DTS = fakeDate;
+                status.Update_DTS = fakeDate;
             }
 
             modelBuilder.Entity<Status>()
                 .HasData(statuses);
+
+            modelBuilder.Entity<DocumentType>()
+                .HasData(new DocumentType
+                {
+                    ID = Guid.Parse("724b20fd-df8d-4b4c-8afc-d54fe796f254"),
+                    RowStatus = 0,
+                    Created_User_ID = rootUserId,
+                    Modified_User_ID = rootUserId,
+                    Insert_DTS = fakeDate,
+                    Update_DTS = fakeDate,
+                    Title = "N/A"
+                });
         }
     }
 }

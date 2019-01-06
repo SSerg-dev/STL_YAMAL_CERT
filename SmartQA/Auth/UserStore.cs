@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SmartQA.DB;
+using SmartQA.DB.Models.Auth;
+
 
 namespace SmartQA.Auth
 {
@@ -26,7 +28,7 @@ namespace SmartQA.Auth
         }
 
         public Task<ApplicationUser> FindByIdAsync(string userId, CancellationToken cancellationToken)
-            => Context.AppUser
+            => Context.Set<AppUser>()
                 .Where(x => x.ID == Guid.Parse(userId))
                 .Select(x => new ApplicationUser(x))
                 .SingleAsync();
@@ -65,7 +67,7 @@ namespace SmartQA.Auth
         }
 
         public Task<ApplicationUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
-            => Context.AppUser.SingleOrDefaultAsync(
+            => Context.Set<AppUser>().SingleOrDefaultAsync(
                     // TODO: fix this "TP\" bullshit
                     x => x.AppUser_Code.ToUpper() == normalizedUserName.ToUpper() || x.AppUser_Code.ToUpper() == $"TP\\{normalizedUserName}".ToUpper(),
                     cancellationToken)
@@ -82,7 +84,7 @@ namespace SmartQA.Auth
         }
 
         public Task<IList<string>> GetRolesAsync(ApplicationUser applicationUser, CancellationToken cancellationToken)
-            => Context.AppUser_to_Role
+            => Context.Set<AppUser_to_Role>()
                 .Include(x => x.Role)
                 .Where(x => x.AppUser_ID == applicationUser.Id)
                 .Select(x => x.Role.Role_Code)                
@@ -91,13 +93,13 @@ namespace SmartQA.Auth
 
 
         public Task<bool> IsInRoleAsync(ApplicationUser applicationUser, string roleName, CancellationToken cancellationToken)
-            => Context.AppUser_to_Role
+            => Context.Set<AppUser_to_Role>()
                 .Include(x => x.Role)                
                 .AnyAsync(x => x.AppUser_ID == applicationUser.Id && x.Role.Role_Code == roleName);                
 
 
         public Task<IList<ApplicationUser>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
-            => Context.AppUser_to_Role
+            => Context.Set<AppUser_to_Role>()
                 .Include(x => x.Role)
                 .Include(x => x.AppUser)
                 .Where(x => x.Role.Role_Code == roleName)

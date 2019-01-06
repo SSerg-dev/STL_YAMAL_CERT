@@ -19,8 +19,8 @@ namespace SmartQA.Controllers.Shared
         where TForm : EntityForm<TEntity>, new ()
 
     {
-        private readonly DataContext _context;
-        private readonly AppUserManager _userManager;
+        protected readonly DataContext _context;
+        protected readonly AppUserManager _userManager;
 
         public CommonEntityODataController(DataContext context, AppUserManager userManager)
         {
@@ -29,20 +29,20 @@ namespace SmartQA.Controllers.Shared
         }
 
         public virtual DbSet<TEntity> GetDbSet()
-            => ((DbSet<TEntity>)_context.GetType().GetProperty(typeof(TEntity).Name).GetValue(_context));
-
+            => _context.Set<TEntity>();
+        
         public virtual IQueryable<TEntity> GetQuery()
-            => GetDbSet().AsQueryable();
-
-        public virtual async Task<IActionResult> Get([FromODataUri] Guid key)
+            => GetDbSet();        
+        
+        [EnableQuery]
+        public SingleResult<TEntity> Get([FromODataUri] Guid key)
         {
-            var entity = await GetDbSet().FindAsync(key);
-            return Ok(entity);
+            return SingleResult.Create(GetQuery().Where(x => x.ID == key));            
         }
 
         [EnableQuery]
         public virtual IQueryable<TEntity> Get()
-            => GetQuery();       
+            => GetQuery().IgnoreQueryFilters();       
 
         public virtual async Task<IActionResult> Post([FromBody]TForm form)
         {
@@ -52,7 +52,7 @@ namespace SmartQA.Controllers.Shared
             }
 
             var entity = new TEntity();
-            form.Serialize(entity);
+            form.Serialize(entity, _context);
 
             entity.OnSave(_context, await _userManager.Get(this.User));
 
@@ -71,7 +71,7 @@ namespace SmartQA.Controllers.Shared
             }
 
             var entity = GetDbSet().Find(key);
-            form.Serialize(entity);
+            form.Serialize(entity, _context);
 
             entity.OnSave(_context, await _userManager.Get(this.User));
 

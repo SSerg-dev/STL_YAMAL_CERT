@@ -54,8 +54,8 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("AppUser_Code")
-                        .HasName("UQ_p_AppUser");
+                    b.HasIndex("AppUser_Code")
+                        .IsUnique();
 
                     b.HasIndex("Created_User_ID");
 
@@ -72,11 +72,11 @@ namespace SmartQA.Migrations
                             AppUser_Code = "root",
                             Comment = "superuser",
                             Created_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 755, DateTimeKind.Unspecified).AddTicks(5436), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             RowStatus = 0,
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 755, DateTimeKind.Unspecified).AddTicks(5695), new TimeSpan(0, 0, 0, 0, 0)),
-                            User_Password = new byte[] { 154, 188, 48, 112, 67, 142, 69, 201, 47, 42, 14, 147, 89, 44, 163, 254 }
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
+                            User_Password = new byte[] { 154, 188, 48, 112, 67, 142, 69, 201, 80, 125, 104, 193, 197, 212, 204, 212 }
                         });
                 });
 
@@ -106,9 +106,6 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("AppUser_ID", "Role_ID")
-                        .HasName("UQ_p_AppUser_to_Role");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
@@ -117,7 +114,23 @@ namespace SmartQA.Migrations
 
                     b.HasIndex("RowStatus");
 
+                    b.HasIndex("AppUser_ID", "Role_ID")
+                        .IsUnique();
+
                     b.ToTable("p_AppUser_to_Role");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = new Guid("c2d77d20-d557-4291-8da8-5b6765256a95"),
+                            AppUser_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                            Created_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
+                            Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                            Role_ID = new Guid("ccd8c1ee-f6a8-e811-aa0b-005056947b15"),
+                            RowStatus = 0,
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
+                        });
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Auth.Role", b =>
@@ -153,6 +166,77 @@ namespace SmartQA.Migrations
                     b.HasIndex("RowStatus");
 
                     b.ToTable("p_Role");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = new Guid("ccd8c1ee-f6a8-e811-aa0b-005056947b15"),
+                            Created_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
+                            Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                            Role_Code = "Administrator",
+                            RowStatus = 0,
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
+                        });
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Common.Parameter", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Parameter_ID")
+                        .HasDefaultValueSql("newsequentialid()");
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<string>("Description_Rus")
+                        .HasMaxLength(255);
+
+                    b.Property<DateTimeOffset?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<string>("Parameter_Code")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<string>("Parameter_Value")
+                        .IsRequired()
+                        .HasMaxLength(1000);
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<DateTimeOffset?>("Update_DTS")
+                        .IsRequired();
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.HasIndex("Parameter_Code")
+                        .IsUnique();
+
+                    b.HasIndex("RowStatus");
+
+                    b.ToTable("p_Parameter");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = new Guid("c2a74178-34ae-407d-af20-bcbcf8be649f"),
+                            Created_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                            Description_Rus = "UTC часовой пояс строительной площадки",
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
+                            Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                            Parameter_Code = "SiteTimezone",
+                            Parameter_Value = "Ekaterinburg Standard Time",
+                            RowStatus = 0,
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
+                        });
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Common.RowStatus", b =>
@@ -218,6 +302,8 @@ namespace SmartQA.Migrations
 
                     b.Property<string>("Document_Code")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("next value for [Sequence_Document_Number]")
                         .HasMaxLength(255);
 
                     b.Property<DateTime?>("Document_Date")
@@ -235,6 +321,9 @@ namespace SmartQA.Migrations
                     b.Property<bool>("IsActual");
 
                     b.Property<DateTimeOffset?>("Issue_Date")
+                        .IsRequired();
+
+                    b.Property<DateTime?>("Issue_Date_DT")
                         .IsRequired();
 
                     b.Property<Guid>("Modified_User_ID");
@@ -255,8 +344,7 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Document_Code")
-                        .HasName("UQ_p_Document");
+                    b.HasAlternateKey("Document_Code");
 
                     b.HasIndex("Created_User_ID");
 
@@ -300,137 +388,19 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_DocumentProjectNumber");
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Documents.DocumentType", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("DocumentType_ID")
-                        .HasDefaultValueSql("newsequentialid()");
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<DateTimeOffset?>("Insert_DTS")
-                        .IsRequired();
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<int?>("RowStatus")
-                        .IsRequired();
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnName("DocumentType_Code")
-                        .HasMaxLength(255);
-
-                    b.Property<DateTimeOffset?>("Update_DTS")
-                        .IsRequired();
-
-                    b.HasKey("ID");
-
-                    b.HasAlternateKey("Title")
-                        .HasName("UQ_p_DocumentType");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.HasIndex("RowStatus");
-
-                    b.ToTable("p_DocumentType");
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Documents.Document_to_GOST", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Document_to_GOST_ID")
-                        .HasDefaultValueSql("newsequentialid()");
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<Guid>("Document_ID");
-
-                    b.Property<Guid>("GOST_ID");
-
-                    b.Property<DateTimeOffset?>("Insert_DTS")
-                        .IsRequired();
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<int?>("RowStatus")
-                        .IsRequired();
-
-                    b.Property<DateTimeOffset?>("Update_DTS")
-                        .IsRequired();
-
-                    b.HasKey("ID");
-
-                    b.HasAlternateKey("Document_ID", "GOST_ID")
-                        .HasName("UQ_p_Document_to_GOST");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("GOST_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.HasIndex("RowStatus");
-
-                    b.ToTable("p_Document_to_GOST");
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Documents.Document_to_PID", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Document_to_PID_ID")
-                        .HasDefaultValueSql("newsequentialid()");
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<Guid>("Document_ID");
-
-                    b.Property<DateTimeOffset?>("Insert_DTS")
-                        .IsRequired();
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<Guid>("PID_ID");
-
-                    b.Property<int?>("RowStatus")
-                        .IsRequired();
-
-                    b.Property<DateTimeOffset?>("Update_DTS")
-                        .IsRequired();
-
-                    b.HasKey("ID");
-
-                    b.HasAlternateKey("Document_ID", "PID_ID")
-                        .HasName("UQ_p_Document_to_PID");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.HasIndex("PID_ID");
-
-                    b.HasIndex("RowStatus");
-
-                    b.ToTable("p_Document_to_PID");
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Documents.Document_to_Status", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Documents.DocumentStatus", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
@@ -480,6 +450,141 @@ namespace SmartQA.Migrations
                     b.ToTable("p_Document_to_Status");
                 });
 
+            modelBuilder.Entity("SmartQA.DB.Models.Documents.DocumentType", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("DocumentType_ID")
+                        .HasDefaultValueSql("newsequentialid()");
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<string>("Description")
+                        .HasColumnName("Description_Rus")
+                        .HasMaxLength(255);
+
+                    b.Property<DateTimeOffset?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnName("DocumentType_Code")
+                        .HasMaxLength(255);
+
+                    b.Property<DateTimeOffset?>("Update_DTS")
+                        .IsRequired();
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
+
+                    b.ToTable("p_DocumentType");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = new Guid("724b20fd-df8d-4b4c-8afc-d54fe796f254"),
+                            Created_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
+                            Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                            RowStatus = 0,
+                            Title = "N/A",
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
+                        });
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Documents.Document_to_GOST", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Document_to_GOST_ID")
+                        .HasDefaultValueSql("newsequentialid()");
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<Guid>("Document_ID");
+
+                    b.Property<Guid>("GOST_ID");
+
+                    b.Property<DateTimeOffset?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<DateTimeOffset?>("Update_DTS")
+                        .IsRequired();
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("GOST_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.HasIndex("RowStatus");
+
+                    b.HasIndex("Document_ID", "GOST_ID")
+                        .IsUnique();
+
+                    b.ToTable("p_Document_to_GOST");
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Documents.Document_to_PID", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Document_to_PID_ID")
+                        .HasDefaultValueSql("newsequentialid()");
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<Guid>("Document_ID");
+
+                    b.Property<DateTimeOffset?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<Guid>("PID_ID");
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<DateTimeOffset?>("Update_DTS")
+                        .IsRequired();
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.HasIndex("PID_ID");
+
+                    b.HasIndex("RowStatus");
+
+                    b.HasIndex("Document_ID", "PID_ID")
+                        .IsUnique();
+
+                    b.ToTable("p_Document_to_PID");
+                });
+
             modelBuilder.Entity("SmartQA.DB.Models.Documents.GOST", b =>
                 {
                     b.Property<Guid>("ID")
@@ -511,10 +616,10 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("GOST_Code")
-                        .HasName("UQ_p_GOST");
-
                     b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("GOST_Code")
+                        .IsUnique();
 
                     b.HasIndex("Marka_ID");
 
@@ -551,9 +656,6 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("GOST_ID", "PID_ID")
-                        .HasName("UQ_p_GOST_to_PID");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
@@ -561,6 +663,9 @@ namespace SmartQA.Migrations
                     b.HasIndex("PID_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("GOST_ID", "PID_ID")
+                        .IsUnique();
 
                     b.ToTable("p_GOST_to_PID");
                 });
@@ -591,9 +696,6 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("GOST_ID", "TitleObject_ID")
-                        .HasName("UQ_p_GOST_to_TitleObject");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
@@ -601,6 +703,9 @@ namespace SmartQA.Migrations
                     b.HasIndex("RowStatus");
 
                     b.HasIndex("TitleObject_ID");
+
+                    b.HasIndex("GOST_ID", "TitleObject_ID")
+                        .IsUnique();
 
                     b.ToTable("p_GOST_to_TitleObject");
                 });
@@ -657,13 +762,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_Marka");
                 });
@@ -765,14 +871,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Draft",
                             Description_Rus = "Черновик",
                             EntityLocked = false,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(639), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Document",
                             Status_Code = "wDd",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(645), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -781,14 +887,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Accepted",
                             Description_Rus = "Действующий",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(648), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Document",
                             Status_Code = "wDa",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(648), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -797,14 +903,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Draft",
                             Description_Rus = "Черновик",
                             EntityLocked = false,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(651), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wSCd",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(651), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -813,14 +919,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Review",
                             Description_Rus = "Проверка",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(651), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wCCuAr",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(651), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -829,14 +935,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "ComentsExists",
                             Description_Rus = "Выданы замечания",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(651), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wSCce",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(654), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -845,14 +951,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "CommentsIncorporation",
                             Description_Rus = "Устранение замечаний",
                             EntityLocked = false,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(654), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wSCci",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(654), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -861,14 +967,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "SecondReview",
                             Description_Rus = "Повторная проверка",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(654), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wCCuAsr",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(654), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -877,14 +983,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Approvement",
                             Description_Rus = "Утверждение",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(654), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wCCua",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(657), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -893,14 +999,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "NotApproved",
                             Description_Rus = "Отказано в утверждении",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(657), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wCCuna",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(657), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -909,14 +1015,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "WaitingSMR",
                             Description_Rus = "Ожидание завершения СМР",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(657), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wCwsmr",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(657), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -925,14 +1031,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Archived",
                             Description_Rus = "Архивирование",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(657), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wCarh",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(660), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -941,14 +1047,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Cancelled",
                             Description_Rus = "Аннулирован",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(660), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "Register",
                             Status_Code = "wCcan",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(660), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -957,14 +1063,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Draft",
                             Description_Rus = "Черновик",
                             EntityLocked = false,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(660), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckList",
                             Status_Code = "wСLd",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(660), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -973,14 +1079,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Review",
                             Description_Rus = "Проверка",
                             EntityLocked = false,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(660), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckList",
                             Status_Code = "wСLr",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(663), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -989,14 +1095,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Completed",
                             Description_Rus = "Проверка завершена",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(663), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckList",
                             Status_Code = "wСLc",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(663), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -1005,14 +1111,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Fixed",
                             Description_Rus = "Замечания устранены",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(663), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckList",
                             Status_Code = "wCLf",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(663), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -1021,14 +1127,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Draft",
                             Description_Rus = "Черновик",
                             EntityLocked = false,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(666), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckItem",
                             Status_Code = "wCLId",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(666), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -1037,14 +1143,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Issued",
                             Description_Rus = "Выпущено",
                             EntityLocked = false,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(666), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckItem",
                             Status_Code = "wCLIss",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(666), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -1053,14 +1159,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Fixed",
                             Description_Rus = "Исправлено",
                             EntityLocked = false,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(666), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckItem",
                             Status_Code = "wCLIf",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(666), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -1069,14 +1175,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Approved",
                             Description_Rus = "Утверждено",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(669), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckItem",
                             Status_Code = "wCLIa",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(669), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         },
                         new
                         {
@@ -1085,14 +1191,14 @@ namespace SmartQA.Migrations
                             Description_Eng = "Cancelled",
                             Description_Rus = "Отменено",
                             EntityLocked = true,
-                            Insert_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(669), new TimeSpan(0, 0, 0, 0, 0)),
+                            Insert_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0)),
                             Modified_User_ID = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
                             ReportColor = false,
                             ReportOrder = 0,
                             RowStatus = 0,
                             StatusEntity = "CheckItem",
                             Status_Code = "wCLIc",
-                            Update_DTS = new DateTimeOffset(new DateTime(2018, 12, 29, 9, 24, 14, 760, DateTimeKind.Unspecified).AddTicks(669), new TimeSpan(0, 0, 0, 0, 0))
+                            Update_DTS = new DateTimeOffset(new DateTime(1900, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 5, 0, 0, 0))
                         });
                 });
 
@@ -1170,60 +1276,16 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_TitleObject");
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.People.Division", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Division_ID")
-                        .HasDefaultValueSql("newsequentialid()");
-
-                    b.Property<Guid?>("Contragent_ID");
-
-                    b.Property<Guid>("Created_User_ID");
-
-                    b.Property<string>("Division_Code")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.Property<string>("Division_Name")
-                        .HasMaxLength(255);
-
-                    b.Property<DateTimeOffset?>("Insert_DTS")
-                        .IsRequired();
-
-                    b.Property<Guid>("Modified_User_ID");
-
-                    b.Property<int?>("RowStatus")
-                        .IsRequired();
-
-                    b.Property<DateTimeOffset?>("Update_DTS")
-                        .IsRequired();
-
-                    b.HasKey("ID");
-
-                    b.HasAlternateKey("Division_Code")
-                        .HasName("UQ_p_Division");
-
-                    b.HasIndex("Contragent_ID");
-
-                    b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Modified_User_ID");
-
-                    b.HasIndex("RowStatus");
-
-                    b.ToTable("p_Division");
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.People.Employee", b =>
@@ -1260,14 +1322,16 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Employee_Code")
-                        .HasName("UQ_p_Employee");
-
-                    b.HasIndex("AppUser_ID");
+                    b.HasIndex("AppUser_ID")
+                        .IsUnique()
+                        .HasFilter("[AppUser_ID] IS NOT NULL");
 
                     b.HasIndex("Contragent_ID");
 
                     b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Employee_Code")
+                        .IsUnique();
 
                     b.HasIndex("Modified_User_ID");
 
@@ -1817,13 +1881,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_AccessToPIStaffFunction");
                 });
@@ -1859,13 +1924,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_AccessToPIVoltageRange");
                 });
@@ -1904,13 +1970,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_AttCenterNaks");
                 });
@@ -1946,13 +2013,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_AuthToSignInspActsForWSUN");
                 });
@@ -1993,9 +2061,6 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title")
-                        .HasName("UQ_p_Contragent");
-
                     b.HasIndex("ContragentRole_ID");
 
                     b.HasIndex("Created_User_ID");
@@ -2003,6 +2068,9 @@ namespace SmartQA.Migrations
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_Contragent");
                 });
@@ -2038,13 +2106,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_ContragentRole");
                 });
@@ -2080,7 +2149,48 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
+
+                    b.ToTable("p_DetailsType");
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.Division", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Division_ID")
+                        .HasDefaultValueSql("newsequentialid()");
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<string>("Description")
+                        .HasColumnName("Description_Rus")
+                        .HasMaxLength(255);
+
+                    b.Property<DateTimeOffset?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnName("Division_Code")
+                        .HasMaxLength(255);
+
+                    b.Property<DateTimeOffset?>("Update_DTS")
+                        .IsRequired();
+
+                    b.HasKey("ID");
 
                     b.HasIndex("Created_User_ID");
 
@@ -2088,7 +2198,10 @@ namespace SmartQA.Migrations
 
                     b.HasIndex("RowStatus");
 
-                    b.ToTable("p_DetailsType");
+                    b.HasIndex("Title")
+                        .IsUnique();
+
+                    b.ToTable("p_Division");
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Reftables.ElectricalSafetyAbilitation", b =>
@@ -2122,13 +2235,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_ElectricalSafetyAbilitation");
                 });
@@ -2164,13 +2278,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_HIFGroup");
                 });
@@ -2212,13 +2327,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_InspectionSubject");
                 });
@@ -2254,13 +2370,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_InspectionTechnique");
                 });
@@ -2296,13 +2413,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_JointKind");
                 });
@@ -2338,7 +2456,48 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
+
+                    b.ToTable("p_JointType");
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.Level", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Level_ID")
+                        .HasDefaultValueSql("newsequentialid()");
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<string>("Description")
+                        .HasColumnName("Description_Rus")
+                        .HasMaxLength(500);
+
+                    b.Property<DateTimeOffset?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnName("Level_Code")
+                        .HasMaxLength(255);
+
+                    b.Property<DateTimeOffset?>("Update_DTS")
+                        .IsRequired();
+
+                    b.HasKey("ID");
 
                     b.HasIndex("Created_User_ID");
 
@@ -2346,7 +2505,10 @@ namespace SmartQA.Migrations
 
                     b.HasIndex("RowStatus");
 
-                    b.ToTable("p_JointType");
+                    b.HasIndex("Title")
+                        .IsUnique();
+
+                    b.ToTable("p_Level");
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Reftables.Position", b =>
@@ -2361,11 +2523,6 @@ namespace SmartQA.Migrations
                     b.Property<string>("Description")
                         .HasColumnName("Description_Rus")
                         .HasMaxLength(255);
-
-                    b.Property<string>("Description_Eng")
-                        .HasMaxLength(255);
-
-                    b.Property<Guid?>("Division_ID");
 
                     b.Property<DateTimeOffset?>("Insert_DTS")
                         .IsRequired();
@@ -2385,15 +2542,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
-
-                    b.HasIndex("Division_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_Position");
                 });
@@ -2435,13 +2591,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_QualificationField");
                 });
@@ -2477,13 +2634,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_QualificationLevel");
                 });
@@ -2519,13 +2677,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_Responsibility");
                 });
@@ -2561,13 +2720,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_SeamsType");
                 });
@@ -2603,7 +2763,48 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
+
+                    b.ToTable("p_ShieldingGas");
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.StaffFunction", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("StaffFunction_ID")
+                        .HasDefaultValueSql("newsequentialid()");
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<string>("Description")
+                        .HasColumnName("Description_Rus")
+                        .HasMaxLength(500);
+
+                    b.Property<DateTimeOffset?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnName("StaffFunction_Code")
+                        .HasMaxLength(255);
+
+                    b.Property<DateTimeOffset?>("Update_DTS")
+                        .IsRequired();
+
+                    b.HasKey("ID");
 
                     b.HasIndex("Created_User_ID");
 
@@ -2611,7 +2812,10 @@ namespace SmartQA.Migrations
 
                     b.HasIndex("RowStatus");
 
-                    b.ToTable("p_ShieldingGas");
+                    b.HasIndex("Title")
+                        .IsUnique();
+
+                    b.ToTable("p_StaffFunction");
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Reftables.TestMethod", b =>
@@ -2651,13 +2855,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_TestMethod");
                 });
@@ -2696,7 +2901,48 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
+                    b.HasIndex("Created_User_ID");
+
+                    b.HasIndex("Modified_User_ID");
+
+                    b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
+
+                    b.ToTable("p_TestTypeRef");
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.VoltageRange", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("VoltageRange_ID")
+                        .HasDefaultValueSql("newsequentialid()");
+
+                    b.Property<Guid>("Created_User_ID");
+
+                    b.Property<string>("Description")
+                        .HasColumnName("Description_Rus")
+                        .HasMaxLength(500);
+
+                    b.Property<DateTimeOffset?>("Insert_DTS")
+                        .IsRequired();
+
+                    b.Property<Guid>("Modified_User_ID");
+
+                    b.Property<int?>("RowStatus")
+                        .IsRequired();
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnName("VoltageRange_Code")
+                        .HasMaxLength(255);
+
+                    b.Property<DateTimeOffset?>("Update_DTS")
+                        .IsRequired();
+
+                    b.HasKey("ID");
 
                     b.HasIndex("Created_User_ID");
 
@@ -2704,7 +2950,10 @@ namespace SmartQA.Migrations
 
                     b.HasIndex("RowStatus");
 
-                    b.ToTable("p_TestTypeRef");
+                    b.HasIndex("Title")
+                        .IsUnique();
+
+                    b.ToTable("p_VoltageRange");
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Reftables.WeldGOST14098", b =>
@@ -2738,13 +2987,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_WeldGOST14098");
                 });
@@ -2780,13 +3030,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_WeldMaterial");
                 });
@@ -2822,13 +3073,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_WeldMaterialGroup");
                 });
@@ -2864,13 +3116,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_WeldPasses");
                 });
@@ -2906,13 +3159,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_WeldPosition");
                 });
@@ -2948,13 +3202,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_WeldType");
                 });
@@ -2990,13 +3245,14 @@ namespace SmartQA.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasAlternateKey("Title");
-
                     b.HasIndex("Created_User_ID");
 
                     b.HasIndex("Modified_User_ID");
 
                     b.HasIndex("RowStatus");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("p_WeldingEquipmentAutomationLevel");
                 });
@@ -3024,7 +3280,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "AppUser")
                         .WithMany("AppUser_to_RoleSet")
                         .HasForeignKey("AppUser_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -3037,9 +3293,9 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.Role", "Role")
-                        .WithMany("AppUser_to_Roles")
+                        .WithMany("AppUser_to_RoleSet")
                         .HasForeignKey("Role_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Common.RowStatus")
                         .WithMany()
@@ -3048,6 +3304,24 @@ namespace SmartQA.Migrations
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Auth.Role", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
+                        .WithMany()
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Common.RowStatus")
+                        .WithMany()
+                        .HasForeignKey("RowStatus")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Common.Parameter", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -3075,7 +3349,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.DocumentType", "DocumentType")
                         .WithMany()
                         .HasForeignKey("DocumentType_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3084,7 +3358,8 @@ namespace SmartQA.Migrations
 
                     b.HasOne("SmartQA.DB.Models.People.Employee", "Resp_Employee")
                         .WithMany()
-                        .HasForeignKey("Resp_Employee_ID");
+                        .HasForeignKey("Resp_Employee_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Documents.Document", "Root")
                         .WithMany()
@@ -3112,6 +3387,39 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Common.RowStatus")
                         .WithMany()
                         .HasForeignKey("RowStatus")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Documents.DocumentStatus", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Documents.Document", "Document")
+                        .WithMany("DocumentStatusSet")
+                        .HasForeignKey("Document_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
+                        .WithMany()
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Documents.DocumentStatus", "PreviousStatus")
+                        .WithOne("NextStatus")
+                        .HasForeignKey("SmartQA.DB.Models.Documents.DocumentStatus", "Parent_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Common.RowStatus")
+                        .WithMany()
+                        .HasForeignKey("RowStatus")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Documents.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("Status_ID")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
@@ -3143,12 +3451,12 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.Document", "Document")
                         .WithMany()
                         .HasForeignKey("Document_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Documents.GOST", "GOST")
                         .WithMany()
                         .HasForeignKey("GOST_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3171,7 +3479,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.Document", "Document")
                         .WithMany()
                         .HasForeignKey("Document_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3181,45 +3489,12 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.PID", "PID")
                         .WithMany()
                         .HasForeignKey("PID_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SmartQA.DB.Models.Common.RowStatus")
-                        .WithMany()
-                        .HasForeignKey("RowStatus")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("SmartQA.DB.Models.Documents.Document_to_Status", b =>
-                {
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
-                        .WithMany()
-                        .HasForeignKey("Created_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Documents.Document", "Document")
-                        .WithMany()
-                        .HasForeignKey("Document_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
-                        .WithMany()
-                        .HasForeignKey("Modified_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Documents.Document_to_Status", "Parent")
-                        .WithOne()
-                        .HasForeignKey("SmartQA.DB.Models.Documents.Document_to_Status", "Parent_ID")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Common.RowStatus")
                         .WithMany()
                         .HasForeignKey("RowStatus")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Documents.Status", "Status")
-                        .WithMany()
-                        .HasForeignKey("Status_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Documents.GOST", b =>
@@ -3231,7 +3506,8 @@ namespace SmartQA.Migrations
 
                     b.HasOne("SmartQA.DB.Models.Documents.Marka", "Marka")
                         .WithMany()
-                        .HasForeignKey("Marka_ID");
+                        .HasForeignKey("Marka_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3254,7 +3530,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.GOST", "GOST")
                         .WithMany()
                         .HasForeignKey("GOST_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3264,7 +3540,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.PID", "PID")
                         .WithMany()
                         .HasForeignKey("PID_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Common.RowStatus")
                         .WithMany()
@@ -3282,7 +3558,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.GOST", "GOST")
                         .WithMany()
                         .HasForeignKey("GOST_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3297,7 +3573,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Documents.TitleObject", "TitleObject")
                         .WithMany()
                         .HasForeignKey("TitleObject_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Documents.Marka", b =>
@@ -3372,37 +3648,17 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.People.Division", b =>
-                {
-                    b.HasOne("SmartQA.DB.Models.Reftables.Contragent", "Contragent")
-                        .WithMany()
-                        .HasForeignKey("Contragent_ID");
-
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
-                        .WithMany()
-                        .HasForeignKey("Created_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
-                        .WithMany()
-                        .HasForeignKey("Modified_User_ID")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SmartQA.DB.Models.Common.RowStatus")
-                        .WithMany()
-                        .HasForeignKey("RowStatus")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
             modelBuilder.Entity("SmartQA.DB.Models.People.Employee", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUser_ID");
+                        .WithOne("Employee")
+                        .HasForeignKey("SmartQA.DB.Models.People.Employee", "AppUser_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Reftables.Contragent", "Contragent")
                         .WithMany()
-                        .HasForeignKey("Contragent_ID");
+                        .HasForeignKey("Contragent_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -3417,12 +3673,12 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.People.Person", "Person")
                         .WithMany("Employees")
                         .HasForeignKey("Person_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Reftables.Position", "Position")
                         .WithMany()
                         .HasForeignKey("Position_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Common.RowStatus")
                         .WithMany()
@@ -3462,12 +3718,13 @@ namespace SmartQA.Migrations
 
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaks", "ParentDocumentNaks")
                         .WithMany("Inserts")
-                        .HasForeignKey("ParentDocumentNaks_ID");
+                        .HasForeignKey("ParentDocumentNaks_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.People.Person", "Person")
                         .WithMany()
                         .HasForeignKey("Person_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Common.RowStatus")
                         .WithMany()
@@ -3477,7 +3734,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Reftables.WeldType", "WeldType")
                         .WithMany()
                         .HasForeignKey("WeldType_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", b =>
@@ -3490,7 +3747,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaks", "DocumentNaks")
                         .WithMany("DocumentNaksAttestSet")
                         .HasForeignKey("DocumentNaks_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3505,7 +3762,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Reftables.WeldingEquipmentAutomationLevel", "WeldingEquipmentAutomationLevel")
                         .WithMany()
                         .HasForeignKey("WeldingEquipmentAutomationLevel_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest_to_DetailsType", b =>
@@ -3518,12 +3775,12 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Reftables.DetailsType", "DetailsType")
                         .WithMany()
                         .HasForeignKey("DetailsType_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", "DocumentNaksAttest")
                         .WithMany("DocumentNaksAttest_to_DetailsTypeSet")
                         .HasForeignKey("DocumentNaksAttest_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3546,12 +3803,12 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", "DocumentNaksAttest")
                         .WithMany("DocumentNaksAttest_to_JointKindSet")
                         .HasForeignKey("DocumentNaksAttest_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Reftables.JointKind", "JointKind")
                         .WithMany()
                         .HasForeignKey("JointKind_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3574,12 +3831,12 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", "DocumentNaksAttest")
                         .WithMany("DocumentNaksAttest_to_JointTypeSet")
                         .HasForeignKey("DocumentNaksAttest_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Reftables.JointType", "JointType")
                         .WithMany()
                         .HasForeignKey("JointType_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3602,7 +3859,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", "DocumentNaksAttest")
                         .WithMany("DocumentNaksAttest_to_SeamsTypeSet")
                         .HasForeignKey("DocumentNaksAttest_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3617,7 +3874,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Reftables.SeamsType", "SeamsType")
                         .WithMany()
                         .HasForeignKey("SeamsType_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest_to_WeldGOST14098", b =>
@@ -3630,7 +3887,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", "DocumentNaksAttest")
                         .WithMany("DocumentNaksAttest_to_WeldGOST14098Set")
                         .HasForeignKey("DocumentNaksAttest_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3645,7 +3902,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Reftables.WeldGOST14098", "WeldGOST14098")
                         .WithMany()
                         .HasForeignKey("WeldGOST14098_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest_to_WeldMaterial", b =>
@@ -3658,7 +3915,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", "DocumentNaksAttest")
                         .WithMany("DocumentNaksAttest_to_WeldMaterialSet")
                         .HasForeignKey("DocumentNaksAttest_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3673,7 +3930,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Reftables.WeldMaterial", "WeldMaterial")
                         .WithMany()
                         .HasForeignKey("WeldMaterial_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest_to_WeldMaterialGroup", b =>
@@ -3686,7 +3943,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", "DocumentNaksAttest")
                         .WithMany("DocumentNaksAttest_to_WeldMaterialGroupSet")
                         .HasForeignKey("DocumentNaksAttest_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3701,7 +3958,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Reftables.WeldMaterialGroup", "WeldMaterialGroup")
                         .WithMany()
                         .HasForeignKey("WeldMaterialGroup_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest_to_WeldPosition", b =>
@@ -3714,7 +3971,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaksAttest", "DocumentNaksAttest")
                         .WithMany("DocumentNaksAttest_to_WeldPositionSet")
                         .HasForeignKey("DocumentNaksAttest_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3729,7 +3986,7 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.Reftables.WeldPosition", "WeldPosition")
                         .WithMany()
                         .HasForeignKey("WeldPosition_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.PermissionDocuments.DocumentNaks_to_HIFGroup", b =>
@@ -3742,12 +3999,12 @@ namespace SmartQA.Migrations
                     b.HasOne("SmartQA.DB.Models.PermissionDocuments.DocumentNaks", "DocumentNaks")
                         .WithMany("DocumentNaks_to_HIFGroupSet")
                         .HasForeignKey("DocumentNaks_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Reftables.HIFGroup", "HIFGroup")
                         .WithMany()
                         .HasForeignKey("HIFGroup_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -3836,7 +4093,8 @@ namespace SmartQA.Migrations
                 {
                     b.HasOne("SmartQA.DB.Models.Reftables.ContragentRole", "ContragentRole")
                         .WithMany()
-                        .HasForeignKey("ContragentRole_ID");
+                        .HasForeignKey("ContragentRole_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -3873,6 +4131,24 @@ namespace SmartQA.Migrations
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Reftables.DetailsType", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
+                        .WithMany()
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Common.RowStatus")
+                        .WithMany()
+                        .HasForeignKey("RowStatus")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.Division", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
@@ -3998,16 +4274,30 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("SmartQA.DB.Models.Reftables.Position", b =>
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.Level", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()
                         .HasForeignKey("Created_User_ID")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("SmartQA.DB.Models.People.Division", "Division")
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
-                        .HasForeignKey("Division_ID");
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Common.RowStatus")
+                        .WithMany()
+                        .HasForeignKey("RowStatus")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.Position", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
                         .WithMany()
@@ -4110,6 +4400,24 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.StaffFunction", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
+                        .WithMany()
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Common.RowStatus")
+                        .WithMany()
+                        .HasForeignKey("RowStatus")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("SmartQA.DB.Models.Reftables.TestMethod", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
@@ -4129,6 +4437,24 @@ namespace SmartQA.Migrations
                 });
 
             modelBuilder.Entity("SmartQA.DB.Models.Reftables.TestTypeRef", b =>
+                {
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
+                        .WithMany()
+                        .HasForeignKey("Created_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Modified_User")
+                        .WithMany()
+                        .HasForeignKey("Modified_User_ID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartQA.DB.Models.Common.RowStatus")
+                        .WithMany()
+                        .HasForeignKey("RowStatus")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("SmartQA.DB.Models.Reftables.VoltageRange", b =>
                 {
                     b.HasOne("SmartQA.DB.Models.Auth.AppUser", "Created_User")
                         .WithMany()

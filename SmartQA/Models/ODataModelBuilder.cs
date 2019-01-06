@@ -8,6 +8,8 @@ using SmartQA.DB.Models.Reftables;
 using SmartQA.DB.Models.Shared;
 using SmartQA.Models.Forms;
 using System;
+using SmartQA.DB.Models.Documents;
+using SmartQA.Models;
 
 namespace SmartQA.DB
 {
@@ -24,7 +26,7 @@ namespace SmartQA.DB
             var conf = entitySet
                 .EntityType
                 .Filter()
-                .Count()
+                .Count()                
                 .Expand()
                 .OrderBy()
                 .Page()
@@ -48,17 +50,47 @@ namespace SmartQA.DB
             var builder = new ODataConventionModelBuilder(serviceProvider);
 
             BuildCommon<Employee>(builder);
-            BuildCommon<Person>(builder);
+            var person = BuildCommon<Person>(builder);
+            person.Property(p => p.FullName);                
+                
             BuildCommon<Contragent>(builder);
-            BuildCommon<Position>(builder);
-
+            
             var user = BuildCommon<AppUser>(builder);
-            user.Ignore(u => u.User_Password);
+            user.Ignore(u => u.User_Password);            
             user.CollectionProperty(u => u.Role_IDs);
             user.ContainsMany(u => u.RoleSet);
             
-            var role = BuildCommon<Role>(builder);                        
+            var role = BuildCommon<Role>(builder);
 
+            BuildCommon<Status>(builder);
+
+            var document = BuildCommon<Document>(builder);
+            document.Ignore(d => d.Issue_Date_DT);
+            document.Property(d => d.Status_ID);
+            document.HasOptional(d => d.Status);
+            document.CollectionProperty(d => d.GOST_IDs);
+            document.CollectionProperty(d => d.PID_IDs);
+            document.ContainsMany(d => d.GOSTSet);
+            document.ContainsMany(d => d.PIDSet);
+                        
+            var documentUI = builder.EntitySet<DocumentUI>("DocumentUI")
+                .EntityType
+                .Filter()
+                .Count()                
+                .Expand()
+                .OrderBy()
+                .Page()
+                .Select();
+            
+            documentUI.Expand(SelectExpandType.Automatic,                
+                "DocumentType",
+                "Status"
+            );           
+            
+            BuildCommon<DocumentStatus>(builder);
+            BuildCommon<GOST>(builder);
+            BuildCommon<PID>(builder);
+            
             var naks = BuildCommon<DocumentNaks>(builder);
             naks.CollectionProperty(x => x.HIFGroup_IDs);
 

@@ -1,25 +1,34 @@
 ﻿<template>
-    <div>        
+    <div class="form-container">
         <dx-popup ref="editPopup"
                   :visible="false"
                   :show-title="false"
                   :width="800"
                   :height="600"
-                  :toolbar-items="toolbarItems"
-                  @hiding="onEditPopupHiding">            
+                  :toolbar-items="popupToolbarItems"
+                  @hiding="onEditPopupHiding">
 
             <dx-scroll-view>
-                <div>                    
-                    <entity-form ref="naksForm"
-                                 :formItems="naksFormItems"
-                                 :formSettings="editRequests"
-                                 :commandRequests="formCommands"
-                                 :dataSource="dataSource"
-                                 v-stream:state="formStateEvents$" />
-
+                <div>
+                    <form v-on:submit.prevent="onSubmitButtonClick">
+                        <dx-form ref="form"
+                                 :form-data="formData"
+                                 :items="formItems" />
+            
+                    </form>
+                    
                     <naks-attest-list v-if="modelKey"
                                       :model-key="modelKey" />
-
+    
+                    <dx-load-panel :position="{ of: '.form-container' }"
+                           :visible="loading"
+                           :delay="100"
+                           :show-indicator="true"
+                           :show-pane="true"
+                           :shading="true"
+                           shading-color="rgba(0,0,0,0.2)"
+                           :close-on-outside-click="false"
+                    />
                 </div>
             </dx-scroll-view>
 
@@ -28,74 +37,88 @@
 </template>
 
 <script>
-    import { Subject } from 'rxjs';
-    import { pluck, map, first, filter } from 'rxjs/operators';
+    import {filter, first} from 'rxjs/operators';
 
-    import { DxScrollView, DxPopup } from 'devextreme-vue';
+    import {DxForm, DxPopup, DxScrollView} from 'devextreme-vue';
     import DataSource from 'devextreme/data/data_source';
     import CustomStore from 'devextreme/data/custom_store';
-    import { DxLoadPanel } from 'devextreme-vue/load-panel';    
+    import {DxLoadPanel} from 'devextreme-vue/load-panel';
 
     import NaksAttestList from './naks-attest-list';
-    import { dataSourceConfs } from './data.js';
-    
-    import EntityForm from 'components/forms/entity-form';
-    import { reftableFormItem } from 'components/forms/reftables';
-    import { reftableDatasourceConf } from 'components/reftables/data'; 
-    
+
+    import BaseEntityEditor from 'components/forms/base-entity-editor';
+    import {reftableFormItem} from 'components/forms/reftables';
+    import {reftableDatasourceConf} from 'components/reftables/data';
+
+    import context from 'api/odata-context';
+
     export default {
-        components: {        
+        name: 'NaksEdit',
+        extends: BaseEntityEditor,
+        components: {
+            BaseEntityEditor,
             DxPopup,            
             DataSource,
             DxScrollView,
-            EntityForm,
+            DxLoadPanel,
+            DxForm,
             NaksAttestList
         },
-        props: {            
-            editRequests: Object,            
-        },
-        subscriptions() {
-            this.formStateEvents$ = new Subject();
-
-            this.$subscribeTo(this.editRequests, req => {
-                const popup = this.$refs.editPopup;
-                if (req !== null) {
-                    if (popup) popup.instance.show();               
-                }
-            });
-
-            this.formStateObs = this.formStateEvents$.pipe(
-                map(e => e.event.msg)
-            );
-
-            const modelKeyObs = this.formStateObs.pipe(
-                pluck('modelKey')
-            );
-
-            return {
-                isChild: this.editRequests.pipe(
-                    map(x => x ? x.isChild : false)
-                ),
-                modelKey: modelKeyObs,                
-                toolbarItems: modelKeyObs.pipe(
-                    map(key => key == null ? 
-                        [ 
-                            // toolbar items for new naks
-                            this.toolbarItemChoices.toolbarTitle,
-                            this.toolbarItemChoices.closeButton,
-                            this.toolbarItemChoices.saveButton
-                        ] :
-                        [
-                            // toolbar items for existing naks
-                            this.toolbarItemChoices.toolbarTitle,
-                            this.toolbarItemChoices.closeButton,
-                            this.toolbarItemChoices.saveAndCloseButton
-                        ]
-                    )
-                )
+        props: {
+            naksIsChild: {
+                type: Boolean,
+                required: true
             }
         },
-        data: function () {
+        mounted() {
+            this.$subscribeTo(
+                this.state.pipe(filter(s => s.state === 'initializing')),
+                s => this.$refs.editPopup.instance.show()
+            )
+        },
+        computed: {
+            popupToolbarItems () {
+                let text;
+                if (!this.modelKey && !this.naksIsChild) {
+                    text = "Новое удостоверение НАКС";
+                } else if (!this.modelKey && this.naksIsChild) {
+                    text = "Новый вкладыш";
+                } else if (!this.naksIsChild) {
+                    text = "Удостоверение НАКС";
+                } else {
+                    text = "Вкладыш";
+                }
+                
+                let toolbarTitle = {
+                    toolbar: 'top',
+                    location: 'before',
+                    template: '<h5>' + text + '</h5>'
+                };
+                
+                return this.modelKey ?
+                    [
+                        // toolbar items for existing naks
+                        toolbarTitle,
+                        this.toolbarItemChoices.closeButton,
+                        this.toolbarItemChoices.saveAndCloseButton
+                    ] :
+                    [
+                        // toolbar items for new naks
+                        toolbarTitle,
+                        this.toolbarItemChoices.closeButton,
+                        this.toolbarItemChoices.saveButton
+                    ]
+            }
+        },
+        watch: {
+            modelKey: {
+                immediate: true,
+                handler(val) {
+                  
+                }
+            }
+        },
+        data() {
             
             // custom autocomplete source for Naks Number field
             const attCenterNaksDs = new CustomStore({
@@ -123,10 +146,10 @@
                 }
             });
 
-            return {                                
-                formCommands: new Subject(),
-                dataSource: dataSourceConfs.documentNaksDetailed,
-                naksFormItems: [
+            return {
+                dataStore: context.DocumentNaks,
+                dataStoreLoadOptions: { expand: 'DocumentNaksAttestSet' },
+                formItems: [
                     {
                         label: { text: 'Номер' },
                         dataField: 'Number',
@@ -138,11 +161,11 @@
                             minSearchLength: 0,
                             maxItemCount: 100,
                             
-                            onFocusIn: function (e) {
+                            onFocusIn(e) {
                                 if (!e.component.field().value) e.component.open();
                             },
                             selectionChanged: function(e) {
-                                console.log(e);
+                                
                             }
                         },
                         isRequired: true
@@ -180,11 +203,6 @@
                     reftableFormItem('HIFGroup', 'Группы технических устройств ОПО', true),
                 ],                
                 toolbarItemChoices: {
-                    toolbarTitle: {
-                        toolbar: 'top',
-                        location: 'before',
-                        template: this.getToolbarTitle
-                    },
                     closeButton: {
                         toolbar: 'bottom',
                         widget: "dxButton",
@@ -218,19 +236,6 @@
             }
         },
         methods: {
-            getToolbarTitle() {
-                let text;
-                if (!this.modelKey && !this.isChild) {
-                    text = "Новое удостоверение НАКС";
-                } else if (!this.modelKey && this.isChild) {
-                    text = "Новый вкладыш";
-                } else if (!this.isChild) {
-                    text = "Удостоверение НАКС";
-                } else {
-                    text = "Вкладыш";
-                }
-                return '<h5>' + text + '</h5>';
-            },
             onEditPopupHiding() {
                 this.$emit('editingDone');
             },      
@@ -241,12 +246,12 @@
                 this.close();
             },
             onSaveButton() {
-                this.formCommands.next({ command: 'submit' });
+                this.submit();
             },
             onSaveAndCloseButton() {
-                this.formCommands.next({ command: 'submit' });
+                this.submit();
                 this.$subscribeTo(
-                    this.formStateObs.pipe(first(s => !s.isProgress)),
+                    this.state.pipe(first(s => !s.isProgress)),
                     s => { if (s.state === 'success') this.close() }
                 );
             }

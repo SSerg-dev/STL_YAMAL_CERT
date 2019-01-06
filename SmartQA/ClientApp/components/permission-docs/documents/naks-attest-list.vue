@@ -5,17 +5,17 @@
             <tr class="table-secondary">
                 <th scope="row">
                     Области аттестации
-                    <button type="button" class="btn btn-sm btn-light">
-                        <font-awesome-icon icon="plus"
-                                           @click="onNewButtonClick" />
+                    <button type="button" class="btn btn-sm btn-light"
+                            @click="onNewButtonClick">
+                        <font-awesome-icon icon="plus" />
                     </button>
                 </th>
                 <th scope="col" v-for="(item, index) in model.DocumentNaksAttestSet">
                     <span>
-                        {{ ++index }}
+                        {{ index + 1 }}
                     </span>
                     <div class="float-right">
-                        <button type="button" class="btn btn-sm btn-light" @click="onEditButtonClick($event, item.ID.toString(), index)">
+                        <button type="button" class="btn btn-sm btn-light" @click="onEditButtonClick($event, item.ID.toString(), index + 1)">
                             <font-awesome-icon icon="edit" />
                         </button>
                         <button type="button" class="btn btn-sm btn-light" @click="onDeleteButtonClick($event, item.ID.toString())">
@@ -141,22 +141,24 @@
 
         </table>
 
-        <naks-attest-edit :editRequests="editRequests"
+        <naks-attest-edit ref="editor"
+                          :editor-settings="editorSettings"
+                          :naks-attest-index="editorIndex"
                           @editingDone="onEditingDone"/>
     </div>
 </template>
 
 
-<script>    
-    import { Subject } from 'rxjs';
-    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-    import { DxButton } from 'devextreme-vue';
-    import { confirm } from 'devextreme/ui/dialog';
-    
-    import DxToolbar from 'devextreme-vue/toolbar'; 
+<script>
+    import {Subject} from 'rxjs';
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+    import {DxButton} from 'devextreme-vue';
+    import {confirm} from 'devextreme/ui/dialog';
+
+    import DxToolbar from 'devextreme-vue/toolbar';
     import DataSource from 'devextreme/data/data_source';
     import DxPopup from 'devextreme-vue/popup';
-    import { dataSourceConfs } from './data.js';
+    import {dataSourceConfs} from './data.js';
 
     import NaksAttestEdit from './naks-attest-edit';
 
@@ -184,7 +186,9 @@
                 loading: false,
                 model: null,
                 error: null,                
-                dataSource: dataSourceConfs.documentNaksDetailed,              
+                dataSource: dataSourceConfs.documentNaksDetailed,
+                editorSettings: {},
+                editorIndex: 0,
                 toolbarItems: [
                     {
                         location: 'before',
@@ -199,20 +203,6 @@
                             }
                         }
                     }                    
-                ],
-                editPopupToolbarItems: [
-                    {
-                        toolbar: 'bottom',
-                        widget: "dxButton",
-                        location: "after",
-                        options: {
-                            text: "Submit",
-                            type: "success",
-                            onClick: () => {
-                                this.$refs.editForm.submitForm();
-                            }
-                        }
-                    }
                 ]
             }
         },
@@ -225,8 +215,8 @@
                     return;
                 }
                 this.loading = true;
-                var component = this;
-                var source = new DataSource(this.dataSource);
+                let component = this;
+                let source = new DataSource(this.dataSource);
                 source.filter([source.key(), "=", new String(component.modelKey.toString())]);
 
                 source
@@ -244,19 +234,22 @@
                 this.loadModel();
             },
             onNewButtonClick(event) {
-                this.editRequests.next({
+                this.editorSettings = {
                     modelKey: null,
                     formDataInitial: {
                         DocumentNaks_ID: this.modelKey,
                     }
-                });
+                };
+
+                this.editorIndex = null
             },
             onEditButtonClick(event, modelId, index) {
-                this.editRequests.next({
+                this.editorSettings = {
                     modelKey: modelId,
-                    index: index,
-                    formDataInitial: Object()
-                });
+                    formDataInitial: {}
+                };
+                
+                this.editorIndex = index;                 
             },
             onDeleteButtonClick(event, modelId) {
                 var component = this;

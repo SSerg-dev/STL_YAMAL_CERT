@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartQA.Auth;
 using SmartQA.DB;
+using SmartQA.DB.Models.Documents;
 using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.PermissionDocuments;
 using SmartQA.DB.Models.Reftables;
@@ -165,17 +166,38 @@ namespace SmartQA.Controllers.Reftables
         }
 
         [EnableQuery]
-        public new IQueryable<Contragent> Get() => _context.Contragent.OrderBy(x => x.Description).AsQueryable();
+        public new IQueryable<Contragent> Get() => _context.Set<Contragent>().OrderBy(x => x.Description).AsQueryable();
     }
     public class PositionController : ReftableBaseController<Position>
     {
-        private DataContext _context;
         public PositionController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+    public class DivisionController : ReftableBaseController<Division>
+    {
+        public DivisionController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+    public class StaffFunctionController : ReftableBaseController<StaffFunction>
+    {
+        public StaffFunctionController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+    public class VoltageRangeController : ReftableBaseController<VoltageRange>
+    {
+        public VoltageRangeController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+    public class LevelController : ReftableBaseController<Level>
+    {
+        public LevelController(DataContext context, AppUserManager userManager) : base(context, userManager)
+        { }
+    }
+    
+    public class DocumentTypeController : ReftableBaseController<DocumentType>
+    {
+        public DocumentTypeController(DataContext context, AppUserManager userManager) : base(context, userManager)
         {
-            _context = context;
         }
-
-        [EnableQuery]
-        public new IQueryable<Position> Get() => _context.Position.OrderBy(x => x.Description).AsQueryable();
     }
 }

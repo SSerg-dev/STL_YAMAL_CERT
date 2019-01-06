@@ -9,10 +9,14 @@
                           :dataSource="dataSource">
     
                 <dx-column
-                        caption="User name"
+                        caption="Имя пользователя"
                         :allow-filtering="true"
                         :allow-search="true"
                         data-field="AppUser_Code" />
+                
+                <dx-column
+                        caption="Сотрудник"
+                        data-field="Employee.Person.FullName" />
                 
                 <dx-column caption="Roles"
                         cell-template="roles-cell" />
@@ -45,46 +49,36 @@
             </dx-data-grid>
         </div>
         <div class="col py-5" v-show="editing">
-
-                
-            <entity-form ref="userForm"
-                         :formItems="formItems"
-                         :formSettings="editRequests"
-                         :commandRequests="formCommands"
-                         :dataSource="dataSource"
-                         v-stream:state="formStateEvents" />
-            <div class="float-right mt-3">
-                <dx-button
-                        text="Cancel" 
-                        @click="onCancelButtonClick"
-                />
-
-                <dx-button
-                        type="success"
-                        @click="onSubmitButtonClick"
-                        text="Save" 
-                />
-                
-            </div>
+             
+            <base-entity-editor 
+                    ref="editor"
+                    :store="dataSource.store"
+                    :store-load-options="{ expand: ['RoleSet', 'Employee'] }"
+                    :items="editorFormItems"
+                    :editor-settings="editorSettings"
+                    v-stream:state="formStateEvents" 
+            />
                  
         </div>
         
     </div>
 </template>
 <script>
-    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-    import { DxToolbar, DxButton } from 'devextreme-vue'
-    import { DxDataGrid, DxColumn } from 'devextreme-vue/data-grid'
-    import { confirm } from 'devextreme/ui/dialog';
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+    import {DxButton, DxToolbar} from 'devextreme-vue'
+    import {DxColumn, DxDataGrid} from 'devextreme-vue/data-grid'
+    import {confirm} from 'devextreme/ui/dialog';
     import DataSource from 'devextreme/data/data_source';
-    
-    import { Subject } from 'rxjs';
-    import { map, filter } from 'rxjs/operators';
-    
-    import EntityForm from 'components/forms/entity-form'
-    import { dataSourceConfs } from './data'
-    
-    
+
+    import {Subject} from 'rxjs';
+    import {filter, map} from 'rxjs/operators';
+
+    import BaseEntityEditor from 'components/forms/base-entity-editor'
+    import {dataSourceConfs} from './data'
+
+    import context from 'api/odata-context'
+
+
     export default {
         name: "user-list",
         components: {
@@ -93,34 +87,37 @@
             DxDataGrid,
             DxColumn,
             DxButton,
-            EntityForm
+            BaseEntityEditor
         },
-        subscriptions() {
+        subscriptions () {
             this.formStateEvents = new Subject();
-            
-            this.$subscribeTo(
-                this.formStateEvents.pipe(
-                    filter(s => s.event.msg.state === 'success')
-                ), 
-                this.onEditSuccess
+            let formStateObs = this.formStateEvents.pipe(
+                map(e => e.event.msg)
             );
             
+            this.$subscribeTo(
+                formStateObs.pipe(
+                    filter(s => s.state === 'success')
+                ), 
+                this.onEditSuccess
+            );  
+            
             return {
-                editing: this.editRequests.pipe(
-                    map(request => request != null)
+                editing: formStateObs.pipe(
+                    map(s => !(['uninitialized', 'success', 'canceled'].includes(s.state)))
                 )
             }
         },
-        data() {
-            return {
-                editRequests: new Subject(),
-                formCommands: new Subject(),
-                dataSource: dataSourceConfs.users,
-                formItems: [
+        computed: {
+            editorFormItems() {
+                return [
                     {
                         label: { text: 'Имя пользователя' },
                         dataField: 'AppUser_Code',
-                        isRequired: true
+                        isRequired: true,
+                        editorOptions: {
+                            disabled: !!this.editorSettings.modelKey,
+                        }
                     },
                     {
                         label: { text: 'Пароль' },
@@ -130,6 +127,37 @@
                         editorOptions: {
                             mode: 'password'
                         }
+                    },
+                    {
+                        label: { text: 'Сотрудник' },
+                        dataField: 'Employee.ID',
+                        editorType: 'dxSelectBox',
+                        editorOptions: {
+                            dataSource: {
+                                store: context.Employee,
+                                expand: ['Person', 'Contragent', 'Position']
+                            },
+                            displayExpr(itemData) {
+                                return !itemData ? '' :  
+                                    `${itemData.Person.FullName} (${itemData.Position.Title}, ${itemData.Contragent.Title})`
+                            },
+                            valueExpr: "ID",
+                            searchEnabled: true,
+                            searchExpr: 'Person.LastName',
+                            showClearButton: true,
+                            itemTemplate(itemData, itemIndex, itemElement) {
+                                return `
+                                    <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                        ${itemData.Person.FullName}
+                                        <span class="text-muted">                                        
+                                            (${itemData.Position.Title}, ${itemData.Contragent.Title})
+                                        </span>
+                                    </div>
+                                `;
+                            }
+                            
+                        },
+                        isRequired: false,
                     },
                     {
                         label: { text: 'Роли' },
@@ -142,8 +170,13 @@
                             searchEnabled: true,
                         },
                         isRequired: false,
-                    },
-                ],
+                    }
+                ]
+            }
+        },
+        data() {
+            return {
+                dataSource: dataSourceConfs.users,
                 toolbarItems: [
                     {
                         location: 'after',
@@ -156,6 +189,7 @@
                         }
                     }
                 ],
+                editorSettings: {},
             }
         },
         methods: {
@@ -164,19 +198,20 @@
             },
             onEditSuccess() {
                 this.reloadData();
-                this.editRequests.next(null);
             },
             onNewButtonClick(event) {
-                this.editRequests.next({
+                this.editorSettings = {
                     modelKey: null,
+                    formTitle: 'Новый пользователь',
                     formDataInitial: {}
-                });
+                };
             },           
             onEditRowButtonClick(event, model) {
-                this.editRequests.next({
+                this.editorSettings = {
                     modelKey: model.ID,
+                    formTitle: model.AppUser_Code,
                     formDataInitial: {}
-                });
+                };
             },
             onDeleteRowButtonClick(event, model) {
                 var component = this;
@@ -191,12 +226,7 @@
                         }
                     });
             },
-            onSubmitButtonClick(event){
-                this.formCommands.next({ command: 'submit' });
-            },
-            onCancelButtonClick(event){
-                this.editRequests.next(null)
-            }
+            
 
         }
     }

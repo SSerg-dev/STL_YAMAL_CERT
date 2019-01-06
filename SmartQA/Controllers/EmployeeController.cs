@@ -26,14 +26,20 @@ namespace SmartQA.Controllers
         }
 
         [EnableQuery]
-        public IQueryable<Employee> Get() => _context.Employee.OrderBy(x => x.Person.LastName).ThenByDescending(x => x.Person.FirstName).ThenByDescending(x => x.Person.SecondName)
+        public IQueryable<Employee> Get() => _context.Set<Employee>()
+            .Include(x => x.Person)
+            .Include(x => x.Contragent)
+            .Include(x => x.Position)            
+            .OrderBy(x => x.Person.LastName)
+                .ThenBy(x => x.Person.FirstName)
+                .ThenBy(x => x.Person.SecondName)
             .AsQueryable();
 
 
         [EnableQuery]
-        public IActionResult Get([FromODataUri] Guid key)
+        public SingleResult<Employee> Get([FromODataUri] Guid key)
         {
-            return Ok(_context.Employee.Single(x => x.ID == key));
+            return SingleResult.Create(_context.Set<Employee>().Where(x => x.ID == key));            
         }
 
         public async Task<IActionResult> Post([FromBody]EmployeeEdit employeeForm)
@@ -57,8 +63,8 @@ namespace SmartQA.Controllers
             employee.OnSave(_context, user);
             employee.Person.OnSave(_context, user);
 
-            _context.Person.Add(employee.Person);
-            _context.Employee.Add(employee);
+            _context.Set<Person>().Add(employee.Person);
+            _context.Set<Employee>().Add(employee);
             _context.SaveChanges();
 
             return Created(employee);
@@ -71,7 +77,7 @@ namespace SmartQA.Controllers
                 return BadRequest(ModelState);
             }
             
-            var employee = _context.Employee
+            var employee = _context.Set<Employee>()
                 .Include(x => x.Person)
                 .Single(x => x.ID == key);
             employeeForm.Serialize(employee);
@@ -92,7 +98,7 @@ namespace SmartQA.Controllers
                 return BadRequest(ModelState);
             }
 
-            var employee = _context.Employee
+            var employee = _context.Set<Employee>()
                 .Include(x => x.Person)
                 .Single(x => x.ID == key);
             employeeForm.Serialize(employee);
@@ -108,7 +114,7 @@ namespace SmartQA.Controllers
 
         public async Task<IActionResult> Delete([FromODataUri] Guid key)
         {
-            var employee = _context.Employee
+            var employee = _context.Set<Employee>()
                 .Include(x => x.Person)
                 .Single(x => x.ID == key);
 

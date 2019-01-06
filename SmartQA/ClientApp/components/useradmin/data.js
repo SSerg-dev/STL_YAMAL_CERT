@@ -1,39 +1,21 @@
-import authHeaders from 'auth/headers.js';
+import context from 'api/odata-context';
 
 export const dataSourceConfs = {
     users: {
-        store: {
-            type: 'odata',
-            url: baseUrl + 'odata/AppUser',
-            version: 4,
-            key: 'ID',
-            keyType: {
-                ID: "Guid"
-            },
-            beforeSend: function (e) {
-                e.headers = authHeaders.getAuthHeaders();
-            }
-        },
+        store: context.AppUser,
         sort: [
             'AppUser_Code'
         ],
         expand: [
-            'RoleSet'
+            'RoleSet',
+            'Employee',
+            'Employee.Person',
+            'Employee.Position',
+            'Employee.Contragent'
         ]
     },
     roles: {
-        store: {
-            type: 'odata',
-            url: baseUrl + 'odata/Role',
-            version: 4,
-            key: 'ID',
-            keyType: {
-                ID: "Guid"
-            },
-            beforeSend: function (e) {
-                e.headers = authHeaders.getAuthHeaders();
-            }
-        },
+        store: context.Role,
         sort: [
             'Role_Code'
         ]

@@ -12,7 +12,7 @@
                        caption="Номер" />
 
             <dx-column data-field="IssueDate"
-                       
+                       data-type="date"
                        caption="Дата выдачи" />
 
             <dx-column :fixed="true"
@@ -41,34 +41,34 @@
 
         </dx-tree-list>
 
-        <naks-edit :editRequests="editRequestsNaks"
+        <naks-edit ref="editor"
+                   :editor-settings="editorSettings"
+                   :naks-is-child="editorIsChild"
                    @editingDone="onEditSuccess" />
 
     </div>
 </template>
 
 <script>
-    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';    
-    import { confirm } from 'devextreme/ui/dialog';
-    import { DxTreeList, DxColumn } from 'devextreme-vue/tree-list';
-    import { DxPopup } from 'devextreme-vue';
-    import { DxButton } from "devextreme-vue/ui/button";
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+    import {confirm} from 'devextreme/ui/dialog';
+    import {DxColumn, DxTreeList} from 'devextreme-vue/tree-list';
+    import {DxPopup} from 'devextreme-vue';
+    import {DxButton} from "devextreme-vue/ui/button";
     import DxToolbar from 'devextreme-vue/toolbar';
     import DataSource from 'devextreme/data/data_source';
-    import 'devextreme/data/odata/store';
 
-    import NaksEdit from './naks-edit';    
+    import NaksEdit from './naks-edit';
 
-    import { dataSourceConfs } from './data.js';
-    import { Subject } from 'rxjs';
+    import {dataSourceConfs} from './data.js';
+    import {Subject} from 'rxjs';
 
     export default {
         name: "naks-list",
         components: {
             FontAwesomeIcon,
             DxTreeList,
-            DxColumn,            
-            DxPopup,
+            DxColumn,
             DxToolbar,
             DxButton,           
             NaksEdit
@@ -81,32 +81,12 @@
         },
         created() {
             this.setDataSource();
-            this.$subscribeTo(this.editRequestsNaks,  (val) => {
-
-            });
-        },
-        watch: {
-            naksEditing(value) {
-                console.log("asadfadsf", value);
-                if (value) this.$refs.editPopup.instance.show();
-                else this.$refs.editPopup.instance.hide();
-            }
-
         },
         data: function () {
-            return {
-                editRequestsNaks: new Subject(),                
+            return {                 
                 dataSource: {},                
-                editPopup: {
-                    showTitle: false,
-                    width: 400,
-                    height: 200,
-                    position: {
-                        my: "center",
-                        at: "center",
-                        of: window
-                    }
-                },                
+                editorSettings: {},
+                editorIsChild: false,
                 toolbarItems: [                    
                     {
                         location: 'after',
@@ -137,31 +117,36 @@
                 
             },
             onNewButtonClick(event) {
-                this.editRequestsNaks.next({
+                this.editorSettings = {
                     modelKey: null,
-                    isChild: false,
                     formDataInitial: {
                         Person_ID: this.personId,
                     }
-                });                
+                };
+                
+                this.editorIsChild = false;
             },
-            onNewChildRowButtonClick(event, model) {                
-                this.editRequestsNaks.next({
+            onNewChildRowButtonClick(event, model) {
+                this.editorSettings = {
                     modelKey: null,
-                    isChild: true,
                     formDataInitial: {
                         Person_ID: this.personId,
                         ParentDocumentNaks_ID: model.ID.toString(),
                         Number: model.Number + ' В'
                     }
-                });                
+                };
+
+                this.editorIsChild = true;
+                
             },
             onEditRowButtonClick(event, model) {
-                this.editRequestsNaks.next({
+                this.editorSettings = {
                     modelKey: model.ID.toString(),
-                    isChild: model.ParentDocumentNaks_ID != null,
-                    formDataInitial: Object()
-                });                 
+                    formDataInitial: {}
+                };
+                
+                this.editorIsChild = model.ParentDocumentNaks_ID != null;
+                
             },
             onDeleteRowButtonClick(event, model) {                
                 var component = this;                

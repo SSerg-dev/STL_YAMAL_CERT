@@ -26,19 +26,19 @@ namespace SmartQA.Controllers.Reftables
         }
 
         public virtual DbSet<TEntity> GetDbSet()
-            => ((DbSet<TEntity>)_context.GetType().GetProperty(typeof(TEntity).Name).GetValue(_context));
+            => _context.Set<TEntity>();
 
         public virtual IQueryable<TEntity> GetQuery()
             => GetDbSet()
                 .OrderByDescending(x => x.Title=="N/A").ThenBy(x => x.Title)
                 .AsQueryable();
 
-        public async Task<IActionResult> Get([FromODataUri] Guid key)
+        [EnableQuery]
+        public SingleResult<TEntity> Get([FromODataUri] Guid key)
         {
-            var entity = await GetDbSet().FindAsync(key);
-            return Ok(entity);
+            return SingleResult.Create(GetDbSet().Where(x => x.ID == key));            
         }
-
+        
         [EnableQuery]
         public IQueryable<TEntity> Get()
             => GetQuery();

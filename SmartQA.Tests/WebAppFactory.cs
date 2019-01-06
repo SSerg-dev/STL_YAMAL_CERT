@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SmartQA.DB;
+using SmartQA.DB.Models.Auth;
 
 namespace SmartQA.Tests
 {
@@ -57,7 +58,7 @@ namespace SmartQA.Tests
                     {
                         // Seed the database with test data.
                         Util.DB.InitializeDbForTests(db);
-                        var c = db.AppUser.Count();
+                        var c = db.Set<AppUser>().Count();
 
 
                         logger.LogInformation($"Hello there! {c}");

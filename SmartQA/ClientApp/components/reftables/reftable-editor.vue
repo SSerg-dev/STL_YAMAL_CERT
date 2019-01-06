@@ -27,23 +27,22 @@
 
 <script>
     import {
-        DxDataGrid,
         DxColumn,
-        DxSearchPanel,
-        DxPaging,
+        DxDataGrid,
         DxEditing,
-        DxPopup,
         DxLookup,
-        DxPosition
+        DxPaging,
+        DxPopup,
+        DxPosition,
+        DxSearchPanel
     } from "devextreme-vue/data-grid";
-    import { DxForm, DxValidationSummary } from 'devextreme-vue';
-    import { DxButton } from "devextreme-vue/ui/button";
+    import {DxForm} from 'devextreme-vue';
+    import {DxButton} from "devextreme-vue/ui/button";
 
     import DxToolbar from 'devextreme-vue/toolbar';
     import DataSource from 'devextreme/data/data_source';
 
-    import 'devextreme/data/odata/store';
-    import { dataSourceConfs, reftableDatasourceConf } from "./data";
+    import {dataSourceConfs, reftableDatasourceConf} from "./data";
 
     export default {
         components: {

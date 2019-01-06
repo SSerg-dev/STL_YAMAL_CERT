@@ -17,6 +17,7 @@
             </div>
         </div>
         <dx-load-panel :position="{ of: '#login-form' }"
+                       :delay="100"
                        :visible="authStatus === 'loading'"
                        :show-indicator="true"
                        :show-pane="true"
@@ -27,11 +28,9 @@
 </template>
 
 <script>
-    import {
-        DxForm,
-        DxLoadPanel
-    } from 'devextreme-vue';
-    import { AUTH_REQUEST } from 'store/actions/auth'
+    import {DxForm, DxLoadPanel} from 'devextreme-vue';
+    import {AUTH_REQUEST} from 'store/actions/auth'
+
     export default {
         name: 'login',
         components: {

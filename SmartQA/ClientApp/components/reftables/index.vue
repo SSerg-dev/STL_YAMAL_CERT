@@ -1,18 +1,21 @@
 ﻿<template>
     <div class="row">
-        <div class="col-sm-3">
-            <div class="py-md-3">
+        <div class="col-sm-3 py-3 position-fixed mh-100" 
+             style="overflow-x: hidden; overflow-y: auto;">             
+            
                 <dx-list :data-source="reftablesDataSource"
+                         :search-enabled="true"
+                         searchExpr="Title"
                          class="nav"
-                         height="100%">
-
+                         height="auto">
+                    
                     <reftables-list-item slot="item"
                                   slot-scope="item"
                                   :item="item" />
                 </dx-list>
-            </div>
+            
         </div>
-        <div class="col-sm-9">
+        <div class="offset-3 col-sm-9">
             <div class="py-md-3">
                 <reftable-editor v-if="modelName"
                                  v-bind:model-name="modelName" />
@@ -24,15 +27,15 @@
 <script>
     import ReftableEditor from "./reftable-editor";
     import ReftablesListItem from './reftables-list-item';
-    import DxMenu from 'devextreme-vue';
+    import {DxScrollView} from 'devextreme-vue';
     import DxList from 'devextreme-vue/list';
-    import { dataSourceConfs } from "./data";
+    import {dataSourceConfs} from "./data";
     import DataSource from 'devextreme/data/data_source';
-    
+
     export default {
         components: {
-            DxMenu,
             DxList,
+            DxScrollView,
             ReftableEditor,
             ReftablesListItem
         },

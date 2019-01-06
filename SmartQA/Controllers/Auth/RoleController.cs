@@ -22,15 +22,15 @@ namespace SmartQA.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Get([FromODataUri] Guid key)
+        [EnableQuery]
+        public SingleResult<DBRole> Get([FromODataUri] Guid key)
         {
-            var entity = await _context.Role.FindAsync(key);
-            return Ok(entity);
+            return SingleResult.Create(_context.Set<DBRole>().Where(x => x.ID == key));            
         }
 
         [EnableQuery]
         public IQueryable<DBRole> Get()
-            => _context.Role.AsQueryable();
+            => _context.Set<DBRole>().AsQueryable();
 
     }
 }

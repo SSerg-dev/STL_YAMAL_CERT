@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+using SmartQA.DB.Models.PermissionDocuments;
 using SmartQA.DB.Models.Shared;
 
 namespace SmartQA.DB.Models.Reftables
@@ -13,8 +15,7 @@ namespace SmartQA.DB.Models.Reftables
         [StringLength(255)] public string Description_Eng { get; set; }
 
         public Guid? ContragentRole_ID { get; set; }
-
-        [ForeignKey("ContragentRole_ID")] 
+        
         public virtual ContragentRole ContragentRole { get; set; }
 
         [Required]
@@ -25,5 +26,15 @@ namespace SmartQA.DB.Models.Reftables
         [Column("Description_Rus")]
         [StringLength(255)]
         public string Description { get; set; }
+
+        [RunAtModelSetup]
+        public static void SetupRelations(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Contragent>()
+                .HasOne(x => x.ContragentRole)
+                .WithMany()
+                .HasForeignKey(x => x.ContragentRole_ID)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
     }
 }

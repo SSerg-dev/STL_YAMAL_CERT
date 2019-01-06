@@ -3,8 +3,10 @@ import ReftablesIndex from 'components/reftables/index'
 import HomePage from 'components/home'
 import LoginPage from 'components/account/login-page'
 import UserAdminIndex from 'components/useradmin/index'
+import DocumentsIndex from 'components/documents/index'
+import DocumentEdit from 'components/documents/document-edit'
 
-import store from 'store' 
+import store from 'store'
 
 const ifNotAuthenticated = (to, from, next) => {
 
@@ -94,6 +96,22 @@ export const routes = [
         props: true,
         display: 'Reftables',
         beforeEnter: ifAuthenticated(),
+    },
+    {
+        name: 'documents',
+        path: '/documents',
+        beforeEnter: ifAuthenticated(),
+        component: DocumentsIndex,
+    },       
+    {
+        name: 'document-edit',
+        path: '/documents/:id?',
+        component: DocumentEdit,
+        props: (route) => ({
+            editorSettings: {
+                modelKey: route.params.id
+            }
+        }),
     }
-  
-]
+
+];

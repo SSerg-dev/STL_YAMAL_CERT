@@ -1,6 +1,8 @@
 const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin')
 const devMode = process.env.NODE_ENV === 'development';
 
 module.exports = {
@@ -71,6 +73,23 @@ module.exports = {
                 use: 'url-loader?name=[name].[ext]'
             }
         ]
+    },
+    optimization: {
+        minimizer: [
+            new OptimizeCSSAssetsPlugin({
+                cssProcessorPluginOptions: {
+                    preset: ['default', { discardComments: { removeAll: true } }],
+                },
+            }),
+            new TerserPlugin({
+                parallel: true,
+                terserOptions: {
+                    ecma: 6,
+                    output: {
+                        comments: false,
+                    },
+                },
+            })],
     },
     plugins: [
         new VueLoaderPlugin(),
