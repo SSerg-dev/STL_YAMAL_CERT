@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Castle.Core.Configuration;
@@ -20,6 +21,7 @@ using SmartQA.DB.Models.Auth;
 using McMaster.Extensions.CommandLineUtils;
 using Newtonsoft.Json.Linq;
 using SmartQA.DB.Models.Shared;
+using SmartQA.DB.Util;
 
 
 namespace SmartQA.Cli
@@ -46,7 +48,6 @@ namespace SmartQA.Cli
             
         };
 
-
         static void DbImport(DataContext context, StreamReader reader)
         {
             var converter = new EfJsonConverter(context);
@@ -58,8 +59,13 @@ namespace SmartQA.Cli
                     : obj.GetType();
 
                 Console.Write($"Importing {obj}... ");
+
+                var existing = typeof(EfUtils)
+                    .GetMethod("Find")
+                    .MakeGenericMethod(objType)
+                    .Invoke(null, new object[] {context, obj.GetPKey(context)});
                 
-                var existing = context.Find(objType, obj.GetPKey(context));
+                context.Find(objType, obj.GetPKey(context));
                 if (existing != null)
                 {
                     Console.WriteLine("exists, skipped");
@@ -85,15 +91,9 @@ namespace SmartQA.Cli
                 .Where(iet => !ExcludeEntities.Contains(iet.ClrType.Name))
                 )
             {
-                var set = context.GetType()
-                    .GetMethod("Set")
+                var coll = typeof(EfUtils).GetMethod("Query")
                     .MakeGenericMethod(iet.ClrType)
-                    .Invoke(context, new object[] { });
-                
-                var coll = typeof(EntityFrameworkQueryableExtensions)
-                    .GetMethod("IgnoreQueryFilters")
-                    .MakeGenericMethod(iet.ClrType)
-                    .Invoke(null, new object[] { set });            
+                    .Invoke(null, new[] {context});                
                 
                 Console.WriteLine($"Exporting {iet.ClrType.Name}...");
                                 
@@ -113,8 +113,8 @@ namespace SmartQA.Cli
         {            
             
             
-            //var configPath = "../SmartQA/appsettings.Development.json";                       
-            const string configPath = "../SmartQA/appsettings.Production.json";                       
+            var configPath = "../SmartQA/appsettings.Development.json";                       
+            //const string configPath = "../SmartQA/appsettings.Production.json";                       
             var workingDir = Directory.GetCurrentDirectory();
             
             IServiceCollection services = new ServiceCollection();
@@ -133,15 +133,15 @@ namespace SmartQA.Cli
 //                .CreateLogger<Program>();
                    
             Console.WriteLine("ok");
-            using (StreamWriter sw = new StreamWriter("data.json"))
-            {
-                DbExport(context, sw);
-            }
-
-//            using (StreamReader sr = new StreamReader("data.json"))
+//            using (StreamWriter sw = new StreamWriter("data.json"))
 //            {
-//                DbImport(context, sr);
+//                DbExport(context, sw);
 //            }
+
+            using (StreamReader sr = new StreamReader("data.json"))
+            {
+                DbImport(context, sr);
+            }
             
         }
 
