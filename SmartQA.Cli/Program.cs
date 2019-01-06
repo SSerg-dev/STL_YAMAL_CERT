@@ -28,6 +28,24 @@ namespace SmartQA.Cli
     class Program
     {
         public IServiceProvider ServiceProvider { get; set; }
+        
+        private static string[] ExcludeEntities = new[]
+        {
+            "Document",
+            "Document_to_GOST",
+            "Document_to_PID",
+            "DocumentType",
+            "DocumentStatus",
+            "Status",
+            "RowStatus",
+            "Parameter",          
+            "AppUser",          
+            "AppUser_to_Role",          
+            "Role",          
+            "ContragentRole"
+            
+        };
+
 
         static void DbImport(DataContext context, StreamReader reader)
         {
@@ -61,7 +79,11 @@ namespace SmartQA.Cli
         {            
             var result = new JArray();
             var converter = new EfJsonConverter(context);
-            foreach (var iet in context.Model.GetEntityTypes())                
+            foreach (var iet in 
+                context.Model
+                .GetEntityTypes()
+                .Where(iet => !ExcludeEntities.Contains(iet.ClrType.Name))
+                )                
             {                
                 var coll = context.GetType().GetMethod("Set").MakeGenericMethod(iet.ClrType).Invoke(
                     context, new object[] { });
@@ -82,8 +104,10 @@ namespace SmartQA.Cli
         
         static void Main(string[] args)
         {            
-            //var configPath = "../SmartQA/appsettings.Development.json";                       
-            const string configPath = "../SmartQA/appsettings.Production.json";                       
+            
+            
+            var configPath = "../SmartQA/appsettings.Development.json";                       
+            //const string configPath = "../SmartQA/appsettings.Production.json";                       
             var workingDir = Directory.GetCurrentDirectory();
             
             IServiceCollection services = new ServiceCollection();
@@ -103,15 +127,15 @@ namespace SmartQA.Cli
                    
             Console.WriteLine("ok");
             
-            using (StreamWriter sw = new StreamWriter("data.json"))
-            {
-                DbExport(context, sw);
-            }
-
-//            using (StreamReader sr = new StreamReader("data.json"))
+//            using (StreamWriter sw = new StreamWriter("data.json"))
 //            {
-//                DbImport(context, sr);
+//                DbExport(context, sw);
 //            }
+
+            using (StreamReader sr = new StreamReader("data.json"))
+            {
+                DbImport(context, sr);
+            }
             
         }
 

@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SmartQA.DB;
 using SmartQA.DB.Models.Shared;
+using StackExchange.Redis;
 
 namespace SmartQA.Cli
 {
@@ -22,7 +23,8 @@ namespace SmartQA.Cli
         {
             Context = context;
         }
-        
+
+
         private static Type[] supportedTypes = 
         {
             typeof(long),
