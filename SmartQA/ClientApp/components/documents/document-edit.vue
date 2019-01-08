@@ -1,13 +1,63 @@
-<script>
-    import BaseEntityEditor from "../forms/base-entity-editor";
-    import {reftableFormItem} from "../forms/reftables";
+<template>
+    <div class="form-container">
+        <h2 class="mt-4" v-if="formTitle">{{ formTitle }}</h2>
+        
+        
+            <form v-on:submit.prevent="onSubmitButtonClick" class="my-3">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <dx-form ref="form"
+                                     :col-count="2"
+                                     :form-data="formData"
+                                     :items="formItems" />
 
-    import context from "api/odata-context";
+                            <div>
+                                <span class="dx-form-group-caption">Файлы</span>
+                                <attachments v-if="modelKey"
+                                             :document-id="modelKey.toString()" />
+
+                            </div>
+                            
+                        </div>
+
+
+
+                        
+                        <div class="col-md-3">
+                            <dx-toolbar :items="toolbarItems" />    
+                        </div>
+                                
+                    </div>
+                </div>
+            </form>
+    
+            
+            <dx-load-panel :position="{ of: '.form-container' }"
+                           :visible="loading"
+                           :delay="100"
+                           :show-indicator="true"
+                           :show-pane="true"
+                           :shading="true"
+                           shading-color="rgba(0,0,0,0.2)"
+                           :close-on-outside-click="false"
+            />
+        
+
+    </div>
+</template>
+
+<script>
+    import BaseEntityEditor from "../forms/base-entity-editor"
+    import {reftableFormItem} from "../forms/reftables"
+    import Attachments from './attachments'
+
+    import context from "api/odata-context"
 
     export default {
         name: "DocumentEdit",
         extends: BaseEntityEditor,
-        components: {BaseEntityEditor},
+        components: {BaseEntityEditor, Attachments},
         watch: {
             model: {
                 immediate: true,
@@ -75,10 +125,7 @@
                                     valueExpr: "ID"
                                 },
                                 disabled: true
-                                
                             }
-                            
-                            
                         ]
                     },
                     {
@@ -100,6 +147,12 @@
                             {
                                 label: { text: 'Название' },
                                 dataField: 'Document_Name',
+                                required: false
+                            },
+                            {
+                                label: { text: 'Страниц' },
+                                dataField: 'TotalSheets',
+                                editorType: 'dxNumberBox',
                                 required: false
                             },
                             {

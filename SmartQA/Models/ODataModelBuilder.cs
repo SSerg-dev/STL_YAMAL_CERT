@@ -9,6 +9,7 @@ using SmartQA.DB.Models.Shared;
 using SmartQA.Models.Forms;
 using System;
 using SmartQA.DB.Models.Documents;
+using SmartQA.DB.Models.Files;
 using SmartQA.Models;
 
 namespace SmartQA.DB
@@ -22,7 +23,7 @@ namespace SmartQA.DB
             var entitySet = (EntitySetConfiguration<TEntityType>)builder.GetType().GetMethod("EntitySet")
                 .MakeGenericMethod(typeof(TEntityType))
                 .Invoke(builder, new object[]{ name });            
-
+            
             var conf = entitySet
                 .EntityType
                 .Filter()
@@ -49,6 +50,11 @@ namespace SmartQA.DB
         {
             var builder = new ODataConventionModelBuilder(serviceProvider);
 
+            BuildCommon<FileDesc>(builder);
+            
+            var att = BuildCommon<DocumentAttachment>(builder);
+            att.Expand(SelectExpandType.Automatic, new string [] {"FileDesc"});
+            
             BuildCommon<Employee>(builder);
             var person = BuildCommon<Person>(builder);
             person.Property(p => p.FullName);                
@@ -72,6 +78,10 @@ namespace SmartQA.DB
             document.CollectionProperty(d => d.PID_IDs);
             document.ContainsMany(d => d.GOSTSet);
             document.ContainsMany(d => d.PIDSet);
+            
+            builder.EntityType<Document>()
+                .Action("UploadAttachments")
+                .ReturnsCollectionFromEntitySet<DocumentAttachment>("DocumentAttachment");                            
                         
             var documentUI = builder.EntitySet<DocumentUI>("DocumentUI")
                 .EntityType

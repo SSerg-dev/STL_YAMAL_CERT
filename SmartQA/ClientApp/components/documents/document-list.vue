@@ -7,8 +7,8 @@
                       :dataSource="dataSource">
             
             <dx-paging
-                enabled="true"
-                page-size="10" />
+                :enabled="true"
+                :page-size="10" />
 
             <dx-column data-field="Status.Description_Rus"
                        caption="Статус" />
@@ -22,6 +22,7 @@
                        caption="Дата карточки" />
             
             <dx-column data-field="Document_Date"
+                       data-type="date"
                        caption="Дата" />
                         
             <dx-column data-field="Document_Number"

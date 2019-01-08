@@ -54,6 +54,7 @@ namespace SmartQA.DB.Models.Documents
         public virtual Employee Resp_Employee { get; set; }
                         
         public virtual ICollection<DocumentStatus> DocumentStatusSet { get; set; }
+        public virtual ICollection<DocumentAttachment> DocumentAttachmentSet { get; set; }
 
         [NotMapped]
         public virtual Status Status
