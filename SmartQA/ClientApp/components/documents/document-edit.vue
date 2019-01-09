@@ -198,6 +198,12 @@
         mounted() {
         },
         methods: {
+            afterSubmitSuccess(state) {
+                this.$router.push({
+                    name: 'document-view',
+                    params: { documentId: this.modelKey }
+                });
+            },
             onCancelButtonClick() {
                 this.$router.push({
                     name: 'document-view',
