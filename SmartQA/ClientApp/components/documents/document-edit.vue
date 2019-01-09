@@ -1,31 +1,34 @@
 <template>
     <div class="form-container">
-        <h2 class="mt-4" v-if="formTitle">{{ formTitle }}</h2>
-
         <form v-on:submit.prevent="onSubmitButtonClick" class="my-3">
 
-            <div class="row">
-                <div class="col-md-9">
-                    <dx-form ref="form"
-                             :col-count="2"
-                             :form-data="formData"
-                             :items="formItems"/>
-
-
-                    <attachments
-                            class="mt-3"
-                            v-if="modelKey"
-                            :document-id="modelKey.toString()"/>
-
-
+            <div class="btn-toolbar justify-content-between" role="toolbar">
+                <div class="input-group">
+                    <h5 v-if="formTitle">{{ formTitle }}</h5>
                 </div>
-
-                <div class="col-md-3">
-                    <dx-toolbar :items="toolbarItems"/>
+                
+                <div class="btn-group" role="group">
+                    <button type="submit"
+                            class="btn btn-outline-success">
+                        Сохранить
+                    </button>
+                    <button type="button" 
+                            class="btn btn-outline-dark"
+                            @click="onCancelButtonClick">
+                        Отмена
+                    </button>
                 </div>
-
             </div>
-
+            
+            <dx-form ref="form"
+                     :col-count="2"
+                     :form-data="formData"
+                     :items="formItems"/>
+            
+            <attachments
+                    class="mt-3"
+                    v-if="documentId"
+                    :document-id="documentId"/>
         </form>
 
         <dx-load-panel :position="{ of: '.form-container' }"
@@ -58,6 +61,11 @@
                     this.formTitle = !val ? "" : `Карточка документа № ${val.Document_Code}`;
                 }
             }
+        },
+        computed: {
+            documentId() {
+                return String(this.modelKey)
+            }  
         },
         data() {
             return {

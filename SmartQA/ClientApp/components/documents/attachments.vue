@@ -11,9 +11,9 @@
 
             <div class="btn-group" role="group">
                 <file-upload
-                        class="mt-lg-0 mt-2"
-                        :upload-url="uploadUrl"
-                        @uploaded="onUploaded" />
+                    class="mt-lg-0 mt-2"
+                    :upload-url="uploadUrl"
+                    @uploaded="onUploaded" />
             </div>
         </div>
 
