@@ -42,7 +42,7 @@ namespace SmartQA.Controllers.Shared
 
         [EnableQuery]
         public virtual IQueryable<TEntity> Get()
-            => GetQuery().IgnoreQueryFilters();       
+            => GetQuery();       
 
         public virtual async Task<IActionResult> Post([FromBody]TForm form)
         {

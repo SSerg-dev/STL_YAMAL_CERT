@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SmartQA.Auth;
 using SmartQA.Models.Account;
+
 
 namespace SmartQA.Controllers
 {
@@ -23,14 +25,14 @@ namespace SmartQA.Controllers
 
         private readonly AppUserManager _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IConfiguration _configuration;
+        private readonly AppSettings _appSettings;
 
         public AccountController(AppUserManager userManager, SignInManager<ApplicationUser> signInManager,
-            IConfiguration configuration)
+            IOptions<AppSettings> appSettings)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _configuration = configuration;
+            _appSettings = appSettings.Value;
         }
         
         [Authorize]
@@ -82,13 +84,13 @@ namespace SmartQA.Controllers
                     new Claim(ClaimTypes.NameIdentifier, applicationUser.Id.ToString())
                 };
 
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtKey"]));
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JwtKey));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                var expires = DateTime.UtcNow.AddDays(Convert.ToDouble(30));
+                var expires = DateTime.UtcNow.AddDays(Convert.ToDouble(_appSettings.JwtExpireDays));
 
                 var token = new JwtSecurityToken(
-                    _configuration["JwtIssuer"],
-                    _configuration["JwtIssuer"],
+                    _appSettings.JwtIssuer,
+                    _appSettings.JwtIssuer,
                     claims,
                     expires: expires,
                     signingCredentials: creds

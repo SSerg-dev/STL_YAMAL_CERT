@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using System.Linq;
 using System.Security.Cryptography.Xml;
 using Microsoft.EntityFrameworkCore;
@@ -54,6 +55,8 @@ namespace SmartQA.DB.Models.Documents
         public virtual Employee Resp_Employee { get; set; }
                         
         public virtual ICollection<DocumentStatus> DocumentStatusSet { get; set; }
+        public virtual ICollection<DocumentAttachment> DocumentAttachmentSet { get; set; }
+        public virtual ICollection<Document> Revisions { get; set; }
 
         [NotMapped]
         public virtual Status Status
@@ -97,7 +100,7 @@ namespace SmartQA.DB.Models.Documents
         {
             modelBuilder.Entity<Document>()
                 .HasOne(d => d.Root)
-                .WithMany()
+                .WithMany(d => d.Revisions)
                 .HasForeignKey(x => x.Root_ID)
                 .OnDelete(DeleteBehavior.Restrict); 
             
@@ -114,11 +117,24 @@ namespace SmartQA.DB.Models.Documents
                 .OnDelete(DeleteBehavior.Restrict);
                         
             modelBuilder.Entity<Document>()
-                .HasAlternateKey(u => u.Document_Code);                ;
+                .HasAlternateKey(u => u.Document_Code);
 
             modelBuilder.Entity<Document>()
                 .Property(d => d.Document_Code)
-                .HasDefaultValueSql("next value for [Sequence_Document_Number]");                        
+                .HasDefaultValueSql("next value for [Sequence_Document_Number]");
+
+            modelBuilder.Entity<Document>()
+                .HasIndex(d => new {d.Root_ID, d.VersionNumber })
+                .IsUnique();
+
+            modelBuilder.Entity<Document>()
+                .HasIndex(d => new {d.Root_ID});
+            
+            modelBuilder.Entity<Document>()
+                .HasIndex(d => new { d.Root_ID, d.IsActual })
+                .HasFilter("(IsActual = 1)")                
+                .IsUnique();
+          
         }               
         
         // ---- m2m relations -------------

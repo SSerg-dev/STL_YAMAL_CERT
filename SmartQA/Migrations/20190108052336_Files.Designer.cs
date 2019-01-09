@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartQA.DB;
 
 namespace SmartQA.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20190108052336_Files")]
+    partial class Files
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -358,13 +360,6 @@ namespace SmartQA.Migrations
 
                     b.HasIndex("RowStatus");
 
-                    b.HasIndex("Root_ID", "IsActual")
-                        .IsUnique()
-                        .HasFilter("(IsActual = 1)");
-
-                    b.HasIndex("Root_ID", "VersionNumber")
-                        .IsUnique();
-
                     b.ToTable("p_Document");
                 });
 
@@ -495,10 +490,6 @@ namespace SmartQA.Migrations
                     b.HasIndex("RowStatus");
 
                     b.HasIndex("Status_ID");
-
-                    b.HasIndex("Document_ID", "DTS_End")
-                        .IsUnique()
-                        .HasFilter("(DTS_End is null)");
 
                     b.ToTable("p_Document_to_Status");
                 });
@@ -3464,7 +3455,7 @@ namespace SmartQA.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartQA.DB.Models.Documents.Document", "Root")
-                        .WithMany("Revisions")
+                        .WithMany()
                         .HasForeignKey("Root_ID")
                         .OnDelete(DeleteBehavior.Restrict);
 

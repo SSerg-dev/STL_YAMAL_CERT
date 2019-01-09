@@ -25,7 +25,9 @@ namespace SmartQA.Models
         public DateTime? Document_Date { get; set; }
         public Guid? DocumentType_ID { get; set; }
         public string Document_Name { get; set; }
-            
+        public int? TotalSheets { get; set; }
+        public Guid? Resp_Employee_ID { get; set; }
+        
         public ICollection<Guid> GOST_IDs { get; set; }
         public ICollection<Guid> PID_IDs { get; set; }
         
@@ -40,7 +42,9 @@ namespace SmartQA.Models
             entity.Document_Date = Document_Date;
             
             if (DocumentType_ID != null) entity.DocumentType_ID = (Guid) DocumentType_ID;
-            
+
+            entity.Resp_Employee_ID = Resp_Employee_ID;
+            entity.TotalSheets = TotalSheets;
             entity.Document_Name = Document_Name;
             entity.GOST_IDs = GOST_IDs;
             entity.PID_IDs = PID_IDs;

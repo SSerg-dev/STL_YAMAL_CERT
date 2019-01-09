@@ -8,6 +8,7 @@ using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +21,7 @@ using SmartQA.Auth;
 using SmartQA.Controllers.Reftables;
 using SmartQA.DB;
 using SmartQA.DB.Models.Auth;
-using SmartQA.Util;
+
 using Role = SmartQA.Auth.Role;
 
 namespace SmartQA
@@ -47,9 +48,13 @@ namespace SmartQA
                 .AddRoleManager<RoleManager<Role>>()                
                 .AddDefaultTokenProviders();
 
-            
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+                            
+            services.Configure<AppSettings>(appSettingsSection);      
+            var appSettings = appSettingsSection.Get<AppSettings>();
+                        
             //var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtKey"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettings.JwtKey));
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             services.AddAuthentication(options =>
                 {
@@ -65,14 +70,20 @@ namespace SmartQA
                     {
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = key,
-                        ValidIssuer = Configuration["JwtIssuer"],
-                        ValidAudience = Configuration["JwtIssuer"],
+                        ValidIssuer = appSettings.JwtIssuer,
+                        ValidAudience =appSettings.JwtIssuer,
                         ClockSkew = TimeSpan.Zero
                     };
                 });
 
             services.Configure<IdentityOptions>(options =>
             {
+            });
+
+            services.Configure<FormOptions>(x =>
+            {
+                x.ValueLengthLimit = int.MaxValue;
+                x.MultipartBodyLengthLimit = int.MaxValue; // In case of multipart
             });
 
             services
