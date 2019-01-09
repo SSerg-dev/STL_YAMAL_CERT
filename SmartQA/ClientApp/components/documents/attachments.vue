@@ -1,17 +1,15 @@
 <template>
     <div>
         <div class="btn-toolbar justify-content-between mb-2" role="toolbar">
-            <div class="btn-group mr-2" role="group" aria-label="First group">
+            <div class="btn-group mr-2" role="group">
                 <span class="dx-form-group-caption">Файлы
-                    <span v-if="totalCount">
+                    <span class="text-muted" v-if="totalCount">
                         ({{ totalCount }})
-                    </span>
-                    
-                        
+                    </span>                     
                 </span>
             </div>
 
-            <div class="btn-group" role="group" aria-label="Third group">
+            <div class="btn-group" role="group">
                 <file-upload
                         class="mt-lg-0 mt-2"
                         :upload-url="uploadUrl"
