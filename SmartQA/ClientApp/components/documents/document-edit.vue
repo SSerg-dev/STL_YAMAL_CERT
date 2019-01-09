@@ -58,7 +58,7 @@
             model: {
                 immediate: true,
                 handler(val) {
-                    this.formTitle = !val ? "" : `Карточка документа № ${val.Document_Code}`;
+                    this.formTitle = !val ? "" : `Документ № ${val.Document_Code}`;
                 }
             }
         },

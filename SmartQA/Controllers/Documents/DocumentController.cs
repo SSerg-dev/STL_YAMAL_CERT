@@ -119,7 +119,8 @@ namespace SmartQA.Controllers.Documents
                 DocumentStatusSet = new List<DocumentStatus>(),
                 DocumentType = await _context.Set<DocumentType>().Where(t => t.Title == "N/A").SingleAsync(),
                 Status = await _context.Set<Status>().SingleAsync(s => s.Status_Code == "wDd"),
-                Resp_Employee = await _context.Set<Employee>().FirstOrDefaultAsync(e => e.AppUser_ID == user.Id)                 
+                Resp_Employee = await _context.Set<Employee>().FirstOrDefaultAsync(e => e.AppUser_ID == user.Id),
+                IsActual = true,                
             };
                        
             form.Serialize(document, _context);
@@ -127,7 +128,13 @@ namespace SmartQA.Controllers.Documents
             if (document.Root_ID == Guid.Empty)
             {
                 document.Root_ID = document.ID;
-            }                                                              
+                document.VersionNumber = 1;
+            }
+            else
+            {
+                document.VersionNumber = 1 + await _context.Set<Document>().Where(d => d.Root_ID == document.Root_ID)
+                    .MaxAsync(d => d.VersionNumber);
+            }
 
             document.OnSave(_context, user);
 

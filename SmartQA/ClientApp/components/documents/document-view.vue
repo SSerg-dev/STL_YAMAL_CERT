@@ -8,6 +8,7 @@
             
             <div class="btn-group" role="group">
                 <router-link
+                        v-if="model.IsActual"
                         :to="{ name: 'document-edit', params: { documentId: documentId }}"
                         class="btn btn-outline-primary">
                     Редактировать
@@ -18,10 +19,17 @@
         <div class="row" v-if="model">
             <div class="col-md-6">
                 <h5>Карточка</h5>
-                <table class="table">
+                <table class="table form-layout">
                     <tr>
                         <th scope="row">Статус</th>
                         <td>{{ model.Status.Description_Rus }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Версия</th>
+                        <td>
+                            {{ model.VersionNumber }}
+                            <span class="text-muted" v-if="model.IsActual">(актуальная версия)</span>
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row">Номер карточки</th>
@@ -45,7 +53,7 @@
             </div>
             <div class="col-md-6">
                 <h5>Документ</h5>
-                <table class="table">
+                <table class="table form-layout">
                     <tr>
                         <th scope="row">Номер</th>
                         <td>{{ model.Document_Number }}</td>
@@ -124,7 +132,6 @@
     export default {
         name: "DocumentView",
         components: {BaseEntityEditor, DxLoadPanel, Attachments},
-
         
         props: {
             documentId: {
@@ -142,7 +149,7 @@
             model: {
                 immediate: true,
                 handler(val) {
-                    this.formTitle = !val ? "" : `Карточка документа № ${val.Document_Code}`;
+                    this.formTitle = !val ? "" : `Документ № ${val.Document_Code}`;
                 }
             }
         },
@@ -199,13 +206,16 @@
     }
 </script>
 
-<style scoped>
-    th {
-        width: 38.2%;
-        font-weight: normal;
+<style lang="scss" scoped>
+    table.form-layout {
+        th {
+            width: 38.2%;
+            font-weight: normal;
+        }
+        td {
+            wifth: 61.8%;
+        }
+
     }
-    td {
-        wifth: 61.8%;
-    }
-    
+        
 </style>
