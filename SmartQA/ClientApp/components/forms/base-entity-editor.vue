@@ -105,7 +105,6 @@
                         }
                     }
                 ],
-                index: null,
                 loading: false
             }
         },
@@ -176,7 +175,6 @@
                 let s = Object.assign({
                     isProgress: ['loading', 'submitting', 'initializing'].includes(state.state),
                     modelKey: this.modelKey,
-                    index: this.index,
                     formData: this.formData
                 }, state);
 

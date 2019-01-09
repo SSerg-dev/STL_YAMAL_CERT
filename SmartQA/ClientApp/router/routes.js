@@ -5,6 +5,7 @@ import LoginPage from 'components/account/login-page'
 import UserAdminIndex from 'components/useradmin/index'
 import DocumentsIndex from 'components/documents/index'
 import DocumentEdit from 'components/documents/document-edit'
+import DocumentView from 'components/documents/document-view'
 
 import store from 'store'
 
@@ -104,12 +105,24 @@ export const routes = [
         component: DocumentsIndex,
     },       
     {
+        name: 'document-view',
+        path: '/documents/:documentId',
+        component: DocumentView,
+        props: true,
+        // props: (route) => ({
+        //     editorSettings: {
+        //         modelKey: route.params.id
+        //     }
+        // }),
+    },
+    {
         name: 'document-edit',
-        path: '/documents/:id?',
+        path: '/documents/edit/:documentId',
         component: DocumentEdit,
+        props: true,
         props: (route) => ({
             editorSettings: {
-                modelKey: route.params.id
+                modelKey: route.params.documentId
             }
         }),
     }

@@ -2,14 +2,15 @@
     <div>
         <div class="btn-toolbar justify-content-between mb-2" role="toolbar">
             <div class="btn-group mr-2" role="group">
-                <span class="dx-form-group-caption">Файлы
+                <h5>
+                    Файлы
                     <span class="text-muted" v-if="totalCount">
                         ({{ totalCount }})
                     </span>                     
-                </span>
+                </h5>
             </div>
 
-            <div class="btn-group" role="group">
+            <div class="btn-group" role="group" v-if="editable">
                 <file-upload
                     class="mt-lg-0 mt-2"
                     :upload-url="uploadUrl"

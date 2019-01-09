@@ -1,10 +1,10 @@
 <template>
-    <div class="form-container">
-        <form v-on:submit.prevent="onSubmitButtonClick" class="my-3">
+    <div class="form-container my-3">
+        <form v-on:submit.prevent="onSubmitButtonClick">
 
             <div class="btn-toolbar justify-content-between" role="toolbar">
                 <div class="input-group">
-                    <h5 v-if="formTitle">{{ formTitle }}</h5>
+                    <h4 v-if="formTitle">{{ formTitle }}</h4>
                 </div>
                 
                 <div class="btn-group" role="group">
@@ -200,7 +200,8 @@
         methods: {
             onCancelButtonClick() {
                 this.$router.push({
-                    name: 'documents'
+                    name: 'document-view',
+                    params: { documentId: this.modelKey }
                 });
             },
         }

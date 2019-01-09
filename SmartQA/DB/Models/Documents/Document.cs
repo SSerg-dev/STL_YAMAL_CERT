@@ -55,6 +55,7 @@ namespace SmartQA.DB.Models.Documents
                         
         public virtual ICollection<DocumentStatus> DocumentStatusSet { get; set; }
         public virtual ICollection<DocumentAttachment> DocumentAttachmentSet { get; set; }
+        public virtual ICollection<Document> Revisions { get; set; }
 
         [NotMapped]
         public virtual Status Status
@@ -98,7 +99,7 @@ namespace SmartQA.DB.Models.Documents
         {
             modelBuilder.Entity<Document>()
                 .HasOne(d => d.Root)
-                .WithMany()
+                .WithMany(d => d.Revisions)
                 .HasForeignKey(x => x.Root_ID)
                 .OnDelete(DeleteBehavior.Restrict); 
             
