@@ -1,12 +1,29 @@
 <template>
     <div>
-        <file-upload
-                :upload-url="uploadUrl"
-                @uploaded="onUploaded" />
-        
+        <div class="btn-toolbar justify-content-between mb-2" role="toolbar">
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+                <span class="dx-form-group-caption">Файлы
+                    <span v-if="totalCount">
+                        ({{ totalCount }})
+                    </span>
+                    
+                        
+                </span>
+            </div>
+
+            <div class="btn-group" role="group" aria-label="Third group">
+                <file-upload
+                        class="mt-lg-0 mt-2"
+                        :upload-url="uploadUrl"
+                        @uploaded="onUploaded" />
+            </div>
+        </div>
+
         <dx-data-grid ref="dataGrid"
+                      :show-borders="true"
                       :allow-column-resizing="true"
-                      :data-source="dataSource">
+                      :data-source="dataSource"
+                      @content-ready="onDataGridContentReady">
 
             <dx-editing
                     :allow-updating="editable"
@@ -56,7 +73,7 @@
             editable: {
                 type: Boolean,
                 default: true,
-                required: false
+                required: false,
             }
         },
         computed: {
@@ -64,6 +81,7 @@
                 return new DataSource({
                     store: context.DocumentAttachment,
                     sort: ['Insert_DTS'],
+                    requireTotalCount: true,
                     filter: [
                         ['Document_ID', '=', new String(this.documentId)]
                     ]
@@ -72,16 +90,18 @@
             uploadUrl() {
                 return `${context.Document._url}(${this.documentId})/UploadAttachments?$expand=FileDesc`;
             }
-            
         },
         data() {
             return {
-          
+                totalCount: null
             }
         },
         methods: {
             onUploaded() {
                 this.$refs.dataGrid.instance.refresh();
+            },
+            onDataGridContentReady(e) {
+                this.totalCount = e.component.totalCount();
             }
         }
     }

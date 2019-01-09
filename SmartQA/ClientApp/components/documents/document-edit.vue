@@ -1,48 +1,41 @@
 <template>
     <div class="form-container">
         <h2 class="mt-4" v-if="formTitle">{{ formTitle }}</h2>
-        
-        
-            <form v-on:submit.prevent="onSubmitButtonClick" class="my-3">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <dx-form ref="form"
-                                     :col-count="2"
-                                     :form-data="formData"
-                                     :items="formItems" />
 
-                            <div>
-                                <span class="dx-form-group-caption">Файлы</span>
-                                <attachments v-if="modelKey"
-                                             :document-id="modelKey.toString()" />
+        <form v-on:submit.prevent="onSubmitButtonClick" class="my-3">
 
-                            </div>
-                            
-                        </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <dx-form ref="form"
+                             :col-count="2"
+                             :form-data="formData"
+                             :items="formItems"/>
 
 
+                    <attachments
+                            class="mt-3"
+                            v-if="modelKey"
+                            :document-id="modelKey.toString()"/>
 
-                        
-                        <div class="col-md-3">
-                            <dx-toolbar :items="toolbarItems" />    
-                        </div>
-                                
-                    </div>
+
                 </div>
-            </form>
-    
-            
-            <dx-load-panel :position="{ of: '.form-container' }"
-                           :visible="loading"
-                           :delay="100"
-                           :show-indicator="true"
-                           :show-pane="true"
-                           :shading="true"
-                           shading-color="rgba(0,0,0,0.2)"
-                           :close-on-outside-click="false"
-            />
-        
+
+                <div class="col-md-3">
+                    <dx-toolbar :items="toolbarItems"/>
+                </div>
+
+            </div>
+
+        </form>
+
+        <dx-load-panel :position="{ of: '.form-container' }"
+                       :visible="loading"
+                       :delay="100"
+                       :show-indicator="true"
+                       :show-pane="true"
+                       :shading="true"
+                       shading-color="rgba(0,0,0,0.2)"
+                       :close-on-outside-click="false"/>
 
     </div>
 </template>
@@ -98,12 +91,12 @@
                             {
                                 dataField: 'Document_Code',
                                 label: {text: 'Номер карточки'},
-                                disabled: true
+                                //disabled: true
                             },
                             {
                                 dataField: 'Issue_Date',
                                 label: {text: 'Дата регистрации'},
-                                disabled: true,
+                                //disabled: true,
                                 editorType: 'dxDateBox',
                                 editorOptions: {
                                     type: 'datetime'
@@ -124,7 +117,7 @@
                                     },
                                     valueExpr: "ID"
                                 },
-                                disabled: true
+                                //disabled: true
                             }
                         ]
                     },
@@ -133,24 +126,24 @@
                         caption: 'Документ',
                         items: [
                             {
-                                label: { text: 'Номер' },
+                                label: {text: 'Номер'},
                                 dataField: 'Document_Number',
                                 required: false
                             },
                             {
-                                label: { text: 'Дата' },
+                                label: {text: 'Дата'},
                                 dataField: 'Document_Date',
                                 editorType: 'dxDateBox',
                                 required: false
                             },
                             reftableFormItem("DocumentType", "Тип"),
                             {
-                                label: { text: 'Название' },
+                                label: {text: 'Название'},
                                 dataField: 'Document_Name',
                                 required: false
                             },
                             {
-                                label: { text: 'Страниц' },
+                                label: {text: 'Страниц'},
                                 dataField: 'TotalSheets',
                                 editorType: 'dxNumberBox',
                                 required: false
@@ -181,7 +174,7 @@
                                         store: context.PID,
                                         paginate: true,
                                         pageSize: 20,
-                                        sort: ['PID_Code'] 
+                                        sort: ['PID_Code']
                                     },
                                     displayExpr: "PID_Code",
                                     valueExpr: "ID",
@@ -194,7 +187,8 @@
                 ]
             }
         },
-        mounted() {},
+        mounted() {
+        },
         methods: {
             onCancelButtonClick() {
                 this.$router.push({

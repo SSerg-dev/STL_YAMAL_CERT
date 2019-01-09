@@ -1,8 +1,15 @@
 <template>
     <div>
-        <div class="card"
-             v-bind:class="{ dropbox: isInitial }">
-            <div class="card-body">
+        <div class="btn"
+             v-bind:class="{ 
+                dropbox: isInitial,
+                'btn-outline-dark': isInitial,
+                'btn-outline-success': isSuccess,
+                'btn-outline-danger': isFailed,
+                'btn-outline-info': isSaving 
+             }"
+             @click="function (){ if (isSuccess || isFailed) reset() }">
+            
                 <form enctype="multipart/form-data" novalidate v-if="isInitial || isSaving">
                     <input type="file"
                            multiple :name="uploadFieldName"
@@ -10,20 +17,19 @@
                            @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length"
                            accept="*"
                            class="input-file">
+                    
                     <div v-if="isInitial" class="upload-prompt">
                         <font-awesome-icon icon="upload"
-                                           class="upload-icon"
-                        />
-                        <p>
-                            Перетащите файлы сюда <br/>
-                            или нажмите для выбора
-                        </p>
+                                           class="upload-icon" />
+                        
+                        Загрузить файлы
+                        
                     </div>
 
                     <div v-if="isSaving">
-                        <p>
+                        <span>
                             Загрузка файлов ({{ fileCount }})...
-                        </p>
+                        </span>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar"
                                  :style="`width: ${percentCompleted}%`"
@@ -33,29 +39,21 @@
                 </form>
 
                 <div v-if="isSuccess">
-                    <div class="alert alert-success" role="alert">
-                        Загрузка завершена ({{ uploadedFiles.length }})
-                    </div>
-                    <button type="button" class="btn btn-info" @click="reset()">Загрузить ешё</button>
-
+                    Загружено: {{ uploadedFiles.length }}. Загрузить ещё?
                 </div>
 
                 <div v-if="isFailed">
-                    <div class="alert alert-danger" role="alert">
-                        Загрузка не удалась
-                    </div>
-                    <button type="button" class="btn btn-info" @click="reset()">Загрузить ешё</button>
-
-                    <pre>{{ uploadError }}</pre>
+                    Загрузка не удалась. Загрузить ещё?                     
                 </div>
             </div>
-        </div>
+        
         
     </div>
 </template>
 
 <script>
     import axios from 'axios';
+    import notify from 'devextreme/ui/notify';
 
     const STATUS_INITIAL = 0, STATUS_SAVING = 1, STATUS_SUCCESS = 2, STATUS_FAILED = 3;
 
@@ -110,10 +108,14 @@
                         this.uploadedFiles = [].concat(x.value);
                         this.$emit('uploaded', this.uploadedFiles);
                         this.currentStatus = STATUS_SUCCESS;
+                        notify('Файлы загружены', 'success', 5000);
+                        
                     })
                     .catch(err => {
                         this.uploadError = err.response;
                         this.currentStatus = STATUS_FAILED;
+                        notify(`Ошибка при загрузке: ${err.response}`, 'error', 5000);
+                        console.error(err.response)
                     });
             },
             filesChange(fieldName, fileList) {
@@ -143,12 +145,6 @@
 </script>
 
 <style scoped lang="scss">
-    .card {
-        display: flex;
-        //align-items: center;
-        position: relative;
-    }
-
     .input-file {
         opacity: 0; /* invisible but it's there! */
         width: 100%;
@@ -158,28 +154,5 @@
         left: 0;
         cursor: pointer;
     }
-
-    .dropbox {
-        cursor: pointer;
-    }
-
-    .dropbox:hover {
-        background: lightblue; /* when mouse over to the drop zone, change color */
-    }
-
-    .card p {
-        text-align: center;
-    }
     
-    .upload-prompt {
-        display: flex;
-        align-content: center;
-    }
-    
-    .upload-icon {
-        width: 40px;
-        height: 40px;
-        margin-right: 1em;
-        opacity: 0.2;
-    }
 </style>
