@@ -105,7 +105,7 @@
                 
                 this.$router.push({
                     name: 'document-edit',
-                    params: { id: data.ID.toString() }
+                    params: { documentId: data.ID.toString() }
                 })
                 
             }
