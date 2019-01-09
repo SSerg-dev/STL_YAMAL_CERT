@@ -1,10 +1,11 @@
 ﻿<template>
     <div class="row">
-        <div class="col-sm-3 py-3 position-fixed mh-100" 
-             style="overflow-x: hidden; overflow-y: auto;">             
+        <div class="col-sm-3 py-3 position-fixed sidebar" 
+             style="">             
             
                 <dx-list :data-source="reftablesDataSource"
                          :search-enabled="true"
+                         page-load-mode="nextButton"
                          searchExpr="Title"
                          class="nav"
                          height="auto">
@@ -55,3 +56,13 @@
     }
 </script>
 
+<style scoped>
+
+    .sidebar{
+        position: sticky;
+        height: calc(100vh - 4rem);
+        overflow-x: hidden; 
+        overflow-y: auto;    
+    }
+        
+</style>
