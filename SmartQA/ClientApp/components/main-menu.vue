@@ -7,6 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <router-link class="nav-item nav-link" to="/permission">Permission</router-link>
+                <router-link class="nav-item nav-link" to="/documents">Documents</router-link>
                 <router-link class="nav-item nav-link" to="/reftables">Reference tables</router-link>
                 <router-link
                         v-if="user && user.Roles.indexOf('Administrator') !== -1"
@@ -38,10 +39,10 @@
     </nav>
 </template>
 
-<script>    
-    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+<script>
+    import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 
-    import { AUTH_LOGOUT } from 'store/actions/auth';
+    import {AUTH_LOGOUT} from 'store/actions/auth';
 
     export default {
         components: {        
