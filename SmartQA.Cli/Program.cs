@@ -110,17 +110,23 @@ namespace SmartQA.Cli
         }
         
         static void Main(string[] args)
-        {            
-            
-            
-            var configPath = "../SmartQA/appsettings.Development.json";                       
+        {
+
+
+            //var configPath = "C:\\Users\\mi\\source\\repos\\STL_YAMAL_CERT\\SmartQA\\appsettings.Development.json";                       
+            //var dataFilePath = "C:\\Users\\mi\\source\\repos\\STL_YAMAL_CERT\\SmartQA.Cli\\data.json";
+
+            var configPath = "appsettings.Development.json";                       
+            var dataFilePath = "data.json";
+
             //const string configPath = "../SmartQA/appsettings.Production.json";                       
             var workingDir = Directory.GetCurrentDirectory();
             
             IServiceCollection services = new ServiceCollection();
             var builder = new ConfigurationBuilder();
-                        
-            builder.AddJsonFile(Path.Join(workingDir, configPath));
+
+            //builder.AddJsonFile(Path.Join(workingDir, configPath));
+            builder.AddJsonFile(configPath);
             var conf = builder.Build();
             
             Startup startup = new Startup(conf);
@@ -133,12 +139,12 @@ namespace SmartQA.Cli
 //                .CreateLogger<Program>();
                    
             Console.WriteLine("ok");
-//            using (StreamWriter sw = new StreamWriter("data.json"))
-//            {
-//                DbExport(context, sw);
-//            }
+            //            using (StreamWriter sw = new StreamWriter(dataFilePath))
+            //            {
+            //                DbExport(context, sw);
+            //            }
 
-            using (StreamReader sr = new StreamReader("data.json"))
+            using (StreamReader sr = new StreamReader(dataFilePath))
             {
                 DbImport(context, sr);
             }
