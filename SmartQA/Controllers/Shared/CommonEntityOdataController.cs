@@ -40,7 +40,7 @@ namespace SmartQA.Controllers.Shared
             return SingleResult.Create(GetQuery().Where(x => x.ID == key));            
         }
 
-        [EnableQuery]
+        [EnableQuery( MaxAnyAllExpressionDepth = 10)]
         public virtual IQueryable<TEntity> Get()
             => GetQuery();       
 

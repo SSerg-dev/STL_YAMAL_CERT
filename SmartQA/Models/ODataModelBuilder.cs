@@ -32,6 +32,12 @@ namespace SmartQA.DB
                 .OrderBy()
                 .Page()
                 .Select();  
+            
+            conf.Ignore(x => x.Created_User_ID);           
+            conf.Ignore(x => x.Modified_User_ID);
+            conf.Ignore(x => x.Insert_DTS);
+            conf.Ignore(x => x.Update_DTS);
+            conf.Ignore(x => x.RowStatus);
         
             return conf;
         }
@@ -54,6 +60,7 @@ namespace SmartQA.DB
             
             var att = BuildCommon<DocumentAttachment>(builder);
             att.Expand(SelectExpandType.Automatic, new string [] {"FileDesc"});
+            att.Property(x => x.Insert_DTS);
             
             BuildCommon<Employee>(builder);
             var person = BuildCommon<Person>(builder);
@@ -103,6 +110,7 @@ namespace SmartQA.DB
             
             var naks = BuildCommon<DocumentNaks>(builder);
             naks.CollectionProperty(x => x.HIFGroup_IDs);
+            naks.ContainsMany(x => x.HIFGroupSet);
 
             var attest = BuildCommon<DocumentNaksAttest>(builder);
             attest.CollectionProperty(x => x.DetailsType_IDs);

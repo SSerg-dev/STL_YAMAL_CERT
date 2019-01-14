@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Protocols;
@@ -39,7 +40,9 @@ namespace SmartQA
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(options => 
-                options.UseSqlServer(Configuration.GetConnectionString("Data")));            
+                options.UseSqlServer(Configuration.GetConnectionString("Data"))
+                        .ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning))
+                );            
             
             services.AddIdentity<ApplicationUser, Role>()                
                 .AddUserStore<UserStore>()

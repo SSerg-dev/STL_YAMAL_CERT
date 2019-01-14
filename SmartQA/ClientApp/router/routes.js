@@ -1,4 +1,5 @@
 import PermissionDocsIndex from 'components/permission-docs/index'
+import NaksPersonReport from 'components/permission-docs/reports/naks-person-report'
 import ReftablesIndex from 'components/reftables/index'
 import HomePage from 'components/home'
 import LoginPage from 'components/account/login-page'
@@ -75,7 +76,7 @@ export const routes = [
             employeeId: route.params.employeeId,
             edit: route.query.edit
         }),
-        display: 'Permission',
+        
         beforeEnter: ifAuthenticated('Administrator'),
     },
 
@@ -87,15 +88,22 @@ export const routes = [
             employeeId: route.params.employeeId,
             edit: route.query.edit
         }),
-        display: 'Permission',
+        
         beforeEnter: ifAuthenticated(),
+    },
+    {
+        name: 'naks-person-report',
+        path: '/naks-person-report',
+        component: NaksPersonReport,
+        beforeEnter: ifAuthenticated(),
+        
     },
     {
         name: 'reftables',
         path: '/reftables/:modelName?',
         component: ReftablesIndex,
         props: true,
-        display: 'Reftables',
+
         beforeEnter: ifAuthenticated(),
     },
     {
