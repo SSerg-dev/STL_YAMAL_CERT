@@ -138,6 +138,26 @@ namespace SmartQA.DB
                 "DetailsTypeSet"
             });
 
+            //ndt
+            var ndt = BuildCommon<DocumentNDT>(builder);
+
+            var it = BuildCommon<DocumentNDTIT>(builder);
+            it.CollectionProperty(x => x.InspectionSubject_IDs);
+            
+
+            it.ContainsMany(x => x.InspectionSubjectSet);
+            it.ContainsOptional(x => x.Level);
+            it.ContainsOptional(x => x.InspectionTechnique);
+
+
+            it.Expand(SelectExpandType.Automatic, new[]
+            {
+                "InspectionSubjectSet",
+                "Level",
+                "InspectionTechnique"
+
+            });
+
             // create models  for reftables
 
             foreach (var reftableType in Reftable.GetReftableTypes())

@@ -40,6 +40,10 @@
                 <h3>Удостоверения НАКС</h3>
                 <naks-list :person-id="employee.Person_ID.toString()" />
             </div>
+            <div class="pt-5">
+                <h3>Удостоверения НК</h3>
+                <ndt-list :person-id="employee.Person_ID.toString()" />
+            </div>
         </div>
 
     </div>
@@ -57,6 +61,7 @@
     import {employeeDataSource} from './employee-data.js'
 
     import NaksList from './documents/naks-list';
+    import NdtList from './documents/ndt-list';
 
     export default {
         components: {
@@ -64,7 +69,8 @@
             DxLoadPanel,
             DxButton,
             DxToolbar,
-            NaksList
+            NaksList,
+            NdtList
         },
         props: {
             'employeeId' : String
