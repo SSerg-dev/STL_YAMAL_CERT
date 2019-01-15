@@ -1,6 +1,7 @@
 <template>
-    <div class="naks-person-report">
+    <div class="naks-report">
         <dx-data-grid
+                class="naks-report-data-grid mt-2"
                 ref="dataGrid"
                 :data-source="dataSource"
                 :remote-operations="true"
@@ -15,19 +16,20 @@
             <dx-column-fixing
                     :enabled="true"/>
 
-            <dx-paging
-                    :enabled="true"/>
+            <dx-scrolling
+                    mode="virtual"/>
 
             <dx-pager
+                    :visible="true"
                     :show-info="true"
                     :show-page-size-selector="true"
                     :allowed-page-sizes="[20, 50, 100, 200]"/>
 
-            <dx-selection
-                    :allow-select-all="true"
-                    :deferred="true"
-                    mode="multiple"
-                    select-all-mode="allPages"/>
+            <!--<dx-selection-->
+                    <!--:allow-select-all="true"-->
+                    <!--:deferred="true"-->
+                    <!--mode="multiple"-->
+                    <!--select-all-mode="allPages"/>-->
 
             <dx-export
                     :enabled="true"
@@ -48,10 +50,10 @@
                        :allow-header-filtering="false"
                        :fixed="true"/>
 
-            <dx-column data-field="Person.BirthDate"
-                       data-type="date"
-                       format="year"
-                       :allow-filtering="false"
+            <dx-column data-field="Person.BirthYear"
+                       data-type="number"
+                       :allow-filtering="true"
+                       :allow-header-filtering="false"
                        caption="Год рождения"/>
 
             <dx-column data-field="Person.Organization"
@@ -76,6 +78,7 @@
             <dx-column data-field="IssueDate"
                        data-type="date"
                        format="shortDate"
+                       :allow-filtering="true"
                        :allow-header-filtering="false"
                        caption="Дата выдачи"/>
 
@@ -89,6 +92,10 @@
             <dx-column data-field="IsValid"
                        data-type="boolean"
                        :allow-header-filtering="true"
+                       :header-filter="{ allowSearch: false, dataSource: [
+                        {text: 'Да', value: ['IsValid', '=', true]},
+                        {text: 'Нет', value: ['IsValid', '=', false]},
+                       ]}"
                        caption="Действует"/>
 
             <dx-column data-field="Schifr"
@@ -276,6 +283,13 @@
     }
 </script>
 
-<style scoped>
-
+<style >
+    .naks-report{
+        height: calc(100vh - 5rem);
+        position: relative;
+    }
+    .naks-report-data-grid {
+        height: 100%;
+        
+    }
 </style>

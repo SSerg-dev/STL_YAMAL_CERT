@@ -6,6 +6,8 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Options;
@@ -40,6 +42,13 @@ namespace SmartQA.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _appSettings = appSettings.Value;
+        }
+
+        private class BadFilterException : Exception
+        {
+            public BadFilterException(string message) : base(message)
+            {
+            }
         }
 
         public IQueryable<DocumentNaks> BaseQuery()
@@ -83,63 +92,106 @@ namespace SmartQA.Controllers
                 .OrderBy(x => x.Person.LastName);
         }
 
+        public Dictionary<string, object> PropertyExpressions =
+            new Dictionary<string, object>
+            {
+                ["Person.FullName"] = (Expression<Func<DocumentNaks, string>>)
+                    (naks => naks.Person.LastName + " " + naks.Person.FirstName +
+                             (naks.Person.SecondName == null ? "" : " " + naks.Person.SecondName)),
+                ["Person.BirthYear"] = (Expression<Func<DocumentNaks, long>>)
+                    (naks => ((DateTime)naks.Person.BirthDate).Year),
+                ["IsValid"] = (Expression<Func<DocumentNaks, bool>>)
+                              (naks => naks.ValidUntil < DateTime.Today)
+                
+            };
+
+        public LambdaExpression GetPropertyExpression(string propertyName)
+        {
+            if (PropertyExpressions.ContainsKey(propertyName))
+                return (LambdaExpression) PropertyExpressions[propertyName];
+
+            var property = typeof(DocumentNaks).GetProperty(propertyName);
+            if (property != null && PredicateBuilder.PropertyTypesSupported.Contains(
+                    Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType
+                    ))
+            {
+                var argParam = Expression.Parameter(typeof(DocumentNaks), "n");
+                return Expression.Lambda(Expression.Property(argParam, propertyName), argParam);
+            }
+
+            return null;
+        }
+
         public Expression<Func<DocumentNaks, bool>> MakeFilterClause(IList<object> filter)
         {
             var field = (string) filter[0];
             var operator_ = (string) filter[1];
-            var value = (string) filter[2];
+            var value = filter[2];
+
+            // handle filter on a property
+            var propertyExpr = GetPropertyExpression(field);
+            if (propertyExpr != null)
+            {
+                try
+                {
+                    return PredicateBuilder.MakePropertyFilterExprTyped(
+                        typeof(DocumentNaks), propertyExpr.ReturnType,
+                        propertyExpr, operator_, value);
+                }
+                catch (PredicateBuilder.OperationNotSupported e)
+                {
+                    throw new BadFilterException(e.Message);
+                }
+            }
 
             switch (field)
             {
                 case "Person.Organization":
-                    return n => n.Person.Employees.Any(e => e.Contragent_ID == Guid.Parse(value));
+                    return n => n.Person.Employees.Any(e => e.Contragent_ID == Guid.Parse((string) value));
                 case "WeldType":
-                    return n => n.WeldType_ID == Guid.Parse(value);                    
+                    return n => n.WeldType_ID == Guid.Parse((string) value);
                 case "HIFGroup":
                     return n => n.DocumentNaks_to_HIFGroupSet.Any(
-                        x => x.HIFGroup_ID == Guid.Parse(value)
+                        x => x.HIFGroup_ID == Guid.Parse((string) value)
                     );
                 case "DetailsType":
                     return n => n.DocumentNaksAttestSet
                         .Any(na => na.DocumentNaksAttest_to_DetailsTypeSet
-                            .Any(x => x.DetailsType_ID == Guid.Parse(value)));
+                            .Any(x => x.DetailsType_ID == Guid.Parse((string) value)));
                 case "SeamsType":
                     return n => n.DocumentNaksAttestSet
                         .Any(na => na.DocumentNaksAttest_to_SeamsTypeSet
-                            .Any(x => x.SeamsType_ID == Guid.Parse(value)));
+                            .Any(x => x.SeamsType_ID == Guid.Parse((string) value)));
                 case "JointType":
                     return n => n.DocumentNaksAttestSet
                         .Any(na => na.DocumentNaksAttest_to_JointTypeSet
-                            .Any(x => x.JointType_ID == Guid.Parse(value)));
+                            .Any(x => x.JointType_ID == Guid.Parse((string) value)));
                 case "WeldMaterialGroup":
                     return n => n.DocumentNaksAttestSet
                         .Any(na => na.DocumentNaksAttest_to_WeldMaterialGroupSet
-                            .Any(x => x.WeldMaterialGroup_ID == Guid.Parse(value)));
+                            .Any(x => x.WeldMaterialGroup_ID == Guid.Parse((string) value)));
                 case "WeldMaterial":
                     return n => n.DocumentNaksAttestSet
                         .Any(na => na.DocumentNaksAttest_to_WeldMaterialSet
-                            .Any(x => x.WeldMaterial_ID == Guid.Parse(value)));
+                            .Any(x => x.WeldMaterial_ID == Guid.Parse((string) value)));
                 case "WeldPosition":
                     return n => n.DocumentNaksAttestSet
                         .Any(na => na.DocumentNaksAttest_to_WeldPositionSet
-                            .Any(x => x.WeldPosition_ID == Guid.Parse(value)));
+                            .Any(x => x.WeldPosition_ID == Guid.Parse((string) value)));
                 case "JointKind":
                     return n => n.DocumentNaksAttestSet
                         .Any(na => na.DocumentNaksAttest_to_JointKindSet
-                            .Any(x => x.JointKind_ID == Guid.Parse(value)));
+                            .Any(x => x.JointKind_ID == Guid.Parse((string) value)));
                 case "WeldGOST14098":
                     return n => n.DocumentNaksAttestSet
                         .Any(na => na.DocumentNaksAttest_to_WeldGOST14098Set
-                            .Any(x => x.WeldGOST14098_ID == Guid.Parse(value)));
+                            .Any(x => x.WeldGOST14098_ID == Guid.Parse((string) value)));
                 case "WeldingEquipmentAutomationLevel":
                     return n => n.DocumentNaksAttestSet
-                        .Any(na => na.WeldingEquipmentAutomationLevel_ID == Guid.Parse(value));
-                
-                        
-            }        
+                        .Any(na => na.WeldingEquipmentAutomationLevel_ID == Guid.Parse((string) value));
+            }
 
-
-            throw new NotImplementedException();
+            throw new BadFilterException($"Unsupported filter: {filter}");
         }
 
         public Expression<Func<DocumentNaks, bool>> MakeFilterPredicate(IList filter)
@@ -209,6 +261,7 @@ namespace SmartQA.Controllers
                             FirstName = naks.Person.FirstName,
                             SecondName = naks.Person.SecondName,
                             BirthDate = naks.Person.BirthDate,
+                            BirthYear = ((DateTime)naks.Person.BirthDate).Year,
                             FullName = naks.Person.LastName + " " + naks.Person.FirstName +
                                        (naks.Person.SecondName == null ? "" : " " + naks.Person.SecondName),
                             Organization = naks.Person.Employees.OrderBy(e => e.ID).Select(x => x.Contragent.Title)
@@ -280,7 +333,16 @@ namespace SmartQA.Controllers
         [HttpPost]
         public async Task<IActionResult> GetData([FromBody] NaksPersonReportQuery q)
         {
-            var fullQuery = GetQuery(q);
+            IQueryable<NaksUI> fullQuery;
+            try
+            {
+                fullQuery = GetQuery(q);
+            }
+            catch (BadFilterException e)
+            {
+                return BadRequest(e.Message);
+            }
+
             var query = fullQuery;
 
             if (q.skip != null) query = query.Skip((int) q.skip);
