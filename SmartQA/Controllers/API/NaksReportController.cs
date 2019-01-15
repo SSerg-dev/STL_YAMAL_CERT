@@ -92,6 +92,7 @@ namespace SmartQA.Controllers
                 .OrderBy(x => x.Person.LastName);
         }
 
+        // used for filtering
         public Dictionary<string, object> PropertyExpressions =
             new Dictionary<string, object>
             {
@@ -204,10 +205,18 @@ namespace SmartQA.Controllers
                 return MakeFilterClause(parts);
             }
 
+            if (parts.Count == 2 && parts[0] is string s && s == "!")
+            {
+                var p = MakeFilterPredicate(parts[1] as IList);
+                return Expression.Lambda<Func<DocumentNaks, bool>>(
+                    Expression.Not(p.Body), p.Parameters);
+            } 
+            
+
             string operation = null;
             var predicate = default(Expression<Func<DocumentNaks, bool>>);
 
-            foreach (var f in parts)
+            foreach (var  f in parts)
             {
                 switch (f)
                 {
@@ -222,7 +231,7 @@ namespace SmartQA.Controllers
                             case "and":
                                 predicate = predicate.And(filterPredicate);
                                 break;
-                            case "or ":
+                            case "or":
                                 predicate = predicate.Or(filterPredicate);
                                 break;
                             default:
