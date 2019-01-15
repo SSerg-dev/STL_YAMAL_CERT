@@ -10,6 +10,9 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="appsettings.Development.json" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="app.vue" />
     <None Remove="ClientApp\auth\headers.js" />
     <None Remove="ClientApp\index.js" />
@@ -40,6 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ClientApp\images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="appsettings.Development.json" />
   </ItemGroup>
   <ItemGroup>
     <DistFiles Remove="wwwroot\dist\**" />

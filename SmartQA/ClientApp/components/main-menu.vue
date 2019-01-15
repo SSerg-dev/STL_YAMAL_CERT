@@ -7,7 +7,11 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <router-link class="nav-item nav-link" to="/permission">Permission</router-link>
-                <router-link class="nav-item nav-link" to="/documents">Documents</router-link>
+                <router-link 
+                        v-if="user && user.Roles.indexOf('Administrator') !== -1"                        
+                        class="nav-item nav-link" to="/documents">
+                Documents
+                </router-link>
                 <router-link class="nav-item nav-link" to="/reftables">Reference tables</router-link>
                 <router-link
                         v-if="user && user.Roles.indexOf('Administrator') !== -1"

@@ -109,30 +109,26 @@ export const routes = [
     {
         name: 'documents',
         path: '/documents',
-        beforeEnter: ifAuthenticated(),
         component: DocumentsIndex,
+        beforeEnter: ifAuthenticated('Administrator'),
     },       
     {
         name: 'document-view',
         path: '/documents/:documentId',
         component: DocumentView,
         props: true,
-        // props: (route) => ({
-        //     editorSettings: {
-        //         modelKey: route.params.id
-        //     }
-        // }),
+        beforeEnter: ifAuthenticated('Administrator'),
     },
     {
         name: 'document-edit',
         path: '/documents/edit/:documentId',
         component: DocumentEdit,
-        props: true,
         props: (route) => ({
             editorSettings: {
                 modelKey: route.params.documentId
             }
         }),
+        beforeEnter: ifAuthenticated('Administrator'),
     }
 
 ];

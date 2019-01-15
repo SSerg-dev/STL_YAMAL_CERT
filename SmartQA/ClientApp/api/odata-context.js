@@ -35,6 +35,8 @@ let context = new ODataContext({
         DocumentType: common_entity_conf(),
         DocumentNaks: common_entity_conf(),
         DocumentNaksAttest: common_entity_conf(),
+        DocumentNDT: common_entity_conf(),
+        DocumentNdtIt: common_entity_conf(),
         AccessToPIStaffFunction: common_entity_conf(),
         AccessToPIVoltageRange: common_entity_conf(),
         AttCenterNaks: common_entity_conf(),
