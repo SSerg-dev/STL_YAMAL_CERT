@@ -146,7 +146,7 @@
                        :allow-header-filtering="true"
                        :header-filter="{ allowSearch: true, dataSource: getReftableDataSource('WeldMaterial')}"
                        :filter-operations="['anyof']"
-                       :calculate-display-value="calculateDisplayValueFunc('WeldMaterial')"
+                       :calculate-display-value="displayValueWeldMaterial"
                        caption="Сварочные материалы"/>
 
             <dx-column data-field="DetailWidth"
@@ -161,7 +161,7 @@
                        :allow-header-filtering="true"
                        :header-filter="{ allowSearch: true, dataSource: getReftableDataSource('WeldPosition')}"
                        :filter-operations="['anyof']"
-                       :calculate-display-value="calculateDisplayValueFunc('WeldPosition')"
+                       :calculate-display-value="displayValueWeldPosition"
                        caption="Положение при сварке"/>
 
             <dx-column data-field="JointKind"
@@ -269,6 +269,26 @@
                     sort: 'Title',
                     store: store,
                 };
+            },
+            displayValueWeldPosition(data) {
+                if (data['WeldPosition'].includes('Ручнойввод')) {
+                    return data['WeldPositionCustom']
+                } else {
+                    return data['WeldPosition']
+                        .map(x => x.replace(/ /g, '\u00a0'))
+                        .join(', ');                    
+                }
+            },
+            displayValueWeldMaterial(data) {
+                if (data['WeldMaterial'].includes('Ручной ввод')) {
+                    return [data['WeldingWire'], data['ShieldingGasFlux']]
+                        .filter(x => !!x)
+                        .join('; ')
+                } else {
+                    return data['WeldMaterial']
+                        .map(x => x.replace(/ /g, '\u00a0'))
+                        .join(', ');
+                }
             },
             calculateDisplayValueFunc(fieldName){
                 return function (data) {

@@ -1,7 +1,7 @@
 import PermissionIndex from 'components/permission-docs/index'
 import PermissionEmployeesIndex from 'components/permission-docs/employees/index'
 
-import NaksPersonReport from 'components/permission-docs/reports/naks-person-report'
+import NaksReport from 'components/permission-docs/reports/naks-report'
 import ReftablesIndex from 'components/reftables/index'
 import HomePage from 'components/home'
 import LoginPage from 'components/account/login-page'
@@ -97,7 +97,7 @@ export const routes = [
             {
                 name: 'permission-naks-report',
                 path: 'naks-report',
-                component: NaksPersonReport,
+                component: NaksReport,
             }
         ],
         beforeEnter: ifAuthenticated(),
