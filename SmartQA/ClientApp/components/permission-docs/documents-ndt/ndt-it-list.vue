@@ -74,7 +74,7 @@
     import DxToolbar from 'devextreme-vue/toolbar';
     import DataSource from 'devextreme/data/data_source';
     import DxPopup from 'devextreme-vue/popup';
-    import {dataSourceConfsNDT} from './data.js';
+    import {dataSourceConfs} from './data.js';
 
     import NdtItEdit from './ndt-it-edit';
 
@@ -102,7 +102,7 @@
                 loading: false,
                 model: null,
                 error: null,
-                dataSource: dataSourceConfsNDT.documentNDTDetailed,
+                dataSource: dataSourceConfs.documentNDTDetailed,
                 editorSettings: {},
                 editorIndex: 0,
                 toolbarItems: [
@@ -169,7 +169,7 @@
             },
             onDeleteButtonClick(event, modelId) {
                 var component = this;
-                confirm("Really delete?", "Confirm")
+                confirm("Действительно удалить?", "Подтверждение")
                     .done(function (dialogResult) {
                         if (dialogResult) {
 

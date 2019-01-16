@@ -253,7 +253,7 @@
             },
             onDeleteButtonClick(event, modelId) {
                 var component = this;
-                confirm("Really delete?", "Confirm")
+                confirm("Действительно удалить?", "Подтверждение")
                     .done(function (dialogResult) {
                         if (dialogResult) {
                             

@@ -215,7 +215,7 @@
             },
             onDeleteRowButtonClick(event, model) {
                 var component = this;
-                confirm("Really delete?", "Confirm")
+                confirm("Действительно удалить?", "Подтверждение")
                     .done(function (dialogResult) {
                         if (dialogResult) {
                             let source = new DataSource(component.dataSource);

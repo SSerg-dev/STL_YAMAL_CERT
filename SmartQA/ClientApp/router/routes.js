@@ -1,4 +1,6 @@
-import PermissionDocsIndex from 'components/permission-docs/index'
+import PermissionIndex from 'components/permission-docs/index'
+import PermissionEmployeesIndex from 'components/permission-docs/employees/index'
+
 import NaksPersonReport from 'components/permission-docs/reports/naks-person-report'
 import ReftablesIndex from 'components/reftables/index'
 import HomePage from 'components/home'
@@ -65,7 +67,7 @@ export const routes = [
         name: 'login',
         path: '/login',
         component: LoginPage,
-        meta: { layout: 'blank' },
+        meta: {layout: 'blank'},
         beforeEnter: ifNotAuthenticated,
     },
     {
@@ -76,27 +78,29 @@ export const routes = [
             employeeId: route.params.employeeId,
             edit: route.query.edit
         }),
-        
+
         beforeEnter: ifAuthenticated('Administrator'),
     },
-
     {
-        name: 'permission',
-        path: '/permission/:employeeId?',
-        component: PermissionDocsIndex,
-        props: (route) => ({
-            employeeId: route.params.employeeId,
-            edit: route.query.edit
-        }),
-        
+        name: 'permission', component: PermissionIndex,
+        path: '/permission',
+        children: [
+            {
+                name: 'permission-employees',
+                path: 'employees/:employeeId?',
+                component: PermissionEmployeesIndex,
+                props: (route) => ({
+                    employeeId: route.params.employeeId,
+                    edit: route.query.edit
+                }),
+            },
+            {
+                name: 'permission-naks-report',
+                path: 'naks-report',
+                component: NaksPersonReport,
+            }
+        ],
         beforeEnter: ifAuthenticated(),
-    },
-    {
-        name: 'naks-person-report',
-        path: '/naks-person-report',
-        component: NaksPersonReport,
-        beforeEnter: ifAuthenticated(),
-        
     },
     {
         name: 'reftables',
@@ -111,7 +115,7 @@ export const routes = [
         path: '/documents',
         component: DocumentsIndex,
         beforeEnter: ifAuthenticated('Administrator'),
-    },       
+    },
     {
         name: 'document-view',
         path: '/documents/:documentId',
