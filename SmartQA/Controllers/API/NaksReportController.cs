@@ -277,34 +277,34 @@ namespace SmartQA.Controllers
                         Number = naks.Number,
                         Schifr = naks.Schifr,
                         WeldType = naks.WeldType.Title,
-                        HIFGroup = naks.DocumentNaks_to_HIFGroupSet.Select(x => x.HIFGroup.Title).ToList(),
+                        HIFGroup = attest.DocumentNaks.DocumentNaks_to_HIFGroupSet.Select(x => x.HIFGroup.Title).OrderBy(x => x).ToList(),
                         IssueDate = naks.IssueDate,
                         ValidUntil = naks.ValidUntil,
                         IsValid = naks.ValidUntil < DateTime.Today,
 
                         DetailsType = attest == null
                             ? (IEnumerable<string>) new string[] { }
-                            : attest.DocumentNaksAttest_to_DetailsTypeSet.Select(x => x.DetailsType.Title).ToList(),
+                            : attest.DocumentNaksAttest_to_DetailsTypeSet.Select(x => x.DetailsType.Title).OrderBy(x => x).ToList(),
                         DetailWidth = attest == null ? null : attest.DetailWidth,
                         JointKind = attest == null
                             ? (IEnumerable) new string[] { }
-                            : attest.DocumentNaksAttest_to_JointKindSet.Select(x => x.JointKind.Title).ToList(),
+                            : attest.DocumentNaksAttest_to_JointKindSet.Select(x => x.JointKind.Title).OrderBy(x => x).ToList(),
                         JointType = attest == null
                             ? (IEnumerable) new string[] { }
-                            : attest.DocumentNaksAttest_to_JointTypeSet.Select(x => x.JointType.Title).ToList(),
+                            : attest.DocumentNaksAttest_to_JointTypeSet.Select(x => x.JointType.Title).OrderBy(x => x).ToList(),
                         OuterDiameter = attest == null ? (IEnumerable) new string[] { } : attest.OuterDiameter,
                         SeamsType = attest == null
                             ? (IEnumerable) new string[] { }
-                            : attest.DocumentNaksAttest_to_SeamsTypeSet.Select(x => x.SeamsType.Title).ToList(),
+                            : attest.DocumentNaksAttest_to_SeamsTypeSet.Select(x => x.SeamsType.Title).OrderBy(x => x).ToList(),
                         SDR = attest == null ? null : attest.SDR,
                         ShieldingGasFlux = attest == null ? (IEnumerable) new string[] { } : attest.ShieldingGasFlux,
                         WeldingWire = attest == null ? null : attest.WeldingWire,
                         WeldMaterial = attest == null
                             ? (IEnumerable) new string[] { }
-                            : attest.DocumentNaksAttest_to_WeldMaterialSet.Select(x => x.WeldMaterial.Title).ToList(),
+                            : attest.DocumentNaksAttest_to_WeldMaterialSet.Select(x => x.WeldMaterial.Title).OrderBy(x => x).ToList(),
                         WeldPosition = attest == null
                             ? (IEnumerable) new string[] { }
-                            : attest.DocumentNaksAttest_to_WeldPositionSet.Select(x => x.WeldPosition.Title).ToList(),
+                            : attest.DocumentNaksAttest_to_WeldPositionSet.Select(x => x.WeldPosition.Title).OrderBy(x => x).ToList(),
                         WeldMaterialGroup = attest == null
                             ? (IEnumerable) new string[] { }
                             : attest.DocumentNaksAttest_to_WeldMaterialGroupSet.Select(x => x.WeldMaterialGroup.Title)
@@ -314,7 +314,7 @@ namespace SmartQA.Controllers
                             attest == null ? null : attest.WeldingEquipmentAutomationLevel.Title,
                         WeldGOST14098 = attest == null
                             ? (IEnumerable) new string[] { }
-                            : attest.DocumentNaksAttest_to_WeldGOST14098Set.Select(x => x.WeldGOST14098.Title).ToList(),
+                            : attest.DocumentNaksAttest_to_WeldGOST14098Set.Select(x => x.WeldGOST14098.Title).OrderBy(x => x).ToList(),
                     });
         }
 
