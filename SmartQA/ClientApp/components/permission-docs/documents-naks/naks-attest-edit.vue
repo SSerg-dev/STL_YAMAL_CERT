@@ -55,7 +55,7 @@
             naksAttestIndex: {
                 type: Number,
                 default: () => null,
-                required: true,
+                required: false,
             }
         },
         computed: {

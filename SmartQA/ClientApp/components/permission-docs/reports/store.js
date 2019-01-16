@@ -10,13 +10,11 @@ function store() {
         key: 'ID',
 
         load(loadOptions) {
-            console.log('load', loadOptions);
             return axios({url: urlGetData, data: loadOptions, method: 'POST'})
                 .then(resp => resp.data);
 
         },
         totalCount(loadOptions) {
-            console.log('totalCount', loadOptions);
             return axios({url: urlTotalCount, data: loadOptions, method: 'POST'})
                 .then(resp => resp.data);
         }
