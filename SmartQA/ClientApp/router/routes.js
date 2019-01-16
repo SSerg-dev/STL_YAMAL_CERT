@@ -39,7 +39,9 @@ export const routes = [
         }
     },
     {
-        name: 'permission', component: PermissionIndex,
+        name: 'permission', 
+        component: PermissionIndex,
+        redirect: { name: 'permission-employees' },
         path: '/permission',
         children: [
             {

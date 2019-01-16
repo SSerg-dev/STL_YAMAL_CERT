@@ -1,19 +1,16 @@
 <template>
-    <div class="mt-5">
-       
+    <div class="container-fluid py-4">
+        <h2>Документы</h2>
         <document-list />
     </div>
 </template>
 
 <script>
 
-    import DataSource from 'devextreme/data/data_source'
-    import DxToolbar from  'devextreme-vue/toolbar'
-    import DxButton from 'devextreme-vue/button'
-    
+    import DxToolbar from 'devextreme-vue/toolbar'
     import DxItem from 'devextreme-vue/toolbar'
+    import DxButton from 'devextreme-vue/button'
     import DocumentList from "./document-list";
-    import { dataSourceConfs} from "./data";
 
     export default {
         name: "DocumentsIndex",

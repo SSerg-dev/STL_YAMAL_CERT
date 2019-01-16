@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="py-4">
         <dx-toolbar :items="toolbarItems"/>
 
         <dx-data-grid ref="dataGrid"

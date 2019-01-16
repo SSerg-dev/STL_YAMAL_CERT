@@ -10,10 +10,9 @@
         </div>
         <div v-if="userProfile">
             <main-menu />
-    
-            <div class="container-fluid">
-                <router-view></router-view>
-            </div>
+            
+            <router-view></router-view>
+            
         </div>
     </div>
 </template>

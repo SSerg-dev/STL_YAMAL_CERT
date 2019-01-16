@@ -5,6 +5,7 @@
                 ref="dataGrid"
                 :data-source="dataSource"
                 :remote-operations="true"
+                :sorting="{mode: 'none'}"
                 :column-auto-width="true"
                 :show-borders="true"
                 :show-row-lines="true"
@@ -30,6 +31,8 @@
                     <!--:deferred="true"-->
                     <!--mode="multiple"-->
                     <!--select-all-mode="allPages"/>-->
+            <dx-filter-row
+                    :visible="true"/>
 
             <dx-export
                     :enabled="true"
@@ -57,6 +60,7 @@
                        caption="Год рождения"/>
 
             <dx-column data-field="Person.Organization"
+                       :allow-filtering="false"
                        :allow-header-filtering="true"
                        :header-filter="{
                            allowSearch: true, 
@@ -70,6 +74,7 @@
                        caption="Должность"/>
 
             <dx-column data-field="Number"
+                       :allow-sorting="false"
                        :width="150"
                        :allow-filtering="true"
                        :allow-header-filtering="false"
@@ -91,6 +96,7 @@
 
             <dx-column data-field="IsValid"
                        data-type="boolean"
+                       :allow-filtering="false"
                        :allow-header-filtering="true"
                        :header-filter="{ allowSearch: false, dataSource: [
                         {text: 'Да', value: ['IsValid', '=', true]},
@@ -104,25 +110,31 @@
                        caption="Шифр"/>
 
             <dx-column data-field="WeldType"
+                       :allow-filtering="false"
                        :allow-header-filtering="true"
                        :header-filter="{ allowSearch: true, dataSource: getReftableDataSource('WeldType')}"
+                       :filter-operations="['anyof']"
                        caption="Вид (способ) сварки (наплавки)"/>
 
             <dx-column data-field="HIFGroup"
                        :width="200"
+                       :allow-filtering="false"
                        :allow-header-filtering="true"
-                       :header-filter="{ allowSearch: true, dataSource: getReftableDataSource('HIFGroup')}"         
+                       :header-filter="{ allowSearch: true, dataSource: getReftableDataSource('HIFGroup')}"
+                       :filter-operations="['anyof']"
                        :calculate-display-value="calculateDisplayValueFunc('HIFGroup')"
                        caption="Группа технических устройств"/>
 
             <dx-column data-field="DetailsType"
                        caption="Вид деталей"
+                       :allow-filtering="false"
                        :allow-header-filtering="true"
                        :header-filter="{ allowSearch: true, dataSource: getReftableDataSource('DetailsType')}"
                        :filter-operations="['anyof']"
                        :calculate-display-value="calculateDisplayValueFunc('DetailsType')" />
             
             <dx-column data-field="SeamsType"
+                       :allow-filtering="false"
                        :allow-header-filtering="true"
                        :header-filter="{ allowSearch: true, dataSource: getReftableDataSource('SeamsType')}"
                        :filter-operations="['anyof']"
@@ -130,12 +142,14 @@
                        caption="Типы швов"/>
 
             <dx-column data-field="JointType"
+                       :allow-filtering="false"
                        :allow-header-filtering="true"
                        :header-filter="{ allowSearch: true, dataSource: getReftableDataSource('JointType')}"
                        :filter-operations="['anyof']"
                        caption="Тип соединения"/>
 
             <dx-column data-field="WeldMaterialGroup"
+                       :allow-filtering="false"
                        :allow-header-filtering="true"
                        :header-filter="{ allowSearch: true, dataSource: getReftableDataSource('WeldMaterialGroup')}"
                        :filter-operations="['anyof']"
@@ -143,6 +157,7 @@
                        caption="Группа свариваемого материала"/>
 
             <dx-column data-field="WeldMaterial"
+                       :allow-filtering="false"
                        :allow-header-filtering="true"
                        :header-filter="{ allowSearch: true, dataSource: getReftableDataSource('WeldMaterial')}"
                        :filter-operations="['anyof']"
@@ -150,14 +165,17 @@
                        caption="Сварочные материалы"/>
 
             <dx-column data-field="DetailWidth"
+                       :allow-filtering="true"
                        :allow-header-filtering="false"
                        caption="Толщина деталей, мм"/>
 
             <dx-column data-field="OuterDiameter"
+                       :allow-filtering="true"
                        :allow-header-filtering="false"
                        caption="Наружный диаметр, мм"/>
 
             <dx-column data-field="WeldPosition"
+                       :allow-filtering="false"
                        :allow-header-filtering="true"
                        :header-filter="{ allowSearch: true, dataSource: getReftableDataSource('WeldPosition')}"
                        :filter-operations="['anyof']"
@@ -165,6 +183,7 @@
                        caption="Положение при сварке"/>
 
             <dx-column data-field="JointKind"
+                       :allow-filtering="false"
                        :allow-header-filtering="true"
                        :header-filter="{ allowSearch: true, dataSource: getReftableDataSource('JointKind')}"
                        :filter-operations="['anyof']"
@@ -172,6 +191,7 @@
                        caption="Вид соединения"/>
 
             <dx-column data-field="WeldGOST14098"
+                       :allow-filtering="false"
                        :allow-header-filtering="true"
                        :header-filter="{ allowSearch: true, dataSource: getReftableDataSource('WeldGOST14098')}"
                        :filter-operations="['anyof']"
@@ -179,8 +199,9 @@
                        caption="Обозначение по ГОСТ 14098"/>
 
             <dx-column data-field="WeldingEquipmentAutomationLevel"
-                       :header-filter="{ allowSearch: true, dataSource: getReftableDataSource('WeldingEquipmentAutomationLevel')}"
+                       :allow-filtering="false"
                        :allow-header-filtering="true"
+                       :header-filter="{ allowSearch: true, dataSource: getReftableDataSource('WeldingEquipmentAutomationLevel')}"
                        :filter-operations="['anyof']"
                        caption="Степень автоматизации сварочного оборудования"/>
 

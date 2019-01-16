@@ -6,18 +6,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Разрешительная документация
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <router-link class="dropdown-item" to="/permission/employees">Персонал</router-link>
-                        <router-link class="dropdown-item" to="/permission/naks-report">Отчёт по свидетельствам НАКС</router-link>
-                    </div>
-                </li>
-                
-                <router-link class="nav-item nav-link" to="/permission"></router-link>
+              
+                <router-link class="nav-item nav-link" to="/permission">Разрешительная документация</router-link>
                 <router-link 
                         v-if="user && user.Roles.indexOf('Administrator') !== -1"                        
                         class="nav-item nav-link" to="/documents">

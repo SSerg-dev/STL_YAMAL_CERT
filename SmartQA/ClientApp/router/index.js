@@ -43,8 +43,6 @@ router.beforeEach(async (to, from, next) => {
             else if (Array.isArray(r)) return new Set(r);
             else return new Set([]);
         }).reduce((acc, val) => {val.forEach(x => acc.add(x)); return acc}, new Set([]));
-        console.debug('userProfile', userProfile)
-        console.debug('roles', requiredRoles)
         
         if (userProfile && (requiredRoles.size === 0 || userProfile.Roles.some(r => requiredRoles.has(r)))) {
             next();    
