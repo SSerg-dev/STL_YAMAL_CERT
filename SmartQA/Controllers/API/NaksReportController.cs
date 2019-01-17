@@ -345,7 +345,7 @@ namespace SmartQA.Controllers
         }
 
 
-        public IQueryable<NaksUI> GetQuery(NaksPersonReportQuery q)
+        public IQueryable<NaksUI> GetQuery(QueryOptions q)
         {
             var queryNaks = BaseQuery();
 
@@ -360,7 +360,7 @@ namespace SmartQA.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetData([FromBody] NaksPersonReportQuery q)
+        public async Task<IActionResult> GetData([FromBody] QueryOptions q)
         {
             IQueryable<NaksUI> fullQuery;
             try
@@ -391,10 +391,11 @@ namespace SmartQA.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> TotalCount([FromBody] NaksPersonReportQuery q)
+        public async Task<IActionResult> TotalCount([FromBody] QueryOptions q)
         {
             var query = GetQuery(q);
             return new JsonResult(await query.CountAsync());
         }
+       
     }
 }

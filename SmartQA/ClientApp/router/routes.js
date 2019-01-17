@@ -1,7 +1,10 @@
 import PermissionIndex from 'components/permission-docs/index'
 import PermissionEmployeesIndex from 'components/permission-docs/employees/index'
 
-import NaksReport from 'components/permission-docs/reports/naks-report'
+import PermissionReportsIndex from 'components/permission-docs/reports/index'
+import PermissionReportsDashboard from 'components/permission-docs/reports/dashboard'
+import NaksReport from 'components/permission-docs/reports/naks/naks-report'
+import NaksReportTwo from 'components/permission-docs/reports/naks/naks-report-two'
 import ReftablesIndex from 'components/reftables/index'
 import HomePage from 'components/home'
 import LoginPage from 'components/account/login-page'
@@ -48,16 +51,35 @@ export const routes = [
                 name: 'permission-employees',
                 path: 'employees/:employeeId?',
                 component: PermissionEmployeesIndex,
+                
                 props: (route) => ({
                     employeeId: route.params.employeeId,
                     edit: route.query.edit
                 }),
             },
             {
-                name: 'permission-naks-report',
-                path: 'naks-report',
-                component: NaksReport,
+                name: 'permission-reports',
+                path: 'reports',
+                component: PermissionReportsIndex,
+                children: [
+                    {
+                        name: 'permission-reports-dashboard',
+                        path: '', 
+                        component: PermissionReportsDashboard 
+                    },
+                    {
+                        name: 'permission-reports-naks',
+                        path: 'naks',
+                        component: NaksReport,
+                    },
+                    {
+                        name: 'permission-reports-naks2',
+                        path: 'naks2',
+                        component: NaksReportTwo,
+                    }        
+                ]
             }
+            
         ],
         meta: {
             requiresAuth: true,

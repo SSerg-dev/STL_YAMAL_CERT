@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SmartQA.Models.API
 {
-    public class NaksPersonReportQuery
+    public class QueryOptions
     {
         public IList filter { get; set; }
         public int? skip { get; set; }

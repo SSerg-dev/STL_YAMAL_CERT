@@ -234,7 +234,7 @@
     import CustomStore from "devextreme/data/custom_store";
 
     export default {
-        name: "NaksPersonReport",
+        name: "NaksReport",
         components: {
             DxDataGrid,
             DxStateStoring,
