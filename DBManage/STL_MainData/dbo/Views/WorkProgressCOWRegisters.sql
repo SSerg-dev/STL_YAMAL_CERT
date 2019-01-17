@@ -1,0 +1,1 @@
+﻿CREATE view WorkProgressCOWRegisters as select [ABDStatus_ID], [CNT_Date], [Log_ID], [Marka_ID], [Module_ID], [Parent_ID], [Reg], [Repr_CNT], [Repr_SCNT], [Source_File], [Status_Date], [TitleObject_ID], [Work_Desc], [WorkPackage_ID], [WorkProgressCOWRegisters_ID] from p_WorkProgressCOWRegisters where row_status < 100

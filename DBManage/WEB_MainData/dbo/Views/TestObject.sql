@@ -1,0 +1,1 @@
+﻿create view TestObject as select [TestObject_ID], [TestObject_Code], [TestCode], [TestId], [Enity_Schema], [Entity_Table], [Entity_TableId] from p_TestObject where RowStatus = 0

@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>STL_DraftData</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{36eaa71a-2707-4155-8c70-c16a7041210a}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>STL_DraftData</RootNamespace>
+    <AssemblyName>STL_DraftData</AssemblyName>
+    <ModelCollation>1049,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <DefaultCollation>Cyrillic_General_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="ext\" />
+    <Folder Include="ext\Tables\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="Security\" />
+    <Folder Include="dbo\Stored Procedures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\OLE DB Destination_789.sql" />
+    <Build Include="dbo\Tables\OLE DB Destination7888.sql" />
+    <Build Include="dbo\Tables\s_WPGradingQuantity.sql" />
+    <Build Include="dbo\Tables\s_PersonnelReport_List.sql" />
+    <Build Include="dbo\Tables\s_Personnel_Excel.sql" />
+    <Build Include="dbo\Tables\s_ABD_ModErrors.sql" />
+    <Build Include="dbo\Tables\s_WPPipingQuantity_Excel.sql" />
+    <Build Include="dbo\Tables\s_WPGradingRegisters_Excel.sql" />
+    <Build Include="dbo\Tables\s_PersonnelErrors.sql" />
+    <Build Include="dbo\Tables\obj_variables.sql" />
+    <Build Include="dbo\Tables\s_WPQuantity_Excel.sql" />
+    <Build Include="dbo\Tables\s_WPGradingQuantity_Excel.sql" />
+    <Build Include="dbo\Tables\s_WPPipingRegisters_Excel.sql" />
+    <Build Include="dbo\Tables\s_WPGradingQuantityErrors.sql" />
+    <Build Include="dbo\Tables\s_WPPipingQuantityErrors.sql" />
+    <Build Include="dbo\Tables\s_WPGradingRegistersErrors.sql" />
+    <Build Include="dbo\Tables\s_WPPipingRegistersErrors.sql" />
+    <Build Include="dbo\Tables\s_WPRegisters_Excel.sql" />
+    <Build Include="dbo\Tables\s_WPQuantityErrors.sql" />
+    <Build Include="dbo\Tables\s_WPRegistersErrors.sql" />
+    <Build Include="dbo\Tables\s_Final_ABD_Registers_Excel.sql" />
+    <Build Include="dbo\Tables\s_Final_ABD_RegistersError.sql" />
+    <Build Include="dbo\Tables\s_Final_ABD_Registers.sql" />
+    <Build Include="dbo\Tables\s_LineList_Excel.sql" />
+    <Build Include="dbo\Tables\s_LineListErrors.sql" />
+    <Build Include="dbo\Tables\s_WPCOWQuantity_Excel.sql" />
+    <Build Include="dbo\Tables\s_OverallElectricalCIProgress_REGISTR_CONSTR_Excel.sql" />
+    <Build Include="dbo\Tables\s_WPCOWRegisters_Excel.sql" />
+    <Build Include="dbo\Tables\s_OverallElectricalCIProgress_REGISTR_CONSTR.sql" />
+    <Build Include="dbo\Tables\s_WPCOWQuantityErrors.sql" />
+    <Build Include="dbo\Tables\s_OverallElectricalCIProgress_REGISTR_CONSTRErrors.sql" />
+    <Build Include="dbo\Tables\s_RegistersArchive_Excel.sql" />
+    <Build Include="dbo\Tables\s_WPCOWRegistersErrors.sql" />
+    <Build Include="dbo\Tables\s_OverallElectricalCIProgress_TAGBASE_Excel.sql" />
+    <Build Include="dbo\Tables\s_RegistersArchiveErrors.sql" />
+    <Build Include="dbo\Tables\s_OverallElectricalCIProgress_TAGBASE.sql" />
+    <Build Include="dbo\Tables\s_RegistersArchive.sql" />
+    <Build Include="dbo\Tables\s_OverallElectricalCIProgress_TAGBASEErrors.sql" />
+    <Build Include="dbo\Tables\s_COWPreparedConnections.sql" />
+    <Build Include="dbo\Tables\s_PipelineCompletionPhase2_3_Excel.sql" />
+    <Build Include="dbo\Tables\s_WPCOWRegisters.sql" />
+    <Build Include="dbo\Tables\s_EDMS_Excel.sql" />
+    <Build Include="dbo\Tables\s_PipelineCompletionPhase2_3.sql" />
+    <Build Include="dbo\Tables\s_EDMSErrors.sql" />
+    <Build Include="dbo\Tables\s_PipelineCompletionPhase2_3Errors.sql" />
+    <Build Include="dbo\Tables\s_PipelineCompletionZvezda_Excel.sql" />
+    <Build Include="dbo\Tables\s_PipelineCompletionZvezda.sql" />
+    <Build Include="dbo\Tables\s_PipelineCompletionZvezda_Errors.sql" />
+    <Build Include="dbo\Tables\s_TestpackDetailsReport_Excel.sql" />
+    <Build Include="dbo\Tables\s_TestpackDetailsReportErrors.sql" />
+    <Build Include="dbo\Tables\s_MTXFull_Excel.sql" />
+    <Build Include="dbo\Tables\ABD_Errors.sql" />
+    <Build Include="ext\Tables\ISO_First_Phase.sql" />
+    <Build Include="dbo\Tables\s_MTXFullErrors.sql" />
+    <Build Include="dbo\Tables\s_Final_ABD_Compilation_LOG_Excel.sql" />
+    <Build Include="dbo\Tables\s_Final_ABD_Compilation_LOGErrors.sql" />
+    <Build Include="dbo\Tables\s_Final_ABD_Compilation_LOG.sql" />
+    <Build Include="dbo\Tables\tr_isodbl.sql" />
+    <Build Include="dbo\Tables\vrbls.sql" />
+    <Build Include="dbo\Tables\tr_zzz.sql" />
+    <Build Include="dbo\Tables\OLE DB Destination.sql" />
+    <Build Include="dbo\Tables\s_WPRegisters.sql" />
+    <Build Include="dbo\Tables\s_WPUndergroundRegisters_Excel.sql" />
+    <Build Include="dbo\Tables\s_WPPipingRegisters.sql" />
+    <Build Include="dbo\Tables\s_WPUndergroundRegisters.sql" />
+    <Build Include="dbo\Tables\s_WPUndergroundRegistersErrors.sql" />
+    <Build Include="dbo\Tables\s_WPUndergroundQuantity_Excel.sql" />
+    <Build Include="dbo\Tables\s_ABD_Mod_Excel.sql" />
+    <Build Include="dbo\Tables\s_WPUndergroundQuantity.sql" />
+    <Build Include="dbo\Tables\s_ABD_Mod.sql" />
+    <Build Include="dbo\Tables\s_WPUndergroundQuantityErrors.sql" />
+    <Build Include="dbo\Tables\s_MTXFull.sql" />
+    <Build Include="dbo\Tables\OLE DB Destination_ipid.sql" />
+    <Build Include="dbo\Tables\OLE DB Destination_imarka.sql" />
+    <Build Include="dbo\Tables\OLE DB Destination_igost.sql" />
+    <Build Include="dbo\Tables\ABDModDownloaded.sql" />
+    <Build Include="dbo\Tables\s_WPGradingRegisters.sql" />
+    <Build Include="dbo\Tables\r_t_s_zzz.sql" />
+    <Build Include="dbo\Tables\s_PipelineCompletion_Excel.sql" />
+    <Build Include="dbo\Tables\s_PipelineCompletion.sql" />
+    <Build Include="dbo\Tables\s_ABD_Mod_Sorted.sql" />
+    <Build Include="dbo\Tables\s_PipelineCompletionErrors.sql" />
+    <Build Include="dbo\Tables\s_ABD_ModErrors_Sorted.sql" />
+    <Build Include="dbo\Tables\s_PipelineCompletionReport_Excel.sql" />
+    <Build Include="dbo\Tables\s_PipelineCompletionReport.sql" />
+    <Build Include="dbo\Tables\s_PipelineCompletionReportErrors.sql" />
+    <Build Include="dbo\Tables\s_Final_ABD.sql" />
+    <Build Include="dbo\Tables\s_Personnel.sql" />
+    <Build Include="dbo\Tables\testdataconvert.sql" />
+    <Build Include="dbo\Tables\p_ValidationErrors.sql" />
+    <Build Include="dbo\Tables\OLE DB Destination_LineTST.sql" />
+    <Build Include="dbo\Tables\s_ABDDocument.sql" />
+    <Build Include="dbo\Views\OverallElectricalCIProgress_REGISTR_CONSTRErrors.sql" />
+    <Build Include="dbo\Views\OverallElectricalCIProgress_TAGBASEErrors.sql" />
+    <Build Include="dbo\Views\ABD_ModErrors_AllStatus.sql" />
+    <Build Include="dbo\Views\LineListErrors.sql" />
+    <Build Include="dbo\Views\WPRegistersErrors.sql" />
+    <Build Include="dbo\Views\WPQuantityErrors.sql" />
+    <Build Include="dbo\Views\PersonnelErrors.sql" />
+    <Build Include="dbo\Views\TestpackDetailsReportErrors.sql" />
+    <Build Include="dbo\Views\WPPipingQuantityErrors.sql" />
+    <Build Include="dbo\Views\Final_ABD_RegistersError.sql" />
+    <Build Include="dbo\Views\WPPipingRegistersErrors.sql" />
+    <Build Include="dbo\Views\Final_ABD_Compilation_LOGErrors.sql" />
+    <Build Include="dbo\Views\PipelineCompletionPhase2_3Errors.sql" />
+    <Build Include="dbo\Views\WPCOWQuantityErrors.sql" />
+    <Build Include="dbo\Views\WPCOWRegistersErrors.sql" />
+    <Build Include="dbo\Views\PipelineCompletionZvezda_Errors.sql" />
+    <Build Include="dbo\Views\PipelineCompletionReportErrors.sql" />
+    <Build Include="dbo\Views\WPUndergroundRegistersErrors.sql" />
+    <Build Include="dbo\Views\WPUndergroundQuantityErrors.sql" />
+    <Build Include="dbo\Views\WPGradingRegistersErrors.sql" />
+    <Build Include="dbo\Views\WPGradingQuantityErrors.sql" />
+    <Build Include="dbo\Views\ABD_ModErrors.sql" />
+    <Build Include="dbo\Views\WPMTXFullErrors.sql" />
+    <Build Include="dbo\Views\RegistersArchiveErrors.sql" />
+    <Build Include="Security\db_executor.sql" />
+    <Build Include="dbo\Stored Procedures\FillABDFinalFolder_to_Contragent_FromStageingTable.sql" />
+    <Build Include="dbo\Stored Procedures\Clear_Fill_Register_GragingQuantity.sql" />
+    <Build Include="dbo\Stored Procedures\FillABDFinalFolder_to_SubContractors_FromStageingTable.sql" />
+    <Build Include="dbo\Stored Procedures\Repl_LatCyr_Final_ABD_Registers.sql" />
+    <Build Include="dbo\Stored Procedures\CombineRegisterFromCOW_LOG.sql" />
+    <Build Include="dbo\Stored Procedures\ETL_Util_LVI_Final_ABD_Document_Full.sql" />
+    <Build Include="dbo\Stored Procedures\Clear_Fill_Register_to_JobCard_JobCard_to_JobCardRusABDActivityGroup.sql" />
+    <Build Include="dbo\Stored Procedures\CombineRegisterFromPIP_LOG_OLD.sql" />
+    <Build Include="dbo\Stored Procedures\Clear_Fill_Register_UndergroundQuantity.sql" />
+    <Build Include="dbo\Stored Procedures\RegisterToFinalFolder_Export.sql" />
+    <Build Include="dbo\Stored Procedures\CombineRegisterFromPIP_LOG.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateTitleObjectFromLinesPIP_LOG.sql" />
+    <Build Include="dbo\Stored Procedures\Clear_Fill_Register_to_ISO_ISO_to_PipingWorkType.sql" />
+    <Build Include="Security\ext.sql" />
+    <Build Include="Security\test.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </ArtifactReference>
+  </ItemGroup>
+</Project>

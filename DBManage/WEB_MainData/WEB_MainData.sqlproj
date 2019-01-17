@@ -1,0 +1,533 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>WEB_MainData</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{7a011b27-4edb-4395-b539-21f448b88f46}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>WEB_MainData</RootNamespace>
+    <AssemblyName>WEB_MainData</AssemblyName>
+    <ModelCollation>1049,CS</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>Cyrillic_General_CS_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <SuppressTSqlWarnings>
+    </SuppressTSqlWarnings>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\Sequences\" />
+    <Folder Include="Security\" />
+    <Folder Include="abd\" />
+    <Folder Include="abd\Tables\" />
+    <Folder Include="abd\Views\" />
+    <Folder Include="abd\Functions\" />
+    <Folder Include="abd\Stored Procedures\" />
+    <Folder Include="abd\Sequences\" />
+    <Folder Include="SysRecords" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\p_Document_to_GOST.sql" />
+    <Build Include="dbo\Tables\p_CheckItem.sql" />
+    <Build Include="dbo\Tables\p_Document_to_FileTable.sql" />
+    <Build Include="dbo\Tables\p_DocumentProjectNumber.sql" />
+    <Build Include="dbo\Tables\p_Parameter.sql" />
+    <Build Include="dbo\Tables\p_Line_to_PID.sql" />
+    <Build Include="dbo\Tables\p_TitleObject.sql" />
+    <Build Include="dbo\Tables\p_Line_to_TitleObject.sql" />
+    <Build Include="dbo\Tables\p_Register.sql" />
+    <Build Include="dbo\Tables\p_StatusRelation.sql" />
+    <Build Include="dbo\Tables\p_Division.sql" />
+    <Build Include="dbo\Tables\p_Role.sql" />
+    <Build Include="dbo\Tables\p_Privilege.sql" />
+    <Build Include="dbo\Tables\p_AppUser_to_Role.sql" />
+    <Build Include="dbo\Tables\p_Document_to_Status.sql" />
+    <Build Include="dbo\Tables\p_CheckList.sql" />
+    <Build Include="dbo\Tables\p_DocumentType.sql" />
+    <Build Include="dbo\Tables\p_Status.sql" />
+    <Build Include="dbo\Tables\p_Document.sql" />
+    <Build Include="dbo\Tables\p_RowStatus.sql" />
+    <Build Include="dbo\Tables\p_Position.sql" />
+    <Build Include="dbo\Tables\p_Line.sql" />
+    <Build Include="dbo\Tables\p_PID.sql" />
+    <Build Include="dbo\Tables\p_AppUser.sql" />
+    <Build Include="dbo\Tables\p_Marka.sql" />
+    <Build Include="dbo\Tables\p_GOST.sql" />
+    <Build Include="dbo\Tables\p_Register_to_Status.sql" />
+    <Build Include="dbo\Tables\p_Line_to_Marka.sql" />
+    <Build Include="dbo\Tables\p_GOST_to_PID.sql" />
+    <Build Include="dbo\Tables\p_WorkPackage.sql" />
+    <Build Include="dbo\Tables\p_Register_to_Document.sql" />
+    <Build Include="dbo\Tables\p_Document_to_PID.sql" />
+    <Build Include="dbo\Tables\p_Contragent.sql" />
+    <Build Include="dbo\Tables\p_CheckList_to_Status.sql" />
+    <Build Include="dbo\Tables\p_Person.sql" />
+    <Build Include="dbo\Views\Document_to_GOST.sql" />
+    <Build Include="dbo\Views\Document_to_PID.sql" />
+    <Build Include="dbo\Views\GOST.sql" />
+    <Build Include="dbo\Views\PID.sql" />
+    <Build Include="dbo\Views\Document_to_Status.sql" />
+    <Build Include="dbo\Views\AppUser.sql" />
+    <None Include="dbo\Views\UI_FileStream.sql" />
+    <Build Include="dbo\Views\UI_Register_List.sql" />
+    <Build Include="dbo\Views\UI_Register_ListItem.sql" />
+    <Build Include="dbo\Views\UI_Incumbent.sql" />
+    <Build Include="dbo\Views\UI_Document_List.sql" />
+    <Build Include="dbo\Views\Division.sql" />
+    <Build Include="dbo\Views\CheckItem.sql" />
+    <Build Include="dbo\Views\CheckList.sql" />
+    <Build Include="dbo\Views\CheckList_to_Status.sql" />
+    <Build Include="dbo\Views\Contragent.sql" />
+    <Build Include="dbo\Views\UI_Document_to_GOST.sql" />
+    <Build Include="dbo\Views\Document.sql" />
+    <Build Include="dbo\Views\UI_Document_to_PID.sql" />
+    <Build Include="dbo\Views\Document_to_FileTable.sql" />
+    <Build Include="dbo\Views\DocumentType.sql" />
+    <Build Include="dbo\Views\EntityType.sql" />
+    <Build Include="dbo\Views\Incumbent.sql" />
+    <Build Include="dbo\Views\Parameter.sql" />
+    <Build Include="dbo\Views\Person.sql" />
+    <Build Include="dbo\Views\Position.sql" />
+    <Build Include="dbo\Views\Register.sql" />
+    <Build Include="dbo\Views\Register_to_Document.sql" />
+    <Build Include="dbo\Views\Register_to_Status.sql" />
+    <Build Include="dbo\Views\Status.sql" />
+    <Build Include="dbo\Views\TitleObject.sql" />
+    <Build Include="dbo\Views\WorkPackage.sql" />
+    <Build Include="dbo\Views\RowStatus.sql" />
+    <Build Include="dbo\Functions\Get_ParamValue.sql" />
+    <Build Include="dbo\Functions\f_Split.sql" />
+    <Build Include="dbo\Functions\f_Split10.sql" />
+    <Build Include="dbo\Stored Procedures\Parameter_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Parameter_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Parameter_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Document_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Position_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Document_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Position_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Position_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\TitleObject_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Register_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\TitleObject_Update.sql" />
+    <Build Include="dbo\Stored Procedures\TitleObject_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Document_to_GOST_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\WorkPackage_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Document_to_GOST_Update.sql" />
+    <Build Include="dbo\Stored Procedures\WorkPackage_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Document_to_GOST_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\WorkPackage_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Check_RecordExists.sql" />
+    <Build Include="dbo\Stored Procedures\Document_to_PID_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Document_to_PID_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Document_to_PID_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\CheckItem_Update.sql" />
+    <Build Include="dbo\Stored Procedures\CheckItem_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\CheckList_to_Status_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\CheckList_to_Status_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Contragent_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Contragent_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Division_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Division_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Get_RowCount.sql" />
+    <Build Include="dbo\Stored Procedures\User_FormType_Get.sql" />
+    <Build Include="dbo\Stored Procedures\Register_SequenceNumber.sql" />
+    <Build Include="dbo\Stored Procedures\Document_to_Status_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Document_to_Status_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Document_to_Status_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Register_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Register_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Document_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Document_SequenceNumber.sql" />
+    <Build Include="dbo\Stored Procedures\CheckList_SequenceNumber.sql" />
+    <Build Include="dbo\Stored Procedures\AppUser_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Division_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\CheckItem_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\CheckList_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Contragent_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\CheckList_Update.sql" />
+    <Build Include="dbo\Stored Procedures\DocumentType_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\CheckList_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\DocumentType_Update.sql" />
+    <Build Include="dbo\Stored Procedures\DocumentType_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Person_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Person_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Person_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Status_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Status_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Status_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\CheckList_To_Status_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Document_to_FileTable_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Document_to_FileTable_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Document_To_FileTable_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Register_to_Document_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\ProcessStep_Set.sql" />
+    <Build Include="dbo\Stored Procedures\Register_to_Document_Update.sql" />
+    <Build Include="dbo\Stored Procedures\ProcessStep_CheckList_Set.sql" />
+    <Build Include="dbo\Stored Procedures\AppUser_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Register_To_Document_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Register_to_Status_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\AppUser_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Register_to_Status_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Register_To_Status_Delete.sql" />
+    <Build Include="dbo\Sequences\Sequence_Document_Number.sql" />
+    <Build Include="dbo\Sequences\Sequence_Register_Number.sql" />
+    <Build Include="dbo\Sequences\Sequence_CheckList_Number.sql" />
+    <Build Include="dbo\Tables\p_ProcessPhase.sql" />
+    <Build Include="dbo\Tables\p_Phase.sql" />
+    <Build Include="dbo\Tables\p_ISO.sql" />
+    <Build Include="dbo\Tables\p_GOST_to_TitleObject.sql" />
+    <Build Include="dbo\Tables\p_DesignAreaType.sql" />
+    <Build Include="dbo\Tables\p_CheckType.sql" />
+    <Build Include="dbo\Tables\p_CheckParty.sql" />
+    <Build Include="dbo\Tables\p_AppUserTaskMessage.sql" />
+    <Build Include="dbo\Tables\p_AppUserTaskLog.sql" />
+    <Build Include="dbo\Tables\p_AppUserTask.sql" />
+    <Build Include="dbo\Views\UI_StatusRelation.sql" />
+    <Build Include="dbo\Views\UI_FileStream_1.sql" />
+    <Build Include="dbo\Views\UI_CheckResp.sql" />
+    <Build Include="dbo\Views\UI_AppUserTaskLog.sql" />
+    <Build Include="dbo\Views\T_Register_to_Status.sql" />
+    <Build Include="dbo\Views\T_Register_List.sql" />
+    <Build Include="dbo\Views\T_Register.sql" />
+    <Build Include="dbo\Views\T_Document_to_Status.sql" />
+    <Build Include="dbo\Views\T_Document_List.sql" />
+    <Build Include="dbo\Views\T_Document.sql" />
+    <Build Include="dbo\Views\StatusRelation.sql" />
+    <Build Include="dbo\Views\R_StatusRelation.sql" />
+    <Build Include="dbo\Views\R_Register_to_Status.sql" />
+    <Build Include="dbo\Views\R_Register_to_Document.sql" />
+    <Build Include="dbo\Views\R_Register_CheckList.sql" />
+    <Build Include="dbo\Views\R_CheckList.sql" />
+    <Build Include="dbo\Views\Marka.sql" />
+    <Build Include="dbo\Views\Line.sql" />
+    <Build Include="dbo\Views\ISO.sql" />
+    <Build Include="dbo\Views\GOST_to_TitleObject.sql" />
+    <Build Include="dbo\Views\GOST_to_PID.sql" />
+    <Build Include="dbo\Views\DocumentProjectNumber.sql" />
+    <Build Include="dbo\Views\CheckType.sql" />
+    <Build Include="dbo\Views\CheckParty.sql" />
+    <Build Include="dbo\Views\AppUserTaskMessage.sql" />
+    <Build Include="dbo\Views\AppUserTaskLog.sql" />
+    <Build Include="dbo\Views\AppUserTask.sql" />
+    <Build Include="dbo\Views\AppUser_to_Role.sql" />
+    <Build Include="Security\db_executor.sql" />
+    <Build Include="dbo\Stored Procedures\ProcessPhase_Update.sql" />
+    <Build Include="dbo\Stored Procedures\ProcessPhase_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\ProcessPhase_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Phase_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Phase_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Phase_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Marka_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Marka_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Marka_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Line_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Line_to_TitleObject_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Line_to_TitleObject_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Line_to_TitleObject_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Line_to_PID_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Line_to_PID_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Line_to_PID_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Line_to_Marka_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Line_to_Marka_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Line_to_Marka_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Line_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Line_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\ISO_Update.sql" />
+    <Build Include="dbo\Stored Procedures\ISO_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\ISO_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\DesignAreaType_Update.sql" />
+    <Build Include="dbo\Stored Procedures\DesignAreaType_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\DesignAreaType_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\AppUserTaskLog_Insert.sql" />
+    <Build Include="dbo\Sequences\Sequence_Run_Number.sql" />
+    <Build Include="dbo\Sequences\Sequence_AppUserTaskLog_Number.sql" />
+    <Build Include="dbo\Tables\p_Register_to_TitleObject.sql" />
+    <Build Include="dbo\Tables\p_Register_to_Marka.sql" />
+    <Build Include="dbo\Views\UI_CheckList.sql" />
+    <Build Include="dbo\Views\UI_CheckItem.sql" />
+    <Build Include="dbo\Views\T_CheckItem.sql" />
+    <Build Include="dbo\Views\Register_to_TitleObject.sql" />
+    <Build Include="dbo\Views\Register_to_Marka.sql" />
+    <Build Include="dbo\Stored Procedures\Register_to_TitleObject_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Register_to_TitleObject_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Register_to_TitleObject_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Register_to_Marka_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Register_to_Marka_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Register_to_Marka_Delete.sql" />
+    <Build Include="dbo\Tables\p_Employee.sql" />
+    <Build Include="dbo\Views\UI_Employee.sql" />
+    <Build Include="dbo\Views\Employee.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_Delete.sql" />
+    <Build Include="dbo\Tables\p_CheckItem_to_Status_1.sql" />
+    <Build Include="dbo\Views\CheckItem_to_Status_1.sql" />
+    <Build Include="dbo\Stored Procedures\CheckItem_to_Status_Update_1.sql" />
+    <Build Include="dbo\Stored Procedures\CheckItem_to_Status_Insert_1.sql" />
+    <Build Include="dbo\Stored Procedures\CheckItem_To_Status_Delete_1.sql" />
+    <Build Include="dbo\Tables\p_WeldType.sql" />
+    <Build Include="dbo\Tables\p_WeldPosition.sql" />
+    <Build Include="dbo\Tables\p_WeldMaterialGroup.sql" />
+    <Build Include="dbo\Tables\p_WeldMaterial.sql" />
+    <Build Include="dbo\Tables\p_WeldingEquipmentAutomationLevel.sql" />
+    <Build Include="dbo\Tables\p_WeldGOST14098.sql" />
+    <Build Include="dbo\Tables\p_SeamsType.sql" />
+    <Build Include="dbo\Tables\p_Position_to_Division.sql" />
+    <Build Include="dbo\Tables\p_Level.sql" />
+    <Build Include="dbo\Tables\p_Kind_of_activity_performed.sql" />
+    <Build Include="dbo\Tables\p_JointType.sql" />
+    <Build Include="dbo\Tables\p_JointKind.sql" />
+    <Build Include="dbo\Tables\p_HIFGroup.sql" />
+    <Build Include="dbo\Tables\p_DetailsType.sql" />
+    <Build Include="dbo\Views\UI_Document_to_TitleObject.sql" />
+    <Build Include="dbo\Views\UI_Document_to_Marka.sql" />
+    <Build Include="dbo\Views\T_CheckList.sql" />
+    <Build Include="dbo\Views\Role.sql" />
+    <Build Include="dbo\Views\Position_to_Division.sql" />
+    <Build Include="dbo\Stored Procedures\Position_to_Division_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Position_to_Division_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Position_to_Division_Delete.sql" />
+    <Build Include="dbo\Tables\p_Employee_to_Document_1.sql" />
+    <Build Include="abd\Tables\p_EntityType_1.sql" />
+    <Build Include="abd\Tables\p_DocumentRelation_1.sql" />
+    <Build Include="abd\Tables\p_DocumentAttributeRelation_1.sql" />
+    <Build Include="abd\Tables\p_DocumentAttribute_1.sql" />
+    <Build Include="abd\Tables\p_Document_1.sql" />
+    <Build Include="abd\Tables\p_RelationType_1.sql" />
+    <Build Include="abd\Tables\p_AttributeType_1.sql" />
+    <Build Include="abd\Tables\p_DocumentType_1.sql" />
+    <Build Include="dbo\Views\WeldType_1.sql" />
+    <Build Include="dbo\Views\WeldPosition_1.sql" />
+    <Build Include="dbo\Views\WeldMaterialGroup_1.sql" />
+    <Build Include="dbo\Views\WeldMaterial_1.sql" />
+    <Build Include="dbo\Views\WeldingEquipmentAutomationLevel_1.sql" />
+    <Build Include="dbo\Views\WeldGOST14098_1.sql" />
+    <Build Include="dbo\Views\UI_Position_1.sql" />
+    <Build Include="dbo\Views\UI_Personal_Document_1.sql" />
+    <Build Include="dbo\Views\UI_Personal_1.sql" />
+    <Build Include="dbo\Views\UI_Contragent_1.sql" />
+    <Build Include="dbo\Views\SeamsType_1.sql" />
+    <Build Include="dbo\Views\ProcessPhase_1.sql" />
+    <Build Include="dbo\Views\Privilege_1.sql" />
+    <Build Include="dbo\Views\Phase_1.sql" />
+    <Build Include="dbo\Views\Line_to_TitleObject_1.sql" />
+    <Build Include="dbo\Views\Line_to_PID_1.sql" />
+    <Build Include="dbo\Views\Line_to_Marka_1.sql" />
+    <Build Include="dbo\Views\Level_1.sql" />
+    <Build Include="dbo\Views\Kind_of_activity_performed_1.sql" />
+    <Build Include="dbo\Views\JointType_1.sql" />
+    <Build Include="dbo\Views\JointKind_1.sql" />
+    <Build Include="dbo\Views\HIFGroup_1.sql" />
+    <Build Include="dbo\Views\Employee_to_Document_1.sql" />
+    <Build Include="dbo\Views\DetailsType_1.sql" />
+    <Build Include="dbo\Views\DesignAreaType_1.sql" />
+    <Build Include="abd\Views\GeneralDocumentAttribute_1.sql" />
+    <Build Include="abd\Views\GeneralDocumentAttributeRelation_1.sql" />
+    <Build Include="abd\Views\GeneralDocumentRelation_1.sql" />
+    <Build Include="abd\Views\GeneralDocument_1.sql" />
+    <Build Include="abd\Views\EntityType_1.sql" />
+    <Build Include="abd\Views\Doc_Act1_1.sql" />
+    <Build Include="abd\Views\Doc_Naks_1.sql" />
+    <Build Include="abd\Views\Template_Act1_DocRelation_1.sql" />
+    <Build Include="abd\Views\Template_Act1_Attr_1.sql" />
+    <Build Include="abd\Views\Template_Act1_Doc_1.sql" />
+    <Build Include="abd\Views\Template_Attestation_DocRelation_1.sql" />
+    <Build Include="abd\Views\Template_Attestation_Attr_1.sql" />
+    <Build Include="abd\Views\Template_Attestation_Doc_1.sql" />
+    <Build Include="abd\Views\Template_Naks_DocRelation_1.sql" />
+    <Build Include="abd\Views\Template_Naks_Attr_1.sql" />
+    <Build Include="abd\Views\Template_Naks_Doc_1.sql" />
+    <Build Include="abd\Functions\f_GetParticular_DocRelation_1.sql" />
+    <Build Include="abd\Functions\f_GetParticular_Attr_1.sql" />
+    <Build Include="abd\Functions\f_GetParticular_Doc_1.sql" />
+    <Build Include="abd\Functions\f_GetTemplate_DocRelation_1.sql" />
+    <Build Include="abd\Functions\f_GetTemplate_Attr_1.sql" />
+    <Build Include="abd\Functions\f_GetTemplate_Doc_1.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_SequenceNumber_1.sql" />
+    <Build Include="abd\Stored Procedures\DocumentAttribute_Delete_1.sql" />
+    <Build Include="abd\Stored Procedures\DocumentAttribute_Update_1.sql" />
+    <Build Include="abd\Stored Procedures\DocumentAttribute_Insert_1.sql" />
+    <Build Include="abd\Stored Procedures\Document_Delete_1.sql" />
+    <Build Include="abd\Stored Procedures\Document_Update_1.sql" />
+    <Build Include="abd\Stored Procedures\Document_Insert_1.sql" />
+    <Build Include="Security\abd.sql" />
+    <Build Include="dbo\Sequences\Sequence_Emp_Number_1.sql" />
+    <Build Include="dbo\Tables\p_TestObject.sql" />
+    <Build Include="dbo\Views\TestObject.sql" />
+    <Build Include="abd\Views\UI_Document_Header.sql" />
+    <Build Include="abd\Views\RelationType.sql" />
+    <Build Include="abd\Views\DocumentType.sql" />
+    <Build Include="abd\Views\AttributeType.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_to_Document_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_to_Document_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_to_Document_Insert.sql" />
+    <Build Include="abd\Stored Procedures\UI_DocumentTree_Select.sql" />
+    <Build Include="abd\Stored Procedures\RelationType_Update.sql" />
+    <Build Include="abd\Stored Procedures\RelationType_Insert.sql" />
+    <Build Include="abd\Stored Procedures\RelationType_Delete.sql" />
+    <Build Include="abd\Stored Procedures\DocumentType_Update.sql" />
+    <Build Include="abd\Stored Procedures\DocumentType_Insert.sql" />
+    <Build Include="abd\Stored Procedures\DocumentType_Delete.sql" />
+    <Build Include="abd\Stored Procedures\Document_SequenceNumber.sql" />
+    <Build Include="abd\Stored Procedures\AttributeType_Update.sql" />
+    <Build Include="abd\Stored Procedures\AttributeType_Insert.sql" />
+    <Build Include="abd\Stored Procedures\AttributeType_Delete.sql" />
+    <Build Include="abd\Sequences\Sequence_Document_Number.sql" />
+    <PostDeploy Include="Script.PostDeployment1.sql" />
+    <Build Include="Security\Permissions_1.sql" />
+    <Build Include="dbo\Tables\p_ContragentRole.sql" />
+    <Build Include="dbo\Tables\p_WeldPasses.sql" />
+    <Build Include="dbo\Tables\p_VoltageRange.sql" />
+    <Build Include="dbo\Tables\p_TestTypeRef.sql" />
+    <Build Include="dbo\Tables\p_TestMethod.sql" />
+    <Build Include="dbo\Tables\p_StaffFunction.sql" />
+    <Build Include="dbo\Tables\p_ShieldingGas.sql" />
+    <Build Include="dbo\Tables\p_Responsibility.sql" />
+    <Build Include="dbo\Tables\p_QualificationLevel.sql" />
+    <Build Include="dbo\Tables\p_QualificationField.sql" />
+    <Build Include="dbo\Tables\p_InspectionTechnique.sql" />
+    <Build Include="dbo\Tables\p_InspectionSubject.sql" />
+    <Build Include="dbo\Tables\p_ElectricalSafetyAbilitation.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest_to_WeldPosition.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest_to_WeldMaterialGroup.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest_to_WeldMaterial.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest_to_WeldGOST14098.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest_to_SeamsType.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest_to_JointType.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest_to_JointKind.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest_to_DetailsType.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaks_to_HIFGroup.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaks.sql" />
+    <Build Include="dbo\Tables\p_AuthToSignInspActsForWSUN.sql" />
+    <Build Include="dbo\Tables\p_AttCenterNaks.sql" />
+    <Build Include="dbo\Tables\p_AccessToPIVoltageRange.sql" />
+    <Build Include="dbo\Tables\p_AccessToPIStaffFunction.sql" />
+    <Build Include="dbo\Tables\__EFMigrationsHistory.sql" />
+    <Build Include="dbo\Views\WeldPasses.sql" />
+    <Build Include="dbo\Views\VoltageRange.sql" />
+    <Build Include="dbo\Views\TestTypeRef.sql" />
+    <Build Include="dbo\Views\TestMethod.sql" />
+    <Build Include="dbo\Views\StaffFunction.sql" />
+    <Build Include="dbo\Views\ShieldingGas.sql" />
+    <Build Include="dbo\Views\Responsibility.sql" />
+    <Build Include="dbo\Views\R_DocumentNaksAttest_to_WeldPosition.sql" />
+    <Build Include="dbo\Views\R_DocumentNaksAttest_to_WeldMaterialGroup.sql" />
+    <Build Include="dbo\Views\R_DocumentNaksAttest_to_WeldMaterial.sql" />
+    <Build Include="dbo\Views\R_DocumentNaksAttest_to_WeldGOST14098.sql" />
+    <Build Include="dbo\Views\R_DocumentNaksAttest_to_SeamsType.sql" />
+    <Build Include="dbo\Views\R_DocumentNaksAttest_to_JointType.sql" />
+    <Build Include="dbo\Views\R_DocumentNaksAttest_to_JointKind.sql" />
+    <Build Include="dbo\Views\R_DocumentNaksAttest_to_DetailsType.sql" />
+    <Build Include="dbo\Views\R_DocumentNaks_to_HIFGroup.sql" />
+    <Build Include="dbo\Views\QualificationLevel.sql" />
+    <Build Include="dbo\Views\QualificationField.sql" />
+    <Build Include="dbo\Views\InspectionTechnique.sql" />
+    <Build Include="dbo\Views\InspectionSubject.sql" />
+    <Build Include="dbo\Views\ElectricalSafetyAbilitation.sql" />
+    <Build Include="dbo\Views\DocumentNaksAttest_to_WeldPosition.sql" />
+    <Build Include="dbo\Views\DocumentNaksAttest_to_WeldMaterialGroup.sql" />
+    <Build Include="dbo\Views\DocumentNaksAttest_to_WeldMaterial.sql" />
+    <Build Include="dbo\Views\DocumentNaksAttest_to_WeldGOST14098.sql" />
+    <Build Include="dbo\Views\DocumentNaksAttest_to_SeamsType.sql" />
+    <Build Include="dbo\Views\DocumentNaksAttest_to_JointType.sql" />
+    <Build Include="dbo\Views\DocumentNaksAttest_to_JointKind.sql" />
+    <Build Include="dbo\Views\DocumentNaksAttest_to_DetailsType.sql" />
+    <Build Include="dbo\Views\DocumentNaksAttest.sql" />
+    <Build Include="dbo\Views\DocumentNaks_to_HIFGroup.sql" />
+    <Build Include="dbo\Views\DocumentNaks.sql" />
+    <Build Include="dbo\Views\AuthToSignInspActsForWSUN.sql" />
+    <Build Include="dbo\Views\AttCenterNaks.sql" />
+    <Build Include="dbo\Views\AccessToPIVoltageRange.sql" />
+    <Build Include="dbo\Views\AccessToPIStaffFunction.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\STL_FileStorage\STL_FileStorage.sqlproj">
+      <Name>STL_FileStorage</Name>
+      <Project>{c79b4bba-938b-40cb-adc7-f3d9fa1de110}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>True</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>STL_FileStorage</DatabaseVariableLiteralValue>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </ArtifactReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SysRecords\p_AppUser.sql" />
+    <None Include="SysRecords\p_RowStatus.sql" />
+    <None Include="SysRecords\p_Status.sql" />
+    <None Include="SysRecords\p_AppUserTask.sql" />
+    <None Include="SysRecords\p_AppUserTaskMessage.sql" />
+    <None Include="SysRecords\p_CheckItem.sql" />
+    <None Include="SysRecords\p_CheckList.sql" />
+    <None Include="SysRecords\p_CheckItem_to_Status.sql" />
+    <None Include="SysRecords\p_CheckList_to_Status.sql" />
+    <None Include="SysRecords\p_CheckType.sql" />
+    <None Include="SysRecords\p_Document.sql" />
+    <None Include="SysRecords\p_DocumentType.sql" />
+    <None Include="SysRecords\p_Document_to_Status.sql" />
+    <None Include="SysRecords\p_Register.sql" />
+    <None Include="SysRecords\p_Register_to_Status.sql" />
+    <None Include="SysRecords\p_StatusRelation.sql" />
+    <None Include="SysRecords\sysmessages.sql" />
+  </ItemGroup>
+</Project>

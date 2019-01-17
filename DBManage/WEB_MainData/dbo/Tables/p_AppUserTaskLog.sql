@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[p_AppUserTaskLog] (
+    [AppUserTaskLog_ID]     UNIQUEIDENTIFIER CONSTRAINT [DF_AppUserTaskLog_ID] DEFAULT (newsequentialid()) NOT NULL,
+    [RowStatus]             INT              NOT NULL,
+    [Insert_DTS]            DATETIME2 (7)    NOT NULL,
+    [Update_DTS]            DATETIME2 (7)    NOT NULL,
+    [Created_User_ID]       UNIQUEIDENTIFIER NOT NULL,
+    [Modified_User_ID]      UNIQUEIDENTIFIER NOT NULL,
+    [AppUserTaskLog_Code]   NVARCHAR (255)   CONSTRAINT [DF_p_AppUserTaskLog_AppUserTaskLog_Code] DEFAULT (NEXT VALUE FOR [dbo].[Sequence_AppUserTaskLog_Number]) NOT NULL,
+    [AppUser_ID]            UNIQUEIDENTIFIER NOT NULL,
+    [AppUserTask_ID]        UNIQUEIDENTIFIER NOT NULL,
+    [AppUserTaskMessage_ID] UNIQUEIDENTIFIER NULL,
+    [FilePath]              NVARCHAR (250)   NULL,
+    [FileName]              NVARCHAR (250)   NULL,
+    [Description_Eng]       NVARCHAR (250)   NULL,
+    [Description_Rus]       NVARCHAR (250)   NULL,
+    [StackTrace]            NVARCHAR (2000)  NULL,
+    CONSTRAINT [PK_p_AppUserTaskLog] PRIMARY KEY CLUSTERED ([AppUserTaskLog_ID] ASC),
+    CONSTRAINT [FK_p_AppUserTaskLog_AppUser_ID_p_AppUser] FOREIGN KEY ([AppUser_ID]) REFERENCES [dbo].[p_AppUser] ([AppUser_ID]),
+    CONSTRAINT [FK_p_AppUserTaskLog_AppUserTaskMessage_ID_p_AppUserTaskMessage] FOREIGN KEY ([AppUserTaskMessage_ID]) REFERENCES [dbo].[p_AppUserTaskMessage] ([AppUserTaskMessage_ID]),
+    CONSTRAINT [FK_p_AppUserTaskLog_Created_User_ID_p_AppUser] FOREIGN KEY ([Created_User_ID]) REFERENCES [dbo].[p_AppUser] ([AppUser_ID]),
+    CONSTRAINT [FK_p_AppUserTaskLog_Modified_User_ID_p_AppUser] FOREIGN KEY ([Modified_User_ID]) REFERENCES [dbo].[p_AppUser] ([AppUser_ID]),
+    CONSTRAINT [FK_p_AppUserTaskLog_RowStatus_p_RowStatus] FOREIGN KEY ([RowStatus]) REFERENCES [dbo].[p_RowStatus] ([RowStatus_ID]),
+    CONSTRAINT [UQ_p_AppUserTaskLog] UNIQUE NONCLUSTERED ([AppUserTaskLog_Code] ASC)
+);
+

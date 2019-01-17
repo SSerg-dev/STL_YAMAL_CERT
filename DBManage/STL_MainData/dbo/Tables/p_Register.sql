@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[p_Register] (
+    [Register_ID]      UNIQUEIDENTIFIER CONSTRAINT [DF_Register_ID] DEFAULT (newsequentialid()) NOT NULL,
+    [Register_Number]  NVARCHAR (100)   NOT NULL,
+    [Insert_DTS]       DATETIME2 (7)    NULL,
+    [SCTR_RESP]        NVARCHAR (255)   NULL,
+    [CTR_RESP]         NVARCHAR (255)   NULL,
+    [Update_DTS]       DATETIME2 (7)    NULL,
+    [Comment]          NVARCHAR (255)   NULL,
+    [Created_By]       NVARCHAR (255)   NULL,
+    [Modified_By]      NVARCHAR (255)   NULL,
+    [Incoming_Cintrol] BIT              NULL,
+    [Row_Status]       INT              NULL,
+    [WorkPackage_ID]   UNIQUEIDENTIFIER NULL,
+    [FileLOG]          NVARCHAR (50)    NOT NULL,
+    [LOG_ID]           NVARCHAR (255)   NULL,
+    [CNT_Date]         DATETIME2 (7)    NULL,
+    [Work_Desc]        NVARCHAR (4000)  NULL,
+    [Notes]            NVARCHAR (4000)  NULL,
+    [InArchiveDate]    DATETIME2 (7)    NULL,
+    [SDM_FEI_SI]       NVARCHAR (255)   NULL,
+    CONSTRAINT [PK_p_Register] PRIMARY KEY CLUSTERED ([Register_ID] ASC),
+    CONSTRAINT [FK_p_Register_Row_Status_p_RowStatus_sys] FOREIGN KEY ([Row_Status]) REFERENCES [dbo].[p_RowStatus_sys] ([Row_Status]),
+    CONSTRAINT [FK_p_Register_WorkPackage_ID_p_WorkPackage] FOREIGN KEY ([WorkPackage_ID]) REFERENCES [dbo].[p_WorkPackage] ([WorkPackage_ID]),
+    CONSTRAINT [UQ_p_Register] UNIQUE NONCLUSTERED ([Register_Number] ASC, [FileLOG] ASC)
+);
+

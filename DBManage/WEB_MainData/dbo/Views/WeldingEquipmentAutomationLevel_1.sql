@@ -1,0 +1,1 @@
+﻿create view WeldingEquipmentAutomationLevel as select [WeldingEquipmentAutomationLevel_ID], [WeldingEquipmentAutomationLevel_Code], [Description_Rus] from p_WeldingEquipmentAutomationLevel where RowStatus = 0

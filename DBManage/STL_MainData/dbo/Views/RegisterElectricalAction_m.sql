@@ -1,0 +1,1 @@
+﻿CREATE view RegisterElectricalAction_m as select [Created_By], [DTS_End], [DTS_Strat], [ElectricalLogsWorkTypes_ID], [Modified_By], [Register_ID], [RegisterElectricalAction_m_ID], [TAG_ID] from p_RegisterElectricalAction_m where row_status < 100

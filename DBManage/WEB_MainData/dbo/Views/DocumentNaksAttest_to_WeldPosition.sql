@@ -1,0 +1,2 @@
+﻿
+create view DocumentNaksAttest_to_WeldPosition as select [DocumentNaksAttest_to_WeldPosition_ID], [DocumentNaksAttest_ID], [WeldPosition_ID] from p_DocumentNaksAttest_to_WeldPosition where RowStatus < 100

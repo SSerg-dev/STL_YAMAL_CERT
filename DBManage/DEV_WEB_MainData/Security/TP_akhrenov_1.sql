@@ -1,0 +1,3 @@
+﻿CREATE LOGIN [TP\akhrenov]
+    FROM WINDOWS WITH DEFAULT_LANGUAGE = [us_english];
+

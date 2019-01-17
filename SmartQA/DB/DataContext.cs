@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Scaffolding;
 using SmartQA.DB.Models.Auth;
 using SmartQA.DB.Models.Common;
 using SmartQA.DB.Models.Documents;
+using SmartQA.DB.Models.Registers;
 using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.PermissionDocuments;
 using SmartQA.DB.Models.Reftables;
@@ -188,6 +189,14 @@ namespace SmartQA.DB
 
             modelBuilder.Entity<AppUser_to_Role>()
                 .HasIndex(u => new {u.AppUser_ID, u.Role_ID})
+                .IsUnique();
+
+            modelBuilder.Entity<Register_to_Marka>()
+                .HasIndex(u => new { u.Register_ID, u.Marka_ID })
+                .IsUnique();
+
+            modelBuilder.Entity<Register_to_TitleObject>()
+                .HasIndex(u => new { u.Register_ID, u.TitleObject_ID })
                 .IsUnique();
 
         }               

@@ -1,0 +1,14 @@
+﻿CREATE TABLE [dbo].[p_GOST_to_PID] (
+    [GOST_to_PID_ID] UNIQUEIDENTIFIER CONSTRAINT [DF_GOST_to_PID_ID] DEFAULT (newsequentialid()) NOT NULL,
+    [Insert_DTS]     DATETIME2 (7)    NULL,
+    [Update_DTS]     DATETIME2 (7)    NULL,
+    [Row_Status]     INT              NULL,
+    [GOST_ID]        UNIQUEIDENTIFIER NOT NULL,
+    [PID_ID]         UNIQUEIDENTIFIER NOT NULL,
+    CONSTRAINT [PK_p_GOST_to_PID] PRIMARY KEY CLUSTERED ([GOST_to_PID_ID] ASC),
+    CONSTRAINT [FK_p_GOST_to_PID_GOST_ID_p_GOST] FOREIGN KEY ([GOST_ID]) REFERENCES [dbo].[p_GOST] ([GOST_ID]),
+    CONSTRAINT [FK_p_GOST_to_PID_PID_ID_p_PID] FOREIGN KEY ([PID_ID]) REFERENCES [dbo].[p_PID] ([PID_ID]),
+    CONSTRAINT [FK_p_GOST_to_PID_Row_Status_p_RowStatus_sys] FOREIGN KEY ([Row_Status]) REFERENCES [dbo].[p_RowStatus_sys] ([Row_Status]),
+    CONSTRAINT [UQ_p_GOST_to_PID] UNIQUE NONCLUSTERED ([GOST_ID] ASC, [PID_ID] ASC)
+);
+

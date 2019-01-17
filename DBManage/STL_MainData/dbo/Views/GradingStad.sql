@@ -1,0 +1,1 @@
+﻿create view GradingStad as select [GradingStad_ID], [GradingStad_Name] from p_GradingStad where row_status = 0

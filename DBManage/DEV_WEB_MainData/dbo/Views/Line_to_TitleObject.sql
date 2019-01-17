@@ -1,0 +1,1 @@
+﻿create view Line_to_TitleObject as select [Line_to_TitleObject_ID], [Line_ID], [TitleObject_ID] from p_Line_to_TitleObject where RowStatus = 0

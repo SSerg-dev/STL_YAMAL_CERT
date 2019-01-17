@@ -1,0 +1,1 @@
+﻿create view RowStatus as select [RowStatus_ID], [Status_Name_Eng], [Status_Name_Rus], [Description_Eng], [Description_Rus] from p_RowStatus 

@@ -1,0 +1,105 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "WEB_MainData", "WEB_MainData\WEB_MainData.sqlproj", "{7A011B27-4EDB-4395-B539-21F448B88F46}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C79B4BBA-938B-40CB-ADC7-F3D9FA1DE110} = {C79B4BBA-938B-40CB-ADC7-F3D9FA1DE110}
+	EndProjectSection
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "STL_FileStorage", "STL_FileStorage\STL_FileStorage.sqlproj", "{C79B4BBA-938B-40CB-ADC7-F3D9FA1DE110}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEB_MainData_SystemTest", "UnitTest_WEB_MainData\WEB_MainData_SystemTest.csproj", "{04ACA4EC-0FD6-4470-975A-61D3C32A075E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7A011B27-4EDB-4395-B539-21F448B88F46} = {7A011B27-4EDB-4395-B539-21F448B88F46}
+		{C79B4BBA-938B-40CB-ADC7-F3D9FA1DE110} = {C79B4BBA-938B-40CB-ADC7-F3D9FA1DE110}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEB_MainData_UnitTest", "WEB_MainData_UnitTest\WEB_MainData_UnitTest.csproj", "{3386C203-BBE2-4670-8419-124CE5CFB305}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{04BAEBB1-A5B9-41D6-82A8-F786E41887A2}"
+	ProjectSection(SolutionItems) = preProject
+		Удаление тестовых данных.sql = Удаление тестовых данных.sql
+	EndProjectSection
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "STL_MainData", "STL_MainData\STL_MainData.sqlproj", "{76870802-7FF4-4A1B-9F9D-FAD64D997AC2}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "STL_DraftData", "STL_DraftData\STL_DraftData.sqlproj", "{36EAA71A-2707-4155-8C70-C16A7041210A}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DEV_WEB_MainData", "DEV_WEB_MainData\DEV_WEB_MainData.sqlproj", "{863AC7B2-F881-4387-9C37-9E2C613E38CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A011B27-4EDB-4395-B539-21F448B88F46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A011B27-4EDB-4395-B539-21F448B88F46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A011B27-4EDB-4395-B539-21F448B88F46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A011B27-4EDB-4395-B539-21F448B88F46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A011B27-4EDB-4395-B539-21F448B88F46}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C79B4BBA-938B-40CB-ADC7-F3D9FA1DE110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C79B4BBA-938B-40CB-ADC7-F3D9FA1DE110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C79B4BBA-938B-40CB-ADC7-F3D9FA1DE110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C79B4BBA-938B-40CB-ADC7-F3D9FA1DE110}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C79B4BBA-938B-40CB-ADC7-F3D9FA1DE110}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{04ACA4EC-0FD6-4470-975A-61D3C32A075E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04ACA4EC-0FD6-4470-975A-61D3C32A075E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04ACA4EC-0FD6-4470-975A-61D3C32A075E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04ACA4EC-0FD6-4470-975A-61D3C32A075E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3386C203-BBE2-4670-8419-124CE5CFB305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3386C203-BBE2-4670-8419-124CE5CFB305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3386C203-BBE2-4670-8419-124CE5CFB305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3386C203-BBE2-4670-8419-124CE5CFB305}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76870802-7FF4-4A1B-9F9D-FAD64D997AC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76870802-7FF4-4A1B-9F9D-FAD64D997AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76870802-7FF4-4A1B-9F9D-FAD64D997AC2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{76870802-7FF4-4A1B-9F9D-FAD64D997AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76870802-7FF4-4A1B-9F9D-FAD64D997AC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76870802-7FF4-4A1B-9F9D-FAD64D997AC2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{36EAA71A-2707-4155-8C70-C16A7041210A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36EAA71A-2707-4155-8C70-C16A7041210A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36EAA71A-2707-4155-8C70-C16A7041210A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{36EAA71A-2707-4155-8C70-C16A7041210A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36EAA71A-2707-4155-8C70-C16A7041210A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36EAA71A-2707-4155-8C70-C16A7041210A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{863AC7B2-F881-4387-9C37-9E2C613E38CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{863AC7B2-F881-4387-9C37-9E2C613E38CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{863AC7B2-F881-4387-9C37-9E2C613E38CE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{863AC7B2-F881-4387-9C37-9E2C613E38CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{863AC7B2-F881-4387-9C37-9E2C613E38CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{863AC7B2-F881-4387-9C37-9E2C613E38CE}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://stlyamal.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = WEB_MainData\\WEB_MainData.sqlproj
+		SccProjectName1 = WEB_MainData
+		SccLocalPath1 = WEB_MainData
+		SccProjectUniqueName2 = STL_FileStorage\\STL_FileStorage.sqlproj
+		SccProjectName2 = STL_FileStorage
+		SccLocalPath2 = STL_FileStorage
+		SccProjectUniqueName3 = UnitTest_WEB_MainData\\WEB_MainData_SystemTest.csproj
+		SccProjectName3 = UnitTest_WEB_MainData
+		SccLocalPath3 = UnitTest_WEB_MainData
+		SccProjectUniqueName4 = WEB_MainData_UnitTest\\WEB_MainData_UnitTest.csproj
+		SccProjectName4 = WEB_MainData_UnitTest
+		SccLocalPath4 = WEB_MainData_UnitTest
+		SccProjectUniqueName5 = DEV_WEB_MainData\\DEV_WEB_MainData.sqlproj
+		SccProjectName5 = DEV_WEB_MainData
+		SccLocalPath5 = DEV_WEB_MainData
+		SccProjectUniqueName6 = STL_DraftData\\STL_DraftData.sqlproj
+		SccProjectName6 = STL_DraftData
+		SccLocalPath6 = STL_DraftData
+		SccProjectUniqueName7 = STL_MainData\\STL_MainData.sqlproj
+		SccProjectName7 = STL_MainData
+		SccLocalPath7 = STL_MainData
+	EndGlobalSection
+EndGlobal

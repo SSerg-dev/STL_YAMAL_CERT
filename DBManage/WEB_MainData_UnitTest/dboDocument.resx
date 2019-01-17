@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="dbo_Document_Insert_Positive_TestAction.SqlScript" xml:space="preserve">
+    <value>--	Внимание Хардкод! @TestCode должен совпадать с тем, что был объявлен в Pre-Test 
+	declare @TestCode nvarchar(250) = 'Document_Insert + 01'
+/*	Участок кода формируемый студией используем максимально!
+	Руками добавляются только заполнение значений параметров. Если параметр является ссылкой, 
+	и был заполнен предварительно, тогда используем подзапросы вида:
+	@Paramater = (select Id from p_TestObject where TestCode = 'TestName' and TestObject_Code = 'Parameter')
+*/
+	DECLARE @RC AS INT, @i_RowStatus AS NVARCHAR (250), @i_AppUser_ID AS NVARCHAR (250), @i_Document_Code AS NVARCHAR (250), @i_Document_Number AS NVARCHAR (250), @i_DocumentType_ID AS NVARCHAR (250), @i_Document_Date AS NVARCHAR (250), @i_Issue_Date AS NVARCHAR (250), @i_TotalSheets AS NVARCHAR (250), @i_Document_Name AS NVARCHAR (250), @i_Parent_ID AS NVARCHAR (250), @o_Entity_ID AS NVARCHAR (250), @o_IsError AS BIT;
+
+	SELECT @RC					= 0,
+		   @i_RowStatus			= 0,
+		   @i_AppUser_ID		= (select Entity_TableId from p_TestObject where TestObject_Code = 'AppUser_ID' and TestCode = @TestCode),
+		   @i_Document_Code		= 'TST#Code_'+cast(newid() as nvarchar(36)),
+		   @i_Document_Number	= 'TST#Number_'+cast(newid() as nvarchar(36)),
+		   @i_DocumentType_ID	= (select Entity_TableId from p_TestObject where TestObject_Code = 'DocumentType_ID' and TestCode = @TestCode),
+		   @i_Document_Date		= getdate(),
+		   @i_Issue_Date		= getdate(),
+		   @i_TotalSheets		= cast(cast(newid() as varbinary(4)) as tinyint),
+		   @i_Document_Name		= 'TST#Name_'+cast(newid() as nvarchar(36)),
+		   @i_Parent_ID			= (select Entity_TableId from p_TestObject where TestObject_Code = 'Parent_ID' and TestCode = @TestCode);
+
+	EXECUTE @RC = [dbo].[Document_Insert] @i_RowStatus, @i_AppUser_ID, @i_Document_Code, @i_Document_Number, @i_DocumentType_ID, @i_Document_Date, @i_Issue_Date, @i_TotalSheets, @i_Document_Name, @i_Parent_ID, @o_Entity_ID OUTPUT, @o_IsError OUTPUT;
+
+	SELECT @RC AS RC,
+		   @o_Entity_ID AS o_Entity_ID,
+		   @o_IsError AS o_IsError;
+/*	Код который нужно добавлять
+	Для того, чтобы Post-Test скрипт удалил все тестовые данные 
+	созданные в результате прогона тестирования - запомним их */ 
+	insert into p_TestObject(TestObject_Code,TestCode,TestId,Enity_Schema,Entity_Table,Entity_TableId)
+	select 'Document_ID', @TestCode, newid(), 'dbo', 'p_Document', @o_Entity_ID
+--	простейшая проверка на то, что процедура создала именно то, что ей подавали на вход
+	select
+		 @i_RowStatus			
+		,@i_Document_Code		
+		,@i_Document_Number	
+		,@i_DocumentType_ID	
+		,@i_Document_Date		
+		,@i_Issue_Date		
+		,@i_TotalSheets		
+		,@i_Document_Name		
+		,@i_Parent_ID			
+	except 
+	select 
+		 RowStatus
+		,Document_Code
+		,Document_Number
+		,DocumentType_ID
+		,Document_Date
+		,Issue_Date
+		,TotalSheets
+		,Document_Name
+		,Parent_ID
+	from dbo.p_Document
+	where Document_ID = @o_Entity_ID
+</value>
+  </data>
+  <data name="dbo_Document_Insert_Positive_PosttestAction.SqlScript" xml:space="preserve">
+    <value>/*	Скрипт для удаления созданных при тестировании записей
+	1. Последовательность удаления обратна созданию так как TestObject_ID создается по newsequentialid()
+	2. Внимание Хардкод! @TestCode должен совпадать с тем, что был объявлен в Pre-Test 
+	3. Скрипт чувствителен к неймингу. Имя таблицы должно быть с превиксом "p_" 
+	   и PK должен быть равен имени таблицы без префикса и оканчиваться на "_ID"
+*/
+declare @TestCode nvarchar(250) = 'Document_Insert + 01'
+declare Cur cursor local fast_forward read_only for
+	select Entity_TableId, Entity_Table, Enity_Schema from p_TestObject 
+	where TestCode = @TestCode order by TestObject_ID desc
+declare @Id uniqueidentifier, @TableName nvarchar(120) = '', @SchemaName nvarchar(120), @SQL nvarchar(max) = ''
+open Cur
+while 1=1 begin
+	fetch next from Cur into @Id, @TableName, @SchemaName
+	if @@fetch_status &lt;&gt; 0 break 
+	select @SQL = 'delete from '+@SchemaName+'.'+@TableName+' where '+right(@TableName,len(@TableName)-2)+'_Id = '''+cast(@Id as nvarchar(36))+''''
+	exec (@SQL)
+end
+close Cur deallocate Cur
+delete from p_TestObject where TestCode = @TestCode
+</value>
+  </data>
+  <data name="dbo_Document_Insert_Positive_PretestAction.SqlScript" xml:space="preserve">
+    <value>--	Переменные для создания тестовых данных
+	declare  @TestCode nvarchaR(250)	= 'Document_Insert + 01'
+			,@TestId uniqueidentifier	= newid()
+			,@UserId uniqueidentifier	= newid()
+/*	Удаляем из табилцы тестовых объектов. Предыдущие данные необходимо удалить, так как иначе запрос вида:
+	@Paramater = (select Id from p_TestObject where TestCode = 'TestName' and TestObject_Code = 'Parameter') 	
+	может вернутьт более 1 значения, что приведет к ошибке. Select top 1 в запрос не добавлено НАМЕРЕННО,
+	чтобы отловить подобные проблемы при подготовке данных. */
+	delete from p_TestObject where TestCode = @TestCode
+/*	Временная таблица для получения ID только что добавленной записил через output 
+	для скорости можно сделать inMemory table создав переменную @Out
+	решение через inMemory удалил так как была странная ошибка (она с этим была не связана, но уже не поменял обратно) */
+	drop table if exists #Out
+	create table #Out (Id uniqueidentifier)
+--	Test AppUser
+	insert into dbo.p_AppUser (RowStatus,Insert_DTS,Update_DTS,Created_User_ID,Modified_User_ID
+		,AppUser_Code
+		,User_Password
+		,Comment)
+	output inserted.AppUser_ID into #Out(Id) select 0, getdate(), getdate(), AppUser_ID, AppUser_ID
+		,'TST#Code_'+cast(newid() as nvarchar(36))
+		,cast('TST#Pass_'+cast(newid() as nvarchar(36)) as varbinary)
+		,'TST#Comment_'+cast(newid() as nvarchar(36))
+	from p_AppUser where AppUser_Code = 'RootUser'
+/*	Создаем запись в таблице отладочной информации (для последующего использования)
+	TestObject_Code - имя параметра тестируемой процедуры 
+	TestCode - код теста по этому полю перед каждым запуском теста происходит очистка
+	TestId - уникальный ID теста (создаем на ВСЯКИЙ случай, в запросах на select пока не участкует)
+	Enity_Schema - схема таблицы с тестовой записью
+	Entity_Table - таблицйа с тестовой записью
+	Entity_TableId - ID тестовой записи	*/
+	insert into p_TestObject(TestObject_Code,TestCode,TestId,Enity_Schema,Entity_Table,Entity_TableId)
+		select  'AppUser_ID', @TestCode, @TestId, 'dbo', 'p_AppUser', ID from #Out
+--	Для дальнейшего использования запоминаем пользователя
+	select top 1 @UserId = Id from #Out
+--	Очищаем таблицу для вставки следующей записи
+	delete from #Out
+--	Test DocumentType
+	insert into dbo.p_DocumentType(RowStatus,Insert_DTS,Update_DTS,Created_User_ID,Modified_User_ID
+		,DocumentType_Code)
+	output inserted.DocumentType_ID into #Out(Id) select 0, getdate(), getdate(), @UserId, @UserId
+		,'TST#Code_'+cast(newid() as nvarchar(36))
+	insert into p_TestObject(TestObject_Code,TestCode,TestId,Enity_Schema,Entity_Table,Entity_TableId)
+		select  'DocumentType_ID', @TestCode, @TestId, 'dbo', 'p_DocumentType', ID from #Out
+	delete from #Out
+--	Test Document для ParentID
+	insert into dbo.p_Document(RowStatus,Insert_DTS,Update_DTS,Created_User_ID,Modified_User_ID
+		,Document_Code
+		,Document_Number
+		,DocumentType_ID
+		,Document_Date
+		,Issue_Date
+		,TotalSheets
+		,Document_Name
+		,Parent_ID
+		,VersionNumber
+		,IsActual)
+	output inserted.Document_ID into #Out(Id) select 0, getdate(), getdate(), @UserId, @UserId
+		,'TST#Code_'+cast(newid() as nvarchar(36))
+		,'TST#Number_'+cast(newid() as nvarchar(36))
+		,(select Entity_TableId from p_TestObject where TestObject_Code = 'DocumentType_ID' and TestCode = 'Document_Insert + 01')
+		,getdate()
+		,getdate()
+		,cast(cast(newid() as varbinary(4)) as tinyint)
+		,'TST#Name_'+cast(newid() as nvarchar(36))
+		,null
+		,null
+		,null
+	insert into p_TestObject(TestObject_Code,TestCode,TestId,Enity_Schema,Entity_Table,Entity_TableId)
+		select 'Parent_ID', @TestCode, @TestId, 'dbo', 'p_Document', ID from #Out
+	delete from #Out</value>
+  </data>
+  <data name="Prepare_Test_Environment_PosttestAction.SqlScript" xml:space="preserve">
+    <value>--create sequence to count test runs
+drop SEQUENCE if exists [dbo].[Sequence_Test_Run_Number]; 
+
+CREATE SEQUENCE [dbo].[Sequence_Test_Run_Number] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ CACHE 
+
+
+--create table to store test objects data
+ CREATE TABLE [dbo].[p_TestObject](
+	[TestObject_ID] [uniqueidentifier] NOT NULL,
+	[RowStatus] [int] NOT NULL,
+	[Insert_DTS] [datetime2](7) NOT NULL,
+	[Update_DTS] [datetime2](7) NOT NULL,
+	[Created_User_ID] [uniqueidentifier] NOT NULL,
+	[Modified_User_ID] [uniqueidentifier] NOT NULL,
+	[TestObject_Code] [nvarchar](255) NOT NULL,
+	[TestCode] [nvarchar](250) NOT NULL,
+	[TestId] [uniqueidentifier] NOT NULL,
+	[Enity_Schema] [nvarchar](250) NOT NULL,
+	[Entity_Table] [nvarchar](250) NOT NULL,
+	[Entity_TableId] [uniqueidentifier] NOT NULL,
+ CONSTRAINT [PK_p_TestObject] PRIMARY KEY CLUSTERED 
+(
+	[TestObject_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [UQ_p_TestObject] UNIQUE NONCLUSTERED 
+(
+	[TestObject_Code] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[p_TestObject] ADD  CONSTRAINT [DF_TestObject_ID]  DEFAULT (newsequentialid()) FOR [TestObject_ID]
+GO
+
+ALTER TABLE [dbo].[p_TestObject] ADD  DEFAULT ((0)) FOR [RowStatus]
+GO
+
+ALTER TABLE [dbo].[p_TestObject] ADD  DEFAULT (getdate()) FOR [Insert_DTS]
+GO
+
+ALTER TABLE [dbo].[p_TestObject] ADD  DEFAULT (getdate()) FOR [Update_DTS]
+GO
+
+ALTER TABLE [dbo].[p_TestObject] ADD  DEFAULT ('3B7A2094-A89E-E811-AA07-005056947B15') FOR [Created_User_ID]
+GO
+
+ALTER TABLE [dbo].[p_TestObject] ADD  DEFAULT ('3B7A2094-A89E-E811-AA07-005056947B15') FOR [Modified_User_ID]
+GO
+
+ALTER TABLE [dbo].[p_TestObject]  WITH CHECK ADD  CONSTRAINT [FK_p_TestObject_Created_User_ID_p_AppUser] FOREIGN KEY([Created_User_ID])
+REFERENCES [dbo].[p_AppUser] ([AppUser_ID])
+GO
+
+ALTER TABLE [dbo].[p_TestObject] CHECK CONSTRAINT [FK_p_TestObject_Created_User_ID_p_AppUser]
+GO
+
+ALTER TABLE [dbo].[p_TestObject]  WITH CHECK ADD  CONSTRAINT [FK_p_TestObject_Modified_User_ID_p_AppUser] FOREIGN KEY([Modified_User_ID])
+REFERENCES [dbo].[p_AppUser] ([AppUser_ID])
+GO
+
+ALTER TABLE [dbo].[p_TestObject] CHECK CONSTRAINT [FK_p_TestObject_Modified_User_ID_p_AppUser]
+GO
+
+ALTER TABLE [dbo].[p_TestObject]  WITH CHECK ADD  CONSTRAINT [FK_p_TestObject_RowStatus_p_RowStatus] FOREIGN KEY([RowStatus])
+REFERENCES [dbo].[p_RowStatus] ([RowStatus_ID])
+GO
+
+ALTER TABLE [dbo].[p_TestObject] CHECK CONSTRAINT [FK_p_TestObject_RowStatus_p_RowStatus]
+GO</value>
+  </data>
+  <data name="Prepare_Test_Environment_TestAction.SqlScript" xml:space="preserve">
+    <value>
+</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+</root>

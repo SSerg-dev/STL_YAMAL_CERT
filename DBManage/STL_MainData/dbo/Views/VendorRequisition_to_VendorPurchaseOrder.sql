@@ -1,0 +1,1 @@
+﻿CREATE view VendorRequisition_to_VendorPurchaseOrder as select [VendorPurchaseOrder_ID], [VendorRequisition_ID], [VendorRequisition_to_VendorPurchaseOrder_ID] from p_VendorRequisition_to_VendorPurchaseOrder where row_status < 100

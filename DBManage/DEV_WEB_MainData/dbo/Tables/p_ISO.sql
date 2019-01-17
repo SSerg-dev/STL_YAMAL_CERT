@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[p_ISO] (
+    [ISO_ID]            UNIQUEIDENTIFIER CONSTRAINT [DF_ISO_ID] DEFAULT (newsequentialid()) NOT NULL,
+    [RowStatus]         INT              NOT NULL,
+    [Insert_DTS]        DATETIME2 (7)    NOT NULL,
+    [Update_DTS]        DATETIME2 (7)    NOT NULL,
+    [Created_User_ID]   UNIQUEIDENTIFIER NOT NULL,
+    [Modified_User_ID]  UNIQUEIDENTIFIER NOT NULL,
+    [ISO_Code]          NVARCHAR (255)   NOT NULL,
+    [Line_ID]           UNIQUEIDENTIFIER NOT NULL,
+    [Phase_ID]          UNIQUEIDENTIFIER NOT NULL,
+    [Marka_ID]          UNIQUEIDENTIFIER NOT NULL,
+    [TitleObject_ID]    UNIQUEIDENTIFIER NOT NULL,
+    [DesignAreaType_ID] UNIQUEIDENTIFIER NOT NULL,
+    [ProcessPhase_ID]   UNIQUEIDENTIFIER NOT NULL,
+    CONSTRAINT [PK_p_ISO] PRIMARY KEY CLUSTERED ([ISO_ID] ASC),
+    CONSTRAINT [FK_p_ISO_Created_User_ID_p_AppUser] FOREIGN KEY ([Created_User_ID]) REFERENCES [dbo].[p_AppUser] ([AppUser_ID]),
+    CONSTRAINT [FK_p_ISO_DesignAreaType_ID_p_DesignAreaType] FOREIGN KEY ([DesignAreaType_ID]) REFERENCES [dbo].[p_DesignAreaType] ([DesignAreaType_ID]),
+    CONSTRAINT [FK_p_ISO_Line_ID_p_Line] FOREIGN KEY ([Line_ID]) REFERENCES [dbo].[p_Line] ([Line_ID]),
+    CONSTRAINT [FK_p_ISO_Marka_ID_p_Marka] FOREIGN KEY ([Marka_ID]) REFERENCES [dbo].[p_Marka] ([Marka_ID]),
+    CONSTRAINT [FK_p_ISO_Modified_User_ID_p_AppUser] FOREIGN KEY ([Modified_User_ID]) REFERENCES [dbo].[p_AppUser] ([AppUser_ID]),
+    CONSTRAINT [FK_p_ISO_Phase_ID_p_Phase] FOREIGN KEY ([Phase_ID]) REFERENCES [dbo].[p_Phase] ([Phase_ID]),
+    CONSTRAINT [FK_p_ISO_ProcessPhase_ID_p_ProcessPhase] FOREIGN KEY ([ProcessPhase_ID]) REFERENCES [dbo].[p_ProcessPhase] ([ProcessPhase_ID]),
+    CONSTRAINT [FK_p_ISO_RowStatus_p_RowStatus] FOREIGN KEY ([RowStatus]) REFERENCES [dbo].[p_RowStatus] ([RowStatus_ID]),
+    CONSTRAINT [FK_p_ISO_TitleObject_ID_p_TitleObject] FOREIGN KEY ([TitleObject_ID]) REFERENCES [dbo].[p_TitleObject] ([TitleObject_ID]),
+    CONSTRAINT [UQ_p_ISO] UNIQUE NONCLUSTERED ([ISO_Code] ASC)
+);
+

@@ -1,0 +1,1 @@
+﻿create view Line_to_Marka as select [Line_to_Marka_ID], [Line_ID], [Marka_ID] from p_Line_to_Marka where RowStatus = 0

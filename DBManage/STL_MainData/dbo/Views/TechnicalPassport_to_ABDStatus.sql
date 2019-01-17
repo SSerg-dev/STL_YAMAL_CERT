@@ -1,0 +1,1 @@
+﻿CREATE view TechnicalPassport_to_ABDStatus as select [ABDStatus_ID], [DTS_End], [DTS_Start], [Parent_ID], [TechnicalPassport_ID], [TechnicalPassport_To_ABDStatus_ID] from p_TechnicalPassport_to_ABDStatus where row_status < 100

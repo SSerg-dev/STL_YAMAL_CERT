@@ -1,0 +1,1 @@
+﻿CREATE view RegisterJobCardAction_m as select [Created_By], [DTS_End], [DTS_Strat], [JobCard_ID], [JobCardRusABDActivityGroup_ID], [Modified_By], [Register_ID], [RegisterJobCardAction_m_ID] from p_RegisterJobCardAction_m where row_status < 100

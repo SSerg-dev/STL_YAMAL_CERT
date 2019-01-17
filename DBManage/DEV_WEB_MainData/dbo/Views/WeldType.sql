@@ -1,0 +1,1 @@
+﻿create view WeldType as select [WeldType_ID], [WeldType_Code], [Description_Rus] from p_WeldType where RowStatus = 0

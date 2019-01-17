@@ -1,0 +1,1 @@
+﻿create view AccessToPIVoltageRange as select [AccessToPIVoltageRange_ID], [AccessToPIVoltageRange_Code], [Description_Rus] from p_AccessToPIVoltageRange where RowStatus < 100

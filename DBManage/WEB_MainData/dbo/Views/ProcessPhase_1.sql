@@ -1,0 +1,1 @@
+﻿create view ProcessPhase as select [ProcessPhase_ID], [ProcessPhase_Code] from p_ProcessPhase where RowStatus = 0

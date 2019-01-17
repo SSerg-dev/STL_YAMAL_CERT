@@ -1,0 +1,2 @@
+﻿
+create view DocumentNaksAttest_to_DetailsType as select [DocumentNaksAttest_to_DetailsType_ID], [DocumentNaksAttest_ID], [DetailsType_ID] from p_DocumentNaksAttest_to_DetailsType where RowStatus < 100

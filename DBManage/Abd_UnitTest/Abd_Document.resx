@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="abd_Document_DeleteTest_TestAction.SqlScript" xml:space="preserve">
+    <value>-- database unit test for abd.Document_Delete
+DECLARE @RC AS INT, @i_Document_ID AS NVARCHAR (250), @i_AppUser_ID AS NVARCHAR (250), @o_IsError AS BIT;
+
+SELECT @RC = 0,
+       @i_Document_ID = NULL,
+       @i_AppUser_ID = NULL;
+
+EXECUTE @RC = [abd].[Document_Delete] @i_Document_ID, @i_AppUser_ID, @o_IsError OUTPUT;
+
+SELECT @RC AS RC,
+       @o_IsError AS o_IsError;
+
+</value>
+  </data>
+  <data name="abd_Document_InsertTest_TestAction.SqlScript" xml:space="preserve">
+    <value>
+
+-- Параметры
+DECLARE @RC AS INT, @i_RowStatus AS NVARCHAR (250), @i_AppUser_ID AS NVARCHAR (250), @i_Entitytype_ID AS NVARCHAR (250), @i_Document_ModofiedDate AS NVARCHAR (250), @i_Document_CreationDate AS NVARCHAR (250), @i_Document_CreatedBy AS NVARCHAR (250), @i_Document_ModifiedBy AS NVARCHAR (250), @i_Document_Name AS NVARCHAR (250), @i_Document_Title AS NVARCHAR (250), @i_Document_RevisionNumber AS NVARCHAR (250), @i_Document_RevisionDate AS NVARCHAR (250), @i_Contragent_ID AS NVARCHAR (250), @o_Entity_ID AS NVARCHAR (250), @o_IsError AS BIT;
+SELECT @RC							= 0,
+       @i_RowStatus					= 0,
+       @i_AppUser_ID				= (select Id from p_xTestOut where TableName = 'AppUser'),
+       @i_Entitytype_ID				= (select Id from p_xTestOut where TableName = 'EntityType'),
+       @i_Document_ModofiedDate		= getdate(),
+       @i_Document_CreationDate		= getdate(),
+       @i_Document_CreatedBy		= (select Id from p_xTestOut where TableName = 'AppUser'),
+       @i_Document_ModifiedBy		= (select Id from p_xTestOut where TableName = 'AppUser'),
+       @i_Document_Name				= 'TST#'+cast(newid() as nvarchar(36)),
+       @i_Document_Title			= 'TST#'+cast(newid() as nvarchar(36)),
+       @i_Document_RevisionNumber	= 1,
+       @i_Document_RevisionDate		= getdate(),
+       @i_Contragent_ID				= (select Id from p_xTestOut where TableName = 'Contragent');
+ -- Вызов  
+EXECUTE @RC = [abd].[Document_Insert] @i_RowStatus, @i_AppUser_ID, @i_Entitytype_ID, @i_Document_ModofiedDate, @i_Document_CreationDate, @i_Document_CreatedBy, @i_Document_ModifiedBy, @i_Document_Name, @i_Document_Title, @i_Document_RevisionNumber, @i_Document_RevisionDate, @i_Contragent_ID, @o_Entity_ID OUTPUT, @o_IsError OUTPUT;
+-- Возвращаем результаты
+SELECT @RC AS RC,
+       @o_Entity_ID AS o_Entity_ID,
+       @o_IsError AS o_IsError;
+
+insert into p_xTestOut (id, TableName, SchemaName, TestName) select @o_Entity_ID, 'Document', 'abd', 'abd.Document'
+-- Проверка вставки
+select
+	 @i_Document_Name
+	,@i_Document_Title
+	,@i_EntityType_ID
+	,@i_Document_RevisionNumber
+	,@i_Document_RevisionDate
+	,case when @i_RowStatus = 0 then (select Document_ID from abd.p_Document where Row_Status = 300 and EntityType_ID = @i_Entitytype_ID) when @i_RowStatus = 300 then null end
+	,@i_Contragent_ID
+except 
+SELECT 
+	 [Document_Name]
+	,[Document_Title]
+	,[EntityType_ID]
+	,[Document_RevisionNumber]
+	,[Document_RevisionDate]
+	,[Document_Parent_ID]
+	,[Contragent_ID]
+FROM [abd].[p_Document]
+where [Document_ID] in (select Id from p_xTestOut where TableName = 'Document' and TestName = 'abd.Document')
+
+</value>
+  </data>
+  <data name="abd_Document_UpdateTest_TestAction.SqlScript" xml:space="preserve">
+    <value>-- database unit test for abd.Document_Update
+DECLARE @RC AS INT, @i_Document_ID AS NVARCHAR (250), @i_RowStatus AS NVARCHAR (250), @i_AppUser_ID AS NVARCHAR (250), @i_Entitytype_ID AS NVARCHAR (250), @i_Document_ModofiedDate AS NVARCHAR (250), @i_Document_CreationDate AS NVARCHAR (250), @i_Document_CreatedBy AS NVARCHAR (250), @i_Document_ModifiedBy AS NVARCHAR (250), @i_Document_Name AS NVARCHAR (250), @i_Document_Title AS NVARCHAR (250), @i_Document_RevisionNumber AS NVARCHAR (250), @i_Document_RevisionDate AS NVARCHAR (250), @i_Contragent_ID AS NVARCHAR (250), @o_IsError AS BIT;
+
+SELECT @RC = 0,
+       @i_Document_ID = NULL,
+       @i_RowStatus = NULL,
+       @i_AppUser_ID = NULL,
+       @i_Entitytype_ID = NULL,
+       @i_Document_ModofiedDate = NULL,
+       @i_Document_CreationDate = NULL,
+       @i_Document_CreatedBy = NULL,
+       @i_Document_ModifiedBy = NULL,
+       @i_Document_Name = NULL,
+       @i_Document_Title = NULL,
+       @i_Document_RevisionNumber = NULL,
+       @i_Document_RevisionDate = NULL,
+       @i_Contragent_ID = NULL;
+
+EXECUTE @RC = [abd].[Document_Update] @i_Document_ID, @i_RowStatus, @i_AppUser_ID, @i_Entitytype_ID, @i_Document_ModofiedDate, @i_Document_CreationDate, @i_Document_CreatedBy, @i_Document_ModifiedBy, @i_Document_Name, @i_Document_Title, @i_Document_RevisionNumber, @i_Document_RevisionDate, @i_Contragent_ID, @o_IsError OUTPUT;
+
+SELECT @RC AS RC,
+       @o_IsError AS o_IsError;
+
+</value>
+  </data>
+  <data name="abd_Document_InsertTest_PretestAction.SqlScript" xml:space="preserve">
+    <value>delete from p_xTestOut where TestName = 'abd.Document'
+
+-- 
+insert into [abd].[p_EntityType]([RowStatus],[Insert_DTS],[Update_DTS],[Created_User_ID],[Modified_User_ID]
+	,[EntityType_Code]
+	,[EntityType_Group]
+	,[Attribute_DataType]
+	,[Document_Type])
+output inserted.EntityType_ID, 'EntityType', 'abd', 'abd.Document' into p_xTestOut
+select 0,getdate(),getdate(),AppUser_ID,AppUser_ID
+	,'TST#'+cast(newid() as nvarchar(36))
+	,'Doc'
+	,null
+	,''
+from p_AppUser where AppUser_Code = 'RootUser'
+
+insert into [dbo].[p_Contragent]([RowStatus],[Insert_DTS],[Update_DTS],[Created_User_ID],[Modified_User_ID]
+	,[Contragent_Code]
+	,[Description_Eng]
+	,[Description_Rus])
+output inserted.Contragent_ID, 'Contragent', 'dbo', 'abd.Document' into p_xTestOut
+select 0,getdate(),getdate(),AppUser_ID,AppUser_ID
+	,'TST#'+cast(newid() as nvarchar(36))
+	,'TST#'+cast(newid() as nvarchar(36))
+	,'TST#'+cast(newid() as nvarchar(36))
+from p_AppUser where AppUser_Code = 'RootUser'
+
+insert into p_xTestOut (id, TableName, SchemaName, TestName) 
+select AppUser_Id, 'AppUser', 'dbo', 'abd.Document' from p_AppUser where AppUser_Code = 'RootUser' 
+</value>
+  </data>
+  <data name="testInitializeAction.SqlScript" xml:space="preserve">
+    <value>/*	Подготовительный скрипт создан для того, чтобы удалить из базы все возможные предыдущие тестовые записи,
+	Если ВДРУГ в результате сбоя они не были удалены штатными средствами тестирования.
+
+	Скрипт не решате ВСЕХ проблем, так как существуют таблицы,
+	которые не содаржат поля вида TableName_Code, 
+	что есть не верно, но на данный момент имеет метсо быть. 
+	
+	Для корректной работы с такими таблицами слдеует руками внести правки в раздел UNION
+
+	Если не удалились записи в _to_ таблицах то скрипт их удалить не сможет
+*/
+set nocount on
+-- курсор по таблицам/колонкам. выбираем только те, которые входят в схемы 'dbo' и 'abd'
+declare Cur cursor local fast_forward read_only for
+	select FullName = s.name+'.'+t.name, CodeField = c.name
+	from sys.tables t 
+	join sys.schemas s on t.schema_id = s.schema_id and s.name in ('dbo','abd')
+	join sys.columns c on c.object_id = t.object_id and c.name = right(t.name,len(t.name)-2)+'_Code'
+	where left(t.name,2) = 'p_' 
+	and t.name not like 'p/_%/_to/_%' escape '/'
+	and t.name &lt;&gt; 'p_RowStatus'
+	-- Для таблиц в которых поля не соответствуют архитектуре нужно сделать ручное присоединение 
+	union all select 'abd.p_Document', 'Document_Name'
+	union all select 'abd.p_DocumentAttribute', 'DocumentAttribute_Format'
+-- переменные 
+declare 
+	 @FullName nvarchar(max) = ''
+	,@ColumnName nvarchar(max) = ''
+	,@SQL nvarchar (max) = ''
+	,@Id uniqueidentifier = '00000000-0000-0000-0000-000000000000' -- нужно для корректного первого условия newid() &gt; @Id
+	,@i int = 0
+-- временная таблица для запросов на удаление, важно newsequentialid(), так как newid() в теории может привести к бесконечному циклу
+drop table if exists #1 
+create table #1 (Id uniqueidentifier default newsequentialid(), RunSQL nvarchar(max))   
+-- пробегаемся по каждой табличке и находим в не тестовые записи по маске like 'TST#%'
+open Cur
+while 1=1 begin
+	fetch next from Cur into @FullName, @ColumnName
+	if @@fetch_status &lt;&gt; 0 break 
+	select @SQL = 'select * from '+@FullName+ ' where left('+@ColumnName+',4)=''TST#'''
+	-- можно не делать вызова @SQL, а сгенерировать динамику с output но так нагляднее для отладки
+	exec (@SQL)
+	-- если в таблице есть тестовые записи, добавляем скрипт на удаление в пул
+	if @@rowcount &gt; 0 insert into #1 (RunSQL) select 'delete from '+@FullName+ ' where left('+@ColumnName+',4)=''TST#'''
+end
+close Cur deallocate Cur
+-- хитрый цикл крутиться пока в пуле есть запросы на удаление
+while exists (select 1 from #1) and (@i &lt; 10) begin
+	-- выбираем следующий запрос и ID (которые сгенерированы последовательно и отсортированно)
+	select top 1 @SQL = RunSQL, @Id = Id from #1 where Id &gt; @Id
+	-- если нет больше Id &gt; @Id (это значит мы прошли от начала до конца всего пула, но он еще не пустой), 
+	-- тогда сбрасываем @Id чтобы запустить проход на следующий круг
+	if @@rowcount = 0 select @Id = '00000000-0000-0000-0000-000000000000' 
+	begin try 
+		exec(@SQL)
+		-- только если удаление прошло успешно - удаляем записть из пула
+		if @@rowcount &gt; 0 delete from #1 where Id = @Id
+	end try begin catch
+		/* если удалить не удалось (так как есть зависимости), не делаем ничего
+		будем крутить запрос цикл пока не удаляться все записи
+		есть опасность получить бесконечный цикл, если была создана запись 
+		ссылающаяся на одну из записей TST#, но при этом сама она не попала 
+		в выборку курсора */
+		set @i = @i + 1
+	end catch
+	-- если что-то осталось тогда выводим что там есть
+	if exists (select 1 from #1) select * from #1
+end
+</value>
+  </data>
+  <data name="abd_Document_InsertTest_PosttestAction.SqlScript" xml:space="preserve">
+    <value>declare Cur cursor local fast_forward read_only for
+	select Id, TableName, SchemaName from p_xTestOut where TestName = 'abd.Document' and TableName &lt;&gt; 'AppUser' order by xTestOut_Id desc
+declare @Id uniqueidentifier, @TableName nvarchar(120) = '', @SchemaName nvarchar(120), @SQL nvarchar(max) = ''
+open Cur
+while 1=1 begin
+	fetch next from Cur into @Id, @TableName, @SchemaName
+	if @@fetch_status &lt;&gt; 0 break 
+	select @SQL = 'delete from '+@SchemaName+'.p_'+@TableName+' where '+@TableName+'_Id = '''+cast(@Id as nvarchar(36))+''''
+	exec (@SQL)
+end
+close Cur deallocate Cur
+delete from p_xTestOut where TestName = 'abd.Document'</value>
+  </data>
+  <data name="abd_AttributeType_Insert_01_PretestAction.SqlScript" xml:space="preserve">
+    <value>declare 
+	 @TestId			uniqueidentifier	= newid()
+	,@TestObject_Code	nvarchar(250)		= 'TST#'+cast(newid() as nvarchar(36))
+	,@TestCode			nvarchar(250)		= ''
+
+
+insert into p_TestObject (TestObject_Code, TestCode, TestId, Enity_Schema, Entity_Table, Entity_TableId)
+select @TestObject_Code, @TestCode, @TestId, '', '', ''
+</value>
+  </data>
+  <data name="abd_AttributeType_Insert_01_TestAction.SqlScript" xml:space="preserve">
+    <value />
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+</root>

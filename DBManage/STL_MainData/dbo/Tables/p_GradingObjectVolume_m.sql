@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[p_GradingObjectVolume_m] (
+    [GradingObjectVolume_ID] UNIQUEIDENTIFIER CONSTRAINT [DF_GradingObjectVolume_m_ID] DEFAULT (newsequentialid()) NOT NULL,
+    [GradingObject_ID]       UNIQUEIDENTIFIER NOT NULL,
+    [GradingStad_ID]         UNIQUEIDENTIFIER NOT NULL,
+    [GradingWorkType_ID]     UNIQUEIDENTIFIER NOT NULL,
+    [MeasureUnit_ID]         UNIQUEIDENTIFIER NOT NULL,
+    [Contragent_ID]          UNIQUEIDENTIFIER NULL,
+    [Design_Qty]             FLOAT (53)       NULL,
+    [Fact_Qty]               FLOAT (53)       NULL,
+    [Insert_DTS]             DATETIME2 (7)    NULL,
+    [Update_DTS]             DATETIME2 (7)    NULL,
+    [Row_Status]             INT              NULL,
+    [Created_User_ID]        UNIQUEIDENTIFIER NULL,
+    [Modified_User_ID]       UNIQUEIDENTIFIER NULL,
+    CONSTRAINT [PK_p_GradingObjectVolume_m] PRIMARY KEY CLUSTERED ([GradingObjectVolume_ID] ASC),
+    CONSTRAINT [FK_p_GradingObjectVolume_m_Contragent_ID_p_Contragent] FOREIGN KEY ([Contragent_ID]) REFERENCES [dbo].[p_Contragent] ([Contragent_ID]),
+    CONSTRAINT [FK_p_GradingObjectVolume_m_Created_User_ID_p_User] FOREIGN KEY ([Created_User_ID]) REFERENCES [syslog].[p_User] ([User_ID]),
+    CONSTRAINT [FK_p_GradingObjectVolume_m_GradingObject_ID_p_GradingObject] FOREIGN KEY ([GradingObject_ID]) REFERENCES [dbo].[p_GradingObject] ([GradingObject_ID]),
+    CONSTRAINT [FK_p_GradingObjectVolume_m_GradingStad_ID_p_GradingStad] FOREIGN KEY ([GradingStad_ID]) REFERENCES [dbo].[p_GradingStad] ([GradingStad_ID]),
+    CONSTRAINT [FK_p_GradingObjectVolume_m_GradingWorkType_ID_p_GradingWorkType] FOREIGN KEY ([GradingWorkType_ID]) REFERENCES [dbo].[p_GradingWorkType] ([GradingWorkType_ID]),
+    CONSTRAINT [FK_p_GradingObjectVolume_m_MeasureUnit_ID_p_MeasureUnit] FOREIGN KEY ([MeasureUnit_ID]) REFERENCES [dbo].[p_MeasureUnit] ([MeasureUnit_ID]),
+    CONSTRAINT [FK_p_GradingObjectVolume_m_Modified_User_ID_p_User] FOREIGN KEY ([Modified_User_ID]) REFERENCES [syslog].[p_User] ([User_ID]),
+    CONSTRAINT [FK_p_GradingObjectVolume_m_Row_Status_p_RowStatus_sys] FOREIGN KEY ([Row_Status]) REFERENCES [dbo].[p_RowStatus_sys] ([Row_Status]),
+    CONSTRAINT [UQ_p_GradingObjectVolume_m] UNIQUE NONCLUSTERED ([GradingObject_ID] ASC, [GradingStad_ID] ASC, [GradingWorkType_ID] ASC, [MeasureUnit_ID] ASC)
+);
+

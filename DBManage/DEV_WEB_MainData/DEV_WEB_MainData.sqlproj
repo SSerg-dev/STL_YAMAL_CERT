@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>DEV_WEB_MainData</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{863ac7b2-f881-4387-9c37-9e2c613e38ce}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>DEV_WEB_MainData</RootNamespace>
+    <AssemblyName>DEV_WEB_MainData</AssemblyName>
+    <ModelCollation>1049,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <DefaultCollation>Cyrillic_General_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\Sequences\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\p_WeldPasses.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest_to_WeldGOST14098.sql" />
+    <Build Include="dbo\Tables\p_JointType.sql" />
+    <Build Include="dbo\Tables\p_WeldPosition.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest_to_WeldMaterial.sql" />
+    <Build Include="dbo\Tables\p_Marka.sql" />
+    <Build Include="dbo\Tables\p_WeldType.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest_to_WeldMaterialGroup.sql" />
+    <Build Include="dbo\Tables\p_Parameter.sql" />
+    <Build Include="dbo\Tables\p_Contragent.sql" />
+    <Build Include="dbo\Tables\p_Person.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest_to_WeldPosition.sql" />
+    <Build Include="dbo\Tables\p_GOST.sql" />
+    <Build Include="dbo\Tables\p_PID.sql" />
+    <Build Include="dbo\Tables\__EFMigrationsHistory.sql" />
+    <Build Include="dbo\Tables\p_Employee.sql" />
+    <Build Include="dbo\Tables\p_AppUser_to_Role.sql" />
+    <Build Include="dbo\Tables\p_QualificationField.sql" />
+    <Build Include="dbo\Tables\p_RowStatus.sql" />
+    <Build Include="dbo\Tables\p_AppUser.sql" />
+    <Build Include="dbo\Tables\p_QualificationLevel.sql" />
+    <Build Include="dbo\Tables\p_Document.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaks.sql" />
+    <Build Include="dbo\Tables\p_AccessToPIStaffFunction.sql" />
+    <Build Include="dbo\Tables\p_Responsibility.sql" />
+    <Build Include="dbo\Tables\p_Division.sql" />
+    <Build Include="dbo\Tables\p_AccessToPIVoltageRange.sql" />
+    <Build Include="dbo\Tables\p_Document_to_GOST.sql" />
+    <Build Include="dbo\Tables\p_Role.sql" />
+    <Build Include="dbo\Tables\p_AttCenterNaks.sql" />
+    <Build Include="dbo\Tables\p_GOST_to_PID.sql" />
+    <Build Include="dbo\Tables\p_Document_to_PID.sql" />
+    <Build Include="dbo\Tables\p_SeamsType.sql" />
+    <Build Include="dbo\Tables\p_AuthToSignInspActsForWSUN.sql" />
+    <Build Include="dbo\Tables\p_GOST_to_TitleObject.sql" />
+    <Build Include="dbo\Tables\p_ShieldingGas.sql" />
+    <Build Include="dbo\Tables\p_Document_to_Status.sql" />
+    <Build Include="dbo\Tables\p_ContragentRole.sql" />
+    <Build Include="dbo\Tables\p_Status.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaks_to_HIFGroup.sql" />
+    <Build Include="dbo\Tables\p_DetailsType.sql" />
+    <Build Include="dbo\Tables\p_Level.sql" />
+    <Build Include="dbo\Tables\p_TestMethod.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest.sql" />
+    <Build Include="dbo\Tables\p_DocumentProjectNumber.sql" />
+    <Build Include="dbo\Tables\p_StaffFunction.sql" />
+    <Build Include="dbo\Tables\p_TestTypeRef.sql" />
+    <Build Include="dbo\Tables\p_Position.sql" />
+    <Build Include="dbo\Tables\p_DocumentType.sql" />
+    <Build Include="dbo\Tables\p_VoltageRange.sql" />
+    <Build Include="dbo\Tables\p_TitleObject.sql" />
+    <Build Include="dbo\Tables\p_ElectricalSafetyAbilitation.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest_to_DetailsType.sql" />
+    <Build Include="dbo\Tables\p_WeldGOST14098.sql" />
+    <Build Include="dbo\Tables\p_HIFGroup.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest_to_JointKind.sql" />
+    <Build Include="dbo\Tables\p_WeldingEquipmentAutomationLevel.sql" />
+    <Build Include="dbo\Tables\p_InspectionSubject.sql" />
+    <Build Include="dbo\Tables\p_WeldMaterial.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest_to_JointType.sql" />
+    <Build Include="dbo\Tables\p_InspectionTechnique.sql" />
+    <Build Include="dbo\Tables\p_WeldMaterialGroup.sql" />
+    <Build Include="dbo\Tables\p_DocumentNaksAttest_to_SeamsType.sql" />
+    <Build Include="dbo\Tables\p_JointKind.sql" />
+    <Build Include="dbo\Functions\f_SiteDTS.sql" />
+    <Build Include="dbo\Sequences\Sequence_CheckList_Number.sql" />
+    <Build Include="dbo\Sequences\Sequence_Document_Number.sql" />
+    <Build Include="dbo\Sequences\Sequence_Register_Number.sql" />
+  </ItemGroup>
+</Project>

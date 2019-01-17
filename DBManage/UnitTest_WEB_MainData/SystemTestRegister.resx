@@ -1,0 +1,3033 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="testInitializeAction.SqlScript" xml:space="preserve">
+    <value>/*
+Add SQL statements here that you want to run before 
+each test method (unit test) in this test class is run.
+
+In the lower pane, you can add test conditions that verify 
+whether the results of your SQL statements match what 
+you expect.
+*/
+select 1</value>
+  </data>
+  <data name="t001_CleanUp_TestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Clear data
+-------------
+	delete from dbo.CheckItem
+	where CheckList_ID in	(
+							select cl.CheckList_ID 
+							from dbo.p_CheckList cl
+							join dbo.p_Register r on cl.Register_ID = r.Register_ID
+							where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject) 
+							)
+
+	delete from dbo.p_CheckList_to_Status
+	where CheckList_ID in	(
+							select cl.CheckList_ID 
+							from dbo.p_CheckList cl
+							join dbo.p_Register r on cl.Register_ID = r.Register_ID
+							where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject) 
+							)
+	
+	delete from dbo.p_CheckList
+	where CheckList_ID in	(
+							select cl.CheckList_ID 
+							from dbo.p_CheckList cl
+							join dbo.p_Register r on cl.Register_ID = r.Register_ID
+							where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject) 
+							)
+
+	delete from dbo.p_Register_to_Document
+	where Register_ID in	(
+							select Register_ID 
+							from dbo.p_Register
+							where Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject) 
+							)
+
+	delete from dbo.p_Register_to_Status
+	where Register_ID in	(
+							select Register_ID 
+							from dbo.p_Register
+							where Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject) 
+							)
+
+	delete from dbo.p_Register
+	where Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject) 
+							
+	delete from dbo.p_Document_to_PID
+	where Document_ID in	(
+							select Document_ID 
+							from dbo.p_Document
+							where Document_ID in (select TestObject_ID from dbo.TMP_SystemTestObject) 
+							)
+
+	delete from dbo.p_Document_to_GOST
+	where Document_ID in	(
+							select Document_ID 
+							from dbo.p_Document
+							where Document_ID in (select TestObject_ID from dbo.TMP_SystemTestObject) 
+							)
+
+	delete from dbo.p_Document_to_Status
+	where Document_ID in	(
+							select Document_ID 
+							from dbo.p_Document
+							where Document_ID in (select TestObject_ID from dbo.TMP_SystemTestObject) 
+							)
+
+	delete from dbo.p_Document_to_FileTable
+	where Document_ID in	(
+							select Document_ID 
+							from dbo.p_Document
+							where Document_ID in (select TestObject_ID from dbo.TMP_SystemTestObject) 
+							)
+
+	delete from dbo.p_Document
+	where Document_ID in (select TestObject_ID from dbo.TMP_SystemTestObject) 
+
+-------------
+------------- Check data is cleared
+-------------
+
+select 1 as cnt
+from dbo.p_Register
+where Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject) 
+UNION ALL
+select 1 as cnt
+from dbo.p_Document
+where Document_ID in (select TestObject_ID from dbo.TMP_SystemTestObject) </value>
+  </data>
+  <metadata name="expectedSchemaCondition1.Configuration" xml:space="preserve">
+    <value>Press to configure</value>
+  </metadata>
+  <data name="t002_PrepareData_TestAction.SqlScript" xml:space="preserve">
+    <value>--prepare Dictionaries data
+
+select ID, Insert_DTS, TestObject_ID, TestObject_Code, TestObject_Entity, Run_Number
+from dbo.TMP_SystemTestObject</value>
+  </data>
+  <metadata name="expectedSchemaCondition1.Configuration" xml:space="preserve">
+    <value>Press to configure</value>
+  </metadata>
+  <data name="expectedSchemaCondition1.Schema" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAE5TeXN0ZW0uRGF0YSwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJl
+        PW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAABNTeXN0ZW0uRGF0YS5E
+        YXRhU2V0AwAAABdEYXRhU2V0LlJlbW90aW5nVmVyc2lvbglYbWxTY2hlbWELWG1sRGlmZkdyYW0DAQEO
+        U3lzdGVtLlZlcnNpb24CAAAACQMAAAAGBAAAAJELPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0i
+        dXRmLTE2Ij8+DQo8eHM6c2NoZW1hIGlkPSJOZXdEYXRhU2V0IiB4bWxucz0iIiB4bWxuczp4cz0iaHR0
+        cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOm1zZGF0YT0idXJuOnNjaGVtYXMtbWlj
+        cm9zb2Z0LWNvbTp4bWwtbXNkYXRhIj4NCiAgPHhzOmVsZW1lbnQgbmFtZT0iTmV3RGF0YVNldCIgbXNk
+        YXRhOklzRGF0YVNldD0idHJ1ZSIgbXNkYXRhOkxvY2FsZT0iZW4tVVMiPg0KICAgIDx4czpjb21wbGV4
+        VHlwZT4NCiAgICAgIDx4czpjaG9pY2UgbWluT2NjdXJzPSIwIiBtYXhPY2N1cnM9InVuYm91bmRlZCI+
+        DQogICAgICAgIDx4czplbGVtZW50IG5hbWU9IlRhYmxlIj4NCiAgICAgICAgICA8eHM6Y29tcGxleFR5
+        cGU+DQogICAgICAgICAgICA8eHM6c2VxdWVuY2U+DQogICAgICAgICAgICAgIDx4czplbGVtZW50IG5h
+        bWU9IklEIiBtc2RhdGE6RGF0YVR5cGU9IlN5c3RlbS5HdWlkLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAu
+        MC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkiIHR5cGU9
+        InhzOnN0cmluZyIgbXNkYXRhOnRhcmdldE5hbWVzcGFjZT0iIiBtaW5PY2N1cnM9IjAiIC8+DQogICAg
+        ICAgICAgICAgIDx4czplbGVtZW50IG5hbWU9Ikluc2VydF9EVFMiIHR5cGU9InhzOmRhdGVUaW1lIiBt
+        c2RhdGE6dGFyZ2V0TmFtZXNwYWNlPSIiIG1pbk9jY3Vycz0iMCIgLz4NCiAgICAgICAgICAgICAgPHhz
+        OmVsZW1lbnQgbmFtZT0iVGVzdE9iamVjdF9JRCIgbXNkYXRhOkRhdGFUeXBlPSJTeXN0ZW0uR3VpZCwg
+        bXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1i
+        NzdhNWM1NjE5MzRlMDg5IiB0eXBlPSJ4czpzdHJpbmciIG1zZGF0YTp0YXJnZXROYW1lc3BhY2U9IiIg
+        bWluT2NjdXJzPSIwIiAvPg0KICAgICAgICAgICAgICA8eHM6ZWxlbWVudCBuYW1lPSJUZXN0T2JqZWN0
+        X0NvZGUiIHR5cGU9InhzOnN0cmluZyIgbXNkYXRhOnRhcmdldE5hbWVzcGFjZT0iIiBtaW5PY2N1cnM9
+        IjAiIC8+DQogICAgICAgICAgICAgIDx4czplbGVtZW50IG5hbWU9IlRlc3RPYmplY3RfRW50aXR5IiB0
+        eXBlPSJ4czpzdHJpbmciIG1zZGF0YTp0YXJnZXROYW1lc3BhY2U9IiIgbWluT2NjdXJzPSIwIiAvPg0K
+        ICAgICAgICAgICAgICA8eHM6ZWxlbWVudCBuYW1lPSJSdW5fTnVtYmVyIiB0eXBlPSJ4czpsb25nIiBt
+        c2RhdGE6dGFyZ2V0TmFtZXNwYWNlPSIiIG1pbk9jY3Vycz0iMCIgLz4NCiAgICAgICAgICAgIDwveHM6
+        c2VxdWVuY2U+DQogICAgICAgICAgPC94czpjb21wbGV4VHlwZT4NCiAgICAgICAgPC94czplbGVtZW50
+        Pg0KICAgICAgPC94czpjaG9pY2U+DQogICAgPC94czpjb21wbGV4VHlwZT4NCiAgPC94czplbGVtZW50
+        Pg0KPC94czpzY2hlbWE+BgUAAACAATxkaWZmZ3I6ZGlmZmdyYW0geG1sbnM6bXNkYXRhPSJ1cm46c2No
+        ZW1hcy1taWNyb3NvZnQtY29tOnhtbC1tc2RhdGEiIHhtbG5zOmRpZmZncj0idXJuOnNjaGVtYXMtbWlj
+        cm9zb2Z0LWNvbTp4bWwtZGlmZmdyYW0tdjEiIC8+BAMAAAAOU3lzdGVtLlZlcnNpb24EAAAABl9NYWpv
+        cgZfTWlub3IGX0J1aWxkCV9SZXZpc2lvbgAAAAAICAgIAgAAAAAAAAD//////////ws=
+</value>
+  </data>
+  <data name="t003_CreateDocuments_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+select 1 as cnt
+--d.Document_Code,d.Document_Number,dtf.Document_to_FileTable_ID,dtg.GOST_ID,dtp.PID_ID, dts.Status_ID
+from dbo.Document d
+--join dbo.Document_to_FileTable dtf on dtf.Document_ID = d.Document_ID
+join dbo.Document_to_Status dts on dts.Document_ID = d.Document_ID 
+join dbo.Status s on dts.Status_ID = s.Status_ID and s.Status_Code = 'wDd'
+join dbo.Document_to_GOST dtg on dtg.Document_ID = d.Document_ID
+join dbo.Document_to_PID dtp on dtp.Document_ID = d.Document_ID
+where d.Document_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+</value>
+  </data>
+  <data name="t003_CreateDocuments_PretestAction.SqlScript" xml:space="preserve">
+    <value>-- start new RUN
+DECLARE @x_Run_Number bigint = NEXT VALUE FOR [dbo].[Sequence_Run_Number]; 
+-------------
+------------- Crete document 1
+-------------
+
+	DECLARE @i_RowStatus		nvarchar(250)	= 0
+	DECLARE @i_AppUser_ID		nvarchar(250)	= N'22DB0A40-AB9E-E811-AA07-005056947B15'
+	DECLARE @i_Document_Code	nvarchar(250)	= NEXT VALUE FOR [dbo].[Sequence_Document_Number]; 
+	DECLARE @i_Document_Number	nvarchar(250)	= N'Test_Number_1'
+	DECLARE @i_DocumentType_ID	nvarchar(250)	= N'9A40AB29-D1AC-4EFF-81F4-35821EDCAEAC'
+	DECLARE @i_Document_Date	nvarchar(250)	= N'2017-08-30'
+	DECLARE @i_Issue_Date		nvarchar(250)	= getdate()
+	DECLARE @i_TotalSheets		nvarchar(250)	= N'5'
+	DECLARE @i_Document_Name	nvarchar(250)	= N'Ведомость электромонтажных недоделок, не припятствующих комплексному опробованию. / List of outstanding dificiencies that do not affect all-up testing.'
+	DECLARE @i_Parent_ID		nvarchar(250)	= null
+	DECLARE @o_Entity_ID		nvarchar(250)
+	DECLARE @o_IsError			bit
+
+	EXECUTE [dbo].[Document_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_Code
+	  ,@i_Document_Number
+	  ,@i_DocumentType_ID
+	  ,@i_Document_Date
+	  ,@i_Issue_Date
+	  ,@i_TotalSheets
+	  ,@i_Document_Name
+	  ,@i_Parent_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	insert into dbo.TMP_SystemTestObject ( ID, Insert_DTS, TestObject_ID, TestObject_Code, TestObject_Entity, Run_Number)
+			VALUES (newid(),getdate(), @o_Entity_ID, (select iif(@o_IsError = 1, null, @i_Document_Code)), 'Document',@x_Run_Number)
+
+	DECLARE @i_Document_ID	nvarchar(250)	= @o_Entity_ID
+	--DECLARE @i_FileTable_ID	nvarchar(250)	= N'62123D4B-4B77-E811-A9F7-005056947B15' 
+
+	--EXECUTE [dbo].[Document_to_FileTable_Insert] 
+	--   @i_RowStatus
+	--  ,@i_AppUser_ID
+	--  ,@i_Document_ID
+	--  ,@i_FileTable_ID
+	--  ,@o_Entity_ID OUTPUT
+	--  ,@o_IsError OUTPUT
+
+	DECLARE @i_Status_ID nvarchar(250)	= (select Status_ID from dbo.Status where Status_Code = 'wDd')
+	DECLARE @i_DTS_Start	nvarchar(250)	= null
+	DECLARE	@i_DTS_End		nvarchar(250)	= null
+
+	EXECUTE [dbo].[Document_to_Status_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_Status_ID
+	  ,@i_Parent_ID	
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	DECLARE @i_GOST_ID nvarchar(250) = N'C4A409CB-74A8-E811-AA09-005056947B15'
+
+	EXECUTE [dbo].[Document_to_GOST_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_GOST_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	DECLARE @i_PID_ID nvarchar(250) = N'592EEB05-75A8-E811-AA09-005056947B15'
+
+	EXECUTE [dbo].[Document_to_PID_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_PID_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+-------------
+------------- Crete document 2
+-------------
+
+	set @i_RowStatus			= 0
+	set @i_AppUser_ID			= N'22DB0A40-AB9E-E811-AA07-005056947B15'
+	set @i_Document_Code		= NEXT VALUE FOR [dbo].[Sequence_Document_Number]; 
+	set @i_Document_Number		= N'Test_Number_2'
+	set @i_DocumentType_ID		= N'9A40AB29-D1AC-4EFF-81F4-35821EDCAEAC'
+	set @i_Document_Date		= N'2018-08-30'
+	set @i_Issue_Date			= getdate()
+	set @i_TotalSheets			= N'2'
+	set @i_Document_Name		= N'Журнал кабельных работ'
+	set @i_Parent_ID			= null	
+
+	EXECUTE [dbo].[Document_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_Code
+	  ,@i_Document_Number
+	  ,@i_DocumentType_ID
+	  ,@i_Document_Date
+	  ,@i_Issue_Date
+	  ,@i_TotalSheets
+	  ,@i_Document_Name
+	  ,@i_Parent_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	insert into dbo.TMP_SystemTestObject ( ID, Insert_DTS, TestObject_ID, TestObject_Code, TestObject_Entity, Run_Number)
+			VALUES (newid(),getdate(), @o_Entity_ID, (select iif(@o_IsError = 1, null, @i_Document_Code)), 'Document',@x_Run_Number)
+
+	set @i_Document_ID		= @o_Entity_ID
+	--set @i_FileTable_ID		= N'52123D4B-4B77-E811-A9F7-005056947B15' 
+
+	--EXECUTE [dbo].[Document_to_FileTable_Insert] 
+	--   @i_RowStatus
+	--  ,@i_AppUser_ID
+	--  ,@i_Document_ID
+	--  ,@i_FileTable_ID
+	--  ,@o_Entity_ID OUTPUT
+	--  ,@o_IsError OUTPUT
+
+	set @i_Status_ID	= (select Status_ID from dbo.Status where Status_Code = 'wDd')
+	set @i_DTS_Start	= null
+	set	@i_DTS_End		= null
+
+	EXECUTE [dbo].[Document_to_Status_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_Status_ID
+	  ,@i_Parent_ID	
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	set @i_GOST_ID = N'C4A409CB-74A8-E811-AA09-005056947B15'
+
+	EXECUTE [dbo].[Document_to_GOST_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_GOST_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	set @i_PID_ID = N'592EEB05-75A8-E811-AA09-005056947B15'
+
+	EXECUTE [dbo].[Document_to_PID_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_PID_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+
+-------------
+------------- Crete document 3
+-------------
+
+	set @i_RowStatus			= 0
+	set @i_AppUser_ID			= N'22DB0A40-AB9E-E811-AA07-005056947B15'
+	set @i_Document_Code		= NEXT VALUE FOR [dbo].[Sequence_Document_Number]; 
+	set @i_Document_Number		= N'Test_Number_3'
+	set @i_DocumentType_ID		= N'9A40AB29-D1AC-4EFF-81F4-35821EDCAEAC'
+	set @i_Document_Date		= N'2018-01-30'
+	set @i_Issue_Date			= getdate()
+	set @i_TotalSheets			= N'1'
+	set @i_Document_Name		= N'Свидетельство о монтаже'
+	set @i_Parent_ID			= null	
+
+	EXECUTE [dbo].[Document_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_Code
+	  ,@i_Document_Number
+	  ,@i_DocumentType_ID
+	  ,@i_Document_Date
+	  ,@i_Issue_Date
+	  ,@i_TotalSheets
+	  ,@i_Document_Name
+	  ,@i_Parent_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	insert into dbo.TMP_SystemTestObject ( ID, Insert_DTS, TestObject_ID, TestObject_Code, TestObject_Entity, Run_Number)
+			VALUES (newid(),getdate(), @o_Entity_ID, (select iif(@o_IsError = 1, null, @i_Document_Code)), 'Document',@x_Run_Number)
+
+	set @i_Document_ID	= @o_Entity_ID
+	--set @i_FileTable_ID	= N'42123D4B-4B77-E811-A9F7-005056947B15' 
+
+	--EXECUTE [dbo].[Document_to_FileTable_Insert] 
+	--   @i_RowStatus
+	--  ,@i_AppUser_ID
+	--  ,@i_Document_ID
+	--  ,@i_FileTable_ID
+	--  ,@o_Entity_ID OUTPUT
+	--  ,@o_IsError OUTPUT
+
+	set @i_Status_ID	= (select Status_ID from dbo.Status where Status_Code = 'wDd')
+	set @i_DTS_Start	= null
+	set	@i_DTS_End		= null
+
+	EXECUTE [dbo].[Document_to_Status_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_Status_ID
+	  ,@i_Parent_ID	
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	set @i_GOST_ID = N'C4A409CB-74A8-E811-AA09-005056947B15'
+
+	EXECUTE [dbo].[Document_to_GOST_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_GOST_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	set @i_PID_ID = N'592EEB05-75A8-E811-AA09-005056947B15'
+
+	EXECUTE [dbo].[Document_to_PID_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_PID_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT</value>
+  </data>
+  <data name="t004_SetDocStatusToAccepted_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+
+select 1 as cnt
+from dbo.Document d
+--join dbo.Document_to_FileTable dtf on dtf.Document_ID = d.Document_ID
+join dbo.Document_to_Status dts on dts.Document_ID = d.Document_ID 
+join dbo.Status s on dts.Status_ID = s.Status_ID 
+where d.Document_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+and s.Status_Code = N'wDa'</value>
+  </data>
+  <data name="t004_SetDocStatusToAccepted_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Set Doc 1 status to accepted
+-------------
+	DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+	DECLARE @i_RowStatus		nvarchar(250)	= 0
+	DECLARE @i_AppUser_ID		nvarchar(250)	= '22DB0A40-AB9E-E811-AA07-005056947B15'
+	DECLARE @o_IsError			bit
+
+
+	DECLARE @i_Document_to_Status_ID nvarchar(250) = (	select Document_to_Status_ID   
+														from dbo.p_Document_to_Status dts 
+														join dbo.p_Document d on dts.Document_ID = d.Document_ID and d.Document_Number = 'Test_Number_1'  
+														join dbo.p_Status s on dts.Status_ID = s.Status_ID and s.Status_Code = 'wDd'
+														where d.Document_ID in	(select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+													  )
+	DECLARE @i_Document_ID  nvarchar(250) =	(	select d.Document_ID   
+														from dbo.p_Document_to_Status dts 
+														join dbo.p_Document d on dts.Document_ID = d.Document_ID and d.Document_Number = 'Test_Number_1'  
+														join dbo.p_Status s on dts.Status_ID = s.Status_ID and s.Status_Code = 'wDd'
+														where d.Document_ID in	(select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+													  )	
+
+
+	DECLARE @i_Status_ID nvarchar(250) = (select Status_ID from dbo.Status where Status_Code = 'wDa')
+
+	EXECUTE [dbo].[Document_to_Status_Update] 
+	   @i_Document_to_Status_ID
+	  ,@i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_Status_ID
+	  ,@o_IsError OUTPUT
+
+-------------
+------------- Set Doc 2 status to accepted
+-------------
+	
+	set @i_RowStatus			= 0
+	set @i_AppUser_ID			= '22DB0A40-AB9E-E811-AA07-005056947B15'	
+
+	set @i_Document_to_Status_ID  = (	select Document_to_Status_ID   
+														from dbo.p_Document_to_Status dts 
+														join dbo.p_Document d on dts.Document_ID = d.Document_ID and d.Document_Number = 'Test_Number_2'  
+														join dbo.p_Status s on dts.Status_ID = s.Status_ID and s.Status_Code = 'wDd'
+														where d.Document_ID in	(select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+													  )
+	set @i_Document_ID   =	(	select d.Document_ID   
+														from dbo.p_Document_to_Status dts 
+														join dbo.p_Document d on dts.Document_ID = d.Document_ID and d.Document_Number = 'Test_Number_2'  
+														join dbo.p_Status s on dts.Status_ID = s.Status_ID and s.Status_Code = 'wDd'
+														where d.Document_ID in	(select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+													  )	
+
+
+	set @i_Status_ID  = (select Status_ID from dbo.Status where Status_Code = 'wDa')
+
+	EXECUTE [dbo].[Document_to_Status_Update] 
+	   @i_Document_to_Status_ID
+	  ,@i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_Status_ID
+	  ,@o_IsError OUTPUT
+
+-------------
+------------- Set Doc 3 status to accepted
+-------------
+	
+	set @i_RowStatus			= 0
+	set @i_AppUser_ID			= '22DB0A40-AB9E-E811-AA07-005056947B15'	
+
+	set @i_Document_to_Status_ID  = (	select Document_to_Status_ID   
+														from dbo.p_Document_to_Status dts 
+														join dbo.p_Document d on dts.Document_ID = d.Document_ID and d.Document_Number = 'Test_Number_3'  
+														join dbo.p_Status s on dts.Status_ID = s.Status_ID and s.Status_Code = 'wDd'
+														where d.Document_ID in	(select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+													  )
+	set @i_Document_ID   =	(	select d.Document_ID   
+														from dbo.p_Document_to_Status dts 
+														join dbo.p_Document d on dts.Document_ID = d.Document_ID and d.Document_Number = 'Test_Number_3'  
+														join dbo.p_Status s on dts.Status_ID = s.Status_ID and s.Status_Code = 'wDd'
+														where d.Document_ID in	(select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+													  )	
+
+	set @i_Status_ID  = (select Status_ID from dbo.Status where Status_Code = 'wDa')
+
+	EXECUTE [dbo].[Document_to_Status_Update] 
+	   @i_Document_to_Status_ID
+	  ,@i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_Status_ID
+	  ,@o_IsError OUTPUT</value>
+  </data>
+  <data name="t005_CreateRegisterDraft_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+select 1 as cnt
+--r.Register_Code, r.Comment, s.Status_Code, d.Document_Code
+from dbo.Register r
+join dbo.Register_to_Status rts on r.Register_ID = rts.Register_ID
+join dbo.Register_to_Document rtd on r.Register_ID = rtd.Register_ID
+join dbo.Document d on d.Document_ID = rtd.Document_ID
+join dbo.Status s on rts.Status_ID = s.Status_ID 
+where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+and s.Status_Code = N'wSCd'</value>
+  </data>
+  <data name="t005_CreateRegisterDraft_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Create register rev 1
+-------------
+	DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+	DECLARE @i_RowStatus			nvarchar(250)	= 0
+	DECLARE @i_AppUser_ID			nvarchar(250)	= '22DB0A40-AB9E-E811-AA07-005056947B15'
+	DECLARE @i_Register_Code		nvarchar(250) = NEXT VALUE FOR [dbo].[Sequence_Register_Number]; 
+	DECLARE @i_Register_Date		nvarchar(250) = '2018-08-30'
+	DECLARE @i_Current_Iteration	nvarchar(250) = 1
+	DECLARE @i_Customer_ID			nvarchar(250) = '9285CD24-EB9E-E811-AA07-005056947B15'
+	DECLARE @i_Contractor_ID		nvarchar(250) = 'A485CD24-EB9E-E811-AA07-005056947B15'
+	DECLARE @i_SubContractor_ID		nvarchar(250) = 'A385CD24-EB9E-E811-AA07-005056947B15'
+	DECLARE @i_Resp_Incumbent_ID	nvarchar(250) = '849663FB-E9D5-4F15-92C1-C9EF3C6A4FFF'
+	DECLARE @i_WorkPackage_ID		nvarchar(250) = '3396B1F6-DA9E-E811-AA07-005056947B15'
+	DECLARE @i_Comment				nvarchar(250) = N'test comment'
+	DECLARE @i_TitleObject_Id		nvarchar(250) = 'F12FF280-32A0-E811-AA07-005056947B15'
+	DECLARE @i_Parent_ID			nvarchar(250) 
+	DECLARE @i_Status_ID			nvarchar(250) = '7179BBAB-9C47-4C00-8900-EA26DA678B9C' 
+	DECLARE	@x_Document_ID			nvarchar(250)
+	DECLARE @x_NumberInRegister		int	
+	DECLARE	@x_SheetFolderNumber	int	
+
+	DECLARE @o_Entity_ID			nvarchar(250)
+	DECLARE @o_IsError				bit
+
+
+	EXECUTE [dbo].[Register_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Register_Code
+	  ,@i_Register_Date
+	  ,@i_Current_Iteration
+	  ,@i_Customer_ID
+	  ,@i_Contractor_ID
+	  ,@i_SubContractor_ID
+	  ,@i_Resp_Incumbent_ID
+	  ,@i_WorkPackage_ID
+	  ,@i_Comment
+	  ,@i_TitleObject_Id
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	  insert into dbo.TMP_SystemTestObject ( ID, Insert_DTS, TestObject_ID, TestObject_Code, TestObject_Entity, Run_Number)
+			VALUES (newid(),getdate(), @o_Entity_ID, (select iif(@o_IsError = 1, null, @i_Register_Code)), 'Register',@x_Run_Number)
+
+	DECLARE @i_Register_ID	nvarchar(250)	= @o_Entity_ID
+	DECLARE	@i_Iteration	nvarchar(250)	= @i_Current_Iteration
+	DECLARE @i_DTS_Start 	nvarchar(250)	= getdate()	
+	DECLARE @i_DTS_End		nvarchar(250)	= null
+	
+	EXECUTE [dbo].[Register_to_Status_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Register_ID
+	  ,@i_Status_ID
+	  ,@i_Iteration	
+	  ,@i_DTS_Start	
+	  ,@i_DTS_End	
+	  ,@i_Parent_ID	
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+
+	DECLARE c_RegToDoc CURSOR  
+			FOR SELECT o.TestObject_ID
+				from dbo.TMP_SystemTestObject o
+				where o.Run_Number = @x_Run_Number and o.TestObject_Entity = 'Document' 
+
+	OPEN c_RegToDoc 
+
+	FETCH NEXT FROM c_RegToDoc 
+	Into	 @x_Document_ID
+
+	set @x_NumberInRegister	= 1
+	set	@x_SheetFolderNumber = 1
+	set	@i_Comment	= 'test comment'
+
+	WHILE @@FETCH_STATUS = 0 
+		BEGIN
+
+			EXECUTE [dbo].[Register_to_Document_Insert] 
+		   @i_RowStatus
+		  ,@i_AppUser_ID
+		  ,@i_Register_ID
+		  ,@x_Document_ID
+		  ,@i_Iteration	
+		  ,@x_NumberInRegister		
+		  ,@x_SheetFolderNumber		
+		  ,@i_Comment				
+
+		  ,@o_Entity_ID OUTPUT
+		  ,@o_IsError OUTPUT
+
+		  set @x_NumberInRegister	= @x_NumberInRegister + 1
+		  set @x_SheetFolderNumber = @x_SheetFolderNumber + 1
+
+		  FETCH NEXT FROM c_RegToDoc 
+			Into	 @x_Document_ID
+
+		END
+
+
+	close c_RegToDoc;
+	DEALLOCATE c_RegToDoc;</value>
+  </data>
+  <data name="t006_SetRegisterFromDraftToFirstReview_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+select 1 as cnt
+--r.Register_Code, s.Description_Rus, rtd.Comment
+from dbo.Register r
+join dbo.Register_to_Status rts on r.Register_ID = rts.Register_ID
+join dbo.Register_to_Document rtd on r.Register_ID = rtd.Register_ID
+join dbo.Status s on rts.Status_ID = s.Status_ID 
+where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+and s.Status_Code = N'wCCuAr'
+
+SELECT 1 as cnt 
+--cl.CheckList_Code, s.Status_Code
+  from dbo.CheckList cl 
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Status s on clts.Status_ID = s.Status_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID
+where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) </value>
+  </data>
+  <data name="t006_SetRegisterFromDraftToFirstReview_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Set Register Status - First Review
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_RowStatus		nvarchar(250)	= 0
+DECLARE @i_AppUser_ID		nvarchar(250)	= '22DB0A40-AB9E-E811-AA07-005056947B15'
+Declare @i_Register_ID		nvarchar(250) = (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number and TestObject_Entity = 'Register') 
+Declare @i_Status_ID		nvarchar(250) = (select Status_ID from dbo.p_Status where Status_Code = 'wCCuAr')
+DECLARE @o_IsError			bit
+
+EXECUTE [dbo].[ProcessStep_Set] 
+   @i_Register_ID
+  ,@i_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@o_IsError OUTPUT</value>
+  </data>
+  <data name="t007_FillCheckListResp_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+DECLARE @x_CheckType_ID uniqueidentifier = (select CheckType_ID from dbo.p_CheckType where CheckType_Code = 'Review') 
+
+SELECT count(*) as cnt 
+--cl.CheckList_Code, pe.ShortName, po.Position_Description, d.Division_Code, c.Contragent_Code, ck.CheckParty_Code
+  from dbo.p_Incumbent i 
+  join dbo.p_Person pe on i.Person_Id = pe.Person_ID 
+  join dbo.p_Position po on i.Position_Id = po.Position_ID
+  join dbo.p_Division d on po.Division_ID = d.Division_ID
+  join dbo.p_Contragent c on c.Contragent_ID = d.Contragent_ID
+  join dbo.p_CheckParty ck on c.Contragent_ID = ck.Contragent_ID and ck.CheckType_ID = @x_CheckType_ID  
+  join dbo.CheckList cl on cl.CheckParty_ID = ck.CheckParty_ID and cl.Resp_Incumbent_ID = i.Incumbent_ID
+  join dbo.p_Register r on cl.Register_ID = r.Register_ID
+  where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) </value>
+  </data>
+  <data name="t007_FillCheckListResp_PretestAction.SqlScript" xml:space="preserve">
+    <value>
+-------------
+------------- Update check lists set resp Incumbents
+-------------
+
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_CheckList_ID			nvarchar(250)
+DECLARE @i_RowStatus			nvarchar(250) = 0
+DECLARE @i_AppUser_ID			nvarchar(250) = '22DB0A40-AB9E-E811-AA07-005056947B15'
+DECLARE @i_CheckList_Code		nvarchar(250)
+DECLARE @i_CheckList_Date		nvarchar(250)
+DECLARE @i_Register_ID			nvarchar(250)
+DECLARE @i_CheckParty_ID		nvarchar(250)
+DECLARE @i_Resp_Incumbent_ID	nvarchar(250)
+DECLARE @i_CheckType_ID			nvarchar(250) = (select CheckType_ID from dbo.CheckType where CheckType_Code ='Review')
+DECLARE @o_IsError bit
+
+DECLARE c_CheckListUpd CURSOR  
+			FOR 
+			select 
+				 cl.CheckList_ID 
+				,cl.CheckList_Code		
+				,cl.CheckList_Date		
+				,cl.Register_ID			
+				,cl.CheckParty_ID			
+			from dbo.p_CheckList cl
+			join dbo.p_Register r on cl.Register_ID = r.Register_ID 
+			join dbo.p_CheckParty ck on cl.CheckParty_ID = ck.CheckParty_ID and ck.CheckType_ID = @i_CheckType_ID	
+			where r.Comment = 'test comment'
+
+			OPEN c_CheckListUpd 
+
+			FETCH NEXT FROM c_CheckListUpd 
+			Into	 @i_CheckList_ID
+					,@i_CheckList_Code
+					,@i_CheckList_Date
+					,@i_Register_ID
+					,@i_CheckParty_ID 
+
+			SELECT top 1
+				   @i_Resp_Incumbent_ID = i.Incumbent_ID
+			  from dbo.p_Incumbent i 
+			  left join dbo.p_Person pe on i.Person_Id = pe.Person_ID 
+			  left join dbo.p_Position po on i.Position_Id = po.Position_ID
+			  left join dbo.p_Division d on po.Division_ID = d.Division_ID
+			  left join dbo.p_Contragent c on c.Contragent_ID = d.Contragent_ID
+			  where c.Contragent_ID = (select Contragent_ID from dbo.CheckParty where CheckParty_ID = @i_CheckParty_ID and CheckType_ID = @i_CheckType_ID) 
+
+			WHILE @@FETCH_STATUS = 0 
+				BEGIN
+				EXECUTE [dbo].[CheckList_Update] 
+				   @i_CheckList_ID
+				  ,@i_RowStatus
+				  ,@i_AppUser_ID
+				  ,@i_CheckList_Code
+				  ,@i_CheckList_Date
+				  ,@i_Register_ID
+				  ,@i_CheckParty_ID
+				  ,@i_Resp_Incumbent_ID
+				  ,@o_IsError OUTPUT
+				
+
+				FETCH NEXT FROM c_CheckListUpd 
+				Into	 @i_CheckList_ID
+						,@i_CheckList_Code
+						,@i_CheckList_Date
+						,@i_Register_ID
+						,@i_CheckParty_ID 
+
+				SELECT top 1
+					   @i_Resp_Incumbent_ID = i.Incumbent_ID
+				  from dbo.p_Incumbent i 
+				  left join dbo.p_Person pe on i.Person_Id = pe.Person_ID 
+				  left join dbo.p_Position po on i.Position_Id = po.Position_ID
+				  left join dbo.p_Division d on po.Division_ID = d.Division_ID
+				  left join dbo.p_Contragent c on c.Contragent_ID = d.Contragent_ID
+				  where c.Contragent_ID = (select Contragent_ID from dbo.CheckParty where CheckParty_ID = @i_CheckParty_ID and CheckType_ID = @i_CheckType_ID) 
+			
+				END
+
+			CLOSE c_CheckListUpd;  
+			DEALLOCATE c_CheckListUpd;  </value>
+  </data>
+  <data name="t008_InsertCheckItemsFirstReview_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+DECLARE @x_CheckType_ID uniqueidentifier = (select CheckType_ID from dbo.p_CheckType where CheckType_Code = 'Review') 
+
+select count(*) as cnt
+--cl.CheckList_Code--, ci.Position, ci.Comment, s.Status_Code	
+from dbo.CheckList cl
+join dbo.CheckItem ci on cl.CheckList_ID = ci.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+join dbo.Status s on ci.Status_ID = s.Status_ID and s.Status_Code = 'wCLId' 
+join dbo.CheckParty AS ck ON cl.CheckParty_ID = ck.CheckParty_ID and ck.CheckType_ID = @x_CheckType_ID
+--order by ci.Comment</value>
+  </data>
+  <data name="t008_InsertCheckItemsFirstReview_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Insert Check Items on first review
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_RowStatus			nvarchar(250) = 0
+DECLARE @i_AppUser_ID			nvarchar(250) = '22DB0A40-AB9E-E811-AA07-005056947B15'
+DECLARE @i_CheckList_ID			nvarchar(250)
+DECLARE @i_Document_ID			nvarchar(250)
+DECLARE @i_Status_ID			nvarchar(250) = (select s.Status_ID from dbo.p_Status s where s.Status_Code = 'wCLId')
+DECLARE @i_Position				nvarchar(250) 
+DECLARE @i_Comment				nvarchar(250) 
+declare @i_ContCode				nvarchar(250)
+declare @i						int			  
+DECLARE @o_Entity_ID			nvarchar(250)
+DECLARE @o_IsError				bit
+DECLARE @x_CheckType_ID			uniqueidentifier = (select CheckType_ID from dbo.p_CheckType where CheckType_Code = 'Review') 
+
+DECLARE c_CheckItemsIns CURSOR  
+			FOR 
+			select 
+				 cl.CheckList_ID 	
+				,c.Contragent_Code		
+			from dbo.p_CheckList cl
+			join dbo.p_Register r on cl.Register_ID = r.Register_ID 
+			join dbo.p_CheckParty ck on cl.CheckParty_ID = ck.CheckParty_ID and ck.CheckType_ID  = @x_CheckType_ID
+			join dbo.Contragent c on c.Contragent_ID = ck.Contragent_ID
+			where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+
+			OPEN c_CheckItemsIns
+
+			FETCH NEXT FROM c_CheckItemsIns 
+			Into	 @i_CheckList_ID
+					,@i_ContCode
+
+			WHILE @@FETCH_STATUS = 0 
+				BEGIN
+
+				set @i = 4
+
+				while @i &gt; 0
+					begin
+
+					set @i_Comment = CONCAT('test_comment_',@i_ContCode,@i)
+					set @i_Position = @i
+
+					EXECUTE [dbo].[CheckItem_Insert] 
+					   @i_RowStatus
+					  ,@i_AppUser_ID
+					  ,@i_CheckList_ID
+					  ,@i_Document_ID
+					  ,@i_Status_ID
+					  ,@i_Position
+					  ,@i_Comment
+					  ,@o_Entity_ID OUTPUT
+					  ,@o_IsError OUTPUT
+					
+					set @i = @i - 1 
+
+					end
+
+				FETCH NEXT FROM c_CheckItemsIns 
+				Into	 @i_CheckList_ID
+						,@i_ContCode
+
+				END
+
+			CLOSE c_CheckItemsIns;  
+			DEALLOCATE c_CheckItemsIns;  </value>
+  </data>
+  <data name="t009_FinishFirstCheckReview_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+select count(*) as cnt
+--cl.CheckList_Code, sl.Status_Code
+from dbo.CheckList cl
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																			from dbo.TMP_SystemTestObject 
+																			where Run_Number = @x_Run_Number
+																			)
+join dbo.CheckParty cp on cl.CheckParty_ID = cp.CheckParty_ID
+join dbo.CheckType ct on cp.CheckType_ID = ct.CheckType_ID and ct.CheckType_Code = 'Review'
+join dbo.Status sl on clts.Status_ID = sl.Status_ID  and sl.Status_Code = 'wСLc'  </value>
+  </data>
+  <data name="t009_FinishFirstCheckReview_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Finish Review by one Checker
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_CheckList_to_Status_ID nvarchar(250)
+DECLARE @i_RowStatus	nvarchar(250) = 0
+DECLARE @i_AppUser_ID	nvarchar(250) = '22DB0A40-AB9E-E811-AA07-005056947B15'
+DECLARE @i_CheckList_ID nvarchar(250)
+DECLARE @i_Status_ID nvarchar(250) = (select Status_ID from dbo.Status where Status_Code = 'wСLc')
+DECLARE @i_DTS_Start nvarchar(250)
+DECLARE @i_DTS_End nvarchar(250)
+DECLARE @o_IsError bit
+DECLARE @x_CheckType_ID			uniqueidentifier = (select CheckType_ID from dbo.p_CheckType where CheckType_Code = 'Review') 
+
+select	 @i_CheckList_ID = cl.CheckList_ID
+		,@i_CheckList_to_Status_ID = clts.CheckList_to_Status_ID 
+from dbo.CheckList cl
+join dbo.CheckParty ck on cl.CheckParty_ID = ck.CheckParty_ID and ck.CheckType_ID  = @x_CheckType_ID and ck.CheckParty_Order = 1
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																		   from dbo.TMP_SystemTestObject 
+																		   where Run_Number = @x_Run_Number
+																		   ) 
+ 
+EXECUTE [dbo].[CheckList_to_Status_Update] 
+   @i_CheckList_to_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@i_CheckList_ID
+  ,@i_Status_ID
+  ,@i_DTS_Start
+  ,@i_DTS_End
+  ,@o_IsError OUTPUT
+
+
+-------------
+------------- Auto try to Set Register Status - from First Review to Comments give or Approvment
+-------------
+Declare @i_Register_ID		nvarchar(250) = (select Register_ID 
+											 from dbo.p_Register 
+											 where Register_ID in (select TestObject_ID 
+																   from dbo.TMP_SystemTestObject 
+																   where Run_Number = @x_Run_Number
+																   ) 
+											)
+set @i_Status_ID = (select Status_ID from dbo.p_Status where Status_Code = 'wSCce')
+
+
+EXECUTE [dbo].[ProcessStep_Set] 
+   @i_Register_ID
+  ,@i_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@o_IsError OUTPUT</value>
+  </data>
+  <data name="t010_FinishSecondCheckReview_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+select count(*) as cnt
+--cl.CheckList_Code, sl.Status_Code
+from dbo.CheckList cl
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																			from dbo.TMP_SystemTestObject 
+																			where Run_Number = @x_Run_Number
+																			)
+join dbo.CheckParty cp on cl.CheckParty_ID = cp.CheckParty_ID
+join dbo.CheckType ct on cp.CheckType_ID = ct.CheckType_ID and ct.CheckType_Code = 'Review'
+join dbo.Status sl on clts.Status_ID = sl.Status_ID  and sl.Status_Code = 'wСLc'  </value>
+  </data>
+  <data name="t010_FinishSecondCheckReview_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Finish Review by one Checker
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_CheckList_to_Status_ID nvarchar(250)
+DECLARE @i_RowStatus	nvarchar(250) = 0
+DECLARE @i_AppUser_ID	nvarchar(250) = '22DB0A40-AB9E-E811-AA07-005056947B15'
+DECLARE @i_CheckList_ID nvarchar(250)
+DECLARE @i_Status_ID nvarchar(250) = (select Status_ID from dbo.Status where Status_Code = 'wСLc')
+DECLARE @i_DTS_Start nvarchar(250)
+DECLARE @i_DTS_End nvarchar(250)
+DECLARE @o_IsError bit
+DECLARE @x_CheckType_ID			uniqueidentifier = (select CheckType_ID from dbo.p_CheckType where CheckType_Code = 'Review') 
+
+select	 @i_CheckList_ID = cl.CheckList_ID
+		,@i_CheckList_to_Status_ID = clts.CheckList_to_Status_ID 
+from dbo.CheckList cl
+join dbo.CheckParty ck on cl.CheckParty_ID = ck.CheckParty_ID and ck.CheckType_ID  = @x_CheckType_ID and ck.CheckParty_Order = 2
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																		   from dbo.TMP_SystemTestObject 
+																		   where Run_Number = @x_Run_Number
+																		   ) 
+ 
+EXECUTE [dbo].[CheckList_to_Status_Update] 
+   @i_CheckList_to_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@i_CheckList_ID
+  ,@i_Status_ID
+  ,@i_DTS_Start
+  ,@i_DTS_End
+  ,@o_IsError OUTPUT
+
+
+-------------
+------------- Auto try to Set Register Status - from First Review to Comments give or Approvment
+-------------
+Declare @i_Register_ID		nvarchar(250) = (select Register_ID 
+											 from dbo.p_Register 
+											 where Register_ID in (select TestObject_ID 
+																   from dbo.TMP_SystemTestObject 
+																   where Run_Number = @x_Run_Number
+																   ) 
+											)
+set @i_Status_ID = (select Status_ID from dbo.p_Status where Status_Code = 'wSCce')
+
+
+EXECUTE [dbo].[ProcessStep_Set] 
+   @i_Register_ID
+  ,@i_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@o_IsError OUTPUT</value>
+  </data>
+  <data name="t011_FinishThirdCheckReview_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+select count(*) as cnt
+--cl.CheckList_Code, sl.Status_Code
+from dbo.CheckList cl
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																			from dbo.TMP_SystemTestObject 
+																			where Run_Number = @x_Run_Number
+																			)
+join dbo.CheckParty cp on cl.CheckParty_ID = cp.CheckParty_ID
+join dbo.CheckType ct on cp.CheckType_ID = ct.CheckType_ID and ct.CheckType_Code = 'Review'
+join dbo.Status sl on clts.Status_ID = sl.Status_ID  and sl.Status_Code = 'wСLc'  
+
+select count(*) as cnt 
+--r.Register_Code, s.Description_Rus, rts.DTS_Start, rts.DTS_End, rts.Iteration, s.Status_Code
+from dbo.Register_to_Status rts
+join dbo.Register r on rts.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																			from dbo.TMP_SystemTestObject 
+																			where Run_Number = @x_Run_Number
+																			)
+join dbo.Status s on rts.Status_ID = s.Status_ID and s.Status_Code = 'wSCce'  
+</value>
+  </data>
+  <data name="t011_FinishThirdCheckReview_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Finish Review by one Checker
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_CheckList_to_Status_ID nvarchar(250)
+DECLARE @i_RowStatus	nvarchar(250) = 0
+DECLARE @i_AppUser_ID	nvarchar(250) = '22DB0A40-AB9E-E811-AA07-005056947B15'
+DECLARE @i_CheckList_ID nvarchar(250)
+DECLARE @i_Status_ID nvarchar(250) = (select Status_ID from dbo.Status where Status_Code = 'wСLc')
+DECLARE @i_DTS_Start nvarchar(250)
+DECLARE @i_DTS_End nvarchar(250)
+DECLARE @o_IsError bit
+DECLARE @x_CheckType_ID			uniqueidentifier = (select CheckType_ID from dbo.p_CheckType where CheckType_Code = 'Review') 
+
+select	 @i_CheckList_ID = cl.CheckList_ID
+		,@i_CheckList_to_Status_ID = clts.CheckList_to_Status_ID 
+from dbo.CheckList cl
+join dbo.CheckParty ck on cl.CheckParty_ID = ck.CheckParty_ID and ck.CheckType_ID  = @x_CheckType_ID and ck.CheckParty_Order = 3
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																		   from dbo.TMP_SystemTestObject 
+																		   where Run_Number = @x_Run_Number
+																		   ) 
+ 
+EXECUTE [dbo].[CheckList_to_Status_Update] 
+   @i_CheckList_to_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@i_CheckList_ID
+  ,@i_Status_ID
+  ,@i_DTS_Start
+  ,@i_DTS_End
+  ,@o_IsError OUTPUT
+
+
+-------------
+------------- Auto try to Set Register Status - from First Review to Comments give or Approvment
+-------------
+Declare @i_Register_ID		nvarchar(250) = (select Register_ID 
+											 from dbo.p_Register 
+											 where Register_ID in (select TestObject_ID 
+																   from dbo.TMP_SystemTestObject 
+																   where Run_Number = @x_Run_Number
+																   ) 
+											)
+set @i_Status_ID = (select Status_ID from dbo.p_Status where Status_Code = 'wSCce')
+
+
+EXECUTE [dbo].[ProcessStep_Set] 
+   @i_Register_ID
+  ,@i_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@o_IsError OUTPUT</value>
+  </data>
+  <data name="t012_SetRegisterFromCommentsGivenToIncorporation_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+select count(*) as cnt 
+--r.Register_Code, s.Description_Rus, rts.DTS_Start, rts.DTS_End, rts.Iteration, s.Status_Code
+from dbo.Register_to_Status rts
+join dbo.Register r on rts.Register_ID = r.Register_ID and r.Register_ID in ( select TestObject_ID 
+																	from dbo.TMP_SystemTestObject 
+																	where Run_Number = @x_Run_Number
+																	)
+join dbo.Status s on rts.Status_ID = s.Status_ID and s.Status_Code = 'wSCci'  
+
+
+select count(*) as cnt
+from dbo.Register r
+join dbo.Register_to_Status rts on r.Register_ID = rts.Register_ID and r.Current_Iteration = rts.Iteration
+where r.Register_ID in ( select TestObject_ID 
+						from dbo.TMP_SystemTestObject 
+						where Run_Number = @x_Run_Number
+						)</value>
+  </data>
+  <data name="t012_SetRegisterFromCommentsGivenToIncorporation_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Auto Set Register Status - from Comments given to Incorporation
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_RowStatus		nvarchar(250)	= 0
+DECLARE @i_AppUser_ID		nvarchar(250)	= '22DB0A40-AB9E-E811-AA07-005056947B15'
+Declare @i_Register_ID		nvarchar(250) = (select Register_ID 
+											 from dbo.p_Register 
+											 where Register_ID in ( select TestObject_ID 
+																	from dbo.TMP_SystemTestObject 
+																	where Run_Number = @x_Run_Number
+																	)
+											)
+Declare @i_Status_ID		nvarchar(250) = (select Status_ID from dbo.p_Status where Status_Code = 'wSCci')
+DECLARE @o_IsError			bit
+
+EXECUTE [dbo].[ProcessStep_Set] 
+   @i_Register_ID
+  ,@i_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@o_IsError OUTPUT
+
+</value>
+  </data>
+  <data name="t013_InsertNewDocsForRevision_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+select 1 as cnt
+--d.Document_Code,d.Document_Number,dtg.GOST_ID,dtp.PID_ID, dts.Status_ID
+from dbo.Document d
+--join dbo.Document_to_FileTable dtf on dtf.Document_ID = d.Document_ID
+join dbo.Document_to_Status dts on dts.Document_ID = d.Document_ID 
+join dbo.Document_to_GOST dtg on dtg.Document_ID = d.Document_ID
+join dbo.Document_to_PID dtp on dtp.Document_ID = d.Document_ID
+where d.Document_ID in (select TestObject_ID 
+						from dbo.TMP_SystemTestObject
+						where Run_Number = @x_Run_Number
+						)
+and d.Document_ID not in	(
+							select rtd.Document_ID 
+							from dbo.Register r 
+							join dbo.Register_to_Document rtd on r.Register_ID = rtd.Register_ID and r.Current_Iteration &lt;&gt; rtd.Iteration
+							where r.Register_ID in (select TestObject_ID 
+													from dbo.TMP_SystemTestObject
+													where Run_Number = @x_Run_Number
+													)
+							)
+					
+</value>
+  </data>
+  <data name="t013_InsertNewDocsForRevision_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Crete document 1rev2
+-------------
+	DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+	DECLARE @i_RowStatus		nvarchar(250)	= 0
+	DECLARE @i_AppUser_ID		nvarchar(250)	= N'22DB0A40-AB9E-E811-AA07-005056947B15'
+	DECLARE @i_Document_Code	nvarchar(250)	= NEXT VALUE FOR [dbo].[Sequence_Document_Number]; 
+	DECLARE @i_Document_Number	nvarchar(250)	= N'Test_Number_1rev2'
+	DECLARE @i_DocumentType_ID	nvarchar(250)	= N'9A40AB29-D1AC-4EFF-81F4-35821EDCAEAC'
+	DECLARE @i_Document_Date	nvarchar(250)	= N'2017-08-30'
+	DECLARE @i_Issue_Date		nvarchar(250)	= getdate()
+	DECLARE @i_TotalSheets		nvarchar(250)	= N'5'
+	DECLARE @i_Document_Name	nvarchar(250)	= N'Ведомость электромонтажных недоделок, не припятствующих комплексному опробованию. / List of outstanding dificiencies that do not affect all-up testing.'
+	DECLARE @i_Parent_ID		nvarchar(250)	= (	select Document_ID 
+													from dbo.p_Document 
+													where Document_Number = N'Test_Number_1'
+													and Document_ID in (select TestObject_ID 
+																		from dbo.TMP_SystemTestObject
+																		where Run_Number = @x_Run_Number
+																		)
+												  )
+	DECLARE @o_Entity_ID		nvarchar(250)
+	DECLARE @o_IsError			bit
+
+	EXECUTE [dbo].[Document_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_Code
+	  ,@i_Document_Number
+	  ,@i_DocumentType_ID
+	  ,@i_Document_Date
+	  ,@i_Issue_Date
+	  ,@i_TotalSheets
+	  ,@i_Document_Name
+	  ,@i_Parent_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+		insert into dbo.TMP_SystemTestObject ( ID, Insert_DTS, TestObject_ID, TestObject_Code, TestObject_Entity, Run_Number)
+			VALUES (newid(),getdate(), @o_Entity_ID, (select iif(@o_IsError = 1, null, @i_Document_Code)), 'Document',@x_Run_Number)
+
+	DECLARE @i_Document_ID	nvarchar(250)	= @o_Entity_ID
+	--DECLARE @i_FileTable_ID	nvarchar(250)	= N'63123D4B-4B77-E811-A9F7-005056947B15' 
+
+	--EXECUTE [dbo].[Document_to_FileTable_Insert] 
+	--   @i_RowStatus
+	--  ,@i_AppUser_ID
+	--  ,@i_Document_ID
+	--  ,@i_FileTable_ID
+	--  ,@o_Entity_ID OUTPUT
+	--  ,@o_IsError OUTPUT
+
+	DECLARE @i_Status_ID	nvarchar(250)	= (select Status_ID from dbo.Status where Status_Code = 'wDd')
+	DECLARE @i_DTS_Start	nvarchar(250)	= null
+	DECLARE	@i_DTS_End		nvarchar(250)	= null
+
+	EXECUTE [dbo].[Document_to_Status_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_Status_ID
+	  ,@i_Parent_ID	
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	DECLARE @i_GOST_ID nvarchar(250) = N'C4A409CB-74A8-E811-AA09-005056947B15'
+
+	EXECUTE [dbo].[Document_to_GOST_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_GOST_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	DECLARE @i_PID_ID nvarchar(250) = N'592EEB05-75A8-E811-AA09-005056947B15'
+
+	EXECUTE [dbo].[Document_to_PID_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_PID_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+-------------
+------------- Crete document 2 
+-------------
+
+	--document 2 excluded from register so vhere is no rev2 needed
+
+
+-------------
+------------- Crete document 3
+-------------
+
+	-- dicument 3 is not mentioned in comments, so it go to Register revision 2 without changes.
+
+-------------
+------------- Crete document 4 new document in Register revision 2
+-------------
+
+	set @i_RowStatus			= 0
+	set @i_AppUser_ID			= N'22DB0A40-AB9E-E811-AA07-005056947B15'
+	set @i_Document_Code		= NEXT VALUE FOR [dbo].[Sequence_Document_Number]; 
+	set @i_Document_Number		= N'Test_Number_4'
+	set @i_DocumentType_ID		= N'9A40AB29-D1AC-4EFF-81F4-35821EDCAEAC'
+	set @i_Document_Date		= N'2018-01-14'
+	set @i_Issue_Date			= getdate()
+	set @i_TotalSheets			= N'4'
+	set @i_Document_Name		= N'Пасспорт на оборудование'
+	set @i_Parent_ID			= null	
+
+	EXECUTE [dbo].[Document_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_Code
+	  ,@i_Document_Number
+	  ,@i_DocumentType_ID
+	  ,@i_Document_Date
+	  ,@i_Issue_Date
+	  ,@i_TotalSheets
+	  ,@i_Document_Name
+	  ,@i_Parent_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	  insert into dbo.TMP_SystemTestObject ( ID, Insert_DTS, TestObject_ID, TestObject_Code, TestObject_Entity, Run_Number)
+			VALUES (newid(),getdate(), @o_Entity_ID, (select iif(@o_IsError = 1, null, @i_Document_Code)), 'Document',@x_Run_Number)
+
+	set @i_Document_ID	= @o_Entity_ID
+	--set @i_FileTable_ID	= N'32123D4B-4B77-E811-A9F7-005056947B15' 
+
+	--EXECUTE [dbo].[Document_to_FileTable_Insert] 
+	--   @i_RowStatus
+	--  ,@i_AppUser_ID
+	--  ,@i_Document_ID
+	--  ,@i_FileTable_ID
+	--  ,@o_Entity_ID OUTPUT
+	--  ,@o_IsError OUTPUT
+
+	set @i_Status_ID	= (select Status_ID from dbo.Status where Status_Code = 'wDd')
+	set @i_DTS_Start	= null
+	set	@i_DTS_End		= null
+
+	EXECUTE [dbo].[Document_to_Status_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_Status_ID
+	  ,@i_Parent_ID	
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	set @i_GOST_ID = N'C4A409CB-74A8-E811-AA09-005056947B15'
+
+	EXECUTE [dbo].[Document_to_GOST_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_GOST_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	set @i_PID_ID = N'592EEB05-75A8-E811-AA09-005056947B15'
+
+	EXECUTE [dbo].[Document_to_PID_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_PID_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT</value>
+  </data>
+  <data name="t014_SetNewDocumentsStatusToAccepted_TestAction.SqlScript" xml:space="preserve">
+    <value>
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+	
+select 1 as cnt
+from dbo.p_Document_to_Status dts 
+join dbo.p_Document d on dts.Document_ID = d.Document_ID and d.Document_Number like 'Test_Number_%'  
+join dbo.p_Status s on dts.Status_ID = s.Status_ID and s.Status_Code = 'wDa'
+where d.Document_ID in	(select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) </value>
+  </data>
+  <data name="t014_SetNewDocumentsStatusToAccepted_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Set Doc 1rev2 status to accepted
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_RowStatus		nvarchar(250)	= 0
+DECLARE @i_AppUser_ID		nvarchar(250)	= '22DB0A40-AB9E-E811-AA07-005056947B15'
+DECLARE @o_IsError			bit
+
+
+DECLARE @i_Document_to_Status_ID nvarchar(250) = (	select Document_to_Status_ID   
+													from dbo.p_Document_to_Status dts 
+													join dbo.p_Document d on dts.Document_ID = d.Document_ID and d.Document_Number = 'Test_Number_1rev2'  
+													join dbo.p_Status s on dts.Status_ID = s.Status_ID and s.Status_Code = 'wDd'
+													where d.Document_ID in	(select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+													)
+	
+DECLARE @i_Document_ID  nvarchar(250) =	(	select d.Document_ID   
+													from dbo.p_Document_to_Status dts 
+													join dbo.p_Document d on dts.Document_ID = d.Document_ID and d.Document_Number = 'Test_Number_1rev2'  
+													join dbo.p_Status s on dts.Status_ID = s.Status_ID and s.Status_Code = 'wDd'
+													where d.Document_ID in	(select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+													)	
+DECLARE @i_Status_ID nvarchar(250) = (select Status_ID from dbo.Status where Status_Code = 'wDa')
+
+EXECUTE [dbo].[Document_to_Status_Update] 
+	@i_Document_to_Status_ID
+	,@i_RowStatus
+	,@i_AppUser_ID
+	,@i_Document_ID
+	,@i_Status_ID
+	,@o_IsError OUTPUT
+
+-------------
+------------- Set Doc 4 status to accepted
+-------------
+	
+set @i_RowStatus			= 0
+set @i_AppUser_ID			= '22DB0A40-AB9E-E811-AA07-005056947B15'	
+
+
+set @i_Document_to_Status_ID  = (	select Document_to_Status_ID   
+													from dbo.p_Document_to_Status dts 
+													join dbo.p_Document d on dts.Document_ID = d.Document_ID and d.Document_Number = 'Test_Number_4'  
+													join dbo.p_Status s on dts.Status_ID = s.Status_ID and s.Status_Code = 'wDd'
+													where d.Document_ID in	(select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+													)
+set @i_Document_ID   =	(	select d.Document_ID   
+													from dbo.p_Document_to_Status dts 
+													join dbo.p_Document d on dts.Document_ID = d.Document_ID and d.Document_Number = 'Test_Number_4'  
+													join dbo.p_Status s on dts.Status_ID = s.Status_ID and s.Status_Code = 'wDd'
+													where d.Document_ID in	(select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+													)	
+
+
+set @i_Status_ID  = (select Status_ID from dbo.Status where Status_Code = 'wDa')
+
+EXECUTE [dbo].[Document_to_Status_Update] 
+	@i_Document_to_Status_ID
+	,@i_RowStatus
+	,@i_AppUser_ID
+	,@i_Document_ID
+	,@i_Status_ID
+	,@o_IsError OUTPUT
+</value>
+  </data>
+  <data name="t015_CreateRegisterRevision2_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+select count(*) as cnt 
+--r.Register_Code, r.Current_Iteration, s.Description_Rus, rts.DTS_Start, rts.DTS_End, rts.Iteration, s.Status_Code,rtd.NumberInRegister ,d.Document_Code, d.Document_Number
+from dbo.Register r
+join dbo.Register_to_Status rts on rts.Register_ID = r.Register_ID and r.Current_Iteration = rts.Iteration 
+join dbo.Status s on rts.Status_ID = s.Status_ID 
+left join dbo.Register_to_Document rtd on r.Register_ID = rtd.Register_ID and r.Current_Iteration = rtd.Iteration
+left join dbo.Document d on rtd.Document_ID = d.Document_ID
+where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+
+</value>
+  </data>
+  <data name="t015_CreateRegisterRevision2_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Create register rev 2
+-------------
+	DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+	DECLARE @i_RowStatus			nvarchar(250)	= 0
+	DECLARE @i_AppUser_ID			nvarchar(250)	= '22DB0A40-AB9E-E811-AA07-005056947B15'
+	DECLARE @i_Current_Iteration	nvarchar(250)   = (	select Current_Iteration 
+														from dbo.p_Register 
+														where Register_ID in (	select TestObject_ID 
+																				from dbo.TMP_SystemTestObject 
+																				where Run_Number = @x_Run_Number
+																			  )
+														)
+
+	DECLARE @i_Register_ID			nvarchar(250)   = (	select Register_ID
+														from dbo.p_Register 
+														where Register_ID in (	select TestObject_ID 
+																				from dbo.TMP_SystemTestObject 
+																				where Run_Number = @x_Run_Number
+																			  )
+														)
+	DECLARE @i_Comment				nvarchar(250)   = N'добавлено на этапе формирования 2ой ревизии'
+
+	DECLARE @o_Entity_ID			nvarchar(250)
+	DECLARE @o_IsError				bit
+
+	DECLARE @i_NumberInRegister		nvarchar(250)	= '1'
+	DECLARE	@i_SheetFolderNumber	nvarchar(250)	= '1'
+	DECLARE	@i_Document_ID			nvarchar(250)	= (select Document_ID 
+													   from dbo.p_Document 
+													   where Document_Number = 'Test_Number_1rev2'
+													   and Document_ID in ( SELECT o.TestObject_ID
+																			from dbo.TMP_SystemTestObject o
+																			where o.Run_Number = @x_Run_Number 
+																			  and o.TestObject_Entity = 'Document' 
+																			)
+														)
+
+
+	EXECUTE [dbo].[Register_to_Document_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Register_ID
+	  ,@i_Document_ID
+	  ,@i_Current_Iteration
+	  ,@i_NumberInRegister		
+	  ,@i_SheetFolderNumber		
+	  ,@i_Comment				
+
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	set @i_NumberInRegister		= '2'
+	set	@i_SheetFolderNumber	= '2'
+	set	@i_Document_ID			= (select Document_ID 
+								from dbo.p_Document 
+								where Document_Number = 'Test_Number_3'
+								and Document_ID in ( SELECT o.TestObject_ID
+													from dbo.TMP_SystemTestObject o
+													where o.Run_Number = @x_Run_Number 
+														and o.TestObject_Entity = 'Document' 
+													)
+								)
+	set	@i_Comment	= 'test comment'
+
+	EXECUTE [dbo].[Register_to_Document_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Register_ID
+	  ,@i_Document_ID
+	  ,@i_Current_Iteration	
+	  ,@i_NumberInRegister		
+	  ,@i_SheetFolderNumber		
+	  ,@i_Comment				
+
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	  	set @i_NumberInRegister		= '3'
+	set	@i_SheetFolderNumber	= '3'
+	set	@i_Document_ID			= (select Document_ID 
+								from dbo.p_Document 
+								where Document_Number = 'Test_Number_4'
+								and Document_ID in ( SELECT o.TestObject_ID
+													from dbo.TMP_SystemTestObject o
+													where o.Run_Number = @x_Run_Number 
+														and o.TestObject_Entity = 'Document' 
+													)
+								)
+	set	@i_Comment	= 'test comment'
+
+	EXECUTE [dbo].[Register_to_Document_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Register_ID
+	  ,@i_Document_ID
+	  ,@i_Current_Iteration	
+	  ,@i_NumberInRegister		
+	  ,@i_SheetFolderNumber		
+	  ,@i_Comment				
+
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+
+
+
+
+
+
+
+
+
+
+
+</value>
+  </data>
+  <data name="t016_SendRegisterToSecondReview_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+select 1 as cnt
+--r.Register_Code,s.Status_Code ,s.Description_Rus
+from dbo.Register r
+join dbo.Register_to_Status rts on r.Register_ID = rts.Register_ID
+--join dbo.Register_to_Document rtd on r.Register_ID = rtd.Register_ID
+join dbo.Status s on rts.Status_ID = s.Status_ID 
+where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+and s.Status_Code = N'wCCuAsr'
+
+SELECT 1 as cnt 
+--cl.CheckList_Code, s.Status_Code, s.Description_Rus
+from dbo.CheckList cl 
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Status s on clts.Status_ID = s.Status_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID 
+where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+and s.Status_Code = 'wСLr'
+
+select 1 as cnt 
+--cl.CheckList_Code, ci.Position, ci.Comment, s.Status_Code, s.Description_Rus
+from dbo.CheckList cl 
+join dbo.Register r on cl.Register_ID = r.Register_ID 
+join dbo.CheckItem ci on cl.CheckList_ID = ci.CheckList_ID
+join dbo.Status s on ci.Status_ID = s.Status_ID
+where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+and s.Status_Code = 'wСLd' </value>
+  </data>
+  <data name="t016_SendRegisterToSecondReview_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Set Register Status - Second Review
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_RowStatus		nvarchar(250)	= 0
+DECLARE @i_AppUser_ID		nvarchar(250)	= '22DB0A40-AB9E-E811-AA07-005056947B15'
+Declare @i_Register_ID		nvarchar(250)   = (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number and TestObject_Entity = 'Register') 
+Declare @i_Status_ID		nvarchar(250)   = (select Status_ID from dbo.p_Status where Status_Code = 'wCCuAsr')
+
+DECLARE @o_IsError			bit
+
+EXECUTE [dbo].[ProcessStep_Set] 
+   @i_Register_ID
+  ,@i_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@o_IsError OUTPUT</value>
+  </data>
+  <data name="t017_FirstCheckerAcceptCommentaAndFinishedReview_TestAction.SqlScript" xml:space="preserve">
+    <value>  DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+ select count(*) as cnt
+--cl.CheckList_Code, sl.Status_Code
+from dbo.CheckList cl
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																			from dbo.TMP_SystemTestObject 
+																			where Run_Number = @x_Run_Number
+																			)
+join dbo.Status sl on clts.Status_ID = sl.Status_ID  and sl.Status_Code = 'wСLc'  </value>
+  </data>
+  <data name="t017_FirstCheckerAcceptCommentaAndFinishedReview_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Finish Review by one Checker with Accept all Comments Fixes
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_CheckList_to_Status_ID nvarchar(250)
+DECLARE @i_RowStatus	nvarchar(250) = 0
+DECLARE @i_AppUser_ID	nvarchar(250) = '22DB0A40-AB9E-E811-AA07-005056947B15'
+DECLARE @i_CheckList_ID nvarchar(250)
+DECLARE @i_Status_ID nvarchar(250) = (select Status_ID from dbo.Status where Status_Code = 'wСLc')
+DECLARE @i_DTS_Start nvarchar(250)
+DECLARE @i_DTS_End nvarchar(250)
+DECLARE @x_CheckItem_Status		uniqueidentifier
+DECLARE @x_CheckItem_ID			uniqueidentifier
+DECLARE @x_Document_ID				uniqueidentifier	
+DECLARE @x_Position				int
+DECLARE @x_Item_Comment			nvarchar(1000)
+DECLARE @x_CheckType_ID			uniqueidentifier = (select CheckType_ID from dbo.p_CheckType where CheckType_Code = 'Review') 
+
+DECLARE @o_IsError bit
+
+select	 @i_CheckList_ID = cl.CheckList_ID
+		,@i_CheckList_to_Status_ID = clts.CheckList_to_Status_ID 
+from dbo.CheckList cl
+join dbo.CheckParty ck on cl.CheckParty_ID = ck.CheckParty_ID and ck.CheckType_ID  = @x_CheckType_ID and ck.CheckParty_Order = 1
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																		   from dbo.TMP_SystemTestObject 
+																		   where Run_Number = @x_Run_Number
+																		   ) 
+
+--Cursor for Items
+
+set @x_CheckItem_Status = (select Status_ID from dbo.p_Status where Status_Code = 'wCLIa')
+
+DECLARE c_CheckItemStatus CURSOR 
+FOR select 
+		ci.CheckItem_ID
+	,ci.Document_ID
+	,ci.Position
+	,ci.Comment
+from dbo.CheckItem ci
+join dbo.Status s on ci.Status_ID = s.Status_ID
+where ci.CheckList_ID = @i_CheckList_ID
+and s.Status_Code not in ('wCLIc','wCLIa')
+
+OPEN c_CheckItemStatus 
+
+FETCH NEXT FROM c_CheckItemStatus Into @x_CheckItem_ID, @x_Document_ID, @x_Position, @x_Item_Comment  
+
+WHILE @@FETCH_STATUS = 0 
+	BEGIN
+
+	EXECUTE dbo.CheckItem_Update 
+		@x_CheckItem_ID
+		,@i_RowStatus
+		,@i_AppUser_ID
+		,@i_CheckList_ID
+		,@x_Document_ID
+		,@x_CheckItem_Status
+		,@x_Position
+		,@x_Item_Comment
+		,@o_IsError OUTPUT
+
+	FETCH NEXT FROM c_CheckItemStatus Into @x_CheckItem_ID, @x_Document_ID, @x_Position, @x_Item_Comment  
+
+	END
+
+CLOSE c_CheckItemStatus;  
+DEALLOCATE c_CheckItemStatus;
+
+EXECUTE [dbo].[CheckList_to_Status_Update] 
+   @i_CheckList_to_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@i_CheckList_ID
+  ,@i_Status_ID
+  ,@i_DTS_Start
+  ,@i_DTS_End
+  ,@o_IsError OUTPUT
+
+-------------
+------------- Auto try to Set Register Status - from First Review to Comments give or Approvment
+-------------
+Declare @i_Register_ID		nvarchar(250)   = (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number and TestObject_Entity = 'Register') 
+set @i_Status_ID = (select Status_ID from dbo.p_Status where Status_Code = 'wSCce')
+
+
+EXECUTE [dbo].[ProcessStep_Set] 
+   @i_Register_ID
+  ,@i_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@o_IsError OUTPUT</value>
+  </data>
+  <data name="t018_SecondCheckerAcceptCommentaAndFinishedReviewData_TestAction.SqlScript" xml:space="preserve">
+    <value>  DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+ select count(*) as cnt
+--cl.CheckList_Code, sl.Status_Code
+from dbo.CheckList cl
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																			from dbo.TMP_SystemTestObject 
+																			where Run_Number = @x_Run_Number
+																			)
+join dbo.Status sl on clts.Status_ID = sl.Status_ID  and sl.Status_Code = 'wСLc'  </value>
+  </data>
+  <data name="t018_SecondCheckerAcceptCommentaAndFinishedReviewData_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Finish Review by one Checker with Accept all Comments Fixes
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_CheckList_to_Status_ID nvarchar(250)
+DECLARE @i_RowStatus	nvarchar(250) = 0
+DECLARE @i_AppUser_ID	nvarchar(250) = '22DB0A40-AB9E-E811-AA07-005056947B15'
+DECLARE @i_CheckList_ID nvarchar(250)
+DECLARE @i_Status_ID nvarchar(250) = (select Status_ID from dbo.Status where Status_Code = 'wСLc')
+DECLARE @i_DTS_Start nvarchar(250)
+DECLARE @i_DTS_End nvarchar(250)
+DECLARE @x_CheckItem_Status		uniqueidentifier
+DECLARE @x_CheckItem_ID			uniqueidentifier
+DECLARE @x_Document_ID				uniqueidentifier	
+DECLARE @x_Position				int
+DECLARE @x_Item_Comment			nvarchar(1000)
+DECLARE @x_CheckType_ID			uniqueidentifier = (select CheckType_ID from dbo.p_CheckType where CheckType_Code = 'Review') 
+
+DECLARE @o_IsError bit
+
+select	 @i_CheckList_ID = cl.CheckList_ID
+		,@i_CheckList_to_Status_ID = clts.CheckList_to_Status_ID 
+from dbo.CheckList cl
+join dbo.CheckParty ck on cl.CheckParty_ID = ck.CheckParty_ID and ck.CheckType_ID  = @x_CheckType_ID and ck.CheckParty_Order = 2
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																		   from dbo.TMP_SystemTestObject 
+																		   where Run_Number = @x_Run_Number
+																		   ) 
+
+--Cursor for Items
+
+set @x_CheckItem_Status = (select Status_ID from dbo.p_Status where Status_Code = 'wCLIa')
+
+DECLARE c_CheckItemStatus CURSOR 
+FOR select 
+		ci.CheckItem_ID
+	,ci.Document_ID
+	,ci.Position
+	,ci.Comment
+from dbo.CheckItem ci
+join dbo.Status s on ci.Status_ID = s.Status_ID
+where ci.CheckList_ID = @i_CheckList_ID
+and s.Status_Code not in ('wCLIc','wCLIa')
+
+OPEN c_CheckItemStatus 
+
+FETCH NEXT FROM c_CheckItemStatus Into @x_CheckItem_ID, @x_Document_ID, @x_Position, @x_Item_Comment  
+
+WHILE @@FETCH_STATUS = 0 
+	BEGIN
+
+	EXECUTE dbo.CheckItem_Update 
+		@x_CheckItem_ID
+		,@i_RowStatus
+		,@i_AppUser_ID
+		,@i_CheckList_ID
+		,@x_Document_ID
+		,@x_CheckItem_Status
+		,@x_Position
+		,@x_Item_Comment
+		,@o_IsError OUTPUT
+
+	FETCH NEXT FROM c_CheckItemStatus Into @x_CheckItem_ID, @x_Document_ID, @x_Position, @x_Item_Comment  
+
+	END
+
+CLOSE c_CheckItemStatus;  
+DEALLOCATE c_CheckItemStatus;
+
+EXECUTE [dbo].[CheckList_to_Status_Update] 
+   @i_CheckList_to_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@i_CheckList_ID
+  ,@i_Status_ID
+  ,@i_DTS_Start
+  ,@i_DTS_End
+  ,@o_IsError OUTPUT
+
+-------------
+------------- Auto try to Set Register Status - from First Review to Comments give or Approvment
+-------------
+Declare @i_Register_ID		nvarchar(250)   = (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number and TestObject_Entity = 'Register') 
+set @i_Status_ID = (select Status_ID from dbo.p_Status where Status_Code = 'wSCce')
+
+
+EXECUTE [dbo].[ProcessStep_Set] 
+   @i_Register_ID
+  ,@i_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@o_IsError OUTPUT</value>
+  </data>
+  <data name="t019_ThirdCheckerAcceptCommentaAndFinishedReviewDataData_TestAction.SqlScript" xml:space="preserve">
+    <value>  DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+ select count(*) as cnt
+--cl.CheckList_Code, sl.Status_Code
+from dbo.CheckList cl
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																			from dbo.TMP_SystemTestObject 
+																			where Run_Number = @x_Run_Number
+																			)
+join dbo.Status sl on clts.Status_ID = sl.Status_ID  and sl.Status_Code = 'wСLc'  
+
+
+
+select count(*) as cnt 
+--r.Register_Code, s.Description_Rus, rts.DTS_Start, rts.DTS_End, rts.Iteration, s.Status_Code
+from dbo.Register_to_Status rts
+join dbo.Register r on rts.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																			from dbo.TMP_SystemTestObject 
+																			where Run_Number = @x_Run_Number
+																			)
+join dbo.Status s on rts.Status_ID = s.Status_ID and s.Status_Code = 'wCCua'  
+</value>
+  </data>
+  <data name="t019_ThirdCheckerAcceptCommentaAndFinishedReviewDataData_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Finish Review by one Checker with Accept all Comments Fixes
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_CheckList_to_Status_ID nvarchar(250)
+DECLARE @i_RowStatus	nvarchar(250) = 0
+DECLARE @i_AppUser_ID	nvarchar(250) = '22DB0A40-AB9E-E811-AA07-005056947B15'
+DECLARE @i_CheckList_ID nvarchar(250)
+DECLARE @i_Status_ID nvarchar(250) = (select Status_ID from dbo.Status where Status_Code = 'wСLc')
+DECLARE @i_DTS_Start nvarchar(250)
+DECLARE @i_DTS_End nvarchar(250)
+DECLARE @x_CheckItem_Status		uniqueidentifier
+DECLARE @x_CheckItem_ID			uniqueidentifier
+DECLARE @x_Document_ID				uniqueidentifier	
+DECLARE @x_Position				int
+DECLARE @x_Item_Comment			nvarchar(1000)
+DECLARE @x_CheckType_ID			uniqueidentifier = (select CheckType_ID from dbo.p_CheckType where CheckType_Code = 'Review') 
+
+DECLARE @o_IsError bit
+
+select	 @i_CheckList_ID = cl.CheckList_ID
+		,@i_CheckList_to_Status_ID = clts.CheckList_to_Status_ID 
+from dbo.CheckList cl
+join dbo.CheckParty ck on cl.CheckParty_ID = ck.CheckParty_ID and ck.CheckType_ID  = @x_CheckType_ID and ck.CheckParty_Order = 3
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																		   from dbo.TMP_SystemTestObject 
+																		   where Run_Number = @x_Run_Number
+																		   ) 
+
+--Cursor for Items
+
+set @x_CheckItem_Status = (select Status_ID from dbo.p_Status where Status_Code = 'wCLIa')
+
+DECLARE c_CheckItemStatus CURSOR 
+FOR select 
+		ci.CheckItem_ID
+	,ci.Document_ID
+	,ci.Position
+	,ci.Comment
+from dbo.CheckItem ci
+join dbo.Status s on ci.Status_ID = s.Status_ID
+where ci.CheckList_ID = @i_CheckList_ID
+and s.Status_Code not in ('wCLIc','wCLIa')
+
+OPEN c_CheckItemStatus 
+
+FETCH NEXT FROM c_CheckItemStatus Into @x_CheckItem_ID, @x_Document_ID, @x_Position, @x_Item_Comment  
+
+WHILE @@FETCH_STATUS = 0 
+	BEGIN
+
+	EXECUTE dbo.CheckItem_Update 
+		@x_CheckItem_ID
+		,@i_RowStatus
+		,@i_AppUser_ID
+		,@i_CheckList_ID
+		,@x_Document_ID
+		,@x_CheckItem_Status
+		,@x_Position
+		,@x_Item_Comment
+		,@o_IsError OUTPUT
+
+	FETCH NEXT FROM c_CheckItemStatus Into @x_CheckItem_ID, @x_Document_ID, @x_Position, @x_Item_Comment  
+
+	END
+
+CLOSE c_CheckItemStatus;  
+DEALLOCATE c_CheckItemStatus;
+
+EXECUTE [dbo].[CheckList_to_Status_Update] 
+   @i_CheckList_to_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@i_CheckList_ID
+  ,@i_Status_ID
+  ,@i_DTS_Start
+  ,@i_DTS_End
+  ,@o_IsError OUTPUT
+
+
+-------------
+------------- Auto try to Set Register Status - from First Review to Comments give or Approvment
+-------------
+Declare @i_Register_ID		nvarchar(250)   = (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number and TestObject_Entity = 'Register') 
+set @i_Status_ID = (select Status_ID from dbo.p_Status where Status_Code = 'wSCce')
+
+
+EXECUTE [dbo].[ProcessStep_Set] 
+   @i_Register_ID
+  ,@i_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@o_IsError OUTPUT
+  
+</value>
+  </data>
+  <data name="t020_FillCheckListApproveingIncumbent_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+DECLARE @x_CheckType_ID uniqueidentifier = (select CheckType_ID from dbo.p_CheckType where CheckType_Code = 'Approvement') 
+
+SELECT count(*) as cnt 
+--cl.CheckList_Code, pe.ShortName, po.Position_Description, d.Division_Code, c.Contragent_Code, ck.CheckParty_Code
+  from dbo.p_Incumbent i 
+  join dbo.p_Person pe on i.Person_Id = pe.Person_ID 
+  join dbo.p_Position po on i.Position_Id = po.Position_ID
+  join dbo.p_Division d on po.Division_ID = d.Division_ID
+  join dbo.p_Contragent c on c.Contragent_ID = d.Contragent_ID
+  join dbo.p_CheckParty ck on c.Contragent_ID = ck.Contragent_ID and ck.CheckType_ID = @x_CheckType_ID  
+  join dbo.CheckList cl on cl.CheckParty_ID = ck.CheckParty_ID and cl.Resp_Incumbent_ID = i.Incumbent_ID
+  join dbo.p_Register r on cl.Register_ID = r.Register_ID
+  where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+
+</value>
+  </data>
+  <data name="t020_FillCheckListApproveingIncumbent_PretestAction.SqlScript" xml:space="preserve">
+    <value>
+-------------
+------------- Update check lists set resp Incumbents
+-------------
+
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_CheckList_ID			nvarchar(250)
+DECLARE @i_RowStatus			nvarchar(250) = 0
+DECLARE @i_AppUser_ID			nvarchar(250) = '22DB0A40-AB9E-E811-AA07-005056947B15'
+DECLARE @i_CheckList_Code		nvarchar(250)
+DECLARE @i_CheckList_Date		nvarchar(250)
+DECLARE @i_Register_ID			nvarchar(250)
+DECLARE @i_CheckParty_ID		nvarchar(250)
+DECLARE @i_Resp_Incumbent_ID	nvarchar(250)
+DECLARE @i_CheckType_ID			nvarchar(250) = (select CheckType_ID from dbo.CheckType where CheckType_Code ='Approvement')
+DECLARE @o_IsError bit
+
+DECLARE c_CheckListUpd CURSOR  
+			FOR 
+			select 
+				 cl.CheckList_ID 
+				,cl.CheckList_Code		
+				,cl.CheckList_Date		
+				,cl.Register_ID			
+				,cl.CheckParty_ID			
+			from dbo.p_CheckList cl
+			join dbo.p_Register r on cl.Register_ID = r.Register_ID 
+			join dbo.p_CheckParty ck on cl.CheckParty_ID = ck.CheckParty_ID and ck.CheckType_ID = @i_CheckType_ID	
+			where r.Comment = 'test comment'
+
+			OPEN c_CheckListUpd 
+
+			FETCH NEXT FROM c_CheckListUpd 
+			Into	 @i_CheckList_ID
+					,@i_CheckList_Code
+					,@i_CheckList_Date
+					,@i_Register_ID
+					,@i_CheckParty_ID 
+
+			SELECT top 1
+				   @i_Resp_Incumbent_ID = i.Incumbent_ID
+			  from dbo.p_Incumbent i 
+			  left join dbo.p_Person pe on i.Person_Id = pe.Person_ID 
+			  left join dbo.p_Position po on i.Position_Id = po.Position_ID
+			  left join dbo.p_Division d on po.Division_ID = d.Division_ID
+			  left join dbo.p_Contragent c on c.Contragent_ID = d.Contragent_ID
+			  where c.Contragent_ID = (select Contragent_ID from dbo.CheckParty where CheckParty_ID = @i_CheckParty_ID and CheckType_ID = @i_CheckType_ID) 
+
+			WHILE @@FETCH_STATUS = 0 
+				BEGIN
+				EXECUTE [dbo].[CheckList_Update] 
+				   @i_CheckList_ID
+				  ,@i_RowStatus
+				  ,@i_AppUser_ID
+				  ,@i_CheckList_Code
+				  ,@i_CheckList_Date
+				  ,@i_Register_ID
+				  ,@i_CheckParty_ID
+				  ,@i_Resp_Incumbent_ID
+				  ,@o_IsError OUTPUT
+				
+
+				FETCH NEXT FROM c_CheckListUpd 
+				Into	 @i_CheckList_ID
+						,@i_CheckList_Code
+						,@i_CheckList_Date
+						,@i_Register_ID
+						,@i_CheckParty_ID 
+
+				SELECT top 1
+					   @i_Resp_Incumbent_ID = i.Incumbent_ID
+				  from dbo.p_Incumbent i 
+				  left join dbo.p_Person pe on i.Person_Id = pe.Person_ID 
+				  left join dbo.p_Position po on i.Position_Id = po.Position_ID
+				  left join dbo.p_Division d on po.Division_ID = d.Division_ID
+				  left join dbo.p_Contragent c on c.Contragent_ID = d.Contragent_ID
+				  where c.Contragent_ID = (select Contragent_ID from dbo.CheckParty where CheckParty_ID = @i_CheckParty_ID and CheckType_ID = @i_CheckType_ID) 
+			
+				END
+
+			CLOSE c_CheckListUpd;  
+			DEALLOCATE c_CheckListUpd;  </value>
+  </data>
+  <data name="t021_InsertCheckItemsFirstApprovement_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+DECLARE @x_CheckType_ID uniqueidentifier = (select CheckType_ID from dbo.p_CheckType where CheckType_Code = 'Approvement') 
+
+select count(*) as cnt
+--cl.CheckList_Code--, ci.Position, ci.Comment, s.Status_Code	
+from dbo.CheckList cl
+join dbo.CheckItem ci on cl.CheckList_ID = ci.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+join dbo.Status s on ci.Status_ID = s.Status_ID and s.Status_Code = 'wCLId' 
+join dbo.CheckParty AS ck ON cl.CheckParty_ID = ck.CheckParty_ID and ck.CheckType_ID = @x_CheckType_ID
+--order by ci.Comment</value>
+  </data>
+  <data name="t021_InsertCheckItemsFirstApprovement_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Insert Check Items on first Approvement
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_RowStatus			nvarchar(250) = 0
+DECLARE @i_AppUser_ID			nvarchar(250) = '22DB0A40-AB9E-E811-AA07-005056947B15'
+DECLARE @i_CheckList_ID			nvarchar(250)
+DECLARE @i_Document_ID			nvarchar(250)
+DECLARE @i_Status_ID			nvarchar(250) = (select s.Status_ID from dbo.p_Status s where s.Status_Code = 'wCLId')
+DECLARE @i_Position				nvarchar(250) 
+DECLARE @i_Comment				nvarchar(250) 
+declare @i_ContCode				nvarchar(250)
+declare @i						int			  
+DECLARE @o_Entity_ID			nvarchar(250)
+DECLARE @o_IsError				bit
+DECLARE @x_CheckType_ID			uniqueidentifier = (select CheckType_ID from dbo.p_CheckType where CheckType_Code = 'Approvement') 
+
+DECLARE c_CheckItemsIns CURSOR  
+			FOR 
+			select 
+				 cl.CheckList_ID 	
+				,c.Contragent_Code		
+			from dbo.p_CheckList cl
+			join dbo.p_Register r on cl.Register_ID = r.Register_ID 
+			join dbo.p_CheckParty ck on cl.CheckParty_ID = ck.CheckParty_ID and ck.CheckType_ID  = @x_CheckType_ID
+			join dbo.Contragent c on c.Contragent_ID = ck.Contragent_ID
+			where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+
+			OPEN c_CheckItemsIns
+
+			FETCH NEXT FROM c_CheckItemsIns 
+			Into	 @i_CheckList_ID
+					,@i_ContCode
+
+			WHILE @@FETCH_STATUS = 0 
+				BEGIN
+
+				set @i = 4
+
+				while @i &gt; 0
+					begin
+
+					set @i_Comment = CONCAT('test_comment_',@i_ContCode,@i)
+					set @i_Position = @i
+
+					EXECUTE [dbo].[CheckItem_Insert] 
+					   @i_RowStatus
+					  ,@i_AppUser_ID
+					  ,@i_CheckList_ID
+					  ,@i_Document_ID
+					  ,@i_Status_ID
+					  ,@i_Position
+					  ,@i_Comment
+					  ,@o_Entity_ID OUTPUT
+					  ,@o_IsError OUTPUT
+					
+					set @i = @i - 1 
+
+					end
+
+				FETCH NEXT FROM c_CheckItemsIns 
+				Into	 @i_CheckList_ID
+						,@i_ContCode
+
+				END
+
+			CLOSE c_CheckItemsIns;  
+			DEALLOCATE c_CheckItemsIns;  </value>
+  </data>
+  <data name="t022_FinishFirstCheckApprovement_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+select count(*) as cnt
+--cl.CheckList_Code, sl.Status_Code
+from dbo.CheckList cl
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																			from dbo.TMP_SystemTestObject 
+																			where Run_Number = @x_Run_Number
+																			)
+join dbo.CheckParty cp on cl.CheckParty_ID = cp.CheckParty_ID
+join dbo.CheckType ct on cp.CheckType_ID = ct.CheckType_ID and ct.CheckType_Code = 'Approvement'
+join dbo.Status sl on clts.Status_ID = sl.Status_ID  and sl.Status_Code = 'wСLc'  </value>
+  </data>
+  <data name="t022_FinishFirstCheckApprovement_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Finish Approvement by one Checker
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_CheckList_to_Status_ID nvarchar(250)
+DECLARE @i_RowStatus	nvarchar(250) = 0
+DECLARE @i_AppUser_ID	nvarchar(250) = '22DB0A40-AB9E-E811-AA07-005056947B15'
+DECLARE @i_CheckList_ID nvarchar(250)
+DECLARE @i_Status_ID nvarchar(250) = (select Status_ID from dbo.Status where Status_Code = 'wСLc')
+DECLARE @i_DTS_Start nvarchar(250)
+DECLARE @i_DTS_End nvarchar(250)
+DECLARE @o_IsError bit
+DECLARE @x_CheckType_ID			uniqueidentifier = (select CheckType_ID from dbo.p_CheckType where CheckType_Code = 'Approvement') 
+
+select	 @i_CheckList_ID = cl.CheckList_ID
+		,@i_CheckList_to_Status_ID = clts.CheckList_to_Status_ID 
+from dbo.CheckList cl
+join dbo.CheckParty ck on cl.CheckParty_ID = ck.CheckParty_ID and ck.CheckType_ID  = @x_CheckType_ID and ck.CheckParty_Order = 1
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																		   from dbo.TMP_SystemTestObject 
+																		   where Run_Number = @x_Run_Number
+																		   ) 
+ 
+EXECUTE [dbo].[CheckList_to_Status_Update] 
+   @i_CheckList_to_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@i_CheckList_ID
+  ,@i_Status_ID
+  ,@i_DTS_Start
+  ,@i_DTS_End
+  ,@o_IsError OUTPUT
+
+
+-------------
+------------- Auto try to Set Register Status - from Approvement to Archived or NotApprovment
+-------------
+Declare @i_Register_ID		nvarchar(250) = (select Register_ID 
+											 from dbo.p_Register 
+											 where Register_ID in (select TestObject_ID 
+																   from dbo.TMP_SystemTestObject 
+																   where Run_Number = @x_Run_Number
+																   ) 
+											)
+set @i_Status_ID = (select Status_ID from dbo.p_Status where Status_Code = 'wCCuna')
+
+
+EXECUTE [dbo].[ProcessStep_Set] 
+   @i_Register_ID
+  ,@i_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@o_IsError OUTPUT</value>
+  </data>
+  <data name="t002_PrepareData_PretestAction.SqlScript" xml:space="preserve">
+    <value>
+--create table to store test objects GUID
+DROP TABLE IF EXISTS  dbo.TMP_SystemTestObject;
+
+Create table dbo.TMP_SystemTestObject(
+	ID uniqueidentifier NOT NULL,
+	Insert_DTS datetime2(7) NULL,
+	TestObject_ID uniqueidentifier NULL,
+	TestObject_Code nvarchar(255) COLLATE Cyrillic_General_CI_AS NULL, 
+	TestObject_Entity nvarchar(255) COLLATE Cyrillic_General_CI_AS NULL, 
+	Run_Number	bigint,
+	 CONSTRAINT PK_p_STO PRIMARY KEY CLUSTERED 
+(
+	ID ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT UQ_p_STO UNIQUE NONCLUSTERED 
+(
+	TestObject_ID ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+ALTER TABLE dbo.TMP_SystemTestObject ADD  CONSTRAINT DF_STO_ID  DEFAULT (newsequentialid()) FOR ID
+
+
+--create sequence to count test runs
+drop SEQUENCE if exists [dbo].[Sequence_Run_Number]; 
+
+CREATE SEQUENCE [dbo].[Sequence_Run_Number] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ CACHE 
+</value>
+  </data>
+  <data name="t023_FinishSecondCheckApprovement_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+select count(*) as cnt
+--cl.CheckList_Code, sl.Status_Code
+from dbo.CheckList cl
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																			from dbo.TMP_SystemTestObject 
+																			where Run_Number = @x_Run_Number
+																			)
+join dbo.CheckParty cp on cl.CheckParty_ID = cp.CheckParty_ID
+join dbo.CheckType ct on cp.CheckType_ID = ct.CheckType_ID and ct.CheckType_Code = 'Approvement'
+join dbo.Status sl on clts.Status_ID = sl.Status_ID  and sl.Status_Code = 'wСLc'  
+
+select count(*) as cnt 
+--r.Register_Code, s.Description_Rus, rts.DTS_Start, rts.DTS_End, rts.Iteration, s.Status_Code
+from dbo.Register_to_Status rts
+join dbo.Register r on rts.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																			from dbo.TMP_SystemTestObject 
+																			where Run_Number = @x_Run_Number
+																			)
+join dbo.Status s on rts.Status_ID = s.Status_ID and s.Status_Code = 'wCCuna'  
+</value>
+  </data>
+  <data name="t023_FinishSecondCheckApprovement_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Finish Approvement by one Checker
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_CheckList_to_Status_ID nvarchar(250)
+DECLARE @i_RowStatus	nvarchar(250) = 0
+DECLARE @i_AppUser_ID	nvarchar(250) = '22DB0A40-AB9E-E811-AA07-005056947B15'
+DECLARE @i_CheckList_ID nvarchar(250)
+DECLARE @i_Status_ID nvarchar(250) = (select Status_ID from dbo.Status where Status_Code = 'wСLc')
+DECLARE @i_DTS_Start nvarchar(250)
+DECLARE @i_DTS_End nvarchar(250)
+DECLARE @o_IsError bit
+DECLARE @x_CheckType_ID			uniqueidentifier = (select CheckType_ID from dbo.p_CheckType where CheckType_Code = 'Approvement') 
+
+select	 @i_CheckList_ID = cl.CheckList_ID
+		,@i_CheckList_to_Status_ID = clts.CheckList_to_Status_ID 
+from dbo.CheckList cl
+join dbo.CheckParty ck on cl.CheckParty_ID = ck.CheckParty_ID and ck.CheckType_ID  = @x_CheckType_ID and ck.CheckParty_Order = 2
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																		   from dbo.TMP_SystemTestObject 
+																		   where Run_Number = @x_Run_Number
+																		   ) 
+ 
+EXECUTE [dbo].[CheckList_to_Status_Update] 
+   @i_CheckList_to_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@i_CheckList_ID
+  ,@i_Status_ID
+  ,@i_DTS_Start
+  ,@i_DTS_End
+  ,@o_IsError OUTPUT
+
+
+-------------
+------------- Auto try to Set Register Status - from Approvement to Archived or NotApprovment
+-------------
+Declare @i_Register_ID		nvarchar(250) = (select Register_ID 
+											 from dbo.p_Register 
+											 where Register_ID in (select TestObject_ID 
+																   from dbo.TMP_SystemTestObject 
+																   where Run_Number = @x_Run_Number
+																   ) 
+											)
+set @i_Status_ID = (select Status_ID from dbo.p_Status where Status_Code = 'wCCuna')
+
+
+EXECUTE [dbo].[ProcessStep_Set] 
+   @i_Register_ID
+  ,@i_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@o_IsError OUTPUT</value>
+  </data>
+  <data name="t024_SetRegisterFromNotAcceptedToCommentsGiven_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+select count(*) as cnt 
+--r.Register_Code, s.Description_Rus, rts.DTS_Start, rts.DTS_End, rts.Iteration, s.Status_Code
+from dbo.Register_to_Status rts
+join dbo.Register r on rts.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																			from dbo.TMP_SystemTestObject 
+																			where Run_Number = @x_Run_Number
+																			)
+join dbo.Status s on rts.Status_ID = s.Status_ID and s.Status_Code = 'wSCce'  
+</value>
+  </data>
+  <data name="t024_SetRegisterFromNotAcceptedToCommentsGiven_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Set Register Status - CommentsGiven
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_RowStatus		nvarchar(250)	= 0
+DECLARE @i_AppUser_ID		nvarchar(250)	= '22DB0A40-AB9E-E811-AA07-005056947B15'
+Declare @i_Register_ID		nvarchar(250) = (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number and TestObject_Entity = 'Register') 
+Declare @i_Status_ID		nvarchar(250) = (select Status_ID from dbo.p_Status where Status_Code = 'wSCce')
+DECLARE @o_IsError			bit
+
+EXECUTE [dbo].[ProcessStep_Set] 
+   @i_Register_ID
+  ,@i_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@o_IsError OUTPUT
+
+</value>
+  </data>
+  <data name="t025_InsertNewDocsFor3revision_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+select 1 as cnt
+--d.Document_Code,d.Document_Number,dtg.GOST_ID,dtp.PID_ID, dts.Status_ID
+from dbo.Document d
+--join dbo.Document_to_FileTable dtf on dtf.Document_ID = d.Document_ID
+join dbo.Document_to_Status dts on dts.Document_ID = d.Document_ID 
+join dbo.Document_to_GOST dtg on dtg.Document_ID = d.Document_ID
+join dbo.Document_to_PID dtp on dtp.Document_ID = d.Document_ID
+where d.Document_ID in (select TestObject_ID 
+						from dbo.TMP_SystemTestObject
+						where Run_Number = @x_Run_Number
+						)
+and d.Document_ID not in	(
+							select rtd.Document_ID 
+							from dbo.Register r 
+							join dbo.Register_to_Document rtd on r.Register_ID = rtd.Register_ID and r.Current_Iteration &lt;&gt; rtd.Iteration
+							where r.Register_ID in (select TestObject_ID 
+													from dbo.TMP_SystemTestObject
+													where Run_Number = @x_Run_Number
+													)
+							)
+					
+</value>
+  </data>
+  <data name="t025_InsertNewDocsFor3revision_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Crete document 1rev3
+-------------
+	DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+	DECLARE @i_RowStatus		nvarchar(250)	= 0
+	DECLARE @i_AppUser_ID		nvarchar(250)	= N'22DB0A40-AB9E-E811-AA07-005056947B15'
+	DECLARE @i_Document_Code	nvarchar(250)	= NEXT VALUE FOR [dbo].[Sequence_Document_Number]; 
+	DECLARE @i_Document_Number	nvarchar(250)	= N'Test_Number_1rev3'
+	DECLARE @i_DocumentType_ID	nvarchar(250)	= N'9A40AB29-D1AC-4EFF-81F4-35821EDCAEAC'
+	DECLARE @i_Document_Date	nvarchar(250)	= N'2017-09-30'
+	DECLARE @i_Issue_Date		nvarchar(250)	= getdate()
+	DECLARE @i_TotalSheets		nvarchar(250)	= N'4'
+	DECLARE @i_Document_Name	nvarchar(250)	= N'Ведомость электромонтажных недоделок, не припятствующих комплексному опробованию. / List of outstanding dificiencies that do not affect all-up testing.'
+	DECLARE @i_Parent_ID		nvarchar(250)	= (	select Document_ID 
+													from dbo.p_Document 
+													where Document_Number = N'Test_Number_1rev2'
+													and Document_ID in (select TestObject_ID 
+																		from dbo.TMP_SystemTestObject
+																		where Run_Number = @x_Run_Number
+																		)
+												  )
+	DECLARE @o_Entity_ID		nvarchar(250)
+	DECLARE @o_IsError			bit
+
+	EXECUTE [dbo].[Document_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_Code
+	  ,@i_Document_Number
+	  ,@i_DocumentType_ID
+	  ,@i_Document_Date
+	  ,@i_Issue_Date
+	  ,@i_TotalSheets
+	  ,@i_Document_Name
+	  ,@i_Parent_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+		insert into dbo.TMP_SystemTestObject ( ID, Insert_DTS, TestObject_ID, TestObject_Code, TestObject_Entity, Run_Number)
+			VALUES (newid(),getdate(), @o_Entity_ID, (select iif(@o_IsError = 1, null, @i_Document_Code)), 'Document',@x_Run_Number)
+
+	DECLARE @i_Document_ID	nvarchar(250)	= @o_Entity_ID
+	--DECLARE @i_FileTable_ID	nvarchar(250)	= N'63123D4B-4B77-E811-A9F7-005056947B15' 
+
+	--EXECUTE [dbo].[Document_to_FileTable_Insert] 
+	--   @i_RowStatus
+	--  ,@i_AppUser_ID
+	--  ,@i_Document_ID
+	--  ,@i_FileTable_ID
+	--  ,@o_Entity_ID OUTPUT
+	--  ,@o_IsError OUTPUT
+
+	DECLARE @i_Status_ID	nvarchar(250)	= (select Status_ID from dbo.Status where Status_Code = 'wDd')
+	DECLARE @i_DTS_Start	nvarchar(250)	= null
+	DECLARE	@i_DTS_End		nvarchar(250)	= null
+
+	EXECUTE [dbo].[Document_to_Status_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_Status_ID
+	  ,@i_Parent_ID	
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	DECLARE @i_GOST_ID nvarchar(250) = N'C4A409CB-74A8-E811-AA09-005056947B15'
+
+	EXECUTE [dbo].[Document_to_GOST_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_GOST_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	DECLARE @i_PID_ID nvarchar(250) = N'592EEB05-75A8-E811-AA09-005056947B15'
+
+	EXECUTE [dbo].[Document_to_PID_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Document_ID
+	  ,@i_PID_ID
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+</value>
+  </data>
+  <data name="t026_SetNewDocumentStatusToAccepted_TestAction.SqlScript" xml:space="preserve">
+    <value>
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+	
+select 1 as cnt
+from dbo.p_Document_to_Status dts 
+join dbo.p_Document d on dts.Document_ID = d.Document_ID and d.Document_Number like 'Test_Number_%'  
+join dbo.p_Status s on dts.Status_ID = s.Status_ID and s.Status_Code = 'wDa'
+where d.Document_ID in	(select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) </value>
+  </data>
+  <data name="t026_SetNewDocumentStatusToAccepted_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Set Doc 1rev2 status to accepted
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_RowStatus		nvarchar(250)	= 0
+DECLARE @i_AppUser_ID		nvarchar(250)	= '22DB0A40-AB9E-E811-AA07-005056947B15'
+DECLARE @o_IsError			bit
+
+
+DECLARE @i_Document_to_Status_ID nvarchar(250) = (	select Document_to_Status_ID   
+													from dbo.p_Document_to_Status dts 
+													join dbo.p_Document d on dts.Document_ID = d.Document_ID and d.Document_Number = 'Test_Number_1rev3'  
+													join dbo.p_Status s on dts.Status_ID = s.Status_ID and s.Status_Code = 'wDd'
+													where d.Document_ID in	(select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+													)
+	
+DECLARE @i_Document_ID  nvarchar(250) =	(	select d.Document_ID   
+													from dbo.p_Document_to_Status dts 
+													join dbo.p_Document d on dts.Document_ID = d.Document_ID and d.Document_Number = 'Test_Number_1rev3'  
+													join dbo.p_Status s on dts.Status_ID = s.Status_ID and s.Status_Code = 'wDd'
+													where d.Document_ID in	(select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+													)	
+DECLARE @i_Status_ID nvarchar(250) = (select Status_ID from dbo.Status where Status_Code = 'wDa')
+
+EXECUTE [dbo].[Document_to_Status_Update] 
+	@i_Document_to_Status_ID
+	,@i_RowStatus
+	,@i_AppUser_ID
+	,@i_Document_ID
+	,@i_Status_ID
+	,@o_IsError OUTPUT
+
+</value>
+  </data>
+  <data name="t027_CreateRegisterRevision3_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+select count(*) as cnt 
+--r.Register_Code, r.Current_Iteration, s.Description_Rus, rts.DTS_Start, rts.DTS_End, rts.Iteration, s.Status_Code,rtd.NumberInRegister ,d.Document_Code, d.Document_Number
+from dbo.Register r
+join dbo.Register_to_Status rts on rts.Register_ID = r.Register_ID and r.Current_Iteration = rts.Iteration 
+join dbo.Status s on rts.Status_ID = s.Status_ID 
+left join dbo.Register_to_Document rtd on r.Register_ID = rtd.Register_ID and r.Current_Iteration = rtd.Iteration
+left join dbo.Document d on rtd.Document_ID = d.Document_ID
+where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+</value>
+  </data>
+  <data name="t027_CreateRegisterRevision3_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Create register rev 3
+-------------
+	DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+	DECLARE @i_RowStatus			nvarchar(250)	= 0
+	DECLARE @i_AppUser_ID			nvarchar(250)	= '22DB0A40-AB9E-E811-AA07-005056947B15'
+	DECLARE @i_Current_Iteration	nvarchar(250)   = (	select Current_Iteration 
+														from dbo.p_Register 
+														where Register_ID in (	select TestObject_ID 
+																				from dbo.TMP_SystemTestObject 
+																				where Run_Number = @x_Run_Number
+																			  )
+														)
+
+	DECLARE @i_Register_ID			nvarchar(250)   = (	select Register_ID
+														from dbo.p_Register 
+														where Register_ID in (	select TestObject_ID 
+																				from dbo.TMP_SystemTestObject 
+																				where Run_Number = @x_Run_Number
+																			  )
+														)
+	DECLARE @i_Comment				nvarchar(250)   = N'добавлено на этапе формирования 3ей ревизии'
+
+	DECLARE @o_Entity_ID			nvarchar(250)
+	DECLARE @o_IsError				bit
+
+	DECLARE @i_NumberInRegister		nvarchar(250)	= '1'
+	DECLARE	@i_SheetFolderNumber	nvarchar(250)	= '1'
+	DECLARE	@i_Document_ID			nvarchar(250)	= (select Document_ID 
+													   from dbo.p_Document 
+													   where Document_Number = 'Test_Number_1rev3'
+													   and Document_ID in ( SELECT o.TestObject_ID
+																			from dbo.TMP_SystemTestObject o
+																			where o.Run_Number = @x_Run_Number 
+																			  and o.TestObject_Entity = 'Document' 
+																			)
+														)
+
+
+	EXECUTE [dbo].[Register_to_Document_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Register_ID
+	  ,@i_Document_ID
+	  ,@i_Current_Iteration
+	  ,@i_NumberInRegister		
+	  ,@i_SheetFolderNumber		
+	  ,@i_Comment				
+
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	set @i_NumberInRegister		= '2'
+	set	@i_SheetFolderNumber	= '2'
+	set	@i_Document_ID			= (select Document_ID 
+								from dbo.p_Document 
+								where Document_Number = 'Test_Number_3'
+								and Document_ID in ( SELECT o.TestObject_ID
+													from dbo.TMP_SystemTestObject o
+													where o.Run_Number = @x_Run_Number 
+														and o.TestObject_Entity = 'Document' 
+													)
+								)
+	set	@i_Comment	= 'test comment'
+
+	EXECUTE [dbo].[Register_to_Document_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Register_ID
+	  ,@i_Document_ID
+	  ,@i_Current_Iteration	
+	  ,@i_NumberInRegister		
+	  ,@i_SheetFolderNumber		
+	  ,@i_Comment				
+
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+	  	set @i_NumberInRegister		= '3'
+	set	@i_SheetFolderNumber	= '3'
+	set	@i_Document_ID			= (select Document_ID 
+								from dbo.p_Document 
+								where Document_Number = 'Test_Number_4'
+								and Document_ID in ( SELECT o.TestObject_ID
+													from dbo.TMP_SystemTestObject o
+													where o.Run_Number = @x_Run_Number 
+														and o.TestObject_Entity = 'Document' 
+													)
+								)
+	set	@i_Comment	= 'test comment'
+
+	EXECUTE [dbo].[Register_to_Document_Insert] 
+	   @i_RowStatus
+	  ,@i_AppUser_ID
+	  ,@i_Register_ID
+	  ,@i_Document_ID
+	  ,@i_Current_Iteration	
+	  ,@i_NumberInRegister		
+	  ,@i_SheetFolderNumber		
+	  ,@i_Comment				
+
+	  ,@o_Entity_ID OUTPUT
+	  ,@o_IsError OUTPUT
+
+
+
+
+
+
+
+
+
+
+
+
+</value>
+  </data>
+  <data name="t028_SendRegisterToSecondApprovement_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+select 1 as cnt
+--r.Register_Code,s.Status_Code ,s.Description_Rus
+from dbo.Register r
+join dbo.Register_to_Status rts on r.Register_ID = rts.Register_ID
+--join dbo.Register_to_Document rtd on r.Register_ID = rtd.Register_ID
+join dbo.Status s on rts.Status_ID = s.Status_ID 
+where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+and s.Status_Code = N'wCCua'
+
+SELECT 1 as cnt 
+--cl.CheckList_Code, s.Status_Code, s.Description_Rus
+from dbo.CheckList cl 
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Status s on clts.Status_ID = s.Status_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID 
+where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+and s.Status_Code = 'wСLr'
+
+select 1 as cnt 
+--cl.CheckList_Code, ci.Position, ci.Comment, s.Status_Code, s.Description_Rus
+from dbo.CheckList cl 
+join dbo.Register r on cl.Register_ID = r.Register_ID 
+join dbo.CheckItem ci on cl.CheckList_ID = ci.CheckList_ID
+join dbo.Status s on ci.Status_ID = s.Status_ID
+where r.Register_ID in (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number) 
+and s.Status_Code = 'wСLd' </value>
+  </data>
+  <data name="t028_SendRegisterToSecondApprovement_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Set Register Status From Incorporation to Approvement
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_RowStatus		nvarchar(250)	= 0
+DECLARE @i_AppUser_ID		nvarchar(250)	= '22DB0A40-AB9E-E811-AA07-005056947B15'
+Declare @i_Register_ID		nvarchar(250)   = (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number and TestObject_Entity = 'Register') 
+Declare @i_Status_ID		nvarchar(250)   = (select Status_ID from dbo.p_Status where Status_Code = 'wCCua')
+
+DECLARE @o_IsError			bit
+
+EXECUTE [dbo].[ProcessStep_Set] 
+   @i_Register_ID
+  ,@i_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@o_IsError OUTPUT</value>
+  </data>
+  <data name="t029_FirstCheckerAcceptCommentAndFinisheApprovement_TestAction.SqlScript" xml:space="preserve">
+    <value>  DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+ select count(*) as cnt
+--cl.CheckList_Code, sl.Status_Code
+from dbo.CheckList cl
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																			from dbo.TMP_SystemTestObject 
+																			where Run_Number = @x_Run_Number
+																			)
+join dbo.Status sl on clts.Status_ID = sl.Status_ID  and sl.Status_Code = 'wСLc'  </value>
+  </data>
+  <data name="t029_FirstCheckerAcceptCommentAndFinisheApprovement_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Finish Approvement by one Checker with Accept all Comments Fixes
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_CheckList_to_Status_ID nvarchar(250)
+DECLARE @i_RowStatus	nvarchar(250) = 0
+DECLARE @i_AppUser_ID	nvarchar(250) = '22DB0A40-AB9E-E811-AA07-005056947B15'
+DECLARE @i_CheckList_ID nvarchar(250)
+DECLARE @i_Status_ID nvarchar(250) = (select Status_ID from dbo.Status where Status_Code = 'wСLc')
+DECLARE @i_DTS_Start nvarchar(250)
+DECLARE @i_DTS_End nvarchar(250)
+DECLARE @x_CheckItem_Status		uniqueidentifier
+DECLARE @x_CheckItem_ID			uniqueidentifier
+DECLARE @x_Document_ID				uniqueidentifier	
+DECLARE @x_Position				int
+DECLARE @x_Item_Comment			nvarchar(1000)
+DECLARE @x_CheckType_ID			uniqueidentifier = (select CheckType_ID from dbo.p_CheckType where CheckType_Code = 'Approvement') 
+
+DECLARE @o_IsError bit
+
+select	 @i_CheckList_ID = cl.CheckList_ID
+		,@i_CheckList_to_Status_ID = clts.CheckList_to_Status_ID 
+from dbo.CheckList cl
+join dbo.CheckParty ck on cl.CheckParty_ID = ck.CheckParty_ID and ck.CheckType_ID  = @x_CheckType_ID and ck.CheckParty_Order = 1
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																		   from dbo.TMP_SystemTestObject 
+																		   where Run_Number = @x_Run_Number
+																		   ) 
+
+--Cursor for Items
+
+set @x_CheckItem_Status = (select Status_ID from dbo.p_Status where Status_Code = 'wCLIa')
+
+DECLARE c_CheckItemStatus CURSOR 
+FOR select 
+		ci.CheckItem_ID
+	,ci.Document_ID
+	,ci.Position
+	,ci.Comment
+from dbo.CheckItem ci
+join dbo.Status s on ci.Status_ID = s.Status_ID
+where ci.CheckList_ID = @i_CheckList_ID
+and s.Status_Code not in ('wCLIc','wCLIa')
+
+OPEN c_CheckItemStatus 
+
+FETCH NEXT FROM c_CheckItemStatus Into @x_CheckItem_ID, @x_Document_ID, @x_Position, @x_Item_Comment  
+
+WHILE @@FETCH_STATUS = 0 
+	BEGIN
+
+	EXECUTE dbo.CheckItem_Update 
+		@x_CheckItem_ID
+		,@i_RowStatus
+		,@i_AppUser_ID
+		,@i_CheckList_ID
+		,@x_Document_ID
+		,@x_CheckItem_Status
+		,@x_Position
+		,@x_Item_Comment
+		,@o_IsError OUTPUT
+
+	FETCH NEXT FROM c_CheckItemStatus Into @x_CheckItem_ID, @x_Document_ID, @x_Position, @x_Item_Comment  
+
+	END
+
+CLOSE c_CheckItemStatus;  
+DEALLOCATE c_CheckItemStatus;
+
+EXECUTE [dbo].[CheckList_to_Status_Update] 
+   @i_CheckList_to_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@i_CheckList_ID
+  ,@i_Status_ID
+  ,@i_DTS_Start
+  ,@i_DTS_End
+  ,@o_IsError OUTPUT
+
+-------------
+------------- Auto try to Set Register Status - from Approvment to NotApproved or Archived 
+-------------
+Declare @i_Register_ID		nvarchar(250)   = (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number and TestObject_Entity = 'Register') 
+set @i_Status_ID = (select Status_ID from dbo.p_Status where Status_Code = 'wCCuna')
+
+
+EXECUTE [dbo].[ProcessStep_Set] 
+   @i_Register_ID
+  ,@i_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@o_IsError OUTPUT</value>
+  </data>
+  <data name="t030_SecondCheckerAcceptCommentAndFinishedApprovement_TestAction.SqlScript" xml:space="preserve">
+    <value>DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+ select count(*) as cnt
+--cl.CheckList_Code, sl.Status_Code
+from dbo.CheckList cl
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																			from dbo.TMP_SystemTestObject 
+																			where Run_Number = @x_Run_Number
+																			)
+join dbo.Status sl on clts.Status_ID = sl.Status_ID  and sl.Status_Code = 'wСLc'  
+
+
+
+select count(*) as cnt 
+--r.Register_Code, s.Description_Rus, rts.DTS_Start, rts.DTS_End, rts.Iteration, s.Status_Code
+from dbo.Register_to_Status rts
+join dbo.Register r on rts.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																			from dbo.TMP_SystemTestObject 
+																			where Run_Number = @x_Run_Number
+																			)
+join dbo.Status s on rts.Status_ID = s.Status_ID and s.Status_Code = 'wCarh'  </value>
+  </data>
+  <data name="t030_SecondCheckerAcceptCommentAndFinishedApprovement_PretestAction.SqlScript" xml:space="preserve">
+    <value>-------------
+------------- Finish Approvement by one Checker with Accept all Comments Fixes
+-------------
+DECLARE @x_Run_Number bigint = (select max(Run_Number) from dbo.TMP_SystemTestObject) 
+
+DECLARE @i_CheckList_to_Status_ID nvarchar(250)
+DECLARE @i_RowStatus	nvarchar(250) = 0
+DECLARE @i_AppUser_ID	nvarchar(250) = '22DB0A40-AB9E-E811-AA07-005056947B15'
+DECLARE @i_CheckList_ID nvarchar(250)
+DECLARE @i_Status_ID nvarchar(250) = (select Status_ID from dbo.Status where Status_Code = 'wСLc')
+DECLARE @i_DTS_Start nvarchar(250)
+DECLARE @i_DTS_End nvarchar(250)
+DECLARE @x_CheckItem_Status		uniqueidentifier
+DECLARE @x_CheckItem_ID			uniqueidentifier
+DECLARE @x_Document_ID				uniqueidentifier	
+DECLARE @x_Position				int
+DECLARE @x_Item_Comment			nvarchar(1000)
+DECLARE @x_CheckType_ID			uniqueidentifier = (select CheckType_ID from dbo.p_CheckType where CheckType_Code = 'Approvement') 
+
+DECLARE @o_IsError bit
+
+select	 @i_CheckList_ID = cl.CheckList_ID
+		,@i_CheckList_to_Status_ID = clts.CheckList_to_Status_ID 
+from dbo.CheckList cl
+join dbo.CheckParty ck on cl.CheckParty_ID = ck.CheckParty_ID and ck.CheckType_ID  = @x_CheckType_ID and ck.CheckParty_Order = 2
+join dbo.CheckList_to_Status clts on cl.CheckList_ID = clts.CheckList_ID
+join dbo.Register r on cl.Register_ID = r.Register_ID and r.Register_ID in (select TestObject_ID 
+																		   from dbo.TMP_SystemTestObject 
+																		   where Run_Number = @x_Run_Number
+																		   ) 
+
+--Cursor for Items
+
+set @x_CheckItem_Status = (select Status_ID from dbo.p_Status where Status_Code = 'wCLIa')
+
+DECLARE c_CheckItemStatus CURSOR 
+FOR select 
+		ci.CheckItem_ID
+	,ci.Document_ID
+	,ci.Position
+	,ci.Comment
+from dbo.CheckItem ci
+join dbo.Status s on ci.Status_ID = s.Status_ID
+where ci.CheckList_ID = @i_CheckList_ID
+and s.Status_Code not in ('wCLIc','wCLIa')
+
+OPEN c_CheckItemStatus 
+
+FETCH NEXT FROM c_CheckItemStatus Into @x_CheckItem_ID, @x_Document_ID, @x_Position, @x_Item_Comment  
+
+WHILE @@FETCH_STATUS = 0 
+	BEGIN
+
+	EXECUTE dbo.CheckItem_Update 
+		@x_CheckItem_ID
+		,@i_RowStatus
+		,@i_AppUser_ID
+		,@i_CheckList_ID
+		,@x_Document_ID
+		,@x_CheckItem_Status
+		,@x_Position
+		,@x_Item_Comment
+		,@o_IsError OUTPUT
+
+	FETCH NEXT FROM c_CheckItemStatus Into @x_CheckItem_ID, @x_Document_ID, @x_Position, @x_Item_Comment  
+
+	END
+
+CLOSE c_CheckItemStatus;  
+DEALLOCATE c_CheckItemStatus;
+
+EXECUTE [dbo].[CheckList_to_Status_Update] 
+   @i_CheckList_to_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@i_CheckList_ID
+  ,@i_Status_ID
+  ,@i_DTS_Start
+  ,@i_DTS_End
+  ,@o_IsError OUTPUT
+
+-------------
+------------- Auto try to Set Register Status - from Approvment to NotApproved or Archived 
+-------------
+Declare @i_Register_ID		nvarchar(250)   = (select TestObject_ID from dbo.TMP_SystemTestObject where Run_Number = @x_Run_Number and TestObject_Entity = 'Register') 
+set @i_Status_ID = (select Status_ID from dbo.p_Status where Status_Code = 'wCCuna')
+
+
+EXECUTE [dbo].[ProcessStep_Set] 
+   @i_Register_ID
+  ,@i_Status_ID
+  ,@i_RowStatus
+  ,@i_AppUser_ID
+  ,@o_IsError OUTPUT</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+</root>

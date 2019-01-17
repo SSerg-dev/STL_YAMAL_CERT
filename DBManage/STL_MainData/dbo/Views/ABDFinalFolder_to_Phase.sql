@@ -1,0 +1,1 @@
+﻿create view ABDFinalFolder_to_Phase as select [ABDFinalFolder_ID], [ABDFinalFolder_to_Phase_ID], [Phase_ID] from p_ABDFinalFolder_to_Phase where row_status = 0

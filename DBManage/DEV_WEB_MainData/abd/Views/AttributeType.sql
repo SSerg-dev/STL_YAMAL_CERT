@@ -1,0 +1,2 @@
+﻿
+CREATE view [abd].[AttributeType] as select [AttributeType_ID], [AttributeType_Code], [AttributeType_Name], [AttributeType_Group], [Attribute_DataType], [Attribute_Table], [Attribute_Format], [Description_Rus], [Description_Eng] from abd.p_AttributeType where RowStatus < 100

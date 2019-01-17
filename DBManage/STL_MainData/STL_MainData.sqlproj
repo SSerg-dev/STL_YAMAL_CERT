@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>STL_MainData</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{76870802-7ff4-4a1b-9f9d-fad64d997ac2}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>STL_MainData</RootNamespace>
+    <AssemblyName>STL_MainData</AssemblyName>
+    <ModelCollation>1049,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <DefaultCollation>Cyrillic_General_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="syslog\" />
+    <Folder Include="syslog\Tables\" />
+    <Folder Include="abd\" />
+    <Folder Include="abd\Tables\" />
+    <Folder Include="ext\" />
+    <Folder Include="ext\Tables\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="syslog\Views\" />
+    <Folder Include="ext\Views\" />
+    <Folder Include="Security\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="syslog\Stored Procedures\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="chk\" />
+    <Folder Include="chk\Stored Procedures\" />
+    <Folder Include="dbo\User Defined Types\" />
+    <Folder Include="syslog\Sequences\" />
+    <Folder Include="dbo\Sequences\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\p_PipingWorkType.sql" />
+    <Build Include="syslog\Tables\p_UserTaskMessage.sql" />
+    <Build Include="syslog\Tables\p_UserXLSErrorLog.sql" />
+    <Build Include="dbo\Tables\p_Transmittal.sql" />
+    <Build Include="dbo\Tables\p_Priority.sql" />
+    <Build Include="dbo\Tables\p_Register.sql" />
+    <Build Include="dbo\Tables\p_Register_to_GradingObjectVolume.sql" />
+    <Build Include="dbo\Tables\p_PermissionDocumentType.sql" />
+    <Build Include="dbo\Tables\p_Register_to_ProcessPhase.sql" />
+    <Build Include="dbo\Tables\p_Register_to_ElectricalVolume.sql" />
+    <Build Include="dbo\Tables\tR_x_Reg_Report.sql" />
+    <Build Include="dbo\Tables\p_ABDFinalFolder_to_Transmittal.sql" />
+    <Build Include="dbo\Tables\tR_x_ISO_Reg.sql" />
+    <Build Include="dbo\Tables\p_Spool.sql" />
+    <Build Include="dbo\Tables\p_SubSubContractor2.sql" />
+    <Build Include="dbo\Tables\p_SubContractor2.sql" />
+    <Build Include="dbo\Tables\p_TAG.sql" />
+    <Build Include="dbo\Tables\p_LogId.sql" />
+    <Build Include="dbo\Tables\p_TestPack.sql" />
+    <Build Include="dbo\Tables\p_SubSubContractor_to_SubContractor2.sql" />
+    <Build Include="dbo\Tables\p_TestPack_to_ISO.sql" />
+    <Build Include="dbo\Tables\p_TestType.sql" />
+    <Build Include="dbo\Tables\p_UndergroundObjectVolume_m.sql" />
+    <Build Include="dbo\Tables\c_ISO4.sql" />
+    <Build Include="dbo\Tables\p_LogId_to_FileLOG.sql" />
+    <Build Include="dbo\Tables\p_UnitNumberDocumentCode.sql" />
+    <Build Include="dbo\Tables\p_TechnicalPassport.sql" />
+    <Build Include="dbo\Tables\p_WorkProgressQuantity.sql" />
+    <Build Include="dbo\Tables\p_UserMessage.sql" />
+    <Build Include="dbo\Tables\p_Line_to_Marka.sql" />
+    <Build Include="dbo\Tables\p_WorkPackage_to_SubContractor2.sql" />
+    <Build Include="dbo\Tables\p_WorkProgressRegisters.sql" />
+    <Build Include="dbo\Tables\p_ABDFinalSet.sql" />
+    <Build Include="dbo\Tables\p_TAG_to_TechnicalPassport.sql" />
+    <Build Include="dbo\Tables\p_SubSubContractor_to_PermissionDocumentTypes2.sql" />
+    <Build Include="dbo\Tables\p_Line_to_TitleObject.sql" />
+    <Build Include="dbo\Tables\p_Register_to_UndergroundObjectVolume.sql" />
+    <Build Include="dbo\Tables\p_RowStatus_sys.sql" />
+    <Build Include="dbo\Tables\p_DisciplineDocumentCode.sql" />
+    <Build Include="dbo\Tables\p_DocumentTypeCode.sql" />
+    <Build Include="dbo\Tables\p_SubSubContractor_to_Transmittal2.sql" />
+    <Build Include="dbo\Tables\p_RegisterJobCardAction_m.sql" />
+    <Build Include="dbo\Tables\p_VendorDocumentCode.sql" />
+    <Build Include="dbo\Tables\p_PID_to_UnitNumberDocumentCode.sql" />
+    <Build Include="dbo\Tables\p_ABDFinalFolder_to_Phase.sql" />
+    <Build Include="dbo\Tables\p_WorkProgressPipingRegisters.sql" />
+    <Build Include="dbo\Tables\p_ABDFinalFolder_to_ABDStatus.sql" />
+    <Build Include="dbo\Tables\p_WorkProgressPipingQuantity.sql" />
+    <Build Include="dbo\Tables\p_PID_to_DocumentOriginCode.sql" />
+    <Build Include="dbo\Tables\p_JobCard.sql" />
+    <Build Include="dbo\Tables\p_PID_to_DisciplineDocumentCode.sql" />
+    <Build Include="dbo\Tables\p_JobCard_to_Module.sql" />
+    <Build Include="dbo\Tables\p_Register_to_FileLOG.sql" />
+    <Build Include="dbo\Tables\p_Register_to_ABDStatus.sql" />
+    <Build Include="dbo\Tables\p_PID_to_DocumentProjectNumber.sql" />
+    <Build Include="dbo\Tables\p_WorkPackage.sql" />
+    <Build Include="dbo\Tables\p_WorkProgressCOWRegisters.sql" />
+    <Build Include="dbo\Tables\tr_ElectricalLogsWorkTypes.sql" />
+    <Build Include="dbo\Tables\p_ABDDocument.sql" />
+    <Build Include="dbo\Tables\p_JobCard_to_TitleObject.sql" />
+    <Build Include="dbo\Tables\p_PID_to_DocumentTypeCode.sql" />
+    <Build Include="dbo\Tables\p_RegisterElectricalAction_m.sql" />
+    <Build Include="dbo\Tables\p_Register_to_Marka.sql" />
+    <Build Include="dbo\Tables\p_JobCard_to_Marka.sql" />
+    <Build Include="dbo\Tables\p_Register_to_TitleObject.sql" />
+    <Build Include="dbo\Tables\p_TechnicalPassport_to_ABDStatus.sql" />
+    <Build Include="dbo\Tables\p_ABDDocument_to_GOST.sql" />
+    <Build Include="dbo\Tables\p_Stage.sql" />
+    <Build Include="dbo\Tables\p_WorkClass.sql" />
+    <Build Include="dbo\Tables\p_DocumentEmitter.sql" />
+    <Build Include="dbo\Tables\p_ABDFinalFolder.sql" />
+    <Build Include="dbo\Tables\p_JobCard_to_WorkClass.sql" />
+    <Build Include="abd\Tables\p_EntityType.sql" />
+    <Build Include="dbo\Tables\p_HelpTable.sql" />
+    <Build Include="dbo\Tables\p_TitleObject_to_Stage.sql" />
+    <Build Include="dbo\Tables\p_LogId_to_Contragent.sql" />
+    <Build Include="dbo\Tables\p_ABDDocument_to_PID.sql" />
+    <Build Include="dbo\Tables\p_ABDFinalFolder_to_ABDFinalSet.sql" />
+    <Build Include="dbo\Tables\p_GradingStad.sql" />
+    <Build Include="dbo\Tables\p_VendorRequisition.sql" />
+    <Build Include="dbo\Tables\p_TitleObject.sql" />
+    <Build Include="dbo\Tables\p_RegisterPipingAction.sql" />
+    <Build Include="dbo\Tables\p_JobCardRusABDActivityGroup.sql" />
+    <Build Include="dbo\Tables\p_ABDDocument_to_Module.sql" />
+    <Build Include="dbo\Tables\p_VendorPurchaseOrder.sql" />
+    <Build Include="ext\Tables\p_FileList_25_As_Built_Documentation.sql" />
+    <Build Include="dbo\Tables\p_GradingWorkType.sql" />
+    <Build Include="dbo\Tables\p_ABDDocument_to_Line.sql" />
+    <Build Include="dbo\Tables\p_ISO.sql" />
+    <Build Include="dbo\Tables\p_ABDDocument_to_TestPack.sql" />
+    <Build Include="abd\Tables\p_GeneralDocumentAttribute.sql" />
+    <Build Include="dbo\Tables\p_GOST.sql" />
+    <Build Include="dbo\Tables\p_RegisterAction.sql" />
+    <Build Include="dbo\Tables\p_RusLabStatus.sql" />
+    <Build Include="dbo\Tables\p_Phase.sql" />
+    <Build Include="dbo\Tables\p_ABDDocument_to_UnitNumberDocumentCode.sql" />
+    <Build Include="dbo\Tables\p_WorkProgressCOWQuantity.sql" />
+    <Build Include="dbo\Tables\p_ContractorDocument.sql" />
+    <Build Include="dbo\Tables\p_Contragent.sql" />
+    <Build Include="abd\Tables\p_GeneralDocument.sql" />
+    <Build Include="dbo\Tables\p_ABDDocument_to_DisciplineDocumentCode.sql" />
+    <Build Include="dbo\Tables\p_GOST_to_PID.sql" />
+    <Build Include="dbo\Tables\p_CivilSector.sql" />
+    <Build Include="dbo\Tables\p_User.sql" />
+    <Build Include="dbo\Tables\p_ABDDocument_to_DocumentTypeCode.sql" />
+    <Build Include="dbo\Tables\p_GOST_to_TitleObject.sql" />
+    <Build Include="dbo\Tables\p_ABDDocument_to_CivilSector.sql" />
+    <Build Include="dbo\Tables\p_UserError.sql" />
+    <Build Include="abd\Tables\p_GeneralDocumentAttributeRelation.sql" />
+    <Build Include="dbo\Tables\p_ABDDocument_to_Contragent.sql" />
+    <Build Include="dbo\Tables\p_GOST_to_Marka.sql" />
+    <Build Include="dbo\Tables\p_ABDStatus.sql" />
+    <Build Include="dbo\Tables\p_PID_to_ContractorDocument.sql" />
+    <Build Include="dbo\Tables\p_PID_to_VendorRequisition.sql" />
+    <Build Include="dbo\Tables\p_DesignAreaType.sql" />
+    <Build Include="dbo\Tables\p_ABDFinalFolder_to_SubContractor2.sql" />
+    <Build Include="dbo\Tables\p_ABDFinalFolder_to_Contragent.sql" />
+    <Build Include="dbo\Tables\p_FileLOG.sql" />
+    <Build Include="dbo\Tables\p_ISO_to_Action.sql" />
+    <Build Include="dbo\Tables\p_ISO_to_DesignAreaType.sql" />
+    <Build Include="dbo\Tables\p_ISO_to_Line.sql" />
+    <Build Include="dbo\Tables\p_ProcessPhase.sql" />
+    <Build Include="dbo\Tables\p_VendorRequisition_to_VendorPurchaseOrder.sql" />
+    <Build Include="dbo\Tables\p_ISO_to_Module.sql" />
+    <Build Include="dbo\Tables\p_ISO_to_RusLabPassport.sql" />
+    <Build Include="dbo\Tables\p_ISO_to_Marka.sql" />
+    <Build Include="dbo\Tables\p_ISO_to_Phase.sql" />
+    <Build Include="dbo\Tables\p_GradingObject.sql" />
+    <Build Include="dbo\Tables\p_ISO_to_Priority.sql" />
+    <Build Include="dbo\Tables\p_ISO_to_ProcessPhase.sql" />
+    <Build Include="abd\Tables\p_GeneralDocumentRelation.sql" />
+    <Build Include="dbo\Tables\p_ISO_to_RusLabStatus.sql" />
+    <Build Include="dbo\Tables\p_ISO_to_Spool.sql" />
+    <Build Include="dbo\Tables\p_WorkPackage_to_Contragent.sql" />
+    <Build Include="dbo\Tables\p_ISO_to_SubContractor2.sql" />
+    <Build Include="dbo\Tables\p_ISO_to_TitleObject.sql" />
+    <Build Include="dbo\Tables\p_MeasureUnit.sql" />
+    <Build Include="dbo\Tables\p_UserTask.sql" />
+    <Build Include="dbo\Tables\p_ISO_to_WorkPackage.sql" />
+    <Build Include="dbo\Tables\p_Line.sql" />
+    <Build Include="dbo\Tables\p_UserTaskMessage.sql" />
+    <Build Include="dbo\Tables\p_Line_to_PID.sql" />
+    <Build Include="dbo\Tables\p_Marka.sql" />
+    <Build Include="dbo\Tables\p_GradingObjectVolume_m.sql" />
+    <Build Include="dbo\Tables\p_UserTaskLog.sql" />
+    <Build Include="dbo\Tables\p_Module.sql" />
+    <Build Include="dbo\Tables\p_UndergroundWorkType.sql" />
+    <Build Include="dbo\Tables\p_Register_to_ABDFinalFolder.sql" />
+    <Build Include="dbo\Tables\p_Module_to_Phase.sql" />
+    <Build Include="dbo\Tables\p_ElectricalVolume_m.sql" />
+    <Build Include="dbo\Tables\p_DocumentProjectNumber.sql" />
+    <Build Include="dbo\Tables\p_Module_to_TitleObject.sql" />
+    <Build Include="syslog\Tables\p_User.sql" />
+    <Build Include="dbo\Tables\p_DataTrans.sql" />
+    <Build Include="dbo\Tables\p_Module_to_WorkPackage_Er.sql" />
+    <Build Include="syslog\Tables\p_UserError.sql" />
+    <Build Include="dbo\Tables\p_Module_to_WorkPackage_Fab.sql" />
+    <Build Include="syslog\Tables\p_UserMessage.sql" />
+    <Build Include="dbo\Tables\p_ABDDocument_to_ABDFinalFolder.sql" />
+    <Build Include="dbo\Tables\p_DocumentOriginCode.sql" />
+    <Build Include="dbo\Tables\p_RusLabPassport.sql" />
+    <Build Include="syslog\Tables\p_UserTask.sql" />
+    <Build Include="dbo\Tables\p_PID.sql" />
+    <Build Include="syslog\Tables\p_UserTaskLog.sql" />
+    <Build Include="dbo\Tables\p_UndergroundObject.sql" />
+    <Build Include="dbo\Tables\p_UserXLSErrorLog.sql" />
+    <Build Include="dbo\Views\DisciplineDocumentCode.sql" />
+    <Build Include="dbo\Views\DocumentTypeCode.sql" />
+    <Build Include="dbo\Views\ABDFinalFolder_to_Phase.sql" />
+    <Build Include="dbo\Views\WorkProgressQuantity.sql" />
+    <Build Include="dbo\Views\GradingObject.sql" />
+    <Build Include="dbo\Views\WorkProgressRegisters.sql" />
+    <Build Include="syslog\Views\User.sql" />
+    <Build Include="dbo\Views\WorkClass.sql" />
+    <Build Include="dbo\Views\GradingStad.sql" />
+    <Build Include="dbo\Views\WorkProgressPipingRegisters.sql" />
+    <Build Include="syslog\Views\UserMessage.sql" />
+    <Build Include="dbo\Views\DocumentProjectNumber.sql" />
+    <Build Include="dbo\Views\PID_to_DocumentOriginCode.sql" />
+    <Build Include="dbo\Views\R_Register_to_ABDFinalFolder.sql" />
+    <Build Include="dbo\Views\PID_to_DocumentProjectNumber.sql" />
+    <Build Include="dbo\Views\TitleObject_to_Marka.sql" />
+    <Build Include="dbo\Views\Register_to_Marka.sql" />
+    <Build Include="dbo\Views\Spool.sql" />
+    <Build Include="dbo\Views\PID_to_VendorRequisition.sql" />
+    <Build Include="dbo\Views\Register_to_ABDStatus.sql" />
+    <Build Include="dbo\Views\Register_to_TitleObject.sql" />
+    <Build Include="dbo\Views\VendorDocumentCode.sql" />
+    <Build Include="dbo\Views\R_Register_to_ABDStatus.sql" />
+    <Build Include="dbo\Views\WorkProgressCOWQuantity.sql" />
+    <Build Include="dbo\Views\VendorRequisition_to_VendorPurchaseOrder.sql" />
+    <Build Include="dbo\Views\ISO_to_Module.sql" />
+    <Build Include="dbo\Views\GOST_to_TitleObject.sql" />
+    <Build Include="dbo\Views\RowStatus_sys.sql" />
+    <Build Include="dbo\Views\R_ABDFinalSet.sql" />
+    <Build Include="dbo\Views\ABDDocument_to_Contragent.sql" />
+    <Build Include="dbo\Views\MeasureUnit.sql" />
+    <Build Include="dbo\Views\JobCard.sql" />
+    <Build Include="dbo\Views\ABDFinalFolder_to_Contragent.sql" />
+    <Build Include="dbo\Views\JobCard_to_Marka.sql" />
+    <Build Include="dbo\Views\RegisterElectricalAction_m.sql" />
+    <Build Include="dbo\Views\JobCard_to_Module.sql" />
+    <Build Include="dbo\Views\TechnicalPassport_to_ABDStatus.sql" />
+    <Build Include="dbo\Views\JobCard_to_TitleObject.sql" />
+    <Build Include="dbo\Views\ABDFinalFolder_to_Transmittal.sql" />
+    <Build Include="dbo\Views\Register_to_ABDFinalFolder.sql" />
+    <Build Include="dbo\Views\R_WPQuantityCS_SplittedUnit.sql" />
+    <Build Include="dbo\Views\R_WorkProgressRegisters.sql" />
+    <Build Include="dbo\Views\FileLOG.sql" />
+    <Build Include="dbo\Views\R_WorkProgressQuantity.sql" />
+    <Build Include="dbo\Views\Stage.sql" />
+    <Build Include="dbo\Views\Transmittal.sql" />
+    <Build Include="dbo\Views\LogId.sql" />
+    <Build Include="dbo\Views\WorkProgressPipingQuantity.sql" />
+    <Build Include="syslog\Views\UserTask.sql" />
+    <Build Include="dbo\Views\ABDFinalFolder.sql" />
+    <Build Include="syslog\Views\UserTaskLog.sql" />
+    <Build Include="dbo\Views\ISO_to_Line.sql" />
+    <Build Include="syslog\Views\UserTaskMessage.sql" />
+    <Build Include="dbo\Views\PermissionDocumentType.sql" />
+    <Build Include="dbo\Views\UndergroundObject.sql" />
+    <Build Include="dbo\Views\R_Register_to_JobCard.sql" />
+    <Build Include="dbo\Views\ISO_to_ProcessPhase.sql" />
+    <Build Include="dbo\Views\ISO_to_Spool.sql" />
+    <Build Include="dbo\Views\ISO_Field_Documents.sql" />
+    <Build Include="dbo\Views\ABDDocument_to_UnitNumberDocumentCode.sql" />
+    <Build Include="dbo\Views\R_Register_to_JobCardRusABDActivityGroup.sql" />
+    <Build Include="dbo\Views\Line_to_PID.sql" />
+    <Build Include="dbo\Views\ABDDocumentFull.sql" />
+    <Build Include="dbo\Views\R_JobCard_to_JobCardRusABDActivityGroup.sql" />
+    <Build Include="dbo\Views\Module_to_TitleObject.sql" />
+    <Build Include="dbo\Views\Module_to_WorkPackage_Er.sql" />
+    <Build Include="dbo\Views\ABDDocument_to_CivilSector.sql" />
+    <Build Include="dbo\Views\Module_to_WorkPackage_Fab.sql" />
+    <Build Include="dbo\Views\DocumentOriginCode.sql" />
+    <Build Include="dbo\Views\RusLabStatus.sql" />
+    <Build Include="dbo\Views\R_ABDFinalFolder_to_ABDStatus.sql" />
+    <Build Include="dbo\Views\TitleObject.sql" />
+    <Build Include="dbo\Views\UserMessage.sql" />
+    <Build Include="dbo\Views\R_Register_to_TitleObject.sql" />
+    <Build Include="dbo\Views\DownloadedABDFinalFolder.sql" />
+    <Build Include="dbo\Views\Register_to_FileLOG.sql" />
+    <Build Include="dbo\Views\r_LogId_to_FileLOG.sql" />
+    <Build Include="dbo\Views\ABDDocument.sql" />
+    <Build Include="dbo\Views\ABDFinalSet.sql" />
+    <Build Include="dbo\Views\getNewID.sql" />
+    <Build Include="dbo\Views\Register_to_GradingObjectVolume.sql" />
+    <Build Include="dbo\Views\LogId_to_FileLOG.sql" />
+    <Build Include="dbo\Views\Line.sql" />
+    <Build Include="dbo\Views\ABDFinalFolder_to_ABDFinalSet.sql" />
+    <Build Include="dbo\Views\UI_Line.sql" />
+    <Build Include="dbo\Views\ISO_to_TitleObject.sql" />
+    <Build Include="dbo\Views\ISO_to_Marka.sql" />
+    <Build Include="syslog\Views\R_UserTaskLog_Full.sql" />
+    <Build Include="dbo\Views\ISO_to_RusLabPassport.sql" />
+    <Build Include="dbo\Views\RegisterPipingAction.sql" />
+    <Build Include="dbo\Views\RegisterJobCardAction_m.sql" />
+    <Build Include="dbo\Views\r_ISO_to_TitleObject.sql" />
+    <Build Include="dbo\Views\RusLabPassport.sql" />
+    <Build Include="dbo\Views\R_WorkProgressPipingQuantity.sql" />
+    <Build Include="dbo\Views\TAG.sql" />
+    <Build Include="dbo\Views\R_WorkProgressPipingRegisters.sql" />
+    <Build Include="dbo\Views\ABDDocument_to_ABDFinalFolder.sql" />
+    <Build Include="dbo\Views\PID_to_DisciplineDocumentCode.sql" />
+    <Build Include="dbo\Views\ISO_to_Priority.sql" />
+    <Build Include="dbo\Views\PID_to_DocumentTypeCode.sql" />
+    <Build Include="dbo\Views\PID_to_UnitNumberDocumentCode.sql" />
+    <Build Include="dbo\Views\R_Line_to_Phase.sql" />
+    <Build Include="dbo\Views\UserError.sql" />
+    <Build Include="dbo\Views\R_x_COW_Report_wo_groups_noLOG.sql" />
+    <Build Include="dbo\Views\UserXLSErrorLog.sql" />
+    <Build Include="dbo\Views\R_LOGID_to_Contragent.sql" />
+    <Build Include="dbo\Views\PipingWorkType.sql" />
+    <Build Include="dbo\Views\TestPack_to_ISO.sql" />
+    <Build Include="dbo\Views\RegisterAction.sql" />
+    <Build Include="dbo\Views\TestPack.sql" />
+    <Build Include="dbo\Views\GOST.sql" />
+    <Build Include="dbo\Views\ContractorDocument.sql" />
+    <Build Include="dbo\Views\PID_to_ContractorDocument.sql" />
+    <Build Include="dbo\Views\GradingObjectVolume_m.sql" />
+    <Build Include="dbo\Views\GradingWorkType.sql" />
+    <Build Include="dbo\Views\ISO_to_DesignAreaType.sql" />
+    <Build Include="dbo\Views\Line_to_TitleObject.sql" />
+    <Build Include="dbo\Views\Module_to_Phase.sql" />
+    <Build Include="dbo\Views\Status.sql" />
+    <Build Include="dbo\Views\User.sql" />
+    <Build Include="dbo\Views\R_WorkPackage_to_Contragent.sql" />
+    <Build Include="dbo\Views\WorkPackage.sql" />
+    <Build Include="dbo\Views\ABDStatus.sql" />
+    <Build Include="dbo\Views\TAG_to_TechnicalPassport.sql" />
+    <Build Include="dbo\Views\DesignAreaType.sql" />
+    <Build Include="syslog\Views\UserXLSErrorLog.sql" />
+    <Build Include="dbo\Views\ABDDocument_to_DisciplineDocumentCode.sql" />
+    <Build Include="dbo\Views\UndergroundObjectVolume_m.sql" />
+    <Build Include="dbo\Views\TechnicalPassport.sql" />
+    <Build Include="dbo\Views\Module.sql" />
+    <Build Include="syslog\Views\UserTaskLog_Full.sql" />
+    <Build Include="dbo\Views\ABDDocument_to_DocumentTypeCode.sql" />
+    <Build Include="dbo\Views\Register_to_UndergroundObjectVolume.sql" />
+    <Build Include="dbo\Views\PID.sql" />
+    <Build Include="syslog\Views\UserTaskLogXLS_Full.sql" />
+    <Build Include="dbo\Views\ABDDocument_to_GOST.sql" />
+    <Build Include="dbo\Views\ABDFinalFolder_to_ABDStatus.sql" />
+    <Build Include="dbo\Views\ISO_to_Action.sql" />
+    <Build Include="dbo\Views\ABDDocument_to_Module.sql" />
+    <Build Include="dbo\Views\ISO_to_Phase.sql" />
+    <Build Include="dbo\Views\ABDDocument_to_PID.sql" />
+    <Build Include="dbo\Views\ISO_to_RusLabStatus.sql" />
+    <Build Include="dbo\Views\R_Structure.sql" />
+    <Build Include="dbo\Views\TitleObject_to_Stage.sql" />
+    <Build Include="dbo\Views\R_Register_toTitle_to_Marka.sql" />
+    <Build Include="dbo\Views\ABDDocument_to_TestPack.sql" />
+    <Build Include="ext\Views\FileList_25_As_Built_Documentation.sql" />
+    <Build Include="dbo\Views\Line_to_Marka.sql" />
+    <Build Include="dbo\Views\TestType.sql" />
+    <Build Include="dbo\Views\ISO_to_TitleObject_Marka.sql" />
+    <Build Include="dbo\Views\ISO.sql" />
+    <Build Include="dbo\Views\GOST_to_Marka.sql" />
+    <Build Include="dbo\Views\Phase.sql" />
+    <Build Include="dbo\Views\CivilSector.sql" />
+    <Build Include="dbo\Views\GOST_to_PID.sql" />
+    <Build Include="dbo\Views\R_RegisterPipingAction.sql" />
+    <Build Include="dbo\Views\Marka.sql" />
+    <Build Include="dbo\Views\FinalABDCompilation.sql" />
+    <Build Include="dbo\Views\DataTrans.sql" />
+    <Build Include="dbo\Views\UserTaskLog.sql" />
+    <Build Include="dbo\Views\ProcessPhase.sql" />
+    <Build Include="dbo\Views\UnitNumberDocumentCode.sql" />
+    <Build Include="dbo\Views\UI_ABDStatus_From.sql" />
+    <Build Include="dbo\Views\Priority.sql" />
+    <Build Include="dbo\Views\ABDDocument_to_Line.sql" />
+    <Build Include="dbo\Views\R_FinalFolder_To_TitleAndMarka.sql" />
+    <Build Include="dbo\Views\DocumentEmitter.sql" />
+    <Build Include="dbo\Views\VendorPurchaseOrder.sql" />
+    <Build Include="dbo\Views\Contragent.sql" />
+    <Build Include="dbo\Views\VendorRequisition.sql" />
+    <Build Include="dbo\Views\TitleObject_to_ALL_Marka.sql" />
+    <Build Include="dbo\Views\WorkPackage_to_Contragent.sql" />
+    <Build Include="dbo\Views\UserTask.sql" />
+    <Build Include="dbo\Views\JobCard_to_WorkClass.sql" />
+    <Build Include="dbo\Views\R_ABDDocument_to_ABDFinalFolder.sql" />
+    <Build Include="dbo\Views\UserTaskMessage.sql" />
+    <Build Include="dbo\Views\JobCardRusABDActivityGroup.sql" />
+    <Build Include="dbo\Views\StructureFull.sql" />
+    <Build Include="dbo\Views\R_WorkType.sql" />
+    <Build Include="dbo\Views\R_ABDDocumentNoStructureAndPIDGOST.sql" />
+    <Build Include="dbo\Views\WorkProgressCOWRegisters.sql" />
+    <Build Include="dbo\Views\UI_MarkaWithDeleted.sql" />
+    <Build Include="dbo\Views\ISO_to_WorkPackage.sql" />
+    <Build Include="dbo\Views\UI_RegisterList.sql" />
+    <Build Include="dbo\Views\UI_RegisterListWithDeleted.sql" />
+    <Build Include="dbo\Views\UndergroundWorkType.sql" />
+    <Build Include="dbo\Views\UI_iso_to_action.sql" />
+    <Build Include="dbo\Views\R_UndergroundObject.sql" />
+    <Build Include="dbo\Views\Register_to_ProcessPhase.sql" />
+    <Build Include="dbo\Views\Register.sql" />
+    <Build Include="Security\db_executor.sql" />
+    <Build Include="dbo\Functions\DB_NEW_GUID.sql" />
+    <Build Include="dbo\Functions\String_Concat.sql" />
+    <Build Include="dbo\Functions\DataTransformation.sql" />
+    <Build Include="syslog\Stored Procedures\User_ID_Get.sql" />
+    <Build Include="syslog\Stored Procedures\User_Message_Set.sql" />
+    <Build Include="syslog\Stored Procedures\User_MessageList_Check.sql" />
+    <Build Include="syslog\Stored Procedures\User_MessageList_Clear.sql" />
+    <Build Include="dbo\Stored Procedures\Delete_ISO_from_Reg.sql" />
+    <Build Include="syslog\Stored Procedures\UserTaskLog_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Update_Reg_Status.sql" />
+    <Build Include="syslog\Stored Procedures\UserXLSErrorLog_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\TestExeption.sql" />
+    <Build Include="dbo\Stored Procedures\Change_ABDFolder_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Delete_Marka.sql" />
+    <Build Include="dbo\Stored Procedures\Delete_Register.sql" />
+    <Build Include="dbo\Stored Procedures\New_Marka.sql" />
+    <Build Include="dbo\Stored Procedures\New_Register.sql" />
+    <Build Include="dbo\Stored Procedures\New_RegisterPipingAction.sql" />
+    <Build Include="dbo\Stored Procedures\Update_Marka.sql" />
+    <Build Include="dbo\Stored Procedures\Update_Register.sql" />
+    <Build Include="dbo\Stored Procedures\Change_Reg_Status.sql" />
+    <Build Include="dbo\Stored Procedures\User_ID_Get.sql" />
+    <Build Include="dbo\Stored Procedures\New_Reg_GUID.sql" />
+    <Build Include="dbo\Stored Procedures\New_ISO_to_Reg.sql" />
+    <Build Include="dbo\Stored Procedures\User_MessageList_Clear.sql" />
+    <Build Include="chk\Stored Procedures\system_DatabaseNameInCode.sql" />
+    <Build Include="dbo\Stored Procedures\Get_UpdLock_FK_Relation.sql" />
+    <Build Include="dbo\Stored Procedures\User_MessageList_Check.sql" />
+    <Build Include="dbo\Stored Procedures\User_Message_Set.sql" />
+    <Build Include="dbo\Stored Procedures\UserTaskLog_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\UserXLSErrorLog_Insert.sql" />
+    <Build Include="dbo\User Defined Types\TestTableType.sql" />
+    <Build Include="Security\abd.sql" />
+    <Build Include="Security\chk.sql" />
+    <Build Include="Security\ext.sql" />
+    <Build Include="Security\syslog.sql" />
+    <Build Include="Security\test.sql" />
+    <Build Include="syslog\Sequences\Sequence_Run_Number.sql" />
+    <Build Include="dbo\Sequences\Sequence_Run_Number.sql" />
+    <Build Include="dbo\Sequences\Sequence_Reg_Number.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\130\SqlSchemas\master.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </ArtifactReference>
+  </ItemGroup>
+</Project>

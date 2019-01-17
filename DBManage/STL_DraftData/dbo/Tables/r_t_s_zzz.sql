@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[r_t_s_zzz] (
+    [Log_ID]           NVARCHAR (4000)  NULL,
+    [Reg]              NVARCHAR (4000)  NULL,
+    [Unit]             NVARCHAR (4000)  NULL,
+    [Work_Desc]        NVARCHAR (4000)  NULL,
+    [CNT_Date]         NVARCHAR (4000)  NULL,
+    [Repr_SCNT]        NVARCHAR (4000)  NULL,
+    [Repr_CNT]         NVARCHAR (4000)  NULL,
+    [Status_Date]      NVARCHAR (4000)  NULL,
+    [Status]           NVARCHAR (4000)  NULL,
+    [Source_File]      NVARCHAR (4000)  NULL,
+    [WorkPackage]      NVARCHAR (4000)  NULL,
+    [Register_Type]    INT              NULL,
+    [DATE Status_Date] DATETIME         NULL,
+    [LEN_Source_File]  NVARCHAR (50)    NULL,
+    [LEN_Reg]          NVARCHAR (100)   NULL,
+    [Insert_Date]      DATETIME         NULL,
+    [Update_Date]      DATETIME         NULL,
+    [Row_Status]       INT              NULL,
+    [Created_By]       NVARCHAR (255)   NULL,
+    [Modified_By]      NVARCHAR (255)   NULL,
+    [Register_ID]      UNIQUEIDENTIFIER NULL,
+    [ABDStatus_ID]     UNIQUEIDENTIFIER NULL,
+    [ErrorCode]        INT              NULL,
+    [ErrorColumn]      INT              NULL
+);
+

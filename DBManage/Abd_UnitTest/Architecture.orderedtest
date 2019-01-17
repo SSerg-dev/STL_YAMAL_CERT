@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="Architecture" storage="c:\dev\stl_yamal_docs\stl_yamal_docs\dbmanage\abd_unittest\architecture.orderedtest" id="a5162b23-39a7-484d-8f09-2f1fffdcff61" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestLinks>
+    <TestLink id="68abfc80-a5be-f284-aa3c-a125bc6b373c" name="arch_001_TableNames" storage="bin\debug\abd_unittest.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="900eb8b5-c89d-c7b4-8cef-faec8a1c4bce" name="arch_002_ViewExists" storage="bin\debug\abd_unittest.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="69fb8ff6-e311-2964-39a0-af5904483464" name="arch_003_PrimaryKeyCheck" storage="bin\debug\abd_unittest.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>

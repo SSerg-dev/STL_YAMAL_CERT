@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="OrderedTest1" storage="c:\dev\stl_yamal_docs\stl_yamal_docs\dbmanage\abd_unittest\orderedtest1.orderedtest" id="22636ba5-8c20-4d6f-ba68-01ad7cec7544" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestLinks>
+    <TestLink id="68e37ba1-f331-5a70-a2ac-fc0739f7fb7c" name="abd_Document_DeleteTest" storage="bin\debug\abd_unittest.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="84b5933d-2a69-2e93-531c-8d035a3b8176" name="abd_Document_InsertTest" storage="bin\debug\abd_unittest.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="19f5e0b2-454b-09c6-bf28-01025388f125" name="abd_Document_UpdateTest" storage="bin\debug\abd_unittest.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>

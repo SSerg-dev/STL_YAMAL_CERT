@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[p_Line] (
+    [Line_ID]                              UNIQUEIDENTIFIER CONSTRAINT [DF_Line_ID] DEFAULT (newsequentialid()) NOT NULL,
+    [RowStatus]                            INT              NOT NULL,
+    [Insert_DTS]                           DATETIME2 (7)    NOT NULL,
+    [Update_DTS]                           DATETIME2 (7)    NOT NULL,
+    [Created_User_ID]                      UNIQUEIDENTIFIER NOT NULL,
+    [Modified_User_ID]                     UNIQUEIDENTIFIER NOT NULL,
+    [Line_Code]                            NVARCHAR (255)   NOT NULL,
+    [Location_From]                        NVARCHAR (255)   NULL,
+    [Location_To]                          NVARCHAR (255)   NULL,
+    [Fluid_Name_Eng]                       NVARCHAR (255)   NULL,
+    [Fluid_Name_Rus]                       NVARCHAR (255)   NULL,
+    [Fluid_Danger_Code_By_Gost]            NVARCHAR (255)   NULL,
+    [Fluid_Fire_Aand_Explosive_Hazard]     NVARCHAR (255)   NULL,
+    [Fluid_Group_By_TP_TC_032_2013]        NVARCHAR (255)   NULL,
+    [Fluid_Group_By_GOST_32569_2013]       NVARCHAR (255)   NULL,
+    [Pipeline_Category_By_GOST_32569_2013] NVARCHAR (255)   NULL,
+    [Piprline_Category_By_TP_TC_032_2013]  NVARCHAR (255)   NULL,
+    CONSTRAINT [PK_p_Line] PRIMARY KEY CLUSTERED ([Line_ID] ASC),
+    CONSTRAINT [FK_p_Line_Created_User_ID_p_AppUser] FOREIGN KEY ([Created_User_ID]) REFERENCES [dbo].[p_AppUser] ([AppUser_ID]),
+    CONSTRAINT [FK_p_Line_Modified_User_ID_p_AppUser] FOREIGN KEY ([Modified_User_ID]) REFERENCES [dbo].[p_AppUser] ([AppUser_ID]),
+    CONSTRAINT [FK_p_Line_RowStatus_p_RowStatus] FOREIGN KEY ([RowStatus]) REFERENCES [dbo].[p_RowStatus] ([RowStatus_ID]),
+    CONSTRAINT [UQ_p_Line] UNIQUE NONCLUSTERED ([Line_Code] ASC)
+);
+

@@ -1,0 +1,23 @@
+﻿--Post-Deployment
+GO
+DECLARE @RootUser_ID	uniqueidentifier	= try_cast('00000000-0000-0000-0000-000000000000' as uniqueidentifier),
+		@DeploymentDate	datetime2(7)		= getdate();
+
+PRINT N'Inserting StatusRelation';
+
+INSERT INTO 
+dbo.p_StatusRelation ( RowStatus	,Insert_DTS			,Update_DTS			,Created_User_ID	,Modified_User_ID	,From_Status_ID																,To_Status_ID																		,StatusRelation_Code	,IterationIncrement	,CheckType_ID																				,ActionType)
+				SELECT 0			,@DeploymentDate	,@DeploymentDate	,@RootUser_ID		,@RootUser_ID		,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wSCd')		,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCCuAr')			,1						,0					,NULL																						,1
+	UNION ALL	SELECT 0			,@DeploymentDate	,@DeploymentDate	,@RootUser_ID		,@RootUser_ID		,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCCuAr')	,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wSCce')			,2						,0					,(select top 1 CheckType_ID from dbo.p_CheckType where CheckType_Code = N'Review')			,2
+	UNION ALL	SELECT 0			,@DeploymentDate	,@DeploymentDate	,@RootUser_ID		,@RootUser_ID		,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCCuAr')	,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCCua')			,3						,0					,(select top 1 CheckType_ID from dbo.p_CheckType where CheckType_Code = N'Review')			,2
+	UNION ALL	SELECT 0			,@DeploymentDate	,@DeploymentDate	,@RootUser_ID		,@RootUser_ID		,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wSCce')	,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wSCci')			,4						,1					,NULL																						,NULL
+	UNION ALL	SELECT 0			,@DeploymentDate	,@DeploymentDate	,@RootUser_ID		,@RootUser_ID		,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wSCci')	,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCCuAsr')			,5						,0					,(select top 1 CheckType_ID from dbo.p_CheckType where CheckType_Code = N'Review')			,1
+	UNION ALL	SELECT 0			,@DeploymentDate	,@DeploymentDate	,@RootUser_ID		,@RootUser_ID		,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCCuAsr')	,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wSCce')			,6						,0					,(select top 1 CheckType_ID from dbo.p_CheckType where CheckType_Code = N'Review')			,2
+	UNION ALL	SELECT 0			,@DeploymentDate	,@DeploymentDate	,@RootUser_ID		,@RootUser_ID		,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCCuAsr')	,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCCua')			,7						,0					,(select top 1 CheckType_ID from dbo.p_CheckType where CheckType_Code = N'Review')			,2
+	UNION ALL	SELECT 0			,@DeploymentDate	,@DeploymentDate	,@RootUser_ID		,@RootUser_ID		,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCCua')	,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCarh')			,8						,0					,(select top 1 CheckType_ID from dbo.p_CheckType where CheckType_Code = N'Approvement')		,3
+	UNION ALL	SELECT 0			,@DeploymentDate	,@DeploymentDate	,@RootUser_ID		,@RootUser_ID		,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCCua')	,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCCuna')			,9						,0					,(select top 1 CheckType_ID from dbo.p_CheckType where CheckType_Code = N'Approvement')		,3
+	UNION ALL	SELECT 0			,@DeploymentDate	,@DeploymentDate	,@RootUser_ID		,@RootUser_ID		,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCCuna')	,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCwsmr')			,10						,0					,NULL																						,NULL
+	UNION ALL	SELECT 0			,@DeploymentDate	,@DeploymentDate	,@RootUser_ID		,@RootUser_ID		,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCCuna')	,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wSCce')			,11						,0					,(select top 1 CheckType_ID from dbo.p_CheckType where CheckType_Code = N'Approvement')		,NULL
+	UNION ALL	SELECT 0			,@DeploymentDate	,@DeploymentDate	,@RootUser_ID		,@RootUser_ID		,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCwsmr')	,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCCua')			,12						,0					,(select top 1 CheckType_ID from dbo.p_CheckType where CheckType_Code = N'Approvement')		,1
+	UNION ALL	SELECT 0			,@DeploymentDate	,@DeploymentDate	,@RootUser_ID		,@RootUser_ID		,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wSCci')	,(select top 1 Status_ID from dbo.p_Status where Status_Code = N'wCCua')			,13						,0					,(select top 1 CheckType_ID from dbo.p_CheckType where CheckType_Code = N'Approvement')		,1
+;

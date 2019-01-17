@@ -1,0 +1,1 @@
+﻿CREATE view UserXLSErrorLog as select [Cell_Value], [Column_Number], [ErrorDescriptiuon_Eng], [ErrorDescriptiuon_Rus], [Row_Number], [Sheet_Name], [User_ID], [UserTaskLog_ID], [UserXLSErrorLog_ID] from p_UserXLSErrorLog where row_status < 100

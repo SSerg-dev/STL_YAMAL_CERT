@@ -1,0 +1,1 @@
+﻿CREATE view VendorDocumentCode as select [Description_Eng], [Description_Rus], [Structure], [VendorDocumentCode_ID], [VendorDocumentCode_Name], [VendorDocumentCode_PARENTID] from p_VendorDocumentCode where row_status < 100
