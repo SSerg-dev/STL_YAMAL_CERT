@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using DelegateDecompiler;
+using DelegateDecompiler.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +14,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 using SmartQA.Auth;
 using SmartQA.DB;
+using SmartQA.DB.Models.People;
 using SmartQA.DB.Models.PermissionDocuments;
 using SmartQA.Models;
 using SmartQA.Models.API;
@@ -84,36 +87,57 @@ namespace SmartQA.Controllers
                 .ThenInclude(e => e.Contragent)
                 .Include(n => n.Person)
                 .ThenInclude(p => p.Employees)
-                .ThenInclude(e => e.Position)
+                .ThenInclude(e => e.Position)                
                 .OrderBy(x => x.Person.LastName);
         }
+                                      
+        [Computed]        
+        public static bool IsValid(DocumentNaks naks)
+            => naks.ValidUntil < DateTime.Today;
 
-        // used for filtering
-        public Dictionary<string, object> PropertyExpressions =
-            new Dictionary<string, object>
-            {
-                ["Person.FullName"] = (Expression<Func<DocumentNaks, string>>)
-                    (naks => naks.Person.LastName + " " + naks.Person.FirstName +
-                             (naks.Person.SecondName == null ? "" : " " + naks.Person.SecondName)),
-                ["Person.BirthYear"] = (Expression<Func<DocumentNaks, long>>)
-                    (naks => ((DateTime)naks.Person.BirthDate).Year),
-                ["IsValid"] = (Expression<Func<DocumentNaks, bool>>)
-                              (naks => naks.ValidUntil < DateTime.Today)
-                
-            };
-
-        public LambdaExpression GetPropertyExpression(string propertyName)
+        [Computed]        
+        public static string Person_FullName(DocumentNaks naks)
+            => naks.Person.FullName;
+        
+        [Computed]        
+        public static long Person_BirthYear(DocumentNaks naks)
+            => ((DateTime)naks.Person.BirthDate).Year;
+        
+        
+        /// <summary>
+        /// Given propertyName, e.g. "IsValid",
+        /// try to find a lambda expression for that property 
+        /// like "x => x.IsValid" or "x => x.IsValid()" or "x => IsValid(x)". 
+        /// Replaces . in propertyName with _, so "Person.FullName" becomes "Person_FullName"
+        /// </summary>
+        /// <param name="propertyName">Name of property in request</param>
+        /// <typeparam name="T">Type of entity that is an argument to expression (x)</typeparam>
+        /// <returns>Lambda expression that computes the property value</returns>
+        public LambdaExpression GetPropertyExpression<T>(string propertyName)
         {
-            if (PropertyExpressions.ContainsKey(propertyName))
-                return (LambdaExpression) PropertyExpressions[propertyName];
-
-            var property = typeof(DocumentNaks).GetProperty(propertyName);
+            propertyName = propertyName.Replace(".", "_");
+            
+            // try to find property on T class
+            var property = typeof(T).GetProperty(propertyName);
             if (property != null && PredicateBuilder.PropertyTypesSupported.Contains(
                     Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType
                     ))
             {
-                var argParam = Expression.Parameter(typeof(DocumentNaks), "n");
+                // create lambda x => x.PropertyName
+                var argParam = Expression.Parameter(typeof(T), "x");
                 return Expression.Lambda(Expression.Property(argParam, propertyName), argParam);
+            }
+
+            // try to find method on DocumentNaks class            
+            var method = typeof(DocumentNaks).GetMethod(propertyName, new Type[] { })
+                         // ..or try to find method on this class
+                         ?? GetType().GetMethod(propertyName, new[] {typeof(DocumentNaks)});
+            
+            if (method != null)
+            {
+                // create lambda x => x.PropertyName()
+                var argParam = Expression.Parameter(typeof(T), "x");
+                return Expression.Lambda(Expression.Call(method, argParam), argParam);
             }
 
             return null;
@@ -125,8 +149,8 @@ namespace SmartQA.Controllers
             var operator_ = (string) filter[1];
             var value = filter[2];
 
-            // handle filter on a property
-            var propertyExpr = GetPropertyExpression(field);
+            // handle filter on a property or method
+            var propertyExpr = GetPropertyExpression<DocumentNaks>(field);
             if (propertyExpr != null)
             {
                 try
@@ -206,8 +230,7 @@ namespace SmartQA.Controllers
                 var p = MakeFilterPredicate(parts[1] as IList);
                 return Expression.Lambda<Func<DocumentNaks, bool>>(
                     Expression.Not(p.Body), p.Parameters);
-            } 
-            
+            }             
 
             string operation = null;
             var predicate = default(Expression<Func<DocumentNaks, bool>>);
@@ -249,9 +272,11 @@ namespace SmartQA.Controllers
             return query.Where(predicate);
         }
 
+        
         public IQueryable<NaksUI> ApplySelect(IQueryable<DocumentNaks> query)
         {
-            return query
+           
+            return query                    
                 .SelectMany(x => x.DocumentNaksAttestSet.DefaultIfEmpty(),
                     (naks, attest) => new NaksUI
                     {
@@ -266,9 +291,8 @@ namespace SmartQA.Controllers
                             FirstName = naks.Person.FirstName,
                             SecondName = naks.Person.SecondName,
                             BirthDate = naks.Person.BirthDate,
-                            BirthYear = ((DateTime)naks.Person.BirthDate).Year,
-                            FullName = naks.Person.LastName + " " + naks.Person.FirstName +
-                                       (naks.Person.SecondName == null ? "" : " " + naks.Person.SecondName),
+                            BirthYear = Person_BirthYear(naks),
+                            FullName = Person_FullName(naks),
                             Organization = naks.Person.Employees.OrderBy(e => e.ID).Select(x => x.Contragent.Title)
                                 .FirstOrDefault(),
                             Organization_Description = naks.Person.Employees.OrderBy(e => e.ID)
@@ -282,7 +306,7 @@ namespace SmartQA.Controllers
                         HIFGroup = attest.DocumentNaks.DocumentNaks_to_HIFGroupSet.Select(x => x.HIFGroup.Title).OrderBy(x => x).ToList(),
                         IssueDate = naks.IssueDate,
                         ValidUntil = naks.ValidUntil,
-                        IsValid = naks.ValidUntil < DateTime.Today,
+                        IsValid = IsValid(naks),
 
                         DetailsType = attest == null
                             ? (IEnumerable<string>) new string[] { }
@@ -317,7 +341,7 @@ namespace SmartQA.Controllers
                         WeldGOST14098 = attest == null
                             ? (IEnumerable) new string[] { }
                             : attest.DocumentNaksAttest_to_WeldGOST14098Set.Select(x => x.WeldGOST14098.Title).OrderBy(x => x).ToList(),
-                    });
+                    }).DecompileAsync();
         }
 
 

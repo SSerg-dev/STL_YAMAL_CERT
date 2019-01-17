@@ -57,7 +57,7 @@ namespace SmartQA.Models
         public string SecondName { get; set; }
         public string FullName { get; set; }
         public DateTime? BirthDate { get; set; }
-        public int BirthYear { get; set; }
+        public long BirthYear { get; set; }
         
         public string Organization { get; set; }
         public string Position { get; set; }
