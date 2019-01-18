@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-
-using SmartQA.DB;
-using SmartQA.DB.Models.People;
+﻿using SmartQA.DB;
 using SmartQA.DB.Models.PermissionDocuments;
 using SmartQA.Models.Shared;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SmartQA.Models
 {
