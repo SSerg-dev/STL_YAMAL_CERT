@@ -1,25 +1,28 @@
 ﻿<template>
-    <div class="row">
-        <div class="col-sm-3 py-3 position-fixed sidebar" 
-             style="">             
-            
-                <dx-list :data-source="reftablesDataSource"
-                         :search-enabled="true"
-                         page-load-mode="nextButton"
-                         searchExpr="Title"
-                         class="nav"
-                         height="auto">
-                    
-                    <reftables-list-item slot="item"
-                                  slot-scope="item"
-                                  :item="item" />
-                </dx-list>
-            
-        </div>
-        <div class="offset-3 col-sm-9">
-            <div class="py-md-3">
-                <reftable-editor v-if="modelName"
-                                 v-bind:model-name="modelName" />
+    <div class="container-fluid py-4">
+        <h2>Справочники</h2>
+        <div class="row">
+            <div class="col-sm-3 py-3 position-fixed sidebar" 
+                 style="">             
+                
+                    <dx-list :data-source="reftablesDataSource"
+                             :search-enabled="true"
+                             page-load-mode="nextButton"
+                             searchExpr="Title"
+                             class="nav"
+                             height="auto">
+                        
+                        <reftables-list-item slot="item"
+                                      slot-scope="item"
+                                      :item="item" />
+                    </dx-list>
+                
+            </div>
+            <div class="offset-3 col-sm-9">
+                <div class="py-md-3">
+                    <reftable-editor v-if="modelName"
+                                     v-bind:model-name="modelName" />
+                </div>
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col py-5">
+        <div class="col">
             <dx-toolbar :items="toolbarItems" />
             
             <dx-data-grid ref="dataGrid"
@@ -215,7 +215,7 @@
             },
             onDeleteRowButtonClick(event, model) {
                 var component = this;
-                confirm("Really delete?", "Confirm")
+                confirm("Действительно удалить?", "Подтверждение")
                     .done(function (dialogResult) {
                         if (dialogResult) {
                             let source = new DataSource(component.dataSource);

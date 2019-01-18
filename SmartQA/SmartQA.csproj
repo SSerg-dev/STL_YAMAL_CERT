@@ -16,12 +16,15 @@
     <None Remove="app.vue" />
     <None Remove="ClientApp\auth\headers.js" />
     <None Remove="ClientApp\index.js" />
+    <None Remove="wwwroot\dist\**" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientApp\api\odata-context.js" />
     <Content Include="ClientApp\auth\headers.js" />
+    <Content Remove="wwwroot\dist\**" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="DelegateDecompiler.EntityFrameworkCore" Version="0.25.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.OData" Version="7.1.0" />
@@ -44,6 +47,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="appsettings.Development.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <DistFiles Remove="wwwroot\dist\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="wwwroot\dist\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="wwwroot\dist\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\dist\images\login_background.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\images\login_background_e1d10a4046b9d18b8d88c0f9cff287d8.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\main.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\main.js" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->

@@ -1,4 +1,10 @@
-import PermissionDocsIndex from 'components/permission-docs/index'
+import PermissionIndex from 'components/permission-docs/index'
+import PermissionEmployeesIndex from 'components/permission-docs/employees/index'
+
+import PermissionReportsIndex from 'components/permission-docs/reports/index'
+import PermissionReportsDashboard from 'components/permission-docs/reports/dashboard'
+import NaksReport from 'components/permission-docs/reports/naks/naks-report'
+import NaksReportTwo from 'components/permission-docs/reports/naks/naks-report-two'
 import ReftablesIndex from 'components/reftables/index'
 import HomePage from 'components/home'
 import LoginPage from 'components/account/login-page'
@@ -7,65 +13,20 @@ import DocumentsIndex from 'components/documents/index'
 import DocumentEdit from 'components/documents/document-edit'
 import DocumentView from 'components/documents/document-view'
 
-import store from 'store'
-
-const ifNotAuthenticated = (to, from, next) => {
-
-    if (!store.getters.isAuthenticated) {
-        next();
-        return;
-    }
-    next('/');
-}
-
-// check if user is logged in
-// if role is specified, also check if user has it
-function ifAuthenticated(role) {
-    return (to, from, next) => {
-        console.debug('[router] ifAuthenticated');
-        var watchStop;
-
-        function proceed() {
-            if (watchStop) watchStop();
-
-            let userProfile = store.getters.getProfile;
-            if (userProfile && (!role || userProfile.Roles.indexOf(role) !== -1))
-                next();
-            else
-                next('/login');
-        }
-
-        if (store.state.user.status === 'loading') {
-            console.debug('[router] user is loading');
-            watchStop = store.watch(
-                (state) => state.user.status,
-                (value) => {
-                    console.debug('[router] user status === ' + value);
-                    if (value !== 'loading')
-                        proceed();
-                }
-            );
-        } else {
-            proceed();
-        }
-    }
-}
-
-
 export const routes = [
     {
         name: 'home',
         path: '/',
         component: HomePage,
         display: 'Home',
-        beforeEnter: ifAuthenticated(),
     },
     {
         name: 'login',
         path: '/login',
         component: LoginPage,
-        meta: { layout: 'blank' },
-        beforeEnter: ifNotAuthenticated,
+        meta: {
+            layout: 'blank',
+        }
     },
     {
         name: 'useradmin',
@@ -75,41 +36,82 @@ export const routes = [
             employeeId: route.params.employeeId,
             edit: route.query.edit
         }),
-        display: 'Permission',
-        beforeEnter: ifAuthenticated('Administrator'),
+        meta: {
+            requiresAuth: true,
+            requiresRole: ['Administrator']
+        }
     },
-
     {
-        name: 'permission',
-        path: '/permission/:employeeId?',
-        component: PermissionDocsIndex,
-        props: (route) => ({
-            employeeId: route.params.employeeId,
-            edit: route.query.edit
-        }),
-        display: 'Permission',
-        beforeEnter: ifAuthenticated(),
+        name: 'permission', 
+        component: PermissionIndex,
+        redirect: { name: 'permission-employees' },
+        path: '/permission',
+        children: [
+            {
+                name: 'permission-employees',
+                path: 'employees/:employeeId?',
+                component: PermissionEmployeesIndex,
+                
+                props: (route) => ({
+                    employeeId: route.params.employeeId,
+                    edit: route.query.edit
+                }),
+            },
+            {
+                name: 'permission-reports',
+                path: 'reports',
+                component: PermissionReportsIndex,
+                children: [
+                    {
+                        name: 'permission-reports-dashboard',
+                        path: '', 
+                        component: PermissionReportsDashboard 
+                    },
+                    {
+                        name: 'permission-reports-naks',
+                        path: 'naks',
+                        component: NaksReport,
+                        props: true
+                    },
+                    {
+                        name: 'permission-reports-naks2',
+                        path: 'naks2',
+                        component: NaksReportTwo,
+                    }        
+                ]
+            }
+            
+        ],
+        meta: {
+            requiresAuth: true,
+        }
     },
     {
         name: 'reftables',
         path: '/reftables/:modelName?',
         component: ReftablesIndex,
         props: true,
-        display: 'Reftables',
-        beforeEnter: ifAuthenticated(),
+        meta: {
+            requiresAuth: true,
+        }
     },
     {
         name: 'documents',
         path: '/documents',
         component: DocumentsIndex,
-        beforeEnter: ifAuthenticated('Administrator'),
-    },       
+        meta: {
+            requiresAuth: true,
+        }
+    },
     {
         name: 'document-view',
         path: '/documents/:documentId',
         component: DocumentView,
         props: true,
-        beforeEnter: ifAuthenticated('Administrator'),
+        meta: {
+            requiresAuth: true,
+            requiresRole: ['Administrator']
+        }
     },
     {
         name: 'document-edit',
@@ -120,7 +122,9 @@ export const routes = [
                 modelKey: route.params.documentId
             }
         }),
-        beforeEnter: ifAuthenticated('Administrator'),
+        meta: {
+            requiresAuth: true,
+            requiresRole: ['Administrator']
+        }
     }
-
 ];

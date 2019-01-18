@@ -60,8 +60,8 @@
 
     import {employeeDataSource} from './employee-data.js'
 
-    import NaksList from './documents/naks-list';
-    import NdtList from './documents/ndt-list';
+    import NaksList from '../documents-naks/naks-list';
+    import NdtList from '../documents-ndt/ndt-list';
 
     export default {
         components: {
@@ -94,7 +94,7 @@
                         options: {
                             type: 'edit',
                             icon: 'edit',
-                            text: 'Edit employee',
+                            text: 'Редактировать',
                             onClick: () => {
                                 this.$router.push({
                                     params: { employeeId: this.employeeId.toString() },
@@ -109,11 +109,11 @@
                         options: {
                             type: 'delete',
                             icon: 'trash',
-                            text: 'Delete',
+                            text: 'Удалить',
                             onClick: () => {
                                 var component = this;
                                 
-                                confirm("Really delete?", "Confirm")
+                                confirm("Действительно удалить?", "Подтверждение")
                                     .done(function (dialogResult) {
                                         if (dialogResult) component.deleteEmployee();                                        
                                     });                                                                                            

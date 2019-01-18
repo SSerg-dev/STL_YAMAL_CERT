@@ -57,7 +57,7 @@
                     options: {
                         type: 'add',   
                         icon: 'add',
-                        text: 'Add employee',
+                        text: 'Добавить сотрудника',
                         onClick: () => {
                             this.$router.push({
                                 params: { employeeId: null },

@@ -17,9 +17,7 @@
                        :show-pane="true"
                        :shading="true"
                        shading-color="rgba(0,0,0,0.2)"
-                       :close-on-outside-click="false"
-        />
-        
+                       :close-on-outside-click="false" />
         
     </div>
 </template>

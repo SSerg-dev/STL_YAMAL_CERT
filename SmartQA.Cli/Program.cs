@@ -38,13 +38,16 @@ namespace SmartQA.Cli
             "Document_to_PID",
             "DocumentType",
             "DocumentStatus",
+            "DocumentAttachment",
+            "FileDesc",
             "Status",
             "RowStatus",
             "Parameter",          
-            "AppUser",          
-            "AppUser_to_Role",          
-            "Role",          
+//            "AppUser",          
+//            "AppUser_to_Role",          
+//            "Role",         
             "ContragentRole"
+            
             
         };
 
@@ -115,12 +118,10 @@ namespace SmartQA.Cli
 
             //var configPath = "C:\\Users\\mi\\source\\repos\\STL_YAMAL_CERT\\SmartQA\\appsettings.Development.json";                       
             //var dataFilePath = "C:\\Users\\mi\\source\\repos\\STL_YAMAL_CERT\\SmartQA.Cli\\data.json";
-
-            var configPath = "appsettings.Development.json";                       
-            var dataFilePath = "data.json";
-
-            //const string configPath = "../SmartQA/appsettings.Production.json";                       
             var workingDir = Directory.GetCurrentDirectory();
+            
+            var configPath = Path.Join(workingDir, "../SmartQA/appsettings.Development.json");
+            var dataFilePath = Path.Join(workingDir, "data_p.json");    
             
             IServiceCollection services = new ServiceCollection();
             var builder = new ConfigurationBuilder();
@@ -135,14 +136,13 @@ namespace SmartQA.Cli
             var serviceProvider = services.BuildServiceProvider();
             var context = serviceProvider.GetService<DataContext>();
             
-//            var logger = serviceProvider.GetService<ILoggerFactory>()
-//                .CreateLogger<Program>();
-                   
-            Console.WriteLine("ok");
-            //            using (StreamWriter sw = new StreamWriter(dataFilePath))
-            //            {
-            //                DbExport(context, sw);
-            //            }
+
+            Console.WriteLine("Starting");
+            
+//            using (StreamWriter sw = new StreamWriter(dataFilePath))
+//            {
+//                DbExport(context, sw);
+//            }
 
             using (StreamReader sr = new StreamReader(dataFilePath))
             {

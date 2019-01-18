@@ -5,10 +5,6 @@ export function naksDataSource() {
     return new DataSource(dataSourceConfs.documentNaks);
 }
 
-export function ndtDataSource() {
-    return new DataSource(dataSourceConfs.documentNDT);
-}
-
 export const dataSourceConfs = {
     documentNaks: { store: context.DocumentNaks },
     documentNaksDetailed: {
@@ -18,17 +14,4 @@ export const dataSourceConfs = {
         ]
     },
     documentNaksAttest: { store: context.DocumentNaksAttest },
-
-}
-
-export const dataSourceConfsNDT = {
-    documentNDT: { store: context.DocumentNDT },
-    documentNDTDetailed: {
-        store: context.DocumentNDT,
-        expand: [
-            'DocumentNDTITSet'
-        ]
-    },
-    documentNDTIT: { store: context.DocumentNDTIT },
-
 }

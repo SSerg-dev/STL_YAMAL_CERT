@@ -36,18 +36,17 @@
 </template>
 
 <script>
-    import { filter, first } from 'rxjs/operators';
+    import {filter, first} from 'rxjs/operators';
 
-    import { DxForm, DxPopup, DxScrollView } from 'devextreme-vue';
+    import {DxForm, DxPopup, DxScrollView} from 'devextreme-vue';
     import DataSource from 'devextreme/data/data_source';
-    import CustomStore from 'devextreme/data/custom_store';
-    import { DxLoadPanel } from 'devextreme-vue/load-panel';
+    import {DxLoadPanel} from 'devextreme-vue/load-panel';
 
     import NdtItList from './ndt-it-list';
 
     import BaseEntityEditor from 'components/forms/base-entity-editor';
-    import { reftableFormItem } from 'components/forms/reftables';
-    import { reftableDatasourceConf } from 'components/reftables/data';
+    import {reftableFormItem} from 'components/forms/reftables';
+    import {reftableDatasourceConf} from 'components/reftables/data';
 
     import context from 'api/odata-context';
 
@@ -152,7 +151,7 @@
                         widget: "dxButton",
                         location: "after",
                         options: {
-                            text: "Close",
+                            text: "Закрыть",
                             onClick: this.onCloseButton
                         }
                     },
@@ -161,7 +160,7 @@
                         widget: "dxButton",
                         location: "after",
                         options: {
-                            text: "Save",
+                            text: "Сохранить",
                             type: "success",
                             onClick: this.onSaveButton
                         }
@@ -171,7 +170,7 @@
                         widget: "dxButton",
                         location: "after",
                         options: {
-                            text: "Save and close",
+                            text: "Сохранить и закрыть",
                             type: "success",
                             onClick: this.onSaveAndCloseButton
                         }

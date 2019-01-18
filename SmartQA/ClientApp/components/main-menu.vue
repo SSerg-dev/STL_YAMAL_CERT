@@ -6,17 +6,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <router-link class="nav-item nav-link" to="/permission">Permission</router-link>
+              
+                <router-link class="nav-item nav-link" to="/permission">Разрешительная документация</router-link>
                 <router-link 
                         v-if="user && user.Roles.indexOf('Administrator') !== -1"                        
                         class="nav-item nav-link" to="/documents">
-                Documents
+                    Исполнительная документация
                 </router-link>
-                <router-link class="nav-item nav-link" to="/reftables">Reference tables</router-link>
+                <router-link class="nav-item nav-link" to="/reftables">Справочники</router-link>
                 <router-link
                         v-if="user && user.Roles.indexOf('Administrator') !== -1"
                         class="nav-item nav-link" to="/useradmin">
-                    Users
+                    Пользователи
                 </router-link>
 
             </div>           
@@ -25,17 +26,17 @@
 
         <ul class="navbar-nav" v-if="user">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <font-awesome-icon icon="user" />&ensp;{{ user.UserName }}
                 </a>                
                 
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu dropdown-menu-right">
                     <a v-for="role in user.Roles" href="#" class="dropdown-item disabled" @click.prevent="">
                         {{ role }}
                     </a>
                     <div v-if="user.Roles.length > 0" class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item" @click.prevent="logout">
-                        <font-awesome-icon icon="sign-out-alt" />&ensp;Log out
+                        <font-awesome-icon icon="sign-out-alt" />&ensp;Выйти
                     </a>
                 </div>
             </li>

@@ -2,7 +2,7 @@
     import {reftableDatasourceConf} from "components/reftables/data"
     import context from 'api/odata-context'
     import BaseEntityEditor from 'components/forms/base-entity-editor'
-    
+
     export default {
         extends: BaseEntityEditor,
         props: {

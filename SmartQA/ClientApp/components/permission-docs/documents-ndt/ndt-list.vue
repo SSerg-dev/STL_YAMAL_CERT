@@ -46,15 +46,13 @@
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
     import {confirm} from 'devextreme/ui/dialog';
     import {DxColumn, DxTreeList} from 'devextreme-vue/tree-list';
-    import {DxPopup} from 'devextreme-vue';
     import {DxButton} from "devextreme-vue/ui/button";
     import DxToolbar from 'devextreme-vue/toolbar';
     import DataSource from 'devextreme/data/data_source';
 
     import NdtEdit from './ndt-edit';
 
-    import {dataSourceConfsNDT} from './data.js';
-    import {Subject} from 'rxjs';
+    import {dataSourceConfs} from './data.js';
 
     export default {
         name: "ndt-list",
@@ -87,7 +85,7 @@
                         options: {
                             type: 'add',
                             icon: 'add',
-                            text: 'Add',
+                            text: 'Добавить',
                             onClick: (event) => this.onNewButtonClick(event)
                         }
                     }
@@ -97,7 +95,7 @@
         },
         methods: {
             setDataSource() {
-                var conf = Object.assign({}, dataSourceConfsNDT.documentNDT);
+                var conf = Object.assign({}, dataSourceConfs.documentNDT);
                 conf.filter = ['Person_ID', '=', new String(this.personId)];
                 this.dataSource = conf;
             },
@@ -105,9 +103,7 @@
                 this.$refs.dataGrid.instance.refresh();
             },
             onEditSuccess() {
-                //this.$refs.editPopup.instance.hide();
                 this.reloadData();
-
             },
             onNewButtonClick(event) {
                 this.editorSettings = {
@@ -119,34 +115,18 @@
 
                 this.editorIsChild = false;
             },
-            //onNewChildRowButtonClick(event, model) {
-            //    this.editorSettings = {
-            //        modelKey: null,
-            //        formDataInitial: {
-            //            Person_ID: this.personId,
-            //            ParentDocumentNaks_ID: model.ID.toString(),
-            //            Number: model.Number + ' В'
-            //        }
-            //    };
-
-            //    this.editorIsChild = true;
-
-            //},
             onEditRowButtonClick(event, model) {
                 this.editorSettings = {
                     modelKey: model.ID.toString(),
                     formDataInitial: {}
                 };
-
-                //this.editorIsChild = model.ParentDocumentNaks_ID != null;
-
             },
             onDeleteRowButtonClick(event, model) {
                 var component = this;
-                confirm("Really delete?", "Confirm")
+                confirm("Действительно удалить?", "Подтверждение")
                     .done(function (dialogResult) {
                         if (dialogResult) {
-                            var source = new DataSource(dataSourceConfs.documentNaks);
+                            var source = new DataSource(dataSourceConfs.documentNDT);
                             source.store().remove(model.ID)
                                 .done(function (data) {
                                     component.reloadData()

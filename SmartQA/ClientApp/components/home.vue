@@ -1,5 +1,6 @@
 ﻿<template>
-    <div class="px-1 py-3">        
+    
+    <div class="container-fluid py-4">        
         <div class="card">            
             <div class="card-body">
                 <h2 class="card-title">Navigation</h2>

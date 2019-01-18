@@ -70,7 +70,7 @@ namespace SmartQA.DB.Models.PermissionDocuments
                
             modelBuilder.Entity<DocumentNaks>()
                 .HasOne(x => x.Person)
-                .WithMany()
+                .WithMany(p => p.DocumentNaksSet)
                 .HasForeignKey(x => x.Person_ID)
                 .OnDelete(DeleteBehavior.Restrict);
             

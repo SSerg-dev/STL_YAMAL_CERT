@@ -76,7 +76,7 @@
                         widget: "dxButton",
                         location: "after",
                         options: {
-                            text: "Close",
+                            text: "Закрыть",
                             onClick: this.onCloseButton
                         }
                     },
@@ -85,7 +85,7 @@
                         widget: "dxButton",
                         location: "after",
                         options: {
-                            text: "Save and close",
+                            text: "Сохранить и закрыть",
                             type: "success",
                             onClick: this.onSaveAndCloseButton
                         }
