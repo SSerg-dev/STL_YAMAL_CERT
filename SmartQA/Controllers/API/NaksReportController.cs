@@ -216,10 +216,15 @@ namespace SmartQA.Controllers
         }
 
         public Expression<Func<DocumentNaks, bool>> MakeFilterPredicate(IList filter)
-        {
+        {                       
             var parts = filter.Cast<object>()
                 .Select(x => x is JArray array ? array.ToList() : x is JValue v ? v.Value : x).ToList();
 
+            if (parts.Count == 0)
+            {
+                return PredicateBuilder.True<DocumentNaks>();
+            }
+            
             if (parts.All(x => !(x is IList)))
             {
                 return MakeFilterClause(parts);

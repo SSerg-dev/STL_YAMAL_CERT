@@ -4,6 +4,7 @@
                 class="naks-report-data-grid mt-2"
                 ref="dataGrid"
                 :data-source="dataSource"
+                :filter-value="filterValue"
                 :remote-operations="true"
                 :sorting="{mode: 'none'}"
                 :column-auto-width="true"
@@ -260,17 +261,12 @@
                 default: () => new Object()
             }
         },
-        mounted() {
-            // apply any filters that were passed from external source 
-            if (this.dataGridSettings.filter) {
-                this.$refs.dataGrid.filterValue = this.dataGridSettings.filter;
-            }  
-        },
         data() {
             return {
                 dataSource: {
                     store: NaksPersonStore(),
                 },
+                filterValue: this.dataGridSettings.filter || [],
             }
         },
         methods: {
