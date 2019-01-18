@@ -70,7 +70,8 @@
     }
     
     .drawer-sidebar {
-        @extend .px-2;
+        @extend .px-2, .pt-2, .bg-light;
+        min-height: 100%;
     }
 
     .drawer-content {
@@ -95,7 +96,8 @@
         }
     }
 
-    .component-container /deep/ .dx-drawer-content {
+    .component-container /deep/ .dx-drawer-content, 
+    .component-container /deep/ .dx-drawer-panel-content {
         height: auto;
     }
 </style>
