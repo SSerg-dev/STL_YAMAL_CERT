@@ -10,9 +10,9 @@
         </div>
         <div v-if="userProfile">
             <main-menu />
-            
-            <router-view></router-view>
-            
+            <div class="page-body">
+                <router-view></router-view>
+            </div>
         </div>
     </div>
 </template>
@@ -44,5 +44,9 @@
         display: flex;
         flex-direction: column;
         min-height: 100%;
+    }
+    
+    .page-body {
+        flex-grow: 1;
     }
 </style>

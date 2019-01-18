@@ -9,7 +9,8 @@
                 :column-auto-width="true"
                 :show-borders="true"
                 :show-row-lines="true"
-                :word-wrap-enabled="true">
+                :word-wrap-enabled="true"
+                width="100%">
 
             <!--<dx-state-storing-->
                     <!--:enabled="true"/>-->
@@ -252,6 +253,19 @@
             DxFilterPanel,
             DxFilterBuilder
         },
+        props: {
+            dataGridSettings: {
+                type: Object,
+                required: false,
+                default: () => new Object()
+            }
+        },
+        mounted() {
+            // apply any filters that were passed from external source 
+            if (this.dataGridSettings.filter) {
+                this.$refs.dataGrid.filterValue = this.dataGridSettings.filter;
+            }  
+        },
         data() {
             return {
                 dataSource: {
@@ -324,13 +338,17 @@
     }
 </script>
 
-<style >
-    .naks-report{
-        height: calc(100vh - 5rem);
-        position: relative;
+<style scoped lang="scss">
+    @import "~bootstrap/scss/bootstrap";
+
+    .naks-report {
+        @extend .px-2;
+        height: calc(100vh - 8rem);
+        max-width: 100%;
+        overflow: hidden;
     }
+
     .naks-report-data-grid {
         height: 100%;
-        
     }
 </style>

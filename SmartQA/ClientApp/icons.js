@@ -15,7 +15,9 @@ fontawesome.library.add(
     require('@fortawesome/fontawesome-free-solid/faEdit'),
     require('@fortawesome/fontawesome-free-solid/faTrash'),
     require('@fortawesome/fontawesome-free-solid/faUser'),
-    require('@fortawesome/fontawesome-free-solid/faSignOutAlt')
+    require('@fortawesome/fontawesome-free-solid/faSignOutAlt'),
+    require('@fortawesome/fontawesome-free-solid/faChevronLeft'),
+    require('@fortawesome/fontawesome-free-solid/faChevronRight')
 );
 
 export {

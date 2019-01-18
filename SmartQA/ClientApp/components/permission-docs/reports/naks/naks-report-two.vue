@@ -10,8 +10,9 @@
                 :column-auto-width="true"
                 :show-borders="true"
                 :show-row-lines="true"
-                :word-wrap-enabled="true">
-
+                :word-wrap-enabled="true"
+                width="100%">
+            
             <!--<dx-state-storing-->
             <!--:enabled="true"/>-->
 
@@ -328,14 +329,17 @@
     }
 </script>
 
-<style>
+<style scoped lang="scss">
+    @import "~bootstrap/scss/bootstrap";
+    
     .naks-report {
-        height: calc(100vh - 5rem);
-        position: relative;
+        @extend .px-2;
+        height: calc(100vh - 8rem);
+        max-width: 100%;
+        overflow: hidden;
     }
-
+    
     .naks-report-data-grid {
         height: 100%;
-
     }
 </style>

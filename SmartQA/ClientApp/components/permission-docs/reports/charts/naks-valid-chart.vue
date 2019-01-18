@@ -2,9 +2,10 @@
     <dx-pie-chart
         :data-source="dataSource"
         palette="Bright"
-        title="Действующие свидетельства">
+        title="Действующие свидетельства"
+        :on-point-click="onPointClick">
         <dx-series
-            argument-field="Label"
+            argument-field="IsValid"
             value-field="Count">
             <dx-label :visible="true">
                 <dx-connector
@@ -13,12 +14,13 @@
                 />
             </dx-label>
         </dx-series>
+        <dx-legend :customize-text="legendCustomizeText" />
         <dx-export :enabled="true"/>
     </dx-pie-chart>     
 </template>
 
 <script>
-    import DxPieChart, {DxConnector, DxExport, DxLabel, DxSeries, DxSize} from 'devextreme-vue/pie-chart'
+    import DxPieChart, {DxConnector, DxExport, DxLabel, DxLegend, DxSeries, DxSize} from 'devextreme-vue/pie-chart'
 
     import axios from 'axios'
 
@@ -30,26 +32,42 @@
             DxSeries,
             DxLabel,
             DxConnector,
-            DxExport
+            DxExport,
+            DxLegend
         },
         data() {
             return {
                 dataSource: {
                     load(options) {
                         return axios({url: `${baseUrl}api/PermissionPersonStat/NaksValidCount`})
-                            .then(resp => resp.data.map(x => 
-                                Object.assign(x, {'Label': x.IsValid ? 'Действует' : 'Просрочено'})
-                            ));
+                            .then(resp => resp.data);
                     },
                 }
                
             }
         },
         methods: {
-          
+            legendCustomizeText(pointInfo) {
+                if (pointInfo.pointName === true) {
+                    return 'Действует';
+                } else {
+                    return 'Просрочено';
+                }                 
+            },
+            onPointClick(event) {
+                let naksIsValid = event.target.argument;
+                this.$router.push({
+                    name: 'permission-reports-naks',
+                    params: {
+                        dataGridSettings: {
+                            filter: [
+                                ['IsValid', '=', naksIsValid]
+                            ]
+                        }
+                    }
+                })
+            }
         }
-        
-        
     }
 </script>
 

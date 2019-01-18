@@ -1,12 +1,19 @@
 <template>
     <dx-chart
-        :data-source="dataSource"
-        title="Количество людей с НАКС">
+            :data-source="dataSource"
+            title="Количество людей с НАКС">
+        
+        <dx-argument-axis title="Количество свидетельств">
+            <dx-label :visible="true"
+                      :customize-text="argumentAxisLabelCustomizeText" />
+        </dx-argument-axis>
+        
         <dx-series
-            type="bar"
-            argument-field="Label"
-            value-field="PersonCount">
-            <dx-label :visible="true">
+                type="bar"
+                argument-field="NaksCount"
+                value-field="PersonCount">
+            <dx-label :visible="true"
+                      :customize-text="labelCustomizeText">
                 <dx-connector
                         :visible="true"
                         :width="1"
@@ -14,13 +21,22 @@
             </dx-label>
         </dx-series>
         <dx-legend :visible="false"/>
-        
+
         <dx-export :enabled="true"/>
-    </dx-chart>     
+    </dx-chart>
 </template>
 
 <script>
-    import {DxChart, DxConnector, DxExport, DxLabel, DxLegend, DxSeries, DxSize} from 'devextreme-vue/chart'
+    import {
+        DxArgumentAxis,
+        DxChart,
+        DxConnector,
+        DxExport,
+        DxLabel,
+        DxLegend,
+        DxSeries,
+        DxSize
+    } from 'devextreme-vue/chart'
 
     import axios from 'axios'
 
@@ -33,33 +49,38 @@
             DxLabel,
             DxConnector,
             DxExport,
+            DxArgumentAxis,
             DxLegend
         },
         data() {
-            let pluralRules = new Intl.PluralRules('ru');
-            let naksPlurals = new Map([
-                ['one', 'свидетельство'],
-                ['few', 'свидетельства'],
-                ['many', 'свидетельств'],
-            ]);
-            
             return {
                 dataSource: {
                     load(options) {
                         return axios({url: `${baseUrl}api/PermissionPersonStat/PersonNaksCount`})
-                            .then(resp => resp.data.map(x => 
-                                Object.assign(x, {'Label': `${x.NaksCount} ${naksPlurals.get(pluralRules.select(x.NaksCount))}`})
-                            ));
+                            .then(resp => resp.data);
                     },
                 }
-               
             }
         },
         methods: {
-          
+            argumentAxisLabelCustomizeText(pointInfo) {
+                if (pointInfo.value === 0) {
+                    return 'Нет';
+                } else {
+                    const pluralRules = new Intl.PluralRules('ru');
+                    const naksPlurals = new Map([
+                        ['one', 'свидетельство'],
+                        ['few', 'свидетельства'],
+                        ['many', 'свидетельств'],
+                    ]);
+
+                    return `${pointInfo.value} ${naksPlurals.get(pluralRules.select(pointInfo.value))}`
+                }
+            },
+            labelCustomizeText(pointInfo) {
+                return `${pointInfo.value} чел.`
+            },
         }
-        
-        
     }
 </script>
 

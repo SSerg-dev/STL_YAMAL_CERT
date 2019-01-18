@@ -71,6 +71,7 @@ export const routes = [
                         name: 'permission-reports-naks',
                         path: 'naks',
                         component: NaksReport,
+                        props: true
                     },
                     {
                         name: 'permission-reports-naks2',
