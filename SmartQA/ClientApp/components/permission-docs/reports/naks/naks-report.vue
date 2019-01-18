@@ -266,7 +266,7 @@
                 dataSource: {
                     store: NaksPersonStore(),
                 },
-                filterValue: this.dataGridSettings.filter || [],
+                filterValue: this.dataGridSettings.filter || null,
             }
         },
         methods: {
