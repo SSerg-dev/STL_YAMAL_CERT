@@ -1,10 +1,12 @@
 <template>
-    <div class="row">
-        <div class="col-md-6">
-            <naks-person-count-chart />
-        </div>
-        <div class="col-md-6">
-            <naks-valid-chart />
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <naks-person-count-chart />
+            </div>
+            <div class="col-md-6">
+                <naks-valid-chart />
+            </div>
         </div>
     </div>
 </template>

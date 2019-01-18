@@ -1,29 +1,33 @@
 <template>
-    <dx-chart
-            :data-source="dataSource"
-            title="Количество людей с НАКС">
-        
-        <dx-argument-axis title="Количество свидетельств">
-            <dx-label :visible="true"
-                      :customize-text="argumentAxisLabelCustomizeText" />
-        </dx-argument-axis>
-        
-        <dx-series
-                type="bar"
-                argument-field="NaksCount"
-                value-field="PersonCount">
-            <dx-label :visible="true"
-                      :customize-text="labelCustomizeText">
-                <dx-connector
-                        :visible="true"
-                        :width="1"
-                />
-            </dx-label>
-        </dx-series>
-        <dx-legend :visible="false"/>
+    <div style="width: 100%;">
+        <dx-chart
+                ref="chart"
+                :data-source="dataSource"
+                title="Количество людей с НАКС">
 
-        <dx-export :enabled="true"/>
-    </dx-chart>
+            <dx-argument-axis title="Количество свидетельств"
+                              :allow-decimals="false">
+                <dx-label :visible="true"
+                          :customize-text="argumentAxisLabelCustomizeText"/>
+            </dx-argument-axis>
+
+            <dx-series
+                    type="bar"
+                    argument-field="NaksCount"
+                    value-field="PersonCount">
+                <dx-label :visible="true"
+                          :customize-text="labelCustomizeText">
+                    <dx-connector
+                            :visible="true"
+                            :width="1"
+                    />
+                </dx-label>
+            </dx-series>
+            <dx-legend :visible="false"/>
+
+            <dx-export :enabled="true"/>
+        </dx-chart>
+    </div>
 </template>
 
 <script>
@@ -62,6 +66,10 @@
                 }
             }
         },
+        mounted: function () {
+            // force chart redraw because dx-chart get incorrect width somehow
+            window.setTimeout(() => this.$refs.chart.instance.render(), 50);
+        },
         methods: {
             argumentAxisLabelCustomizeText(pointInfo) {
                 if (pointInfo.value === 0) {
@@ -80,6 +88,10 @@
             labelCustomizeText(pointInfo) {
                 return `${pointInfo.value} чел.`
             },
+            handleResize(){
+                this.$refs.chart.instance.render();
+                
+            }
         }
     }
 </script>

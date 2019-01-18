@@ -1,22 +1,25 @@
 <template>
-    <dx-pie-chart
-        :data-source="dataSource"
-        palette="Bright"
-        title="Действующие свидетельства"
-        :on-point-click="onPointClick">
-        <dx-series
-            argument-field="IsValid"
-            value-field="Count">
-            <dx-label :visible="true">
-                <dx-connector
-                        :visible="true"
-                        :width="1"
-                />
-            </dx-label>
-        </dx-series>
-        <dx-legend :customize-text="legendCustomizeText" />
-        <dx-export :enabled="true"/>
-    </dx-pie-chart>     
+    <div style="width: 100%;">
+        <dx-pie-chart
+                ref="chart"
+                :data-source="dataSource"
+                palette="Bright"
+                title="Действующие свидетельства"
+                :on-point-click="onPointClick">
+            <dx-series
+                    argument-field="IsValid"
+                    value-field="Count">
+                <dx-label :visible="true">
+                    <dx-connector
+                            :visible="true"
+                            :width="1"
+                    />
+                </dx-label>
+            </dx-series>
+            <dx-legend :customize-text="legendCustomizeText"/>
+            <dx-export :enabled="true"/>
+        </dx-pie-chart>
+    </div>
 </template>
 
 <script>
@@ -35,6 +38,10 @@
             DxExport,
             DxLegend
         },
+        mounted: function () {
+            // force chart redraw because dx-chart get incorrect width somehow
+            window.setTimeout(() => this.$refs.chart.instance.render(), 50);
+        },
         data() {
             return {
                 dataSource: {
@@ -43,7 +50,7 @@
                             .then(resp => resp.data);
                     },
                 }
-               
+
             }
         },
         methods: {
@@ -52,7 +59,7 @@
                     return 'Действует';
                 } else {
                     return 'Просрочено';
-                }                 
+                }
             },
             onPointClick(event) {
                 let naksIsValid = event.target.argument;

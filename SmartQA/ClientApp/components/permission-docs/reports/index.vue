@@ -1,6 +1,7 @@
 <template>
-    <div class="row">
+    <div class="row component-container">
         <dx-drawer
+                class="drawer"
                 ref="drawer"
                 position="left"
                 opened-state-mode="shrink"
@@ -56,11 +57,25 @@
 <style scoped lang="scss">
     @import "~bootstrap/scss/bootstrap";
 
+    .component-container {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .drawer {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
     .drawer-sidebar {
         @extend .px-2;
     }
 
     .drawer-content {
+        
+        min-height: 100%;
         display: flex;
         flex-direction: row;
         align-items: stretch;
@@ -78,5 +93,9 @@
         .drawer-toggle:hover {
             @extend .bg-secondary, .text-light;
         }
+    }
+
+    .component-container /deep/ .dx-drawer-content {
+        height: auto;
     }
 </style>
