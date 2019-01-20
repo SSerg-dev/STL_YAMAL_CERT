@@ -53,14 +53,6 @@ namespace SmartQA.DB.Models.Registers
                 .WithMany(d => d.RegisterStatusSet)
                 .HasForeignKey(ds => ds.Register_ID)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<RegisterStatus>()
-                .HasIndex(ds => new { ds.Register_ID });
-
-            modelBuilder.Entity<RegisterStatus>()
-                .HasIndex(ds => new { ds.Register_ID, ds.DTS_End })
-                .HasFilter("(DTS_End is null)")
-                .IsUnique();
         }
     }
 }

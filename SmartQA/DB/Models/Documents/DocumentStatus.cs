@@ -52,14 +52,7 @@ namespace SmartQA.DB.Models.Documents
                 .WithMany(d => d.DocumentStatusSet)
                 .HasForeignKey(ds => ds.Document_ID)                
                 .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<DocumentStatus>()
-                .HasIndex(ds => new {ds.Document_ID});
-            
-            modelBuilder.Entity<DocumentStatus>()
-                .HasIndex(ds => new { ds.Document_ID, ds.DTS_End })
-                .HasFilter("(DTS_End is null)")                
-                .IsUnique();
+  
         }
     }
 }

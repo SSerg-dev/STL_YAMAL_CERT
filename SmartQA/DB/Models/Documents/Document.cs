@@ -129,12 +129,7 @@ namespace SmartQA.DB.Models.Documents
 
             modelBuilder.Entity<Document>()
                 .HasIndex(d => new {d.Root_ID});
-            
-            modelBuilder.Entity<Document>()
-                .HasIndex(d => new { d.Root_ID, d.IsActual })
-                .HasFilter("(IsActual = 1)")                
-                .IsUnique();
-          
+         
         }               
         
         // ---- m2m relations -------------
