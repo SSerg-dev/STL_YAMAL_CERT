@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using SmartQA.Auth;
 using SmartQA.DB;
 using SmartQA.DB.Models.Auth;
@@ -13,8 +15,6 @@ namespace SmartQA.Models
 {
     public class AppUserEdit: EntityForm<AppUser>
     {
-        public Guid? AppUser_ID { get; set; }
-
         public class EmployeeID
         {
             public Guid? ID { get; set; }   
@@ -26,8 +26,8 @@ namespace SmartQA.Models
         public List<Guid> Role_IDs { get; set; }
         public Guid? Employee_ID { get; set; }
         public EmployeeID Employee { get; set; }
-        
-        public override void Serialize(AppUser entity, DataContext _context)
+                
+        public async Task<AppUser> SerializeUser(AppUser entity, DataContext _context, AppUserManager _userManager)
         {
             entity.AppUser_Code = AppUser_Code;
             entity.Role_IDs = Role_IDs;
@@ -42,10 +42,14 @@ namespace SmartQA.Models
             
             if (!string.IsNullOrEmpty(User_Password))
             {
-                entity.User_Password = new Encryptor3DES(ApplicationUser.passKey).encrypt(
-                    Encoding.UTF8.GetBytes(User_Password)
-                );
-            }             
+                var user = await _userManager.FindByIdAsync(entity.ID.ToString());
+                var hashedNewPassword = _userManager.PasswordHasher.HashPassword(user, User_Password);
+                var userStore = new UserStore(_context);
+                await userStore.SetPasswordHashAsync(user, hashedNewPassword, new CancellationToken());
+                await userStore.UpdateAsync(user, new CancellationToken());                                                
+            }
+
+            return entity;
         }
     }
 }

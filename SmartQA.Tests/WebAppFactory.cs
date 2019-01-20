@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SmartQA.Auth;
 using SmartQA.DB;
 using SmartQA.DB.Models.Auth;
+
+using Role = SmartQA.Auth.Role;
 
 namespace SmartQA.Tests
 {
@@ -19,6 +23,7 @@ namespace SmartQA.Tests
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
+           
             builder.ConfigureServices(services =>
             {
                 builder.UseSolutionRelativeContentRoot(".");
@@ -36,9 +41,8 @@ namespace SmartQA.Tests
                     options.UseInMemoryDatabase("InMemoryDbForTesting");
                     options.UseInternalServiceProvider(serviceProvider);
 
-                });
-                //services.AddEntityFrameworkProxies();
-
+                });                                
+                
                 // Build the service provider.
                 var sp = services.BuildServiceProvider();
 
@@ -48,6 +52,7 @@ namespace SmartQA.Tests
                 {
                     var scopedServices = scope.ServiceProvider;
                     var db = scopedServices.GetRequiredService<DataContext>();
+                    var appUserManager = scopedServices.GetService<AppUserManager>();
                     var logger = scopedServices
                         .GetRequiredService<ILogger<WebAppFactory<TStartup>>>();
 
@@ -57,7 +62,7 @@ namespace SmartQA.Tests
                     try
                     {
                         // Seed the database with test data.
-                        Util.DB.InitializeDbForTests(db);
+                        Util.DB.InitializeDbForTests(db, appUserManager);
                         var c = db.Set<AppUser>().Count();
 
 

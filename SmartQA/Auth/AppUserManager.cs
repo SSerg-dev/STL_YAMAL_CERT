@@ -14,10 +14,7 @@ namespace SmartQA.Auth
         public AppUserManager(IUserStore<ApplicationUser> store, IOptions<IdentityOptions> optionsAccessor, IPasswordHasher<ApplicationUser> passwordHasher, IEnumerable<IUserValidator<ApplicationUser>> userValidators, IEnumerable<IPasswordValidator<ApplicationUser>> passwordValidators, ILookupNormalizer keyNormalizer, IdentityErrorDescriber errors, IServiceProvider services, ILogger<UserManager<ApplicationUser>> logger) : base(store, optionsAccessor, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger)
         {
         }
-
-        public override Task<bool> CheckPasswordAsync(ApplicationUser applicationUser, string password)
-            => Task.FromResult(applicationUser.CheckPassword(password));
-
+       
         public async Task<ApplicationUser> Get(ClaimsPrincipal controllerUser)
         {
             var key = controllerUser.FindFirst(ClaimTypes.NameIdentifier).Value;            

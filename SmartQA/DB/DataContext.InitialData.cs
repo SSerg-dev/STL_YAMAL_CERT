@@ -78,7 +78,7 @@ namespace SmartQA.DB
                         Update_DTS = fakeDate,
                         
                         // "root_user_18"
-                        User_Password = new byte[] { 154, 188, 48, 112, 67, 142, 69, 201, 80, 125, 104, 193, 197, 212, 204, 212 }
+                        PasswordHash = "AQAAAAEAACcQAAAAEM32TERcI2+bweQtjppTckAZD0GyUqWWalim/MrY7rpuVwGFIOJYb39xLcrcR4w5VA=="
                     }
                 );
 

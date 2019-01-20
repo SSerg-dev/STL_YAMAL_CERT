@@ -20,6 +20,9 @@ namespace SmartQA.DB.Models.Auth
         [StringLength(8000)]
         public byte[] User_Password { get; set; }
                 
+        [StringLength(8000)]
+        public string PasswordHash { get; set; }
+        
         public virtual ICollection<AppUser_to_Role> AppUser_to_RoleSet { get; set; }
                         
         public virtual Employee Employee { get; set; }
