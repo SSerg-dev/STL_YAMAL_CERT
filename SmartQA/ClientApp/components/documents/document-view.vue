@@ -1,5 +1,5 @@
 <template>
-    <div class="form-container my-3">
+    <div class="form-container my-3 mx-2">
         
         <div class="btn-toolbar justify-content-between" role="toolbar">
             <div class="input-group">
@@ -8,7 +8,7 @@
             
             <div class="btn-group" role="group">
                 <router-link
-                        v-if="model.IsActual"
+                        v-if="model && model.IsActual"
                         :to="{ name: 'document-edit', params: { documentId: documentId }}"
                         class="btn btn-outline-primary">
                     Редактировать
@@ -28,7 +28,7 @@
                         <th scope="row">Версия</th>
                         <td>
                             {{ model.VersionNumber }}
-                            <span class="text-muted" v-if="model.IsActual">(актуальная версия)</span>
+                            <span class="text-muted" v-if="model && model.IsActual">(актуальная версия)</span>
                         </td>
                     </tr>
                     <tr>

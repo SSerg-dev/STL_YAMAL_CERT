@@ -33,8 +33,8 @@
                        caption="Описание"
                        :allow-editing="true" />
 
-            <dx-column data-field="FileDesc.UploadName"
-                       caption="Файл"
+            <dx-column caption="Файл"
+                       cell-template="file-name-cell-template"
                        :allow-editing="false" />
             
             <dx-column data-field="FileDesc.Length"
@@ -47,6 +47,12 @@
                        caption="Загружено"
                        :allow-editing="false"/>
             
+            <div slot="file-name-cell-template" slot-scope="row">
+                <a :href="getDownloadLink(row.data.FileDesc.ID.toString())">
+                    {{ row.data.FileDesc.UploadName || '(файл)' }}
+                </a>
+            </div>
+                 
         </dx-data-grid>
 
     </div>
@@ -101,6 +107,11 @@
             },
             onDataGridContentReady(e) {
                 this.totalCount = e.component.totalCount();
+            },
+            getDownloadLink(fileDescId) {
+                
+                let params = new URLSearchParams({fileDescId: fileDescId});
+                return `${baseUrl}api/File/Download?${params.toString()}`;
             }
         }
     }

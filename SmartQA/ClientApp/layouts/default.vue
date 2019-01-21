@@ -1,11 +1,9 @@
 <template>
     <div id="page-container">
         <div id="loading-placeholder" v-if="!userProfile">
-            <dx-load-panel :visible="true"
-                           :show-indicator="true"
-                           :show-pane="true"
-                           :shading="false"
-                           :close-on-outside-click="false"/>
+            <div class="spinner-border" style="width: 10rem; height: 10rem;" role="status">
+                <span class="sr-only">Загрузка...</span>
+            </div>
         </div>
         
         <div id="page" v-if="userProfile">
@@ -18,13 +16,10 @@
 </template>
 
 <script>
-    import DxLoadPanel from 'devextreme-vue/load-panel'
-
     import MainMenu from 'components/main-menu'
 
     export default {
         components: {
-            DxLoadPanel,
             MainMenu,
         },
         computed: {

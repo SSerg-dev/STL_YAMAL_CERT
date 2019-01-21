@@ -14,8 +14,8 @@
             </form>
 
         </div>
-        <dx-load-panel :position="{ of: '#login-form' }"
-                       :delay="100"
+        
+        <dx-load-panel :delay="100"
                        :visible="status === 'loading'"
                        :show-indicator="true"
                        :show-pane="true"
