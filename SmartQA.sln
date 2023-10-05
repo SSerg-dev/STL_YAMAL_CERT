@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2036
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartQA", "SmartQA\SmartQA.csproj", "{7C5E9938-5B38-4D7C-A076-AFFCC095CF33}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartQA.Tests", "SmartQA.Tests\SmartQA.Tests.csproj", "{71F0B8BA-8EC1-4F55-A78B-CFB5B8BCAA5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartQA.Cli", "SmartQA.Cli\SmartQA.Cli.csproj", "{16AF908F-FAAD-4C25-B086-D64D5AEFD667}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartQA.Cli", "SmartQA.Cli\SmartQA.Cli.csproj", "{16AF908F-FAAD-4C25-B086-D64D5AEFD667}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{11C40EFD-E277-43E8-82F3-A656B0C33B81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MSSQL", "MSSQL", "{3D49B415-BD78-4D09-BA73-1E1CAC133FA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
